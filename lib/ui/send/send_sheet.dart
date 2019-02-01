@@ -572,7 +572,7 @@ class AppSendSheet {
       return false;
     }
   }
-∂
+
   void toggleLocalCurrency(BuildContext context, StateSetter setState) {
     // Keep a cache of previous amounts because, it's kinda nice to see approx what nano is worth
     // this way you can tap button and tap back and not end up with X.9993451 NANO
