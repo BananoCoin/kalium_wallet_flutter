@@ -10,7 +10,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
 import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
-import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
@@ -194,6 +193,7 @@ class AppReceiveSheet {
                             File f = File(filePath);
                             if (f.existsSync()) {
                               try {
+                                UIUtil.cancelLockEvent();
                                 Share.shareFile(f, text: StateContainer.of(context).wallet.address);
                                 doCapture = false;
                               } catch (e) {
@@ -209,6 +209,7 @@ class AppReceiveSheet {
                                   _capturePng().then((byteData) {
                                     if (byteData != null) {
                                       f.writeAsBytes(byteData).then((file) {
+                                        UIUtil.cancelLockEvent();
                                         Share.shareFile(file, text: StateContainer.of(context).wallet.address);
                                       });
                                     } else {

@@ -444,6 +444,7 @@ class AppSendSheet {
                               AppLocalization.of(context).scanQrCode,
                               Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                             try {
+                              UIUtil.cancelLockEvent();
                               BarcodeScanner.scan(OverlayTheme.KALIUM).then((value) {
                                 Address address = Address(value);
                                 if (!address.isValid()) {
@@ -518,7 +519,6 @@ class AppSendSheet {
       Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
       return NumberUtil.truncateDecimal(valueLocal / conversion).toString();
     } catch (e) {
-      _sendAmountController.text = "";
       return "";
     }
   }
@@ -557,7 +557,6 @@ class AppSendSheet {
       int balanceInt = (Decimal.parse(balance) * Decimal.fromInt(100)).toInt();
       return textFieldInt == balanceInt;
     } catch (e) {
-      _sendAmountController.text = "";
       return false;
     }
   }
