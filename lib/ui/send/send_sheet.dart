@@ -508,13 +508,11 @@ class AppSendSheet {
   }
 
   String _convertLocalCurrencyToCrypto(BuildContext context) {
-    String convertedAmt = _sendAmountController.text;
+    String convertedAmt = NumberUtil.sanitizeNumber(_sendAmountController.text);
     if (convertedAmt.isEmpty) {
       return "";
     }
     try {
-      convertedAmt = convertedAmt.replaceAll(_localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-      convertedAmt = convertedAmt.replaceAll(_localCurrencyFormat.currencySymbol, "");
       Decimal valueLocal = Decimal.parse(convertedAmt);
       Decimal conversion = Decimal.parse(StateContainer.of(context).wallet.localCurrencyConversion);
       return NumberUtil.truncateDecimal(valueLocal / conversion).toString();
@@ -541,20 +539,36 @@ class AppSendSheet {
     // Sanitize commas
     if (_sendAmountController.text.isEmpty) {
       return false;
-    } else if (_sendAddressController.text.trim() == _localCurrencyFormat.currencySymbol) {
-      _sendAmountController.text = "";
-      return false;
     }
     try {
-      String textField = _localCurrencyMode ? _convertLocalCurrencyToCrypto(context) : _sendAmountController.text.replaceAll(r',', "");
-      String balance = StateContainer.of(context)
+      String textField = _sendAmountController.text.replaceAll(r',', "");
+      String balance;
+      if (_localCurrencyMode) {
+        balance = StateContainer.of(context)
+          .wallet
+          .getLocalCurrencyPrice(locale: StateContainer.of(context).currencyLocale);
+      } else {
+        balance = StateContainer.of(context)
           .wallet
           .getAccountBalanceDisplay()
           .replaceAll(r",", "");
+      }
       // Convert to Integer representations
-      int textFieldInt =
-          (Decimal.parse(textField) * Decimal.fromInt(100)).toInt();
-      int balanceInt = (Decimal.parse(balance) * Decimal.fromInt(100)).toInt();
+      int textFieldInt;
+      int balanceInt;
+      if (_localCurrencyMode) {
+        // Sanitize currency values into plain integer representations
+        textField = textField.replaceAll(",", ".");
+        String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
+        String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
+        textFieldInt =
+            (Decimal.parse(sanitizedTextField) * Decimal.fromInt(100)).toInt();
+        balanceInt = (Decimal.parse(sanitizedBalance) * Decimal.fromInt(100)).toInt();
+      } else {
+        textFieldInt =
+            (Decimal.parse(textField) * Decimal.fromInt(100)).toInt();
+        balanceInt = (Decimal.parse(balance) * Decimal.fromInt(100)).toInt();
+      }
       return textFieldInt == balanceInt;
     } catch (e) {
       return false;
