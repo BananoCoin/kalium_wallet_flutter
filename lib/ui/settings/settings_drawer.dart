@@ -283,6 +283,9 @@ class _SettingsSheetState extends State<SettingsSheet>
     if (_transferCompleteSub != null) {
       _transferCompleteSub.cancel();
     }
+    if (_callbackUnlockSub != null) {
+      _callbackUnlockSub.cancel();
+    }
   }
 
   @override
