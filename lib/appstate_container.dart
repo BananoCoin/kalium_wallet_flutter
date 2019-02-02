@@ -236,6 +236,7 @@ class StateContainerState extends State<StateContainer> {
 
   @override
   void dispose() {
+    _destroyBus();
     _deepLinkSub.cancel();
     super.dispose();
   }
@@ -725,7 +726,6 @@ class StateContainerState extends State<StateContainer> {
       wallet = AppWallet();
     });
     AccountService.clearQueue();
-    _destroyBus();
   }
 
   Future<String> _getPrivKey() async {

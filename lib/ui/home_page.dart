@@ -893,7 +893,7 @@ class _AppHomePageState extends State<AppHomePage>
           style: AppStyles.TextStyleTransactionWelcome,
         ),
         TextSpan(
-          text: " BANANO ",
+          text: "BANANO",
           style: AppStyles.TextStyleTransactionWelcomePrimary,
         ),
         TextSpan(
