@@ -1,14 +1,16 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:flutter_nano_core/flutter_nano_core.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:event_taxi/event_taxi.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
-import 'package:kalium_wallet_flutter/bus/rxbus.dart';
+import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
@@ -45,21 +47,25 @@ class AppChangeRepresentativeSheet {
     _repAddressStyle = AppStyles.TextStyleAddressText60;
   }
 
+  StreamSubscription<RepChangedEvent> _repChangeSub;
+
   Future<bool> _onWillPop() async {
-    RxBus.destroy(tag: RX_REP_CHANGED_TAG);
+    if (_repChangeSub != null) {
+      _repChangeSub.cancel();
+    }
     return true;
   }
 
   mainBottomSheet(BuildContext context) {
     _changeRepHint = AppLocalization.of(context).changeRepHint;
 
-    RxBus.register<StateBlock>(tag: RX_REP_CHANGED_TAG).listen((stateBlock) {
-      if (stateBlock != null) {
+    _repChangeSub = EventTaxiImpl.singleton().registerTo<RepChangedEvent>().listen((event) {
+      if (event.previous != null) {
         StateContainer.of(context).wallet.representative =
-            stateBlock.representative;
+            event.previous.representative;
         UIUtil.showSnackbar(AppLocalization.of(context).changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      }
+      } 
     });
 
     AppSheets.showAppHeightNineSheet(
@@ -405,15 +411,15 @@ class AppChangeRepresentativeSheet {
                                               .setRepresentative(
                                                   _repController.text)
                                               .then((result) {
-                                            RxBus.post(
-                                                new StateBlock(
+                                            EventTaxiImpl.singleton().fire(RepChangedEvent(previous: StateBlock(
                                                     representative:
                                                         _repController.text,
                                                     previous: "",
                                                     link: "",
                                                     balance: "",
-                                                    account: ""),
-                                                tag: RX_REP_CHANGED_TAG);
+                                                    account: "")
+                                                    )
+                                              );
                                           });
                                         } else {
                                           StateContainer.of(context)
@@ -451,15 +457,15 @@ class AppChangeRepresentativeSheet {
                                                   .setRepresentative(
                                                       _repController.text)
                                                   .then((result) {
-                                                RxBus.post(
-                                                    new StateBlock(
-                                                        representative:
-                                                            _repController.text,
-                                                        previous: "",
-                                                        link: "",
-                                                        balance: "",
-                                                        account: ""),
-                                                    tag: RX_REP_CHANGED_TAG);
+                                              EventTaxiImpl.singleton().fire(RepChangedEvent(previous: StateBlock(
+                                                      representative:
+                                                          _repController.text,
+                                                      previous: "",
+                                                      link: "",
+                                                      balance: "",
+                                                      account: "")
+                                                      )
+                                                );
                                               });
                                             } else {
                                               StateContainer.of(context)

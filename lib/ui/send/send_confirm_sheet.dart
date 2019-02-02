@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:event_taxi/event_taxi.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
-import 'package:kalium_wallet_flutter/bus/rxbus.dart';
+import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
@@ -36,13 +39,17 @@ class AppSendConfirmSheet {
     _maxSend = maxSend;
   }
 
+  StreamSubscription<SendFailedEvent> _sendEventFailedSub;
+
   Future<bool> _onWillPop() async {
-    RxBus.destroy(tag: RX_SEND_FAILED_TAG);
+    if (_sendEventFailedSub != null) {
+      _sendEventFailedSub.cancel();
+    }
     return true;
   }
 
   mainBottomSheet(BuildContext context) {
-    RxBus.register<ErrorResponse>(tag: RX_SEND_FAILED_TAG).listen((result) {
+    _sendEventFailedSub = EventTaxiImpl.singleton().registerTo<SendFailedEvent>().listen((event) {
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
