@@ -228,7 +228,7 @@ class _AppHomePageState extends State<AppHomePage>
         DBHelper().getContactWithAddress(event.previous.link).then((contact) {
           String contactName = contact == null ? null : contact.name;
           Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-          AppSendCompleteSheet(displayAmount, event.previous.link, contactName)
+          AppSendCompleteSheet(displayAmount, event.previous.link, contactName, localAmount: event.previous.localCurrencyValue)
               .mainBottomSheet(context);
         });
       }

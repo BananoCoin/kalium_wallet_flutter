@@ -614,7 +614,7 @@ class StateContainerState extends State<StateContainer> {
   /// @param destination - Destination address
   /// @param amount - Amount to send in RAW
   /// 
-  void requestSend(String previous, String destination, String amount, {String privKey,String account}) {
+  void requestSend(String previous, String destination, String amount, {String privKey,String account,String localCurrencyAmount}) {
     String representative = wallet.representative;
     bool fromTransfer = privKey == null && account == null ? false: true;
 
@@ -625,7 +625,8 @@ class StateContainerState extends State<StateContainer> {
       balance:amount,
       link:destination,
       account: !fromTransfer ? wallet.address : account,
-      privKey: privKey
+      privKey: privKey,
+      localCurrencyValue: localCurrencyAmount
     );
     previousPendingMap.putIfAbsent(previous, () => sendBlock);
 
