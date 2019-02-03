@@ -376,6 +376,7 @@ class _AppHomePageState extends State<AppHomePage>
     if (StateContainer.of(context).wallet.historyLoading) {
       // Loading Animation
       return ReactiveRefreshIndicator(
+        backgroundColor: AppColors.backgroundDark,
         onRefresh: _refresh,
         isRefreshing: _isRefreshing,
         child: ListView(
@@ -402,6 +403,7 @@ class _AppHomePageState extends State<AppHomePage>
     } else if (StateContainer.of(context).wallet.history.length == 0) {
       _disposeAnimation();
       return ReactiveRefreshIndicator(
+        backgroundColor: AppColors.backgroundDark,
         child: ListView(
           padding: EdgeInsets.fromLTRB(0, 5.0, 0, 15.0),
           children: <Widget>[
@@ -428,6 +430,7 @@ class _AppHomePageState extends State<AppHomePage>
       });
     }
     return ReactiveRefreshIndicator(
+      backgroundColor: AppColors.backgroundDark,
       child: AnimatedList(
         key: _listKey,
         padding: EdgeInsets.fromLTRB(0, 5.0, 0, 15.0),
