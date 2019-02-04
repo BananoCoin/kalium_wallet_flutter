@@ -1,4 +1,4 @@
-\# Kalium - BANANO Mobile Wallet
+# Kalium - BANANO Mobile Wallet
 
 ## What is Kalium?
 
@@ -26,11 +26,11 @@ If you have a connected device or emulator you can run and deploy the app with `
 
 ## Have a question?
 
-If you need any help, please visit our (GITHUB_LINK_TBD) or the [Banano discord](https://chat.banano.cc). Feel free to file an issue if you do not manage to find any solution.
+If you need any help, please create an issue on GitHub or visit the [Banano discord](https://chat.banano.cc). Feel free to file an issue if you do not manage to find any solution.
 
 ## License
 
-To be determined
+Kalium is released under the BSD-2 License
 
 ### Update translations:
 
