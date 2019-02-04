@@ -1,0 +1,133 @@
+// DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
+// This is a library that provides messages for a el locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
+
+// ignore: unnecessary_new
+final messages = new MessageLookup();
+
+// ignore: unused_element
+final _keepAnalysisHappy = Intl.defaultLocale;
+
+// ignore: non_constant_identifier_names
+typedef MessageIfAbsent(String message_str, List args);
+
+class MessageLookup extends MessageLookupByLibrary {
+  get localeName => 'el';
+
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static _notInlinedMessages(_) => <String, Function> {
+    "addContact" : MessageLookupByLibrary.simpleMessage("Προσθήκη Επαφής"),
+    "addressCopied" : MessageLookupByLibrary.simpleMessage("Η Διεύθυνση Αντιγράφηκε"),
+    "addressHint" : MessageLookupByLibrary.simpleMessage("Εισάγετε Διεύθυνση"),
+    "addressMising" : MessageLookupByLibrary.simpleMessage("Παρακαλούμε εισάγετε μια διεύθυνση"),
+    "addressShare" : MessageLookupByLibrary.simpleMessage("Share Address"),
+    "amountMissing" : MessageLookupByLibrary.simpleMessage("Παρακαλούμε εισάγετε ένα ποσό"),
+    "authMethod" : MessageLookupByLibrary.simpleMessage("Μέθοδος Ταυτοποίησης"),
+    "backupSeed" : MessageLookupByLibrary.simpleMessage("Αντίγραφο Ασφαλείας του Seed"),
+    "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Είστε βέβαιος/η ότι έχετε δημιουργήσει αντίγραφο ασφαλείας του seed του πορτοφολιού σας?"),
+    "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Αντίγραφο ασφαλείας του seed σας"),
+    "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Δακτυλικό Αποτύπωμα"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("Ακύρωση"),
+    "changeCurrency" : MessageLookupByLibrary.simpleMessage("Αλλαγή Νομίσματος"),
+    "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Αλλαγή Εκπροσώπου"),
+    "changeRepButton" : MessageLookupByLibrary.simpleMessage("Αλλαγή"),
+    "changeRepHint" : MessageLookupByLibrary.simpleMessage("Εισάγετε Νέο Εκπρόσωπο"),
+    "changeRepSucces" : MessageLookupByLibrary.simpleMessage("Ο Εκπρόσωπος Άλλαξε Επιτυχώς"),
+    "close" : MessageLookupByLibrary.simpleMessage("Κλείσιμο"),
+    "confirm" : MessageLookupByLibrary.simpleMessage("Επιβεβαίωση"),
+    "contactAdded" : MessageLookupByLibrary.simpleMessage("Ο/Η %1 προσθέθηκε στις επαφές!"),
+    "contactExists" : MessageLookupByLibrary.simpleMessage("Η Επαφή Υπάρχει Ήδη"),
+    "contactHeader" : MessageLookupByLibrary.simpleMessage("Επαφή:"),
+    "contactInvalid" : MessageLookupByLibrary.simpleMessage("Μη Έγκυρο Όνομα Επαφής"),
+    "contactNameHint" : MessageLookupByLibrary.simpleMessage("Γράψτε ένα Όνομα @"),
+    "contactNameMissing" : MessageLookupByLibrary.simpleMessage("Δεν υπάρχουν επαφές για εξαγωγή"),
+    "contactsHeader" : MessageLookupByLibrary.simpleMessage("Επαφές"),
+    "contactsImportSuccess" : MessageLookupByLibrary.simpleMessage("Sucessfully imported %1 contacts."),
+    "copyAddress" : MessageLookupByLibrary.simpleMessage("Αντιγραφή Διεύθυνσης"),
+    "currentlyRepresented" : MessageLookupByLibrary.simpleMessage("Τώρα εκπροσωπείται από"),
+    "enterAddress" : MessageLookupByLibrary.simpleMessage("Enter Address"),
+    "enterAmount" : MessageLookupByLibrary.simpleMessage("Εισάγετε Ποσό"),
+    "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Επιβεβαιώστε με δαχτυλικό αποτύπωμα την προβολή του seed σας."),
+    "importSeed" : MessageLookupByLibrary.simpleMessage("Εισαγωγή seed"),
+    "importSeedHint" : MessageLookupByLibrary.simpleMessage("Παρακαλούμε εισάγετε το seed σας παρακάτω."),
+    "importWallet" : MessageLookupByLibrary.simpleMessage("Εισαγωγή Πορτοφολιού"),
+    "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Ανεπαρκές Υπόλοιπο"),
+    "invalidAddress" : MessageLookupByLibrary.simpleMessage("Η διεύθυνση που πληκτρολογήσατε δεν ήταν έγκυρη"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium Wallet"),
+    "language" : MessageLookupByLibrary.simpleMessage("Γλώσσα"),
+    "logout" : MessageLookupByLibrary.simpleMessage("Αποσυνδέση"),
+    "logoutAction" : MessageLookupByLibrary.simpleMessage("Διαγραφή του seed και αποσύνδεση"),
+    "logoutAreYouSure" : MessageLookupByLibrary.simpleMessage("Είσαστε σίγουρος/η?"),
+    "logoutDetail" : MessageLookupByLibrary.simpleMessage("Η αποσύνδεση θα διαγράψει το seed σας και όλα τα δεδομένα σχετικά με το Kalium από αυτή τη συσκευή. Εάν δεν έχετε δημιουργήσει αντίγραφο ασφαλείας του seed σας, δεν θα έχετε ποτέ ξανά πρόσβαση στα χρήματά σας."),
+    "logoutReassurance" : MessageLookupByLibrary.simpleMessage("Εφόσον έχετε δημιουργήσει αντίγραφο ασφαλείας του seed σας, δεν έχετε τίποτα να ανησυχείτε."),
+    "manage" : MessageLookupByLibrary.simpleMessage("Διαχείριση"),
+    "manualEntry" : MessageLookupByLibrary.simpleMessage("Manual Entry"),
+    "mnemonicPhrase" : MessageLookupByLibrary.simpleMessage("Mnemonic Phrase"),
+    "newWallet" : MessageLookupByLibrary.simpleMessage("Νέο Πορτοφόλι"),
+    "no" : MessageLookupByLibrary.simpleMessage("Όχι"),
+    "noContactsExport" : MessageLookupByLibrary.simpleMessage("Δεν υπάρχουν επαφές για εξαγωγή"),
+    "noContactsImport" : MessageLookupByLibrary.simpleMessage("Δεν βρέθηκαν επαφές για εισαγωγή"),
+    "notificationBody" : MessageLookupByLibrary.simpleMessage("Ανοίξτε το Kalium για να δείτε αυτή τη συναλλαγή."),
+    "notificationHeaderSupplement" : MessageLookupByLibrary.simpleMessage("Πατήστε για να ανοίξετε"),
+    "notificationTitle" : MessageLookupByLibrary.simpleMessage("Λήφθηκαν %1 BANANO"),
+    "notifications" : MessageLookupByLibrary.simpleMessage("Ειδοποιήσεις"),
+    "off" : MessageLookupByLibrary.simpleMessage("Απενεργοποιημένες"),
+    "onStr" : MessageLookupByLibrary.simpleMessage("Ενεργοποιημένες"),
+    "paperWallet" : MessageLookupByLibrary.simpleMessage("Paper Wallet"),
+    "pinConfirmError" : MessageLookupByLibrary.simpleMessage("Τα pin που εισάγατε δεν είναι ίδια."),
+    "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Επιβεβαιώστε το pin σας"),
+    "pinCreateTitle" : MessageLookupByLibrary.simpleMessage("Δημιουργήστε ένα pin 4 ψηφίων"),
+    "pinEnterTitle" : MessageLookupByLibrary.simpleMessage("Εισάγετε το pin σας"),
+    "pinInvalid" : MessageLookupByLibrary.simpleMessage("Έχει εισαχθεί μη έγκυρο pin"),
+    "pinMethod" : MessageLookupByLibrary.simpleMessage("PIN"),
+    "pinRepChange" : MessageLookupByLibrary.simpleMessage("Πληκτρολογήστε το pin σας για να αλλάξετε εκπρόσωπο"),
+    "pinSeedBackup" : MessageLookupByLibrary.simpleMessage("Εισάγετε το pin για να εμφανιστεί το seed σας."),
+    "preferences" : MessageLookupByLibrary.simpleMessage("Προτιμήσεις"),
+    "rawSeed" : MessageLookupByLibrary.simpleMessage("Raw Seed"),
+    "receive" : MessageLookupByLibrary.simpleMessage("Λήψη"),
+    "received" : MessageLookupByLibrary.simpleMessage("Λήφθηκαν"),
+    "removeContact" : MessageLookupByLibrary.simpleMessage("Διαγραφή Επαφής"),
+    "removeContactConfirmation" : MessageLookupByLibrary.simpleMessage("Είσαστε σίγουρος/η ότι θέλετε να διαγράψετε τον/την %1?"),
+    "repInfo" : MessageLookupByLibrary.simpleMessage("Εκπρόσωπος είναι ένας λογαριασμός που ψηφίζει για τη συναίνεση του δικτύου. Η ισχύς της ψήφου του εκπροσώπου καθορίζεται από το πλήθος των Banano που χρήστες έχουν επιλέξει να εκπροσωπούνται από αυτόν. Μπορείτε να θέσετε τα BANANO σας να ενισχύουν την ψήφο ενός εκπροσώπου που εμπιστεύεστε. Ο εκπρόσωπός σας δεν έχει τη δυνατότητα να ξοδέψει τα χρήματά σας. Θα πρέπει να επιλέξετε έναν εκπρόσωπο που είναι σπάνια offline και είναι αξιόπιστος."),
+    "repInfoHeader" : MessageLookupByLibrary.simpleMessage("Τι είναι ένας εκπρόσωπος?"),
+    "scanInstructions" : MessageLookupByLibrary.simpleMessage("Σαρώστε τον QR κωδικό \\nμιας BANANO διεύθυνσης"),
+    "scanQrCode" : MessageLookupByLibrary.simpleMessage("Σάρωση QR Κωδικού"),
+    "seed" : MessageLookupByLibrary.simpleMessage("Seed"),
+    "seedBackupInfo" : MessageLookupByLibrary.simpleMessage("Παρακάτω είναι το seed του πορτοφολιού σας. Είναι σημαντικό να δημιουργήσετε αντίγραφα ασφαλείας του seed σας και να μην τα αποθηκεύσετε ποτέ ως απλό κείμενο ή ως στιγμιότυπο οθόνης."),
+    "seedCopied" : MessageLookupByLibrary.simpleMessage("Το seed αντιγράφηκε στο πρόχειρο.\\n Είναι δυνατή η επικόλλησή του για 2 λεπτά."),
+    "seedInvalid" : MessageLookupByLibrary.simpleMessage("Το seed δεν είναι Έγκυρο"),
+    "send" : MessageLookupByLibrary.simpleMessage("Αποστολή"),
+    "sendAmountConfirm" : MessageLookupByLibrary.simpleMessage("Να σταλθούν %1 Banano?"),
+    "sendFrom" : MessageLookupByLibrary.simpleMessage("Αποστολή Από:"),
+    "sending" : MessageLookupByLibrary.simpleMessage("Στέλνονται"),
+    "sent" : MessageLookupByLibrary.simpleMessage("Στάλθηκαν"),
+    "sentTo" : MessageLookupByLibrary.simpleMessage("Στάλθηκαν Προς:"),
+    "settingsHeader" : MessageLookupByLibrary.simpleMessage("Ρυθμίσεις"),
+    "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Load from Paper Wallet"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Κοινοποιήστε το Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Δοκιμάστε το Kalium! Το καλύτερο πορτοφόλι για BANANO σε κινητά τηλέφωνα!"),
+    "systemDefault" : MessageLookupByLibrary.simpleMessage("Προεπιλογή Συστήματος"),
+    "to" : MessageLookupByLibrary.simpleMessage("Προς:"),
+    "transactions" : MessageLookupByLibrary.simpleMessage("Συναλλαγές"),
+    "transferClose" : MessageLookupByLibrary.simpleMessage("Tap anywhere to close the window."),
+    "transferComplete" : MessageLookupByLibrary.simpleMessage("%1 BANANO successfully transferred to your Kalium Wallet."),
+    "transferConfirmInfo" : MessageLookupByLibrary.simpleMessage("A wallet with a balance of %1 BANANO has been detected."),
+    "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Tap confirm to transfer the funds."),
+    "transferConfirmInfoThird" : MessageLookupByLibrary.simpleMessage("Transfer may take several seconds to complete."),
+    "transferError" : MessageLookupByLibrary.simpleMessage("An error has occurred during the transfer. Please try again later."),
+    "transferHeader" : MessageLookupByLibrary.simpleMessage("Transfer Funds:"),
+    "transferIntro" : MessageLookupByLibrary.simpleMessage("This process will transfer the funds from a paper wallet to your Kalium wallet.\n\nTap the \"%1\" button to start"),
+    "transferLoading" : MessageLookupByLibrary.simpleMessage("Transferring"),
+    "transferNoFunds" : MessageLookupByLibrary.simpleMessage("This seed does not have any BANANO on it"),
+    "transferQrScanError" : MessageLookupByLibrary.simpleMessage("This QR code does not contain a valid seed."),
+    "transferQrScanHint" : MessageLookupByLibrary.simpleMessage("Scan a Banano \nseed or private key"),
+    "viewDetails" : MessageLookupByLibrary.simpleMessage("Δείτε Λεπτομέρειες"),
+    "warning" : MessageLookupByLibrary.simpleMessage("ΠΡΟΣΟΧΗ"),
+    "welcomeText" : MessageLookupByLibrary.simpleMessage("Καλωσήρθατε στο Kalium. Για να συνεχίσετε, μπορείτε να δημιουργήσετε ένα νέο πορτοφόλι ή να εισάγετε ένα υπάρχον."),
+    "yes" : MessageLookupByLibrary.simpleMessage("Ναι")
+  };
+}

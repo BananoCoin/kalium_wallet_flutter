@@ -33,7 +33,13 @@ void main() async {
   });
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => new _AppState();
+}
+
+
+class _AppState extends State<App> {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
@@ -54,11 +60,11 @@ class App extends StatelessWidget {
           brightness: Brightness.dark,
         ),
         localizationsDelegates: [
-          AppLocalizationsDelegate(),
+          AppLocalizationsDelegate(StateContainer.of(context).curLanguage),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        supportedLocales: [Locale("en"), Locale("es"), Locale("pt")],
+        supportedLocales: [Locale("en"), Locale("de")],
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {

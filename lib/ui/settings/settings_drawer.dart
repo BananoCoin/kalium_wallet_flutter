@@ -24,6 +24,7 @@ import 'package:kalium_wallet_flutter/model/available_currency.dart';
 import 'package:kalium_wallet_flutter/model/device_unlock_option.dart';
 import 'package:kalium_wallet_flutter/model/device_lock_timeout.dart';
 import 'package:kalium_wallet_flutter/model/notification_settings.dart';
+import 'package:kalium_wallet_flutter/model/available_language.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
@@ -35,7 +36,6 @@ import 'package:kalium_wallet_flutter/ui/settings/settings_list_item.dart';
 import 'package:kalium_wallet_flutter/ui/transfer/transfer_overview_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/transfer/transfer_confirm_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/transfer/transfer_complete_sheet.dart';
-import 'package:kalium_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
@@ -594,6 +594,52 @@ class _SettingsSheetState extends State<SettingsSheet>
     });
   }
 
+  List<Widget> _buildLanguageOptions() {
+    List<Widget> ret = new List();
+    AvailableLanguage.values.forEach((AvailableLanguage value) {
+      ret.add(SimpleDialogOption(
+        onPressed: () {
+          Navigator.pop(context, value);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            LanguageSetting(value).getDisplayName(context),
+            style: AppStyles.TextStyleDialogOptions,
+          ),
+        ),
+      ));
+    });
+    return ret;
+  }
+
+  Future<void> _languageDialog() async {
+    AvailableLanguage selection =
+        await showAppDialog<AvailableLanguage>(
+            context: context,
+            builder: (BuildContext context) {
+              return AppSimpleDialog(
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                    AppLocalization.of(context).language,
+                    style: AppStyles.TextStyleDialogHeader,
+                  ),
+                ),
+                children: _buildLanguageOptions(),
+              );
+            });
+    SharedPrefsUtil.inst
+        .setLanguage(LanguageSetting(selection))
+        .then((result) {
+      if (StateContainer.of(context).curLanguage.language != selection) {
+        setState(() {
+          StateContainer.of(context).updateLanguage(LanguageSetting(selection));
+        });
+      }
+    });
+  }
+
   List<Widget> _buildLockTimeoutOptions() {
     List<Widget> ret = new List();
     LockTimeoutOption.values.forEach((LockTimeoutOption value) {
@@ -724,12 +770,13 @@ class _SettingsSheetState extends State<SettingsSheet>
                       StateContainer.of(context).curCurrency,
                       AppIcons.currency,
                       _currencyDialog),
-                  /*
                   Divider(height: 2),
-                  buildSettingsListItemDoubleLine(
+                  AppSettings.buildSettingsListItemDoubleLine(
+                      context,
                       AppLocalization.of(context).language,
-                      AppLocalization.of(context).systemDefault,
-                      AppIcons.language),*/
+                      StateContainer.of(context).curLanguage,
+                      AppIcons.language,
+                      _languageDialog),
                   Divider(height: 2),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,

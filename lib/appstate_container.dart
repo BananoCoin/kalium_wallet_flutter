@@ -10,6 +10,7 @@ import 'package:logging/logging.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/model/available_currency.dart';
+import 'package:kalium_wallet_flutter/model/available_language.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/state_block.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
@@ -61,13 +62,15 @@ class StateContainer extends StatefulWidget {
   final String currencyLocale;
   final Locale deviceLocale;
   final AvailableCurrency curCurrency;
+  final LanguageSetting curLanguage;
 
   StateContainer({
     @required this.child,
     this.wallet,
     this.currencyLocale,
     this.deviceLocale,
-    this.curCurrency
+    this.curCurrency,
+    this.curLanguage
   });
 
   // This is the secret sauce. Write your own 'of' method that will behave
@@ -93,6 +96,7 @@ class StateContainerState extends State<StateContainer> {
   String currencyLocale;
   Locale deviceLocale = Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
+  LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
 
   // Subscribe to deep link changes
   StreamSubscription _deepLinkSub;
@@ -139,6 +143,12 @@ class StateContainerState extends State<StateContainer> {
       }
     }, onError: (e) {
       log.severe(e.toString());
+    });
+    // Get default language setting
+    SharedPrefsUtil.inst.getLanguage().then((language) {
+      setState(() {
+        curLanguage = language;
+      });
     });
   }
 
@@ -279,6 +289,13 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet = AppWallet(address: address, loading: true);
       requestUpdate();
+    });
+  }
+
+  // Change language
+  void updateLanguage(LanguageSetting language) {
+    setState(() {
+      curLanguage = language;
     });
   }
 

@@ -1,0 +1,133 @@
+// DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
+// This is a library that provides messages for a nl locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
+
+// ignore: unnecessary_new
+final messages = new MessageLookup();
+
+// ignore: unused_element
+final _keepAnalysisHappy = Intl.defaultLocale;
+
+// ignore: non_constant_identifier_names
+typedef MessageIfAbsent(String message_str, List args);
+
+class MessageLookup extends MessageLookupByLibrary {
+  get localeName => 'nl';
+
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static _notInlinedMessages(_) => <String, Function> {
+    "addContact" : MessageLookupByLibrary.simpleMessage("Contact toevoegen"),
+    "addressCopied" : MessageLookupByLibrary.simpleMessage("Adres gekopieerd"),
+    "addressHint" : MessageLookupByLibrary.simpleMessage("Vul adres in"),
+    "addressMising" : MessageLookupByLibrary.simpleMessage("Voer a.u.b. een adres in"),
+    "addressShare" : MessageLookupByLibrary.simpleMessage("Share Address"),
+    "amountMissing" : MessageLookupByLibrary.simpleMessage("Voer a.u.b. een hoeveelheid in"),
+    "authMethod" : MessageLookupByLibrary.simpleMessage("Verificatiemethode"),
+    "backupSeed" : MessageLookupByLibrary.simpleMessage("Maak seed back-up"),
+    "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Weet je zeker dat jouw wallet seed is opgeslagen?"),
+    "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Maak een back-up van jouw seed"),
+    "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Vingerafdruk"),
+    "cancel" : MessageLookupByLibrary.simpleMessage("Annuleer"),
+    "changeCurrency" : MessageLookupByLibrary.simpleMessage("Verander valuta"),
+    "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Verander van vertegenwoordiger"),
+    "changeRepButton" : MessageLookupByLibrary.simpleMessage("Verander"),
+    "changeRepHint" : MessageLookupByLibrary.simpleMessage("Vul nieuwe vertegenwoordiger in:"),
+    "changeRepSucces" : MessageLookupByLibrary.simpleMessage("Nieuwe vertegenwoordiger opgeslagen"),
+    "close" : MessageLookupByLibrary.simpleMessage("Sluit"),
+    "confirm" : MessageLookupByLibrary.simpleMessage("Bevestig"),
+    "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 is toegevoegd aan contact!"),
+    "contactExists" : MessageLookupByLibrary.simpleMessage("Contact bestaat al"),
+    "contactHeader" : MessageLookupByLibrary.simpleMessage("Contact:"),
+    "contactInvalid" : MessageLookupByLibrary.simpleMessage("Ongeldige contact naam"),
+    "contactNameHint" : MessageLookupByLibrary.simpleMessage("Voer naam in @"),
+    "contactNameMissing" : MessageLookupByLibrary.simpleMessage("Er zijn geen contacten aanwezig om te verwijderen"),
+    "contactsHeader" : MessageLookupByLibrary.simpleMessage("Contacten"),
+    "contactsImportSuccess" : MessageLookupByLibrary.simpleMessage("Sucessfully imported %1 contacts."),
+    "copyAddress" : MessageLookupByLibrary.simpleMessage("Kopieer adres"),
+    "currentlyRepresented" : MessageLookupByLibrary.simpleMessage("Jouw huidige vertegenwoordiger is:"),
+    "enterAddress" : MessageLookupByLibrary.simpleMessage("Enter Address"),
+    "enterAmount" : MessageLookupByLibrary.simpleMessage("Vul bedrag in"),
+    "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Bevestig je vingerafdruk om een back-up te maken."),
+    "importSeed" : MessageLookupByLibrary.simpleMessage("Importeer seed"),
+    "importSeedHint" : MessageLookupByLibrary.simpleMessage("Vul jouw seed in."),
+    "importWallet" : MessageLookupByLibrary.simpleMessage("Importeer wallet"),
+    "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Onvoldoende saldo"),
+    "invalidAddress" : MessageLookupByLibrary.simpleMessage("Ongeldige ontvanger"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium wallet"),
+    "language" : MessageLookupByLibrary.simpleMessage("Taal"),
+    "logout" : MessageLookupByLibrary.simpleMessage("Uitloggen"),
+    "logoutAction" : MessageLookupByLibrary.simpleMessage("Seed verwijderen en uitloggen"),
+    "logoutAreYouSure" : MessageLookupByLibrary.simpleMessage("Weet je het zeker?"),
+    "logoutDetail" : MessageLookupByLibrary.simpleMessage("Uitloggen zorgt ervoor dat jouw seed en alle Kalium-gerelateerde informatie van dit toestel worden verwijderd. Als je geen back-up hebt gemaakt, kan je niet meer bij de inhoud van jouw wallet."),
+    "logoutReassurance" : MessageLookupByLibrary.simpleMessage("Als je een back-up hebt gemaakt van jouw seed, is er niks aan de hand."),
+    "manage" : MessageLookupByLibrary.simpleMessage("Beheren"),
+    "manualEntry" : MessageLookupByLibrary.simpleMessage("Handmatige invoer"),
+    "mnemonicPhrase" : MessageLookupByLibrary.simpleMessage("Woordvolgorde"),
+    "newWallet" : MessageLookupByLibrary.simpleMessage("Nieuwe wallet"),
+    "no" : MessageLookupByLibrary.simpleMessage("Nee"),
+    "noContactsExport" : MessageLookupByLibrary.simpleMessage("Er zijn geen contacten aanwezig om te verwijderen"),
+    "noContactsImport" : MessageLookupByLibrary.simpleMessage("Geen contacten gevonden om te importeren"),
+    "notificationBody" : MessageLookupByLibrary.simpleMessage("Open Kalium om de transactie te zien."),
+    "notificationHeaderSupplement" : MessageLookupByLibrary.simpleMessage("Tik om te openen"),
+    "notificationTitle" : MessageLookupByLibrary.simpleMessage("%1 BANANO ontvangen"),
+    "notifications" : MessageLookupByLibrary.simpleMessage("Notificaties"),
+    "off" : MessageLookupByLibrary.simpleMessage("Uit"),
+    "onStr" : MessageLookupByLibrary.simpleMessage("Aan"),
+    "paperWallet" : MessageLookupByLibrary.simpleMessage("Papieren wallet"),
+    "pinConfirmError" : MessageLookupByLibrary.simpleMessage("Pincodes komen niet overeen"),
+    "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("Bevestig pincode"),
+    "pinCreateTitle" : MessageLookupByLibrary.simpleMessage("Creëer een 4-cijferige pincode"),
+    "pinEnterTitle" : MessageLookupByLibrary.simpleMessage("Voer pincode in"),
+    "pinInvalid" : MessageLookupByLibrary.simpleMessage("Ongeldige pincode ingevoerd"),
+    "pinMethod" : MessageLookupByLibrary.simpleMessage("Pincode"),
+    "pinRepChange" : MessageLookupByLibrary.simpleMessage("Voer PIN in om van vertegenwoordiger te veranderen"),
+    "pinSeedBackup" : MessageLookupByLibrary.simpleMessage("Vul je pincode in om je wallet seed te zien."),
+    "preferences" : MessageLookupByLibrary.simpleMessage("Voorkeuren"),
+    "rawSeed" : MessageLookupByLibrary.simpleMessage("Seed"),
+    "receive" : MessageLookupByLibrary.simpleMessage("Ontvang"),
+    "received" : MessageLookupByLibrary.simpleMessage("Ontvangen"),
+    "removeContact" : MessageLookupByLibrary.simpleMessage("Verwijder contact"),
+    "removeContactConfirmation" : MessageLookupByLibrary.simpleMessage("Weet je zeker dat je het contact %1 wil verwijderen?"),
+    "repInfo" : MessageLookupByLibrary.simpleMessage("Een vertegenwoordiger stemt mee om consensus te bereiken in het netwerk. De waarde van de stem van een vertegenwoordiger wordt bepaald door de balans van dat account. Je kunt ervoor kiezen jouw balans toe te wijzen aan een vertegenwoordiger, zodat deze meer stemrecht krijgt. Geen zorgen, jouw balans blijft altijd volledig in eigen beheer. Kies bij voorkeur een betrouwbare vertegenwoordiger die altijd online is."),
+    "repInfoHeader" : MessageLookupByLibrary.simpleMessage("Wat is een vertegenwoordiger?"),
+    "scanInstructions" : MessageLookupByLibrary.simpleMessage("Scan een Banano\\nadres QR code"),
+    "scanQrCode" : MessageLookupByLibrary.simpleMessage("Scan QR Code"),
+    "seed" : MessageLookupByLibrary.simpleMessage("Seed"),
+    "seedBackupInfo" : MessageLookupByLibrary.simpleMessage("Hieronder staat de seed van jouw wallet. Maak hier altijd een back-up van en sla deze veilig op."),
+    "seedCopied" : MessageLookupByLibrary.simpleMessage("Seed is gekopieerd naar klembord en blijft 2 minuten beschikbaar."),
+    "seedInvalid" : MessageLookupByLibrary.simpleMessage("Seed is ongeldig"),
+    "send" : MessageLookupByLibrary.simpleMessage("Verstuur"),
+    "sendAmountConfirm" : MessageLookupByLibrary.simpleMessage("Verstuur %1 Banano?"),
+    "sendFrom" : MessageLookupByLibrary.simpleMessage("Verstuur via:"),
+    "sending" : MessageLookupByLibrary.simpleMessage("Versturen"),
+    "sent" : MessageLookupByLibrary.simpleMessage("Verstuurd"),
+    "sentTo" : MessageLookupByLibrary.simpleMessage("Verstuur naar:"),
+    "settingsHeader" : MessageLookupByLibrary.simpleMessage("Instellingen"),
+    "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Van papieren wallet importeren"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Deel Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Check Kalium! Banano Android Wallet!"),
+    "systemDefault" : MessageLookupByLibrary.simpleMessage("Systeemfout"),
+    "to" : MessageLookupByLibrary.simpleMessage("Naar:"),
+    "transactions" : MessageLookupByLibrary.simpleMessage("Transacties"),
+    "transferClose" : MessageLookupByLibrary.simpleMessage("Tik ergens om het venster te sluiten."),
+    "transferComplete" : MessageLookupByLibrary.simpleMessage("%1 Banano succesvol overgezet naar uw Kalium-wallet."),
+    "transferConfirmInfo" : MessageLookupByLibrary.simpleMessage("Een wallet met een balans van %1 Banano is gedetecteerd."),
+    "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Tik op bevestigen om het bedrag over te zetten."),
+    "transferConfirmInfoThird" : MessageLookupByLibrary.simpleMessage("Het overzetten kan enkele seconden duren om te voltooien."),
+    "transferError" : MessageLookupByLibrary.simpleMessage("Tijdens het overzetten is een fout opgetreden. Probeer het later nog eens."),
+    "transferHeader" : MessageLookupByLibrary.simpleMessage("Bedragen overzetten:"),
+    "transferIntro" : MessageLookupByLibrary.simpleMessage("Met dit proces worden de bedragen van een papieren wallet overgezet naar uw Kalium-wallet.\\n\\nTik op de \"%1\" knop om te starten."),
+    "transferLoading" : MessageLookupByLibrary.simpleMessage("Overzetten"),
+    "transferNoFunds" : MessageLookupByLibrary.simpleMessage("Deze seed bevat geen Banano."),
+    "transferQrScanError" : MessageLookupByLibrary.simpleMessage("Deze QR-code bevat geen geldige seed."),
+    "transferQrScanHint" : MessageLookupByLibrary.simpleMessage("Scan een Banano \\nseed of private key"),
+    "viewDetails" : MessageLookupByLibrary.simpleMessage("Bekijk details"),
+    "warning" : MessageLookupByLibrary.simpleMessage("WAARSCHUWING"),
+    "welcomeText" : MessageLookupByLibrary.simpleMessage("Welkom bij Kalium. Creëer een nieuwe wallet of importeer een bestaande wallet om verder te gaan."),
+    "yes" : MessageLookupByLibrary.simpleMessage("Ja")
+  };
+}

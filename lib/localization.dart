@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kalium_wallet_flutter/model/available_language.dart';
 
 import 'l10n/messages_all.dart';
 
@@ -772,16 +773,21 @@ class AppLocalization {
 }
 
 class AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalization> {
-  const AppLocalizationsDelegate();
+  final LanguageSetting languageSetting;
+
+  const AppLocalizationsDelegate(this.languageSetting);
 
   @override
   bool isSupported(Locale locale) {
-    return ['en'].contains(locale.languageCode);
+    return languageSetting != null;
   }
 
   @override
   Future<AppLocalization> load(Locale locale) {
-    return AppLocalization.load(locale);
+    if (languageSetting.language == AvailableLanguage.DEFAULT) {
+      return AppLocalization.load(locale);
+    }
+    return AppLocalization.load(Locale(languageSetting.getLocaleString()));
   }
 
   @override
