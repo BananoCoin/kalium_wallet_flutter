@@ -92,6 +92,9 @@ class SharedPrefsUtil {
   }
 
   Future<bool> getFirstLaunch() async {
+    if (await getSeedBackedUp()) {
+      return false;
+    }
     return await get(first_launch_key, defaultValue: true);
   }
 
