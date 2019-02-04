@@ -1,0 +1,675 @@
+{
+	"@@last_modified": "2019-01-19T10:52:44.632276",
+	"cancel": "Kanselahin",
+	"@cancel": {
+		"description": "dialog_cancel",
+		"type": "text",
+		"placeholders": {}
+	},
+	"close": "Isara",
+	"@close": {
+		"description": "dialog_close",
+		"type": "text",
+		"placeholders": {}
+	},
+	"confirm": "Kumpirmahin",
+	"@confirm": {
+		"description": "dialog_confirm",
+		"type": "text",
+		"placeholders": {}
+	},
+	"no": "Hindi",
+	"@no": {
+		"description": "intro_new_wallet_backup_no",
+		"type": "text",
+		"placeholders": {}
+	},
+	"yes": "Oo",
+	"@yes": {
+		"description": "intro_new_wallet_backup_yes",
+		"type": "text",
+		"placeholders": {}
+	},
+	"onStr": "On",
+	"@onStr": {
+		"description": "generic_on",
+		"type": "text",
+		"placeholders": {}
+	},
+	"off": "Off",
+	"@off": {
+		"description": "generic_off",
+		"type": "text",
+		"placeholders": {}
+	},
+	"send": "Magpadala",
+	"@send": {
+		"description": "home_send_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"receive": "Tumanggap",
+	"@receive": {
+		"description": "home_receive_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sent": "Naipadala",
+	"@sent": {
+		"description": "history_sent",
+		"type": "text",
+		"placeholders": {}
+	},
+	"received": "Natanggap",
+	"@received": {
+		"description": "history_received",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transactions": "Mga transaksyon",
+	"@transactions": {
+		"description": "transaction_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressCopied": "Ang Address ay nakopya",
+	"@addressCopied": {
+		"description": "receive_copied",
+		"type": "text",
+		"placeholders": {}
+	},
+	"copyAddress": "Kopyahin ang Address",
+	"@copyAddress": {
+		"description": "receive_copy_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressShare": "Share Address",
+	"@addressShare": {
+		"description": "share_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressHint": "Ilagay ang Address",
+	"@addressHint": {
+		"description": "send_address_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seed": "Seed",
+	"@seed": {
+		"description": "intro_new_wallet_seed_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedInvalid": "Ang seed ay hindi wasto",
+	"@seedInvalid": {
+		"description": "intro_seed_invalid",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedCopied": "Ang seed ay nakopya sa clipboard.\\n Pwedeng i-paste ito sa loob ng dalawang minuto.",
+	"@seedCopied": {
+		"description": "intro_new_wallet_seed_copied",
+		"type": "text",
+		"placeholders": {}
+	},
+	"scanQrCode": "I-scan ang QR Code",
+	"@scanQrCode": {
+		"description": "send_scan_qr",
+		"type": "text",
+		"placeholders": {}
+	},
+	"fileReadErr": "Couldn't read file",
+	"@fileReadErr": {
+		"description": "file_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"fileParseErr": "Couldn't parse file",
+	"@fileParseErr": {
+		"description": "file_parse_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"viewDetails": "Tingnan ang detalye",
+	"@viewDetails": {
+		"description": "transaction_details",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeContact": "Alisin ang kontak",
+	"@removeContact": {
+		"description": "contact_remove_btn",
+		"type": "text",
+		"placeholders": {}
+	},
+	"removeContactConfirmation": "Sigurado ka ba gusto mong tanggalin ang %1?",
+	"@removeContactConfirmation": {
+		"description": "contact_remove_sure",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactHeader": "Kontak:",
+	"@contactHeader": {
+		"description": "contact_view_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsHeader": "Mga kontak",
+	"@contactsHeader": {
+		"description": "contact_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addContact": "Mag-add ng kontak",
+	"@addContact": {
+		"description": "contact_add_button",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactNameHint": "Ilagay ang pangalan @",
+	"@contactNameHint": {
+		"description": "contact_name_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactInvalid": "Hindi tugma sa kontak",
+	"@contactInvalid": {
+		"description": "contact_invalid_name",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noContactsExport": "Walang kontak na ma-export",
+	"@noContactsExport": {
+		"description": "contact_export_none",
+		"type": "text",
+		"placeholders": {}
+	},
+	"noContactsImport": "Walang kontak na ma-import",
+	"@noContactsImport": {
+		"description": "contact_import_none",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsImportSuccess": "Sucessfully imported %1 contacts.",
+	"@contactsImportSuccess": {
+		"description": "contacts_import_success",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactAdded": "%1 ay nadagdag sa mga kontak!",
+	"@contactAdded": {
+		"description": "contact_added",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactNameMissing": "Walang kontak na ma-export",
+	"@contactNameMissing": {
+		"description": "contact_export_none",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactExists": "Mayroon nang kapareho",
+	"@contactExists": {
+		"description": "contact_name_exists",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupYourSeed": "I-back up ang iyong seed",
+	"@backupYourSeed": {
+		"description": "intro_new_wallet_seed_backup_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSeedConfirm": "Sigurado ka ba na na-back up mo na ang iyong wallet seed?",
+	"@backupSeedConfirm": {
+		"description": "intro_new_wallet_backup",
+		"type": "text",
+		"placeholders": {}
+	},
+	"seedBackupInfo": "Ang nasa ibaba ay ang seed ng iyong wallet. Importante na i-back up ang iyong seed at huwag i-save bilang plaintext o screenshot.",
+	"@seedBackupInfo": {
+		"description": "intro_new_wallet_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeed": "I-import ang iyong seed",
+	"@importSeed": {
+		"description": "intro_seed_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importSeedHint": "Ilagay ang iyong seed sa ibaba.",
+	"@importSeedHint": {
+		"description": "intro_seed_info",
+		"type": "text",
+		"placeholders": {}
+	},
+	"welcomeText": "Maligayang pagdating sa Kalium. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
+	"@welcomeText": {
+		"description": "intro_welcome_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"newWallet": "Bagong Wallet",
+	"@newWallet": {
+		"description": "intro_welcome_new_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"importWallet": "Dating Wallet",
+	"@importWallet": {
+		"description": "intro_welcome_have_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sentTo": "Pinadala sa:",
+	"@sentTo": {
+		"description": "sent_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sending": "Pinapadala",
+	"@sending": {
+		"description": "send_sending",
+		"type": "text",
+		"placeholders": {}
+	},
+	"to": "Sa:",
+	"@to": {
+		"description": "send_to",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendAmountConfirm": "Magpadala ng %1 Banano?",
+	"@sendAmountConfirm": {
+		"description": "send_pin_description",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterAmount": "Ilagay ang Amount",
+	"@enterAmount": {
+		"description": "send_amount_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"enterAddress": "Enter Address",
+	"@enterAddress": {
+		"description": "enter_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"invalidAddress": "Hindi wasto ang Destination Address",
+	"@invalidAddress": {
+		"description": "send_invalid_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressMising": "Mangyaring magpasok ng patutunguhan",
+	"@addressMising": {
+		"description": "send_enter_address",
+		"type": "text",
+		"placeholders": {}
+	},
+	"amountMissing": "Mangyaring magpasok ng isang halaga",
+	"@amountMissing": {
+		"description": "send_enter_amount",
+		"type": "text",
+		"placeholders": {}
+	},
+	"insufficientBalance": "Hindi sapat ang balanse",
+	"@insufficientBalance": {
+		"description": "send_insufficient_balance",
+		"type": "text",
+		"placeholders": {}
+	},
+	"sendFrom": "Magpadala galing sa:",
+	"@sendFrom": {
+		"description": "send_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinCreateTitle": "Gumawa ng 4-digit pin",
+	"@pinCreateTitle": {
+		"description": "pin_create_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinConfirmTitle": "Kumpirmahin ang iyong pin",
+	"@pinConfirmTitle": {
+		"description": "pin_confirm_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinEnterTitle": "Ilagay ang pin",
+	"@pinEnterTitle": {
+		"description": "pin_enter_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinConfirmError": "Hindi magkatugma ang pins",
+	"@pinConfirmError": {
+		"description": "pin_confirm_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinInvalid": "Hindi tama ang pin na nilagay",
+	"@pinInvalid": {
+		"description": "pin_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepButton": "Palitan",
+	"@changeRepButton": {
+		"description": "change_representative_change",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepAuthenticate": "Palitan ang Representative",
+	"@changeRepAuthenticate": {
+		"description": "settings_change_rep",
+		"type": "text",
+		"placeholders": {}
+	},
+	"currentlyRepresented": "Kasalukuyang nirerepresenta ng",
+	"@currentlyRepresented": {
+		"description": "change_representative_current_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepSucces": "Ang Representative ay napalitan",
+	"@changeRepSucces": {
+		"description": "change_representative_success",
+		"type": "text",
+		"placeholders": {}
+	},
+	"repInfoHeader": "Ano ang representative?",
+	"@repInfoHeader": {
+		"description": "change_representative_info_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"repInfo": "Ang representative ay isang account na nagboboto para sa kasunduan ng network. Ang kapangyarihan ng pagboto ay tinitimbang sa pamamagitan ng balanse, pwede mong i-delegate ang iyong balanse para dagdagan ang\n    timbang ng boto ng representative na pinagkakatiwalaan mo. Ang iyong representative ay walang kapangyarihan para gastusin ang iyong pondo. Dapat piliin mo ang representative na walang masyadong downtime at mapagkakatiwalaan.",
+	"@repInfo": {
+		"description": "change_representative_info",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinRepChange": "Ilagay ang pin para palitan ang representative",
+	"@pinRepChange": {
+		"description": "change_representative_pin",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeRepHint": "Ilagay ang bagong Representative",
+	"@changeRepHint": {
+		"description": "change_representative_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"authMethod": "Pamamaraan Authentication",
+	"@authMethod": {
+		"description": "settings_disable_fingerprint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinMethod": "PIN",
+	"@pinMethod": {
+		"description": "settings_pin_method",
+		"type": "text",
+		"placeholders": {}
+	},
+	"privacyPolicy": "Patakaran sa privacy",
+	"@privacyPolicy": {
+		"description": "settings_privacy_policy",
+		"type": "text",
+		"placeholders": {}
+	},
+	"biometricsMethod": "Fingerprint",
+	"@biometricsMethod": {
+		"description": "settings_fingerprint_method",
+		"type": "text",
+		"placeholders": {}
+	},
+	"changeCurrency": "Palitan ang Currency",
+	"@changeCurrency": {
+		"description": "settings_local_currency",
+		"type": "text",
+		"placeholders": {}
+	},
+	"language": "Wika",
+	"@language": {
+		"description": "settings_change_language",
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareKalium": "I-share ang Kalium",
+	"@shareKalium": {
+		"description": "settings_share",
+		"type": "text",
+		"placeholders": {}
+	},
+	"shareKaliumText": "Tingnan ang Kalium! Ang opisyal na Android Wallet ng Banano!",
+	"@shareKaliumText": {
+		"description": "share_extra",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logout": "Logout",
+	"@logout": {
+		"description": "settings_logout",
+		"type": "text",
+		"placeholders": {}
+	},
+	"warning": "BABALA",
+	"@warning": {
+		"description": "settings_logout_alert_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutDetail": "Mabubura ang iyong seed at lahat ng Kalium-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
+	"@logoutDetail": {
+		"description": "settings_logout_alert_message",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutAction": "Burahin ang seed at mag-logout",
+	"@logoutAction": {
+		"description": "settings_logout_alert_confirm_cta",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutAreYouSure": "Sigurado ka ba?",
+	"@logoutAreYouSure": {
+		"description": "settings_logout_warning_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"logoutReassurance": "Wala kang dapat ikabahala basta may back up ka ng iyong seed.",
+	"@logoutReassurance": {
+		"description": "settings_logout_warning_message",
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsHeader": "Mga setting",
+	"@settingsHeader": {
+		"description": "settings_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"preferences": "Kagustuhan",
+	"@preferences": {
+		"description": "settings_preferences_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"manage": "Pamamahala",
+	"@manage": {
+		"description": "settings_manage_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"backupSeed": "I-back up ang Seed",
+	"@backupSeed": {
+		"description": "settings_backup_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"fingerprintSeedBackup": "Kumpirmahin ang fingerprint para i-back up ang wallet seed.",
+	"@fingerprintSeedBackup": {
+		"description": "settings_fingerprint_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"pinSeedBackup": "Ilagay ang pin para tingnan ang wallet seed.",
+	"@pinSeedBackup": {
+		"description": "settings_pin_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"systemDefault": "Default na System",
+	"@systemDefault": {
+		"description": "settings_default_language_string",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notifications": "Abiso",
+	"@notifications": {
+		"description": "notifications_settings",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationTitle": "Nakatanggap ng %1 BANANO",
+	"@notificationTitle": {
+		"description": "notification_title",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationBody": "Buksan ang Kalium para tingnan ito.",
+	"@notificationBody": {
+		"description": "notification_body",
+		"type": "text",
+		"placeholders": {}
+	},
+	"notificationHeaderSupplement": "Tapikin para mabuksan",
+	"@notificationHeaderSupplement": {
+		"description": "notificaiton_header_suplement",
+		"type": "text",
+		"placeholders": {}
+	},
+	"settingsTransfer": "Ilipat galing sa Paper Wallet",
+	"@settingsTransfer": {
+		"description": "settings_transfer",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferError": "Nagkaroon ng error sa paglipat. Pakiulit mamaya.",
+	"@transferError": {
+		"description": "transfer_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"paperWallet": "Paper Wallet",
+	"@paperWallet": {
+		"description": "paper_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"kaliumWallet": "Kalium Wallet",
+	"@kaliumWallet": {
+		"description": "kalium_wallet",
+		"type": "text",
+		"placeholders": {}
+	},
+	"manualEntry": "Manual na ipasok",
+	"@manualEntry": {
+		"description": "transfer_manual_entry",
+		"type": "text",
+		"placeholders": {}
+	},
+	"mnemonicPhrase": "Mnemonic Phrase",
+	"@mnemonicPhrase": {
+		"description": "mnemonic_phrase",
+		"type": "text",
+		"placeholders": {}
+	},
+	"rawSeed": "Raw Seed",
+	"@rawSeed": {
+		"description": "raw_seed",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferHeader": "Transfer\\nFunds:",
+	"@transferHeader": {
+		"description": "transfer_header",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferIntro": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\\n\\nI-tap ang \\\"%1\\\" button para umpisahan.",
+	"@transferIntro": {
+		"description": "transfer_intro",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferQrScanHint": "Mag-scan ng Banano \\nseed o private key",
+	"@transferQrScanHint": {
+		"description": "transfer_qr_scan_hint",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferQrScanError": "Ang QR code na ito ay hindi valid na seed.",
+	"@transferQrScanError": {
+		"description": "transfer_qr_scan_error",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferNoFunds": "Ang seed na ito ay walang BANANO.",
+	"@transferNoFunds": {
+		"description": "transfer_no_funds_toast",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfo": "Ang wallet na may balanse na %1 BANANO ay na-detect.",
+	"@transferConfirmInfo": {
+		"description": "transfer_confirm_info_first",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfoSecond": "I-tap ang confirm para ilipat ang pondo.",
+	"@transferConfirmInfoSecond": {
+		"description": "transfer_confirm_info_second",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferConfirmInfoThird": "Ang paglipat ay maaring tumagal ng ilang segundo.",
+	"@transferConfirmInfoThird": {
+		"description": "transfer_confirm_info_third",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferLoading": "Nililipat na",
+	"@transferLoading": {
+		"description": "transfer_loading_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferComplete": "%1 BANANO ay nalipat na sa iyong Kalium Wallet.",
+	"@transferComplete": {
+		"description": "transfer_complete_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"transferClose": "I-tap kahit saan para isara itong window.",
+	"@transferClose": {
+		"description": "transfer_close_text",
+		"type": "text",
+		"placeholders": {}
+	},
+	"scanInstructions": "I-scan ang Banano \\naddress QR code",
+	"@scanInstructions": {
+		"description": "scan_send_instruction_label",
+		"type": "text",
+		"placeholders": {}
+	}
+}
