@@ -99,7 +99,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "scanQrCode" : MessageLookupByLibrary.simpleMessage("掃描二維碼"),
     "seed" : MessageLookupByLibrary.simpleMessage("種子代碼"),
     "seedBackupInfo" : MessageLookupByLibrary.simpleMessage("以下是您錢包的種子代碼。請注意，您一定要備份種子代碼但不要將其存儲為純文本或屏幕截圖"),
-    "seedCopied" : MessageLookupByLibrary.simpleMessage("種子代碼復製到剪貼板。\\n 2分鐘後失效"),
+    "seedCopied" : MessageLookupByLibrary.simpleMessage("種子代碼復製到剪貼板。\n 2分鐘後失效"),
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("種子代碼無效"),
     "send" : MessageLookupByLibrary.simpleMessage("發送"),
     "sendAmountConfirm" : MessageLookupByLibrary.simpleMessage("發送 %1 Banano?"),

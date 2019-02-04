@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Το seed αντιγράφηκε στο πρόχειρο.\\n Είναι δυνατή η επικόλλησή του για 2 λεπτά.",
+	"seedCopied": "Το seed αντιγράφηκε στο πρόχειρο.\n Είναι δυνατή η επικόλλησή του για 2 λεπτά.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -665,7 +665,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Σαρώστε τον QR κωδικό \\nμιας BANANO διεύθυνσης",
+	"scanInstructions": "Σαρώστε τον QR κωδικό \nμιας BANANO διεύθυνσης",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

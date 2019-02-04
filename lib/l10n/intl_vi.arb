@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Đã sao chép hạt giống .\\n Có thể dán trong 2 phút.",
+	"seedCopied": "Đã sao chép hạt giống .\n Có thể dán trong 2 phút.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -600,19 +600,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "Chuyển\\nFunds:",
+	"transferHeader": "Chuyển\nFunds:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Quá trình này sẽ chuyển từ quỹ ví giấy sang ví Kalium của bạn.\\n\\nNhấn vào \\\"%1\\\" Nút để bắt đầu.",
+	"transferIntro": "Quá trình này sẽ chuyển từ quỹ ví giấy sang ví Kalium của bạn.\n\nNhấn vào \"%1\" Nút để bắt đầu.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Quét một Banano \\nseed hoặc private key",
+	"transferQrScanHint": "Quét một Banano \nseed hoặc private key",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Quét 1 Banano \\nđịa chỉ mã QR",
+	"scanInstructions": "Quét 1 Banano \nđịa chỉ mã QR",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

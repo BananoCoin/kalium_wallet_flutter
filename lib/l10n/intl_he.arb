@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": ".הסיד הועתק \\n הוא ניתן להדבקה במשך שתי דקות",
+	"seedCopied": ".הסיד הועתק \n הוא ניתן להדבקה במשך שתי דקות",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -600,19 +600,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "העברת\\nסכום:",
+	"transferHeader": "העברת\nסכום:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "התהליך יעביר את הסכום שברשותך מארנק הנייר לארנק קאליום\\n\\nלחץ על כפתור ה \"%1\" בכדי להתחיל.",
+	"transferIntro": "התהליך יעביר את הסכום שברשותך מארנק הנייר לארנק קאליום\n\nלחץ על כפתור ה \"%1\" בכדי להתחיל.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "סרוק סיד של \\nבאנאנו או ארנק נייר",
+	"transferQrScanHint": "סרוק סיד של \nבאנאנו או ארנק נייר",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "סרוק כתובת ברקוד \\n של באנאנו",
+	"scanInstructions": "סרוק כתובת ברקוד \n של באנאנו",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

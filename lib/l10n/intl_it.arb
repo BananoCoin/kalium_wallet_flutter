@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Seme copiato negli appunti.\\n Potrai incollarlo per 2 minuti.",
+	"seedCopied": "Seme copiato negli appunti.\n Potrai incollarlo per 2 minuti.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -228,7 +228,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedBackupInfo": "Qui sotto c\\'è il seme del tuo portafoglio. È fondamentale che tu faccia un backup del seme evitando di conservarlo in chiaro o con uno screenshot.",
+	"seedBackupInfo": "Qui sotto c\'è il seme del tuo portafoglio. È fondamentale che tu faccia un backup del seme evitando di conservarlo in chiaro o con uno screenshot.",
 	"@seedBackupInfo": {
 		"description": "intro_new_wallet_seed",
 		"type": "text",
@@ -384,7 +384,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"repInfoHeader": "Cos\\'è un Rappresentante?",
+	"repInfoHeader": "Cos\'è un Rappresentante?",
 	"@repInfoHeader": {
 		"description": "change_representative_info_header",
 		"type": "text",
@@ -449,7 +449,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"shareKaliumText": "Dai un\\'occhiata a Kalium! Il portafoglio ufficiale di Banano per Android!",
+	"shareKaliumText": "Dai un\'occhiata a Kalium! Il portafoglio ufficiale di Banano per Android!",
 	"@shareKaliumText": {
 		"description": "share_extra",
 		"type": "text",
@@ -515,7 +515,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"fingerprintSeedBackup": "Conferma l\\'impronta per salvare il seme.",
+	"fingerprintSeedBackup": "Conferma l\'impronta per salvare il seme.",
 	"@fingerprintSeedBackup": {
 		"description": "settings_fingerprint_title",
 		"type": "text",
@@ -599,19 +599,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "Trasferisci\\nFondi:",
+	"transferHeader": "Trasferisci\nFondi:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Questo processo trasferirà i fondi da un portafoglio cartaceo al tuo portafoglio Kalium.\\n\\nPremi il pulsante \\\"%1\\\" per iniziare.",
+	"transferIntro": "Questo processo trasferirà i fondi da un portafoglio cartaceo al tuo portafoglio Kalium.\n\nPremi il pulsante \"%1\" per iniziare.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Scansiona un seme \\no una chiave privata",
+	"transferQrScanHint": "Scansiona un seme \no una chiave privata",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -665,7 +665,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Scansiona un \\ncodice QR Banano",
+	"scanInstructions": "Scansiona un \ncodice QR Banano",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

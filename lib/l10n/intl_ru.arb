@@ -600,19 +600,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "Перечислить\\nСредства:",
+	"transferHeader": "Перечислить\nСредства:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Этот процесс переведёт средства с бумажного кошелька на ваш Kalium кошелёк.\\n\\nНажмите кнопку\"%1\"чтобы начать.",
+	"transferIntro": "Этот процесс переведёт средства с бумажного кошелька на ваш Kalium кошелёк.\n\nНажмите кнопку\"%1\"чтобы начать.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Сканировать Banano \\nseed или закрытый ключ",
+	"transferQrScanHint": "Сканировать Banano \nseed или закрытый ключ",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",

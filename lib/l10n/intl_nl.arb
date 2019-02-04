@@ -605,13 +605,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Met dit proces worden de bedragen van een papieren wallet overgezet naar uw Kalium-wallet.\\n\\nTik op de \"%1\" knop om te starten.",
+	"transferIntro": "Met dit proces worden de bedragen van een papieren wallet overgezet naar uw Kalium-wallet.\n\nTik op de \"%1\" knop om te starten.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Scan een Banano \\nseed of private key",
+	"transferQrScanHint": "Scan een Banano \nseed of private key",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -665,7 +665,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Scan een Banano\\nadres QR code",
+	"scanInstructions": "Scan een Banano\nadres QR code",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

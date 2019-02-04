@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Benih disalin ke papan kilp.\\n Ia dapat ditampal selama 2 minit.",
+	"seedCopied": "Benih disalin ke papan kilp.\n Ia dapat ditampal selama 2 minit.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Imbaskan Kod QR\\n Alamat Banano anda",
+	"scanInstructions": "Imbaskan Kod QR\n Alamat Banano anda",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

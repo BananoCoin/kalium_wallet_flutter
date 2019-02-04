@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "बनानो के पते का \\nक्यू आर कोड स्कैन करें ",
+	"scanInstructions": "बनानो के पते का \nक्यू आर कोड स्कैन करें ",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

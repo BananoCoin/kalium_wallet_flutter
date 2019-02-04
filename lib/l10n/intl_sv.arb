@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Din seed är kopierad till urklipp.\\n Den går att klistra in under 2 minuter.",
+	"seedCopied": "Din seed är kopierad till urklipp.\n Den går att klistra in under 2 minuter.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -600,19 +600,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "Överför\\nmedel:",
+	"transferHeader": "Överför\nmedel:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Den här processen kommer att överföra medel från en pappersplånbok till din Kalium-plånbok.\\n\\nTryck på \\\"%1\\\" knappen för att starta.",
+	"transferIntro": "Den här processen kommer att överföra medel från en pappersplånbok till din Kalium-plånbok.\n\nTryck på \"%1\" knappen för att starta.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Skanna en Banano \\nseed eller en privat nyckel",
+	"transferQrScanHint": "Skanna en Banano \nseed eller en privat nyckel",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Skanna en Banano\\nadress QR-kod",
+	"scanInstructions": "Skanna en Banano\nadress QR-kod",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Seed\\'iniz panoya kopyalandı.\\n 2 dakika panoda kalacak.\n  ",
+	"seedCopied": "Seed\'iniz panoya kopyalandı.\n 2 dakika panoda kalacak.\n  ",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -216,37 +216,37 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"backupYourSeed": "Seed\\'inizi yedekleyin",
+	"backupYourSeed": "Seed\'inizi yedekleyin",
 	"@backupYourSeed": {
 		"description": "intro_new_wallet_seed_backup_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"backupSeedConfirm": "Cüzdanınızın seed\\'ini yedeklediğinizden emin misiniz?",
+	"backupSeedConfirm": "Cüzdanınızın seed\'ini yedeklediğinizden emin misiniz?",
 	"@backupSeedConfirm": {
 		"description": "intro_new_wallet_backup",
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedBackupInfo": "Cüzdanınızın seed\\'i aşağıdadır. Seed\\'inizi yedeklemeniz çok önemlidir. Kesinlikle ekran görüntüsü olarak saklamamalısınız.",
+	"seedBackupInfo": "Cüzdanınızın seed\'i aşağıdadır. Seed\'inizi yedeklemeniz çok önemlidir. Kesinlikle ekran görüntüsü olarak saklamamalısınız.",
 	"@seedBackupInfo": {
 		"description": "intro_new_wallet_seed",
 		"type": "text",
 		"placeholders": {}
 	},
-	"importSeed": "Seed\\'i içe aktar",
+	"importSeed": "Seed\'i içe aktar",
 	"@importSeed": {
 		"description": "intro_seed_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"importSeedHint": "Lütfen seed\\'inizi girin.",
+	"importSeedHint": "Lütfen seed\'inizi girin.",
 	"@importSeedHint": {
 		"description": "intro_seed_info",
 		"type": "text",
 		"placeholders": {}
 	},
-	"welcomeText": "Kalium\\'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
+	"welcomeText": "Kalium\'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
 	"@welcomeText": {
 		"description": "intro_welcome_title",
 		"type": "text",
@@ -444,13 +444,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"shareKalium": "Kalium\\'u Paylaş",
+	"shareKalium": "Kalium\'u Paylaş",
 	"@shareKalium": {
 		"description": "settings_share",
 		"type": "text",
 		"placeholders": {}
 	},
-	"shareKaliumText": "Banano\\'nun resmi Android Cüzdanı Kalium\\'u denesene!",
+	"shareKaliumText": "Banano\'nun resmi Android Cüzdanı Kalium\'u denesene!",
 	"@shareKaliumText": {
 		"description": "share_extra",
 		"type": "text",
@@ -468,13 +468,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"logoutDetail": "Çıkış yaptığınızda seed\\'iniz ve Kalium\\'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed\\'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
+	"logoutDetail": "Çıkış yaptığınızda seed\'iniz ve Kalium\'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed\'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
 	"@logoutDetail": {
 		"description": "settings_logout_alert_message",
 		"type": "text",
 		"placeholders": {}
 	},
-	"logoutAction": "Seed\\'i sil ve çıkış yap",
+	"logoutAction": "Seed\'i sil ve çıkış yap",
 	"@logoutAction": {
 		"description": "settings_logout_alert_confirm_cta",
 		"type": "text",
@@ -486,7 +486,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"logoutReassurance": "Seed\\'inizi yedeklediyseniz endişe etmenize gerek yok.",
+	"logoutReassurance": "Seed\'inizi yedeklediyseniz endişe etmenize gerek yok.",
 	"@logoutReassurance": {
 		"description": "settings_logout_warning_message",
 		"type": "text",
@@ -510,19 +510,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"backupSeed": "Seed\\'i Yedekle",
+	"backupSeed": "Seed\'i Yedekle",
 	"@backupSeed": {
 		"description": "settings_backup_seed",
 		"type": "text",
 		"placeholders": {}
 	},
-	"fingerprintSeedBackup": "Seed\\'i yedeklemek için parmak izini onaylayın.",
+	"fingerprintSeedBackup": "Seed\'i yedeklemek için parmak izini onaylayın.",
 	"@fingerprintSeedBackup": {
 		"description": "settings_fingerprint_title",
 		"type": "text",
 		"placeholders": {}
 	},
-	"pinSeedBackup": "Seed\\'i görüntülemek için şifreyi girin.",
+	"pinSeedBackup": "Seed\'i görüntülemek için şifreyi girin.",
 	"@pinSeedBackup": {
 		"description": "settings_pin_title",
 		"type": "text",
@@ -600,19 +600,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "Bakiye\\nTransferi:",
+	"transferHeader": "Bakiye\nTransferi:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.\\n\\nBaşlamak için \\\"%1\\\" butonuna bas.",
+	"transferIntro": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Bir Banano seedi \\nveya private key\\'i tara",
+	"transferQrScanHint": "Bir Banano seedi \nveya private key\'i tara",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Banano Adresi\\'nin \\n QR Kodu\\'nu tarayın",
+	"scanInstructions": "Banano Adresi\'nin \n QR Kodu\'nu tarayın",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

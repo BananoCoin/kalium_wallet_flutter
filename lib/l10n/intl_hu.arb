@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Seed másolva a clipboardra.\\n 2 percig beilleszthető.",
+	"seedCopied": "Seed másolva a clipboardra.\n 2 percig beilleszthető.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Olvass be QR kóddal egy Banano \\ncímet",
+	"scanInstructions": "Olvass be QR kóddal egy Banano \ncímet",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",

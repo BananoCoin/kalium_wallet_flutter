@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Su semilla ha sido copiada al portapapeles.\\n Podrá pegarla solo durante los próximos dos minutos.",
+	"seedCopied": "Su semilla ha sido copiada al portapapeles.\n Podrá pegarla solo durante los próximos dos minutos.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -600,19 +600,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "Transferir\\nFondos:",
+	"transferHeader": "Transferir\nFondos:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Kalium.\\n\\nPulse el \\\"%1\\\" botón para empezar.",
+	"transferIntro": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Kalium.\n\nPulse el \"%1\" botón para empezar.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Escanear una semilla \\nde BANANO o clave privada",
+	"transferQrScanHint": "Escanear una semilla \nde BANANO o clave privada",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Escanear un código QR\\naddress de una billetera de Banano.",
+	"scanInstructions": "Escanear un código QR\naddress de una billetera de Banano.",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",
