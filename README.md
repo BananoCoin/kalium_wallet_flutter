@@ -11,6 +11,10 @@ Kalium is a cross-platform mobile wallet for the Banano cryptocurrency. It is wr
 [@bananocoin](https://twitter.com/bananocoin) | Follow Banano on Twitter to stay up to date
 [banano.how](https://banano.how) | Getting started with Banano and more Information
 
+## Server
+
+Kalium's backend server can be found [here](https://github.com/BananoCoin/kalium-wallet-server)
+
 ## Contributing
 
 * Fork the repository and clone it to your local machine
