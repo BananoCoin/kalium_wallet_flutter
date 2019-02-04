@@ -123,6 +123,7 @@ class _AppHomePageState extends State<AppHomePage>
     _firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {
       if (settings.alert || settings.badge || settings.sound) {
+        SharedPrefsUtil.inst.setDisabledNotificationsIos(false);
         SharedPrefsUtil.inst.getNotificationsSet().then((beenSet) {
           if (!beenSet) {
             SharedPrefsUtil.inst.setNotificationsOn(true);
@@ -134,6 +135,7 @@ class _AppHomePageState extends State<AppHomePage>
           }
         });
       } else {
+        SharedPrefsUtil.inst.setDisabledNotificationsIos(true);
         SharedPrefsUtil.inst.setNotificationsOn(false).then((_) {
           _firebaseMessaging.getToken().then((String token) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: token));
