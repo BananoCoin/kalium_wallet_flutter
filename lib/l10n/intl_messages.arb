@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-01-31T11:31:25.330831",
+  "@@last_modified": "2019-02-04T09:26:48.408903",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -777,6 +777,36 @@
   "instantly": "Instantly",
   "@instantly": {
     "description": "insantly",
+    "type": "text",
+    "placeholders": {}
+  },
+  "exampleCardIntro": "Welcome to Kalium. Once you receive BANANO, transactions will show up like this:",
+  "@exampleCardIntro": {
+    "description": "example_card_intro",
+    "type": "text",
+    "placeholders": {}
+  },
+  "exampleCardLittle": "A little",
+  "@exampleCardLittle": {
+    "description": "example_card_little",
+    "type": "text",
+    "placeholders": {}
+  },
+  "exampleCardLot": "A lot of",
+  "@exampleCardLot": {
+    "description": "example_card_lot",
+    "type": "text",
+    "placeholders": {}
+  },
+  "exampleCardTo": "to a random monkey",
+  "@exampleCardTo": {
+    "description": "example_card_to",
+    "type": "text",
+    "placeholders": {}
+  },
+  "exampleCardFrom": "from a random monkey",
+  "@exampleCardFrom": {
+    "description": "example_card_from",
     "type": "text",
     "placeholders": {}
   }
