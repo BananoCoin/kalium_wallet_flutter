@@ -1,11 +1,14 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:event_taxi/event_taxi.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
-import 'package:kalium_wallet_flutter/bus/rxbus.dart';
+import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
@@ -16,7 +19,6 @@ import 'package:kalium_wallet_flutter/util/biometrics.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/model/authentication_method.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
-import 'package:kalium_wallet_flutter/network/model/response/error_response.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
 
 class AppSendConfirmSheet {
@@ -24,25 +26,31 @@ class AppSendConfirmSheet {
   String _amountRaw;
   String _destination;
   String _contactName;
+  String _localCurrency;
   bool _maxSend;
 
   bool animationOpen = false;
 
-  AppSendConfirmSheet(String amount, String destinaton, {bool maxSend = false, String contactName}) {
+  AppSendConfirmSheet(String amount, String destinaton, {bool maxSend = false, String contactName, String localCurrencyAmount}) {
     _amount = amount;
     _amountRaw = NumberUtil.getAmountAsRaw(amount);
     _destination = destinaton;
     _contactName = contactName;
     _maxSend = maxSend;
+    _localCurrency = localCurrencyAmount;
   }
 
+  StreamSubscription<SendFailedEvent> _sendEventFailedSub;
+
   Future<bool> _onWillPop() async {
-    RxBus.destroy(tag: RX_SEND_FAILED_TAG);
+    if (_sendEventFailedSub != null) {
+      _sendEventFailedSub.cancel();
+    }
     return true;
   }
 
   mainBottomSheet(BuildContext context) {
-    RxBus.register<ErrorResponse>(tag: RX_SEND_FAILED_TAG).listen((result) {
+    _sendEventFailedSub = EventTaxiImpl.singleton().registerTo<SendFailedEvent>().listen((event) {
       // Send failed
       if (animationOpen) {
         Navigator.of(context).pop();
@@ -114,6 +122,15 @@ class AppSendConfirmSheet {
                                     fontFamily: 'NunitoSans',
                                   ),
                                 ),
+                                TextSpan(
+                                  text: _localCurrency != null ? " ($_localCurrency)" : "",
+                                  style: TextStyle(
+                                    color: AppColors.primary,
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                    fontFamily: 'NunitoSans',
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -170,7 +187,8 @@ class AppSendConfirmSheet {
                                           StateContainer.of(context).requestSend(
                                               StateContainer.of(context).wallet.frontier,
                                               _destination,
-                                              _maxSend ? "0" : _amountRaw);
+                                              _maxSend ? "0" : _amountRaw,
+                                              localCurrencyAmount: _localCurrency);
                                         }
                                       });
                                     } else {

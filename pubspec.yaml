@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 0.9.1+13
+version: 0.9.1+14
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
@@ -66,8 +66,9 @@ dependencies:
       url: https://github.com/bbedward/plugins.git
       path: packages/local_auth
       ref: master
-  # RXDart
-  rxdart : ^0.20.0
+
+  # Eventbus
+  event_taxi: ^0.1.5
 
   # SVG
   flutter_svg: ^0.10.3

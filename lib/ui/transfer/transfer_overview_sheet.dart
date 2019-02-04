@@ -1,13 +1,15 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:flutter_nano_core/flutter_nano_core.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
-import 'package:kalium_wallet_flutter/bus/rxbus.dart';
+import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:kalium_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:kalium_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
@@ -26,19 +28,23 @@ class AppTransferOverviewSheet {
 
   bool _animationOpen = false;
 
+  StreamSubscription<AccountsBalancesEvent> _balancesSub;
+
   Future<bool> _onWillPop() async {
-    RxBus.destroy(tag: RX_ACCOUNTS_BALANCES_TAG);
+    if (_balancesSub != null) {
+      _balancesSub.cancel();
+    }
     return true;
   }
 
   mainBottomSheet(BuildContext context) {
     // Handle accounts balances response
-    RxBus.register<AccountsBalancesResponse>(tag: RX_ACCOUNTS_BALANCES_TAG).listen((accountsBalancesResponse) {
+    _balancesSub = EventTaxiImpl.singleton().registerTo<AccountsBalancesEvent>().listen((event) {
       if (_animationOpen) {
         Navigator.of(context).pop();
       }
       List<String> accountsToRemove = List();
-      accountsBalancesResponse.balances.forEach((String account, AccountBalanceItem balItem) {
+      event.response.balances.forEach((String account, AccountBalanceItem balItem) {
         BigInt balance = BigInt.parse(balItem.balance);
         BigInt pending = BigInt.parse(balItem.pending);
         if (balance + pending == BigInt.zero) {
@@ -57,7 +63,7 @@ class AppTransferOverviewSheet {
         return;
       }
       // Go to confirmation screen
-      RxBus.post(privKeyBalanceMap, tag: RX_TRANSFER_CONFIRM_TAG);
+      EventTaxiImpl.singleton().fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
       Navigator.of(context).pop();
     });
 
