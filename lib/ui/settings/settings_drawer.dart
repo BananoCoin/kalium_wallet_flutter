@@ -45,6 +45,7 @@ import 'package:kalium_wallet_flutter/util/biometrics.dart';
 import 'package:kalium_wallet_flutter/util/fileutil.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
+import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 
 class SettingsSheet extends StatefulWidget {
   _SettingsSheetState createState() => _SettingsSheetState();
@@ -879,7 +880,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                       onPressed: () {
                     AppDialogs.showConfirmDialog(
                         context,
-                        AppLocalization.of(context).warning.toUpperCase(),
+                        CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
                         AppLocalization.of(context).logoutDetail,
                         AppLocalization.of(context)
                             .logoutAction
@@ -889,7 +890,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                           context,
                           AppLocalization.of(context).logoutAreYouSure,
                           AppLocalization.of(context).logoutReassurance,
-                          AppLocalization.of(context).yes.toUpperCase(), () {
+                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
                         // Unsubscribe from notifications
                         SharedPrefsUtil.inst.setNotificationsOn(false).then((_) {
                           FirebaseMessaging().getToken().then((fcmToken) {

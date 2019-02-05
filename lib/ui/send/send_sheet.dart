@@ -21,6 +21,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/util/formatters.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
+import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 
 class AppSendSheet {
   FocusNode _sendAddressFocusNode;
@@ -187,9 +188,8 @@ class AppSendSheet {
                         children: <Widget>[
                           // Header
                           AutoSizeText(
-                            AppLocalization.of(context)
-                                .sendFrom
-                                .toUpperCase(),
+                            CaseChange.toUpperCase(AppLocalization.of(context)
+                                .sendFrom, context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,

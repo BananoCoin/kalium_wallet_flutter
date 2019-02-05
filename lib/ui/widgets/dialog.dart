@@ -4,6 +4,7 @@ import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
+import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 
 class AppDialogs {
   static void showConfirmDialog(
@@ -195,7 +196,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Text(AppLocalization.of(context).transferLoading.toUpperCase(),
+                    Text(CaseChange.toUpperCase(AppLocalization.of(context).transferLoading, context),
                         style: AppStyles.TextStyleHeader2Colored),
                     Container(
                       margin: EdgeInsets.only(bottom: 7),
