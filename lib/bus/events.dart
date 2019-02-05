@@ -17,7 +17,6 @@ export 'contact_added_event.dart';
 export 'contact_modified_event.dart';
 export 'contact_removed_event.dart';
 export 'monkey_overlay_closed_event.dart';
-export 'deep_link_event.dart';
 export 'accounts_balances_event.dart';
 export 'transfer_account_history_response_event.dart';
 export 'transfer_complete_event.dart';

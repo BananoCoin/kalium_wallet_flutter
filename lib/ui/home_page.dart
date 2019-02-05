@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:uni_links/uni_links.dart';
+import 'package:logging/logging.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/list_model.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
@@ -45,6 +48,7 @@ class _AppHomePageState extends State<AppHomePage>
     with WidgetsBindingObserver, SingleTickerProviderStateMixin {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   final GlobalKey<AppScaffoldState> _scaffoldKey = new GlobalKey<AppScaffoldState>();
+  final Logger log = Logger("HomePage");
 
   // Controller for placeholder card animations
   AnimationController _placeholderCardAnimationController;
@@ -76,6 +80,8 @@ class _AppHomePageState extends State<AppHomePage>
 
   // FCM instance
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
+
+  StreamSubscription _deepLinkSub;
 
   @override
   void initState() {
@@ -210,7 +216,6 @@ class _AppHomePageState extends State<AppHomePage>
   StreamSubscription<SendCompleteEvent> _sendCompleteSub;
   StreamSubscription<DisableLockTimeoutEvent> _disableLockSub;
   StreamSubscription<MonkeyOverlayClosedEvent> _monkeyOverlaySub;
-  StreamSubscription<DeepLinkEvent> _deepLinkEventSub;
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton().registerTo<HistoryHomeEvent>().listen((event) {
@@ -242,36 +247,6 @@ class _AppHomePageState extends State<AppHomePage>
           _monkeyOverlayOpen = false;
         });
       });
-    });
-    _deepLinkEventSub = EventTaxiImpl.singleton().registerTo<DeepLinkEvent>().listen((event) {
-      String amount;
-      String contactName;
-      if (event.sendAmount != null) {
-        // Require minimum 1 BANOSHI to send
-        if (BigInt.parse(event.sendAmount) >= BigInt.from(10).pow(27)) {
-          amount = event.sendAmount;
-        }
-      }
-      // See if a contact
-      DBHelper().getContactWithAddress(event.sendDestination).then((contact) {
-        if (contact != null) {
-          contactName = contact.name;
-        }
-        // Remove any other screens from stack
-        Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-        if (amount != null) {
-          // Go to send confirm with amount
-          AppSendConfirmSheet(
-                  NumberUtil.getRawAsUsableString(amount).replaceAll(",", ""),
-                  event.sendDestination,
-                  contactName: contactName)
-              .mainBottomSheet(context);
-        } else {
-          // Go to send with address
-          AppSendSheet(contact: contact, address: event.sendDestination)
-              .mainBottomSheet(context);
-        }
-      });      
     });
     // Hackish event to block auto-lock functionality
     _disableLockSub = EventTaxiImpl.singleton().registerTo<DisableLockTimeoutEvent>().listen((event) {
@@ -306,8 +281,8 @@ class _AppHomePageState extends State<AppHomePage>
     if (_monkeyOverlaySub != null) {
       _monkeyOverlaySub.cancel();
     }
-    if (_deepLinkEventSub != null) {
-      _deepLinkEventSub.cancel();
+    if (_deepLinkSub != null) {
+      _deepLinkSub.cancel();
     }
   }
 
@@ -477,6 +452,45 @@ class _AppHomePageState extends State<AppHomePage>
 
   @override
   Widget build(BuildContext context) {
+    if (_deepLinkSub == null && !StateContainer.of(context).wallet.loading) {
+      // Listen for deep link changes
+      _deepLinkSub = getLinksStream().listen((String link) {
+            Address address = Address(link);
+            if (!address.isValid()) { return; }
+            String amount;
+            String contactName;
+            if (address.amount != null) {
+              // Require minimum 1 BANOSHI to send
+              if (BigInt.parse(address.amount) >= BigInt.from(10).pow(27)) {
+                amount = address.amount;
+              }
+            }
+            // See if a contact
+            DBHelper().getContactWithAddress(address.address).then((contact) {
+              if (contact != null) {
+                contactName = contact.name;
+              }
+              // Remove any other screens from stack
+              Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+              if (amount != null) {
+                // Go to send confirm with amount
+                AppSendConfirmSheet(
+                        NumberUtil.getRawAsUsableString(amount).replaceAll(",", ""),
+                        address.address,
+                        contactName: contactName)
+                    .mainBottomSheet(context);
+              } else {
+                // Go to send with address
+                AppSendSheet(contact: contact, address: address.address)
+                    .mainBottomSheet(context);
+              }
+            });
+      }, onError: (e) {
+        log.severe(e.toString());
+      });      
+    } 
+
+    // Create QR ahead of time because it improves performance this way
     if (receive == null) {
       QrPainter painter = QrPainter(
         data: StateContainer.of(context).wallet.address,
@@ -491,6 +505,7 @@ class _AppHomePageState extends State<AppHomePage>
         });
       });
     }
+
     // Download/Retrieve smaller and large monKeys
     if (!_monkeyDownloadTriggered) {
       _monkeyDownloadTriggered = true;
