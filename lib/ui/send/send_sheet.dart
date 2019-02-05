@@ -88,7 +88,7 @@ class AppSendSheet {
 
   mainBottomSheet(BuildContext context) {
     _amountHint = AppLocalization.of(context).enterAmount;
-    _addressHint = AppLocalization.of(context).enterAddress;
+    _addressHint = AppLocalization.of(context).addressHint;
     String locale = StateContainer.of(context).currencyLocale;
     switch (locale) {
       case "es_VE":
@@ -138,7 +138,7 @@ class AppSendSheet {
                 }
               } else {
                 setState(() {
-                  _addressHint = AppLocalization.of(context).enterAddress;
+                  _addressHint = AppLocalization.of(context).addressHint;
                   _contacts = [];
                   if (Address(_sendAddressController.text).isValid()) {
                     _addressValidAndUnfocused = true;

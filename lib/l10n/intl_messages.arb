@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-02-04T09:26:48.408903",
+  "@@last_modified": "2019-02-04T20:48:49.241925",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -86,7 +86,7 @@
   },
   "addressShare": "Share Address",
   "@addressShare": {
-    "description": "share_address",
+    "description": "receive_share_cta",
     "type": "text",
     "placeholders": {}
   },
@@ -200,7 +200,7 @@
   },
   "contactsImportSuccess": "Sucessfully imported %1 contacts.",
   "@contactsImportSuccess": {
-    "description": "contacts_import_success",
+    "description": "contact_import_success",
     "type": "text",
     "placeholders": {}
   },
@@ -218,7 +218,7 @@
   },
   "contactNameMissing": "Choose a Name for this Contact",
   "@contactNameMissing": {
-    "description": "contact_export_none",
+    "description": "contact_name_missing",
     "type": "text",
     "placeholders": {}
   },

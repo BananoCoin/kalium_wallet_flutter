@@ -1,5 +1,23 @@
 {
     "@@last_modified": "2019-02-04T09:26:48.408903",
+    "contactsImportSuccess": "已成功导入％d个联络人",
+    "@contactsImportSuccess": {
+        "description": "contact_import_success",
+        "type": "text",
+        "placeholders": {}
+    },
+    "contactNameMissing": "选择此联络人的姓名",
+    "@contactNameMissing": {
+        "description": "contact_name_missing",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addressShare": "分享",
+    "@addressShare": {
+        "description": "receive_share_cta",
+        "type": "text",
+        "placeholders": {}
+    },
     "cancel": "取消",
     "@cancel": {
         "description": "dialog_cancel",

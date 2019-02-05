@@ -1,5 +1,23 @@
 {
 	"@@last_modified": "2019-01-19T10:52:44.632276",
+	"contactNameMissing": "Không có liên hệ nào để xuất ra",
+	"@contactNameMissing": {
+		"description": "contact_name_missing",
+		"type": "text",
+		"placeholders": {}
+	},
+	"contactsImportSuccess": "Đã được nhập thành công %1 liên hệ",
+	"@contactsImportSuccess": {
+		"description": "contact_import_success",
+		"type": "text",
+		"placeholders": {}
+	},
+	"addressShare": "Chia sẻ",
+	"@addressShare": {
+		"description": "receive_share_cta",
+		"type": "text",
+		"placeholders": {}
+	},
 	"cancel": "Hủy",
 	"@cancel": {
 		"description": "dialog_cancel",

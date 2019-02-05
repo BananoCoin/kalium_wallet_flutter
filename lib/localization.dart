@@ -99,7 +99,7 @@ class AppLocalization {
 
   String get addressShare {
     return Intl.message('Share Address',
-        desc: 'share_address', name: 'addressShare');
+        desc: 'receive_share_cta', name: 'addressShare');
   }
 
   String get addressHint {
@@ -198,7 +198,7 @@ class AppLocalization {
 
   String get contactsImportSuccess {
     return Intl.message("Sucessfully imported %1 contacts.",
-      desc: 'contacts_import_success', name: 'contactsImportSuccess');
+      desc: 'contact_import_success', name: 'contactsImportSuccess');
   }
 
   String get contactAdded {
@@ -213,7 +213,7 @@ class AppLocalization {
 
   String get contactNameMissing {
     return Intl.message("Choose a Name for this Contact",
-      desc: 'contact_export_none', name: 'contactNameMissing');
+      desc: 'contact_name_missing', name: 'contactNameMissing');
   }
 
   String get contactExists {

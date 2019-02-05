@@ -1,5 +1,23 @@
 {
     "@@last_modified": "2019-02-04T09:26:48.408903",
+    "contactsImportSuccess": "Z powodzeniem importowao %1 contacts",
+    "@contactsImportSuccess": {
+        "description": "contact_import_success",
+        "type": "text",
+        "placeholders": {}
+    },
+    "contactNameMissing": "Wybierz imię dla tego kontaktu",
+    "@contactNameMissing": {
+        "description": "contact_name_missing",
+        "type": "text",
+        "placeholders": {}
+    },
+    "addressShare": "Udostępnij",
+    "@addressShare": {
+        "description": "receive_share_cta",
+        "type": "text",
+        "placeholders": {}
+    },
     "cancel": "Anuluj",
     "@cancel": {
         "description": "dialog_cancel",
