@@ -61,6 +61,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "Italiano (it)";
       case AvailableLanguage.DUTCH:
         return "Nederlands (nl)";
+      case AvailableLanguage.POLISH:
+        return "Polski (pl)";
       case AvailableLanguage.PORTUGUESE:
         return "Português (pt)";
       case AvailableLanguage.ROMANIAN:
@@ -112,6 +114,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "it";
       case AvailableLanguage.DUTCH:
         return "nl";
+      case AvailableLanguage.POLISH:
+        return "pl";
       case AvailableLanguage.PORTUGUESE:
         return "pt";
       case AvailableLanguage.ROMANIAN:
