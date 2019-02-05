@@ -276,6 +276,13 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
+  // Set device locale
+  void updateDeviceLocale(Locale locale) {
+    setState(() {
+      deviceLocale = locale;
+    });
+  }
+
   void disconnect() {
     AccountService.reset(suspend: true);
   }
