@@ -67,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Ungültige Empfänger-Adresse"),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium Wallet"),
     "language" : MessageLookupByLibrary.simpleMessage("Sprache"),
-    "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Authentifikation beim Öffnen der App"),
+    "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Authentifikation beim Öffnen"),
     "locked" : MessageLookupByLibrary.simpleMessage("Gesperrt"),
     "logout" : MessageLookupByLibrary.simpleMessage("Ausloggen"),
     "logoutAction" : MessageLookupByLibrary.simpleMessage("Seed löschen und ausloggen"),

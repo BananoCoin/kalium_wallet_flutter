@@ -726,7 +726,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "lockAppSetting": "Authentifikation beim Öffnen der App",
+    "lockAppSetting": "Authentifikation beim Öffnen",
     "@lockAppSetting": {
         "description": "authenticate_on_launch",
         "type": "text",

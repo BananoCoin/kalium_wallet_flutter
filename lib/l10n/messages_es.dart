@@ -28,7 +28,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Por favor ingrese un monto"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Método de Autenticación"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Bloquear automáticamente"),
-    "backupSeed" : MessageLookupByLibrary.simpleMessage("Hacer una copia de seguridad de su semilla"),
+    "backupSeed" : MessageLookupByLibrary.simpleMessage("Copia de seguridad"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("¿Está seguro de haber copiado y almacenado correctamente la semilla de su billetera?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Haga una copia de seguridad de su semilla"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Huella Digital"),

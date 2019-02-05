@@ -540,7 +540,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "backupSeed": "Hacer una copia de seguridad de su semilla",
+    "backupSeed": "Copia de seguridad",
     "@backupSeed": {
         "description": "settings_backup_seed",
         "type": "text",
