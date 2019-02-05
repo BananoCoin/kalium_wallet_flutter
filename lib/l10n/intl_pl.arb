@@ -1,576 +1,690 @@
 {
     "@@last_modified": "2019-02-04T09:26:48.408903",
-    "cancel": "取消",
+    "cancel": "Anuluj",
     "@cancel": {
         "description": "dialog_cancel",
         "type": "text",
         "placeholders": {}
     },
-    "close": "關閉",
+    "close": "Zamknij",
     "@close": {
         "description": "dialog_close",
         "type": "text",
         "placeholders": {}
     },
-    "confirm": "確認",
+    "confirm": "Potwierdz",
     "@confirm": {
         "description": "dialog_confirm",
         "type": "text",
         "placeholders": {}
     },
-    "no": "沒有",
+    "no": "Nie",
     "@no": {
         "description": "intro_new_wallet_backup_no",
         "type": "text",
         "placeholders": {}
     },
-    "yes": "確認",
+    "yes": "Tak",
     "@yes": {
         "description": "intro_new_wallet_backup_yes",
         "type": "text",
         "placeholders": {}
     },
-    "onStr": "開啟",
+    "onStr": "Włączone",
     "@onStr": {
         "description": "generic_on",
         "type": "text",
         "placeholders": {}
     },
-    "off": "關閉",
+    "off": "Wyłączone",
     "@off": {
         "description": "generic_off",
         "type": "text",
         "placeholders": {}
     },
-    "send": "發送",
+    "send": "Wyślij",
     "@send": {
         "description": "home_send_cta",
         "type": "text",
         "placeholders": {}
     },
-    "receive": "接收",
+    "receive": "Odbierz",
     "@receive": {
         "description": "home_receive_cta",
         "type": "text",
         "placeholders": {}
     },
-    "sent": "發送",
+    "sent": "Wysłane",
     "@sent": {
         "description": "history_sent",
         "type": "text",
         "placeholders": {}
     },
-    "received": "收到",
+    "received": "Odebrane",
     "@received": {
         "description": "history_received",
         "type": "text",
         "placeholders": {}
     },
-    "transactions": "交易",
+    "transactions": "Transakcje",
     "@transactions": {
         "description": "transaction_header",
         "type": "text",
         "placeholders": {}
     },
-    "addressCopied": "地址已復制",
+    "addressCopied": "Adres Skopiowany",
     "@addressCopied": {
         "description": "receive_copied",
         "type": "text",
         "placeholders": {}
     },
-    "copyAddress": "複製地址",
+    "copyAddress": "Skopiuj Adres",
     "@copyAddress": {
         "description": "receive_copy_cta",
         "type": "text",
         "placeholders": {}
     },
-    "addressHint": "輸入地址",
+    "addressHint": "Wpisz Adres",
     "@addressHint": {
         "description": "send_address_hint",
         "type": "text",
         "placeholders": {}
     },
-    "seed": "種子代碼",
+    "seed": "Nasiono",
     "@seed": {
         "description": "intro_new_wallet_seed_header",
         "type": "text",
         "placeholders": {}
     },
-    "seedInvalid": "種子代碼無效",
+    "seedInvalid": "Nasiono jest nieważne",
     "@seedInvalid": {
         "description": "intro_seed_invalid",
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "種子代碼復製到剪貼板。n 2分鐘後失效",
+    "seedCopied": "Nasiono skopiowane do schowka. Możesz je wklejić przez 2 minuty.",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
         "placeholders": {}
     },
-    "scanQrCode": "掃描二維碼",
+    "scanQrCode": "Skanuj Kod QR",
     "@scanQrCode": {
         "description": "send_scan_qr",
         "type": "text",
         "placeholders": {}
     },
-    "contactsImportErr": "无法导入联络人",
+    "contactsImportErr": "Nie udało się importować kontaktów",
     "@contactsImportErr": {
         "description": "contact_import_error",
         "type": "text",
         "placeholders": {}
     },
-    "viewDetails": "查看詳情",
+    "viewDetails": "Zobacz Szczegóły",
     "@viewDetails": {
         "description": "transaction_details",
         "type": "text",
         "placeholders": {}
     },
-    "removeContact": "删除联络人",
+    "removeContact": "Usuń kontakt",
     "@removeContact": {
         "description": "contact_remove_btn",
         "type": "text",
         "placeholders": {}
     },
-    "removeContactConfirmation": "您确定要删除％s吗？",
+    "removeContactConfirmation": "Czy jesteś pewny że chcesz usunąć %1?",
     "@removeContactConfirmation": {
         "description": "contact_remove_sure",
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "联络人:",
+    "contactHeader": "Kontakt:",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
         "placeholders": {}
     },
-    "contactsHeader": "联络人名单",
+    "contactsHeader": "Kontakty",
     "@contactsHeader": {
         "description": "contact_header",
         "type": "text",
         "placeholders": {}
     },
-    "addContact": "添加联络人",
+    "addContact": "Dodaj Kontakt",
     "@addContact": {
         "description": "contact_add_button",
         "type": "text",
         "placeholders": {}
     },
-    "contactNameHint": "输入姓名@",
+    "contactNameHint": "Wpisz imię @",
     "@contactNameHint": {
         "description": "contact_name_hint",
         "type": "text",
         "placeholders": {}
     },
-    "contactInvalid": "联络人姓名无效",
+    "contactInvalid": "Niewłaściwe imię Kontaktu",
     "@contactInvalid": {
         "description": "contact_invalid_name",
         "type": "text",
         "placeholders": {}
     },
-    "noContactsExport": "没有要导出的联络人",
+    "noContactsExport": "Nie ma kontaktów do eksportowania",
     "@noContactsExport": {
         "description": "contact_export_none",
         "type": "text",
         "placeholders": {}
     },
-    "noContactsImport": "找不到要导入的联络人",
+    "noContactsImport": "Nie znaleziono kontaktów do importowania",
     "@noContactsImport": {
         "description": "contact_import_none",
         "type": "text",
         "placeholders": {}
     },
-    "contactAdded": "%1 已被添加到联络人！",
+    "contactAdded": "%1 został dodany do kontaktów!",
     "@contactAdded": {
         "description": "contact_added",
         "type": "text",
         "placeholders": {}
     },
-    "contactRemoved": "％S已从联络人名单中删除！",
+    "contactRemoved": "%1 został usunięty z kontaktów",
     "@contactRemoved": {
         "description": "contact_removed",
         "type": "text",
         "placeholders": {}
     },
-    "contactNameMissing": "没有要导出的联络人",
+    "contactNameMissing": "Nie ma kontaktów do eksportowania",
     "@contactNameMissing": {
         "description": "contact_export_none",
         "type": "text",
         "placeholders": {}
     },
-    "contactExists": "联络人已存在",
+    "contactExists": "Kontakt już istnieje",
     "@contactExists": {
         "description": "contact_name_exists",
         "type": "text",
         "placeholders": {}
     },
-    "backupYourSeed": "備份你的種子代碼",
+    "backupYourSeed": "Zapisałeś swoje nasiono?",
     "@backupYourSeed": {
         "description": "intro_new_wallet_seed_backup_header",
         "type": "text",
         "placeholders": {}
     },
-    "backupSeedConfirm": "你確認你備份了您的錢包種子嗎？",
+    "backupSeedConfirm": "Czy jesteś pewny że zapisałeś nasiono portfela?",
     "@backupSeedConfirm": {
         "description": "intro_new_wallet_backup",
         "type": "text",
         "placeholders": {}
     },
-    "seedBackupInfo": "以下是您錢包的種子代碼。請注意，您一定要備份種子代碼但不要將其存儲為純文本或屏幕截圖",
+    "seedBackupInfo": "Pod tym jest nasiono twojego portfela. Ważne jest, aby je zapisać (np. na kartce) i nigdy nie zapisywać jako plaintext albo screenshot.",
     "@seedBackupInfo": {
         "description": "intro_new_wallet_seed",
         "type": "text",
         "placeholders": {}
     },
-    "importSeed": "導入種子代碼",
+    "importSeed": "Importuj nasiono.",
     "@importSeed": {
         "description": "intro_seed_header",
         "type": "text",
         "placeholders": {}
     },
-    "importSeedHint": "請在下面輸入您的種子",
+    "importSeedHint": "Prosze zapisz swoje nasiono poniżej.",
     "@importSeedHint": {
         "description": "intro_seed_info",
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "歡迎來到Kalium。下一步，您可以創建新錢包或導入現有錢包",
+    "welcomeText": "Witam w Kalium. Żeby kontynuować, możesz stworzyć nowy portfel albo importować go.",
     "@welcomeText": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
     },
-    "newWallet": "創建新錢包",
+    "newWallet": "Nowy Portfel",
     "@newWallet": {
         "description": "intro_welcome_new_wallet",
         "type": "text",
         "placeholders": {}
     },
-    "importWallet": "導入現有錢包",
+    "importWallet": "Importuj Portfel",
     "@importWallet": {
         "description": "intro_welcome_have_wallet",
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "發給：",
+    "sentTo": "Wysłane Do:",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
         "placeholders": {}
     },
-    "sending": "發出",
+    "sending": "Wysyłanie",
     "@sending": {
         "description": "send_sending",
         "type": "text",
         "placeholders": {}
     },
-    "to": "至：",
+    "to": "Do:",
     "@to": {
         "description": "send_to",
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "發送 %1 Banano?",
+    "sendAmountConfirm": "Wyślij %1 Banano?",
     "@sendAmountConfirm": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
     },
-    "sendError": "發生錯誤。稍後再試。",
+    "sendError": "Wystąpił błąd. Spróbuj póżniej",
     "@sendError": {
         "description": "send_generic_error",
         "type": "text",
         "placeholders": {}
     },
-    "enterAmount": "輸入金額",
+    "enterAmount": "Wpisz Ilość",
     "@enterAmount": {
         "description": "send_amount_hint",
         "type": "text",
         "placeholders": {}
     },
-    "invalidAddress": "無效的目標地址",
+    "invalidAddress": "Wpisany Addres jest nieważny",
     "@invalidAddress": {
         "description": "send_invalid_address",
         "type": "text",
         "placeholders": {}
     },
-    "addressMising": "請輸入目的地",
+    "addressMising": "Wpisz Adres",
     "@addressMising": {
         "description": "send_enter_address",
         "type": "text",
         "placeholders": {}
     },
-    "amountMissing": "請輸入金額",
+    "amountMissing": "Wpisz ilość",
     "@amountMissing": {
         "description": "send_enter_amount",
         "type": "text",
         "placeholders": {}
     },
-    "insufficientBalance": "平衡不足",
+    "insufficientBalance": "Niewystarczające środki",
     "@insufficientBalance": {
         "description": "send_insufficient_balance",
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "發送自：",
+    "sendFrom": "Wyślij Od",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "創建一個4位數的識別碼",
+    "pinCreateTitle": "Stwórz czterocyfrowy PIN",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
         "placeholders": {}
     },
-    "pinConfirmTitle": "確認你的識別碼",
+    "pinConfirmTitle": "Potwierdz swój PIN",
     "@pinConfirmTitle": {
         "description": "pin_confirm_title",
         "type": "text",
         "placeholders": {}
     },
-    "pinEnterTitle": "輸入識別碼",
+    "pinEnterTitle": "Wpisz PIN",
     "@pinEnterTitle": {
         "description": "pin_enter_title",
         "type": "text",
         "placeholders": {}
     },
-    "pinConfirmError": "識別碼不匹配",
+    "pinConfirmError": "PIN'y nie pasują",
     "@pinConfirmError": {
         "description": "pin_confirm_error",
         "type": "text",
         "placeholders": {}
     },
-    "pinInvalid": "輸入的識別碼無效",
+    "pinInvalid": "Wprowadzono nieważny kod PIN",
     "@pinInvalid": {
         "description": "pin_error",
         "type": "text",
         "placeholders": {}
     },
-    "changeRepButton": "更改",
+    "changeRepButton": "Zmień",
     "@changeRepButton": {
         "description": "change_representative_change",
         "type": "text",
         "placeholders": {}
     },
-    "changeRepAuthenticate": "變更代理人",
+    "changeRepAuthenticate": "Zmień przedstawiciela",
     "@changeRepAuthenticate": {
         "description": "settings_change_rep",
         "type": "text",
         "placeholders": {}
     },
-    "currentlyRepresented": "目前指定代表",
+    "currentlyRepresented": "Obecnie Representowany Przez",
     "@currentlyRepresented": {
         "description": "change_representative_current_header",
         "type": "text",
         "placeholders": {}
     },
-    "changeRepSucces": "指定代表成功改變",
+    "changeRepSucces": "Przedstawiciel Zmieniony",
     "@changeRepSucces": {
         "description": "change_representative_success",
         "type": "text",
         "placeholders": {}
     },
-    "repInfoHeader": "什麼是指定代表？",
+    "repInfoHeader": "Co to jest przedstawiciel?",
     "@repInfoHeader": {
         "description": "change_representative_info_header",
         "type": "text",
         "placeholders": {}
     },
-    "repInfo": "指定代表是投票支持網絡共識的帳戶。投票權由余額加權，您可以委派餘額來增加您信任的代表的投票權重。您的代表對您的資金沒有消費能力。您應該選擇一個停機時間很少且值得信賴的代表。",
+    "repInfo": "Przedstawiciel jest kontem które głosi za porozumienie w sieci. Siła głosowania jest mierzona przez saldo, możesz delegować swoje saldo żeby zwiększyć siłę głosowania przedstawiciela któremu ufasz. Twój przedstawiciel nie ma mocy wydawania swoich środków. Powinieneś wybrać przedstawiciela które jest prawie zawsze online i jest godny zaufania.",
     "@repInfo": {
         "description": "change_representative_info",
         "type": "text",
         "placeholders": {}
     },
-    "pinRepChange": "輸入識別碼以變更代理人。",
+    "pinRepChange": "Wpisz PIN żeby zmienić przedstawiciela",
     "@pinRepChange": {
         "description": "change_representative_pin",
         "type": "text",
         "placeholders": {}
     },
-    "changeRepHint": "輸入新指定代表",
+    "changeRepHint": "Wpisz nowego Przedstawiciela",
     "@changeRepHint": {
         "description": "change_representative_hint",
         "type": "text",
         "placeholders": {}
     },
-    "authMethod": "驗證方法",
+    "authMethod": "Metoda Uwierzytelniania",
     "@authMethod": {
         "description": "settings_disable_fingerprint",
         "type": "text",
         "placeholders": {}
     },
-    "pinMethod": "識別碼",
+    "pinMethod": "PIN",
     "@pinMethod": {
         "description": "settings_pin_method",
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "指紋",
+    "privacyPolicy": "",
+    "@privacyPolicy": {
+        "description": "settings_privacy_policy",
+        "type": "text",
+        "placeholders": {}
+    },
+    "biometricsMethod": "Odcisk Palca",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",
         "placeholders": {}
     },
-    "changeCurrency": "改變貨幣",
+    "changeCurrency": "Zmień walutę",
     "@changeCurrency": {
         "description": "settings_local_currency",
         "type": "text",
         "placeholders": {}
     },
-    "language": "語言",
+    "language": "Język",
     "@language": {
         "description": "settings_change_language",
         "type": "text",
         "placeholders": {}
     },
-    "shareKalium": "分享Kalium",
+    "shareKalium": "Udostępnij Kalium",
     "@shareKalium": {
         "description": "settings_share",
         "type": "text",
         "placeholders": {}
     },
-    "shareKaliumText": "看看Kalium！ Banano的官方Android錢包！",
+    "shareKaliumText": "Zobacz Kalium! Oficjalny portfel Banano dla Android!",
     "@shareKaliumText": {
         "description": "share_extra",
         "type": "text",
         "placeholders": {}
     },
-    "logout": "登出",
+    "logout": "Wyloguj",
     "@logout": {
         "description": "settings_logout",
         "type": "text",
         "placeholders": {}
     },
-    "warning": "警告",
+    "warning": "UWAGA",
     "@warning": {
         "description": "settings_logout_alert_title",
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "註銷將從此設備中刪除您的種子和所有與Kalium相關的數據。如果您的種子沒有備份，您將永遠無法再次訪問您的帳戶",
+    "logoutDetail": "Wylogowanie usunie twoje nasiono i wszystkie dane związane z Kalium. Jeżeli twoje nasiono nie jest zapisane, nigdy nie odzyskasz dostępu do swoich środków.",
     "@logoutDetail": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
     },
-    "logoutAction": "刪除種子並登出",
+    "logoutAction": "Skasuj nasiono i wyloguj?",
     "@logoutAction": {
         "description": "settings_logout_alert_confirm_cta",
         "type": "text",
         "placeholders": {}
     },
-    "logoutAreYouSure": "你確定？",
+    "logoutAreYouSure": "Czy jesteś pewny?",
     "@logoutAreYouSure": {
         "description": "settings_logout_warning_title",
         "type": "text",
         "placeholders": {}
     },
-    "logoutReassurance": "只要你有備份你的種子，就沒有什麼可擔心的了。",
+    "logoutReassurance": "Jeżeli zapisałeś nasiono nie musisz się niczego obawiać.",
     "@logoutReassurance": {
         "description": "settings_logout_warning_message",
         "type": "text",
         "placeholders": {}
     },
-    "settingsHeader": "設置",
+    "settingsHeader": "Ustawienia",
     "@settingsHeader": {
         "description": "settings_title",
         "type": "text",
         "placeholders": {}
     },
-    "preferences": "偏好",
+    "preferences": "Preferencje",
     "@preferences": {
         "description": "settings_preferences_header",
         "type": "text",
         "placeholders": {}
     },
-    "manage": "管理",
+    "manage": "Zarządzaj",
     "@manage": {
         "description": "settings_manage_header",
         "type": "text",
         "placeholders": {}
     },
-    "backupSeed": "備份種子",
+    "backupSeed": "Zapisz Nasiono",
     "@backupSeed": {
         "description": "settings_backup_seed",
         "type": "text",
         "placeholders": {}
     },
-    "fingerprintSeedBackup": "確認指紋，備份錢包種子。",
+    "fingerprintSeedBackup": "Potwierdz odcisk palca żeby zapisać nasiono portfela.",
     "@fingerprintSeedBackup": {
         "description": "settings_fingerprint_title",
         "type": "text",
         "placeholders": {}
     },
-    "pinSeedBackup": "輸入識別碼以查看錢包種子。",
+    "pinSeedBackup": "Wpisz PIN żeby zobaczyć nasiono portfela.",
     "@pinSeedBackup": {
         "description": "settings_pin_title",
         "type": "text",
         "placeholders": {}
     },
-    "systemDefault": "系統默認",
+    "systemDefault": "Domyślny język systemu",
     "@systemDefault": {
         "description": "settings_default_language_string",
         "type": "text",
         "placeholders": {}
     },
-    "notifications": "通知",
+    "notifications": "Powiadomienia",
     "@notifications": {
         "description": "notifications_settings",
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "收到 %1 BANANO",
+    "notificationTitle": "Otrzymano %1 BANANO",
     "@notificationTitle": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "打開Kalium查看此交易.",
+    "notificationBody": "Otwórz Kalium żeby zobaczyć tą transakcje.",
     "@notificationBody": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
     },
-    "notificationHeaderSupplement": "點擊打開",
+    "notificationHeaderSupplement": "Naciśnij aby Otworzyć",
     "@notificationHeaderSupplement": {
         "description": "notificaiton_header_suplement",
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "掃描Banano二維碼地址",
+    "settingsTransfer": "Załaduj z Papierowego Portfela",
+    "@settingsTransfer": {
+        "description": "settings_transfer",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferError": "Podczas transferu wystąpił błąd. Proszę spróbować póżniej.",
+    "@transferError": {
+        "description": "transfer_error",
+        "type": "text",
+        "placeholders": {}
+    },
+    "paperWallet": "Papierowy Portfel",
+    "@paperWallet": {
+        "description": "paper_wallet",
+        "type": "text",
+        "placeholders": {}
+    },
+    "kaliumWallet": "Portfel Kalium",
+    "@kaliumWallet": {
+        "description": "kalium_wallet",
+        "type": "text",
+        "placeholders": {}
+    },
+    "manualEntry": "Wpisanie Manualne",
+    "@manualEntry": {
+        "description": "transfer_manual_entry",
+        "type": "text",
+        "placeholders": {}
+    },
+    "mnemonicPhrase": "Fraza Mnemnoniczna",
+    "@mnemonicPhrase": {
+        "description": "mnemonic_phrase",
+        "type": "text",
+        "placeholders": {}
+    },
+    "rawSeed": "Surowe Nasiono",
+    "@rawSeed": {
+        "description": "raw_seed",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferHeader": "TransferujnŚrodki:",
+    "@transferHeader": {
+        "description": "transfer_header",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferIntro": "Ten proces trensferuje środki z portfela papierowego do twojego portfela Kalium.nnNaciśnij \"%1\" przycisk aby zacząć.",
+    "@transferIntro": {
+        "description": "transfer_intro",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferQrScanHint": "Skanuj Nasiono nBanano lub klucz prywatny",
+    "@transferQrScanHint": {
+        "description": "transfer_qr_scan_hint",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferQrScanError": "Ten kod QR nie zawiera ważnego nasiona.",
+    "@transferQrScanError": {
+        "description": "transfer_qr_scan_error",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferNoFunds": "To nasiono nie zawiera żadnego BANANO.",
+    "@transferNoFunds": {
+        "description": "transfer_no_funds_toast",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferConfirmInfo": "Portfel z saldem %1 BANANO został wykryty.",
+    "@transferConfirmInfo": {
+        "description": "transfer_confirm_info_first",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferConfirmInfoSecond": "Naciśnij potwierdz aby transferować środki.",
+    "@transferConfirmInfoSecond": {
+        "description": "transfer_confirm_info_second",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferConfirmInfoThird": "Transfer może zająć kilka sekund żeby się zakończyć.",
+    "@transferConfirmInfoThird": {
+        "description": "transfer_confirm_info_third",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferLoading": "Transferuje",
+    "@transferLoading": {
+        "description": "transfer_loading_text",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferComplete": "%1 BANANO zostało z powodzeniem przesłane do twojego portfela Kalium.",
+    "@transferComplete": {
+        "description": "transfer_complete_text",
+        "type": "text",
+        "placeholders": {}
+    },
+    "transferClose": "Naciśnij gdziekolwiek żeby zamknąć okno.",
+    "@transferClose": {
+        "description": "transfer_close_text",
+        "type": "text",
+        "placeholders": {}
+    },
+    "scanInstructions": "Zeskanuj  naddres Kod QR ",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "歡迎來到Kalium。當您收到或發送BANANO時，它將如下所示.",
+    "exampleCardIntro": "Witam w Kalium. Kiedy dostaniesz BANANO, transakcje pokażą się w ten sposób:",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardLittle": "一點",
+    "exampleCardLittle": "Mało",
     "@exampleCardLittle": {
         "description": "example_card_little",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardLot": "很多",
+    "exampleCardLot": "Dużo",
     "@exampleCardLot": {
         "description": "example_card_lot",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "給一隻未知的猴子",
+    "exampleCardTo": "do losowej małpy",
     "@exampleCardTo": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "從一隻未知的猴子",
+    "exampleCardFrom": "od losowej małpy",
     "@exampleCardFrom": {
         "description": "example_card_from",
         "type": "text",

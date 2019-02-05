@@ -108,7 +108,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"seedCopied": "Đã sao chép hạt giống .\n Có thể dán trong 2 phút.",
+	"seedCopied": "Đã sao chép hạt giống .n Có thể dán trong 2 phút.",
 	"@seedCopied": {
 		"description": "intro_new_wallet_seed_copied",
 		"type": "text",
@@ -390,7 +390,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"repInfo": "Đại diện là một tài khoản bỏ phiếu cho sự đồng thuận trên nền tảng Internet . Quyền biểu quyết được cân bằng theo số dư, bạn có thể ủy quyền số dư của mình để tăng số biểu quyết của đại diện mà bạn tin cậy.\n    Người đại diện của bạn không có quyền sử dụng số tiền của bạn. Bạn nên chọn một đại diện có nhiều thời gian cho bạn và đáng tin cậy.",
+	"repInfo": "Đại diện là một tài khoản bỏ phiếu cho sự đồng thuận trên nền tảng Internet . Quyền biểu quyết được cân bằng theo số dư, bạn có thể ủy quyền số dư của mình để tăng số biểu quyết của đại diện mà bạn tin cậy.n    Người đại diện của bạn không có quyền sử dụng số tiền của bạn. Bạn nên chọn một đại diện có nhiều thời gian cho bạn và đáng tin cậy.",
 	"@repInfo": {
 		"description": "change_representative_info",
 		"type": "text",
@@ -600,19 +600,19 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "Chuyển\nFunds:",
+	"transferHeader": "ChuyểnnFunds:",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Quá trình này sẽ chuyển từ quỹ ví giấy sang ví Kalium của bạn.\n\nNhấn vào \"%1\" Nút để bắt đầu.",
+	"transferIntro": "Quá trình này sẽ chuyển từ quỹ ví giấy sang ví Kalium của bạn.nnNhấn vào \"%1\" Nút để bắt đầu.",
 	"@transferIntro": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Quét một Banano \nseed hoặc private key",
+	"transferQrScanHint": "Quét một Banano nseed hoặc private key",
 	"@transferQrScanHint": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
@@ -666,7 +666,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Quét 1 Banano \nđịa chỉ mã QR",
+	"scanInstructions": "Quét 1 Banano nđịa chỉ mã QR",
 	"@scanInstructions": {
 		"description": "scan_send_instruction_label",
 		"type": "text",
