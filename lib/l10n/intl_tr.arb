@@ -336,7 +336,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "4 haneli şifre oluşturun",
+    "pinCreateTitle": "6 haneli şifre oluşturun",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -426,7 +426,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Parmak İzi",
+    "biometricsMethod": "Biyometrik",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

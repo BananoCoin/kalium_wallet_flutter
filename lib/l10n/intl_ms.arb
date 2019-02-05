@@ -336,7 +336,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Mencipta pin 4 digit anda",
+    "pinCreateTitle": "Mencipta pin 6 digit anda",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -426,7 +426,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Cap jari",
+    "biometricsMethod": "Biometrik",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

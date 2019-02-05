@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Skapa en 4-siffrig PIN-kod",
+    "pinCreateTitle": "Skapa en 6-siffrig PIN-kod",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Fingeravtryck",
+    "biometricsMethod": "Biometrics",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

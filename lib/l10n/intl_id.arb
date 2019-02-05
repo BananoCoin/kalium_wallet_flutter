@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Buat pin 4 angka",
+    "pinCreateTitle": "Buat pin 6 angka",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Sidik jari",
+    "biometricsMethod": "Biometrik",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

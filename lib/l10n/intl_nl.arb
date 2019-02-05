@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Creëer een 4-cijferige pincode",
+    "pinCreateTitle": "Creëer een 6-cijferige pincode",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Vingerafdruk",
+    "biometricsMethod": "biometrie",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

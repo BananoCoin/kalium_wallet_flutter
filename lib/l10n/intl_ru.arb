@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Создать 4-значный PIN-код.",
+    "pinCreateTitle": "Создать 6-значный PIN-код.",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Отпечаток пальца",
+    "biometricsMethod": "биометрия",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

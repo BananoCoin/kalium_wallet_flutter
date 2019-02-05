@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Crea un pin a 4 cifre",
+    "pinCreateTitle": "Crea un pin a 6 cifre",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Impronta Digitale",
+    "biometricsMethod": "Biometrica",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

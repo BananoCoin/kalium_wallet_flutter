@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Hozz létre egy 4 számjegyű PIN-kódot",
+    "pinCreateTitle": "Hozz létre egy 6 számjegyű PIN-kódot",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Ujjlenyomat",
+    "biometricsMethod": "Biometria",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

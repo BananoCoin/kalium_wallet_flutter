@@ -336,7 +336,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "創建一個4位數的識別碼",
+    "pinCreateTitle": "創建一個6位數的識別碼",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -426,7 +426,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "指紋",
+    "biometricsMethod": "生物識別技術",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

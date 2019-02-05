@@ -348,7 +348,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"pinCreateTitle": "Tạo mã gồm 4 chữ số",
+	"pinCreateTitle": "Tạo mã gồm 6 chữ số",
 	"@pinCreateTitle": {
 		"description": "pin_create_title",
 		"type": "text",
@@ -444,7 +444,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"biometricsMethod": "Dấu vân tay",
+	"biometricsMethod": "Sinh trắc học",
 	"@biometricsMethod": {
 		"description": "settings_fingerprint_method",
 		"type": "text",

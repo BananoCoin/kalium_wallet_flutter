@@ -336,7 +336,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "एक ४ (4) अंकों का पिन बनाएँ",
+    "pinCreateTitle": "एक ४ (6) अंकों का पिन बनाएँ",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -426,7 +426,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "उंगली का निशान",
+    "biometricsMethod": "बॉयोमेट्रिक्स",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

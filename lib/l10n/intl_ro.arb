@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Creați un PIN cu 4 cifre",
+    "pinCreateTitle": "Creați un PIN cu 6 cifre",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Amprentă Digitală",
+    "biometricsMethod": "Biometria",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

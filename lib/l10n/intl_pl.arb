@@ -336,7 +336,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Stwórz czterocyfrowy PIN",
+    "pinCreateTitle": "Utwórz sześciocyfrowy kod PIN",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -432,7 +432,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Odcisk Palca",
+    "biometricsMethod": "Biometria",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

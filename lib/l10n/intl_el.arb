@@ -336,7 +336,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "Δημιουργήστε ένα pin 4 ψηφίων",
+    "pinCreateTitle": "Δημιουργήστε ένα pin 6 ψηφίων",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -432,7 +432,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "Δακτυλικό Αποτύπωμα",
+    "biometricsMethod": "Βιομετρία",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

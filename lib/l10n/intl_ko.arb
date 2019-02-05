@@ -336,7 +336,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "4자리 비밀번호를 만드세요",
+    "pinCreateTitle": "6자리 비밀번호를 만드세요",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -426,7 +426,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "지문",
+    "biometricsMethod": "생체 인식",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",

@@ -360,7 +360,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "pinCreateTitle": "יצר קוד באורך 4 ספרות",
+    "pinCreateTitle": "יצר קוד באורך 6 ספרות",
     "@pinCreateTitle": {
         "description": "pin_create_title",
         "type": "text",
@@ -456,7 +456,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "biometricsMethod": "טביעת אצבע",
+    "biometricsMethod": "ביומטריה",
     "@biometricsMethod": {
         "description": "settings_fingerprint_method",
         "type": "text",
