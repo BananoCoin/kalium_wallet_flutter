@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "Ang seed ay nakopya sa clipboard.n Pwedeng i-paste ito sa loob ng dalawang minuto.",
+    "seedCopied": "Ang seed ay nakopya sa clipboard.\n Pwedeng i-paste ito sa loob ng dalawang minuto.",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
@@ -612,7 +612,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "TransfernFunds:",
+    "transferHeader": "Transfer\nFunds:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -630,13 +630,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.nnI-tap ang \"%1\" button para umpisahan.",
+    "transferIntro": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Mag-scan ng Banano nseed o private key",
+    "transferQrScanHint": "Mag-scan ng Banano \nseed o private key",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -690,7 +690,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "I-scan ang Banano naddress QR code",
+    "scanInstructions": "I-scan ang Banano \naddress QR code",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",

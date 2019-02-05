@@ -588,19 +588,19 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "TransferujnŚrodki:",
+    "transferHeader": "Transferuj\nŚrodki:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Ten proces trensferuje środki z portfela papierowego do twojego portfela Kalium.nnNaciśnij \"%1\" przycisk aby zacząć.",
+    "transferIntro": "Ten proces trensferuje środki z portfela papierowego do twojego portfela Kalium.\n\nNaciśnij \"%1\" przycisk aby zacząć.",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Skanuj Nasiono nBanano lub klucz prywatny",
+    "transferQrScanHint": "Skanuj Nasiono \nBanano lub klucz prywatny",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -654,7 +654,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Zeskanuj  naddres Kod QR ",
+    "scanInstructions": "Zeskanuj  \naddres Kod QR ",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",

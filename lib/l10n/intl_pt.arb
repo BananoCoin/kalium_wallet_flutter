@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "Seed copiada para a área de transferência.n É possível colar por 2 minutos.",
+    "seedCopied": "Seed copiada para a área de transferência.\n É possível colar por 2 minutos.",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
@@ -612,7 +612,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "TransferirnFundos:",
+    "transferHeader": "Transferir\nFundos:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -630,13 +630,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Este processo transferirá os fundos de uma carteira de papel para sua carteira Kalium.nnToque no botão \"%1\" para começar.",
+    "transferIntro": "Este processo transferirá os fundos de uma carteira de papel para sua carteira Kalium.\n\nToque no botão \"%1\" para começar.",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Escaneie uma Banano nseed ou private key",
+    "transferQrScanHint": "Escaneie uma Banano \nseed ou private key",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -690,7 +690,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Escaneie o código QR nde um endereço Banano",
+    "scanInstructions": "Escaneie o código QR \nde um endereço Banano",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",

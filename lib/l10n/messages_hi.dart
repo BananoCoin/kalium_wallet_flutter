@@ -93,7 +93,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "removeContactConfirmation" : MessageLookupByLibrary.simpleMessage("क्या आप वाकई %1 को संपर्कों में से मिटाना चाहतें हैं?"),
     "repInfo" : MessageLookupByLibrary.simpleMessage("प्रतिनिधि (रिप्रेजेन्टेटिव) एक खाता है जो नेटवर्क सर्वसम्मति (कंसेंसस) के लिए वोट देता है। हर प्रतिनिधि (रिप्रेजेन्टेटिव) की मतदान शक्ति (वोटिंग पावर) उसे चुनने वालों की कुल धनराशि पर निर्भर है। आप किसी भी समय एक भरोसेमंद प्रतिनिधि (रिप्रेजेन्टेटिव) को चुन कर, अपनी धनराशि से उस प्रतिनिधि (रिप्रेजेन्टेटिव) की मतदान शक्ति (वोटिंग पावर) बढ़ा सकते हैं। आपके प्रतिनिधि (रिप्रेजेन्टेटिव) को आपका धन खर्च करने का अधिकार नहीं है। आपको ऐसा प्रतिनिधि चुनना चाहिए जो भरोसेमंद हो और अधिकतर उपस्थित रहे।"),
     "repInfoHeader" : MessageLookupByLibrary.simpleMessage("प्रतिनिधि (रिप्रेजेन्टेटिव) क्या है?"),
-    "scanInstructions" : MessageLookupByLibrary.simpleMessage("बनानो के पते का nक्यू आर कोड स्कैन करें "),
+    "scanInstructions" : MessageLookupByLibrary.simpleMessage("बनानो के पते का \nक्यू आर कोड स्कैन करें "),
     "scanQrCode" : MessageLookupByLibrary.simpleMessage("क्यू आर कोड स्कैन करें "),
     "seed" : MessageLookupByLibrary.simpleMessage("बीज (सीड)"),
     "seedBackupInfo" : MessageLookupByLibrary.simpleMessage("नीचे आपके वॉलेट का बीज (सीड) है। इसका बैकअप करना आवश्यक है। कृपया इसे हमेशा सुरक्षित रखें और टेक्स्ट या स्क्रीनशॉट के रूप में हरगिज़ न रखें।"),

@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "Seed in Zwischenablage kopiert.n Du kannst ihn jetzt 2 Minuten lang einfügen.",
+    "seedCopied": "Seed in Zwischenablage kopiert.\n Du kannst ihn jetzt 2 Minuten lang einfügen.",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
@@ -228,7 +228,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedBackupInfo": "Unten siehst du deinen Seed.nEs ist extrem wichtig, dass du ein Backup deines Seeds erstellst.nSichere deinen Seed niemals als Klartext oder mit einem Screenshot.",
+    "seedBackupInfo": "Unten siehst du deinen Seed.\nEs ist extrem wichtig, dass du ein Backup deines Seeds erstellst.\nSichere deinen Seed niemals als Klartext oder mit einem Screenshot.",
     "@seedBackupInfo": {
         "description": "intro_new_wallet_seed",
         "type": "text",
@@ -612,7 +612,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Guthabenntransferieren:",
+    "transferHeader": "Guthaben\ntransferieren:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -630,13 +630,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Dieser Vorgang wird das Guthaben vom Paper Wallet an dein Kalium Wallet transferieren.nnTippe zum Starten auf \"%1\" .",
+    "transferIntro": "Dieser Vorgang wird das Guthaben vom Paper Wallet an dein Kalium Wallet transferieren.\n\nTippe zum Starten auf \"%1\" .",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Scanne einen Banano nSeed oder Private Key",
+    "transferQrScanHint": "Scanne einen Banano \nSeed oder Private Key",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -690,7 +690,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Scanne einennBanano-Address-QR-Code",
+    "scanInstructions": "Scanne einen\nBanano-Address-QR-Code",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",

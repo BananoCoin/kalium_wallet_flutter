@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "Seme copiato negli appunti.n Potrai incollarlo per 2 minuti.",
+    "seedCopied": "Seme copiato negli appunti.\n Potrai incollarlo per 2 minuti.",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
@@ -612,7 +612,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "TrasferiscinFondi:",
+    "transferHeader": "Trasferisci\nFondi:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -630,13 +630,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Questo processo trasferirà i fondi da un portafoglio cartaceo al tuo portafoglio Kalium.nnPremi il pulsante \"%1\" per iniziare.",
+    "transferIntro": "Questo processo trasferirà i fondi da un portafoglio cartaceo al tuo portafoglio Kalium.\n\nPremi il pulsante \"%1\" per iniziare.",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Scansiona un seme no una chiave privata",
+    "transferQrScanHint": "Scansiona un seme \no una chiave privata",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -690,7 +690,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Scansiona un ncodice QR Banano",
+    "scanInstructions": "Scansiona un \ncodice QR Banano",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",

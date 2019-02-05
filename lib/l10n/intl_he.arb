@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": ".הסיד הועתק n הוא ניתן להדבקה במשך שתי דקות",
+    "seedCopied": ".הסיד הועתק \n הוא ניתן להדבקה במשך שתי דקות",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
@@ -228,7 +228,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedBackupInfo": "tמתחת נמצא הסיד של הארנקים שלך. זה מאוד קריטי שתגבה את הסיד שלך ולא תשמור אותו בקובץ טקסט או כתמונת מסך.",
+    "seedBackupInfo": "\tמתחת נמצא הסיד של הארנקים שלך. זה מאוד קריטי שתגבה את הסיד שלך ולא תשמור אותו בקובץ טקסט או כתמונת מסך.",
     "@seedBackupInfo": {
         "description": "intro_new_wallet_seed",
         "type": "text",
@@ -258,7 +258,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "tברוך הבא לקאליום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים.",
+    "welcomeText": "\tברוך הבא לקאליום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים.",
     "@welcomeText": {
         "description": "intro_welcome_title",
         "type": "text",
@@ -612,7 +612,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "העברתnסכום:",
+    "transferHeader": "העברת\nסכום:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -624,19 +624,19 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferManualHint": "בבקשה הכנס את הסיד הנל",
+    "transferManualHint": "בבקשה הכנס את הסיד הנ\"ל",
     "@transferManualHint": {
         "description": "transfer_hint",
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "התהליך יעביר את הסכום שברשותך מארנק הנייר לארנק קאליוםnnלחץ על כפתור ה \"%1\" בכדי להתחיל.",
+    "transferIntro": "התהליך יעביר את הסכום שברשותך מארנק הנייר לארנק קאליום\n\nלחץ על כפתור ה \"%1\" בכדי להתחיל.",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "סרוק סיד של nבאנאנו או ארנק נייר",
+    "transferQrScanHint": "סרוק סיד של \nבאנאנו או ארנק נייר",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -690,7 +690,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "סרוק כתובת ברקוד n של באנאנו",
+    "scanInstructions": "סרוק כתובת ברקוד \n של באנאנו",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",

@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "Seed'iniz panoya kopyalandı.n 2 dakika panoda kalacak. ",
+    "seedCopied": "Seed'iniz panoya kopyalandı.\n 2 dakika panoda kalacak. ",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
@@ -582,19 +582,19 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "BakiyenTransferi:",
+    "transferHeader": "Bakiye\nTransferi:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.nnBaşlamak için \"%1\" butonuna bas.",
+    "transferIntro": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Bir Banano seedi nveya private key'i tara",
+    "transferQrScanHint": "Bir Banano seedi \nveya private key'i tara",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -648,7 +648,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Banano Adresi'nin n QR Kodu'nu tarayın",
+    "scanInstructions": "Banano Adresi'nin \n QR Kodu'nu tarayın",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",

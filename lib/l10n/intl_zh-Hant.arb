@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "種子代碼復製到剪貼板。n 2分鐘後失效",
+    "seedCopied": "種子代碼復製到剪貼板。\n 2分鐘後失效",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",

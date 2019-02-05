@@ -102,7 +102,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "seedCopied": "Benih disalin kedalam papan klip.n Hanya bisa ditempel dalam waktu 2 menit.",
+    "seedCopied": "Benih disalin kedalam papan klip.\n Hanya bisa ditempel dalam waktu 2 menit.",
     "@seedCopied": {
         "description": "intro_new_wallet_seed_copied",
         "type": "text",
@@ -612,7 +612,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "TransfernDana:",
+    "transferHeader": "Transfer\nDana:",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -630,13 +630,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Proses ini akan mentransfer dana dari dompet kertas ke dompet Kalium Anda.nnKetuk \"%1\" tombol untuk memulai.",
+    "transferIntro": "Proses ini akan mentransfer dana dari dompet kertas ke dompet Kalium Anda.\n\nKetuk \"%1\" tombol untuk memulai.",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Pindai Benihn atau kunci pribadi",
+    "transferQrScanHint": "Pindai Benih\n atau kunci pribadi",
     "@transferQrScanHint": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
@@ -690,7 +690,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Pindai QR coden alamat Banano",
+    "scanInstructions": "Pindai QR code\n alamat Banano",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",
