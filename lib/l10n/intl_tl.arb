@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Ang wallet na may balanse na %1 BANANO ay na-detect.",
+    "transferConfirmInfo": "Ang wallet na may balanse na %1 BANANO ay na-detect.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "I-tap ang confirm para ilipat ang pondo.",
+    "transferConfirmInfoSecond": "I-tap ang confirm para ilipat ang pondo.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

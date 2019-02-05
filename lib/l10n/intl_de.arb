@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Ein Wallet mit einem Guthaben von %1 BANANO wurde gefunden.",
+    "transferConfirmInfo": "Ein Wallet mit einem Guthaben von %1 BANANO wurde gefunden.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Tippe, um den Transfer zu bestätigen.",
+    "transferConfirmInfoSecond": "Tippe, um den Transfer zu bestätigen.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

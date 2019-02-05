@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Un portefeuille avec un solde de %1 BANANO a été détecté.",
+    "transferConfirmInfo": "Un portefeuille avec un solde de %1 BANANO a été détecté.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Appuyer pour confirmer le transfert de fonds.",
+    "transferConfirmInfoSecond": "Appuyer pour confirmer le transfert de fonds.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

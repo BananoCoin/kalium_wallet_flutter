@@ -630,13 +630,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "%1 BANANO bakiyeye sahip bir cüzdan tespit edildi.",
+    "transferConfirmInfo": "%1 BANANO bakiyeye sahip bir cüzdan tespit edildi.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Transfer işlemini başlatmak için onayla butonuna bas.",
+    "transferConfirmInfoSecond": "Transfer işlemini başlatmak için onayla butonuna bas.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

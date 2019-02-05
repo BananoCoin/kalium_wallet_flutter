@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Un portofel cu un sold de %1 BANANO a fost detectat.",
+    "transferConfirmInfo": "Un portofel cu un sold de %1 BANANO a fost detectat.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Apăsați pentru a confirma transferul.",
+    "transferConfirmInfoSecond": "Apăsați pentru a confirma transferul.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

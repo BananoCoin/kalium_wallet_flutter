@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "En plånbok med ett saldo om %1 BANANO har upptäckts.",
+    "transferConfirmInfo": "En plånbok med ett saldo om %1 BANANO har upptäckts.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Tryck på bekräfta för att överföra medel.",
+    "transferConfirmInfoSecond": "Tryck på bekräfta för att överföra medel.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

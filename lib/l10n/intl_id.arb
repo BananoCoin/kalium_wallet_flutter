@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Dompet dengan saldo %1 BANANO telah terdeteksi.",
+    "transferConfirmInfo": "Dompet dengan saldo %1 BANANO telah terdeteksi.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Ketuk konfirmasi untuk mentransfer dana.",
+    "transferConfirmInfoSecond": "Ketuk konfirmasi untuk mentransfer dana.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

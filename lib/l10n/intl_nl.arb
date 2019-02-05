@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Een wallet met een balans van %1 Banano is gedetecteerd.",
+    "transferConfirmInfo": "Een wallet met een balans van %1 Banano is gedetecteerd.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Tik op bevestigen om het bedrag over te zetten.",
+    "transferConfirmInfoSecond": "Tik op bevestigen om het bedrag over te zetten.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

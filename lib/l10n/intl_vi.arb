@@ -648,13 +648,13 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferConfirmInfo": "Một ví có số dư là %1 BANANO đã được tìm thấy.",
+	"transferConfirmInfo": "Một ví có số dư là %1 BANANO đã được tìm thấy.\n",
 	"@transferConfirmInfo": {
 		"description": "transfer_confirm_info_first",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferConfirmInfoSecond": "Nhấn để xác nhận chuyển quỹ.",
+	"transferConfirmInfoSecond": "Nhấn để xác nhận chuyển quỹ.\n",
 	"@transferConfirmInfoSecond": {
 		"description": "transfer_confirm_info_second",
 		"type": "text",

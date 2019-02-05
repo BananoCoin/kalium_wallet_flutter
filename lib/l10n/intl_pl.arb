@@ -636,13 +636,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Portfel z saldem %1 BANANO został wykryty.",
+    "transferConfirmInfo": "Portfel z saldem %1 BANANO został wykryty.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Naciśnij potwierdz aby transferować środki.",
+    "transferConfirmInfoSecond": "Naciśnij potwierdz aby transferować środki.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

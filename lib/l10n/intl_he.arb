@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "ארנק עם מאזן של %1 באנאנו אותר.",
+    "transferConfirmInfo": "\nארנק עם מאזן של %1 באנאנו אותר.",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "לחץ על אשר בכדי להעביר את הסכום.",
+    "transferConfirmInfoSecond": "\nלחץ על אשר בכדי להעביר את הסכום.",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

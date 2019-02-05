@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Uma carteira com saldo de %1 BANANO foi detectada.",
+    "transferConfirmInfo": "Uma carteira com saldo de %1 BANANO foi detectada.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Toque em confirmar para transferir os fundos.",
+    "transferConfirmInfoSecond": "Toque em confirmar para transferir os fundos.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",

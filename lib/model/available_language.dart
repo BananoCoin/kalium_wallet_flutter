@@ -10,7 +10,6 @@ enum AvailableLanguage {
   DUTCH,
   FRENCH,
   GERMAN,
-  GREEK,
   HEBREW,
   HINDI,
   HUNGARIAN,
@@ -45,8 +44,6 @@ class LanguageSetting extends SettingSelectionItem {
         return "Deutsch (de)";
       case AvailableLanguage.SPANISH:
         return "Español (es)";
-      case AvailableLanguage.GREEK:
-        return "ελληνικά (el)";
       case AvailableLanguage.HINDI:
         return "हिन्दी (hi)";
       case AvailableLanguage.HUNGARIAN:
@@ -98,8 +95,6 @@ class LanguageSetting extends SettingSelectionItem {
         return "de";
       case AvailableLanguage.SPANISH:
         return "es";
-      case AvailableLanguage.GREEK:
-        return "el";
       case AvailableLanguage.HINDI:
         return "hi";
       case AvailableLanguage.HUNGARIAN:

@@ -672,13 +672,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Обнаружен кошелёк с балансом %1 BANANO.",
+    "transferConfirmInfo": "Обнаружен кошелёк с балансом %1 BANANO.\n",
     "@transferConfirmInfo": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoSecond": "Нажмите Подтвердить, чтобы перевести средства.",
+    "transferConfirmInfoSecond": "Нажмите Подтвердить, чтобы перевести средства.\n",
     "@transferConfirmInfoSecond": {
         "description": "transfer_confirm_info_second",
         "type": "text",
