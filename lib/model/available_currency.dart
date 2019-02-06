@@ -245,12 +245,12 @@ class AvailableCurrency extends SettingSelectionItem {
   // Get best currency for a given locale
   // Default to USD
   static AvailableCurrency getBestForLocale(Locale locale) {
+    return AvailableCurrency(AvailableCurrencyEnum.USD);
+    // TODO - Since adding KaliumLocalizations we only get language code in locale, not country code
+    // Cause the below code to crash
     AvailableCurrencyEnum.values.forEach((value) {
       AvailableCurrency currency = AvailableCurrency(value);
-      // Special cases
-      if (locale != null && locale.countryCode != null && currency.currency == AvailableCurrencyEnum.EUR && ['AT', 'BE', 'CY', 'EE', 'FI', 'FR', 'DE', 'GR', 'IE', 'IT', 'LV', 'LT', 'LU', 'MT', 'NL', 'PT', 'SK', 'SI', 'ES'].contains(locale.countryCode.toUpperCase())) {
-        return currency;
-      } else if (locale != null && locale.countryCode != null && currency.getLocale().countryCode.toUpperCase() == locale.countryCode.toUpperCase()) {
+      if (currency.getLocale().countryCode.toUpperCase() == locale.countryCode.toUpperCase()) {
         return currency;
       }
     });

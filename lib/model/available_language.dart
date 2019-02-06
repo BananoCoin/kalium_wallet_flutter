@@ -135,18 +135,6 @@ class LanguageSetting extends SettingSelectionItem {
         return "DEFAULT";
     }
   }
-
-  static LanguageSetting getBestForLocale(Locale locale) {
-    AvailableLanguage.values.forEach((value) {
-      LanguageSetting language = LanguageSetting(value);
-      print("setting ${language.getLocaleString()} - locale ${locale.languageCode}");
-      if (locale != null && locale.languageCode != null && language.getLocaleString() == locale.languageCode) {
-        return language;
-      }
-    });
-    return LanguageSetting(AvailableLanguage.ENGLISH);
-  }
-
   // For saving to shared prefs
   int getIndex() {
     return language.index;

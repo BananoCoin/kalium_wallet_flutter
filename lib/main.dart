@@ -17,7 +17,6 @@ import 'package:kalium_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_import_seed.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
-import 'package:kalium_wallet_flutter/model/available_language.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'colors.dart';
@@ -41,14 +40,6 @@ class App extends StatefulWidget {
 
 
 class _AppState extends State<App> {
-
-  LanguageSetting _getDefaultLanguageSetting(LanguageSetting setting) {
-    if (setting.language == AvailableLanguage.DEFAULT) {
-      return LanguageSetting.getBestForLocale(StateContainer.of(context).deviceLocale);
-    }
-    return setting;
-  }
-
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
@@ -69,7 +60,7 @@ class _AppState extends State<App> {
           brightness: Brightness.dark,
         ),
         localizationsDelegates: [
-          AppLocalizationsDelegate(_getDefaultLanguageSetting(StateContainer.of(context).curLanguage)),
+          AppLocalizationsDelegate(StateContainer.of(context).curLanguage),
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
@@ -186,8 +177,8 @@ class SplashState extends State<Splash> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
         .copyWith(statusBarIconBrightness: Brightness.light, statusBarColor: Colors.transparent));
     // This seems to be the earliest place we can retrieve the device Locale
-    StateContainer.of(context).updateDeviceLocale(Localizations.localeOf(context));
-    SharedPrefsUtil.inst.getCurrency(Localizations.localeOf(context)).then((currency) {
+    StateContainer.of(context).deviceLocale = Localizations.localeOf(context);
+    SharedPrefsUtil.inst.getCurrency(StateContainer.of(context).deviceLocale).then((currency) {
       StateContainer.of(context).curCurrency = currency;
     });
     return new Scaffold(
