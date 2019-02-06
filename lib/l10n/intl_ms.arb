@@ -156,7 +156,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Kenalan:",
+    "contactHeader": "Kenalan",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -270,7 +270,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Dihantar ke:",
+    "sentTo": "Dihantar ke",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -282,7 +282,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "Ke:",
+    "to": "Ke",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -330,7 +330,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Dihantar dari:",
+    "sendFrom": "Dihantar dari",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -564,7 +564,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Selamat datang ke Kalium. Sekali anda menerima BANANO, transaksi akan terlihat seperti ini:",
+    "exampleCardIntro": "Selamat datang ke Kalium. Sekali anda menerima BANANO, transaksi akan terlihat seperti ini",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

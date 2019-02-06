@@ -273,6 +273,13 @@ class StateContainerState extends State<StateContainer> {
   void updateLanguage(LanguageSetting language) {
     setState(() {
       curLanguage = language;
+      deviceLocale = deviceLocale;
+    });
+  }
+
+  void updateDeviceLocale(Locale locale) {
+    setState(() {
+      deviceLocale = locale;
     });
   }
 

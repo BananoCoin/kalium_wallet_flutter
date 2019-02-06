@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Kontak:",
+    "contactHeader": "Kontak",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Pinadala sa:",
+    "sentTo": "Pinadala sa",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "Sa:",
+    "to": "Sa",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Magpadala galing sa:",
+    "sendFrom": "Magpadala galing sa",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Transfer\nFunds:",
+    "transferHeader": "Transfer\nFunds",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -774,7 +774,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO:",
+    "exampleCardIntro": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

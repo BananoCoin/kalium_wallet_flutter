@@ -156,7 +156,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "联络人:",
+    "contactHeader": "联络人",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",

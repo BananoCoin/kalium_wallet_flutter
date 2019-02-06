@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Контакт:",
+    "contactHeader": "Контакт",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Отправлено на:",
+    "sentTo": "Отправлено на",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "на:",
+    "to": "на",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Отправить из:",
+    "sendFrom": "Отправить из",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Перечислить\nСредства:",
+    "transferHeader": "Перечислить\nСредства",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",

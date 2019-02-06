@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Kontakter:",
+    "contactHeader": "Kontakter",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Skickat till:",
+    "sentTo": "Skickat till",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "Till:",
+    "to": "Till",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Skicka från:",
+    "sendFrom": "Skicka från",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Överför\nmedel:",
+    "transferHeader": "Överför\nmedel",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -768,7 +768,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Välkommen till Kalium. Så snart du tar emot BANANO, visas transaktionerna på detta vis:",
+    "exampleCardIntro": "Välkommen till Kalium. Så snart du tar emot BANANO, visas transaktionerna på detta vis",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

@@ -156,7 +156,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Kişi:",
+    "contactHeader": "Kişi",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -270,19 +270,19 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Alıcı:",
+    "sentTo": "Alıcı",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
         "placeholders": {}
     },
-    "sending": "Miktar:",
+    "sending": "Miktar",
     "@sending": {
         "description": "send_sending",
         "type": "text",
         "placeholders": {}
     },
-    "to": "Adres:",
+    "to": "Adres",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -330,7 +330,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Gönderici:",
+    "sendFrom": "Gönderici",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -600,7 +600,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Bakiye\nTransferi:",
+    "transferHeader": "Bakiye\nTransferi",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -672,7 +672,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Kalium’a hoşgeldin. Hesabına BANANO geldiğinde işlemlerin şu şekilde görünecek:",
+    "exampleCardIntro": "Kalium’a hoşgeldin. Hesabına BANANO geldiğinde işlemlerin şu şekilde görünecek",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

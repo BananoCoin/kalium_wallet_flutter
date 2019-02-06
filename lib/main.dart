@@ -64,7 +64,30 @@ class _AppState extends State<App> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        supportedLocales: [Locale("en"), Locale("de")],
+        supportedLocales: [
+          const Locale('en', 'US'), // English
+          const Locale('he', 'IL'), // Hebrew
+          const Locale('de', 'DE'), // German
+          const Locale('es'), // Spanish
+          const Locale('hi'), // Hindi
+          const Locale('hu'), // Hungarian
+          const Locale('hi'), // Hindi
+          const Locale('id'), // Indonesian
+          const Locale('it'), // Italian
+          const Locale('ko'), // Korean
+          const Locale('ms'), // Malay
+          const Locale('nl'), // Dutch
+          const Locale('pl'), // Polish
+          const Locale('pt'), // Portugese
+          const Locale('ro'), // Romanian
+          const Locale('ru'), // Russian
+          const Locale('sv'), // Swedish
+          const Locale('tl'), // Tagalog
+          const Locale('tr'), // Turkish
+          const Locale('vi'), // Vietnamese
+          const Locale('zh-Hans'), // Chinese Simplified
+          const Locale('zh-Hant'), // Chinese Traditional
+        ],
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
@@ -129,16 +152,14 @@ class Splash extends StatefulWidget {
   SplashState createState() => new SplashState();
 }
 
-class SplashState extends State<Splash> {
+class SplashState extends State<Splash> with WidgetsBindingObserver {
   Future checkLoggedIn() async {
     // iOS key store is persistent, so if this is first launch then we will clear the keystore
-    /* TODO - Uncomment
     bool firstLaunch = await SharedPrefsUtil.inst.getFirstLaunch();
     if (firstLaunch) {
       await Vault.inst.deleteAll();
     }
     await SharedPrefsUtil.inst.setFirstLaunch();
-    */
     // See if logged in already
     bool isLoggedIn = false;
     var seed = await Vault.inst.getSeed();
@@ -170,6 +191,41 @@ class SplashState extends State<Splash> {
   void initState() {
     super.initState();
     checkLoggedIn();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // Account for user changing locale when leaving the app
+    switch (state) {
+      case AppLifecycleState.paused:
+        super.didChangeAppLifecycleState(state);
+        break;
+      case AppLifecycleState.resumed:
+        setLanguage();
+        super.didChangeAppLifecycleState(state);
+        break;
+      default:
+        super.didChangeAppLifecycleState(state);
+        break;
+    }
+  }
+
+  void setLanguage() {
+    setState(() {
+      StateContainer.of(context).deviceLocale = Localizations.localeOf(context);
+    });
+    SharedPrefsUtil.inst.getLanguage().then((setting) {
+      setState(() {
+        StateContainer.of(context).updateLanguage(setting);
+      });
+    });    
   }
 
   @override
@@ -177,7 +233,7 @@ class SplashState extends State<Splash> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
         .copyWith(statusBarIconBrightness: Brightness.light, statusBarColor: Colors.transparent));
     // This seems to be the earliest place we can retrieve the device Locale
-    StateContainer.of(context).deviceLocale = Localizations.localeOf(context);
+    setLanguage();
     SharedPrefsUtil.inst.getCurrency(StateContainer.of(context).deviceLocale).then((currency) {
       StateContainer.of(context).curCurrency = currency;
     });

@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Kontak:",
+    "contactHeader": "Kontak",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Terkirim Kepada:",
+    "sentTo": "Terkirim Kepada",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "Kepada:",
+    "to": "Kepada",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Kirim Dari:",
+    "sendFrom": "Kirim Dari",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Transfer\nDana:",
+    "transferHeader": "Transfer\nDana",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -774,7 +774,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Hai, Saat anda mengirim dan menerima BANANO, akan terlihat seperti ini:",
+    "exampleCardIntro": "Hai, Saat anda mengirim dan menerima BANANO, akan terlihat seperti ini",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

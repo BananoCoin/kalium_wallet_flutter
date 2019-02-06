@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Contact:",
+    "contactHeader": "Contact",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Trmite către:",
+    "sentTo": "Trmite către",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Trimite de la:",
+    "sendFrom": "Trimite de la",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Transferă\nFonduri:",
+    "transferHeader": "Transferă\nFonduri",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -774,7 +774,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Bun venit la Kalium. Odată ce primiți sau trimiteți BANANO, tranzacțiile vor arăta astfel:",
+    "exampleCardIntro": "Bun venit la Kalium. Odată ce primiți sau trimiteți BANANO, tranzacțiile vor arăta astfel",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

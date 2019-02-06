@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "איש קשר:",
+    "contactHeader": "איש קשר",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "נשלח ל:",
+    "sentTo": "נשלח ל",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "מ:",
+    "to": "מ",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "נשלח מ:",
+    "sendFrom": "נשלח מ",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "העברת\nסכום:",
+    "transferHeader": "העברת\nסכום",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -774,7 +774,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך:",
+    "exampleCardIntro": "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

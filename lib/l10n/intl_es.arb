@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Contacto:",
+    "contactHeader": "Contacto",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -270,7 +270,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "importSeedHint": "Introduzca la semilla de su billetera:",
+    "importSeedHint": "Introduzca la semilla de su billetera",
     "@importSeedHint": {
         "description": "intro_seed_info",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Enviar a:",
+    "sentTo": "Enviar a",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "A:",
+    "to": "A",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Enviar desde:",
+    "sendFrom": "Enviar desde",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -402,7 +402,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "currentlyRepresented": "Su representante actual es:",
+    "currentlyRepresented": "Su representante actual es",
     "@currentlyRepresented": {
         "description": "change_representative_current_header",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Transferir\nFondos:",
+    "transferHeader": "Transferir\nFondos",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -774,7 +774,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Bienvenido a Kalium. Una vez que envíe o reciba BANANO, las transacciones se verán así:",
+    "exampleCardIntro": "Bienvenido a Kalium. Una vez que envíe o reciba BANANO, las transacciones se verán así",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

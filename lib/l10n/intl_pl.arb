@@ -156,7 +156,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Kontakt:",
+    "contactHeader": "Kontakt",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -270,7 +270,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Wysłane Do:",
+    "sentTo": "Wysłane Do",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -282,7 +282,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "Do:",
+    "to": "Do",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -606,7 +606,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Transferuj\nŚrodki:",
+    "transferHeader": "Transferuj\nŚrodki",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -678,7 +678,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Witam w Kalium. Kiedy dostaniesz BANANO, transakcje pokażą się w ten sposób:",
+    "exampleCardIntro": "Witam w Kalium. Kiedy dostaniesz BANANO, transakcje pokażą się w ten sposób",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

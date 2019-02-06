@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Kontakt:",
+    "contactHeader": "Kontakt",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Elküldve ide:",
+    "sentTo": "Elküldve ide",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "Küldés ide:",
+    "to": "Küldés ide",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Küldés Innen:",
+    "sendFrom": "Küldés Innen",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",

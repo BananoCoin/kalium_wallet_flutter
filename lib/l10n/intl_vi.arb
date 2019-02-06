@@ -168,7 +168,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"contactHeader": "Liên hệ:",
+	"contactHeader": "Liên hệ",
 	"@contactHeader": {
 		"description": "contact_view_header",
 		"type": "text",
@@ -282,7 +282,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"sentTo": "Gửi tới:",
+	"sentTo": "Gửi tới",
 	"@sentTo": {
 		"description": "sent_to",
 		"type": "text",
@@ -294,7 +294,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"to": "tới:",
+	"to": "tới",
 	"@to": {
 		"description": "send_to",
 		"type": "text",
@@ -342,7 +342,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"sendFrom": "Gửi từ:",
+	"sendFrom": "Gửi từ",
 	"@sendFrom": {
 		"description": "send_title",
 		"type": "text",
@@ -618,7 +618,7 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferHeader": "ChuyểnnFunds:",
+	"transferHeader": "ChuyểnnFunds",
 	"@transferHeader": {
 		"description": "transfer_header",
 		"type": "text",

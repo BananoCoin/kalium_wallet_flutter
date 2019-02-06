@@ -156,7 +156,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "연락처:",
+    "contactHeader": "연락처",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -270,7 +270,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "받는 사람:",
+    "sentTo": "받는 사람",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -282,7 +282,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "받는 사람:",
+    "to": "받는 사람",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -330,7 +330,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "보낸 사람 :",
+    "sendFrom": "보낸 사람 ",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",

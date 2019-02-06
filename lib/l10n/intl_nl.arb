@@ -168,7 +168,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactHeader": "Contact:",
+    "contactHeader": "Contact",
     "@contactHeader": {
         "description": "contact_view_header",
         "type": "text",
@@ -294,7 +294,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sentTo": "Verstuur naar:",
+    "sentTo": "Verstuur naar",
     "@sentTo": {
         "description": "sent_to",
         "type": "text",
@@ -306,7 +306,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "to": "Naar:",
+    "to": "Naar",
     "@to": {
         "description": "send_to",
         "type": "text",
@@ -354,7 +354,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendFrom": "Verstuur via:",
+    "sendFrom": "Verstuur via",
     "@sendFrom": {
         "description": "send_title",
         "type": "text",
@@ -402,7 +402,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "currentlyRepresented": "Jouw huidige vertegenwoordiger is:",
+    "currentlyRepresented": "Jouw huidige vertegenwoordiger is",
     "@currentlyRepresented": {
         "description": "change_representative_current_header",
         "type": "text",
@@ -432,7 +432,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "changeRepHint": "Vul nieuwe vertegenwoordiger in:",
+    "changeRepHint": "Vul nieuwe vertegenwoordiger in",
     "@changeRepHint": {
         "description": "change_representative_hint",
         "type": "text",
@@ -630,7 +630,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferHeader": "Bedragen overzetten:",
+    "transferHeader": "Bedragen overzetten",
     "@transferHeader": {
         "description": "transfer_header",
         "type": "text",
@@ -774,7 +774,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Welkom bij Kalium. Zodra je BANANO ontvangt zullen jouw transacties op deze manier verschijnen:",
+    "exampleCardIntro": "Welkom bij Kalium. Zodra je BANANO ontvangt zullen jouw transacties op deze manier verschijnen",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",

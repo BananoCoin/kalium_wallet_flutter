@@ -41,7 +41,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "confirm" : MessageLookupByLibrary.simpleMessage("確認"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 已被添加到联络人！"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("联络人已存在"),
-    "contactHeader" : MessageLookupByLibrary.simpleMessage("联络人:"),
+    "contactHeader" : MessageLookupByLibrary.simpleMessage("联络人"),
     "contactInvalid" : MessageLookupByLibrary.simpleMessage("联络人姓名无效"),
     "contactNameHint" : MessageLookupByLibrary.simpleMessage("输入姓名@"),
     "contactNameMissing" : MessageLookupByLibrary.simpleMessage("没有要导出的联络人"),
