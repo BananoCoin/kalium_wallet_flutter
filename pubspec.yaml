@@ -21,7 +21,7 @@ dependencies:
   # Securley store data in a keystore
   flutter_secure_storage:
     git:
-      url: https://github.com/bbedward/flutter_secure_storage.git
+      url: https://github.com/mogol/flutter_secure_storage.git
       ref: develop
 
   # Nano core functions
@@ -109,11 +109,7 @@ dependencies:
   oktoast: ^2.1.4
 
   # Push notifications - TODO update to newer androidX version
-  firebase_messaging:
-    git:
-      url: https://github.com/bbedward/plugins.git
-      path: packages/firebase_messaging
-      ref: master
+  firebase_messaging: ^ 2.2.0+1
 
 dev_dependencies:
   flutter_test:
