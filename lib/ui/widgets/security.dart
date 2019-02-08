@@ -130,9 +130,6 @@ class _PinScreenState extends State<PinScreen>
           // the animation object’s value is the changed state
         });
       });
-      if (this.pinScreenBackgroundColor == null) {
-        pinScreenBackgroundColor = StateContainer.of(context).curTheme.backgroundDark;
-      }
   }
 
   @override
@@ -257,6 +254,11 @@ class _PinScreenState extends State<PinScreen>
 
   @override
   Widget build(BuildContext context) {
+    if (this.pinScreenBackgroundColor == null) {
+      setState(() {
+        pinScreenBackgroundColor = StateContainer.of(context).curTheme.backgroundDark;
+      });
+    }
     if (pinEnterTitle.isEmpty) {
       setState(() {
         pinEnterTitle = AppLocalization.of(context).pinEnterTitle;
