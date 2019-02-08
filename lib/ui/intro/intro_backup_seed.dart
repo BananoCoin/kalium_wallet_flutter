@@ -47,7 +47,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         key: _scaffoldKey,
-        backgroundColor: StateContainer.of(context).curTheme.background,
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         body: LayoutBuilder(
           builder: (context, constraints) => Column(
                 children: <Widget>[
@@ -125,7 +125,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                       horizontal: 25.0, vertical: 15),
                                   margin: EdgeInsets.only(top: 25),
                                   decoration: BoxDecoration(
-                                    color: StateContainer.of(context).curTheme.backgroundDark,
+                                    color: StateContainer.of(context).curTheme.backgroundDarkest,
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   child:

@@ -37,12 +37,14 @@ class _AppLockScreenState extends State<AppLockScreen> {
   }
 
   Widget _buildPinScreen(BuildContext context, String expectedPin) {
-    return PinScreen(PinOverlayType.ENTER_PIN, (pin) {
-      _goHome();
-    },
-        expectedPin: expectedPin,
-        description: AppLocalization.of(context).unlockPin,
-        pinScreenBackgroundColor: StateContainer.of(context).curTheme.background);
+    return PinScreen(
+      PinOverlayType.ENTER_PIN,
+      (pin) {
+        _goHome();
+      },
+      expectedPin: expectedPin,
+      description: AppLocalization.of(context).unlockPin,
+    );
   }
 
   String _formatCountDisplay(int count) {
@@ -207,7 +209,8 @@ class _AppLockScreenState extends State<AppLockScreen> {
                               child: Icon(
                                 AppIcons.lock,
                                 size: 80,
-                                color: StateContainer.of(context).curTheme.primary,
+                                color:
+                                    StateContainer.of(context).curTheme.primary,
                               ),
                               margin: EdgeInsets.only(
                                   top:
@@ -215,9 +218,11 @@ class _AppLockScreenState extends State<AppLockScreen> {
                             ),
                             Container(
                               child: Text(
-                                CaseChange.toUpperCase(AppLocalization.of(context)
-                                    .locked, context),
-                                style: AppStyles.textStyleHeaderColored(context),
+                                CaseChange.toUpperCase(
+                                    AppLocalization.of(context).locked,
+                                    context),
+                                style:
+                                    AppStyles.textStyleHeaderColored(context),
                               ),
                               margin: EdgeInsets.only(top: 10),
                             ),
@@ -227,19 +232,20 @@ class _AppLockScreenState extends State<AppLockScreen> {
                 ),
                 _lockedOut
                     ? Container(
-                      width: MediaQuery.of(context).size.width-100,
-                      margin: EdgeInsets.symmetric(horizontal: 50),
-                      child: Text(
-                        AppLocalization.of(context).tooManyFailedAttempts,
-                        style: AppStyles.textStyleErrorMedium(context),
-                        textAlign: TextAlign.center,
-                      ),
-                    )
+                        width: MediaQuery.of(context).size.width - 100,
+                        margin: EdgeInsets.symmetric(horizontal: 50),
+                        child: Text(
+                          AppLocalization.of(context).tooManyFailedAttempts,
+                          style: AppStyles.textStyleErrorMedium(context),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
                     : SizedBox(),
                 _showUnlockButton
                     ? Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(context, 
+                          AppButton.buildAppButton(
+                              context,
                               AppButtonType.PRIMARY,
                               _lockedOut
                                   ? _countDownTxt
