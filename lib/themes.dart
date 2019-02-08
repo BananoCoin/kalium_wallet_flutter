@@ -46,6 +46,8 @@ abstract class BaseTheme {
   Color overlay80;
   Color overlay85;
   Color overlay90;
+
+  Brightness statusBarBrightness;
 }
 
 class KaliumTheme extends BaseTheme {
@@ -130,6 +132,8 @@ class KaliumTheme extends BaseTheme {
   Color overlay80= black80;
   Color overlay85= black85;
   Color overlay90= black90;
+
+  Brightness statusBarBrightness = Brightness.light;
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -214,4 +218,6 @@ class TitaniumTheme extends BaseTheme {
   Color overlay80= black80;
   Color overlay85= black85;
   Color overlay90= black90;
+
+  Brightness statusBarBrightness = Brightness.light;
 }

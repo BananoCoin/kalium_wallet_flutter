@@ -570,7 +570,7 @@ class _AppHomePageState extends State<AppHomePage>
     }
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-        statusBarIconBrightness: Brightness.light,
+        statusBarBrightness: StateContainer.of(context).curTheme.statusBarBrightness,
         statusBarColor: Colors.transparent));
     return AppScaffold(
       resizeToAvoidBottomPadding: false,
