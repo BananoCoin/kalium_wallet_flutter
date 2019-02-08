@@ -140,7 +140,7 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
     switch (type) {
       case AnimationType.SEND:
         return FlareActor("assets/send_animation.flr",
-            animation: "main", fit: BoxFit.contain);
+            animation: "main", fit: BoxFit.contain, color: StateContainer.of(context).curTheme.primary,);
       case AnimationType.TRANSFER_SEARCHING_QR:
         return FlareActor("assets/searchseedqr_animation.flr",
             animation: "main", fit: BoxFit.contain);

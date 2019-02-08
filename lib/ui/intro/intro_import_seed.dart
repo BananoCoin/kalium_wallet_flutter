@@ -132,7 +132,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                   decoration: BoxDecoration(
                                     color: StateContainer.of(context)
                                         .curTheme
-                                        .backgroundDark,
+                                        .backgroundDarkest,
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   // Text Field for the seed
