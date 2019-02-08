@@ -74,7 +74,7 @@ class _AppHomePageState extends State<AppHomePage>
 
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion _priceConversion;
-  TextStyle _convertedPriceStyle;
+  bool _pricesHidden = false;
 
   bool _isRefreshing = false;
 
@@ -475,11 +475,6 @@ class _AppHomePageState extends State<AppHomePage>
 
   @override
   Widget build(BuildContext context) {
-    if (_convertedPriceStyle == null) {
-      setState(() {
-        _convertedPriceStyle = AppStyles.textStyleCurrencyAlt(context);
-      });
-    }
     if (_deepLinkSub == null && !StateContainer.of(context).wallet.loading) {
       // Listen for deep link changes
       _deepLinkSub = getLinksStream().listen((String link) {
@@ -1401,22 +1396,21 @@ class _AppHomePageState extends State<AppHomePage>
         if (_priceConversion == PriceConversion.BTC) {
           // Cycle to NANO price
           setState(() {
-            _convertedPriceStyle = AppStyles.textStyleCurrencyAlt(context);
+            _pricesHidden = false;
             _priceConversion = PriceConversion.NANO;
           });
           SharedPrefsUtil.inst.setPriceConversion(PriceConversion.NANO);
         } else if (_priceConversion == PriceConversion.NANO) {
           // Hide prices
           setState(() {
-            _convertedPriceStyle =
-                AppStyles.textStyleCurrencyAltHidden(context);
+            _pricesHidden = true;
             _priceConversion = PriceConversion.NONE;
           });
           SharedPrefsUtil.inst.setPriceConversion(PriceConversion.NONE);
         } else {
           // Cycle to BTC price
           setState(() {
-            _convertedPriceStyle = AppStyles.textStyleCurrencyAlt(context);
+            _pricesHidden = false;
             _priceConversion = PriceConversion.BTC;
           });
           SharedPrefsUtil.inst.setPriceConversion(PriceConversion.BTC);
@@ -1431,7 +1425,7 @@ class _AppHomePageState extends State<AppHomePage>
               StateContainer.of(context).wallet.getLocalCurrencyPrice(
                   locale: StateContainer.of(context).currencyLocale),
               textAlign: TextAlign.center,
-              style: _convertedPriceStyle),
+              style: _pricesHidden ? AppStyles.textStyleCurrencyAltHidden(context) : AppStyles.textStyleCurrencyAlt(context)),
           Container(
             margin: EdgeInsets.only(right: 15),
             child: Row(
@@ -1486,7 +1480,7 @@ class _AppHomePageState extends State<AppHomePage>
                       ? StateContainer.of(context).wallet.btcPrice
                       : StateContainer.of(context).wallet.nanoPrice,
                   textAlign: TextAlign.center,
-                  style: _convertedPriceStyle),
+                  style: _pricesHidden ? AppStyles.textStyleCurrencyAltHidden(context) : AppStyles.textStyleCurrencyAlt(context)),
             ],
           ),
         ],
