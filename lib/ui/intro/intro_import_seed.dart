@@ -41,8 +41,6 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
-        .copyWith(statusBarBrightness: StateContainer.of(context).curTheme.statusBarBrightness, statusBarColor: Colors.transparent));
 
     // Back button pressed
     Future<bool> _onWillPop() async {

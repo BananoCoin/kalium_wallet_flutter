@@ -47,8 +47,7 @@ class _AppState extends State<App> {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
-        .copyWith(statusBarBrightness: StateContainer.of(context).curTheme.statusBarBrightness, statusBarColor: Colors.transparent));
+    SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar);
     return OKToast(
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -234,8 +233,6 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
-        .copyWith(statusBarBrightness: StateContainer.of(context).curTheme.statusBarBrightness, statusBarColor: Colors.transparent));
     // This seems to be the earliest place we can retrieve the device Locale
     setLanguage();
     SharedPrefsUtil.inst.getCurrency(StateContainer.of(context).deviceLocale).then((currency) {

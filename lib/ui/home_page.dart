@@ -568,10 +568,6 @@ class _AppHomePageState extends State<AppHomePage>
         }
       });
     }
-
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-        statusBarBrightness: StateContainer.of(context).curTheme.statusBarBrightness,
-        statusBarColor: Colors.transparent));
     return AppScaffold(
       resizeToAvoidBottomPadding: false,
       key: _scaffoldKey,

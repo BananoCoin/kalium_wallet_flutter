@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppColors {
   // Some constants not themed
@@ -47,7 +48,7 @@ abstract class BaseTheme {
   Color overlay85;
   Color overlay90;
 
-  Brightness statusBarBrightness;
+  SystemUiOverlayStyle statusBar;
 }
 
 class KaliumTheme extends BaseTheme {
@@ -125,15 +126,16 @@ class KaliumTheme extends BaseTheme {
   Color text15 = white15;
   Color text03 = white03;
 
-  Color overlay20= black20;
-  Color overlay30= black20;
-  Color overlay50= black50;
-  Color overlay70= black70;
-  Color overlay80= black80;
-  Color overlay85= black85;
-  Color overlay90= black90;
+  Color overlay20 = black20;
+  Color overlay30 = black20;
+  Color overlay50 = black50;
+  Color overlay70 = black70;
+  Color overlay80 = black80;
+  Color overlay85 = black85;
+  Color overlay90 = black90;
 
-  Brightness statusBarBrightness = Brightness.light;
+  SystemUiOverlayStyle statusBar =
+      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -211,13 +213,14 @@ class TitaniumTheme extends BaseTheme {
   Color text15 = white15;
   Color text03 = white03;
 
-  Color overlay20= black20;
-  Color overlay30= black20;
-  Color overlay50= black50;
-  Color overlay70= black70;
-  Color overlay80= black80;
-  Color overlay85= black85;
-  Color overlay90= black90;
+  Color overlay20 = black20;
+  Color overlay30 = black20;
+  Color overlay50 = black50;
+  Color overlay70 = black70;
+  Color overlay80 = black80;
+  Color overlay85 = black85;
+  Color overlay90 = black90;
 
-  Brightness statusBarBrightness = Brightness.light;
+  SystemUiOverlayStyle statusBar =
+      SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
 }
