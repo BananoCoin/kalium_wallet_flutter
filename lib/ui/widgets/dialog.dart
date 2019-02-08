@@ -139,8 +139,18 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
   Widget _getAnimation(BuildContext context) {
     switch (type) {
       case AnimationType.SEND:
-        return FlareActor("assets/send_animation.flr",
-            animation: "main", fit: BoxFit.contain, color: StateContainer.of(context).curTheme.primary,);
+        return Stack(
+          children: <Widget>[
+            Center(
+              child: FlareActor("assets/send_animation_bananasonly.flr",
+              animation: "main", fit: BoxFit.contain, color: StateContainer.of(context).curTheme.primary,),
+            ),
+            Center(
+              child: FlareActor("assets/send_animation_shadowsonly.flr",
+              animation: "main", fit: BoxFit.contain,),
+            ),
+          ],
+        );
       case AnimationType.TRANSFER_SEARCHING_QR:
         return FlareActor("assets/searchseedqr_animation.flr",
             animation: "main", fit: BoxFit.contain);
