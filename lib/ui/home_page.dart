@@ -369,7 +369,7 @@ class _AppHomePageState extends State<AppHomePage>
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           onRefresh: _refresh,
           isRefreshing: _isRefreshing,
-          child: ListView(
+          child: ListView (
             padding: EdgeInsets.fromLTRB(0, 5.0, 0, 15.0),
             children: <Widget>[
               _buildLoadingTransactionCard(
@@ -729,7 +729,7 @@ class _AppHomePageState extends State<AppHomePage>
     );
   }
 
-// Transaction Card/List Item
+  // Transaction Card/List Item
   Widget _buildTransactionCard(AccountHistoryResponseItem item,
       Animation<double> animation, String displayName, BuildContext context) {
     TransactionDetailsSheet transactionDetails =
@@ -746,9 +746,7 @@ class _AppHomePageState extends State<AppHomePage>
       icon = AppIcons.received;
       iconColor = StateContainer.of(context).curTheme.primary60;
     }
-    return SizeTransition(
-      axis: Axis.vertical,
-      axisAlignment: -1.0,
+    return _SizeTransitionNoClip(
       sizeFactor: animation,
       child: Container(
         margin: EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 4.0),
@@ -1709,6 +1707,28 @@ class MonkeyOverlay extends ModalRoute<void> {
         scale: animation,
         child: FadeTransition(opacity: animation, child: child),
       ),
+    );
+  }
+}
+
+/// This is used so that the elevation of the container is kept and the
+/// drop shadow is not clipped.
+///
+class _SizeTransitionNoClip extends AnimatedWidget {
+  final Widget child;
+
+  const _SizeTransitionNoClip({
+    @required Animation<double> sizeFactor,
+    this.child
+  }) : super(listenable: sizeFactor);
+
+  @override
+  Widget build(BuildContext context) {
+    return new Align(
+      alignment: const AlignmentDirectional(-1.0, -1.0),
+      widthFactor: null,
+      heightFactor: (this.listenable as Animation<double>).value,
+      child: child,
     );
   }
 }
