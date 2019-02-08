@@ -89,7 +89,6 @@ class _AppHomePageState extends State<AppHomePage>
   void initState() {
     super.initState();
     _registerBus();
-    _convertedPriceStyle = AppStyles.textStyleCurrencyAlt(context);
     _monKey = SizedBox();
     WidgetsBinding.instance.addObserver(this);
     SharedPrefsUtil.inst.getPriceConversion().then((result) {
@@ -476,6 +475,11 @@ class _AppHomePageState extends State<AppHomePage>
 
   @override
   Widget build(BuildContext context) {
+    if (_convertedPriceStyle == null) {
+      setState(() {
+        _convertedPriceStyle = AppStyles.textStyleCurrencyAlt(context);
+      });
+    }
     if (_deepLinkSub == null && !StateContainer.of(context).wallet.loading) {
       // Listen for deep link changes
       _deepLinkSub = getLinksStream().listen((String link) {
