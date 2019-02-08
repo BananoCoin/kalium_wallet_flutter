@@ -49,6 +49,8 @@ abstract class BaseTheme {
   Color overlay90;
 
   SystemUiOverlayStyle statusBar;
+
+  BoxShadow boxShadow;
 }
 
 class KaliumTheme extends BaseTheme {
@@ -92,8 +94,6 @@ class KaliumTheme extends BaseTheme {
   static const black85 = Color(0xD9000000);
   static const black90 = Color(0xE6000000);
 
-  static const blue = Color(0xFF4A90E2);
-
   Color primary = yellow;
   Color primary60 = yellow60;
   Color primary45 = yellow45;
@@ -136,6 +136,8 @@ class KaliumTheme extends BaseTheme {
 
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+  
+  BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -179,8 +181,6 @@ class TitaniumTheme extends BaseTheme {
   static const black85 = Color(0xD9000000);
   static const black90 = Color(0xE6000000);
 
-  static const blue = Color(0xFF4A90E2);
-
   Color primary = blueishGreen;
   Color primary60 = blueishGreen60;
   Color primary45 = blueishGreen45;
@@ -222,5 +222,93 @@ class TitaniumTheme extends BaseTheme {
   Color overlay90 = black90;
 
   SystemUiOverlayStyle statusBar =
+      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
+}
+
+class IridiumTheme extends BaseTheme {
+  static const green = Color(0xFF008F53);
+  static const green10 = Color(0x1A008F53);
+  static const green15 = Color(0x26008F53);
+  static const green20 = Color(0x33008F53);
+  static const green30 = Color(0x4D008F53);
+  static const green45 = Color(0x73008F53);
+  static const green60 = Color(0x99008F53);
+
+  static const blue = Color(0xFF2572AB);
+  static const blue60 = Color(0x992572AB);
+  static const blue30 = Color(0x4D2572AB);
+  static const blue15 = Color(0x262572AB);
+  static const blueDark = Color(0xFF0F4975);
+  static const blueDark30 = Color(0x4D0F4975);
+
+  static const white = Color(0xFFFFFFFF);
+  static const white40 = Color(0x66FFFFFF);
+  static const white00 = Color(0x00FFFFFF);
+
+  static const whiteishDark = Color(0xFFE6E6E6);
+
+  static const grey90 = Color(0xE6424E49);
+  static const grey60 = Color(0x99424E49);
+  static const grey45 = Color(0x73424E49);
+  static const grey30 = Color(0x4D424E49);
+  static const grey20 = Color(0x33424E49);
+  static const grey15 = Color(0x2424E496);
+  static const grey03 = Color(0x08424E49);
+
+  static const black20 = Color(0x33000000);
+  static const black30 = Color(0x4D000000);
+  static const black50 = Color(0x80000000);
+  static const black70 = Color(0xB3000000);
+  static const black80 = Color(0xCC000000);
+  static const black85 = Color(0xD9000000);
+  static const black90 = Color(0xE6000000);
+
+  static const veryDarkGreen10 = Color(0x1A003B22);
+
+  Color primary = green;
+  Color primary60 = green60;
+  Color primary45 = green45;
+  Color primary30 = green30;
+  Color primary20 = green20;
+  Color primary15 = green15;
+  Color primary10 = green10;
+
+  Color success = blue;
+  Color success60 = blue60;
+  Color success30 = blue30;
+  Color success15 = blue15;
+  Color successDark = blueDark;
+  Color successDark30 = blueDark30;
+
+  Color background = white;
+  Color background40 = white40;
+  Color background00 = white00;
+
+  Color backgroundDark = white;
+  Color backgroundDark00 = white00;
+
+  Color backgroundDarkest = whiteishDark;
+
+  Color text = grey90;
+  Color text60 = grey60;
+  Color text45 = grey45;
+  Color text30 = grey30;
+  Color text20 = grey20;
+  Color text15 = grey30;
+  Color text03 = grey03;
+
+  Color overlay20 = black20;
+  Color overlay30 = black20;
+  Color overlay50 = black50;
+  Color overlay70 = black70;
+  Color overlay80 = black80;
+  Color overlay85 = black85;
+  Color overlay90 = black90;
+
+  SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow boxShadow = BoxShadow(color: veryDarkGreen10, offset: Offset(0, 5), blurRadius: 15);
 }

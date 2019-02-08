@@ -33,9 +33,6 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
-        .copyWith(statusBarBrightness: StateContainer.of(context).curTheme.statusBarBrightness, statusBarColor: Colors.transparent));
-
     // Back button pressed
     Future<bool> _onWillPop() async {
       // Delete seed

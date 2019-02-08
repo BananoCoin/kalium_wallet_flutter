@@ -760,6 +760,7 @@ class _AppHomePageState extends State<AppHomePage>
         decoration: BoxDecoration(
           color: StateContainer.of(context).curTheme.backgroundDark,
           borderRadius: BorderRadius.circular(10.0),
+          boxShadow: [StateContainer.of(context).curTheme.boxShadow],
         ),
         child: FlatButton(
           highlightColor: StateContainer.of(context).curTheme.text15,
@@ -852,6 +853,7 @@ class _AppHomePageState extends State<AppHomePage>
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
       child: FlatButton(
         onPressed: () {
@@ -966,6 +968,7 @@ class _AppHomePageState extends State<AppHomePage>
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
       child: IntrinsicHeight(
         child: Row(
@@ -978,6 +981,7 @@ class _AppHomePageState extends State<AppHomePage>
                     topLeft: Radius.circular(10.0),
                     bottomLeft: Radius.circular(10.0)),
                 color: StateContainer.of(context).curTheme.primary,
+                boxShadow: [StateContainer.of(context).curTheme.boxShadow],
               ),
             ),
             Flexible(
@@ -1025,6 +1029,7 @@ class _AppHomePageState extends State<AppHomePage>
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
       child: FlatButton(
         onPressed: () {
@@ -1199,6 +1204,7 @@ class _AppHomePageState extends State<AppHomePage>
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         borderRadius: BorderRadius.circular(10.0),
+        boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
       margin: EdgeInsets.only(
           top: MediaQuery.of(context).size.height * 0.05,

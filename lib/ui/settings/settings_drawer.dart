@@ -819,35 +819,35 @@ class _SettingsSheetState extends State<SettingsSheet>
                             fontWeight: FontWeight.w100,
                             color: StateContainer.of(context).curTheme.text60)),
                   ),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).changeCurrency,
                       StateContainer.of(context).curCurrency,
                       AppIcons.currency,
                       _currencyDialog),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).language,
                       StateContainer.of(context).curLanguage,
                       AppIcons.language,
                       _languageDialog),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).notifications,
                       _curNotificiationSetting,
                       AppIcons.notifications,
                       _notificationsDialog),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).themeHeader,
                       _curThemeSetting,
                       AppIcons.theme,
                       _themeDialog),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).securityHeader,
                       AppIcons.security, onPressed: () {
@@ -856,7 +856,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                     });
                     _securityController.forward();
                   }),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   Container(
                     margin:
                         EdgeInsets.only(left: 30.0, top: 20.0, bottom: 10.0),
@@ -866,7 +866,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                             fontWeight: FontWeight.w100,
                             color: StateContainer.of(context).curTheme.text60)),
                   ),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).contactsHeader,
                       AppIcons.contacts, onPressed: () {
@@ -875,7 +875,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                     });
                     _controller.forward();
                   }),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).backupSeed,
                       AppIcons.backupseed, onPressed: () {
@@ -916,27 +916,27 @@ class _SettingsSheetState extends State<SettingsSheet>
                       });
                     });
                   }),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).settingsTransfer,
                       AppIcons.transferfunds, onPressed: () {
                     AppTransferOverviewSheet().mainBottomSheet(context);
                   }),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).changeRepAuthenticate,
                       AppIcons.changerepresentative, onPressed: () {
                     new AppChangeRepresentativeSheet()
                         .mainBottomSheet(context);
                   }),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).shareKalium,
                       AppIcons.share, onPressed: () {
                     Share.share(AppLocalization.of(context).shareKaliumText +
                         " https://kalium.banano.cc");
                   }),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).logout, AppIcons.logout,
                       onPressed: () {
@@ -970,7 +970,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                       });
                     });
                   }),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   Padding(
                     padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                     child: Row(
@@ -1204,7 +1204,7 @@ class _SettingsSheetState extends State<SettingsSheet>
       },
       padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
-        Divider(height: 2),
+        Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
         // Main Container
         Container(
           padding: EdgeInsets.symmetric(vertical: 5.0),
@@ -1310,7 +1310,7 @@ Widget buildSecurityMenu(BuildContext context) {
                             color: StateContainer.of(context).curTheme.text60)),
                   ),
                   // Authentication Method
-                  _hasBiometrics ? Divider(height: 2) : null,
+                  _hasBiometrics ? Divider(height: 2, color: StateContainer.of(context).curTheme.text15,) : null,
                   _hasBiometrics
                       ? AppSettings.buildSettingsListItemDoubleLine(
                           context,
@@ -1320,7 +1320,7 @@ Widget buildSecurityMenu(BuildContext context) {
                           _authMethodDialog)
                       : null,
                   // Authenticate on Launch
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).lockAppSetting,
@@ -1328,7 +1328,7 @@ Widget buildSecurityMenu(BuildContext context) {
                       AppIcons.lock,
                       _lockDialog),
                   // Authentication Timer
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).autoLockHeader,
@@ -1337,7 +1337,7 @@ Widget buildSecurityMenu(BuildContext context) {
                       _lockTimeoutDialog,
                       disabled: _curUnlockSetting.setting == UnlockOption.NO,
                   ),
-                  Divider(height: 2),
+                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
                 ].where(notNull).toList(),
               ),
               //List Top Gradient End
