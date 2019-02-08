@@ -18,6 +18,7 @@ import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
+import 'package:kalium_wallet_flutter/model/available_themes.dart';
 import 'package:kalium_wallet_flutter/model/authentication_method.dart';
 import 'package:kalium_wallet_flutter/model/available_currency.dart';
 import 'package:kalium_wallet_flutter/model/device_unlock_option.dart';
@@ -70,6 +71,8 @@ class _SettingsSheetState extends State<SettingsSheet>
       UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting =
       LockTimeoutSetting(LockTimeoutOption.ONE);
+  ThemeSetting _curThemeSetting =
+      ThemeSetting(ThemeOptions.KALIUM);
 
   bool _contactsOpen;
   bool _securityOpen;
@@ -191,6 +194,12 @@ class _SettingsSheetState extends State<SettingsSheet>
         _curNotificiationSetting =
             notificationsOn ? NotificationSetting(NotificationOptions.ON) 
                             : NotificationSetting(NotificationOptions.OFF);
+      });
+    });
+    // Get default theme settings
+    SharedPrefsUtil.inst.getTheme().then((theme) {
+      setState(() {
+        _curThemeSetting = theme;
       });
     });
     // Initial contacts list
@@ -689,6 +698,53 @@ class _SettingsSheetState extends State<SettingsSheet>
     });
   }
 
+  List<Widget> _buildThemeOptions() {
+    List<Widget> ret = new List();
+    ThemeOptions.values.forEach((ThemeOptions value) {
+      ret.add(SimpleDialogOption(
+        onPressed: () {
+          Navigator.pop(context, value);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            ThemeSetting(value).getDisplayName(context),
+            style: AppStyles.textStyleDialogOptions(context),
+          ),
+        ),
+      ));
+    });
+    return ret;
+  }
+
+  Future<void> _themeDialog() async {
+    ThemeOptions selection =
+        await showAppDialog<ThemeOptions>(
+            context: context,
+            builder: (BuildContext context) {
+              return AppSimpleDialog(
+                title: Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: Text(
+                    AppLocalization.of(context).themeHeader,
+                    style: AppStyles.textStyleDialogHeader(context),
+                  ),
+                ),
+                children: _buildThemeOptions(),
+              );
+            });
+    if (_curThemeSetting != ThemeSetting(selection)) {
+      SharedPrefsUtil.inst
+          .setTheme(ThemeSetting(selection))
+          .then((result) {
+        setState(() {
+          StateContainer.of(context).updateTheme(ThemeSetting(selection));
+          _curThemeSetting = ThemeSetting(selection);
+        });
+      });
+    }
+  }
+
   Future<bool> _onBackButtonPressed() async {
     if (_contactsOpen) {
       setState(() {
@@ -784,6 +840,13 @@ class _SettingsSheetState extends State<SettingsSheet>
                       _curNotificiationSetting,
                       AppIcons.notifications,
                       _notificationsDialog),
+                  Divider(height: 2),
+                  AppSettings.buildSettingsListItemDoubleLine(
+                      context,
+                      AppLocalization.of(context).themeHeader,
+                      _curThemeSetting,
+                      AppIcons.currency,
+                      _themeDialog),
                   Divider(height: 2),
                   AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).securityHeader,

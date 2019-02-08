@@ -9,6 +9,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logging/logging.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
+import 'package:kalium_wallet_flutter/model/available_themes.dart';
 import 'package:kalium_wallet_flutter/model/available_currency.dart';
 import 'package:kalium_wallet_flutter/model/available_language.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
@@ -267,6 +268,13 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       curLanguage = language;
       deviceLocale = deviceLocale;
+    });
+  }
+
+  // Change theme
+  void updateTheme(ThemeSetting theme) {
+    setState(() {
+      curTheme = theme.getTheme();
     });
   }
 

@@ -39,6 +39,17 @@ class App extends StatefulWidget {
 
 
 class _AppState extends State<App> {
+  @override
+  void initState() {
+    super.initState();
+    // Get theme
+    SharedPrefsUtil.inst.getTheme().then((theme) {
+      setState(() {
+        StateContainer.of(context).updateTheme(theme);
+      });
+    });
+  }
+
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
