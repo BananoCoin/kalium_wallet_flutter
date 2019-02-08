@@ -3,7 +3,7 @@ import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
 import 'package:kalium_wallet_flutter/model/setting_item.dart';
 
-enum ThemeOptions { KALIUM, PINK }
+enum ThemeOptions { KALIUM, TITANIUM }
 
 /// Represent notification on/off setting
 class ThemeSetting extends SettingSelectionItem {
@@ -13,8 +13,8 @@ class ThemeSetting extends SettingSelectionItem {
 
   String getDisplayName(BuildContext context) {
     switch (theme) {
-      case ThemeOptions.PINK:
-        return "Pink";
+      case ThemeOptions.TITANIUM:
+        return "Titanium";
       case ThemeOptions.KALIUM:
       default:
         return "Kalium";
@@ -23,8 +23,8 @@ class ThemeSetting extends SettingSelectionItem {
 
   BaseTheme getTheme() {
     switch (theme) {
-      case ThemeOptions.PINK:
-        return PinkTheme();
+      case ThemeOptions.TITANIUM:
+        return TitaniumTheme();
       case ThemeOptions.KALIUM:
       default:
         return KaliumTheme();
