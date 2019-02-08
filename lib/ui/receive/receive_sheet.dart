@@ -27,13 +27,14 @@ class AppReceiveSheet {
   Widget monkeySVGBorder;
   Widget shareCardLogoSvg;
   Widget shareCardTickerSvg;
+  BuildContext context;
 
   Widget qrCode;
 
   AppReceiveSheet(Widget qrWidget) {
     // Create our SVG-heavy things in the constructor because they are slower operations
     monkeySVGBorder = SvgPicture.asset('assets/monkeyQR.svg');
-    shareCardLogoSvg = SvgPicture.asset('assets/sharecard_bananologo.svg');
+    shareCardLogoSvg = SvgPicture.asset('assets/sharecard_bananologo.svg', color: StateContainer.of(context).curTheme.primary,);
     // Share card initialization
     shareCardKey = GlobalKey();
     appShareCard = Container(
@@ -41,6 +42,7 @@ class AppReceiveSheet {
       alignment: Alignment(0.0, 0.0),
     );
     qrCode = qrWidget;
+    context = context;
   }
 
   // Address copied items

@@ -525,9 +525,11 @@ class _AppHomePageState extends State<AppHomePage>
       );
       painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
         setState(() {
-          receive = AppReceiveSheet(Container(
-              width: MediaQuery.of(context).size.width / 3.13,
-              child: Image.memory(byteData.buffer.asUint8List())));
+          receive = AppReceiveSheet(
+            Container(
+                width: MediaQuery.of(context).size.width / 3.13,
+                child: Image.memory(byteData.buffer.asUint8List())),
+          );
         });
       });
     }
@@ -615,7 +617,10 @@ class _AppHomePageState extends State<AppHomePage>
                     width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [StateContainer.of(context).curTheme.background00, StateContainer.of(context).curTheme.background],
+                        colors: [
+                          StateContainer.of(context).curTheme.background00,
+                          StateContainer.of(context).curTheme.background
+                        ],
                         begin: Alignment(0.5, 1.0),
                         end: Alignment(0.5, -1.0),
                       ),
@@ -631,7 +636,10 @@ class _AppHomePageState extends State<AppHomePage>
                     width: double.infinity,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
-                        colors: [StateContainer.of(context).curTheme.background00, StateContainer.of(context).curTheme.background],
+                        colors: [
+                          StateContainer.of(context).curTheme.background00,
+                          StateContainer.of(context).curTheme.background
+                        ],
                         begin: Alignment(0.5, -1),
                         end: Alignment(0.5, 0.5),
                       ),
@@ -692,12 +700,13 @@ class _AppHomePageState extends State<AppHomePage>
                               BigInt.zero
                           ? StateContainer.of(context).curTheme.primary
                           : StateContainer.of(context).curTheme.primary60,
-                      child: AutoSizeText(AppLocalization.of(context).send,
-                          textAlign: TextAlign.center,
-                          style: AppStyles.textStyleButtonPrimary(context),
-                          maxLines: 1,
-                          stepGranularity: 0.5,
-                          ),
+                      child: AutoSizeText(
+                        AppLocalization.of(context).send,
+                        textAlign: TextAlign.center,
+                        style: AppStyles.textStyleButtonPrimary(context),
+                        maxLines: 1,
+                        stepGranularity: 0.5,
+                      ),
                       onPressed: () {
                         if (StateContainer.of(context).wallet.accountBalance >
                             BigInt.zero) {
@@ -780,7 +789,8 @@ class _AppHomePageState extends State<AppHomePage>
                             Text(
                               text,
                               textAlign: TextAlign.left,
-                              style: AppStyles.textStyleTransactionType(context),
+                              style:
+                                  AppStyles.textStyleTransactionType(context),
                             ),
                             RichText(
                               textAlign: TextAlign.left,
@@ -789,11 +799,13 @@ class _AppHomePageState extends State<AppHomePage>
                                 children: [
                                   TextSpan(
                                     text: item.getFormattedAmount(),
-                                    style: AppStyles.textStyleTransactionAmount(context),
+                                    style: AppStyles.textStyleTransactionAmount(
+                                        context),
                                   ),
                                   TextSpan(
                                     text: " BAN",
-                                    style: AppStyles.textStyleTransactionUnit(context),
+                                    style: AppStyles.textStyleTransactionUnit(
+                                        context),
                                   ),
                                 ],
                               ),
@@ -880,11 +892,13 @@ class _AppHomePageState extends State<AppHomePage>
                               children: [
                                 TextSpan(
                                   text: amount,
-                                  style: AppStyles.textStyleTransactionAmount(context),
+                                  style: AppStyles.textStyleTransactionAmount(
+                                      context),
                                 ),
                                 TextSpan(
                                   text: " BAN",
-                                  style: AppStyles.textStyleTransactionUnit(context),
+                                  style: AppStyles.textStyleTransactionUnit(
+                                      context),
                                 ),
                               ],
                             ),
@@ -1062,7 +1076,9 @@ class _AppHomePageState extends State<AppHomePage>
                                   opacity: _opacityAnimation.value,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.text45,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .text45,
                                       borderRadius: BorderRadius.circular(100),
                                     ),
                                     child: Text(
@@ -1098,7 +1114,9 @@ class _AppHomePageState extends State<AppHomePage>
                                   opacity: _opacityAnimation.value,
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      color: StateContainer.of(context).curTheme.primary20,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .primary20,
                                       borderRadius: BorderRadius.circular(100),
                                     ),
                                     child: Text(
@@ -1144,7 +1162,9 @@ class _AppHomePageState extends State<AppHomePage>
                               opacity: _opacityAnimation.value,
                               child: Container(
                                 decoration: BoxDecoration(
-                                  color: StateContainer.of(context).curTheme.text20,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .text20,
                                   borderRadius: BorderRadius.circular(100),
                                 ),
                                 child: Text(
@@ -1206,7 +1226,8 @@ class _AppHomePageState extends State<AppHomePage>
                           borderRadius: BorderRadius.circular(50.0)),
                       padding: EdgeInsets.all(0.0),
                       child: Icon(AppIcons.settings,
-                          color: StateContainer.of(context).curTheme.text, size: 24)),
+                          color: StateContainer.of(context).curTheme.text,
+                          size: 24)),
                 ),
               ],
             ),
@@ -1224,7 +1245,9 @@ class _AppHomePageState extends State<AppHomePage>
                           child: Container(
                             width: 90,
                             height: 90,
-                            color: StateContainer.of(context).curTheme.backgroundDark,
+                            color: StateContainer.of(context)
+                                .curTheme
+                                .backgroundDark,
                           ),
                         ),
                         _monKey
@@ -1379,7 +1402,8 @@ class _AppHomePageState extends State<AppHomePage>
         } else if (_priceConversion == PriceConversion.NANO) {
           // Hide prices
           setState(() {
-            _convertedPriceStyle = AppStyles.textStyleCurrencyAltHidden(context);
+            _convertedPriceStyle =
+                AppStyles.textStyleCurrencyAltHidden(context);
             _priceConversion = PriceConversion.NONE;
           });
           SharedPrefsUtil.inst.setPriceConversion(PriceConversion.NONE);
@@ -1497,7 +1521,8 @@ class TransactionDetailsSheet {
                           // A row for Copy Address Button
                           Row(
                             children: <Widget>[
-                              AppButton.buildAppButton(context,
+                              AppButton.buildAppButton(
+                                  context,
                                   // Share Address Button
                                   _addressCopied
                                       ? AppButtonType.SUCCESS
@@ -1557,8 +1582,12 @@ class TransactionDetailsSheet {
                                           child: Icon(AppIcons.addcontact,
                                               size: 35,
                                               color: _addressCopied
-                                                  ? StateContainer.of(context).curTheme.successDark
-                                                  : StateContainer.of(context).curTheme.backgroundDark),
+                                                  ? StateContainer.of(context)
+                                                      .curTheme
+                                                      .successDark
+                                                  : StateContainer.of(context)
+                                                      .curTheme
+                                                      .backgroundDark),
                                         )
                                       : SizedBox(),
                                 ),
@@ -1570,7 +1599,8 @@ class TransactionDetailsSheet {
                       // A row for View Details button
                       Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(context, 
+                          AppButton.buildAppButton(
+                              context,
                               AppButtonType.PRIMARY_OUTLINE,
                               AppLocalization.of(context).viewDetails,
                               Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
