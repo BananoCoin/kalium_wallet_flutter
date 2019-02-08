@@ -45,4 +45,5 @@ class AppIcons {
   static const IconData bananocurrency = const IconData(0xe825, fontFamily: _kFontFam);
   static const IconData nanocurrency = const IconData(0xe826, fontFamily: _kFontFam);
   static const IconData timer = const IconData(0xe827, fontFamily: _kFontFam);
+  static const IconData theme = const IconData(0xe828, fontFamily: _kFontFam);
 }

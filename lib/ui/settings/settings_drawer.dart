@@ -845,7 +845,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                       context,
                       AppLocalization.of(context).themeHeader,
                       _curThemeSetting,
-                      AppIcons.currency,
+                      AppIcons.theme,
                       _themeDialog),
                   Divider(height: 2),
                   AppSettings.buildSettingsListItemSingleLine(context, 
