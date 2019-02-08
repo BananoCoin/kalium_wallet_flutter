@@ -42,17 +42,17 @@ class _AppState extends State<App> {
   @override
   void initState() {
     super.initState();
+  }
+
+  // This widget is the root of the application.
+  @override
+  Widget build(BuildContext context) {
     // Get theme
     SharedPrefsUtil.inst.getTheme().then((theme) {
       setState(() {
         StateContainer.of(context).updateTheme(theme);
       });
     });
-  }
-
-  // This widget is the root of the application.
-  @override
-  Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
         .copyWith(statusBarIconBrightness: Brightness.light, statusBarColor: Colors.transparent));
     return OKToast(
@@ -248,6 +248,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       StateContainer.of(context).curCurrency = currency;
     });
     return new Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: StateContainer.of(context).curTheme.background,
     );
   }

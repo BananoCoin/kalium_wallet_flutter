@@ -23,7 +23,8 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
         .copyWith(statusBarIconBrightness: Brightness.light, statusBarColor: Colors.transparent));
 
-    return new Scaffold(
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.background,
       body: LayoutBuilder(
