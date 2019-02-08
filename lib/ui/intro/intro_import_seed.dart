@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_nano_core/flutter_nano_core.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
@@ -22,10 +21,10 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
   var _seedInputFocusNode = new FocusNode();
   var _seedInputController = new TextEditingController();
   // State constants
-  static const _initialSeedTextStyle = AppStyles.TextStyleSeedGray;
-  static const _validSeedTextStyle = AppStyles.TextStyleSeed;
+  TextStyle _initialSeedTextStyle;
+  TextStyle _validSeedTextStyle;
   static const _initialErrorTextColor = Colors.transparent;
-  static const _hasErrorTextColor = AppColors.primary;
+  Color _hasErrorTextColor;
   // State variables
   var _seedTextStyle;
   var _errorTextColor;
@@ -33,10 +32,11 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      _seedTextStyle = _initialSeedTextStyle;
-      _errorTextColor = _initialErrorTextColor;      
-    });
+    _initialSeedTextStyle = AppStyles.textStyleSeedGray(context);
+    _validSeedTextStyle = AppStyles.textStyleSeed(context);
+    _hasErrorTextColor = StateContainer.of(context).curTheme.primary;
+    _seedTextStyle = _initialSeedTextStyle;
+    _errorTextColor = _initialErrorTextColor;      
   }
 
   @override
@@ -57,7 +57,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
       onWillPop:_onWillPop,
       child: new Scaffold(
         key: _scaffoldKey,
-        backgroundColor: AppColors.background,
+        backgroundColor: StateContainer.of(context).curTheme.background,
         body: LayoutBuilder(
           builder: (context, constraints) => Column(
                 children: <Widget>[
@@ -96,7 +96,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                                 BorderRadius.circular(50.0)),
                                         padding: EdgeInsets.all(0.0),
                                         child: Icon(AppIcons.back,
-                                            color: AppColors.text, size: 24)),
+                                            color: StateContainer.of(context).curTheme.text, size: 24)),
                                   ),
                                 ],
                               ),
@@ -106,7 +106,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 alignment: Alignment(-1, 0),
                                 child: Text(
                                   AppLocalization.of(context).importSeed,
-                                  style: AppStyles.TextStyleHeaderColored,
+                                  style: AppStyles.textStyleHeaderColored(context),
                                 ),
                               ),
                               // The paragraph
@@ -116,7 +116,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                     AppLocalization.of(context).importSeedHint,
-                                    style: AppStyles.TextStyleParagraph,
+                                    style: AppStyles.textStyleParagraph(context),
                                     textAlign: TextAlign.left,),
                               ),
                               // The container for the seed
@@ -124,7 +124,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 margin: EdgeInsets.only(left: 50, right: 50, top: 20),
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: AppColors.backgroundDark,
+                                  color: StateContainer.of(context).curTheme.backgroundDark,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 // Text Field for the seed
@@ -132,7 +132,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                   focusNode: _seedInputFocusNode,
                                   controller: _seedInputController,
                                   textAlign: TextAlign.center,
-                                  cursorColor: AppColors.primary,
+                                  cursorColor: StateContainer.of(context).curTheme.primary,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
                                   ],
@@ -153,7 +153,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                         height: 48,
                                         child: FlatButton(
                                           child: Icon(AppIcons.paste,
-                                              size: 20, color: AppColors.primary),
+                                              size: 20, color: StateContainer.of(context).curTheme.primary),
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(100.0)),
@@ -229,8 +229,8 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                         height: 50,
                         width: 50,
                         child: FlatButton(
-                            splashColor: AppColors.primary30,
-                            highlightColor: AppColors.primary15,
+                            splashColor: StateContainer.of(context).curTheme.primary30,
+                            highlightColor: StateContainer.of(context).curTheme.primary15,
                             onPressed: () {
                               _seedInputFocusNode.unfocus();
                               // If seed valid, log them in
@@ -255,7 +255,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 borderRadius: BorderRadius.circular(50.0)),
                             padding: EdgeInsets.all(0.0),
                             child: Icon(AppIcons.forward,
-                                color: AppColors.primary, size: 50)),
+                                color: StateContainer.of(context).curTheme.primary, size: 50)),
                       ),
                     ],
                   ),

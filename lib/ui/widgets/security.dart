@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:kalium_wallet_flutter/colors.dart';
+import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
@@ -29,7 +29,7 @@ class PinScreen extends StatefulWidget {
   final Color pinScreenBackgroundColor;
 
   PinScreen(this.type, this.pinSuccessCallback,
-      {this.description = "", this.expectedPin = "", this.pinScreenBackgroundColor = AppColors.backgroundDark});
+      {this.description = "", this.expectedPin = "", this.pinScreenBackgroundColor});
 
   @override
   _PinScreenState createState() =>
@@ -41,7 +41,11 @@ class _PinScreenState extends State<PinScreen>
   static const int MAX_ATTEMPTS = 5;
 
   _PinScreenState(
-      this.type, this.expectedPin, this.description, this.successCallback, this.pinScreenBackgroundColor);
+      this.type, this.expectedPin, this.description, this.successCallback, this.pinScreenBackgroundColor) {
+        if (this.pinScreenBackgroundColor == null) {
+          pinScreenBackgroundColor = StateContainer.of(context).curTheme.backgroundDark;
+        }
+  }
 
   PinOverlayType type;
   String expectedPin;
@@ -193,8 +197,8 @@ class _PinScreenState extends State<PinScreen>
       width: smallScreen(context) ? buttonSize - 15 : buttonSize,
       child: InkWell(
         borderRadius: BorderRadius.circular(200),
-        highlightColor: AppColors.primary15,
-        splashColor: AppColors.primary30,
+        highlightColor: StateContainer.of(context).curTheme.primary15,
+        splashColor: StateContainer.of(context).curTheme.primary30,
         onTap: () {},
         onTapDown: (details) {
           if (_controller.status == AnimationStatus.forward ||
@@ -242,7 +246,7 @@ class _PinScreenState extends State<PinScreen>
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20.0,
-              color: AppColors.primary,
+              color: StateContainer.of(context).curTheme.primary,
               fontFamily: 'NunitoSans',
               fontWeight: FontWeight.w700,
             ),
@@ -292,7 +296,7 @@ class _PinScreenState extends State<PinScreen>
                       margin: EdgeInsets.symmetric(horizontal: 40),
                       child: AutoSizeText(
                         _header,
-                        style: AppStyles.TextStylePinScreenHeaderColored,
+                        style: AppStyles.textStylePinScreenHeaderColored(context),
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         stepGranularity: 0.1,
@@ -304,7 +308,7 @@ class _PinScreenState extends State<PinScreen>
                           EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                       child: AutoSizeText(
                         description,
-                        style: AppStyles.TextStyleParagraph,
+                        style: AppStyles.textStyleParagraph(context),
                         textAlign: TextAlign.center,
                         maxLines: 1,
                         stepGranularity: 0.1,
@@ -324,32 +328,32 @@ class _PinScreenState extends State<PinScreen>
                         children: <Widget>[
                           Icon(
                             _dotStates[0],
-                            color: AppColors.primary,
+                            color: StateContainer.of(context).curTheme.primary,
                             size: 20.0,
                           ),
                           Icon(
                             _dotStates[1],
-                            color: AppColors.primary,
+                            color: StateContainer.of(context).curTheme.primary,
                             size: 20.0,
                           ),
                           Icon(
                             _dotStates[2],
-                            color: AppColors.primary,
+                            color: StateContainer.of(context).curTheme.primary,
                             size: 20.0,
                           ),
                           Icon(
                             _dotStates[3],
-                            color: AppColors.primary,
+                            color: StateContainer.of(context).curTheme.primary,
                             size: 20.0,
                           ),
                           Icon(
                             _dotStates[4],
-                            color: AppColors.primary,
+                            color: StateContainer.of(context).curTheme.primary,
                             size: 20.0,
                           ),
                           Icon(
                             _dotStates[5],
-                            color: AppColors.primary,
+                            color: StateContainer.of(context).curTheme.primary,
                             size: 20.0,
                           ),
                         ],
@@ -431,8 +435,8 @@ class _PinScreenState extends State<PinScreen>
                                   : buttonSize,
                               child: InkWell(
                                 borderRadius: BorderRadius.circular(200),
-                                highlightColor: AppColors.primary15,
-                                splashColor: AppColors.primary30,
+                                highlightColor: StateContainer.of(context).curTheme.primary15,
+                                splashColor: StateContainer.of(context).curTheme.primary30,
                                 onTap: () {},
                                 onTapDown: (details) {
                                   _backSpace();
@@ -440,7 +444,7 @@ class _PinScreenState extends State<PinScreen>
                                 child: Container(
                                   alignment: Alignment(0, 0),
                                   child: Icon(Icons.backspace,
-                                      color: AppColors.primary, size: 20.0),
+                                      color: StateContainer.of(context).curTheme.primary, size: 20.0),
                                 ),
                               ),
                             ),

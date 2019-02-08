@@ -8,7 +8,6 @@ import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
@@ -94,7 +93,7 @@ class AppReceiveSheet {
                           Navigator.pop(context);
                         },
                         child: Icon(AppIcons.close,
-                            size: 16, color: AppColors.text),
+                            size: 16, color: StateContainer.of(context).curTheme.text),
                         padding: EdgeInsets.all(17.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0)),
@@ -104,7 +103,7 @@ class AppReceiveSheet {
                     //Container for the address text
                     Container(
                       margin: EdgeInsets.only(top: 30.0),
-                      child: UIUtil.threeLineAddressText(_wallet.address,
+                      child: UIUtil.threeLineAddressText(context, _wallet.address,
                           type: ThreeLineAddressTextType.PRIMARY60),
                     ),
                     //Empty SizedBox
@@ -126,7 +125,7 @@ class AppReceiveSheet {
                           child: Container(
                             width: 260,
                             height: 150,
-                            color: AppColors.backgroundDark,
+                            color: StateContainer.of(context).curTheme.backgroundDark,
                           ),
                         ),
                         // Background/border part the monkeyQR
@@ -153,7 +152,7 @@ class AppReceiveSheet {
                   children: <Widget>[
                     Row(
                       children: <Widget>[
-                        AppButton.buildAppButton(
+                        AppButton.buildAppButton(context, 
                           // Share Address Button
                           _addressCopied ? AppButtonType.SUCCESS : AppButtonType.PRIMARY,
                           _addressCopied ? AppLocalization.of(context).addressCopied : AppLocalization.of(context).copyAddress,
@@ -180,7 +179,7 @@ class AppReceiveSheet {
                     ),
                     Row(
                       children: <Widget>[
-                        AppButton.buildAppButton(
+                        AppButton.buildAppButton(context, 
                             // Share Address Button
                             AppButtonType.PRIMARY_OUTLINE,
                             _showShareCard ? "Loading" : AppLocalization.of(context).addressShare,
@@ -188,40 +187,28 @@ class AppReceiveSheet {
                             disabled: _showShareCard, onPressed: () {
                           String receiveCardFileName = "share_${StateContainer.of(context).wallet.address}.png";
                           getApplicationDocumentsDirectory().then((directory) {
-                            bool doCapture = true;
                             String filePath = "${directory.path}/$receiveCardFileName";
                             File f = File(filePath);
-                            if (f.existsSync()) {
-                              try {
-                                UIUtil.cancelLockEvent();
-                                Share.shareFile(f, text: StateContainer.of(context).wallet.address);
-                                doCapture = false;
-                              } catch (e) {
-                                doCapture = true;
-                              }
-                            }
-                            if (doCapture) {
-                              setState(() {
-                                _showShareCard = true;
-                              });
-                              Future.delayed(new Duration(milliseconds: 300), () {
-                                if (_showShareCard) {
-                                  _capturePng().then((byteData) {
-                                    if (byteData != null) {
-                                      f.writeAsBytes(byteData).then((file) {
-                                        UIUtil.cancelLockEvent();
-                                        Share.shareFile(file, text: StateContainer.of(context).wallet.address);
-                                      });
-                                    } else {
-                                      // TODO - show a something went wrong message
-                                    }
-                                    setState(() {
-                                      _showShareCard = false;
+                            setState(() {
+                              _showShareCard = true;
+                            });
+                            Future.delayed(new Duration(milliseconds: 300), () {
+                              if (_showShareCard) {
+                                _capturePng().then((byteData) {
+                                  if (byteData != null) {
+                                    f.writeAsBytes(byteData).then((file) {
+                                      UIUtil.cancelLockEvent();
+                                      Share.shareFile(file, text: StateContainer.of(context).wallet.address);
                                     });
+                                  } else {
+                                    // TODO - show a something went wrong message
+                                  }
+                                  setState(() {
+                                    _showShareCard = false;
                                   });
-                                }
-                              });
-                            }
+                                });
+                              }
+                            });
                           });
                         }),
                       ],

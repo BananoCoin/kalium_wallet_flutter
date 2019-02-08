@@ -6,7 +6,6 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:intl/intl.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
@@ -49,12 +48,31 @@ class AppSendSheet {
   String _lastCryptoAmount = "";
   NumberFormat _localCurrencyFormat;
 
-  AppSendSheet({Contact contact, String address}) {
+  Contact contact;
+  String address;
+
+  AppSendSheet({this.contact, this.address});
+
+  // A method for deciding if 1 or 3 line address text should be used
+  _oneOrthreeLineAddressText(BuildContext context) {
+    if (MediaQuery.of(context).size.height < 667)
+      return UIUtil.oneLineAddressText(context, 
+        StateContainer.of(context).wallet.address,
+        type: OneLineAddressTextType.PRIMARY60,
+      );
+    else
+      return UIUtil.threeLineAddressText(context, 
+        StateContainer.of(context).wallet.address,
+        type: ThreeLineAddressTextType.PRIMARY60,
+      );
+  }
+
+  mainBottomSheet(BuildContext context) {
     _sendAmountFocusNode = new FocusNode();
     _sendAddressFocusNode = new FocusNode();
     _sendAmountController = new TextEditingController();
     _sendAddressController = new TextEditingController();
-    _sendAddressStyle = AppStyles.TextStyleAddressText60;
+    _sendAddressStyle = AppStyles.textStyleAddressText60(context);
     _contacts = List();
     if (contact != null) {
       // Setup initial state for contact pre-filled
@@ -62,32 +80,15 @@ class AppSendSheet {
       _isContact = true;
       _showContactButton = false;
       _pasteButtonVisible = false;
-      _sendAddressStyle = AppStyles.TextStyleAddressPrimary;
+      _sendAddressStyle = AppStyles.textStyleAddressPrimary(context);
     } else if (address != null) {
       // Setup initial state with prefilled address
       _sendAddressController.text = address;
       _showContactButton = false;
       _pasteButtonVisible = false;
-      _sendAddressStyle = AppStyles.TextStyleAddressText90;
+      _sendAddressStyle = AppStyles.textStyleAddressText90(context);
       _addressValidAndUnfocused = true;
     }
-  }
-
-  // A method for deciding if 1 or 3 line address text should be used
-  _oneOrThreeLineAddressText(BuildContext context) {
-    if (MediaQuery.of(context).size.height < 667)
-      return UIUtil.oneLineAddressText(
-        StateContainer.of(context).wallet.address,
-        type: OneLineAddressTextType.PRIMARY60,
-      );
-    else
-      return UIUtil.threeLineAddressText(
-        StateContainer.of(context).wallet.address,
-        type: ThreeLineAddressTextType.PRIMARY60,
-      );
-  }
-
-  mainBottomSheet(BuildContext context) {
     _amountHint = AppLocalization.of(context).enterAmount;
     _addressHint = AppLocalization.of(context).addressHint;
     String locale = StateContainer.of(context).currencyLocale;
@@ -171,7 +172,7 @@ class AppSendSheet {
                           Navigator.pop(context);
                         },
                         child: Icon(AppIcons.close,
-                            size: 16, color: AppColors.text),
+                            size: 16, color: StateContainer.of(context).curTheme.text),
                         padding: EdgeInsets.all(17.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0)),
@@ -198,7 +199,7 @@ class AppSendSheet {
                           // Address Text
                           Container(
                             margin: EdgeInsets.only(top: 10.0),
-                            child: _oneOrThreeLineAddressText(context),
+                            child: _oneOrthreeLineAddressText(context),
                           ),
                         ],
                       ),
@@ -247,7 +248,7 @@ class AppSendSheet {
                                             TextSpan(
                                               text: "(",
                                               style: TextStyle(
-                                                color: AppColors.primary60,
+                                                color: StateContainer.of(context).curTheme.primary60,
                                                 fontSize: 14.0,
                                                 fontWeight: FontWeight.w100,
                                                 fontFamily: 'NunitoSans',
@@ -263,7 +264,7 @@ class AppSendSheet {
                                                     .wallet
                                                     .getAccountBalanceDisplay(),
                                               style: TextStyle(
-                                                color: AppColors.primary60,
+                                                color: StateContainer.of(context).curTheme.primary60,
                                                 fontSize: 14.0,
                                                 fontWeight: FontWeight.w700,
                                                 fontFamily: 'NunitoSans',
@@ -272,7 +273,7 @@ class AppSendSheet {
                                             TextSpan(
                                               text: _localCurrencyMode ? ")" : " BAN)",
                                               style: TextStyle(
-                                                color: AppColors.primary60,
+                                                color: StateContainer.of(context).curTheme.primary60,
                                                 fontSize: 14.0,
                                                 fontWeight: FontWeight.w100,
                                                 fontFamily: 'NunitoSans',
@@ -293,7 +294,7 @@ class AppSendSheet {
                                       child: Text(_amountValidationText,
                                           style: TextStyle(
                                             fontSize: 14.0,
-                                            color: AppColors.primary,
+                                            color: StateContainer.of(context).curTheme.primary,
                                             fontFamily: 'NunitoSans',
                                             fontWeight: FontWeight.w600,
                                           )),
@@ -332,7 +333,7 @@ class AppSendSheet {
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(25),
-                                                  color: AppColors
+                                                  color: StateContainer.of(context).curTheme
                                                       .backgroundDarkest,
                                                 ),
                                                 child: Container(
@@ -377,7 +378,7 @@ class AppSendSheet {
                                       child: Text(_addressValidationText,
                                           style: TextStyle(
                                             fontSize: 14.0,
-                                            color: AppColors.primary,
+                                            color: StateContainer.of(context).curTheme.primary,
                                             fontFamily: 'NunitoSans',
                                             fontWeight: FontWeight.w600,
                                           )),
@@ -401,7 +402,7 @@ class AppSendSheet {
                       Row(
                         children: <Widget>[
                           // Send Button
-                          AppButton.buildAppButton(
+                          AppButton.buildAppButton(context, 
                               AppButtonType.PRIMARY,
                               AppLocalization.of(context).send,
                               Dimens.BUTTON_TOP_DIMENS, onPressed: () {
@@ -443,7 +444,7 @@ class AppSendSheet {
                       Row(
                         children: <Widget>[
                           // Scan QR Code Button
-                          AppButton.buildAppButton(
+                          AppButton.buildAppButton(context, 
                               AppButtonType.PRIMARY_OUTLINE,
                               AppLocalization.of(context).scanQrCode,
                               Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
@@ -465,7 +466,7 @@ class AppSendSheet {
                                         _isContact = false;
                                         _addressValidationText = "";
                                         _sendAddressStyle =
-                                            AppStyles.TextStyleAddressText90;
+                                            AppStyles.textStyleAddressText90(context);
                                         _pasteButtonVisible = false;
                                         _showContactButton = false;
                                       });
@@ -481,7 +482,7 @@ class AppSendSheet {
                                         _isContact = true;
                                         _addressValidationText = "";
                                         _sendAddressStyle = AppStyles
-                                            .TextStyleAddressPrimary;
+                                            .textStyleAddressPrimary(context);
                                         _pasteButtonVisible = false;
                                         _showContactButton = false;
                                       });
@@ -644,18 +645,18 @@ class AppSendSheet {
                 _isContact = true;
                 _showContactButton = false;
                 _pasteButtonVisible = false;
-                _sendAddressStyle = AppStyles.TextStyleAddressPrimary;
+                _sendAddressStyle = AppStyles.textStyleAddressPrimary(context);
               });
             },
             child: Text(contact.name,
                 textAlign: TextAlign.center,
-                style: AppStyles.TextStyleAddressPrimary),
+                style: AppStyles.textStyleAddressPrimary(context)),
           ),
         ),
         Container(
           margin: EdgeInsets.symmetric(horizontal: 25),
           height: 1,
-          color: AppColors.text03,
+          color: StateContainer.of(context).curTheme.text03,
         ),
       ],
     );
@@ -726,14 +727,14 @@ class AppSendSheet {
       ),
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.backgroundDarkest,
+        color: StateContainer.of(context).curTheme.backgroundDarkest,
         borderRadius: BorderRadius.circular(25),
       ),
       // Amount Text Field
       child: TextField(
         focusNode: _sendAmountFocusNode,
         controller: _sendAmountController,
-        cursorColor: AppColors.primary,
+        cursorColor: StateContainer.of(context).curTheme.primary,
         inputFormatters: [
           LengthLimitingTextInputFormatter(13),
           _localCurrencyMode ?
@@ -763,13 +764,13 @@ class AppSendSheet {
               height: 48,
               child: FlatButton(
                 padding: EdgeInsets.all(14.0),
-                highlightColor: AppColors.primary15,
-                splashColor: AppColors.primary30,
+                highlightColor: StateContainer.of(context).curTheme.primary15,
+                splashColor: StateContainer.of(context).curTheme.primary30,
                 onPressed: () {
                   toggleLocalCurrency(context, setState);
                 },
                 child: Icon(AppIcons.swapcurrency,
-                    size: 20, color: AppColors.primary),
+                    size: 20, color: StateContainer.of(context).curTheme.primary),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(200.0)),
               ),
@@ -780,8 +781,8 @@ class AppSendSheet {
               width: 48,
               height: 48,
               child: FlatButton(
-                highlightColor: AppColors.primary15, 
-                splashColor: AppColors.primary30,
+                highlightColor: StateContainer.of(context).curTheme.primary15, 
+                splashColor: StateContainer.of(context).curTheme.primary30,
                 padding: EdgeInsets.all(12.0),
                 onPressed: () {
                   if (_isMaxSend(context)) {
@@ -809,7 +810,7 @@ class AppSendSheet {
                   }
                 },
                 child: Icon(AppIcons.max,
-                    size: 24, color: AppColors.primary),
+                    size: 24, color: StateContainer.of(context).curTheme.primary),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(200.0)),
               ),
@@ -825,7 +826,7 @@ class AppSendSheet {
         style: TextStyle(
           fontWeight: FontWeight.w700,
           fontSize: 16.0,
-          color: AppColors.primary,
+          color: StateContainer.of(context).curTheme.primary,
           fontFamily: 'NunitoSans',
         ),
         onSubmitted: (text) {
@@ -852,7 +853,7 @@ class AppSendSheet {
           : EdgeInsets.zero,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: AppColors.backgroundDarkest,
+        color: StateContainer.of(context).curTheme.backgroundDarkest,
         borderRadius: BorderRadius.circular(25),
       ),
       // Enter Address Text field
@@ -862,7 +863,7 @@ class AppSendSheet {
                   _isContact && false ? TextAlign.left : TextAlign.center,
               focusNode: _sendAddressFocusNode,
               controller: _sendAddressController,
-              cursorColor: AppColors.primary,
+              cursorColor: StateContainer.of(context).curTheme.primary,
               keyboardAppearance: Brightness.dark,
               inputFormatters: [
                 _isContact
@@ -886,8 +887,8 @@ class AppSendSheet {
                     width: 48.0,
                     height: 48.0,
                     child: FlatButton(
-                      highlightColor: AppColors.primary15,
-                      splashColor: AppColors.primary30,
+                      highlightColor: StateContainer.of(context).curTheme.primary15,
+                      splashColor: StateContainer.of(context).curTheme.primary30,
                       padding: EdgeInsets.all(14.0),
                       onPressed: () {
                         if (_showContactButton && _contacts.length == 0) {
@@ -909,7 +910,7 @@ class AppSendSheet {
                         }
                       },
                       child: Icon(AppIcons.at,
-                          size: 20, color: AppColors.primary),
+                          size: 20, color: StateContainer.of(context).curTheme.primary),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(200.0)),
                     ),
@@ -926,8 +927,8 @@ class AppSendSheet {
                     width: 48.0,
                     height: 48.0,
                     child: FlatButton(
-                      highlightColor: AppColors.primary15,
-                      splashColor: AppColors.primary30,
+                      highlightColor: StateContainer.of(context).curTheme.primary15,
+                      splashColor: StateContainer.of(context).curTheme.primary30,
                       padding: EdgeInsets.all(14.0),
                       onPressed: () {
                         if (!_pasteButtonVisible) {
@@ -948,7 +949,7 @@ class AppSendSheet {
                                   _isContact = false;
                                   _addressValidationText = "";
                                   _sendAddressStyle =
-                                      AppStyles.TextStyleAddressText90;
+                                      AppStyles.textStyleAddressText90(context);
                                   _pasteButtonVisible = false;
                                   _showContactButton = false;
                                 });
@@ -963,7 +964,7 @@ class AppSendSheet {
                                   _isContact = true;
                                   _addressValidationText = "";
                                   _sendAddressStyle =
-                                      AppStyles.TextStyleAddressPrimary;
+                                      AppStyles.textStyleAddressPrimary(context);
                                   _pasteButtonVisible = false;
                                   _showContactButton = false;
                                 });
@@ -974,7 +975,7 @@ class AppSendSheet {
                         });
                       },
                       child: Icon(AppIcons.paste,
-                          size: 20, color: AppColors.primary),
+                          size: 20, color: StateContainer.of(context).curTheme.primary),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(200.0)),
                     ),
@@ -1020,26 +1021,26 @@ class AppSendSheet {
                 if (!isContact && Address(text).isValid()) {
                   _sendAddressFocusNode.unfocus();
                   setState(() {
-                    _sendAddressStyle = AppStyles.TextStyleAddressText90;
+                    _sendAddressStyle = AppStyles.textStyleAddressText90(context);
                     _addressValidationText = "";
                     _pasteButtonVisible = false;
                   });
                 } else if (!isContact) {
                   setState(() {
-                    _sendAddressStyle = AppStyles.TextStyleAddressText60;
+                    _sendAddressStyle = AppStyles.textStyleAddressText60(context);
                     _pasteButtonVisible = true;
                   });
                 } else {
                   DBHelper().getContactWithName(text).then((contact) {
                     if (contact == null) {
                       setState(() {
-                        _sendAddressStyle = AppStyles.TextStyleAddressText60;
+                        _sendAddressStyle = AppStyles.textStyleAddressText60(context);
                       });
                     } else {
                       setState(() {
                         _pasteButtonVisible = false;
                         _sendAddressStyle =
-                            AppStyles.TextStyleAddressPrimary;
+                            AppStyles.textStyleAddressPrimary(context);
                       });
                     }
                   });
@@ -1055,7 +1056,7 @@ class AppSendSheet {
                   FocusScope.of(context).requestFocus(_sendAddressFocusNode);
                 });
               },
-              child: UIUtil.threeLineAddressText(_sendAddressController.text),
+              child: UIUtil.threeLineAddressText(context, _sendAddressController.text),
             ),
     );
   } //************ Enter Address Container Method End ************//

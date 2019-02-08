@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:qr/qr.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -35,7 +33,7 @@ class _AppShareCardState extends State<AppShareCard> {
         height: 125,
         width: 241,
         decoration: BoxDecoration(
-          color: AppColors.backgroundDark,
+          color: StateContainer.of(context).curTheme.backgroundDark,
           borderRadius: BorderRadius.circular(12.5),
         ),
         child: Container(
@@ -104,7 +102,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                   .address
                                   .substring(0, 11),
                               style: TextStyle(
-                                color: AppColors.primary,
+                                color: StateContainer.of(context).curTheme.primary,
                                 fontFamily: "OverpassMono",
                                 fontWeight: FontWeight.w100,
                               ),
@@ -124,7 +122,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               minFontSize: 1.0,
                               stepGranularity: 0.1,
                               style: TextStyle(
-                                color: AppColors.text,
+                                color: StateContainer.of(context).curTheme.text,
                                 fontFamily: "OverpassMono",
                                 fontWeight: FontWeight.w100,
                               ),
@@ -144,7 +142,7 @@ class _AppShareCardState extends State<AppShareCard> {
                           minFontSize: 1.0,
                           stepGranularity: 0.1,
                           style: TextStyle(
-                            color: AppColors.text,
+                            color: StateContainer.of(context).curTheme.text,
                             fontFamily: "OverpassMono",
                             fontWeight: FontWeight.w100,
                           ),
@@ -162,7 +160,7 @@ class _AppShareCardState extends State<AppShareCard> {
                           minFontSize: 1.0,
                           stepGranularity: 0.1,
                           style: TextStyle(
-                            color: AppColors.text,
+                            color: StateContainer.of(context).curTheme.text,
                             fontFamily: "OverpassMono",
                             fontWeight: FontWeight.w100,
                           ),
@@ -183,7 +181,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               minFontSize: 1.0,
                               stepGranularity: 0.1,
                               style: TextStyle(
-                                color: AppColors.text,
+                                color: StateContainer.of(context).curTheme.text,
                                 fontFamily: "OverpassMono",
                                 fontWeight: FontWeight.w100,
                               ),
@@ -201,7 +199,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               minFontSize: 1.0,
                               stepGranularity: 0.1,
                               style: TextStyle(
-                                color: AppColors.primary,
+                                color: StateContainer.of(context).curTheme.primary,
                                 fontFamily: "OverpassMono",
                                 fontWeight: FontWeight.w100,
                               ),
@@ -220,7 +218,7 @@ class _AppShareCardState extends State<AppShareCard> {
                       minFontSize: 1.0,
                       stepGranularity: 0.1,
                       style: TextStyle(
-                        color: AppColors.primary,
+                        color: StateContainer.of(context).curTheme.primary,
                         fontFamily: "NunitoSans",
                         fontWeight: FontWeight.w600,
                       ),

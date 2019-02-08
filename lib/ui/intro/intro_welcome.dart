@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
+import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
@@ -21,7 +21,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
         .copyWith(statusBarIconBrightness: Brightness.light, statusBarColor: Colors.transparent));
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: AppColors.background,
+      backgroundColor: StateContainer.of(context).curTheme.background,
       body: LayoutBuilder(
         builder: (context, constraints) => Column(
               children: <Widget>[
@@ -48,7 +48,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                               horizontal: 50, vertical: 20),
                           child: Text(
                             AppLocalization.of(context).welcomeText,
-                            style: AppStyles.TextStyleParagraph,
+                            style: AppStyles.textStyleParagraph(context),
                           ),
                         ),
                       ],
@@ -62,7 +62,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                     Row(
                       children: <Widget>[
                         // New Wallet Button
-                        AppButton.buildAppButton(
+                        AppButton.buildAppButton(context, 
                             AppButtonType.PRIMARY,
                             AppLocalization.of(context).newWallet,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {
@@ -73,7 +73,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                     Row(
                       children: <Widget>[
                         // Import Wallet Button
-                        AppButton.buildAppButton(
+                        AppButton.buildAppButton(context, 
                             AppButtonType.PRIMARY_OUTLINE,
                             AppLocalization.of(context).importWallet,
                             Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {

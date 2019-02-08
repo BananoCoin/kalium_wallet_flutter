@@ -7,7 +7,6 @@ import 'package:barcode_scan/barcode_scan.dart';
 import 'package:event_taxi/event_taxi.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
@@ -45,7 +44,6 @@ class AppChangeRepresentativeSheet {
   AppChangeRepresentativeSheet() {
     _repFocusNode = new FocusNode();
     _repController = new TextEditingController();
-    _repAddressStyle = AppStyles.TextStyleAddressText60;
   }
 
   StreamSubscription<RepChangedEvent> _repChangeSub;
@@ -59,7 +57,7 @@ class AppChangeRepresentativeSheet {
 
   mainBottomSheet(BuildContext context) {
     _changeRepHint = AppLocalization.of(context).changeRepHint;
-
+    _repAddressStyle = AppStyles.textStyleAddressText60(context);
     _repChangeSub = EventTaxiImpl.singleton().registerTo<RepChangedEvent>().listen((event) {
       if (event.previous != null) {
         StateContainer.of(context).wallet.representative =
@@ -118,7 +116,7 @@ class AppChangeRepresentativeSheet {
                                 AppLocalization.of(context).repInfo);
                           },
                           child: Icon(AppIcons.info,
-                              size: 24, color: AppColors.text),
+                              size: 24, color: StateContainer.of(context).curTheme.text),
                           padding: EdgeInsets.all(13.0),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100.0)),
@@ -163,7 +161,7 @@ class AppChangeRepresentativeSheet {
                                   _showPasteButton = false;
                                   _repAddressStyle =
                                       AppStyles
-                                          .TextStyleAddressText90;
+                                          .textStyleAddressText60(context);
                                 });
                                 _repController.text =
                                     address.address;
@@ -174,7 +172,7 @@ class AppChangeRepresentativeSheet {
                             });
                           },
                           child: Icon(AppIcons.scan,
-                              size: 28, color: AppColors.text),
+                              size: 28, color: StateContainer.of(context).curTheme.text),
                           padding: EdgeInsets.all(11.0),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100.0)),
@@ -213,7 +211,7 @@ class AppChangeRepresentativeSheet {
                                 child: Text(
                                   AppLocalization.of(context)
                                       .currentlyRepresented,
-                                  style: AppStyles.TextStyleParagraph,
+                                  style: AppStyles.textStyleParagraph(context),
                                 )),
                             Container(
                               width: double.infinity,
@@ -226,10 +224,10 @@ class AppChangeRepresentativeSheet {
                               padding: EdgeInsets.symmetric(
                                   horizontal: 25.0, vertical: 15.0),
                               decoration: BoxDecoration(
-                                color: AppColors.backgroundDarkest,
+                                color: StateContainer.of(context).curTheme.backgroundDarkest,
                                 borderRadius: BorderRadius.circular(25),
                               ),
-                              child: UIUtil.threeLineAddressText(
+                              child: UIUtil.threeLineAddressText(context,
                                   StateContainer.of(context)
                                       .wallet
                                       .representative),
@@ -247,7 +245,7 @@ class AppChangeRepresentativeSheet {
                                       horizontal: 25.0, vertical: 15.0)
                                   : EdgeInsets.zero,
                               decoration: BoxDecoration(
-                                color: AppColors.backgroundDarkest,
+                                color: StateContainer.of(context).curTheme.backgroundDarkest,
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child: !_addressValidAndUnfocused
@@ -255,7 +253,7 @@ class AppChangeRepresentativeSheet {
                                       focusNode: _repFocusNode,
                                       controller: _repController,
                                       textAlign: TextAlign.center,
-                                      cursorColor: AppColors.primary,
+                                      cursorColor: StateContainer.of(context).curTheme.primary,
                                       inputFormatters: [
                                         LengthLimitingTextInputFormatter(64),
                                       ],
@@ -296,7 +294,7 @@ class AppChangeRepresentativeSheet {
                                                       _showPasteButton = false;
                                                       _repAddressStyle =
                                                           AppStyles
-                                                              .TextStyleAddressText90;
+                                                              .textStyleAddressText90(context);
                                                     });
                                                     _repController.text =
                                                         address.address;
@@ -306,7 +304,7 @@ class AppChangeRepresentativeSheet {
                                               },
                                               child: Icon(AppIcons.paste,
                                                   size: 20.0,
-                                                  color: AppColors.primary),
+                                                  color: StateContainer.of(context).curTheme.primary),
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -334,13 +332,13 @@ class AppChangeRepresentativeSheet {
                                           setState(() {
                                             _showPasteButton = false;
                                             _repAddressStyle = AppStyles
-                                                .TextStyleAddressText90;
+                                                .textStyleAddressText90(context);
                                           });
                                         } else {
                                           setState(() {
                                             _showPasteButton = true;
                                             _repAddressStyle = AppStyles
-                                                .TextStyleAddressText60;
+                                                .textStyleAddressText60(context);
                                           });
                                         }
                                       },
@@ -356,7 +354,7 @@ class AppChangeRepresentativeSheet {
                                               .requestFocus(_repFocusNode);
                                         });
                                       },
-                                      child: UIUtil.threeLineAddressText(
+                                      child: UIUtil.threeLineAddressText(context,
                                           _repController.text),
                                     ),
                             ),
@@ -371,7 +369,7 @@ class AppChangeRepresentativeSheet {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(
+                          AppButton.buildAppButton(context, 
                             AppButtonType.PRIMARY,
                             AppLocalization.of(context)
                                 .changeRepButton
@@ -496,7 +494,7 @@ class AppChangeRepresentativeSheet {
                       ),
                       Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(
+                          AppButton.buildAppButton(context, 
                             AppButtonType.PRIMARY_OUTLINE,
                             CaseChange.toUpperCase(AppLocalization.of(context).close, context),
                             Dimens.BUTTON_BOTTOM_DIMENS,

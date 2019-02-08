@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_nano_core/flutter_nano_core.dart';
+import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
@@ -19,17 +19,20 @@ class AppTransferManualEntrySheet {
   var _seedInputFocusNode = new FocusNode();
   var _seedInputController = new TextEditingController();
   // State constants
-  static const _initialSeedTextStyle = AppStyles.TextStyleSeedGray;
-  static const _validSeedTextStyle = AppStyles.TextStyleSeed;
+  TextStyle _initialSeedTextStyle;
+  TextStyle _validSeedTextStyle;
   static const _initialErrorTextColor = Colors.transparent;
-  static const _hasErrorTextColor = AppColors.primary;
+  Color _hasErrorTextColor;
   // State variables
   var _seedTextStyle;
   var _errorTextColor;
 
   mainBottomSheet(BuildContext context) {
     _seedTextStyle = _initialSeedTextStyle;
-    _errorTextColor = _initialErrorTextColor;     
+    _errorTextColor = _initialErrorTextColor;
+    _hasErrorTextColor = StateContainer.of(context).curTheme.primary;
+    _initialSeedTextStyle = AppStyles.textStyleSeedGray(context);
+    _validSeedTextStyle = AppStyles.textStyleSeed(context);
     AppSheets.showAppHeightNineSheet(
         context: context,
         builder: (BuildContext context) {
@@ -78,7 +81,7 @@ class AppTransferManualEntrySheet {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                     AppLocalization.of(context).transferManualHint,
-                                    style: AppStyles.TextStyleParagraph,
+                                    style: AppStyles.textStyleParagraph(context),
                                     textAlign: TextAlign.left,),
                               ),
                               // The container for the seed
@@ -89,7 +92,7 @@ class AppTransferManualEntrySheet {
                                                     0.105,),
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: AppColors.backgroundDarkest,
+                                  color: StateContainer.of(context).curTheme.backgroundDarkest,
                                   borderRadius: BorderRadius.circular(25),
                                 ),
                                 // Text Field for the seed
@@ -97,7 +100,7 @@ class AppTransferManualEntrySheet {
                                   focusNode: _seedInputFocusNode,
                                   controller: _seedInputController,
                                   textAlign: TextAlign.center,
-                                  cursorColor: AppColors.primary,
+                                  cursorColor: StateContainer.of(context).curTheme.primary,
                                   inputFormatters: [
                                     LengthLimitingTextInputFormatter(64),
                                   ],
@@ -118,7 +121,7 @@ class AppTransferManualEntrySheet {
                                         height: 48,
                                         child: FlatButton(
                                           child: Icon(AppIcons.paste,
-                                              size: 20, color: AppColors.primary),
+                                              size: 20, color: StateContainer.of(context).curTheme.primary),
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(100.0)),
@@ -191,7 +194,7 @@ class AppTransferManualEntrySheet {
 
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
+                      AppButton.buildAppButton(context, 
                         AppButtonType.PRIMARY,
                         AppLocalization.of(context).transfer,
                         Dimens.BUTTON_TOP_DIMENS,
@@ -200,7 +203,7 @@ class AppTransferManualEntrySheet {
                             validSeedCallback(_seedInputController.text);
                           } else {
                             setState(() {
-                              _errorTextColor = AppColors.primary;
+                              _errorTextColor = StateContainer.of(context).curTheme.primary;
                             });
                           }
                         },
@@ -210,7 +213,7 @@ class AppTransferManualEntrySheet {
 
                   Row(
                     children: <Widget>[
-                      AppButton.buildAppButton(
+                      AppButton.buildAppButton(context, 
                         AppButtonType.PRIMARY_OUTLINE,
                         AppLocalization.of(context).cancel,
                         Dimens.BUTTON_BOTTOM_DIMENS,

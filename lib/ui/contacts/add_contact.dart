@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:event_taxi/event_taxi.dart';
 
-import 'package:kalium_wallet_flutter/colors.dart';
+import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
@@ -150,7 +150,7 @@ class AddContactSheet {
                             }
                         },
                         child: Icon(AppIcons.scan,
-                            size: 28, color: AppColors.text),
+                            size: 28, color: StateContainer.of(context).curTheme.text),
                         padding: EdgeInsets.all(11.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0)),
@@ -188,14 +188,14 @@ class AddContactSheet {
                               padding: EdgeInsets.symmetric(horizontal: 30),
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: AppColors.backgroundDarkest,
+                                color: StateContainer.of(context).curTheme.backgroundDarkest,
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               // Enter Name text field
                               child: TextField(
                                 focusNode: _nameFocusNode,
                                 controller: _nameController,
-                                cursorColor: AppColors.primary,
+                                cursorColor: StateContainer.of(context).curTheme.primary,
                                 textInputAction: address != null ? TextInputAction.done : TextInputAction.next,
                                 maxLines: null,
                                 autocorrect: false,
@@ -212,7 +212,7 @@ class AddContactSheet {
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.0,
-                                  color: AppColors.text,
+                                  color: StateContainer.of(context).curTheme.text,
                                   fontFamily: 'NunitoSans',
                                 ),
                                 inputFormatters: [
@@ -238,7 +238,7 @@ class AddContactSheet {
                               child: Text(_nameValidationText,
                                   style: TextStyle(
                                     fontSize: 14.0,
-                                    color: AppColors.primary,
+                                    color: StateContainer.of(context).curTheme.primary,
                                     fontFamily: 'NunitoSans',
                                     fontWeight: FontWeight.w600,
                                   )),
@@ -252,16 +252,16 @@ class AddContactSheet {
                                     horizontal: 25.0, vertical: 15.0) : EdgeInsets.zero,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                color: AppColors.backgroundDarkest,
+                                color: StateContainer.of(context).curTheme.backgroundDarkest,
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               // Enter Address text field
                               child: _shouldShowTextField() ? TextField(
                                 focusNode: _addressFocusNode,
                                 controller: _addressController,
-                                style: _addressValid ? AppStyles.TextStyleAddressText90 : AppStyles.TextStyleAddressText60,
+                                style: _addressValid ? AppStyles.textStyleAddressText90(context) : AppStyles.textStyleAddressText60(context),
                                 textAlign: TextAlign.center,
-                                cursorColor: AppColors.primary,
+                                cursorColor: StateContainer.of(context).curTheme.primary,
                                 keyboardAppearance: Brightness.dark,
                                 inputFormatters: [
                                   LengthLimitingTextInputFormatter(64),
@@ -287,8 +287,8 @@ class AddContactSheet {
                                     firstChild: Container(
                                         width: 48,
                                         child: FlatButton(
-                                          highlightColor: AppColors.primary15,
-                                          splashColor: AppColors.primary30,
+                                          highlightColor: StateContainer.of(context).curTheme.primary15,
+                                          splashColor: StateContainer.of(context).curTheme.primary30,
                                           padding: EdgeInsets.all(14.0),
                                           onPressed: () {
                                             if (!_showPasteButton) {
@@ -318,7 +318,7 @@ class AddContactSheet {
                                             });
                                           },
                                           child: Icon(AppIcons.paste,
-                                              size: 20, color: AppColors.primary),
+                                              size: 20, color: StateContainer.of(context).curTheme.primary),
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(200.0)),
@@ -358,7 +358,7 @@ class AddContactSheet {
                                     FocusScope.of(context).requestFocus(_addressFocusNode);
                                   });
                                 },
-                                child: UIUtil.threeLineAddressText(address != null ? address : _addressController.text)
+                                child: UIUtil.threeLineAddressText(context, address != null ? address : _addressController.text)
                               ),
                             ),
                             // Enter Address Error Container
@@ -367,7 +367,7 @@ class AddContactSheet {
                               child: Text(_addressValidationText,
                                   style: TextStyle(
                                     fontSize: 14.0,
-                                    color: AppColors.primary,
+                                    color: StateContainer.of(context).curTheme.primary,
                                     fontFamily: 'NunitoSans',
                                     fontWeight: FontWeight.w600,
                                   )),
@@ -386,7 +386,7 @@ class AddContactSheet {
                       Row(
                         children: <Widget>[
                           // Add Contact Button
-                          AppButton.buildAppButton(
+                          AppButton.buildAppButton(context, 
                               AppButtonType.PRIMARY,
                               AppLocalization.of(context).addContact,
                               Dimens.BUTTON_TOP_DIMENS, onPressed: () {
@@ -411,7 +411,7 @@ class AddContactSheet {
                       Row(
                         children: <Widget>[
                           // Close Button
-                          AppButton.buildAppButton(
+                          AppButton.buildAppButton(context, 
                               AppButtonType.PRIMARY_OUTLINE,
                               AppLocalization.of(context).close,
                               Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {

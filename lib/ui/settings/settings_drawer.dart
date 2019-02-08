@@ -12,7 +12,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
-import 'package:kalium_wallet_flutter/colors.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
@@ -378,7 +377,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           return AppSimpleDialog(
             title: Text(
               AppLocalization.of(context).authMethod,
-              style: AppStyles.TextStyleDialogHeader,
+              style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               AppSimpleDialogOption(
@@ -389,7 +388,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     AppLocalization.of(context).biometricsMethod,
-                    style: AppStyles.TextStyleDialogOptions,
+                    style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
               ),
@@ -401,7 +400,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     AppLocalization.of(context).pinMethod,
-                    style: AppStyles.TextStyleDialogOptions,
+                    style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
               ),
@@ -436,7 +435,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           return AppSimpleDialog(
             title: Text(
               AppLocalization.of(context).notifications,
-              style: AppStyles.TextStyleDialogHeader,
+              style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               AppSimpleDialogOption(
@@ -447,7 +446,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     AppLocalization.of(context).onStr,
-                    style: AppStyles.TextStyleDialogOptions,
+                    style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
               ),
@@ -459,7 +458,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     AppLocalization.of(context).off,
-                    style: AppStyles.TextStyleDialogOptions,
+                    style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
               ),
@@ -499,7 +498,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           return AppSimpleDialog(
             title: Text(
               AppLocalization.of(context).lockAppSetting,
-              style: AppStyles.TextStyleDialogHeader,
+              style: AppStyles.textStyleDialogHeader(context),
             ),
             children: <Widget>[
               AppSimpleDialogOption(
@@ -510,7 +509,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     AppLocalization.of(context).no,
-                    style: AppStyles.TextStyleDialogOptions,
+                    style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
               ),
@@ -522,7 +521,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     AppLocalization.of(context).yes,
-                    style: AppStyles.TextStyleDialogOptions,
+                    style: AppStyles.textStyleDialogOptions(context),
                   ),
                 ),
               ),
@@ -559,7 +558,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             AvailableCurrency(value).getDisplayName(context),
-            style: AppStyles.TextStyleDialogOptions,
+            style: AppStyles.textStyleDialogOptions(context),
           ),
         ),
       ));
@@ -577,7 +576,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
                     AppLocalization.of(context).changeCurrency,
-                    style: AppStyles.TextStyleDialogHeader,
+                    style: AppStyles.textStyleDialogHeader(context),
                   ),
                 ),
                 children: _buildCurrencyOptions(),
@@ -606,7 +605,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             LanguageSetting(value).getDisplayName(context),
-            style: AppStyles.TextStyleDialogOptions,
+            style: AppStyles.textStyleDialogOptions(context),
           ),
         ),
       ));
@@ -624,7 +623,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
                     AppLocalization.of(context).language,
-                    style: AppStyles.TextStyleDialogHeader,
+                    style: AppStyles.textStyleDialogHeader(context),
                   ),
                 ),
                 children: _buildLanguageOptions(),
@@ -652,7 +651,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           padding: const EdgeInsets.symmetric(vertical: 8.0),
           child: Text(
             LockTimeoutSetting(value).getDisplayName(context),
-            style: AppStyles.TextStyleDialogOptions,
+            style: AppStyles.textStyleDialogOptions(context),
           ),
         ),
       ));
@@ -671,7 +670,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
                     AppLocalization.of(context).autoLockHeader,
-                    style: AppStyles.TextStyleDialogHeader,
+                    style: AppStyles.textStyleDialogHeader(context),
                   ),
                 ),
                 children: _buildLockTimeoutOptions(),
@@ -718,7 +717,7 @@ class _SettingsSheetState extends State<SettingsSheet>
         child: Stack(
           children: <Widget>[
             Container(
-              color: AppColors.backgroundDark,
+              color: StateContainer.of(context).curTheme.backgroundDark,
               constraints: BoxConstraints.expand(),
             ),
             buildMainSettings(context),
@@ -735,7 +734,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   Widget buildMainSettings(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.backgroundDark,
+        color: StateContainer.of(context).curTheme.backgroundDark,
       ),
       child: Column(
         children: <Widget>[
@@ -745,7 +744,7 @@ class _SettingsSheetState extends State<SettingsSheet>
               children: <Widget>[
                 Text(
                   AppLocalization.of(context).settingsHeader,
-                  style: AppStyles.textStyleSettingsHeader(),
+                  style: AppStyles.textStyleSettingsHeader(context),
                 ),
               ],
             ),
@@ -762,7 +761,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                         style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w100,
-                            color: AppColors.text60)),
+                            color: StateContainer.of(context).curTheme.text60)),
                   ),
                   Divider(height: 2),
                   AppSettings.buildSettingsListItemDoubleLine(
@@ -786,7 +785,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                       AppIcons.notifications,
                       _notificationsDialog),
                   Divider(height: 2),
-                  AppSettings.buildSettingsListItemSingleLine(
+                  AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).securityHeader,
                       AppIcons.security, onPressed: () {
                     setState(() {
@@ -802,10 +801,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                         style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w100,
-                            color: AppColors.text60)),
+                            color: StateContainer.of(context).curTheme.text60)),
                   ),
                   Divider(height: 2),
-                  AppSettings.buildSettingsListItemSingleLine(
+                  AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).contactsHeader,
                       AppIcons.contacts, onPressed: () {
                     setState(() {
@@ -814,7 +813,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                     _controller.forward();
                   }),
                   Divider(height: 2),
-                  AppSettings.buildSettingsListItemSingleLine(
+                  AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).backupSeed,
                       AppIcons.backupseed, onPressed: () {
                     // Authenticate
@@ -855,27 +854,27 @@ class _SettingsSheetState extends State<SettingsSheet>
                     });
                   }),
                   Divider(height: 2),
-                  AppSettings.buildSettingsListItemSingleLine(
+                  AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).settingsTransfer,
                       AppIcons.transferfunds, onPressed: () {
                     AppTransferOverviewSheet().mainBottomSheet(context);
                   }),
                   Divider(height: 2),
-                  AppSettings.buildSettingsListItemSingleLine(
+                  AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).changeRepAuthenticate,
                       AppIcons.changerepresentative, onPressed: () {
                     new AppChangeRepresentativeSheet()
                         .mainBottomSheet(context);
                   }),
                   Divider(height: 2),
-                  AppSettings.buildSettingsListItemSingleLine(
+                  AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).shareKalium,
                       AppIcons.share, onPressed: () {
                     Share.share(AppLocalization.of(context).shareKaliumText +
                         " https://kalium.banano.cc");
                   }),
                   Divider(height: 2),
-                  AppSettings.buildSettingsListItemSingleLine(
+                  AppSettings.buildSettingsListItemSingleLine(context, 
                       AppLocalization.of(context).logout, AppIcons.logout,
                       onPressed: () {
                     AppDialogs.showConfirmDialog(
@@ -915,32 +914,32 @@ class _SettingsSheetState extends State<SettingsSheet>
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(versionString,
-                            style: AppStyles.TextStyleVersion),
+                            style: AppStyles.textStyleVersion(context)),
                         Text(" | ",
-                            style: AppStyles.TextStyleVersion),
+                            style: AppStyles.textStyleVersion(context)),
                         GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return UIUtil.showWebview(
+                                return UIUtil.showWebview(context, 
                                    AppLocalization.of(context).privacyUrl);
                               }));      
                             },
                             child: Text(AppLocalization.of(context).privacyPolicy,
-                                    style: AppStyles.TextStyleVersionUnderline)
+                                    style: AppStyles.textStyleVersionUnderline(context))
                         ),
                         Text(" | ",
-                            style: AppStyles.TextStyleVersion),
+                            style: AppStyles.textStyleVersion(context)),
                         GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return UIUtil.showWebview(
+                                return UIUtil.showWebview(context, 
                                    AppLocalization.of(context).eulaUrl);
                               }));                              
                             },
                             child: Text("EULA",
-                                    style: AppStyles.TextStyleVersionUnderline)
+                                    style: AppStyles.textStyleVersionUnderline(context))
                         ),
                       ],
                     ),
@@ -956,8 +955,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.backgroundDark,
-                        AppColors.backgroundDark00
+                        StateContainer.of(context).curTheme.backgroundDark,
+                        StateContainer.of(context).curTheme.backgroundDark00
                       ],
                       begin: Alignment(0.5, -1.0),
                       end: Alignment(0.5, 1.0),
@@ -975,9 +974,9 @@ class _SettingsSheetState extends State<SettingsSheet>
   Widget buildContacts(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.backgroundDark,
+        color: StateContainer.of(context).curTheme.backgroundDark,
         boxShadow: [
-          BoxShadow(color: AppColors.overlay30, offset: Offset(-5, 0), blurRadius: 20),
+          BoxShadow(color: StateContainer.of(context).curTheme.overlay30, offset: Offset(-5, 0), blurRadius: 20),
         ],
       ),
       child: Column(
@@ -1006,12 +1005,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.back,
-                              color: AppColors.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text, size: 24)),
                     ),
                     //Contacts Header Text
                     Text(
                       AppLocalization.of(context).contactsHeader,
-                      style: AppStyles.textStyleSettingsHeader(),
+                      style: AppStyles.textStyleSettingsHeader(context),
                     ),
                   ],
                 ),
@@ -1030,7 +1029,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.import_icon,
-                              color: AppColors.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text, size: 24)),
                     ),
                     //Export button
                     Container(
@@ -1045,7 +1044,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.export_icon,
-                              color: AppColors.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text, size: 24)),
                     ),
                   ],
                 ),
@@ -1086,8 +1085,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.backgroundDark,
-                          AppColors.backgroundDark00
+                          StateContainer.of(context).curTheme.backgroundDark,
+                          StateContainer.of(context).curTheme.backgroundDark00
                         ],
                         begin: Alignment(0.5, -1.0),
                         end: Alignment(0.5, 1.0),
@@ -1104,8 +1103,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          AppColors.backgroundDark00,
-                          AppColors.backgroundDark,
+                          StateContainer.of(context).curTheme.backgroundDark00,
+                          StateContainer.of(context).curTheme.backgroundDark,
                         ],
                         begin: Alignment(0.5, -1.0),
                         end: Alignment(0.5, 1.0),
@@ -1120,7 +1119,7 @@ class _SettingsSheetState extends State<SettingsSheet>
             margin: EdgeInsets.only(top: 10),
             child: Row(
               children: <Widget>[
-                AppButton.buildAppButton(
+                AppButton.buildAppButton(context, 
                     AppButtonType.TEXT_OUTLINE,
                     AppLocalization.of(context).addContact,
                     Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
@@ -1170,12 +1169,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                     //Contact name
                     Text(
                       contact.name,
-                      style: AppStyles.TextStyleSettingItemHeader,
+                      style: AppStyles.textStyleSettingItemHeader(context)
                     ),
                     //Contact address
                     Text(
                       Address(contact.address).getShortString(),
-                      style: AppStyles.TextStyleTransactionAddress,
+                      style: AppStyles.textStyleTransactionAddress(context),
                     ),
                   ],
                 ),
@@ -1190,9 +1189,9 @@ class _SettingsSheetState extends State<SettingsSheet>
 Widget buildSecurityMenu(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.backgroundDark,
+        color: StateContainer.of(context).curTheme.backgroundDark,
         boxShadow: [
-          BoxShadow(color: AppColors.overlay30, offset: Offset(-5, 0), blurRadius: 20),
+          BoxShadow(color: StateContainer.of(context).curTheme.overlay30, offset: Offset(-5, 0), blurRadius: 20),
         ],
       ),
       child: Column(
@@ -1221,12 +1220,12 @@ Widget buildSecurityMenu(BuildContext context) {
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.back,
-                              color: AppColors.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text, size: 24)),
                     ),
                     //Security Header Text
                     Text(
                       AppLocalization.of(context).securityHeader,
-                      style: AppStyles.textStyleSettingsHeader(),
+                      style: AppStyles.textStyleSettingsHeader(context),
                     ),
                   ],
                 ),                
@@ -1245,7 +1244,7 @@ Widget buildSecurityMenu(BuildContext context) {
                         style: TextStyle(
                             fontSize: 16.0,
                             fontWeight: FontWeight.w100,
-                            color: AppColors.text60)),
+                            color: StateContainer.of(context).curTheme.text60)),
                   ),
                   // Authentication Method
                   _hasBiometrics ? Divider(height: 2) : null,
@@ -1287,8 +1286,8 @@ Widget buildSecurityMenu(BuildContext context) {
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        AppColors.backgroundDark,
-                        AppColors.backgroundDark00
+                        StateContainer.of(context).curTheme.backgroundDark,
+                        StateContainer.of(context).curTheme.backgroundDark00
                       ],
                       begin: Alignment(0.5, -1.0),
                       end: Alignment(0.5, 1.0),
