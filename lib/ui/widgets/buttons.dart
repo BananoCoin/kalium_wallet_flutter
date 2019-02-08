@@ -2,8 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 
-enum AppButtonType { PRIMARY, PRIMARY_OUTLINE, SUCCESS, SUCCESS_OUTLINE, TEXT_OUTLINE }
+enum AppButtonType {
+  PRIMARY,
+  PRIMARY_OUTLINE,
+  SUCCESS,
+  SUCCESS_OUTLINE,
+  TEXT_OUTLINE
+}
 
 class AppButton {
   // Primary button builder
@@ -14,15 +21,18 @@ class AppButton {
       case AppButtonType.PRIMARY:
         return Expanded(
           child: Container(
+            height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
               color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
-              child: Text(buttonText,
+              child: AutoSizeText(buttonText,
                   textAlign: TextAlign.center,
-                  style: AppStyles.textStyleButtonPrimary(context)),
+                  style: AppStyles.textStyleButtonPrimary(context),
+                  maxLines: 1,
+                  stepGranularity: 0.5),
               padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 20),
               onPressed: () {
                 if (onPressed != null && !disabled) {
@@ -38,20 +48,29 @@ class AppButton {
       case AppButtonType.PRIMARY_OUTLINE:
         return Expanded(
           child: Container(
+            height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlineButton(
               textColor: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
-              borderSide: BorderSide(color: disabled? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary, width: 2.0),
-              highlightedBorderColor: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
+              borderSide: BorderSide(
+                  color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
+                  width: 2.0),
+              highlightedBorderColor:
+                  disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
               splashColor: StateContainer.of(context).curTheme.primary30,
               highlightColor: StateContainer.of(context).curTheme.primary15,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
-              child: Text(buttonText,
-                  textAlign: TextAlign.center,
-                  style: disabled ? AppStyles.textStyleButtonPrimaryOutlineDisabled(context) : AppStyles.textStyleButtonPrimaryOutline(context)),
-              padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 20),
+              child: AutoSizeText(
+                buttonText,
+                textAlign: TextAlign.center,
+                style: disabled
+                    ? AppStyles.textStyleButtonPrimaryOutlineDisabled(context)
+                    : AppStyles.textStyleButtonPrimaryOutline(context),
+                maxLines: 1,
+                stepGranularity: 0.5,
+              ),
               onPressed: () {
                 if (onPressed != null && !disabled) {
                   onPressed();
@@ -64,16 +83,20 @@ class AppButton {
       case AppButtonType.SUCCESS:
         return Expanded(
           child: Container(
+            height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: FlatButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
               color: StateContainer.of(context).curTheme.success,
-              child: Text(buttonText,
-                  textAlign: TextAlign.center,
-                  style: AppStyles.textStyleButtonPrimaryGreen(context)),
-              padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 20),
+              child: AutoSizeText(
+                buttonText,
+                textAlign: TextAlign.center,
+                style: AppStyles.textStyleButtonPrimaryGreen(context),
+                maxLines: 1,
+                stepGranularity: 0.5,
+              ),
               onPressed: () {
                 if (onPressed != null && !disabled) {
                   onPressed();
@@ -88,6 +111,7 @@ class AppButton {
       case AppButtonType.SUCCESS_OUTLINE:
         return Expanded(
           child: Container(
+            height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlineButton(
@@ -98,10 +122,13 @@ class AppButton {
               highlightColor: StateContainer.of(context).curTheme.success15,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
-              child: Text(buttonText,
-                  textAlign: TextAlign.center,
-                  style: AppStyles.textStyleButtonSuccessOutline(context)),
-              padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 20),
+              child: AutoSizeText(
+                buttonText,
+                textAlign: TextAlign.center,
+                style: AppStyles.textStyleButtonSuccessOutline(context),
+                maxLines: 1,
+                stepGranularity: 0.5,
+              ),
               onPressed: () {
                 if (onPressed != null) {
                   onPressed();
@@ -111,9 +138,10 @@ class AppButton {
             ),
           ),
         );
-        case AppButtonType.TEXT_OUTLINE:
+      case AppButtonType.TEXT_OUTLINE:
         return Expanded(
           child: Container(
+            height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlineButton(
@@ -124,10 +152,13 @@ class AppButton {
               highlightColor: StateContainer.of(context).curTheme.text15,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(100.0)),
-              child: Text(buttonText,
-                  textAlign: TextAlign.center,
-                  style: AppStyles.textStyleButtonTextOutline(context)),
-              padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 20),
+              child: AutoSizeText(
+                buttonText,
+                textAlign: TextAlign.center,
+                style: AppStyles.textStyleButtonTextOutline(context),
+                maxLines: 1,
+                stepGranularity: 0.5,
+              ),
               onPressed: () {
                 if (onPressed != null) {
                   onPressed();
