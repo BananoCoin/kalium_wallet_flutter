@@ -36,10 +36,26 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                         Container(
                           //Width/Height ratio for the animation is needed because BoxFit is not working as expected
                           width: double.infinity,
-                          height: MediaQuery.of(context).size.width * 5/8,
-                          child: FlareActor("assets/welcome_animation.flr",
-                              animation: "main",
-                              fit: BoxFit.contain),
+                          height: MediaQuery.of(context).size.width * 5 / 8,
+                          child: Stack(
+                            children: <Widget>[
+                              Center(
+                                child: FlareActor(
+                                  "assets/welcome_animation_bananasonly.flr",
+                                  animation: "main",
+                                  fit: BoxFit.contain,
+                                  color: StateContainer.of(context).curTheme.primary,
+                                ),
+                              ),
+                              Center(
+                                child: FlareActor(
+                                  "assets/welcome_animation_monkeysonly.flr",
+                                  animation: "main",
+                                  fit: BoxFit.contain,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         //Container for the paragraph
                         Container(
@@ -61,25 +77,27 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                     Row(
                       children: <Widget>[
                         // New Wallet Button
-                        AppButton.buildAppButton(context, 
+                        AppButton.buildAppButton(
+                            context,
                             AppButtonType.PRIMARY,
                             AppLocalization.of(context).newWallet,
                             Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                              Navigator.of(context).pushNamed('/intro_backup');
+                          Navigator.of(context).pushNamed('/intro_backup');
                         }),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         // Import Wallet Button
-                        AppButton.buildAppButton(context, 
+                        AppButton.buildAppButton(
+                            context,
                             AppButtonType.PRIMARY_OUTLINE,
                             AppLocalization.of(context).importWallet,
                             Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                           Navigator.of(context).pushNamed('/intro_import');
                         }),
                       ],
-                    ), 
+                    ),
                   ],
                 ),
               ],

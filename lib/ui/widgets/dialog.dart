@@ -142,12 +142,19 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
         return Stack(
           children: <Widget>[
             Center(
-              child: FlareActor("assets/send_animation_bananasonly.flr",
-              animation: "main", fit: BoxFit.contain, color: StateContainer.of(context).curTheme.primary,),
+              child: FlareActor(
+                "assets/send_animation_bananasonly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+                color: StateContainer.of(context).curTheme.primary,
+              ),
             ),
             Center(
-              child: FlareActor("assets/send_animation_shadowsonly.flr",
-              animation: "main", fit: BoxFit.contain,),
+              child: FlareActor(
+                "assets/send_animation_shadowsonly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+              ),
             ),
           ],
         );
@@ -158,13 +165,26 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
         return FlareActor("assets/searchseedmanual_animation.flr",
             animation: "main", fit: BoxFit.contain);
       case AnimationType.TRANSFER_TRANSFERRING:
-        return FlareActor("assets/transfer_animation.flr",
-            animation: "main", fit: BoxFit.contain);
+        return Stack(
+          children: <Widget>[
+            FlareActor(
+              "assets/transfer_animation_paperwalletonly.flr",
+              animation: "main",
+              fit: BoxFit.contain,
+            ),
+            FlareActor(
+              "assets/transfer_animation_kaliumwalletonly.flr",
+              animation: "main",
+              fit: BoxFit.contain,
+              color: StateContainer.of(context).curTheme.primary,
+            ),
+          ],
+        );
       case AnimationType.GENERIC:
       default:
         return CircularProgressIndicator(
-            valueColor:
-                new AlwaysStoppedAnimation<Color>(StateContainer.of(context).curTheme.primary60));
+            valueColor: new AlwaysStoppedAnimation<Color>(
+                StateContainer.of(context).curTheme.primary60));
     }
   }
 
@@ -198,23 +218,33 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
               Container(
                 alignment: Alignment(0, -0.5),
                 width: MediaQuery.of(context).size.width / 1.4,
-                height: MediaQuery.of(context).size.width / 1.4/2,
+                height: MediaQuery.of(context).size.width / 1.4 / 2,
                 child: _getAnimation(context),
               ),
               Container(
-                margin: EdgeInsets.only(left: 10, top:20, bottom: MediaQuery.of(context).size.height*0.15),
-                              child: Row(
+                margin: EdgeInsets.only(
+                    left: 10,
+                    top: 20,
+                    bottom: MediaQuery.of(context).size.height * 0.15),
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    Text(CaseChange.toUpperCase(AppLocalization.of(context).transferLoading, context),
+                    Text(
+                        CaseChange.toUpperCase(
+                            AppLocalization.of(context).transferLoading,
+                            context),
                         style: AppStyles.textStyleHeader2Colored(context)),
                     Container(
                       margin: EdgeInsets.only(bottom: 7),
                       width: 33.333,
                       height: 8.866,
-                      child: FlareActor("assets/threedot_animation.flr",
-                          animation: "main", fit: BoxFit.contain),
+                      child: FlareActor(
+                        "assets/threedot_animation.flr",
+                        animation: "main",
+                        fit: BoxFit.contain,
+                        color: StateContainer.of(context).curTheme.primary,
+                      ),
                     ),
                   ],
                 ),

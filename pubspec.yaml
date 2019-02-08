@@ -150,10 +150,14 @@ flutter:
   assets:
     - assets/monkeyQR.svg
     - assets/welcome_animation.flr
+    - assets/welcome_animation_bananasonly.flr
+    - assets/welcome_animation_monkeysonly.flr
     - assets/send_animation.flr
     - assets/send_animation_bananasonly.flr
     - assets/send_animation_shadowsonly.flr
     - assets/transfer_animation.flr
+    - assets/transfer_animation_kaliumwalletonly.flr
+    - assets/transfer_animation_paperwalletonly.flr
     - assets/searchseedqr_animation.flr
     - assets/searchseedmanual_animation.flr
     - assets/threedot_animation.flr
