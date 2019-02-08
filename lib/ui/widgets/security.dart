@@ -41,11 +41,7 @@ class _PinScreenState extends State<PinScreen>
   static const int MAX_ATTEMPTS = 5;
 
   _PinScreenState(
-      this.type, this.expectedPin, this.description, this.successCallback, this.pinScreenBackgroundColor) {
-        if (this.pinScreenBackgroundColor == null) {
-          pinScreenBackgroundColor = StateContainer.of(context).curTheme.backgroundDark;
-        }
-  }
+      this.type, this.expectedPin, this.description, this.successCallback, this.pinScreenBackgroundColor);
 
   PinOverlayType type;
   String expectedPin;
@@ -134,6 +130,9 @@ class _PinScreenState extends State<PinScreen>
           // the animation object’s value is the changed state
         });
       });
+      if (this.pinScreenBackgroundColor == null) {
+        pinScreenBackgroundColor = StateContainer.of(context).curTheme.backgroundDark;
+      }
   }
 
   @override

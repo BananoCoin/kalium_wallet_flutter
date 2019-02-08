@@ -23,11 +23,12 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
   var _seedCopiedColor = Colors.transparent;
   Timer _seedCopiedTimer;
 
+  bool _seedCopied = false;
+
   @override
   void initState() {
     super.initState();
     _seed = NanoSeeds.generateSeed();
-    _seedTapStyle = AppStyles.textStyleSeed(context);
   }
 
   @override
@@ -107,7 +108,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                       new ClipboardData(text: _seed));
                                   ClipboardUtil.setClipboardClearEvent();
                                   setState(() {
-                                    _seedTapStyle = AppStyles.textStyleSeedGreen(context);
+                                    _seedCopied = true;
                                     _seedCopiedColor = StateContainer.of(context).curTheme.success;
                                   });
                                   if (_seedCopiedTimer != null) {
@@ -116,7 +117,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                   _seedCopiedTimer = new Timer(
                                       const Duration(milliseconds: 1200), () {
                                     setState(() {
-                                      _seedTapStyle = AppStyles.textStyleSeed(context);
+                                      _seedCopied = false;
                                       _seedCopiedColor = Colors.transparent;
                                     });
                                   });
@@ -131,7 +132,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                     borderRadius: BorderRadius.circular(25),
                                   ),
                                   child:
-                                    UIUtil.threeLineSeedText(context, _seed, textStyle: _seedTapStyle),    
+                                    UIUtil.threeLineSeedText(context, _seed, textStyle: _seedCopied ? AppStyles.textStyleSeedGreen(context) : AppStyles.textStyleSeed(context)),    
                                 )),
                           ),
                           // "Seed copied to Clipboard" text that appaears when seed is tapped

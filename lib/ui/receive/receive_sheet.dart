@@ -27,23 +27,11 @@ class AppReceiveSheet {
   Widget monkeySVGBorder;
   Widget shareCardLogoSvg;
   Widget shareCardTickerSvg;
-  BuildContext context;
 
   Widget qrCode;
+  Widget qrWidget;
 
-  AppReceiveSheet(Widget qrWidget) {
-    // Create our SVG-heavy things in the constructor because they are slower operations
-    monkeySVGBorder = SvgPicture.asset('assets/monkeyQR.svg');
-    shareCardLogoSvg = SvgPicture.asset('assets/sharecard_bananologo.svg', color: StateContainer.of(context).curTheme.primary,);
-    // Share card initialization
-    shareCardKey = GlobalKey();
-    appShareCard = Container(
-      child: AppShareCard(shareCardKey, monkeySVGBorder, shareCardLogoSvg),
-      alignment: Alignment(0.0, 0.0),
-    );
-    qrCode = qrWidget;
-    context = context;
-  }
+  AppReceiveSheet(this.qrWidget);
 
   // Address copied items
   // Current state references
@@ -70,6 +58,16 @@ class AppReceiveSheet {
     // Set initial state of copy button
     _addressCopied = false;
     double devicewidth = MediaQuery.of(context).size.width;
+    // Create our SVG-heavy things in the constructor because they are slower operations
+    monkeySVGBorder = SvgPicture.asset('assets/monkeyQR.svg');
+    shareCardLogoSvg = SvgPicture.asset('assets/sharecard_bananologo.svg', color: StateContainer.of(context).curTheme.primary);
+    // Share card initialization
+    shareCardKey = GlobalKey();
+    appShareCard = Container(
+      child: AppShareCard(shareCardKey, monkeySVGBorder, shareCardLogoSvg),
+      alignment: Alignment(0.0, 0.0),
+    );
+    qrCode = qrWidget;
 
     _showShareCard = false;
 

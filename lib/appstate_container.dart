@@ -122,6 +122,10 @@ class StateContainerState extends State<StateContainer> {
         curLanguage = language;
       });
     });
+    // Get theme default
+    SharedPrefsUtil.inst.getTheme().then((theme) {
+      updateTheme(theme);
+    });
   }
 
   // Subscriptions
