@@ -499,7 +499,7 @@ class AppSendSheet {
                                 Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               try {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(OverlayTheme.KALIUM)
+                                BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme)
                                     .then((value) {
                                   Address address = Address(value);
                                   if (!address.isValid()) {

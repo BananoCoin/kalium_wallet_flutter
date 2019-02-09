@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:barcode_scan/barcode_scan.dart';
 
 class AppColors {
   // Some constants not themed
@@ -51,6 +52,9 @@ abstract class BaseTheme {
   SystemUiOverlayStyle statusBar;
 
   BoxShadow boxShadow;
+
+  // QR scanner theme
+  OverlayTheme qrScanTheme;
 }
 
 class KaliumTheme extends BaseTheme {
@@ -115,6 +119,8 @@ class KaliumTheme extends BaseTheme {
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
+
+  OverlayTheme qrScanTheme = OverlayTheme.KALIUM;
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -179,6 +185,8 @@ class TitaniumTheme extends BaseTheme {
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
+
+  OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
 }
 
 class IridiumTheme extends BaseTheme {
@@ -246,6 +254,8 @@ class IridiumTheme extends BaseTheme {
       color: veryDarkGreen.withOpacity(0.1),
       offset: Offset(0, 5),
       blurRadius: 15);
+
+  OverlayTheme qrScanTheme = OverlayTheme.IRIDIUM;
 }
 
 class BerylliumTheme extends BaseTheme {
@@ -311,4 +321,6 @@ class BerylliumTheme extends BaseTheme {
 
   BoxShadow boxShadow = BoxShadow(
       color: Colors.transparent, offset: Offset(0, 5), blurRadius: 15);
+
+  OverlayTheme qrScanTheme = OverlayTheme.BERYLLIUM;
 }

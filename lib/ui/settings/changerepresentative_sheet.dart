@@ -165,7 +165,7 @@ class AppChangeRepresentativeSheet {
                                   StateContainer.of(context).curTheme.text15,
                               onPressed: () {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(OverlayTheme.KALIUM)
+                                BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme)
                                     .then((result) {
                                   if (result == null) {
                                     return;
