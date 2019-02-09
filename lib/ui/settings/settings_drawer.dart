@@ -67,12 +67,10 @@ class _SettingsSheetState extends State<SettingsSheet>
       AuthenticationMethod(AuthMethod.BIOMETRICS);
   NotificationSetting _curNotificiationSetting =
       NotificationSetting(NotificationOptions.ON);
-  UnlockSetting _curUnlockSetting =
-      UnlockSetting(UnlockOption.NO);
+  UnlockSetting _curUnlockSetting = UnlockSetting(UnlockOption.NO);
   LockTimeoutSetting _curTimeoutSetting =
       LockTimeoutSetting(LockTimeoutOption.ONE);
-  ThemeSetting _curThemeSetting =
-      ThemeSetting(ThemeOptions.KALIUM);
+  ThemeSetting _curThemeSetting = ThemeSetting(ThemeOptions.KALIUM);
 
   bool _contactsOpen;
   bool _securityOpen;
@@ -142,7 +140,8 @@ class _SettingsSheetState extends State<SettingsSheet>
       int numSaved = await dbHelper.saveContacts(contactsToAdd);
       if (numSaved > 0) {
         _updateContacts();
-        EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: Contact(name: "", address: "")));
+        EventTaxiImpl.singleton().fire(
+            ContactModifiedEvent(contact: Contact(name: "", address: "")));
         UIUtil.showSnackbar(
             AppLocalization.of(context)
                 .contactsImportSuccess
@@ -180,7 +179,9 @@ class _SettingsSheetState extends State<SettingsSheet>
     // Get default unlock settings
     SharedPrefsUtil.inst.getLock().then((lock) {
       setState(() {
-        _curUnlockSetting = lock ? UnlockSetting(UnlockOption.YES) : UnlockSetting(UnlockOption.NO);
+        _curUnlockSetting = lock
+            ? UnlockSetting(UnlockOption.YES)
+            : UnlockSetting(UnlockOption.NO);
       });
     });
     SharedPrefsUtil.inst.getLockTimeout().then((lockTimeout) {
@@ -191,9 +192,9 @@ class _SettingsSheetState extends State<SettingsSheet>
     // Get default notification setting
     SharedPrefsUtil.inst.getNotificationsOn().then((notificationsOn) {
       setState(() {
-        _curNotificiationSetting =
-            notificationsOn ? NotificationSetting(NotificationOptions.ON) 
-                            : NotificationSetting(NotificationOptions.OFF);
+        _curNotificiationSetting = notificationsOn
+            ? NotificationSetting(NotificationOptions.ON)
+            : NotificationSetting(NotificationOptions.OFF);
       });
     });
     // Get default theme settings
@@ -226,8 +227,9 @@ class _SettingsSheetState extends State<SettingsSheet>
 
     _offsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0))
         .animate(_controller);
-    _securityOffsetFloat = Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0))
-        .animate(_securityController);
+    _securityOffsetFloat =
+        Tween<Offset>(begin: Offset(1.1, 0), end: Offset(0, 0))
+            .animate(_securityController);
 
     // Version string
     PackageInfo.fromPlatform().then((packageInfo) {
@@ -245,7 +247,9 @@ class _SettingsSheetState extends State<SettingsSheet>
 
   void _registerBus() {
     // Contact added bus event
-    _contactAddedSub = EventTaxiImpl.singleton().registerTo<ContactAddedEvent>().listen((event) {
+    _contactAddedSub = EventTaxiImpl.singleton()
+        .registerTo<ContactAddedEvent>()
+        .listen((event) {
       setState(() {
         _contacts.add(event.contact);
         //Sort by name
@@ -253,28 +257,36 @@ class _SettingsSheetState extends State<SettingsSheet>
             (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       });
       // Full update which includes downloading new monKey
-      _updateContacts();      
+      _updateContacts();
     });
     // Contact removed bus event
-    _contactRemovedSub = EventTaxiImpl.singleton().registerTo<ContactRemovedEvent>().listen((event) {
+    _contactRemovedSub = EventTaxiImpl.singleton()
+        .registerTo<ContactRemovedEvent>()
+        .listen((event) {
       setState(() {
         _contacts.remove(event.contact);
       });
     });
     // Ready to go to transfer confirm
-    _transferConfirmSub = EventTaxiImpl.singleton().registerTo<TransferConfirmEvent>().listen((event) {
+    _transferConfirmSub = EventTaxiImpl.singleton()
+        .registerTo<TransferConfirmEvent>()
+        .listen((event) {
       AppTransferConfirmSheet(event.balMap, transferError)
           .mainBottomSheet(context);
     });
     // Ready to go to transfer complete
-    _transferCompleteSub = EventTaxiImpl.singleton().registerTo<TransferCompleteEvent>().listen((event) {
+    _transferCompleteSub = EventTaxiImpl.singleton()
+        .registerTo<TransferCompleteEvent>()
+        .listen((event) {
       StateContainer.of(context).requestUpdate();
       AppTransferCompleteSheet(
               NumberUtil.getRawAsUsableString(event.amount.toString()))
           .mainBottomSheet(context);
     });
     // Unlock callback
-    _callbackUnlockSub = EventTaxiImpl.singleton().registerTo<UnlockCallbackEvent>().listen((event) {
+    _callbackUnlockSub = EventTaxiImpl.singleton()
+        .registerTo<UnlockCallbackEvent>()
+        .listen((event) {
       StateContainer.of(context).unlockCallback();
     });
   }
@@ -540,16 +552,14 @@ class _SettingsSheetState extends State<SettingsSheet>
       case UnlockOption.YES:
         SharedPrefsUtil.inst.setLock(true).then((result) {
           setState(() {
-            _curUnlockSetting =
-                UnlockSetting(UnlockOption.YES);
+            _curUnlockSetting = UnlockSetting(UnlockOption.YES);
           });
         });
         break;
       case UnlockOption.NO:
         SharedPrefsUtil.inst.setLock(false).then((result) {
           setState(() {
-            _curUnlockSetting =
-                UnlockSetting(UnlockOption.NO);
+            _curUnlockSetting = UnlockSetting(UnlockOption.NO);
           });
         });
         break;
@@ -623,24 +633,21 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _languageDialog() async {
-    AvailableLanguage selection =
-        await showAppDialog<AvailableLanguage>(
-            context: context,
-            builder: (BuildContext context) {
-              return AppSimpleDialog(
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Text(
-                    AppLocalization.of(context).language,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                ),
-                children: _buildLanguageOptions(),
-              );
-            });
-    SharedPrefsUtil.inst
-        .setLanguage(LanguageSetting(selection))
-        .then((result) {
+    AvailableLanguage selection = await showAppDialog<AvailableLanguage>(
+        context: context,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: Text(
+                AppLocalization.of(context).language,
+                style: AppStyles.textStyleDialogHeader(context),
+              ),
+            ),
+            children: _buildLanguageOptions(),
+          );
+        });
+    SharedPrefsUtil.inst.setLanguage(LanguageSetting(selection)).then((result) {
       if (StateContainer.of(context).curLanguage.language != selection) {
         setState(() {
           StateContainer.of(context).updateLanguage(LanguageSetting(selection));
@@ -668,28 +675,28 @@ class _SettingsSheetState extends State<SettingsSheet>
     return ret;
   }
 
-
   Future<void> _lockTimeoutDialog() async {
-    LockTimeoutOption selection =
-        await showAppDialog<LockTimeoutOption>(
-            context: context,
-            builder: (BuildContext context) {
-              return AppSimpleDialog(
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Text(
-                    AppLocalization.of(context).autoLockHeader,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                ),
-                children: _buildLockTimeoutOptions(),
-              );
-            });
+    LockTimeoutOption selection = await showAppDialog<LockTimeoutOption>(
+        context: context,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: Text(
+                AppLocalization.of(context).autoLockHeader,
+                style: AppStyles.textStyleDialogHeader(context),
+              ),
+            ),
+            children: _buildLockTimeoutOptions(),
+          );
+        });
     SharedPrefsUtil.inst
         .setLockTimeout(LockTimeoutSetting(selection))
         .then((result) {
       if (_curTimeoutSetting.setting != selection) {
-        SharedPrefsUtil.inst.setLockTimeout(LockTimeoutSetting(selection)).then((_) {
+        SharedPrefsUtil.inst
+            .setLockTimeout(LockTimeoutSetting(selection))
+            .then((_) {
           setState(() {
             _curTimeoutSetting = LockTimeoutSetting(selection);
           });
@@ -718,25 +725,22 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _themeDialog() async {
-    ThemeOptions selection =
-        await showAppDialog<ThemeOptions>(
-            context: context,
-            builder: (BuildContext context) {
-              return AppSimpleDialog(
-                title: Padding(
-                  padding: const EdgeInsets.only(bottom: 10.0),
-                  child: Text(
-                    AppLocalization.of(context).themeHeader,
-                    style: AppStyles.textStyleDialogHeader(context),
-                  ),
-                ),
-                children: _buildThemeOptions(),
-              );
-            });
+    ThemeOptions selection = await showAppDialog<ThemeOptions>(
+        context: context,
+        builder: (BuildContext context) {
+          return AppSimpleDialog(
+            title: Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: Text(
+                AppLocalization.of(context).themeHeader,
+                style: AppStyles.textStyleDialogHeader(context),
+              ),
+            ),
+            children: _buildThemeOptions(),
+          );
+        });
     if (_curThemeSetting != ThemeSetting(selection)) {
-      SharedPrefsUtil.inst
-          .setTheme(ThemeSetting(selection))
-          .then((result) {
+      SharedPrefsUtil.inst.setTheme(ThemeSetting(selection)).then((result) {
         setState(() {
           StateContainer.of(context).updateTheme(ThemeSetting(selection));
           _curThemeSetting = ThemeSetting(selection);
@@ -780,7 +784,8 @@ class _SettingsSheetState extends State<SettingsSheet>
             SlideTransition(
                 position: _offsetFloat, child: buildContacts(context)),
             SlideTransition(
-                position: _securityOffsetFloat, child: buildSecurityMenu(context)),
+                position: _securityOffsetFloat,
+                child: buildSecurityMenu(context)),
           ],
         ),
       ),
@@ -819,36 +824,52 @@ class _SettingsSheetState extends State<SettingsSheet>
                             fontWeight: FontWeight.w100,
                             color: StateContainer.of(context).curTheme.text60)),
                   ),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).changeCurrency,
                       StateContainer.of(context).curCurrency,
                       AppIcons.currency,
                       _currencyDialog),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).language,
                       StateContainer.of(context).curLanguage,
                       AppIcons.language,
                       _languageDialog),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).notifications,
                       _curNotificiationSetting,
                       AppIcons.notifications,
                       _notificationsDialog),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).themeHeader,
                       _curThemeSetting,
                       AppIcons.theme,
                       _themeDialog),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemSingleLine(context, 
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
+                  AppSettings.buildSettingsListItemSingleLine(
+                      context,
                       AppLocalization.of(context).securityHeader,
                       AppIcons.security, onPressed: () {
                     setState(() {
@@ -856,7 +877,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                     });
                     _securityController.forward();
                   }),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                   Container(
                     margin:
                         EdgeInsets.only(left: 30.0, top: 20.0, bottom: 10.0),
@@ -866,8 +890,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                             fontWeight: FontWeight.w100,
                             color: StateContainer.of(context).curTheme.text60)),
                   ),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemSingleLine(context, 
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
+                  AppSettings.buildSettingsListItemSingleLine(
+                      context,
                       AppLocalization.of(context).contactsHeader,
                       AppIcons.contacts, onPressed: () {
                     setState(() {
@@ -875,8 +903,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                     });
                     _controller.forward();
                   }),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemSingleLine(context, 
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
+                  AppSettings.buildSettingsListItemSingleLine(
+                      context,
                       AppLocalization.of(context).backupSeed,
                       AppIcons.backupseed, onPressed: () {
                     // Authenticate
@@ -890,8 +922,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               .then((authenticated) {
                             if (authenticated) {
                               HapticUtil.fingerprintSucess();
-                              new AppSeedBackupSheet()
-                                  .mainBottomSheet(context);
+                              new AppSeedBackupSheet().mainBottomSheet(context);
                             }
                           });
                         } else {
@@ -907,8 +938,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                       .mainBottomSheet(context);
                                 },
                                 expectedPin: expectedPin,
-                                description: AppLocalization.of(context)
-                                    .pinSeedBackup,
+                                description:
+                                    AppLocalization.of(context).pinSeedBackup,
                               );
                             }));
                           });
@@ -916,47 +947,66 @@ class _SettingsSheetState extends State<SettingsSheet>
                       });
                     });
                   }),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemSingleLine(context, 
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
+                  AppSettings.buildSettingsListItemSingleLine(
+                      context,
                       AppLocalization.of(context).settingsTransfer,
                       AppIcons.transferfunds, onPressed: () {
                     AppTransferOverviewSheet().mainBottomSheet(context);
                   }),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemSingleLine(context, 
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
+                  AppSettings.buildSettingsListItemSingleLine(
+                      context,
                       AppLocalization.of(context).changeRepAuthenticate,
                       AppIcons.changerepresentative, onPressed: () {
-                    new AppChangeRepresentativeSheet()
-                        .mainBottomSheet(context);
+                    new AppChangeRepresentativeSheet().mainBottomSheet(context);
                   }),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemSingleLine(context, 
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
+                  AppSettings.buildSettingsListItemSingleLine(
+                      context,
                       AppLocalization.of(context).shareKalium,
                       AppIcons.share, onPressed: () {
                     Share.share(AppLocalization.of(context).shareKaliumText +
                         " https://kalium.banano.cc");
                   }),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemSingleLine(context, 
-                      AppLocalization.of(context).logout, AppIcons.logout,
-                      onPressed: () {
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
+                  AppSettings.buildSettingsListItemSingleLine(
+                      context,
+                      AppLocalization.of(context).logout,
+                      AppIcons.logout, onPressed: () {
                     AppDialogs.showConfirmDialog(
                         context,
-                        CaseChange.toUpperCase(AppLocalization.of(context).warning, context),
+                        CaseChange.toUpperCase(
+                            AppLocalization.of(context).warning, context),
                         AppLocalization.of(context).logoutDetail,
-                        AppLocalization.of(context)
-                            .logoutAction
-                            .toUpperCase(), () {
+                        AppLocalization.of(context).logoutAction.toUpperCase(),
+                        () {
                       // Show another confirm dialog
                       AppDialogs.showConfirmDialog(
                           context,
                           AppLocalization.of(context).logoutAreYouSure,
                           AppLocalization.of(context).logoutReassurance,
-                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context), () {
+                          CaseChange.toUpperCase(
+                              AppLocalization.of(context).yes, context), () {
                         // Unsubscribe from notifications
-                        SharedPrefsUtil.inst.setNotificationsOn(false).then((_) {
+                        SharedPrefsUtil.inst
+                            .setNotificationsOn(false)
+                            .then((_) {
                           FirebaseMessaging().getToken().then((fcmToken) {
-                          EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
+                            EventTaxiImpl.singleton()
+                                .fire(FcmUpdateEvent(token: fcmToken));
                             // Delete all data
                             Vault.inst.deleteAll().then((_) {
                               SharedPrefsUtil.inst.deleteAll().then((result) {
@@ -970,7 +1020,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                       });
                     });
                   }),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                   Padding(
                     padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
                     child: Row(
@@ -978,32 +1031,31 @@ class _SettingsSheetState extends State<SettingsSheet>
                       children: <Widget>[
                         Text(versionString,
                             style: AppStyles.textStyleVersion(context)),
-                        Text(" | ",
-                            style: AppStyles.textStyleVersion(context)),
+                        Text(" | ", style: AppStyles.textStyleVersion(context)),
                         GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return UIUtil.showWebview(context, 
-                                   AppLocalization.of(context).privacyUrl);
-                              }));      
+                                return UIUtil.showWebview(context,
+                                    AppLocalization.of(context).privacyUrl);
+                              }));
                             },
-                            child: Text(AppLocalization.of(context).privacyPolicy,
-                                    style: AppStyles.textStyleVersionUnderline(context))
-                        ),
-                        Text(" | ",
-                            style: AppStyles.textStyleVersion(context)),
+                            child: Text(
+                                AppLocalization.of(context).privacyPolicy,
+                                style: AppStyles.textStyleVersionUnderline(
+                                    context))),
+                        Text(" | ", style: AppStyles.textStyleVersion(context)),
                         GestureDetector(
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return UIUtil.showWebview(context, 
-                                   AppLocalization.of(context).eulaUrl);
-                              }));                              
+                                return UIUtil.showWebview(context,
+                                    AppLocalization.of(context).eulaUrl);
+                              }));
                             },
                             child: Text("EULA",
-                                    style: AppStyles.textStyleVersionUnderline(context))
-                        ),
+                                style: AppStyles.textStyleVersionUnderline(
+                                    context))),
                       ],
                     ),
                   ),
@@ -1039,7 +1091,10 @@ class _SettingsSheetState extends State<SettingsSheet>
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         boxShadow: [
-          BoxShadow(color: StateContainer.of(context).curTheme.overlay30, offset: Offset(-5, 0), blurRadius: 20),
+          BoxShadow(
+              color: StateContainer.of(context).curTheme.overlay30,
+              offset: Offset(-5, 0),
+              blurRadius: 20),
         ],
       ),
       child: Column(
@@ -1068,7 +1123,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.back,
-                              color: StateContainer.of(context).curTheme.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text,
+                              size: 24)),
                     ),
                     //Contacts Header Text
                     Text(
@@ -1092,7 +1148,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.import_icon,
-                              color: StateContainer.of(context).curTheme.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text,
+                              size: 24)),
                     ),
                     //Export button
                     Container(
@@ -1107,7 +1164,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.export_icon,
-                              color: StateContainer.of(context).curTheme.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text,
+                              size: 24)),
                     ),
                   ],
                 ),
@@ -1182,7 +1240,8 @@ class _SettingsSheetState extends State<SettingsSheet>
             margin: EdgeInsets.only(top: 10),
             child: Row(
               children: <Widget>[
-                AppButton.buildAppButton(context, 
+                AppButton.buildAppButton(
+                    context,
                     AppButtonType.TEXT_OUTLINE,
                     AppLocalization.of(context).addContact,
                     Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
@@ -1198,13 +1257,18 @@ class _SettingsSheetState extends State<SettingsSheet>
 
   Widget buildSingleContact(BuildContext context, Contact contact) {
     return FlatButton(
+      highlightColor: StateContainer.of(context).curTheme.text15,
+      splashColor: StateContainer.of(context).curTheme.text15,
       onPressed: () {
         ContactDetailsSheet(contact, documentsDirectory)
             .mainBottomSheet(context);
       },
       padding: EdgeInsets.all(0.0),
       child: Column(children: <Widget>[
-        Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+        Divider(
+          height: 2,
+          color: StateContainer.of(context).curTheme.text15,
+        ),
         // Main Container
         Container(
           padding: EdgeInsets.symmetric(vertical: 5.0),
@@ -1230,10 +1294,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     //Contact name
-                    Text(
-                      contact.name,
-                      style: AppStyles.textStyleSettingItemHeader(context)
-                    ),
+                    Text(contact.name,
+                        style: AppStyles.textStyleSettingItemHeader(context)),
                     //Contact address
                     Text(
                       Address(contact.address).getShortString(),
@@ -1249,12 +1311,15 @@ class _SettingsSheetState extends State<SettingsSheet>
     );
   }
 
-Widget buildSecurityMenu(BuildContext context) {
+  Widget buildSecurityMenu(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: StateContainer.of(context).curTheme.backgroundDark,
         boxShadow: [
-          BoxShadow(color: StateContainer.of(context).curTheme.overlay30, offset: Offset(-5, 0), blurRadius: 20),
+          BoxShadow(
+              color: StateContainer.of(context).curTheme.overlay30,
+              offset: Offset(-5, 0),
+              blurRadius: 20),
         ],
       ),
       child: Column(
@@ -1283,7 +1348,8 @@ Widget buildSecurityMenu(BuildContext context) {
                               borderRadius: BorderRadius.circular(50.0)),
                           padding: EdgeInsets.all(8.0),
                           child: Icon(AppIcons.back,
-                              color: StateContainer.of(context).curTheme.text, size: 24)),
+                              color: StateContainer.of(context).curTheme.text,
+                              size: 24)),
                     ),
                     //Security Header Text
                     Text(
@@ -1291,7 +1357,7 @@ Widget buildSecurityMenu(BuildContext context) {
                       style: AppStyles.textStyleSettingsHeader(context),
                     ),
                   ],
-                ),                
+                ),
               ],
             ),
           ),
@@ -1310,7 +1376,12 @@ Widget buildSecurityMenu(BuildContext context) {
                             color: StateContainer.of(context).curTheme.text60)),
                   ),
                   // Authentication Method
-                  _hasBiometrics ? Divider(height: 2, color: StateContainer.of(context).curTheme.text15,) : null,
+                  _hasBiometrics
+                      ? Divider(
+                          height: 2,
+                          color: StateContainer.of(context).curTheme.text15,
+                        )
+                      : null,
                   _hasBiometrics
                       ? AppSettings.buildSettingsListItemDoubleLine(
                           context,
@@ -1320,7 +1391,10 @@ Widget buildSecurityMenu(BuildContext context) {
                           _authMethodDialog)
                       : null,
                   // Authenticate on Launch
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                   AppSettings.buildSettingsListItemDoubleLine(
                       context,
                       AppLocalization.of(context).lockAppSetting,
@@ -1328,16 +1402,22 @@ Widget buildSecurityMenu(BuildContext context) {
                       AppIcons.lock,
                       _lockDialog),
                   // Authentication Timer
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
-                  AppSettings.buildSettingsListItemDoubleLine(
-                      context,
-                      AppLocalization.of(context).autoLockHeader,
-                      _curTimeoutSetting,
-                      AppIcons.timer,
-                      _lockTimeoutDialog,
-                      disabled: _curUnlockSetting.setting == UnlockOption.NO,
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
                   ),
-                  Divider(height: 2, color: StateContainer.of(context).curTheme.text15,),
+                  AppSettings.buildSettingsListItemDoubleLine(
+                    context,
+                    AppLocalization.of(context).autoLockHeader,
+                    _curTimeoutSetting,
+                    AppIcons.timer,
+                    _lockTimeoutDialog,
+                    disabled: _curUnlockSetting.setting == UnlockOption.NO,
+                  ),
+                  Divider(
+                    height: 2,
+                    color: StateContainer.of(context).curTheme.text15,
+                  ),
                 ].where(notNull).toList(),
               ),
               //List Top Gradient End

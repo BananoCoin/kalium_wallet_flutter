@@ -16,6 +16,8 @@ class AppSettings {
     return IgnorePointer(
       ignoring: disabled,
       child: FlatButton(
+        highlightColor: StateContainer.of(context).curTheme.text15,
+        splashColor: StateContainer.of(context).curTheme.text15,
         onPressed: () {
           onPressed();
         },
@@ -63,10 +65,12 @@ class AppSettings {
   }
 
   //Settings item without any dropdown option but rather a direct functionality
-  static Widget buildSettingsListItemSingleLine( 
+  static Widget buildSettingsListItemSingleLine(
       BuildContext context, String heading, IconData settingIcon,
       {Function onPressed}) {
     return FlatButton(
+      highlightColor: StateContainer.of(context).curTheme.text15,
+      splashColor: StateContainer.of(context).curTheme.text15,
       onPressed: () {
         if (onPressed != null) {
           onPressed();
