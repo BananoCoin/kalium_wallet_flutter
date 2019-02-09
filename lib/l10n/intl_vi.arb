@@ -378,6 +378,12 @@
 		"type": "text",
 		"placeholders": {}
 	},
+    "themeHeader": "Theme",
+    "@themeHeader": {
+        "description": "theme_header",
+        "type": "text",
+        "placeholders": {}
+    },
 	"changeRepButton": "Thay đổi",
 	"@changeRepButton": {
 		"description": "change_representative_change",

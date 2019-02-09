@@ -390,6 +390,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "themeHeader": "Theme",
+    "@themeHeader": {
+        "description": "theme_header",
+        "type": "text",
+        "placeholders": {}
+    },
     "changeRepButton": "Cambiar",
     "@changeRepButton": {
         "description": "change_representative_change",
