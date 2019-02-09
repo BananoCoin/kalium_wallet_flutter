@@ -574,7 +574,9 @@ class _AppHomePageState extends State<AppHomePage>
         ),
       ),
       body: SafeArea(
-        minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05, bottom: MediaQuery.of(context).size.height*0.035),
+        minimum: EdgeInsets.only(
+            top: MediaQuery.of(context).size.height * 0.05,
+            bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -1203,9 +1205,7 @@ class _AppHomePageState extends State<AppHomePage>
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
-      margin: EdgeInsets.only(
-          left: 14.0,
-          right: 14.0),
+      margin: EdgeInsets.only(left: 14.0, right: 14.0),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -1520,113 +1520,121 @@ class TransactionDetailsSheet {
         builder: (BuildContext context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
-            return Container(
-              width: double.infinity,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Column(
-                    children: <Widget>[
-                      // A stack for Copy Address and Add Contact buttons
-                      Stack(
-                        children: <Widget>[
-                          // A row for Copy Address Button
-                          Row(
-                            children: <Widget>[
-                              AppButton.buildAppButton(
-                                  context,
-                                  // Share Address Button
-                                  _addressCopied
-                                      ? AppButtonType.SUCCESS
-                                      : AppButtonType.PRIMARY,
-                                  _addressCopied
-                                      ? AppLocalization.of(context)
-                                          .addressCopied
-                                      : AppLocalization.of(context).copyAddress,
-                                  Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
-                                  onPressed: () {
-                                Clipboard.setData(
-                                    new ClipboardData(text: _address));
-                                setState(() {
-                                  // Set copied style
-                                  _addressCopied = true;
-                                });
-                                if (_addressCopiedTimer != null) {
-                                  _addressCopiedTimer.cancel();
-                                }
-                                _addressCopiedTimer = new Timer(
-                                    const Duration(milliseconds: 800), () {
+            return SafeArea(
+              minimum: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.035,
+              ),
+              child: Container(
+                width: double.infinity,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Column(
+                      children: <Widget>[
+                        // A stack for Copy Address and Add Contact buttons
+                        Stack(
+                          children: <Widget>[
+                            // A row for Copy Address Button
+                            Row(
+                              children: <Widget>[
+                                AppButton.buildAppButton(
+                                    context,
+                                    // Share Address Button
+                                    _addressCopied
+                                        ? AppButtonType.SUCCESS
+                                        : AppButtonType.PRIMARY,
+                                    _addressCopied
+                                        ? AppLocalization.of(context)
+                                            .addressCopied
+                                        : AppLocalization.of(context)
+                                            .copyAddress,
+                                    Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                                    onPressed: () {
+                                  Clipboard.setData(
+                                      new ClipboardData(text: _address));
                                   setState(() {
-                                    _addressCopied = false;
+                                    // Set copied style
+                                    _addressCopied = true;
                                   });
-                                });
-                              }),
-                            ],
-                          ),
-                          // A row for Add Contact Button
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(
-                                    top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1],
-                                    right:
-                                        Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
-                                child: Container(
-                                  height: 55,
-                                  width: 55,
-                                  // Add Contact Button
-                                  child: !_displayName.startsWith("@")
-                                      ? FlatButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                            AddContactSheet(address: _address)
-                                                .mainBottomSheet(context);
-                                          },
-                                          splashColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(100.0)),
-                                          padding: EdgeInsets.symmetric(
-                                              vertical: 10.0, horizontal: 10),
-                                          child: Icon(AppIcons.addcontact,
-                                              size: 35,
-                                              color: _addressCopied
-                                                  ? StateContainer.of(context)
-                                                      .curTheme
-                                                      .successDark
-                                                  : StateContainer.of(context)
-                                                      .curTheme
-                                                      .backgroundDark),
-                                        )
-                                      : SizedBox(),
+                                  if (_addressCopiedTimer != null) {
+                                    _addressCopiedTimer.cancel();
+                                  }
+                                  _addressCopiedTimer = new Timer(
+                                      const Duration(milliseconds: 800), () {
+                                    setState(() {
+                                      _addressCopied = false;
+                                    });
+                                  });
+                                }),
+                              ],
+                            ),
+                            // A row for Add Contact Button
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.only(
+                                      top:
+                                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1],
+                                      right: Dimens
+                                          .BUTTON_TOP_EXCEPTION_DIMENS[2]),
+                                  child: Container(
+                                    height: 55,
+                                    width: 55,
+                                    // Add Contact Button
+                                    child: !_displayName.startsWith("@")
+                                        ? FlatButton(
+                                            onPressed: () {
+                                              Navigator.of(context).pop();
+                                              AddContactSheet(address: _address)
+                                                  .mainBottomSheet(context);
+                                            },
+                                            splashColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        100.0)),
+                                            padding: EdgeInsets.symmetric(
+                                                vertical: 10.0, horizontal: 10),
+                                            child: Icon(AppIcons.addcontact,
+                                                size: 35,
+                                                color: _addressCopied
+                                                    ? StateContainer.of(context)
+                                                        .curTheme
+                                                        .successDark
+                                                    : StateContainer.of(context)
+                                                        .curTheme
+                                                        .backgroundDark),
+                                          )
+                                        : SizedBox(),
+                                  ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      // A row for View Details button
-                      Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY_OUTLINE,
-                              AppLocalization.of(context).viewDetails,
-                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return UIUtil.showBlockExplorerWebview(
-                                  context, _hash);
-                            }));
-                          }),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
+                              ],
+                            ),
+                          ],
+                        ),
+                        // A row for View Details button
+                        Row(
+                          children: <Widget>[
+                            AppButton.buildAppButton(
+                                context,
+                                AppButtonType.PRIMARY_OUTLINE,
+                                AppLocalization.of(context).viewDetails,
+                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                return UIUtil.showBlockExplorerWebview(
+                                    context, _hash);
+                              }));
+                            }),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             );
           });
