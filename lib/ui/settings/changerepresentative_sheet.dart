@@ -448,7 +448,6 @@ class AppChangeRepresentativeSheet {
                           ),
                         ),
 
-<<<<<<< HEAD
                         //A row with change and close button
                         Column(
                           children: <Widget>[
@@ -477,7 +476,7 @@ class AppChangeRepresentativeSheet {
                                                 AuthMethod.BIOMETRICS &&
                                             hasBiometrics) {
                                           BiometricUtil
-                                                  .authenticateWithBiometrics(
+                                                  .authenticateWithBiometrics(context,
                                                       AppLocalization.of(
                                                               context)
                                                           .changeRepAuthenticate)
@@ -532,43 +531,6 @@ class AppChangeRepresentativeSheet {
                                           Vault.inst
                                               .getPin()
                                               .then((expectedPin) {
-=======
-                      //A row with change and close button
-                      Column(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              AppButton.buildAppButton(
-                                context,
-                                AppButtonType.PRIMARY,
-                                AppLocalization.of(context)
-                                    .changeRepButton
-                                    .toUpperCase(),
-                                Dimens.BUTTON_TOP_DIMENS,
-                                onPressed: () {
-                                  if (!NanoAccounts.isValid(
-                                      NanoAccountType.BANANO,
-                                      _repController.text)) {
-                                    return;
-                                  }
-                                  // Authenticate
-                                  SharedPrefsUtil.inst
-                                      .getAuthMethod()
-                                      .then((authMethod) {
-                                    BiometricUtil.hasBiometrics()
-                                        .then((hasBiometrics) {
-                                      if (authMethod.method ==
-                                              AuthMethod.BIOMETRICS &&
-                                          hasBiometrics) {
-                                        BiometricUtil
-                                                .authenticateWithBiometrics(context, 
-                                                    AppLocalization.of(context)
-                                                        .changeRepAuthenticate)
-                                            .then((authenticated) {
-                                          if (authenticated) {
-                                            HapticUtil.fingerprintSucess();
-                                            _animationOpen = true;
->>>>>>> d06ed5de2b68e432874a3af3db8b4dac8c1a15a0
                                             Navigator.of(context).push(
                                                 MaterialPageRoute(builder:
                                                     (BuildContext context) {

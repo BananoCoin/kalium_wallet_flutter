@@ -812,7 +812,6 @@ class _SettingsSheetState extends State<SettingsSheet>
                     AppLocalization.of(context).settingsHeader,
                     style: AppStyles.textStyleSettingsHeader(context),
                   ),
-<<<<<<< HEAD
                 ],
               ),
             ),
@@ -881,58 +880,6 @@ class _SettingsSheetState extends State<SettingsSheet>
                         AppIcons.security, onPressed: () {
                       setState(() {
                         _securityOpen = true;
-=======
-                  AppSettings.buildSettingsListItemSingleLine(
-                      context,
-                      AppLocalization.of(context).contactsHeader,
-                      AppIcons.contacts, onPressed: () {
-                    setState(() {
-                      _contactsOpen = true;
-                    });
-                    _controller.forward();
-                  }),
-                  Divider(
-                    height: 2,
-                    color: StateContainer.of(context).curTheme.text15,
-                  ),
-                  AppSettings.buildSettingsListItemSingleLine(
-                      context,
-                      AppLocalization.of(context).backupSeed,
-                      AppIcons.backupseed, onPressed: () {
-                    // Authenticate
-                    SharedPrefsUtil.inst.getAuthMethod().then((authMethod) {
-                      BiometricUtil.hasBiometrics().then((hasBiometrics) {
-                        if (authMethod.method == AuthMethod.BIOMETRICS &&
-                            hasBiometrics) {
-                          BiometricUtil.authenticateWithBiometrics(context, 
-                                  AppLocalization.of(context)
-                                      .fingerprintSeedBackup)
-                              .then((authenticated) {
-                            if (authenticated) {
-                              HapticUtil.fingerprintSucess();
-                              new AppSeedBackupSheet().mainBottomSheet(context);
-                            }
-                          });
-                        } else {
-                          // PIN Authentication
-                          Vault.inst.getPin().then((expectedPin) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return new PinScreen(
-                                PinOverlayType.ENTER_PIN,
-                                (pin) {
-                                  Navigator.of(context).pop();
-                                  new AppSeedBackupSheet()
-                                      .mainBottomSheet(context);
-                                },
-                                expectedPin: expectedPin,
-                                description:
-                                    AppLocalization.of(context).pinSeedBackup,
-                              );
-                            }));
-                          });
-                        }
->>>>>>> d06ed5de2b68e432874a3af3db8b4dac8c1a15a0
                       });
                       _securityController.forward();
                     }),
@@ -976,7 +923,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                         BiometricUtil.hasBiometrics().then((hasBiometrics) {
                           if (authMethod.method == AuthMethod.BIOMETRICS &&
                               hasBiometrics) {
-                            BiometricUtil.authenticateWithBiometrics(
+                            BiometricUtil.authenticateWithBiometrics(context,
                                     AppLocalization.of(context)
                                         .fingerprintSeedBackup)
                                 .then((authenticated) {
