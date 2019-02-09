@@ -312,3 +312,92 @@ class IridiumTheme extends BaseTheme {
 
   BoxShadow boxShadow = BoxShadow(color: veryDarkGreen10, offset: Offset(0, 5), blurRadius: 15);
 }
+
+class BerylliumTheme extends BaseTheme {
+  static const purple = Color(0xFFBDA1FF);
+  static const purple10 = Color(0x1ABDA1FF);
+  static const purple15 = Color(0x26BDA1FF);
+  static const purple20 = Color(0x33BDA1FF);
+  static const purple30 = Color(0x4DBDA1FF);
+  static const purple45 = Color(0x73BDA1FF);
+  static const purple60 = Color(0x99BDA1FF);
+
+  static const green = Color(0xFFA1FFD2);
+  static const green60 = Color(0x99A1FFD2);
+  static const green30 = Color(0x4DA1FFD2);
+  static const green15 = Color(0x26A1FFD2);
+
+  static const greenDark = Color(0xFF2C6E4E);
+  static const greenDark30 = Color(0x4D2C6E4E);
+
+  static const greyDark = Color(0xFF18181A);
+  static const greyDark40 = Color(0x6618181A);
+  static const greyDark00 = Color(0x0018181A);
+
+  static const greyLight = Color(0xFF1E1E21);
+  static const greyLight00 = Color(0x001E1E21);
+
+  static const greyDarkest = Color(0xFF18181A);
+
+  static const white90 = Color(0xE6FFFFFF);
+  static const white60 = Color(0x99FFFFFF);
+  static const white45 = Color(0x73FFFFFF);
+  static const white30 = Color(0x4DFFFFFF);
+  static const white20 = Color(0x33FFFFFF);
+  static const white15 = Color(0x26FFFFFF);
+  static const white03 = Color(0x08FFFFFF);
+
+  static const black20 = Color(0x33000000);
+  static const black30 = Color(0x4D000000);
+  static const black50 = Color(0x80000000);
+  static const black70 = Color(0xB3000000);
+  static const black80 = Color(0xCC000000);
+  static const black85 = Color(0xD9000000);
+  static const black90 = Color(0xE6000000);
+
+  Color primary = purple;
+  Color primary60 = purple60;
+  Color primary45 = purple45;
+  Color primary30 = purple30;
+  Color primary20 = purple20;
+  Color primary15 = purple15;
+  Color primary10 = purple10;
+
+  Color success = green;
+  Color success60 = green60;
+  Color success30 = green30;
+  Color success15 = green15;
+
+  Color successDark = greenDark;
+  Color successDark30 = greenDark30;
+
+  Color background = greyDark;
+  Color background40 = greyDark40;
+  Color background00 = greyDark00;
+
+  Color backgroundDark = greyLight;
+  Color backgroundDark00 = greyLight00;
+
+  Color backgroundDarkest = greyDarkest;
+
+  Color text = white90;
+  Color text60 = white60;
+  Color text45 = white45;
+  Color text30 = white30;
+  Color text20 = white20;
+  Color text15 = white15;
+  Color text03 = white03;
+
+  Color overlay20 = black20;
+  Color overlay30 = black20;
+  Color overlay50 = black50;
+  Color overlay70 = black70;
+  Color overlay80 = black80;
+  Color overlay85 = black85;
+  Color overlay90 = black90;
+
+  SystemUiOverlayStyle statusBar =
+      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow boxShadow = BoxShadow(color: Colors.transparent, offset: Offset(0, 5), blurRadius: 15);
+}
