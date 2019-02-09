@@ -390,7 +390,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "themeHeader": "Theme",
+    "themeHeader": "Temă",
     "@themeHeader": {
         "description": "theme_header",
         "type": "text",

@@ -127,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("分享Kalium"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("看看Kalium！ Banano的官方Android錢包！"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("系統默認"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("主題"),
     "to" : MessageLookupByLibrary.simpleMessage("至："),
     "tooManyFailedAttempts" : MessageLookupByLibrary.simpleMessage("解鎖失敗太多次"),
     "transactions" : MessageLookupByLibrary.simpleMessage("交易"),

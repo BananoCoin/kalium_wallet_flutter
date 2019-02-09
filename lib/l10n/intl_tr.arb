@@ -366,7 +366,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "themeHeader": "Theme",
+    "themeHeader": "Tema",
     "@themeHeader": {
         "description": "theme_header",
         "type": "text",
