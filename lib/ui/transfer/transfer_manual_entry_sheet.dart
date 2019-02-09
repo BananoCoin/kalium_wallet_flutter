@@ -128,6 +128,14 @@ class AppTransferManualEntrySheet {
                                         width: 48,
                                         height: 48,
                                         child: FlatButton(
+                                          highlightColor:
+                                              StateContainer.of(context)
+                                                  .curTheme
+                                                  .primary15,
+                                          splashColor:
+                                              StateContainer.of(context)
+                                                  .curTheme
+                                                  .primary30,
                                           child: Icon(AppIcons.paste,
                                               size: 20,
                                               color: StateContainer.of(context)

@@ -369,7 +369,7 @@ class _AppHomePageState extends State<AppHomePage>
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           onRefresh: _refresh,
           isRefreshing: _isRefreshing,
-          child: ListView (
+          child: ListView(
             padding: EdgeInsets.fromLTRB(0, 5.0, 0, 15.0),
             children: <Widget>[
               _buildLoadingTransactionCard(
@@ -1209,26 +1209,24 @@ class _AppHomePageState extends State<AppHomePage>
         children: <Widget>[
           Container(
             width: 90.0,
-            height: 120.0,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 5, left: 5),
-                  height: 50,
-                  width: 50,
-                  child: FlatButton(
-                      onPressed: () {
-                        _scaffoldKey.currentState.openDrawer();
-                      },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(50.0)),
-                      padding: EdgeInsets.all(0.0),
-                      child: Icon(AppIcons.settings,
-                          color: StateContainer.of(context).curTheme.text,
-                          size: 24)),
-                ),
-              ],
+            height: 120,
+            alignment: Alignment(-1, -1),
+            child: Container(
+              margin: EdgeInsets.only(top: 5, left: 5),
+              height: 50,
+              width: 50,
+              child: FlatButton(
+                  highlightColor: StateContainer.of(context).curTheme.text15,
+                  splashColor: StateContainer.of(context).curTheme.text15,
+                  onPressed: () {
+                    _scaffoldKey.currentState.openDrawer();
+                  },
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(50.0)),
+                  padding: EdgeInsets.all(0.0),
+                  child: Icon(AppIcons.settings,
+                      color: StateContainer.of(context).curTheme.text,
+                      size: 24)),
             ),
           ),
           _getBalanceWidget(context),
@@ -1236,6 +1234,8 @@ class _AppHomePageState extends State<AppHomePage>
             width: 90.0,
             height: 90.0,
             child: FlatButton(
+                highlightColor: StateContainer.of(context).curTheme.text15,
+                splashColor: StateContainer.of(context).curTheme.text15,
                 child: _monkeyOverlayOpen
                     ? SizedBox()
                     : Stack(children: <Widget>[
@@ -1273,120 +1273,123 @@ class _AppHomePageState extends State<AppHomePage>
   Widget _getBalanceWidget(BuildContext context) {
     if (StateContainer.of(context).wallet.loading) {
       // Placeholder for balance text
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Container(
-            child: Stack(
-              alignment: AlignmentDirectional(0, 0),
-              children: <Widget>[
-                Text(
-                  "1234567",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "NunitoSans",
-                      fontSize: AppFontSizes.small,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.transparent),
-                ),
-                Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text20,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Text(
-                      "1234567",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: "NunitoSans",
-                          fontSize: AppFontSizes.small - 3,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.transparent),
+      return Container(
+        padding: EdgeInsets.symmetric(vertical: 14),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              child: Stack(
+                alignment: AlignmentDirectional(0, 0),
+                children: <Widget>[
+                  Text(
+                    "1234567",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: "NunitoSans",
+                        fontSize: AppFontSizes.small,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.transparent),
+                  ),
+                  Opacity(
+                    opacity: _opacityAnimation.value,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.text20,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Text(
+                        "1234567",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: "NunitoSans",
+                            fontSize: AppFontSizes.small - 3,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.transparent),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            constraints: BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width - 225),
-            child: Stack(
-              alignment: AlignmentDirectional(0, 0),
-              children: <Widget>[
-                AutoSizeText(
-                  "1234567",
-                  style: TextStyle(
-                      fontFamily: "NunitoSans",
-                      fontSize: AppFontSizes.largestc,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.transparent),
-                  maxLines: 1,
-                  stepGranularity: 0.1,
-                  minFontSize: 1,
-                ),
-                Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.primary60,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: AutoSizeText(
-                      "1234567",
-                      style: TextStyle(
-                          fontFamily: "NunitoSans",
-                          fontSize: AppFontSizes.largestc - 8,
-                          fontWeight: FontWeight.w900,
-                          color: Colors.transparent),
-                      maxLines: 1,
-                      stepGranularity: 0.1,
-                      minFontSize: 1,
+            Container(
+              constraints: BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width - 225),
+              child: Stack(
+                alignment: AlignmentDirectional(0, 0),
+                children: <Widget>[
+                  AutoSizeText(
+                    "1234567",
+                    style: TextStyle(
+                        fontFamily: "NunitoSans",
+                        fontSize: AppFontSizes.largestc,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.transparent),
+                    maxLines: 1,
+                    stepGranularity: 0.1,
+                    minFontSize: 1,
+                  ),
+                  Opacity(
+                    opacity: _opacityAnimation.value,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.primary60,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: AutoSizeText(
+                        "1234567",
+                        style: TextStyle(
+                            fontFamily: "NunitoSans",
+                            fontSize: AppFontSizes.largestc - 8,
+                            fontWeight: FontWeight.w900,
+                            color: Colors.transparent),
+                        maxLines: 1,
+                        stepGranularity: 0.1,
+                        minFontSize: 1,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Container(
-            child: Stack(
-              alignment: AlignmentDirectional(0, 0),
-              children: <Widget>[
-                Text(
-                  "1234567",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: "NunitoSans",
-                      fontSize: AppFontSizes.small,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.transparent),
-                ),
-                Opacity(
-                  opacity: _opacityAnimation.value,
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: StateContainer.of(context).curTheme.text20,
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Text(
-                      "1234567",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: "NunitoSans",
-                          fontSize: AppFontSizes.small - 3,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.transparent),
+            Container(
+              child: Stack(
+                alignment: AlignmentDirectional(0, 0),
+                children: <Widget>[
+                  Text(
+                    "1234567",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: "NunitoSans",
+                        fontSize: AppFontSizes.small,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.transparent),
+                  ),
+                  Opacity(
+                    opacity: _opacityAnimation.value,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: StateContainer.of(context).curTheme.text20,
+                        borderRadius: BorderRadius.circular(100),
+                      ),
+                      child: Text(
+                        "1234567",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: "NunitoSans",
+                            fontSize: AppFontSizes.small - 3,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.transparent),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       );
     }
     return GestureDetector(
@@ -1414,74 +1417,82 @@ class _AppHomePageState extends State<AppHomePage>
           SharedPrefsUtil.inst.setPriceConversion(PriceConversion.BTC);
         }
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-              StateContainer.of(context).wallet.getLocalCurrencyPrice(
-                  locale: StateContainer.of(context).currencyLocale),
-              textAlign: TextAlign.center,
-              style: _pricesHidden ? AppStyles.textStyleCurrencyAltHidden(context) : AppStyles.textStyleCurrencyAlt(context)),
-          Container(
-            margin: EdgeInsets.only(right: 15),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  constraints: BoxConstraints(
-                      maxWidth: MediaQuery.of(context).size.width - 225),
-                  child: AutoSizeText.rich(
-                    TextSpan(
-                      children: [
-                        // Currency Icon
-                        TextSpan(
-                          text: "",
-                          style: TextStyle(
-                            fontFamily: 'AppIcons',
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontSize: 23.0,
+      child: Container(
+        padding: EdgeInsets.symmetric(vertical: 14),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+                StateContainer.of(context).wallet.getLocalCurrencyPrice(
+                    locale: StateContainer.of(context).currencyLocale),
+                textAlign: TextAlign.center,
+                style: _pricesHidden
+                    ? AppStyles.textStyleCurrencyAltHidden(context)
+                    : AppStyles.textStyleCurrencyAlt(context)),
+            Container(
+              margin: EdgeInsets.only(right: 15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width - 225),
+                    child: AutoSizeText.rich(
+                      TextSpan(
+                        children: [
+                          // Currency Icon
+                          TextSpan(
+                            text: "",
+                            style: TextStyle(
+                              fontFamily: 'AppIcons',
+                              color:
+                                  StateContainer.of(context).curTheme.primary,
+                              fontSize: 23.0,
+                            ),
                           ),
-                        ),
-                        // Main balance text
-                        TextSpan(
-                          text: StateContainer.of(context)
-                              .wallet
-                              .getAccountBalanceDisplay(),
-                          style: AppStyles.textStyleCurrency(context),
-                        ),
-                      ],
+                          // Main balance text
+                          TextSpan(
+                            text: StateContainer.of(context)
+                                .wallet
+                                .getAccountBalanceDisplay(),
+                            style: AppStyles.textStyleCurrency(context),
+                          ),
+                        ],
+                      ),
+                      maxLines: 1,
+                      style: TextStyle(fontSize: 28.0),
+                      stepGranularity: 0.1,
+                      minFontSize: 1,
                     ),
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 28.0),
-                    stepGranularity: 0.1,
-                    minFontSize: 1,
                   ),
-                ),
+                ],
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                Icon(
+                    _priceConversion == PriceConversion.BTC
+                        ? AppIcons.btc
+                        : AppIcons.nanocurrency,
+                    color: _priceConversion == PriceConversion.NONE
+                        ? Colors.transparent
+                        : StateContainer.of(context).curTheme.text60,
+                    size: 14),
+                Text(
+                    _priceConversion == PriceConversion.BTC
+                        ? StateContainer.of(context).wallet.btcPrice
+                        : StateContainer.of(context).wallet.nanoPrice,
+                    textAlign: TextAlign.center,
+                    style: _pricesHidden
+                        ? AppStyles.textStyleCurrencyAltHidden(context)
+                        : AppStyles.textStyleCurrencyAlt(context)),
               ],
             ),
-          ),
-          Row(
-            children: <Widget>[
-              Icon(
-                  _priceConversion == PriceConversion.BTC
-                      ? AppIcons.btc
-                      : AppIcons.nanocurrency,
-                  color: _priceConversion == PriceConversion.NONE
-                      ? Colors.transparent
-                      : StateContainer.of(context).curTheme.text60,
-                  size: 14),
-              Text(
-                  _priceConversion == PriceConversion.BTC
-                      ? StateContainer.of(context).wallet.btcPrice
-                      : StateContainer.of(context).wallet.nanoPrice,
-                  textAlign: TextAlign.center,
-                  style: _pricesHidden ? AppStyles.textStyleCurrencyAltHidden(context) : AppStyles.textStyleCurrencyAlt(context)),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -1717,10 +1728,9 @@ class MonkeyOverlay extends ModalRoute<void> {
 class _SizeTransitionNoClip extends AnimatedWidget {
   final Widget child;
 
-  const _SizeTransitionNoClip({
-    @required Animation<double> sizeFactor,
-    this.child
-  }) : super(listenable: sizeFactor);
+  const _SizeTransitionNoClip(
+      {@required Animation<double> sizeFactor, this.child})
+      : super(listenable: sizeFactor);
 
   @override
   Widget build(BuildContext context) {

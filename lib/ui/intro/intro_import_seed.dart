@@ -87,6 +87,14 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                       height: 50,
                                       width: 50,
                                       child: FlatButton(
+                                          highlightColor:
+                                              StateContainer.of(context)
+                                                  .curTheme
+                                                  .text15,
+                                          splashColor:
+                                              StateContainer.of(context)
+                                                  .curTheme
+                                                  .text15,
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },
@@ -162,6 +170,14 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                           width: 48,
                                           height: 48,
                                           child: FlatButton(
+                                            highlightColor:
+                                                StateContainer.of(context)
+                                                    .curTheme
+                                                    .primary15,
+                                            splashColor:
+                                                StateContainer.of(context)
+                                                    .curTheme
+                                                    .primary30,
                                             child: Icon(AppIcons.paste,
                                                 size: 20,
                                                 color:
@@ -260,10 +276,10 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                           height: 50,
                           width: 50,
                           child: FlatButton(
-                              splashColor:
-                                  StateContainer.of(context).curTheme.primary30,
                               highlightColor:
                                   StateContainer.of(context).curTheme.primary15,
+                              splashColor:
+                                  StateContainer.of(context).curTheme.primary30,
                               onPressed: () {
                                 _seedInputFocusNode.unfocus();
                                 // If seed valid, log them in

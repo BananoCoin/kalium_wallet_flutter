@@ -51,34 +51,52 @@ class ContactDetailsSheet {
                       height: 50,
                       margin: EdgeInsets.only(top: 10.0, left: 10.0),
                       child: FlatButton(
+                        highlightColor:
+                            StateContainer.of(context).curTheme.text15,
+                        splashColor: StateContainer.of(context).curTheme.text15,
                         onPressed: () {
-                          AppDialogs.showConfirmDialog(context,
-                                                          AppLocalization.of(context).removeContact,
-                                                          AppLocalization.of(context).removeContactConfirmation.replaceAll('%1', contact.name),
-                                                          CaseChange.toUpperCase(AppLocalization.of(context).yes, context),
-                          () {
+                          AppDialogs.showConfirmDialog(
+                              context,
+                              AppLocalization.of(context).removeContact,
+                              AppLocalization.of(context)
+                                  .removeContactConfirmation
+                                  .replaceAll('%1', contact.name),
+                              CaseChange.toUpperCase(
+                                  AppLocalization.of(context).yes, context),
+                              () {
                             DBHelper dbHelper = DBHelper();
                             dbHelper.deleteContact(contact).then((deleted) {
                               if (deleted) {
                                 // Delete image if exists
                                 if (contact.monkeyPath != null) {
-                                  if (File("$documentsDirectory/${contact.monkeyPath}").existsSync()) {
-                                    File("$documentsDirectory/${contact.monkeyPath}").delete();
+                                  if (File(
+                                          "$documentsDirectory/${contact.monkeyPath}")
+                                      .existsSync()) {
+                                    File("$documentsDirectory/${contact.monkeyPath}")
+                                        .delete();
                                   }
                                 }
-                                EventTaxiImpl.singleton().fire(ContactRemovedEvent(contact: contact));
-                                EventTaxiImpl.singleton().fire(ContactModifiedEvent(contact: contact));
-                                UIUtil.showSnackbar(AppLocalization.of(context).contactRemoved.replaceAll("%1", contact.name), context);
+                                EventTaxiImpl.singleton().fire(
+                                    ContactRemovedEvent(contact: contact));
+                                EventTaxiImpl.singleton().fire(
+                                    ContactModifiedEvent(contact: contact));
+                                UIUtil.showSnackbar(
+                                    AppLocalization.of(context)
+                                        .contactRemoved
+                                        .replaceAll("%1", contact.name),
+                                    context);
                                 Navigator.of(context).pop();
                               } else {
                                 // TODO - error for failing to delete contact
                               }
                             });
                           },
-                          cancelText: CaseChange.toUpperCase(AppLocalization.of(context).no, context));
+                              cancelText: CaseChange.toUpperCase(
+                                  AppLocalization.of(context).no, context));
                         },
                         child: Icon(AppIcons.trashcan,
-                            size: 24, color: StateContainer.of(context).curTheme.text),
+                            size: 24,
+                            color: StateContainer.of(context).curTheme.text),
                         padding: EdgeInsets.all(13.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0)),
@@ -93,7 +111,9 @@ class ContactDetailsSheet {
                       child: Column(
                         children: <Widget>[
                           AutoSizeText(
-                            CaseChange.toUpperCase(AppLocalization.of(context).contactHeader, context),
+                            CaseChange.toUpperCase(
+                                AppLocalization.of(context).contactHeader,
+                                context),
                             style: AppStyles.textStyleHeader(context),
                             textAlign: TextAlign.center,
                             maxLines: 1,
@@ -108,14 +128,19 @@ class ContactDetailsSheet {
                       height: 50,
                       margin: EdgeInsets.only(top: 10.0, right: 10.0),
                       child: FlatButton(
+                        highlightColor:
+                            StateContainer.of(context).curTheme.text15,
+                        splashColor: StateContainer.of(context).curTheme.text15,
                         onPressed: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (BuildContext context) {
-                            return UIUtil.showAccountWebview(context, contact.address);
+                            return UIUtil.showAccountWebview(
+                                context, contact.address);
                           }));
                         },
                         child: Icon(AppIcons.search,
-                            size: 24, color: StateContainer.of(context).curTheme.text),
+                            size: 24,
+                            color: StateContainer.of(context).curTheme.text),
                         padding: EdgeInsets.all(13.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0)),
@@ -131,8 +156,11 @@ class ContactDetailsSheet {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       // monKey container
-                      contact.monkeyWidgetLarge != null ?
-                        contact.monkeyWidgetLarge : SizedBox(width: smallScreen(context)?130:200, height: smallScreen(context)?130:200),
+                      contact.monkeyWidgetLarge != null
+                          ? contact.monkeyWidgetLarge
+                          : SizedBox(
+                              width: smallScreen(context) ? 130 : 200,
+                              height: smallScreen(context) ? 130 : 200),
                       // Contact Name container
                       Container(
                         width: double.infinity,
@@ -143,7 +171,9 @@ class ContactDetailsSheet {
                         padding: EdgeInsets.symmetric(
                             horizontal: 25.0, vertical: 12.0),
                         decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.backgroundDarkest,
+                          color: StateContainer.of(context)
+                              .curTheme
+                              .backgroundDarkest,
                           borderRadius: BorderRadius.circular(25),
                         ),
                         child: Text(
@@ -168,8 +198,8 @@ class ContactDetailsSheet {
                           if (_addressCopiedTimer != null) {
                             _addressCopiedTimer.cancel();
                           }
-                          _addressCopiedTimer = new Timer(
-                              const Duration(milliseconds: 800), () {
+                          _addressCopiedTimer =
+                              new Timer(const Duration(milliseconds: 800), () {
                             setState(() {
                               _addressCopied = false;
                             });
@@ -184,22 +214,29 @@ class ContactDetailsSheet {
                           padding: EdgeInsets.symmetric(
                               horizontal: 25.0, vertical: 15.0),
                           decoration: BoxDecoration(
-                            color: StateContainer.of(context).curTheme.backgroundDarkest,
+                            color: StateContainer.of(context)
+                                .curTheme
+                                .backgroundDarkest,
                             borderRadius: BorderRadius.circular(25),
                           ),
-                          child: UIUtil.threeLineAddressText(context, 
-                            contact.address,
-                            type: _addressCopied ? ThreeLineAddressTextType.SUCCESS_FULL : ThreeLineAddressTextType.PRIMARY
-                          ),
+                          child: UIUtil.threeLineAddressText(
+                              context, contact.address,
+                              type: _addressCopied
+                                  ? ThreeLineAddressTextType.SUCCESS_FULL
+                                  : ThreeLineAddressTextType.PRIMARY),
                         ),
                       ),
                       // Address Copied text container
                       Container(
                         margin: EdgeInsets.only(top: 5, bottom: 5),
-                        child: Text(_addressCopied ? AppLocalization.of(context).addressCopied : "",
+                        child: Text(
+                            _addressCopied
+                                ? AppLocalization.of(context).addressCopied
+                                : "",
                             style: TextStyle(
                               fontSize: 14.0,
-                              color: StateContainer.of(context).curTheme.success,
+                              color:
+                                  StateContainer.of(context).curTheme.success,
                               fontFamily: 'NunitoSans',
                               fontWeight: FontWeight.w600,
                             )),
@@ -215,19 +252,22 @@ class ContactDetailsSheet {
                       Row(
                         children: <Widget>[
                           // Send Button
-                          AppButton.buildAppButton(context, 
+                          AppButton.buildAppButton(
+                              context,
                               AppButtonType.PRIMARY,
                               AppLocalization.of(context).send,
                               Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                             Navigator.of(context).pop();
-                            AppSendSheet(contact: contact).mainBottomSheet(context);
+                            AppSendSheet(contact: contact)
+                                .mainBottomSheet(context);
                           }),
                         ],
                       ),
                       Row(
                         children: <Widget>[
                           // Close Button
-                          AppButton.buildAppButton(context, 
+                          AppButton.buildAppButton(
+                              context,
                               AppButtonType.PRIMARY_OUTLINE,
                               AppLocalization.of(context).close,
                               Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {

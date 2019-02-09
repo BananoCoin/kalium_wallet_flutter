@@ -111,6 +111,10 @@ class AppChangeRepresentativeSheet {
                             height: 50,
                             margin: EdgeInsets.only(top: 10.0, left: 10.0),
                             child: FlatButton(
+                              highlightColor:
+                                  StateContainer.of(context).curTheme.text15,
+                              splashColor:
+                                  StateContainer.of(context).curTheme.text15,
                               onPressed: () {
                                 AppDialogs.showInfoDialog(
                                     context,
@@ -155,6 +159,10 @@ class AppChangeRepresentativeSheet {
                             height: 50,
                             margin: EdgeInsets.only(top: 10.0, right: 10.0),
                             child: FlatButton(
+                              highlightColor:
+                                  StateContainer.of(context).curTheme.text15,
+                              splashColor:
+                                  StateContainer.of(context).curTheme.text15,
                               onPressed: () {
                                 UIUtil.cancelLockEvent();
                                 BarcodeScanner.scan(OverlayTheme.KALIUM)
@@ -300,6 +308,14 @@ class AppChangeRepresentativeSheet {
                                                 width: 48.0,
                                                 height: 48.0,
                                                 child: FlatButton(
+                                                  highlightColor:
+                                                      StateContainer.of(context)
+                                                          .curTheme
+                                                          .primary15,
+                                                  splashColor:
+                                                      StateContainer.of(context)
+                                                          .curTheme
+                                                          .primary30,
                                                   padding: EdgeInsets.all(15.0),
                                                   onPressed: () {
                                                     if (!_showPasteButton) {

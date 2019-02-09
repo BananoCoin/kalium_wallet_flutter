@@ -172,6 +172,9 @@ class AppSendSheet {
                       height: 50,
                       margin: EdgeInsets.only(top: 10.0, left: 10.0),
                       child: FlatButton(
+                        highlightColor:
+                            StateContainer.of(context).curTheme.text15,
+                        splashColor: StateContainer.of(context).curTheme.text15,
                         onPressed: () {
                           Navigator.pop(context);
                         },

@@ -43,6 +43,12 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                               height: 50,
                               width: 50,
                               child: FlatButton(
+                                  highlightColor: StateContainer.of(context)
+                                      .curTheme
+                                      .text15,
+                                  splashColor: StateContainer.of(context)
+                                      .curTheme
+                                      .text15,
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
@@ -51,7 +57,10 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                                           BorderRadius.circular(50.0)),
                                   padding: EdgeInsets.all(0.0),
                                   child: Icon(AppIcons.back,
-                                      color: StateContainer.of(context).curTheme.text, size: 24)),
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .text,
+                                      size: 24)),
                             ),
                           ],
                         ),
@@ -77,32 +86,34 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                   ),
                 ),
 
-               //A column with YES and NO buttons
+                //A column with YES and NO buttons
                 Column(
                   children: <Widget>[
                     Row(
                       children: <Widget>[
                         // YES Button
-                        AppButton.buildAppButton(context, 
+                        AppButton.buildAppButton(
+                            context,
                             AppButtonType.PRIMARY,
                             AppLocalization.of(context).yes.toUpperCase(),
-                            Dimens.BUTTON_TOP_DIMENS, 
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (BuildContext context) {
-                              return new PinScreen(PinOverlayType.NEW_PIN, (_pinEnteredCallback));
-                            }));
+                            Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return new PinScreen(
+                                PinOverlayType.NEW_PIN, (_pinEnteredCallback));
+                          }));
                         }),
                       ],
                     ),
                     Row(
                       children: <Widget>[
                         // NO BUTTON
-                        AppButton.buildAppButton(context, 
+                        AppButton.buildAppButton(
+                            context,
                             AppButtonType.PRIMARY_OUTLINE,
                             AppLocalization.of(context).no.toUpperCase(),
                             Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                              Navigator.of(context).pop();
+                          Navigator.of(context).pop();
                         }),
                       ],
                     ),

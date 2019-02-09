@@ -1113,6 +1113,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                       width: 40,
                       margin: EdgeInsets.only(right: 10, left: 10),
                       child: FlatButton(
+                          highlightColor:
+                              StateContainer.of(context).curTheme.text15,
+                          splashColor:
+                              StateContainer.of(context).curTheme.text15,
                           onPressed: () {
                             setState(() {
                               _contactsOpen = false;
@@ -1141,6 +1145,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                       width: 40,
                       margin: EdgeInsets.only(right: 5),
                       child: FlatButton(
+                          highlightColor:
+                              StateContainer.of(context).curTheme.text15,
+                          splashColor:
+                              StateContainer.of(context).curTheme.text15,
                           onPressed: () {
                             _importContacts();
                           },
@@ -1157,6 +1165,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                       width: 40,
                       margin: EdgeInsets.only(right: 20),
                       child: FlatButton(
+                          highlightColor:
+                              StateContainer.of(context).curTheme.text15,
+                          splashColor:
+                              StateContainer.of(context).curTheme.text15,
                           onPressed: () {
                             _exportContacts();
                           },
@@ -1338,6 +1350,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                       width: 40,
                       margin: EdgeInsets.only(right: 10, left: 10),
                       child: FlatButton(
+                          highlightColor:
+                              StateContainer.of(context).curTheme.text15,
+                          splashColor:
+                              StateContainer.of(context).curTheme.text15,
                           onPressed: () {
                             setState(() {
                               _securityOpen = false;
