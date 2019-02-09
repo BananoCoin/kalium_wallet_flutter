@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("Chia sẻ Kalium"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Hãy xem Kalium! Ví Android chính thức của Banano."),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Mặc định hệ thống"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("Chủ đề"),
     "to" : MessageLookupByLibrary.simpleMessage("tới"),
     "transactions" : MessageLookupByLibrary.simpleMessage("Giao dịch"),
     "transferClose" : MessageLookupByLibrary.simpleMessage("Nhấn vào bất kỳ đâu để đóng cửa sổ."),

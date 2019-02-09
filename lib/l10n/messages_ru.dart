@@ -127,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("Поделиться Kalium"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Оцените Kalium! Официальный Android кошелёк Banano!"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("По умолчанию"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("тема"),
     "to" : MessageLookupByLibrary.simpleMessage("на"),
     "tooManyFailedAttempts" : MessageLookupByLibrary.simpleMessage("Слишком много неудачных попыток разблокировки."),
     "transactions" : MessageLookupByLibrary.simpleMessage("Транзакции"),

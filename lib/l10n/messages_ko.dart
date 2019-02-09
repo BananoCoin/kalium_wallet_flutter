@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("Kalium 공유 "),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Kalium을 확인하세요! Banano의 공식 Android 지갑!"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("전화 언어"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("테마"),
     "to" : MessageLookupByLibrary.simpleMessage("받는 사람"),
     "transactions" : MessageLookupByLibrary.simpleMessage("거래"),
     "viewDetails" : MessageLookupByLibrary.simpleMessage("세부 정보보기"),

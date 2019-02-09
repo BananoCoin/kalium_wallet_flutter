@@ -121,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("Oszd meg a Kaliumot"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Próbáld ki a Kaliumot, a Banano hivatalos Androidos tárcáját!"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Rendszer alapértelmezett"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("Téma"),
     "to" : MessageLookupByLibrary.simpleMessage("Küldés ide"),
     "tooManyFailedAttempts" : MessageLookupByLibrary.simpleMessage("Túl sok hibás feloldási kísérlet."),
     "transactions" : MessageLookupByLibrary.simpleMessage("Tranzakciók"),

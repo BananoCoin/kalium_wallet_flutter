@@ -366,7 +366,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "themeHeader": "Theme",
+    "themeHeader": "विषय",
     "@themeHeader": {
         "description": "theme_header",
         "type": "text",

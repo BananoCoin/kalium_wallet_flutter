@@ -112,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("केलियम साझा (शेयर) करें"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("केलियम - बनानो का एंड्रॉइड वॉलेट देखें!"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("डिवाइस की भाषा"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("विषय"),
     "to" : MessageLookupByLibrary.simpleMessage("इसको - "),
     "transactions" : MessageLookupByLibrary.simpleMessage("लेनदेन"),
     "viewDetails" : MessageLookupByLibrary.simpleMessage("अधिक जानकारी देखें "),

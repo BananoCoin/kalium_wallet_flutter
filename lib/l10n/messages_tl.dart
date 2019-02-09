@@ -127,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("I-share ang Kalium"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Tingnan ang Kalium! Ang opisyal na Android Wallet ng Banano!"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Default na System"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("Tema"),
     "to" : MessageLookupByLibrary.simpleMessage("Sa"),
     "tooManyFailedAttempts" : MessageLookupByLibrary.simpleMessage("Masyadong madaming maling unlock attempts."),
     "transactions" : MessageLookupByLibrary.simpleMessage("Mga transaksyon"),

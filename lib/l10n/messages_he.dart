@@ -127,6 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "shareKalium" : MessageLookupByLibrary.simpleMessage("שתף את קאליום"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("בוא לנסות את קאליום. הארנק הרשמי של באנאנו!"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("בְּרִירַת מֶחדָל"),
+    "themeHeader" : MessageLookupByLibrary.simpleMessage("נושא"),
     "to" : MessageLookupByLibrary.simpleMessage("מ"),
     "tooManyFailedAttempts" : MessageLookupByLibrary.simpleMessage("יותר מדי נסיונות כושלים לשחרור הנעילה."),
     "transactions" : MessageLookupByLibrary.simpleMessage("טרנסקציות"),
