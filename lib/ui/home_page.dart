@@ -575,7 +575,7 @@ class _AppHomePageState extends State<AppHomePage>
       ),
       body: SafeArea(
         minimum: EdgeInsets.only(
-            top: MediaQuery.of(context).size.height * 0.05,
+            top: MediaQuery.of(context).size.height * 0.045,
             bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -1205,7 +1205,7 @@ class _AppHomePageState extends State<AppHomePage>
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
-      margin: EdgeInsets.only(left: 14.0, right: 14.0),
+      margin: EdgeInsets.only(left: 14.0, right: 14.0, top: MediaQuery.of(context).size.height * 0.005),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

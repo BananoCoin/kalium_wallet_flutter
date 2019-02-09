@@ -799,13 +799,12 @@ class _SettingsSheetState extends State<SettingsSheet>
       ),
       child: SafeArea(
         minimum: EdgeInsets.only(
-          bottom: 10,
           top: 60,
         ),
         child: Column(
           children: <Widget>[
             Container(
-              margin: EdgeInsets.only(left: 30.0),
+              margin: EdgeInsets.only(left: 30.0, bottom: 10, top: 5),
               child: Row(
                 children: <Widget>[
                   Text(
@@ -1119,7 +1118,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           children: <Widget>[
             // Back button and Contacts Text
             Container(
-              margin: EdgeInsets.only(bottom: 10.0),
+              margin: EdgeInsets.only(bottom: 10, top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
@@ -1357,14 +1356,13 @@ class _SettingsSheetState extends State<SettingsSheet>
       ),
       child: SafeArea(
         minimum: EdgeInsets.only(
-          bottom: 10,
           top: 60,
         ),
         child: Column(
           children: <Widget>[
             // Back button and Security Text
             Container(
-              margin: EdgeInsets.only(bottom: 10.0),
+              margin: EdgeInsets.only(bottom: 10, top: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
