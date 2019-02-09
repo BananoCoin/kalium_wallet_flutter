@@ -199,66 +199,70 @@ class _AppLockScreenState extends State<AppLockScreen> {
         body: Container(
             color: StateContainer.of(context).curTheme.background,
             width: double.infinity,
-            child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: _showLock
-                      ? Column(
+            child: SafeArea(
+              minimum: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.035,
+                top: MediaQuery.of(context).size.height * 0.1,
+              ),
+              child: Column(
+                children: <Widget>[
+                  Expanded(
+                    child: _showLock
+                        ? Column(
+                            children: <Widget>[
+                              Container(
+                                child: Icon(
+                                  AppIcons.lock,
+                                  size: 80,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary,
+                                ),
+                              ),
+                              Container(
+                                child: Text(
+                                  CaseChange.toUpperCase(
+                                      AppLocalization.of(context).locked,
+                                      context),
+                                  style:
+                                      AppStyles.textStyleHeaderColored(context),
+                                ),
+                                margin: EdgeInsets.only(top: 10),
+                              ),
+                            ],
+                          )
+                        : SizedBox(),
+                  ),
+                  _lockedOut
+                      ? Container(
+                          width: MediaQuery.of(context).size.width - 100,
+                          margin: EdgeInsets.symmetric(horizontal: 50),
+                          child: Text(
+                            AppLocalization.of(context).tooManyFailedAttempts,
+                            style: AppStyles.textStyleErrorMedium(context),
+                            textAlign: TextAlign.center,
+                          ),
+                        )
+                      : SizedBox(),
+                  _showUnlockButton
+                      ? Row(
                           children: <Widget>[
-                            Container(
-                              child: Icon(
-                                AppIcons.lock,
-                                size: 80,
-                                color:
-                                    StateContainer.of(context).curTheme.primary,
-                              ),
-                              margin: EdgeInsets.only(
-                                  top:
-                                      MediaQuery.of(context).size.height * 0.1),
-                            ),
-                            Container(
-                              child: Text(
-                                CaseChange.toUpperCase(
-                                    AppLocalization.of(context).locked,
-                                    context),
-                                style:
-                                    AppStyles.textStyleHeaderColored(context),
-                              ),
-                              margin: EdgeInsets.only(top: 10),
-                            ),
+                            AppButton.buildAppButton(
+                                context,
+                                AppButtonType.PRIMARY,
+                                _lockedOut
+                                    ? _countDownTxt
+                                    : AppLocalization.of(context).unlock,
+                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                              if (!_lockedOut) {
+                                _authenticate(transitions: true);
+                              }
+                            }, disabled: _lockedOut),
                           ],
                         )
                       : SizedBox(),
-                ),
-                _lockedOut
-                    ? Container(
-                        width: MediaQuery.of(context).size.width - 100,
-                        margin: EdgeInsets.symmetric(horizontal: 50),
-                        child: Text(
-                          AppLocalization.of(context).tooManyFailedAttempts,
-                          style: AppStyles.textStyleErrorMedium(context),
-                          textAlign: TextAlign.center,
-                        ),
-                      )
-                    : SizedBox(),
-                _showUnlockButton
-                    ? Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                              context,
-                              AppButtonType.PRIMARY,
-                              _lockedOut
-                                  ? _countDownTxt
-                                  : AppLocalization.of(context).unlock,
-                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                            if (!_lockedOut) {
-                              _authenticate(transitions: true);
-                            }
-                          }, disabled: _lockedOut),
-                        ],
-                      )
-                    : SizedBox(),
-              ],
+                ],
+              ),
             )));
   }
 }
