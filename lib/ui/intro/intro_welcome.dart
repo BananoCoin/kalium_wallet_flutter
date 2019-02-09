@@ -53,7 +53,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                                   animation: "main",
                                   fit: BoxFit.contain,
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),

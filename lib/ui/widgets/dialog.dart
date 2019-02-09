@@ -159,11 +159,60 @@ class AnimationLoadingOverlay extends ModalRoute<void> {
           ],
         );
       case AnimationType.TRANSFER_SEARCHING_QR:
-        return FlareActor("assets/searchseedqr_animation.flr",
-            animation: "main", fit: BoxFit.contain);
+        return Stack(
+          children: <Widget>[
+            Center(
+              child: FlareActor(
+                "assets/searchseedqr_animation_qronly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+              ),
+            ),
+            Center(
+              child: FlareActor(
+                "assets/searchseedqr_animation_glassonly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+              ),
+            ),
+            Center(
+              child: FlareActor(
+                "assets/searchseedqr_animation_magnifyingglassonly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+                color: StateContainer.of(context).curTheme.primary,
+              ),
+            ),
+          ],
+        );
       case AnimationType.TRANSFER_SEARCHING_MANUAL:
-        return FlareActor("assets/searchseedmanual_animation.flr",
-            animation: "main", fit: BoxFit.contain);
+        return Stack(
+          children: <Widget>[
+            Center(
+              child: FlareActor(
+                "assets/searchseedmanual_animation_seedonly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+                color: StateContainer.of(context).curTheme.primary30,
+              ),
+            ),
+            Center(
+              child: FlareActor(
+                "assets/searchseedmanual_animation_glassonly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+              ),
+            ),
+            Center(
+              child: FlareActor(
+                "assets/searchseedmanual_animation_magnifyingglassonly.flr",
+                animation: "main",
+                fit: BoxFit.contain,
+                color: StateContainer.of(context).curTheme.primary,
+              ),
+            ),
+          ],
+        );
       case AnimationType.TRANSFER_TRANSFERRING:
         return Stack(
           children: <Widget>[

@@ -39,9 +39,9 @@ import 'package:kalium_wallet_flutter/network/account_service.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 
 class _InheritedStateContainer extends InheritedWidget {
-   // Data is your entire state. In our case just 'User' 
+  // Data is your entire state. In our case just 'User'
   final StateContainerState data;
-   
+
   // You must pass through a child and your state.
   _InheritedStateContainer({
     Key key,
@@ -57,21 +57,20 @@ class _InheritedStateContainer extends InheritedWidget {
 }
 
 class StateContainer extends StatefulWidget {
-   // You must pass through a child. 
+  // You must pass through a child.
   final Widget child;
 
-  StateContainer({
-    @required this.child
-  });
+  StateContainer({@required this.child});
 
   // This is the secret sauce. Write your own 'of' method that will behave
   // Exactly like MediaQuery.of and Theme.of
   // It basically says 'get the data from the widget of this type.
   static StateContainerState of(BuildContext context) {
     return (context.inheritFromWidgetOfExactType(_InheritedStateContainer)
-            as _InheritedStateContainer).data;
+            as _InheritedStateContainer)
+        .data;
   }
-  
+
   @override
   StateContainerState createState() => StateContainerState();
 }
@@ -79,7 +78,7 @@ class StateContainer extends StatefulWidget {
 /// App InheritedWidget
 /// This is where we handle the global state and also where
 /// we interact with the server and make requests/handle+propagate responses
-/// 
+///
 /// Basically the central hub behind the entire app
 class StateContainerState extends State<StateContainer> {
   final Logger log = Logger("StateContainerState");
@@ -142,17 +141,20 @@ class StateContainerState extends State<StateContainer> {
 
   // Register RX event listenerss
   void _registerBus() {
-    _subscribeEventSub = EventTaxiImpl.singleton().registerTo<SubscribeEvent>().listen((event) {
+    _subscribeEventSub =
+        EventTaxiImpl.singleton().registerTo<SubscribeEvent>().listen((event) {
       handleSubscribeResponse(event.response);
     });
-    _historyEventSub = EventTaxiImpl.singleton().registerTo<HistoryEvent>().listen((event) {
+    _historyEventSub =
+        EventTaxiImpl.singleton().registerTo<HistoryEvent>().listen((event) {
       AccountHistoryResponse historyResponse = event.response;
       // Special handling if from transfer
       RequestItem topItem = AccountService.peek();
       if (topItem != null && topItem.fromTransfer) {
         AccountHistoryRequest origRequest = AccountService.pop().request;
         historyResponse.account = origRequest.account;
-        EventTaxiImpl.singleton().fire(TransferAccountHistoryEvent(response: historyResponse));
+        EventTaxiImpl.singleton()
+            .fire(TransferAccountHistoryEvent(response: historyResponse));
         return;
       }
 
@@ -162,16 +164,21 @@ class StateContainerState extends State<StateContainer> {
         // If current list doesn't contain this item, insert it and the rest of the items in list and exit loop
         if (!wallet.history.contains(item)) {
           int startIndex = 0; // Index to start inserting into the list
-          int lastIndex = historyResponse.history.indexWhere((item) => wallet.history.contains(item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
-          lastIndex = lastIndex <= 0 ? historyResponse.history.length : lastIndex;
+          int lastIndex = historyResponse.history.indexWhere((item) =>
+              wallet.history.contains(
+                  item)); // Last index of historyResponse to insert to (first index where item exists in wallet history)
+          lastIndex =
+              lastIndex <= 0 ? historyResponse.history.length : lastIndex;
           setState(() {
-            wallet.history.insertAll(0, historyResponse.history.getRange(startIndex, lastIndex));            
+            wallet.history.insertAll(
+                0, historyResponse.history.getRange(startIndex, lastIndex));
             // Send list to home screen
-            EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
+            EventTaxiImpl.singleton()
+                .fire(HistoryHomeEvent(items: wallet.history));
           });
           postedToHome = true;
           break;
-        }        
+        }
       }
       setState(() {
         wallet.historyLoading = false;
@@ -181,9 +188,10 @@ class StateContainerState extends State<StateContainer> {
       }
       AccountService.pop();
       AccountService.processQueue();
-      requestPending();      
+      requestPending();
     });
-    _priceEventSub = EventTaxiImpl.singleton().registerTo<PriceEvent>().listen((event) {
+    _priceEventSub =
+        EventTaxiImpl.singleton().registerTo<PriceEvent>().listen((event) {
       // PriceResponse's get pushed periodically, it wasn't a request we made so don't pop the queue
       setState(() {
         wallet.nanoPrice = event.response.nanoPrice.toString();
@@ -191,31 +199,39 @@ class StateContainerState extends State<StateContainer> {
         wallet.localCurrencyPrice = event.response.price.toString();
       });
     });
-    _blocksInfoEventSub = EventTaxiImpl.singleton().registerTo<BlocksInfoEvent>().listen((event) {
+    _blocksInfoEventSub =
+        EventTaxiImpl.singleton().registerTo<BlocksInfoEvent>().listen((event) {
       handleBlocksInfoResponse(event.response);
     });
-    _connStatusSub = EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((event) {
+    _connStatusSub =
+        EventTaxiImpl.singleton().registerTo<ConnStatusEvent>().listen((event) {
       if (event.status == ConnectionStatus.CONNECTED) {
         requestUpdate();
       } else {
         AccountService.initCommunication();
       }
     });
-    _callbackSub = EventTaxiImpl.singleton().registerTo<CallbackEvent>().listen((event) {
+    _callbackSub =
+        EventTaxiImpl.singleton().registerTo<CallbackEvent>().listen((event) {
       handleCallbackResponse(event.response);
     });
-    _processSub = EventTaxiImpl.singleton().registerTo<ProcessEvent>().listen((event) {
+    _processSub =
+        EventTaxiImpl.singleton().registerTo<ProcessEvent>().listen((event) {
       handleProcessResponse(event.response);
     });
-    _pendingSub = EventTaxiImpl.singleton().registerTo<PendingEvent>().listen((event) {
+    _pendingSub =
+        EventTaxiImpl.singleton().registerTo<PendingEvent>().listen((event) {
       handlePendingResponse(event.response);
     });
-    _errorSub = EventTaxiImpl.singleton().registerTo<ErrorEvent>().listen((event) {
+    _errorSub =
+        EventTaxiImpl.singleton().registerTo<ErrorEvent>().listen((event) {
       handleErrorResponse(event.response);
     });
-    _fcmUpdateSub = EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
+    _fcmUpdateSub =
+        EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
       SharedPrefsUtil.inst.getNotificationsOn().then((enabled) {
-        AccountService.sendRequest(FcmUpdateRequest(account: wallet.address, fcmToken: event.token, enabled: enabled));
+        AccountService.sendRequest(FcmUpdateRequest(
+            account: wallet.address, fcmToken: event.token, enabled: enabled));
       });
     });
   }
@@ -306,21 +322,25 @@ class StateContainerState extends State<StateContainer> {
 
   ///
   /// When an error is returned from server
-  /// 
+  ///
   void handleErrorResponse(ErrorResponse errorResponse) {
     RequestItem prevRequest = AccountService.pop();
     AccountService.processQueue();
-    if (errorResponse.error == null) { return; }
+    if (errorResponse.error == null) {
+      return;
+    }
     // 1) Unreceivable error, due to already having received the block typically
     // This is a no-op for now
 
     // 2) Process/work errors
-    if (errorResponse.error.toLowerCase().contains("process") || errorResponse.error.toLowerCase().contains("work")) {
+    if (errorResponse.error.toLowerCase().contains("process") ||
+        errorResponse.error.toLowerCase().contains("work")) {
       if (prevRequest != null && prevRequest.request is ProcessRequest) {
         ProcessRequest origRequest = prevRequest.request;
         if (origRequest.subType == BlockTypes.SEND) {
           // Send send failed event
-          EventTaxiImpl.singleton().fire(SendFailedEvent(response: errorResponse));
+          EventTaxiImpl.singleton()
+              .fire(SendFailedEvent(response: errorResponse));
         }
         pendingBlockMap.clear();
         pendingResponseBlockMap.clear();
@@ -330,7 +350,8 @@ class StateContainerState extends State<StateContainer> {
     }
     // 3) Error from transfer request
     if (prevRequest != null && prevRequest.fromTransfer) {
-      EventTaxiImpl.singleton().fire(TransferErrorEvent(response: errorResponse));
+      EventTaxiImpl.singleton()
+          .fire(TransferErrorEvent(response: errorResponse));
     }
   }
 
@@ -367,7 +388,8 @@ class StateContainerState extends State<StateContainer> {
           // Handle next receive if there is one, we store these in a Map also
           StateBlock frontier = pendingBlockMap.remove(processResponse.hash);
           if (frontier != null && pendingBlockMap.length > 0) {
-            StateBlock nextBlock = pendingBlockMap.remove(pendingBlockMap.keys.first);
+            StateBlock nextBlock =
+                pendingBlockMap.remove(pendingBlockMap.keys.first);
             nextBlock.previous = frontier.hash;
             nextBlock.representative = frontier.representative;
             nextBlock.setBalance(frontier.balance);
@@ -375,8 +397,11 @@ class StateContainerState extends State<StateContainer> {
             _getPrivKey().then((result) {
               nextBlock.sign(result);
               pendingBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
-              pendingResponseBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
-              AccountService.queueRequest(ProcessRequest(block: json.encode(nextBlock.toJson()), subType: nextBlock.subType));
+              pendingResponseBlockMap.putIfAbsent(
+                  nextBlock.hash, () => nextBlock);
+              AccountService.queueRequest(ProcessRequest(
+                  block: json.encode(nextBlock.toJson()),
+                  subType: nextBlock.subType));
               AccountService.processQueue();
             });
           }
@@ -388,7 +413,10 @@ class StateContainerState extends State<StateContainer> {
     } else {
       // From seed sweep, UI gets a different response
       doUpdate = false;
-      EventTaxiImpl.singleton().fire(TransferProcessEvent(account: previous.account, hash: processResponse.hash, balance: previous.balance));
+      EventTaxiImpl.singleton().fire(TransferProcessEvent(
+          account: previous.account,
+          hash: processResponse.hash,
+          balance: previous.balance));
     }
     if (doUpdate) {
       requestUpdate();
@@ -466,13 +494,14 @@ class StateContainerState extends State<StateContainer> {
     AccountService.pop();
     AccountService.processQueue();
   }
- 
+
   /// Handle blocks_info response
   /// Typically, this preceeds a process request. And we want to update
   /// that request with data from the previous block (which is what we got from this request)
   void handleBlocksInfoResponse(BlocksInfoResponse resp) {
     String hash = resp.blocks.keys.first;
-    StateBlock previousBlock = StateBlock.fromJson(json.decode(resp.blocks[hash].contents));
+    StateBlock previousBlock =
+        StateBlock.fromJson(json.decode(resp.blocks[hash].contents));
     StateBlock nextBlock = previousPendingMap.remove(hash);
     RequestItem lastRequest = AccountService.pop();
     if (nextBlock == null) {
@@ -484,7 +513,7 @@ class StateContainerState extends State<StateContainer> {
     nextBlock.setBalance(previousBlock.balance);
     if (nextBlock.subType == BlockTypes.SEND && nextBlock.balance == "0") {
       // In case of a max send, go back and update sendAmount with the balance
-      nextBlock.sendAmount = wallet.accountBalance.toString();      
+      nextBlock.sendAmount = wallet.accountBalance.toString();
     }
     _getPrivKey().then((result) {
       if (lastRequest.fromTransfer) {
@@ -494,14 +523,19 @@ class StateContainerState extends State<StateContainer> {
       }
       pendingResponseBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
       // If this is of type RECEIVE, update its data in our pending map
-      if (nextBlock.subType == BlockTypes.RECEIVE && !lastRequest.fromTransfer) {
+      if (nextBlock.subType == BlockTypes.RECEIVE &&
+          !lastRequest.fromTransfer) {
         StateBlock prevReceive = pendingBlockMap.remove(nextBlock.link);
         if (prevReceive != null) {
           print("put ${nextBlock.hash}");
           pendingBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
         }
       }
-      AccountService.queueRequest(ProcessRequest(block: json.encode(nextBlock.toJson()), subType: nextBlock.subType), fromTransfer: lastRequest.fromTransfer);
+      AccountService.queueRequest(
+          ProcessRequest(
+              block: json.encode(nextBlock.toJson()),
+              subType: nextBlock.subType),
+          fromTransfer: lastRequest.fromTransfer);
       AccountService.processQueue();
     });
   }
@@ -509,67 +543,88 @@ class StateContainerState extends State<StateContainer> {
   /// Handle callback response
   /// Typically this means we need to pocket transactions
   void handleCallbackResponse(CallbackResponse resp) {
-    if (_locked) { return; }
+    if (_locked) {
+      return;
+    }
     log.fine("Received callback ${json.encode(resp.toJson())}");
     if (resp.isSend != "true") {
       log.fine("Is not send");
       AccountService.processQueue();
       return;
     }
-    PendingResponseItem pendingItem = PendingResponseItem(hash: resp.hash, source: resp.account, amount: resp.amount);
+    PendingResponseItem pendingItem = PendingResponseItem(
+        hash: resp.hash, source: resp.account, amount: resp.amount);
     handlePendingItem(pendingItem);
   }
 
   void handlePendingItem(PendingResponseItem item) {
-    if (!AccountService.queueContainsRequestWithHash(item.hash) && !pendingBlockMap.containsKey(item.hash)) {
-      if (wallet.openBlock == null && !AccountService.queueContainsOpenBlock()) {
+    if (!AccountService.queueContainsRequestWithHash(item.hash) &&
+        !pendingBlockMap.containsKey(item.hash)) {
+      if (wallet.openBlock == null &&
+          !AccountService.queueContainsOpenBlock()) {
         requestOpen("0", item.hash, item.amount);
       } else if (pendingBlockMap.length == 0) {
-          requestReceive(wallet.frontier, item.hash, item.amount);
+        requestReceive(wallet.frontier, item.hash, item.amount);
       } else {
         pendingBlockMap.putIfAbsent(item.hash, () {
           return StateBlock(
-            subtype:BlockTypes.RECEIVE,
-            previous: wallet.frontier,
-            representative: wallet.representative,
-            balance:item.amount,
-            link:item.hash,
-            account:wallet.address
-          );
+              subtype: BlockTypes.RECEIVE,
+              previous: wallet.frontier,
+              representative: wallet.representative,
+              balance: item.amount,
+              link: item.hash,
+              account: wallet.address);
         });
       }
     }
   }
 
   Future<void> requestUpdate() async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+    if (wallet != null &&
+        wallet.address != null &&
+        Address(wallet.address).isValid()) {
       String uuid = await SharedPrefsUtil.inst.getUuid();
       String fcmToken = await FirebaseMessaging().getToken();
-      bool notificationsEnabled = await SharedPrefsUtil.inst.getNotificationsOn();
+      bool notificationsEnabled =
+          await SharedPrefsUtil.inst.getNotificationsOn();
       AccountService.clearQueue();
       pendingBlockMap.clear();
       pendingResponseBlockMap.clear();
       previousPendingMap.clear();
-      AccountService.queueRequest(SubscribeRequest(account:wallet.address, currency:curCurrency.getIso4217Code(), uuid:uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
-      AccountService.queueRequest(AccountHistoryRequest(account: wallet.address));
+      AccountService.queueRequest(SubscribeRequest(
+          account: wallet.address,
+          currency: curCurrency.getIso4217Code(),
+          uuid: uuid,
+          fcmToken: fcmToken,
+          notificationEnabled: notificationsEnabled));
+      AccountService.queueRequest(
+          AccountHistoryRequest(account: wallet.address));
       AccountService.processQueue();
     }
   }
 
   Future<void> requestSubscribe() async {
-    if (wallet != null && wallet.address != null && Address(wallet.address).isValid()) {
+    if (wallet != null &&
+        wallet.address != null &&
+        Address(wallet.address).isValid()) {
       String uuid = await SharedPrefsUtil.inst.getUuid();
       String fcmToken = await FirebaseMessaging().getToken();
-      bool notificationsEnabled = await SharedPrefsUtil.inst.getNotificationsOn();
+      bool notificationsEnabled =
+          await SharedPrefsUtil.inst.getNotificationsOn();
       AccountService.removeSubscribeHistoryPendingFromQueue();
-      AccountService.queueRequest(SubscribeRequest(account:wallet.address, currency:curCurrency.getIso4217Code(), uuid:uuid, fcmToken: fcmToken, notificationEnabled: notificationsEnabled));
+      AccountService.queueRequest(SubscribeRequest(
+          account: wallet.address,
+          currency: curCurrency.getIso4217Code(),
+          uuid: uuid,
+          fcmToken: fcmToken,
+          notificationEnabled: notificationsEnabled));
       AccountService.processQueue();
     }
   }
 
   ///
   /// Request accounts_balances
-  /// 
+  ///
   void requestAccountsBalances(List<String> accounts) {
     if (accounts != null && accounts.isNotEmpty) {
       AccountService.queueRequest(AccountsBalancesRequest(accounts: accounts));
@@ -581,100 +636,106 @@ class StateContainerState extends State<StateContainer> {
   /// Request account history
   ///
   void requestAccountHistory(String account) {
-    AccountService.queueRequest(AccountHistoryRequest(account: account, count: 1), fromTransfer: true);
+    AccountService.queueRequest(
+        AccountHistoryRequest(account: account, count: 1),
+        fromTransfer: true);
     AccountService.processQueue();
   }
 
   ///
   /// Request pending blocks
-  /// 
+  ///
   void requestPending({String account}) {
     if (wallet.address != null && account == null) {
-      AccountService.queueRequest(PendingRequest(account: wallet.address, count: max(wallet.blockCount ?? 0, 10)));
+      AccountService.queueRequest(PendingRequest(
+          account: wallet.address, count: max(wallet.blockCount ?? 0, 10)));
       AccountService.processQueue();
     } else {
-      AccountService.queueRequest(PendingRequest(account:account, count: 10), fromTransfer: true);
-      AccountService.processQueue(); 
+      AccountService.queueRequest(PendingRequest(account: account, count: 20),
+          fromTransfer: true);
+      AccountService.processQueue();
     }
   }
 
   ///
   /// Create a state block send request
-  /// 
+  ///
   /// @param previous - Previous Hash
   /// @param destination - Destination address
   /// @param amount - Amount to send in RAW
-  /// 
-  void requestSend(String previous, String destination, String amount, {String privKey,String account,String localCurrencyAmount}) {
+  ///
+  void requestSend(String previous, String destination, String amount,
+      {String privKey, String account, String localCurrencyAmount}) {
     String representative = wallet.representative;
-    bool fromTransfer = privKey == null && account == null ? false: true;
+    bool fromTransfer = privKey == null && account == null ? false : true;
 
     StateBlock sendBlock = StateBlock(
-      subtype:BlockTypes.SEND,
-      previous: previous,
-      representative: representative,
-      balance:amount,
-      link:destination,
-      account: !fromTransfer ? wallet.address : account,
-      privKey: privKey,
-      localCurrencyValue: localCurrencyAmount
-    );
+        subtype: BlockTypes.SEND,
+        previous: previous,
+        representative: representative,
+        balance: amount,
+        link: destination,
+        account: !fromTransfer ? wallet.address : account,
+        privKey: privKey,
+        localCurrencyValue: localCurrencyAmount);
     previousPendingMap.putIfAbsent(previous, () => sendBlock);
 
-    AccountService.queueRequest(BlocksInfoRequest(hashes: [previous]), fromTransfer: fromTransfer);
+    AccountService.queueRequest(BlocksInfoRequest(hashes: [previous]),
+        fromTransfer: fromTransfer);
     AccountService.processQueue();
   }
 
   ///
   /// Create a state block receive request
-  /// 
+  ///
   /// @param previous - Previous Hash
   /// @param source - source address
   /// @param balance - balance in RAW
   /// @param privKey - private key (optional, used for transfer)
-  /// 
-  void requestReceive(String previous, String source, String balance, {String privKey, String account}) {
+  ///
+  void requestReceive(String previous, String source, String balance,
+      {String privKey, String account}) {
     String representative = wallet.representative;
     bool fromTransfer = privKey == null && account == null ? false : true;
 
     StateBlock receiveBlock = StateBlock(
-      subtype:BlockTypes.RECEIVE,
-      previous: previous,
-      representative: representative,
-      balance:balance,
-      link:source,
-      account: !fromTransfer ? wallet.address: account,
-      privKey: privKey
-    );
+        subtype: BlockTypes.RECEIVE,
+        previous: previous,
+        representative: representative,
+        balance: balance,
+        link: source,
+        account: !fromTransfer ? wallet.address : account,
+        privKey: privKey);
     previousPendingMap.putIfAbsent(previous, () => receiveBlock);
     if (!fromTransfer) {
       pendingBlockMap.putIfAbsent(source, () => receiveBlock);
     }
 
-    AccountService.queueRequest(BlocksInfoRequest(hashes: [previous]), fromTransfer: fromTransfer);
+    AccountService.queueRequest(BlocksInfoRequest(hashes: [previous]),
+        fromTransfer: fromTransfer);
     AccountService.processQueue();
   }
 
   ///
   /// Create a state block open request
-  /// 
+  ///
   /// @param previous - Previous Hash
   /// @param source - source address
   /// @param balance - balance in RAW
   /// @param privKey - optional private key to use to sign block wen from transfer
-  /// 
-  void requestOpen(String previous, String source, String balance, {String privKey, String account}) {
+  ///
+  void requestOpen(String previous, String source, String balance,
+      {String privKey, String account}) {
     String representative = wallet.representative;
     bool fromTransfer = privKey == null && account == null ? false : true;
 
     StateBlock openBlock = StateBlock(
-      subtype:BlockTypes.OPEN,
-      previous: previous,
-      representative: representative,
-      balance:balance,
-      link:source,
-      account: !fromTransfer ? wallet.address : account
-    );
+        subtype: BlockTypes.OPEN,
+        previous: previous,
+        representative: representative,
+        balance: balance,
+        link: source,
+        account: !fromTransfer ? wallet.address : account);
     _getPrivKey().then((result) {
       if (!fromTransfer) {
         openBlock.sign(result);
@@ -683,32 +744,37 @@ class StateContainerState extends State<StateContainer> {
       }
       pendingResponseBlockMap.putIfAbsent(openBlock.hash, () => openBlock);
 
-      AccountService.queueRequest(ProcessRequest(block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN), fromTransfer: fromTransfer);
+      AccountService.queueRequest(
+          ProcessRequest(
+              block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN),
+          fromTransfer: fromTransfer);
       AccountService.processQueue();
     });
   }
 
   ///
   /// Create a state block change request
-  /// 
+  ///
   /// @param previous - Previous Hash
   /// @param balance - Current balance
   /// @param representative - representative
-  /// 
+  ///
   void requestChange(String previous, String balance, String representative) {
     StateBlock changeBlock = StateBlock(
-      subtype:BlockTypes.CHANGE,
-      previous: previous,
-      representative: representative,
-      balance:balance,
-      link:"0000000000000000000000000000000000000000000000000000000000000000",
-      account:wallet.address
-    );
+        subtype: BlockTypes.CHANGE,
+        previous: previous,
+        representative: representative,
+        balance: balance,
+        link:
+            "0000000000000000000000000000000000000000000000000000000000000000",
+        account: wallet.address);
     _getPrivKey().then((result) {
       changeBlock.sign(result);
       pendingResponseBlockMap.putIfAbsent(changeBlock.hash, () => changeBlock);
 
-      AccountService.queueRequest(ProcessRequest(block: json.encode(changeBlock.toJson()), subType: BlockTypes.CHANGE));
+      AccountService.queueRequest(ProcessRequest(
+          block: json.encode(changeBlock.toJson()),
+          subType: BlockTypes.CHANGE));
       AccountService.processQueue();
     });
   }
@@ -721,7 +787,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<String> _getPrivKey() async {
-   return NanoUtil.seedToPrivate(await Vault.inst.getSeed(), 0);
+    return NanoUtil.seedToPrivate(await Vault.inst.getSeed(), 0);
   }
 
   // Simple build method that just passes this state through

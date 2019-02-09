@@ -159,7 +159,13 @@ flutter:
     - assets/transfer_animation_kaliumwalletonly.flr
     - assets/transfer_animation_paperwalletonly.flr
     - assets/searchseedqr_animation.flr
+    - assets/searchseedqr_animation_magnifyingglassonly.flr
+    - assets/searchseedqr_animation_glassonly.flr
+    - assets/searchseedqr_animation_qronly.flr
     - assets/searchseedmanual_animation.flr
+    - assets/searchseedmanual_animation_magnifyingglassonly.flr
+    - assets/searchseedmanual_animation_glassonly.flr
+    - assets/searchseedmanual_animation_seedonly.flr
     - assets/threedot_animation.flr
     - assets/offline_animation.flr
     - assets/sharecard_bananologo.svg
