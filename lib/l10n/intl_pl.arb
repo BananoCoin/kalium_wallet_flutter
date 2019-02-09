@@ -366,6 +366,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "themeHeader": "Theme",
+    "@themeHeader": {
+        "description": "theme_header",
+        "type": "text",
+        "placeholders": {}
+    },
     "changeRepButton": "Zmień",
     "@changeRepButton": {
         "description": "change_representative_change",
