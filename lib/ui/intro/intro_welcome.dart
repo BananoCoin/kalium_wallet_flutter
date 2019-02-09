@@ -22,13 +22,15 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       body: LayoutBuilder(
-        builder: (context, constraints) => Column(
-              children: <Widget>[
-                //A widget that holds welcome animation + paragraph
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.10),
+        builder: (context, constraints) => SafeArea(
+              minimum: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.035,
+                top: MediaQuery.of(context).size.height * 0.10,
+              ),
+              child: Column(
+                children: <Widget>[
+                  //A widget that holds welcome animation + paragraph
+                  Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
@@ -44,7 +46,9 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                                   "assets/welcome_animation_bananasonly.flr",
                                   animation: "main",
                                   fit: BoxFit.contain,
-                                  color: StateContainer.of(context).curTheme.primary,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary,
                                 ),
                               ),
                               Center(
@@ -69,38 +73,38 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                       ],
                     ),
                   ),
-                ),
 
-                //A column with "New Wallet" and "Import Wallet" buttons
-                Column(
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        // New Wallet Button
-                        AppButton.buildAppButton(
-                            context,
-                            AppButtonType.PRIMARY,
-                            AppLocalization.of(context).newWallet,
-                            Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                          Navigator.of(context).pushNamed('/intro_backup');
-                        }),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        // Import Wallet Button
-                        AppButton.buildAppButton(
-                            context,
-                            AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).importWallet,
-                            Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                          Navigator.of(context).pushNamed('/intro_import');
-                        }),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
+                  //A column with "New Wallet" and "Import Wallet" buttons
+                  Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          // New Wallet Button
+                          AppButton.buildAppButton(
+                              context,
+                              AppButtonType.PRIMARY,
+                              AppLocalization.of(context).newWallet,
+                              Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                            Navigator.of(context).pushNamed('/intro_backup');
+                          }),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          // Import Wallet Button
+                          AppButton.buildAppButton(
+                              context,
+                              AppButtonType.PRIMARY_OUTLINE,
+                              AppLocalization.of(context).importWallet,
+                              Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                            Navigator.of(context).pushNamed('/intro_import');
+                          }),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
       ),
     );

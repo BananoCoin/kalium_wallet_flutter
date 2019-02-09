@@ -57,13 +57,13 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
           key: _scaffoldKey,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           body: LayoutBuilder(
-            builder: (context, constraints) => Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(
-                            vertical:
-                                MediaQuery.of(context).size.height * 0.075),
+            builder: (context, constraints) => SafeArea(
+                  minimum: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.035,
+                      top: MediaQuery.of(context).size.height * 0.075),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
                         child: Stack(
                           children: <Widget>[
                             GestureDetector(
@@ -112,7 +112,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 ),
                                 // The header
                                 Container(
-                                  margin: EdgeInsets.only(top: 15.0, left: 50),
+                                  margin: EdgeInsets.only(top: 15.0, left: 50, right: 50),
                                   alignment: Alignment(-1, 0),
                                   child: Text(
                                     AppLocalization.of(context).importSeed,
@@ -266,62 +266,64 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                           ],
                         ),
                       ),
-                    ),
-                    // Next Screen Button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(bottom: 30, right: 30),
-                          height: 50,
-                          width: 50,
-                          child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.primary15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.primary30,
-                              onPressed: () {
-                                _seedInputFocusNode.unfocus();
-                                // If seed valid, log them in
-                                if (NanoSeeds.isValidSeed(
-                                    _seedInputController.text)) {
-                                  SharedPrefsUtil.inst
-                                      .setSeedBackedUp(true)
-                                      .then((result) {
-                                    Vault.inst
-                                        .setSeed(_seedInputController.text)
+                      // Next Screen Button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(right: 30),
+                            height: 50,
+                            width: 50,
+                            child: FlatButton(
+                                highlightColor: StateContainer.of(context)
+                                    .curTheme
+                                    .primary15,
+                                splashColor: StateContainer.of(context)
+                                    .curTheme
+                                    .primary30,
+                                onPressed: () {
+                                  _seedInputFocusNode.unfocus();
+                                  // If seed valid, log them in
+                                  if (NanoSeeds.isValidSeed(
+                                      _seedInputController.text)) {
+                                    SharedPrefsUtil.inst
+                                        .setSeedBackedUp(true)
                                         .then((result) {
-                                      StateContainer.of(context).updateWallet(
-                                          address:
-                                              NanoUtil.seedToAddress(result));
-                                      Navigator.of(context).push(
-                                          MaterialPageRoute(
-                                              builder: (BuildContext context) {
-                                        return new PinScreen(
-                                            PinOverlayType.NEW_PIN,
-                                            (_pinEnteredCallback));
-                                      }));
+                                      Vault.inst
+                                          .setSeed(_seedInputController.text)
+                                          .then((result) {
+                                        StateContainer.of(context).updateWallet(
+                                            address:
+                                                NanoUtil.seedToAddress(result));
+                                        Navigator.of(context).push(
+                                            MaterialPageRoute(builder:
+                                                (BuildContext context) {
+                                          return new PinScreen(
+                                              PinOverlayType.NEW_PIN,
+                                              (_pinEnteredCallback));
+                                        }));
+                                      });
                                     });
-                                  });
-                                } else {
-                                  // Display error
-                                  setState(() {
-                                    _errorTextColor = _hasErrorTextColor;
-                                  });
-                                }
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
-                              child: Icon(AppIcons.forward,
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
-                                  size: 50)),
-                        ),
-                      ],
-                    ),
-                  ],
+                                  } else {
+                                    // Display error
+                                    setState(() {
+                                      _errorTextColor = _hasErrorTextColor;
+                                    });
+                                  }
+                                },
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.all(0.0),
+                                child: Icon(AppIcons.forward,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
+                                    size: 50)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
           ),
         ));

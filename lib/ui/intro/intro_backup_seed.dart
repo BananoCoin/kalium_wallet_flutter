@@ -49,14 +49,14 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
           key: _scaffoldKey,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
           body: LayoutBuilder(
-            builder: (context, constraints) => Column(
-                  children: <Widget>[
-                    //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.symmetric(
-                            vertical:
-                                MediaQuery.of(context).size.height * 0.075),
+            builder: (context, constraints) => SafeArea(
+                  minimum: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.035,
+                      top: MediaQuery.of(context).size.height * 0.075),
+                  child: Column(
+                    children: <Widget>[
+                      //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
@@ -68,9 +68,10 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                   height: 50,
                                   width: 50,
                                   child: FlatButton(
-                                      highlightColor: StateContainer.of(context)
-                                          .curTheme
-                                          .text15,
+                                      highlightColor:
+                                          StateContainer.of(context)
+                                              .curTheme
+                                              .text15,
                                       splashColor: StateContainer.of(context)
                                           .curTheme
                                           .text15,
@@ -91,7 +92,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                             ),
                             // The header
                             Container(
-                              margin: EdgeInsets.only(top: 15.0, left: 50),
+                              margin: EdgeInsets.only(top: 15.0, left: 50, right: 50),
                               alignment: Alignment(-1, 0),
                               child: Text(
                                 AppLocalization.of(context).seed,
@@ -106,7 +107,8 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                               alignment: Alignment.centerLeft,
                               child: Text(
                                   AppLocalization.of(context).seedBackupInfo,
-                                  style: AppStyles.textStyleParagraph(context)),
+                                  style:
+                                      AppStyles.textStyleParagraph(context)),
                             ),
                             Container(
                               // A gesture detector to decide if the is tapped or not
@@ -126,7 +128,8 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                       _seedCopiedTimer.cancel();
                                     }
                                     _seedCopiedTimer = new Timer(
-                                        const Duration(milliseconds: 1200), () {
+                                        const Duration(milliseconds: 1200),
+                                        () {
                                       setState(() {
                                         _seedCopied = false;
                                         _seedCopiedColor = Colors.transparent;
@@ -149,7 +152,8 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                         textStyle: _seedCopied
                                             ? AppStyles.textStyleSeedGreen(
                                                 context)
-                                            : AppStyles.textStyleSeed(context)),
+                                            : AppStyles.textStyleSeed(
+                                                context)),
                                   )),
                             ),
                             // "Seed copied to Clipboard" text that appaears when seed is tapped
@@ -168,43 +172,46 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                           ],
                         ),
                       ),
-                    ),
 
-                    // Next Screen Button
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Container(
-                          margin: EdgeInsets.only(bottom: 30, right: 30),
-                          height: 50,
-                          width: 50,
-                          child: FlatButton(
-                              splashColor:
-                                  StateContainer.of(context).curTheme.primary30,
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.primary15,
-                              onPressed: () {
-                                Vault.inst.setSeed(_seed).then((result) {
-                                  // Update wallet
-                                  StateContainer.of(context).updateWallet(
-                                      address: NanoUtil.seedToAddress(result));
-                                  StateContainer.of(context).requestUpdate();
-                                  Navigator.of(context)
-                                      .pushNamed('/intro_backup_confirm');
-                                });
-                              },
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(50.0)),
-                              padding: EdgeInsets.all(0.0),
-                              child: Icon(AppIcons.forward,
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
-                                  size: 50)),
-                        ),
-                      ],
-                    ),
-                  ],
+                      // Next Screen Button
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Container(
+                            margin: EdgeInsets.only(right: 30),
+                            height: 50,
+                            width: 50,
+                            child: FlatButton(
+                                splashColor: StateContainer.of(context)
+                                    .curTheme
+                                    .primary30,
+                                highlightColor: StateContainer.of(context)
+                                    .curTheme
+                                    .primary15,
+                                onPressed: () {
+                                  Vault.inst.setSeed(_seed).then((result) {
+                                    // Update wallet
+                                    StateContainer.of(context).updateWallet(
+                                        address:
+                                            NanoUtil.seedToAddress(result));
+                                    StateContainer.of(context).requestUpdate();
+                                    Navigator.of(context)
+                                        .pushNamed('/intro_backup_confirm');
+                                  });
+                                },
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(50.0)),
+                                padding: EdgeInsets.all(0.0),
+                                child: Icon(AppIcons.forward,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
+                                    size: 50)),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
           ),
         ));
