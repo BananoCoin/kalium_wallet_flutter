@@ -573,158 +573,162 @@ class _AppHomePageState extends State<AppHomePage>
           child: SettingsSheet(),
         ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          //Main Card
-          _buildMainCard(context, _scaffoldKey),
-          //Main Card End
+      body: SafeArea(
+        minimum: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.05, bottom: MediaQuery.of(context).size.height*0.035),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            //Main Card
+            _buildMainCard(context, _scaffoldKey),
+            //Main Card End
 
-          //Transactions Text
-          Container(
-            margin: EdgeInsets.fromLTRB(30.0, 20.0, 26.0, 0.0),
-            child: Row(
-              children: <Widget>[
-                Text(
-                  CaseChange.toUpperCase(
-                      AppLocalization.of(context).transactions, context),
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w100,
-                    color: StateContainer.of(context).curTheme.text,
+            //Transactions Text
+            Container(
+              margin: EdgeInsets.fromLTRB(30.0, 20.0, 26.0, 0.0),
+              child: Row(
+                children: <Widget>[
+                  Text(
+                    CaseChange.toUpperCase(
+                        AppLocalization.of(context).transactions, context),
+                    textAlign: TextAlign.left,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontWeight: FontWeight.w100,
+                      color: StateContainer.of(context).curTheme.text,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ), //Transactions Text End
+                ],
+              ),
+            ), //Transactions Text End
 
-          //Transactions List
-          Expanded(
-            child: Stack(
-              children: <Widget>[
-                _getListWidget(context),
-                //List Top Gradient End
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: 10.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          StateContainer.of(context).curTheme.background00,
-                          StateContainer.of(context).curTheme.background
-                        ],
-                        begin: Alignment(0.5, 1.0),
-                        end: Alignment(0.5, -1.0),
+            //Transactions List
+            Expanded(
+              child: Stack(
+                children: <Widget>[
+                  _getListWidget(context),
+                  //List Top Gradient End
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      height: 10.0,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            StateContainer.of(context).curTheme.background00,
+                            StateContainer.of(context).curTheme.background
+                          ],
+                          begin: Alignment(0.5, 1.0),
+                          end: Alignment(0.5, -1.0),
+                        ),
+                      ),
+                    ),
+                  ), // List Top Gradient End
+
+                  //List Bottom Gradient
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      height: 30.0,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          colors: [
+                            StateContainer.of(context).curTheme.background00,
+                            StateContainer.of(context).curTheme.background
+                          ],
+                          begin: Alignment(0.5, -1),
+                          end: Alignment(0.5, 0.5),
+                        ),
+                      ),
+                    ),
+                  ), //List Bottom Gradient End
+                ],
+              ),
+            ), //Transactions List End
+
+            //Buttons Area
+            Container(
+              color: StateContainer.of(context).curTheme.background,
+              child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                      height: 55,
+                      margin: EdgeInsets.only(left: 14, top: 0.0, right: 7.0),
+                      child: FlatButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100.0)),
+                        color: receive != null
+                            ? StateContainer.of(context).curTheme.primary
+                            : StateContainer.of(context).curTheme.primary60,
+                        child: AutoSizeText(
+                          AppLocalization.of(context).receive,
+                          textAlign: TextAlign.center,
+                          style: AppStyles.textStyleButtonPrimary(context),
+                          maxLines: 1,
+                          stepGranularity: 0.5,
+                        ),
+                        onPressed: () {
+                          if (receive == null) {
+                            return;
+                          }
+                          receive.mainBottomSheet(context);
+                        },
+                        highlightColor: receive != null
+                            ? StateContainer.of(context).curTheme.background40
+                            : Colors.transparent,
+                        splashColor: receive != null
+                            ? StateContainer.of(context).curTheme.background40
+                            : Colors.transparent,
                       ),
                     ),
                   ),
-                ), // List Top Gradient End
-
-                //List Bottom Gradient
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: 30.0,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          StateContainer.of(context).curTheme.background00,
-                          StateContainer.of(context).curTheme.background
-                        ],
-                        begin: Alignment(0.5, -1),
-                        end: Alignment(0.5, 0.5),
+                  Expanded(
+                    child: Container(
+                      height: 55,
+                      margin: EdgeInsets.only(left: 7, top: 0.0, right: 14.0),
+                      child: FlatButton(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(100.0)),
+                        color:
+                            StateContainer.of(context).wallet.accountBalance >
+                                    BigInt.zero
+                                ? StateContainer.of(context).curTheme.primary
+                                : StateContainer.of(context).curTheme.primary60,
+                        child: AutoSizeText(
+                          AppLocalization.of(context).send,
+                          textAlign: TextAlign.center,
+                          style: AppStyles.textStyleButtonPrimary(context),
+                          maxLines: 1,
+                          stepGranularity: 0.5,
+                        ),
+                        onPressed: () {
+                          if (StateContainer.of(context).wallet.accountBalance >
+                              BigInt.zero) {
+                            AppSendSheet().mainBottomSheet(context);
+                          }
+                        },
+                        highlightColor: StateContainer.of(context)
+                                    .wallet
+                                    .accountBalance >
+                                BigInt.zero
+                            ? StateContainer.of(context).curTheme.background40
+                            : Colors.transparent,
+                        splashColor: StateContainer.of(context)
+                                    .wallet
+                                    .accountBalance >
+                                BigInt.zero
+                            ? StateContainer.of(context).curTheme.background40
+                            : Colors.transparent,
                       ),
                     ),
                   ),
-                ), //List Bottom Gradient End
-              ],
-            ),
-          ), //Transactions List End
-
-          //Buttons Area
-          Container(
-            color: StateContainer.of(context).curTheme.background,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    height: 55,
-                    margin: EdgeInsets.fromLTRB(14.0, 0.0, 7.0,
-                        MediaQuery.of(context).size.height * 0.035),
-                    child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.0)),
-                      color: receive != null
-                          ? StateContainer.of(context).curTheme.primary
-                          : StateContainer.of(context).curTheme.primary60,
-                      child: AutoSizeText(
-                        AppLocalization.of(context).receive,
-                        textAlign: TextAlign.center,
-                        style: AppStyles.textStyleButtonPrimary(context),
-                        maxLines: 1,
-                        stepGranularity: 0.5,
-                      ),
-                      onPressed: () {
-                        if (receive == null) {
-                          return;
-                        }
-                        receive.mainBottomSheet(context);
-                      },
-                      highlightColor: receive != null
-                          ? StateContainer.of(context).curTheme.background40
-                          : Colors.transparent,
-                      splashColor: receive != null
-                          ? StateContainer.of(context).curTheme.background40
-                          : Colors.transparent,
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 55,
-                    margin: EdgeInsets.fromLTRB(7.0, 0.0, 14.0,
-                        MediaQuery.of(context).size.height * 0.035),
-                    child: FlatButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(100.0)),
-                      color: StateContainer.of(context).wallet.accountBalance >
-                              BigInt.zero
-                          ? StateContainer.of(context).curTheme.primary
-                          : StateContainer.of(context).curTheme.primary60,
-                      child: AutoSizeText(
-                        AppLocalization.of(context).send,
-                        textAlign: TextAlign.center,
-                        style: AppStyles.textStyleButtonPrimary(context),
-                        maxLines: 1,
-                        stepGranularity: 0.5,
-                      ),
-                      onPressed: () {
-                        if (StateContainer.of(context).wallet.accountBalance >
-                            BigInt.zero) {
-                          AppSendSheet().mainBottomSheet(context);
-                        }
-                      },
-                      highlightColor:
-                          StateContainer.of(context).wallet.accountBalance >
-                                  BigInt.zero
-                              ? StateContainer.of(context).curTheme.background40
-                              : Colors.transparent,
-                      splashColor:
-                          StateContainer.of(context).wallet.accountBalance >
-                                  BigInt.zero
-                              ? StateContainer.of(context).curTheme.background40
-                              : Colors.transparent,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ), //Buttons Area End
-        ],
+                ],
+              ),
+            ), //Buttons Area End
+          ],
+        ),
       ),
     );
   }
@@ -1200,7 +1204,6 @@ class _AppHomePageState extends State<AppHomePage>
         boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
       margin: EdgeInsets.only(
-          top: MediaQuery.of(context).size.height * 0.05,
           left: 14.0,
           right: 14.0),
       child: Row(
