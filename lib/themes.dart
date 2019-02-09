@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:local_auth/local_auth.dart';
 
 class AppColors {
   // Some constants not themed
@@ -55,6 +56,8 @@ abstract class BaseTheme {
 
   // QR scanner theme
   OverlayTheme qrScanTheme;
+  // FP Dialog theme (android-only)
+  FPDialogTheme fpTheme;
 }
 
 class KaliumTheme extends BaseTheme {
@@ -121,6 +124,7 @@ class KaliumTheme extends BaseTheme {
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.KALIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.KALIUM;
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -187,6 +191,7 @@ class TitaniumTheme extends BaseTheme {
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.TITANIUM;
 }
 
 class IridiumTheme extends BaseTheme {
@@ -256,6 +261,7 @@ class IridiumTheme extends BaseTheme {
       blurRadius: 15);
 
   OverlayTheme qrScanTheme = OverlayTheme.IRIDIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.IRIDIUM;
 }
 
 class BerylliumTheme extends BaseTheme {
@@ -323,4 +329,5 @@ class BerylliumTheme extends BaseTheme {
       color: Colors.transparent, offset: Offset(0, 5), blurRadius: 15);
 
   OverlayTheme qrScanTheme = OverlayTheme.BERYLLIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.BERYLLIUM;
 }
