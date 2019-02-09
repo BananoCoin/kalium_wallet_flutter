@@ -170,7 +170,11 @@ flutter:
     - assets/offline_animation.flr
     - assets/sharecard_bananologo.svg
     - assets/transferfunds_illustration_start.svg
+    - assets/transferfunds_illustration_start_paperwalletonly.svg
+    - assets/transferfunds_illustration_start_kaliumwalletonly.svg
     - assets/transferfunds_illustration_end.svg
+    - assets/transferfunds_illustration_end_paperwalletonly.svg
+    - assets/transferfunds_illustration_end_kaliumwalletonly.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

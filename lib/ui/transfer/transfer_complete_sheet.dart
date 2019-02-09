@@ -37,35 +37,57 @@ class AppTransferCompleteSheet {
                             Container(
                               margin: EdgeInsets.only(bottom: 30),
                               child: Icon(AppIcons.success,
-                                  size: 100, color: StateContainer.of(context).curTheme.success),
+                                  size: 100,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .success),
                             ),
                             Container(
                               margin: EdgeInsets.only(bottom: 20),
                               constraints: BoxConstraints(
                                   maxHeight:
-                                      MediaQuery.of(context).size.height *
-                                          0.2,
+                                      MediaQuery.of(context).size.height * 0.2,
                                   maxWidth:
-                                      MediaQuery.of(context).size.width *
-                                          0.6),
-                              child: SvgPicture.asset('assets/transferfunds_illustration_end.svg'),
+                                      MediaQuery.of(context).size.width * 0.6),
+                              child: Stack(
+                                children: <Widget>[
+                                  Center(
+                                    child: SvgPicture.asset(
+                                      'assets/transferfunds_illustration_end_paperwalletonly.svg',
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .text45,
+                                    ),
+                                  ),
+                                  Center(
+                                    child: SvgPicture.asset(
+                                      'assets/transferfunds_illustration_end_kaliumwalletonly.svg',
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .success,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                             Container(
                                 alignment: Alignment(-1, 0),
-                                margin: EdgeInsets.symmetric(horizontal: smallScreen(context)?35:60),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: smallScreen(context) ? 35 : 60),
                                 child: Text(
                                   AppLocalization.of(context)
-                                      .transferComplete.replaceAll("%1", transferAmount),
-                                  style:
-                                      AppStyles.textStyleParagraphSuccess(context),
+                                      .transferComplete
+                                      .replaceAll("%1", transferAmount),
+                                  style: AppStyles.textStyleParagraphSuccess(
+                                      context),
                                   textAlign: TextAlign.left,
                                 )),
                             Container(
                                 alignment: Alignment(-1, 0),
-                                margin: EdgeInsets.symmetric(horizontal: smallScreen(context)?35:60),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: smallScreen(context) ? 35 : 60),
                                 child: Text(
-                                  AppLocalization.of(context)
-                                      .transferClose,
+                                  AppLocalization.of(context).transferClose,
                                   style: AppStyles.textStyleParagraph(context),
                                   textAlign: TextAlign.left,
                                 )),
@@ -75,11 +97,10 @@ class AppTransferCompleteSheet {
 
                       Row(
                         children: <Widget>[
-                          AppButton.buildAppButton(context, 
+                          AppButton.buildAppButton(
+                            context,
                             AppButtonType.SUCCESS_OUTLINE,
-                            AppLocalization.of(context)
-                                .close
-                                .toUpperCase(),
+                            AppLocalization.of(context).close.toUpperCase(),
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
                               Navigator.of(context).pop();
