@@ -84,151 +84,159 @@ class AppTransferOverviewSheet {
               builder: (BuildContext context, StateSetter setState) {
             return WillPopScope(
               onWillPop: _onWillPop,
-              child: Container(
-                width: double.infinity,
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    // A container for the header
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        //Close Button
-                        Container(
-                          width: 50,
-                          height: 50,
-                          margin: EdgeInsets.only(top: 10.0, left: 10.0),
-                          child: FlatButton(
-                            highlightColor:
-                                StateContainer.of(context).curTheme.text15,
-                            splashColor:
-                                StateContainer.of(context).curTheme.text15,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Icon(AppIcons.close,
-                                size: 16,
-                                color:
-                                    StateContainer.of(context).curTheme.text),
-                            padding: EdgeInsets.all(17.0),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(100.0)),
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
-                          ),
-                        ),
-                        // The header
-                        Container(
-                          margin: EdgeInsets.only(top: 30.0),
-                          constraints: BoxConstraints(
-                              maxWidth:
-                                  MediaQuery.of(context).size.width - 140),
-                          child: AutoSizeText(
-                            CaseChange.toUpperCase(
-                                AppLocalization.of(context).transferHeader,
-                                context),
-                            style: AppStyles.textStyleHeader(context),
-                            textAlign: TextAlign.center,
-                            maxLines: 2,
-                            stepGranularity: 0.1,
-                          ),
-                        ),
-                        // Emtpy SizedBox
-                        SizedBox(
-                          height: 60,
-                          width: 60,
-                        ),
-                      ],
-                    ),
-
-                    // A container for the illustration and paragraphs
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
+              child: SafeArea(
+                minimum: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.035,
+                ),
+                child: Container(
+                  width: double.infinity,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      // A container for the header
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          //Close Button
                           Container(
-                            constraints: BoxConstraints(
-                                maxHeight:
-                                    MediaQuery.of(context).size.height * 0.2,
-                                maxWidth:
-                                    MediaQuery.of(context).size.width * 0.6),
-                            child: Stack(
-                              children: <Widget>[
-                                Center(
-                                  child: SvgPicture.asset(
-                                    'assets/transferfunds_illustration_start_paperwalletonly.svg',
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .text45,
-                                  ),
-                                ),
-                                Center(
-                                  child: SvgPicture.asset(
-                                    'assets/transferfunds_illustration_start_kaliumwalletonly.svg',
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
-                                  ),
-                                ),
-                              ],
+                            width: 50,
+                            height: 50,
+                            margin: EdgeInsets.only(top: 10.0, left: 10.0),
+                            child: FlatButton(
+                              highlightColor:
+                                  StateContainer.of(context).curTheme.text15,
+                              splashColor:
+                                  StateContainer.of(context).curTheme.text15,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Icon(AppIcons.close,
+                                  size: 16,
+                                  color:
+                                      StateContainer.of(context).curTheme.text),
+                              padding: EdgeInsets.all(17.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(100.0)),
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.padded,
                             ),
                           ),
+                          // The header
                           Container(
-                              alignment: Alignment(-1, 0),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: smallScreen(context) ? 35 : 60,
-                                  vertical: 20),
-                              child: Text(
-                                AppLocalization.of(context)
-                                    .transferIntro
-                                    .replaceAll("%1",
-                                        AppLocalization.of(context).scanQrCode),
-                                style: AppStyles.textStyleParagraph(context),
-                                textAlign: TextAlign.left,
-                              )),
+                            margin: EdgeInsets.only(top: 30.0),
+                            constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width - 140),
+                            child: AutoSizeText(
+                              CaseChange.toUpperCase(
+                                  AppLocalization.of(context).transferHeader,
+                                  context),
+                              style: AppStyles.textStyleHeader(context),
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              stepGranularity: 0.1,
+                            ),
+                          ),
+                          // Emtpy SizedBox
+                          SizedBox(
+                            height: 60,
+                            width: 60,
+                          ),
                         ],
                       ),
-                    ),
 
-                    Row(
-                      children: <Widget>[
-                        AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY,
-                          AppLocalization.of(context).scanQrCode,
-                          Dimens.BUTTON_TOP_DIMENS,
-                          onPressed: () {
-                            UIUtil.cancelLockEvent();
-                            BarcodeScanner.scan(OverlayTheme.KALIUM)
-                                .then((value) {
-                              if (!NanoSeeds.isValidSeed(value)) {
-                                UIUtil.showSnackbar(
-                                    AppLocalization.of(context).qrInvalidSeed,
-                                    context);
-                                return;
-                              }
-                              startTransfer(context, value);
-                            });
-                          },
+                      // A container for the illustration and paragraphs
+                      Expanded(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Container(
+                              constraints: BoxConstraints(
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width * 0.6),
+                              child: Stack(
+                                children: <Widget>[
+                                  Center(
+                                    child: SvgPicture.asset(
+                                      'assets/transferfunds_illustration_start_paperwalletonly.svg',
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .text45,
+                                    ),
+                                  ),
+                                  Center(
+                                    child: SvgPicture.asset(
+                                      'assets/transferfunds_illustration_start_kaliumwalletonly.svg',
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .primary,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                                alignment: Alignment(-1, 0),
+                                margin: EdgeInsets.symmetric(
+                                    horizontal: smallScreen(context) ? 35 : 60,
+                                    vertical: 20),
+                                child: Text(
+                                  AppLocalization.of(context)
+                                      .transferIntro
+                                      .replaceAll(
+                                          "%1",
+                                          AppLocalization.of(context)
+                                              .scanQrCode),
+                                  style: AppStyles.textStyleParagraph(context),
+                                  textAlign: TextAlign.left,
+                                )),
+                          ],
                         ),
-                      ],
-                    ),
-                    Row(
-                      children: <Widget>[
-                        AppButton.buildAppButton(
-                          context,
-                          AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context).manualEntry,
-                          Dimens.BUTTON_BOTTOM_DIMENS,
-                          onPressed: () {
-                            AppTransferManualEntrySheet(manualEntryCallback)
-                                .mainBottomSheet(context);
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
+                      ),
+
+                      Row(
+                        children: <Widget>[
+                          AppButton.buildAppButton(
+                            context,
+                            AppButtonType.PRIMARY,
+                            AppLocalization.of(context).scanQrCode,
+                            Dimens.BUTTON_TOP_DIMENS,
+                            onPressed: () {
+                              UIUtil.cancelLockEvent();
+                              BarcodeScanner.scan(OverlayTheme.KALIUM)
+                                  .then((value) {
+                                if (!NanoSeeds.isValidSeed(value)) {
+                                  UIUtil.showSnackbar(
+                                      AppLocalization.of(context).qrInvalidSeed,
+                                      context);
+                                  return;
+                                }
+                                startTransfer(context, value);
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          AppButton.buildAppButton(
+                            context,
+                            AppButtonType.PRIMARY_OUTLINE,
+                            AppLocalization.of(context).manualEntry,
+                            Dimens.BUTTON_BOTTOM_DIMENS,
+                            onPressed: () {
+                              AppTransferManualEntrySheet(manualEntryCallback)
+                                  .mainBottomSheet(context);
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
