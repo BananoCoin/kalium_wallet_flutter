@@ -449,7 +449,7 @@ class AppChangeRepresentativeSheet {
                                               AuthMethod.BIOMETRICS &&
                                           hasBiometrics) {
                                         BiometricUtil
-                                                .authenticateWithBiometrics(
+                                                .authenticateWithBiometrics(context, 
                                                     AppLocalization.of(context)
                                                         .changeRepAuthenticate)
                                             .then((authenticated) {

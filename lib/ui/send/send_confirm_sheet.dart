@@ -215,7 +215,7 @@ class AppSendConfirmSheet {
                                     if (authMethod.method ==
                                             AuthMethod.BIOMETRICS &&
                                         hasBiometrics) {
-                                      BiometricUtil.authenticateWithBiometrics(
+                                      BiometricUtil.authenticateWithBiometrics(context, 
                                               AppLocalization.of(context)
                                                   .sendAmountConfirm
                                                   .replaceAll("%1", _amount))

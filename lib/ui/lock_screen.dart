@@ -146,7 +146,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
             _showLock = true;
             _showUnlockButton = true;
           });
-          BiometricUtil.authenticateWithBiometrics(
+          BiometricUtil.authenticateWithBiometrics(context, 
                   AppLocalization.of(context).unlockBiometrics)
               .then((authenticated) {
             if (authenticated) {

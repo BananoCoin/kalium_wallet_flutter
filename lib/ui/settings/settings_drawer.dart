@@ -916,7 +916,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                       BiometricUtil.hasBiometrics().then((hasBiometrics) {
                         if (authMethod.method == AuthMethod.BIOMETRICS &&
                             hasBiometrics) {
-                          BiometricUtil.authenticateWithBiometrics(
+                          BiometricUtil.authenticateWithBiometrics(context, 
                                   AppLocalization.of(context)
                                       .fingerprintSeedBackup)
                               .then((authenticated) {
