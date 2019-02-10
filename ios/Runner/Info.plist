@@ -72,5 +72,47 @@
 		</array>
 		</dict>
 	</array>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>Icon-App</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>beryllium</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Be-Icon-App</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>iridium</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Ir-Icon-App</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>titanium</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Ti-Icon-App</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>

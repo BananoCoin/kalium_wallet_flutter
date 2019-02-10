@@ -58,6 +58,8 @@ abstract class BaseTheme {
   OverlayTheme qrScanTheme;
   // FP Dialog theme (android-only)
   FPDialogTheme fpTheme;
+  // App icon (iOS only)
+  AppIconEnum appIcon;
 }
 
 class KaliumTheme extends BaseTheme {
@@ -125,6 +127,7 @@ class KaliumTheme extends BaseTheme {
 
   OverlayTheme qrScanTheme = OverlayTheme.KALIUM;
   FPDialogTheme fpTheme = FPDialogTheme.KALIUM;
+  AppIconEnum appIcon = AppIconEnum.KALIUM;
 }
 
 class TitaniumTheme extends BaseTheme {
@@ -192,6 +195,7 @@ class TitaniumTheme extends BaseTheme {
 
   OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
   FPDialogTheme fpTheme = FPDialogTheme.TITANIUM;
+  AppIconEnum appIcon = AppIconEnum.TITANIUM;
 }
 
 class IridiumTheme extends BaseTheme {
@@ -262,6 +266,7 @@ class IridiumTheme extends BaseTheme {
 
   OverlayTheme qrScanTheme = OverlayTheme.IRIDIUM;
   FPDialogTheme fpTheme = FPDialogTheme.IRIDIUM;
+  AppIconEnum appIcon = AppIconEnum.IRIDIUM;
 }
 
 class BerylliumTheme extends BaseTheme {
@@ -330,4 +335,33 @@ class BerylliumTheme extends BaseTheme {
 
   OverlayTheme qrScanTheme = OverlayTheme.BERYLLIUM;
   FPDialogTheme fpTheme = FPDialogTheme.BERYLLIUM;
+  AppIconEnum appIcon = AppIconEnum.BERYLLIUM;
+}
+
+enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM }
+class AppIcon {
+  static const _channel = const MethodChannel('fappchannel');
+
+  static Future<void> setAppIcon(AppIconEnum iconToChange) async {
+    String iconStr = "kalium";
+    switch (iconToChange) {
+      case AppIconEnum.BERYLLIUM:
+        iconStr = "beryllium";
+        break;
+      case AppIconEnum.IRIDIUM:
+        iconStr = "iridium";
+        break;
+      case AppIconEnum.TITANIUM:
+        iconStr = "titanium";
+        break;
+      case AppIconEnum.KALIUM:
+      default:
+        iconStr = "kalium";
+        break;
+    }
+    final Map<String, dynamic> params = <String, dynamic>{
+     'icon': iconStr,
+    };
+    return await _channel.invokeMethod('changeIcon', params);
+  }
 }
