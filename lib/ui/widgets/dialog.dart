@@ -25,18 +25,31 @@ class AppDialogs {
           content: Text(content, style: AppStyles.textStyleParagraph(context)),
           actions: <Widget>[
             FlatButton(
-              child: Text(
-                cancelText,
-                style: AppStyles.textStyleDialogButtonText(context),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0)),
+              padding: EdgeInsets.all(12),
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 100),
+                child: Text(
+                  cancelText,
+                  style: AppStyles.textStyleDialogButtonText(context),
+                ),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
             ),
             FlatButton(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text(buttonText,
-                  style: AppStyles.textStyleDialogButtonText(context)),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4.0)),
+              padding: EdgeInsets.all(12),
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 100),
+                child: Text(
+                  buttonText,
+                  style: AppStyles.textStyleDialogButtonText(context),
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
                 onPressed();
