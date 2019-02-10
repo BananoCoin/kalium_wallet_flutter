@@ -420,6 +420,75 @@ class RutheniumTheme extends BaseTheme {
   AppIconEnum appIcon = AppIconEnum.IRIDIUM;
 }
 
+class RadiumTheme extends BaseTheme {
+  static const electricGreen = Color(0xFF39E289);
+
+  static const pink = Color(0xFFA96BFF);
+
+  static const pinkDark = Color(0xFF6E3AB6);
+
+  static const purpleDark = Color(0xFF130626);
+
+  static const purpleLight = Color(0xFF1A0636);
+
+  static const purpleDarkest = Color(0xFF130626);
+
+  static const white = Color(0xFFFFFFFF);
+
+  static const black = Color(0xFF000000);
+
+  Color primary = electricGreen;
+  Color primary60 = electricGreen.withOpacity(0.6);
+  Color primary45 = electricGreen.withOpacity(0.45);
+  Color primary30 = electricGreen.withOpacity(0.3);
+  Color primary20 = electricGreen.withOpacity(0.2);
+  Color primary15 = electricGreen.withOpacity(0.15);
+  Color primary10 = electricGreen.withOpacity(0.1);
+
+  Color success = pink;
+  Color success60 = pink.withOpacity(0.6);
+  Color success30 = pink.withOpacity(0.3);
+  Color success15 = pink.withOpacity(0.15);
+
+  Color successDark = pinkDark;
+  Color successDark30 = pinkDark.withOpacity(0.3);
+
+  Color background = purpleDark;
+  Color background40 = purpleDark.withOpacity(0.4);
+  Color background00 = purpleDark.withOpacity(0.0);
+
+  Color backgroundDark = purpleLight;
+  Color backgroundDark00 = purpleLight.withOpacity(0.0);
+
+  Color backgroundDarkest = purpleDarkest;
+
+  Color text = white.withOpacity(0.9);
+  Color text60 = white.withOpacity(0.6);
+  Color text45 = white.withOpacity(0.45);
+  Color text30 = white.withOpacity(0.3);
+  Color text20 = white.withOpacity(0.2);
+  Color text15 = white.withOpacity(0.15);
+  Color text03 = white.withOpacity(0.03);
+
+  Color overlay90 = black.withOpacity(0.9);
+  Color overlay85 = black.withOpacity(0.85);
+  Color overlay80 = black.withOpacity(0.8);
+  Color overlay70 = black.withOpacity(0.7);
+  Color overlay50 = black.withOpacity(0.5);
+  Color overlay30 = black.withOpacity(0.3);
+  Color overlay20 = black.withOpacity(0.2);
+
+  SystemUiOverlayStyle statusBar =
+      SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
+  BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
+
+  OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.TITANIUM;
+  AppIconEnum appIcon = AppIconEnum.TITANIUM;
+}
+
 enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM }
 class AppIcon {
   static const _channel = const MethodChannel('fappchannel');

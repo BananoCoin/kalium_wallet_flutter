@@ -3,7 +3,7 @@ import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
 import 'package:kalium_wallet_flutter/model/setting_item.dart';
 
-enum ThemeOptions { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM, RUTHENIUM }
+enum ThemeOptions { KALIUM, TITANIUM, IRIDIUM, RADIUM, BERYLLIUM, RUTHENIUM }
 
 /// Represent notification on/off setting
 class ThemeSetting extends SettingSelectionItem {
@@ -21,6 +21,8 @@ class ThemeSetting extends SettingSelectionItem {
         return "Beryllium";
       case ThemeOptions.RUTHENIUM:
         return "Ruthenium";
+      case ThemeOptions.RADIUM:
+        return "Radium";
       case ThemeOptions.KALIUM:
       default:
         return "Kalium";
@@ -37,6 +39,8 @@ class ThemeSetting extends SettingSelectionItem {
         return BerylliumTheme();
       case ThemeOptions.RUTHENIUM:
         return RutheniumTheme();
+      case ThemeOptions.RADIUM:
+        return RadiumTheme();
       case ThemeOptions.KALIUM:
       default:
         return KaliumTheme();

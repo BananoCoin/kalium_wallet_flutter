@@ -21,7 +21,6 @@ class AppIcons {
   static const _kFontFam = 'AppIcons';
 
   static const IconData theme = const IconData(0xe800, fontFamily: _kFontFam);
-  static const IconData transferfunds = const IconData(0xe801, fontFamily: _kFontFam);
   static const IconData changerepresentative = const IconData(0xe802, fontFamily: _kFontFam);
   static const IconData share = const IconData(0xe803, fontFamily: _kFontFam);
   static const IconData language = const IconData(0xe804, fontFamily: _kFontFam);
@@ -62,4 +61,5 @@ class AppIcons {
   static const IconData export_icon = const IconData(0xe827, fontFamily: _kFontFam);
   static const IconData import_icon = const IconData(0xe828, fontFamily: _kFontFam);
   static const IconData lock = const IconData(0xe829, fontFamily: _kFontFam);
+  static const IconData transferfunds = const IconData(0xe82a, fontFamily: _kFontFam);
 }
