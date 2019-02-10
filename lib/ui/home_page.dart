@@ -656,6 +656,12 @@ class _AppHomePageState extends State<AppHomePage>
                 children: <Widget>[
                   Expanded(
                     child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: [
+                          StateContainer.of(context).curTheme.boxShadow
+                        ],
+                      ),
                       height: 55,
                       margin: EdgeInsets.only(left: 14, top: 0.0, right: 7.0),
                       child: FlatButton(
@@ -688,6 +694,12 @@ class _AppHomePageState extends State<AppHomePage>
                   ),
                   Expanded(
                     child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        boxShadow: [
+                          StateContainer.of(context).curTheme.boxShadow
+                        ],
+                      ),
                       height: 55,
                       margin: EdgeInsets.only(left: 7, top: 0.0, right: 14.0),
                       child: FlatButton(
@@ -1205,7 +1217,10 @@ class _AppHomePageState extends State<AppHomePage>
         borderRadius: BorderRadius.circular(10.0),
         boxShadow: [StateContainer.of(context).curTheme.boxShadow],
       ),
-      margin: EdgeInsets.only(left: 14.0, right: 14.0, top: MediaQuery.of(context).size.height * 0.005),
+      margin: EdgeInsets.only(
+          left: 14.0,
+          right: 14.0,
+          top: MediaQuery.of(context).size.height * 0.005),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

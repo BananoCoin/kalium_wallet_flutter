@@ -21,6 +21,10 @@ class AppButton {
       case AppButtonType.PRIMARY:
         return Expanded(
           child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+            ),
             height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
@@ -48,6 +52,11 @@ class AppButton {
       case AppButtonType.PRIMARY_OUTLINE:
         return Expanded(
           child: Container(
+            decoration: BoxDecoration(
+              color: StateContainer.of(context).curTheme.backgroundDark,
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+            ),
             height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
@@ -83,6 +92,10 @@ class AppButton {
       case AppButtonType.SUCCESS:
         return Expanded(
           child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+            ),
             height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
@@ -111,6 +124,11 @@ class AppButton {
       case AppButtonType.SUCCESS_OUTLINE:
         return Expanded(
           child: Container(
+            decoration: BoxDecoration(
+              color: StateContainer.of(context).curTheme.backgroundDark,
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+            ),
             height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
@@ -141,6 +159,11 @@ class AppButton {
       case AppButtonType.TEXT_OUTLINE:
         return Expanded(
           child: Container(
+            decoration: BoxDecoration(
+              color: StateContainer.of(context).curTheme.backgroundDark,
+              borderRadius: BorderRadius.circular(100),
+              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+            ),
             height: 55,
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
