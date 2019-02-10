@@ -66,12 +66,15 @@ class AppSeedBackupSheet {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                  margin: EdgeInsets.only(left: 50, right: 50),
-                                  child: Text(
+                                  margin: EdgeInsets.only(left: smallScreen(context)?35:50, right: smallScreen(context)?35:50),
+                                  child: AutoSizeText(
                                     AppLocalization.of(context).seedBackupInfo,
                                     style:
                                         AppStyles.textStyleParagraph(context),
-                                  )),
+                                    maxLines: 4,
+                                    stepGranularity: 0.5,
+                                  ),
+                              ),
                               new GestureDetector(
                                 onTap: () {
                                   if (_seedHidden) {
@@ -108,7 +111,7 @@ class AppSeedBackupSheet {
                                                   context)),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(top: 5),
+                                      margin: EdgeInsets.only(top: 5, left:smallScreen(context)?35:50, right: smallScreen(context)?35:50),
                                       child: Text(
                                           AppLocalization.of(context)
                                               .seedCopied,

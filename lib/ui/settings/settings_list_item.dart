@@ -3,6 +3,8 @@ import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/model/setting_item.dart';
+import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 
 class AppSettings {
   //Settings item with a dropdown option
@@ -100,9 +102,12 @@ class AppSettings {
                 ),
               ),
             ),
-            Text(
-              heading,
-              style: AppStyles.textStyleSettingItemHeader(context),
+            Container( 
+              width: UIUtil.drawerWidth(context)-100,
+              child: Text(
+                heading,
+                style: AppStyles.textStyleSettingItemHeader(context),
+              ),
             ),
           ],
         ),

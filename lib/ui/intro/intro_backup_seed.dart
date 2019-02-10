@@ -8,6 +8,7 @@ import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:kalium_wallet_flutter/util/clipboardutil.dart';
 
@@ -68,10 +69,9 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                   height: 50,
                                   width: 50,
                                   child: FlatButton(
-                                      highlightColor:
-                                          StateContainer.of(context)
-                                              .curTheme
-                                              .text15,
+                                      highlightColor: StateContainer.of(context)
+                                          .curTheme
+                                          .text15,
                                       splashColor: StateContainer.of(context)
                                           .curTheme
                                           .text15,
@@ -92,7 +92,8 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                             ),
                             // The header
                             Container(
-                              margin: EdgeInsets.only(top: 15.0, left: 50, right: 50),
+                              margin: EdgeInsets.only(
+                                  top: 15.0, left: 50, right: 50),
                               alignment: Alignment(-1, 0),
                               child: Text(
                                 AppLocalization.of(context).seed,
@@ -105,10 +106,12 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                               margin: EdgeInsets.only(
                                   left: 50, right: 50, top: 15.0),
                               alignment: Alignment.centerLeft,
-                              child: Text(
-                                  AppLocalization.of(context).seedBackupInfo,
-                                  style:
-                                      AppStyles.textStyleParagraph(context)),
+                              child: AutoSizeText(
+                                AppLocalization.of(context).seedBackupInfo,
+                                style: AppStyles.textStyleParagraph(context),
+                                maxLines: 5,
+                                stepGranularity: 0.5,
+                              ),
                             ),
                             Container(
                               // A gesture detector to decide if the is tapped or not
@@ -128,8 +131,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                       _seedCopiedTimer.cancel();
                                     }
                                     _seedCopiedTimer = new Timer(
-                                        const Duration(milliseconds: 1200),
-                                        () {
+                                        const Duration(milliseconds: 1200), () {
                                       setState(() {
                                         _seedCopied = false;
                                         _seedCopiedColor = Colors.transparent;
@@ -152,8 +154,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                         textStyle: _seedCopied
                                             ? AppStyles.textStyleSeedGreen(
                                                 context)
-                                            : AppStyles.textStyleSeed(
-                                                context)),
+                                            : AppStyles.textStyleSeed(context)),
                                   )),
                             ),
                             // "Seed copied to Clipboard" text that appaears when seed is tapped

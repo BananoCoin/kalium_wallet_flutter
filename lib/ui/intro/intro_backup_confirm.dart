@@ -5,6 +5,7 @@ import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
@@ -67,7 +68,8 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                         ),
                         // The header
                         Container(
-                          margin: EdgeInsets.only(top: 15.0, left: 50, right: 50),
+                          margin:
+                              EdgeInsets.only(top: 15.0, left: 50, right: 50),
                           alignment: Alignment(-1, 0),
                           child: Text(
                             AppLocalization.of(context).backupYourSeed,
@@ -78,9 +80,12 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                         Container(
                           margin:
                               EdgeInsets.only(left: 50, right: 50, top: 15.0),
-                          child: Text(
-                              AppLocalization.of(context).backupSeedConfirm,
-                              style: AppStyles.textStyleParagraph(context)),
+                          child: AutoSizeText(
+                            AppLocalization.of(context).backupSeedConfirm,
+                            style: AppStyles.textStyleParagraph(context),
+                            maxLines: 3,
+                            stepGranularity: 0.5,
+                          ),
                         ),
                       ],
                     ),

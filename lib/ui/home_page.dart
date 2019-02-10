@@ -838,12 +838,12 @@ class _AppHomePageState extends State<AppHomePage>
     String text;
     IconData icon;
     Color iconColor;
-    if (type == "Sent") {
-      text = "Sent";
+    if (type == AppLocalization.of(context).sent) {
+      text = AppLocalization.of(context).sent;
       icon = AppIcons.sent;
       iconColor = StateContainer.of(context).curTheme.text60;
     } else {
-      text = "Received";
+      text = AppLocalization.of(context).received;
       icon = AppIcons.received;
       iconColor = StateContainer.of(context).curTheme.primary60;
     }
@@ -1008,7 +1008,7 @@ class _AppHomePageState extends State<AppHomePage>
     );
   } // Welcome Card End
 
-  // Dummy Transaction Card
+  // Loading Transaction Card
   Widget _buildLoadingTransactionCard(
       String type, String amount, String address, BuildContext context) {
     String text;
@@ -1195,7 +1195,7 @@ class _AppHomePageState extends State<AppHomePage>
         ),
       ),
     );
-  } //Dummy Transaction Card End
+  } // Loading Transaction Card End
 
   //Main Card
   Widget _buildMainCard(BuildContext context, _scaffoldKey) {

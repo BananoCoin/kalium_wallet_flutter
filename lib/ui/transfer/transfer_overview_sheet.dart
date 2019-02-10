@@ -180,20 +180,21 @@ class AppTransferOverviewSheet {
                               ),
                             ),
                             Container(
-                                alignment: Alignment(-1, 0),
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: smallScreen(context) ? 35 : 60,
-                                    vertical: 20),
-                                child: Text(
-                                  AppLocalization.of(context)
-                                      .transferIntro
-                                      .replaceAll(
-                                          "%1",
-                                          AppLocalization.of(context)
-                                              .scanQrCode),
-                                  style: AppStyles.textStyleParagraph(context),
-                                  textAlign: TextAlign.left,
-                                )),
+                              alignment: Alignment(-1, 0),
+                              margin: EdgeInsets.symmetric(
+                                  horizontal: smallScreen(context) ? 35 : 50,
+                                  vertical: 20),
+                              child: AutoSizeText(
+                                AppLocalization.of(context)
+                                    .transferIntro
+                                    .replaceAll("%1",
+                                        AppLocalization.of(context).scanQrCode),
+                                style: AppStyles.textStyleParagraph(context),
+                                textAlign: TextAlign.left,
+                                maxLines: 6,
+                                stepGranularity: 0.5,
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -207,7 +208,9 @@ class AppTransferOverviewSheet {
                             Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () {
                               UIUtil.cancelLockEvent();
-                              BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme)
+                              BarcodeScanner.scan(StateContainer.of(context)
+                                      .curTheme
+                                      .qrScanTheme)
                                   .then((value) {
                                 if (!NanoSeeds.isValidSeed(value)) {
                                   UIUtil.showSnackbar(

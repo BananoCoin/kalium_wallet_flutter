@@ -4,6 +4,7 @@ import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
@@ -65,9 +66,11 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                         Container(
                           margin: EdgeInsets.symmetric(
                               horizontal: 50, vertical: 20),
-                          child: Text(
+                          child: AutoSizeText(
                             AppLocalization.of(context).welcomeText,
                             style: AppStyles.textStyleParagraph(context),
+                            maxLines: 4,
+                            stepGranularity: 0.5,
                           ),
                         ),
                       ],
