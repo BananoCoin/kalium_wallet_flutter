@@ -780,6 +780,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "באופן מידי",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך",
     "@exampleCardIntro": {
         "description": "example_card_intro",

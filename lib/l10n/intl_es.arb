@@ -780,6 +780,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Al instante",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Bienvenido a Kalium. Una vez que envíe o reciba BANANO, las transacciones se verán así",
     "@exampleCardIntro": {
         "description": "example_card_intro",

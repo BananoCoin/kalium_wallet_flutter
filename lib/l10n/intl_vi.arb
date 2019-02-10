@@ -695,5 +695,11 @@
 		"description": "scan_send_instruction_label",
 		"type": "text",
 		"placeholders": {}
-	}
+	},
+    "instantly": "Ngay bây giờ",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    }
 }

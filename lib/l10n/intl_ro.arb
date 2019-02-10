@@ -780,6 +780,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Imediat",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Bun venit la Kalium. Odată ce primiți sau trimiteți BANANO, tranzacțiile vor arăta astfel",
     "@exampleCardIntro": {
         "description": "example_card_intro",

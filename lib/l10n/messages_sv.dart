@@ -62,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "importSeed" : MessageLookupByLibrary.simpleMessage("Importera seed"),
     "importSeedHint" : MessageLookupByLibrary.simpleMessage("Ange din seed nedanför."),
     "importWallet" : MessageLookupByLibrary.simpleMessage("Importera plånbok"),
+    "instantly" : MessageLookupByLibrary.simpleMessage("Omedelbart"),
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Saknas täckning"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Ogiltig mottagaradress"),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium-plånbok"),

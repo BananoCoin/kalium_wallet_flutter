@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "importSeed" : MessageLookupByLibrary.simpleMessage("Importă seed-ul"),
     "importSeedHint" : MessageLookupByLibrary.simpleMessage("Introdu seed-ul mai jos."),
     "importWallet" : MessageLookupByLibrary.simpleMessage("Importă portofelul\""),
+    "instantly" : MessageLookupByLibrary.simpleMessage("Imediat"),
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Fonduri insuficiente"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Adresa de destinație este invalidă"),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Portofel Kalium"),

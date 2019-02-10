@@ -780,6 +780,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Немедленно",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Добро пожаловать в Kalium.Когда вы получите или отправите BANANO,это будет отображено ниже.",
     "@exampleCardIntro": {
         "description": "example_card_intro",

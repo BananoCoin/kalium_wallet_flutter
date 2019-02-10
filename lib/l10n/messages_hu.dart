@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "importSeed" : MessageLookupByLibrary.simpleMessage("Seed importálása"),
     "importSeedHint" : MessageLookupByLibrary.simpleMessage("Írd be a seeded."),
     "importWallet" : MessageLookupByLibrary.simpleMessage("Tárca Importálása"),
+    "instantly" : MessageLookupByLibrary.simpleMessage("Azonnal"),
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Elégtelen Számlaegyenleg"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Helytelen Cím"),
     "language" : MessageLookupByLibrary.simpleMessage("Nyelv"),

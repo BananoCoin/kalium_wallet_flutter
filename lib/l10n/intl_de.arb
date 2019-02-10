@@ -732,7 +732,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "lockAppSetting": "Authentisierung beim Öffnen",
+    "lockAppSetting": "Authentifizierung beim Öffnen",
     "@lockAppSetting": {
         "description": "authenticate_on_launch",
         "type": "text",
@@ -777,6 +777,12 @@
     "xMinute": "Nach %1 Minute",
     "@xMinute": {
         "description": "after_minute",
+        "type": "text",
+        "placeholders": {}
+    },
+    "instantly": "Sofort",
+    "@instantly": {
+        "description": "insantly",
         "type": "text",
         "placeholders": {}
     },

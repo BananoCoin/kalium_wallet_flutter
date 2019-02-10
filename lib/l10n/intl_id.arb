@@ -780,6 +780,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Segera",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Hai, Saat anda mengirim dan menerima BANANO, akan terlihat seperti ini",
     "@exampleCardIntro": {
         "description": "example_card_intro",

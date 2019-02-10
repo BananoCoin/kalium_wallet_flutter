@@ -672,6 +672,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Azonnal",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Üdvözöllek a Kaliumban! Így fogod látni a tranzakcióid, amikor kapsz BANANO-t.",
     "@exampleCardIntro": {
         "description": "example_card_intro",

@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "importSeed" : MessageLookupByLibrary.simpleMessage("ייבא סיד"),
     "importSeedHint" : MessageLookupByLibrary.simpleMessage("בבקשה תכניס את הסיד שלך."),
     "importWallet" : MessageLookupByLibrary.simpleMessage("ייבא ארנק"),
+    "instantly" : MessageLookupByLibrary.simpleMessage("באופן מידי"),
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("אין מספיק מטבעות בחשבון"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("כתובת יעד אינה תקינה"),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("ארנק קאליום"),

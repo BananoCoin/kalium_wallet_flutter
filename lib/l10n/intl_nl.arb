@@ -780,6 +780,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Direct",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Welkom bij Kalium. Zodra je BANANO ontvangt zullen jouw transacties op deze manier verschijnen",
     "@exampleCardIntro": {
         "description": "example_card_intro",
