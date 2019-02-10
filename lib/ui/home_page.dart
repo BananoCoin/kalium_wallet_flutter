@@ -659,7 +659,7 @@ class _AppHomePageState extends State<AppHomePage>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                         boxShadow: [
-                          StateContainer.of(context).curTheme.boxShadow
+                          StateContainer.of(context).curTheme.boxShadowButton
                         ],
                       ),
                       height: 55,
@@ -697,7 +697,7 @@ class _AppHomePageState extends State<AppHomePage>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(100),
                         boxShadow: [
-                          StateContainer.of(context).curTheme.boxShadow
+                          StateContainer.of(context).curTheme.boxShadowButton
                         ],
                       ),
                       height: 55,

@@ -53,6 +53,7 @@ abstract class BaseTheme {
   SystemUiOverlayStyle statusBar;
 
   BoxShadow boxShadow;
+  BoxShadow boxShadowButton;
 
   // QR scanner theme
   OverlayTheme qrScanTheme;
@@ -124,6 +125,7 @@ class KaliumTheme extends BaseTheme {
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
+  BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.KALIUM;
   FPDialogTheme fpTheme = FPDialogTheme.KALIUM;
@@ -192,6 +194,7 @@ class TitaniumTheme extends BaseTheme {
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
+  BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
   FPDialogTheme fpTheme = FPDialogTheme.TITANIUM;
@@ -263,6 +266,10 @@ class IridiumTheme extends BaseTheme {
       color: veryDarkGreen.withOpacity(0.1),
       offset: Offset(0, 5),
       blurRadius: 15);
+  BoxShadow boxShadowButton = BoxShadow(
+      color: veryDarkGreen.withOpacity(0.2),
+      offset: Offset(0, 5),
+      blurRadius: 15);
 
   OverlayTheme qrScanTheme = OverlayTheme.IRIDIUM;
   FPDialogTheme fpTheme = FPDialogTheme.IRIDIUM;
@@ -330,12 +337,87 @@ class BerylliumTheme extends BaseTheme {
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
-  BoxShadow boxShadow = BoxShadow(
-      color: Colors.transparent, offset: Offset(0, 5), blurRadius: 15);
+  BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
+  BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.BERYLLIUM;
   FPDialogTheme fpTheme = FPDialogTheme.BERYLLIUM;
   AppIconEnum appIcon = AppIconEnum.BERYLLIUM;
+}
+
+class RutheniumTheme extends BaseTheme {
+  static const cherry = Color(0xFFD5727E);
+
+  static const purple = Color(0xFF9B72D5);
+
+  static const purpleLight = Color(0xFFCAA4FF);
+
+  static const pink = Color(0xFFFFC1C8);
+
+  static const pinkLight = Color(0xFFFFC9D0);
+
+  static const grey = Color(0xFF7A6262);
+
+  static const black = Color(0xFF000000);
+
+  static const veryDarkPink = Color(0xFF7C595D);
+
+  Color primary = cherry;
+  Color primary60 = cherry.withOpacity(0.6);
+  Color primary45 = cherry.withOpacity(0.45);
+  Color primary30 = cherry.withOpacity(0.3);
+  Color primary20 = cherry.withOpacity(0.2);
+  Color primary15 = cherry.withOpacity(0.15);
+  Color primary10 = cherry.withOpacity(0.1);
+
+  Color success = purple;
+  Color success60 = purple.withOpacity(0.6);
+  Color success30 = purple.withOpacity(0.3);
+  Color success15 = purple.withOpacity(0.15);
+
+  Color successDark = purpleLight;
+  Color successDark30 = purpleLight.withOpacity(0.3);
+
+  Color background = pink;
+  Color background40 = pink.withOpacity(0.4);
+  Color background00 = pink.withOpacity(0.0);
+
+  Color backgroundDark = pinkLight;
+  Color backgroundDark00 = pinkLight.withOpacity(0.0);
+
+  Color backgroundDarkest = pink;
+
+  Color text = grey.withOpacity(0.9);
+  Color text60 = grey.withOpacity(0.6);
+  Color text45 = grey.withOpacity(0.45);
+  Color text30 = grey.withOpacity(0.3);
+  Color text20 = grey.withOpacity(0.2);
+  Color text15 = grey.withOpacity(0.15);
+  Color text03 = grey.withOpacity(0.03);
+
+  Color overlay90 = black.withOpacity(0.9);
+  Color overlay85 = black.withOpacity(0.85);
+  Color overlay80 = black.withOpacity(0.8);
+  Color overlay70 = black.withOpacity(0.7);
+  Color overlay50 = black.withOpacity(0.5);
+  Color overlay30 = black.withOpacity(0.3);
+  Color overlay20 = black.withOpacity(0.2);
+
+  SystemUiOverlayStyle statusBar =
+      SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
+
+  BoxShadow boxShadow = BoxShadow(
+      color: veryDarkPink.withOpacity(0.08),
+      offset: Offset(0, 5),
+      blurRadius: 15);
+  BoxShadow boxShadowButton = BoxShadow(
+      color: veryDarkPink.withOpacity(0.16),
+      offset: Offset(0, 5),
+      blurRadius: 15);
+
+  OverlayTheme qrScanTheme = OverlayTheme.IRIDIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.IRIDIUM;
+  AppIconEnum appIcon = AppIconEnum.IRIDIUM;
 }
 
 enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM }

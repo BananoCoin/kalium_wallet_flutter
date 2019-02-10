@@ -23,7 +23,7 @@ class AppButton {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
             ),
             height: 55,
             margin:
@@ -55,7 +55,7 @@ class AppButton {
             decoration: BoxDecoration(
               color: StateContainer.of(context).curTheme.backgroundDark,
               borderRadius: BorderRadius.circular(100),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
             ),
             height: 55,
             margin:
@@ -94,7 +94,7 @@ class AppButton {
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(100),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
             ),
             height: 55,
             margin:
@@ -127,7 +127,7 @@ class AppButton {
             decoration: BoxDecoration(
               color: StateContainer.of(context).curTheme.backgroundDark,
               borderRadius: BorderRadius.circular(100),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
             ),
             height: 55,
             margin:
@@ -162,7 +162,7 @@ class AppButton {
             decoration: BoxDecoration(
               color: StateContainer.of(context).curTheme.backgroundDark,
               borderRadius: BorderRadius.circular(100),
-              boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+              boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
             ),
             height: 55,
             margin:
