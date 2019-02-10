@@ -6,7 +6,6 @@
 
 - (void)lc_setAlternateIconName:(NSString*)iconName
 {
-    //anti apple private method call analyse
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(supportsAlternateIcons)] &&
         [[UIApplication sharedApplication] supportsAlternateIcons])
     {
@@ -48,13 +47,9 @@
             } else if ([@"titanium" isEqualToString:icon]) {
                 [self lc_setAlternateIconName:@"titanium"];
             } else if ([@"iridium" isEqualToString:icon]) {
-                [application setAlternateIconName:@"iridium" completionHandler:^(NSError * _Nullable error) {
-                    NSLog(@"Error...");
-                }];
+                [self lc_setAlternateIconName:@"iridium"];
             } else if ([@"beryllium" isEqualToString:icon]) {
-                [application setAlternateIconName:@"beryllium" completionHandler:^(NSError * _Nullable error) {
-                    NSLog(@"Error...");
-                }];
+                [self lc_setAlternateIconName:@"beryllium"];
             }
         } else {
             result(FlutterMethodNotImplemented);
