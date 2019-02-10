@@ -594,7 +594,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "settingsTransfer": "Charger depuis le portefeuille papier",
+    "settingsTransfer": "Transfert de fond",
     "@settingsTransfer": {
         "description": "settings_transfer",
         "type": "text",
@@ -777,6 +777,12 @@
     "xMinute": "Après %1 minute",
     "@xMinute": {
         "description": "after_minute",
+        "type": "text",
+        "placeholders": {}
+    },
+    "instantly": "Immédiatement",
+    "@instantly": {
+        "description": "insantly",
         "type": "text",
         "placeholders": {}
     },

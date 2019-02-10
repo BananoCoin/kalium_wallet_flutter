@@ -774,6 +774,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Omedelbart",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Välkommen till Kalium. Så snart du tar emot BANANO, visas transaktionerna på detta vis",
     "@exampleCardIntro": {
         "description": "example_card_intro",

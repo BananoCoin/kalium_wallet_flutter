@@ -684,6 +684,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Instantly",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Witam w Kalium. Kiedy dostaniesz BANANO, transakcje pokażą się w ten sposób",
     "@exampleCardIntro": {
         "description": "example_card_intro",

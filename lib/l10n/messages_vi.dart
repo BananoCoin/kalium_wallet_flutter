@@ -55,6 +55,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "importSeed" : MessageLookupByLibrary.simpleMessage("Nhập hạt giống"),
     "importSeedHint" : MessageLookupByLibrary.simpleMessage("Vui lòng nhập hạt giống của bạn bên dưới."),
     "importWallet" : MessageLookupByLibrary.simpleMessage("Nhập ví hiện có"),
+    "instantly" : MessageLookupByLibrary.simpleMessage("Ngay bây giờ"),
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Không đủ số dư"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Địa chỉ không hợp lệ"),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Ví Kalium"),

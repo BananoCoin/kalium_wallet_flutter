@@ -678,6 +678,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Hemen",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Kalium’a hoşgeldin. Hesabına BANANO geldiğinde işlemlerin şu şekilde görünecek",
     "@exampleCardIntro": {
         "description": "example_card_intro",

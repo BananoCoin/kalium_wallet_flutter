@@ -780,6 +780,12 @@
         "type": "text",
         "placeholders": {}
     },
+    "instantly": "Agad",
+    "@instantly": {
+        "description": "insantly",
+        "type": "text",
+        "placeholders": {}
+    },
     "exampleCardIntro": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO",
     "@exampleCardIntro": {
         "description": "example_card_intro",

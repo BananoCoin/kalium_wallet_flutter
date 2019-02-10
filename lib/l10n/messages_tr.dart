@@ -63,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "importSeed" : MessageLookupByLibrary.simpleMessage("Seed\'i içe aktar"),
     "importSeedHint" : MessageLookupByLibrary.simpleMessage("Lütfen seed\'inizi girin."),
     "importWallet" : MessageLookupByLibrary.simpleMessage("İçe Aktar"),
+    "instantly" : MessageLookupByLibrary.simpleMessage("Hemen"),
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Yetersiz Bakiye"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Geçersiz bir adres girdiniz"),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium Cüzdanı"),
