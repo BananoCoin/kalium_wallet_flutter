@@ -204,9 +204,9 @@ class TitaniumTheme extends BaseTheme {
 class IridiumTheme extends BaseTheme {
   static const green = Color(0xFF008F53);
 
-  static const blue = Color(0xFF2572AB);
+  static const blue = Color(0xFF566AB4);
 
-  static const blueDark = Color(0xFF0F4975);
+  static const blueLight = Color(0xFF90A0D9);
 
   static const white = Color(0xFFFFFFFF);
 
@@ -231,8 +231,8 @@ class IridiumTheme extends BaseTheme {
   Color success30 = blue.withOpacity(0.3);
   Color success15 = blue.withOpacity(0.15);
 
-  Color successDark = blueDark;
-  Color successDark30 = blueDark.withOpacity(0.3);
+  Color successDark = blueLight;
+  Color successDark30 = blueLight.withOpacity(0.3);
 
   Color background = white;
   Color background40 = white.withOpacity(0.4);
