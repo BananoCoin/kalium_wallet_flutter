@@ -96,9 +96,9 @@ class AppSettings {
                 ),
                 margin: EdgeInsets.only(
                   top: 3,
-                  left: settingIcon == AppIcons.logout ? 6 : 3,
+                  left: settingIcon == AppIcons.logout ? 6 : settingIcon == AppIcons.changerepresentative? 0: settingIcon == AppIcons.backupseed ? 1: settingIcon == AppIcons.transferfunds ? 2:3,
                   bottom: 3,
-                  right: settingIcon == AppIcons.logout ? 0 : 3,
+                  right: settingIcon == AppIcons.logout ? 0 : settingIcon == AppIcons.changerepresentative? 6: settingIcon == AppIcons.backupseed ? 5: settingIcon == AppIcons.transferfunds ? 4:3,
                 ),
               ),
             ),

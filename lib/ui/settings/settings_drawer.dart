@@ -903,7 +903,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                     AppSettings.buildSettingsListItemSingleLine(
                         context,
                         AppLocalization.of(context).contactsHeader,
-                        AppIcons.contacts, onPressed: () {
+                        AppIcons.contact, onPressed: () {
                       setState(() {
                         _contactsOpen = true;
                       });
@@ -1034,9 +1034,9 @@ class _SettingsSheetState extends State<SettingsSheet>
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left:20, right: 20),
+                      child: Wrap(
+                        alignment: WrapAlignment.center,
                         children: <Widget>[
                           Text(versionString,
                               style: AppStyles.textStyleVersion(context)),
