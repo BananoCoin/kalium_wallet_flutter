@@ -296,6 +296,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       curTheme = theme.getTheme();
     });
+    AppIcon.setAppIcon(theme.getTheme().appIcon);
   }
 
   void updateDeviceLocale(Locale locale) {
