@@ -415,9 +415,9 @@ class RutheniumTheme extends BaseTheme {
       offset: Offset(0, 5),
       blurRadius: 15);
 
-  OverlayTheme qrScanTheme = OverlayTheme.IRIDIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.IRIDIUM;
-  AppIconEnum appIcon = AppIconEnum.IRIDIUM;
+  OverlayTheme qrScanTheme = OverlayTheme.RUTHIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.RUTHIUM;
+  AppIconEnum appIcon = AppIconEnum.RUTHIUM;
 }
 
 class RadiumTheme extends BaseTheme {
@@ -484,12 +484,12 @@ class RadiumTheme extends BaseTheme {
   BoxShadow boxShadow = BoxShadow(color: Colors.transparent);
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
-  OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.TITANIUM;
-  AppIconEnum appIcon = AppIconEnum.TITANIUM;
+  OverlayTheme qrScanTheme = OverlayTheme.RADIUM;
+  FPDialogTheme fpTheme = FPDialogTheme.RADIUM;
+  AppIconEnum appIcon = AppIconEnum.RADIUM;
 }
 
-enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM }
+enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM, RUTHIUM, RADIUM }
 class AppIcon {
   static const _channel = const MethodChannel('fappchannel');
 
@@ -504,6 +504,12 @@ class AppIcon {
         break;
       case AppIconEnum.TITANIUM:
         iconStr = "titanium";
+        break;
+      case AppIconEnum.RUTHIUM:
+        iconStr = "ruthium";
+        break;
+      case AppIconEnum.RADIUM:
+        iconStr = "radium";
         break;
       case AppIconEnum.KALIUM:
       default:
