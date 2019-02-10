@@ -25,13 +25,13 @@ dependencies:
       ref: develop
 
   # Nano core functions
-  flutter_nano_core: ^1.0.1
+  flutter_nano_core: ^1.0.2
 
   # Shared prefs
   shared_preferences: ^0.4.3
 
   # Flare for animations
-  flare_flutter: ^1.2.0
+  flare_flutter: ^1.2.2
 
   # Websockets
   web_socket_channel: ^1.0.9
@@ -106,7 +106,7 @@ dependencies:
       ref: master
 
   # Toast
-  oktoast: ^2.1.4
+  oktoast: ^2.1.5
 
   # Push notifications - TODO update to newer androidX version
   firebase_messaging: ^ 2.2.0+1
