@@ -123,7 +123,7 @@ class StateContainerState extends State<StateContainer> {
     });
     // Get theme default
     SharedPrefsUtil.inst.getTheme().then((theme) {
-      updateTheme(theme);
+      updateTheme(theme, setIcon: false);
     });
   }
 
@@ -292,11 +292,13 @@ class StateContainerState extends State<StateContainer> {
   }
 
   // Change theme
-  void updateTheme(ThemeSetting theme) {
+  void updateTheme(ThemeSetting theme, {bool setIcon = true}) {
     setState(() {
       curTheme = theme.getTheme();
     });
-    AppIcon.setAppIcon(theme.getTheme().appIcon);
+    if (setIcon) {
+      AppIcon.setAppIcon(theme.getTheme().appIcon);
+    }
   }
 
   void updateDeviceLocale(Locale locale) {
