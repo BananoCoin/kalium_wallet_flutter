@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>XSAppIconAssets</key>
+	<string>Assets.xcassets/AppIcons.appiconset</string>
+	<key>CFBundleIconName</key>
+	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>NSFaceIDUsageDescription</key>
-     <string>App needs to authenticate using faces.</string>
+	<string>App needs to authenticate using faces.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -61,15 +65,15 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
-		<key>CFBundleTypeRole</key>
-		<string>Editor</string>
-		<key>CFBundleURLName</key>
-		<string>com.banano.kaliumwallet</string>
-		<key>CFBundleURLSchemes</key>
-		<array>
-			<string>ban</string>
-			<string>banano</string>
-		</array>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.banano.kaliumwallet</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>ban</string>
+				<string>banano</string>
+			</array>
 		</dict>
 	</array>
 	<key>CFBundleIcons</key>
@@ -112,24 +116,24 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-                        <key>radium</key>
-                        <dict>
-                                <key>CFBundleIconFiles</key>
-                                <array>
-                                        <string>Ra-Icon-App</string>
-                                </array>
-                                <key>UIPrerenderedIcon</key>
-                                <false/>
-                        </dict>
-                        <key>ruthium</key>
-                        <dict>
-                                <key>CFBundleIconFiles</key>
-                                <array>
-                                        <string>Ru-Icon-App</string>
-                                </array>
-                                <key>UIPrerenderedIcon</key>
-                                <false/>
-                        </dict>
+			<key>radium</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Ra-Icon-App</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>ruthium</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Ru-Icon-App</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 		</dict>
 	</dict>
 </dict>
