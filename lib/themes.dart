@@ -50,6 +50,7 @@ abstract class BaseTheme {
   Color overlay30;
   Color overlay20;
 
+  Brightness brightness;
   SystemUiOverlayStyle statusBar;
 
   BoxShadow boxShadow;
@@ -121,6 +122,7 @@ class KaliumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
@@ -190,6 +192,7 @@ class TitaniumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
@@ -259,6 +262,7 @@ class IridiumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Brightness brightness = Brightness.light;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
 
@@ -334,6 +338,7 @@ class BerylliumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 
@@ -403,6 +408,7 @@ class RutheniumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Brightness brightness = Brightness.light;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
 
@@ -478,6 +484,7 @@ class RadiumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
 

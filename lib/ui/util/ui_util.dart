@@ -358,8 +358,8 @@ class UIUtil {
     return WebviewScaffold(
       url: AppLocalization.of(context).getBlockExplorerUrl(hash),
       appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.background,
-        brightness: Brightness.dark,
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        brightness: StateContainer.of(context).curTheme.brightness,
         iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
       ),
     );
@@ -370,8 +370,8 @@ class UIUtil {
     return WebviewScaffold(
       url: AppLocalization.of(context).getAccountExplorerUrl(account),
       appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.background,
-        brightness: Brightness.dark,
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        brightness: StateContainer.of(context).curTheme.brightness,
         iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
       ),
     );
@@ -382,8 +382,8 @@ class UIUtil {
     return WebviewScaffold(
       url: url,
       appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.background,
-        brightness: Brightness.dark,
+        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+        brightness: StateContainer.of(context).curTheme.brightness,
         iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
       ),
     );
