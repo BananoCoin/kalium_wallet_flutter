@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:logging/logging.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
@@ -29,6 +28,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_drawer.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_scaffold.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/list_slidable.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
@@ -769,6 +769,10 @@ class _AppHomePageState extends State<AppHomePage>
       delegate: SlidableScrollDelegate(),
       actionExtentRatio: 0.25,
       movementDuration: Duration(milliseconds: 300),
+      onTriggered: () {
+        HapticUtil.success();
+        AppSendSheet(address: item.account).mainBottomSheet(context);
+      },
       secondaryActions: <Widget>[
         SlideAction(
           child: Container(
@@ -790,10 +794,6 @@ class _AppHomePageState extends State<AppHomePage>
                   size: 26.0),
             ),
           ),
-
-          onTap: () {
-            AppSendSheet(address: item.account).mainBottomSheet(context);
-          },
         ),
       ],
       child: _SizeTransitionNoClip(

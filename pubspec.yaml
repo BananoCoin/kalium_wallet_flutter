@@ -75,9 +75,6 @@ dependencies:
 
   # SVG
   flutter_svg: ^0.10.3
-
-  # Slide Actions
-  flutter_slidable: "^0.4.9"
     
   # QR Codes
   qr_flutter: ^1.1.6 # Generator
