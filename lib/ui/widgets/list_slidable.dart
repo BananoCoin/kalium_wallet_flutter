@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-const double _kActionsExtentRatio = 0.35;
+import 'package:kalium_wallet_flutter/util/hapticutil.dart';
+
+const double _kActionsExtentRatio = 0.25;
 const double _kFastThreshold = 2500.0;
 const double _kDismissThreshold = 0.75;
 const Curve _kResizeTimeCurve = const Interval(0.4, 1.0, curve: Curves.ease);
@@ -832,8 +834,7 @@ class SlidableState extends State<Slidable>
           ..addStatusListener(_handleDismissStatusChanged);
     _actionsMoveController =
         new AnimationController(duration: widget.movementDuration, vsync: this)
-          ..addStatusListener(_handleShowAllActionsStatusChanged)
-          ..addListener(_actionsMoveListener);
+          ..addStatusListener(_handleShowAllActionsStatusChanged);
   }
 
   AnimationController _overallMoveController;
@@ -1019,6 +1020,8 @@ class SlidableState extends State<Slidable>
     close();
   }
 
+  StreamSubscription<dynamic> _callbackStream;
+  bool _callbackComplete = false;
   void _handleShowAllActionsStatusChanged(AnimationStatus status) {
     // Make sure to rebuild a last time, otherwise the slide action could
     // be scrambled.
@@ -1027,15 +1030,25 @@ class SlidableState extends State<Slidable>
       setState(() {});
     }
 
-    updateKeepAlive();
-  }
-
-  void _actionsMoveListener() {
-    if (actionsMoveAnimation.value >= 1.0) {
-      widget.onTriggered();
+    if (_dragExtent < 0 && status == AnimationStatus.completed && actionsMoveAnimation.value >= 1.0 && !_callbackComplete) {
+      _callbackComplete = true;
+      HapticUtil.success();
+      var delayed = new Future.delayed(new Duration(milliseconds: 100));
+      delayed.then((_) {
+        _callbackComplete = false;
+        return true;
+      });
+      if (_callbackStream != null) {
+        _callbackStream.cancel();
+      }
+      _callbackStream = delayed.asStream().listen((_) {
+        widget.onTriggered();
+      });
       _dragUnderway = false;
       close();
     }
+
+    updateKeepAlive();
   }
 
   void _handleDismissStatusChanged(AnimationStatus status) async {

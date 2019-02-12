@@ -770,14 +770,11 @@ class _AppHomePageState extends State<AppHomePage>
       actionExtentRatio: 0.35,
       movementDuration: Duration(milliseconds: 300),
       onTriggered: () {
-        HapticUtil.success();
         // See if a contact
         DBHelper().getContactWithAddress(item.account).then((contact) {
-          Future.delayed(Duration(milliseconds: 100), () {
-            // Go to send with address
-            AppSendSheet(contact: contact, address: item.account)
-                .mainBottomSheet(context);
-          });
+          // Go to send with address
+          AppSendSheet(contact: contact, address: item.account)
+              .mainBottomSheet(context);
         });
       },
       secondaryActions: <Widget>[
