@@ -771,7 +771,12 @@ class _AppHomePageState extends State<AppHomePage>
       movementDuration: Duration(milliseconds: 300),
       onTriggered: () {
         HapticUtil.success();
-        AppSendSheet(address: item.account).mainBottomSheet(context);
+        // See if a contact
+        DBHelper().getContactWithAddress(item.account).then((contact) {
+          // Go to send with address
+          AppSendSheet(contact: contact, address: item.account)
+              .mainBottomSheet(context);
+        });
       },
       secondaryActions: <Widget>[
         SlideAction(
