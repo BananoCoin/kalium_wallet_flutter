@@ -767,15 +767,17 @@ class _AppHomePageState extends State<AppHomePage>
     }
     return Slidable(
       delegate: SlidableScrollDelegate(),
-      actionExtentRatio: 0.25,
+      actionExtentRatio: 0.35,
       movementDuration: Duration(milliseconds: 300),
       onTriggered: () {
         HapticUtil.success();
         // See if a contact
         DBHelper().getContactWithAddress(item.account).then((contact) {
-          // Go to send with address
-          AppSendSheet(contact: contact, address: item.account)
-              .mainBottomSheet(context);
+          Future.delayed(Duration(milliseconds: 100), () {
+            // Go to send with address
+            AppSendSheet(contact: contact, address: item.account)
+                .mainBottomSheet(context);
+          });
         });
       },
       secondaryActions: <Widget>[
@@ -784,7 +786,10 @@ class _AppHomePageState extends State<AppHomePage>
             decoration: BoxDecoration(
               color: Colors.transparent,
             ),
-            margin: EdgeInsets.only(right: 14, top: 4, bottom: 4),
+            margin: EdgeInsets.only(
+                right: MediaQuery.of(context).size.width * 0.15,
+                top: 4,
+                bottom: 4),
             child: Container(
               constraints: BoxConstraints.expand(),
               decoration: BoxDecoration(

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-const double _kActionsExtentRatio = 0.25;
+const double _kActionsExtentRatio = 0.35;
 const double _kFastThreshold = 2500.0;
 const double _kDismissThreshold = 0.75;
 const Curve _kResizeTimeCurve = const Interval(0.4, 1.0, curve: Curves.ease);
