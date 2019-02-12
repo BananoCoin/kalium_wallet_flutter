@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:logging/logging.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
@@ -764,78 +765,111 @@ class _AppHomePageState extends State<AppHomePage>
       icon = AppIcons.received;
       iconColor = StateContainer.of(context).curTheme.primary60;
     }
-    return _SizeTransitionNoClip(
-      sizeFactor: animation,
-      child: Container(
-        margin: EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 4.0),
-        decoration: BoxDecoration(
-          color: StateContainer.of(context).curTheme.backgroundDark,
-          borderRadius: BorderRadius.circular(10.0),
-          boxShadow: [StateContainer.of(context).curTheme.boxShadow],
-        ),
-        child: FlatButton(
-          highlightColor: StateContainer.of(context).curTheme.text15,
-          splashColor: StateContainer.of(context).curTheme.text15,
-          color: StateContainer.of(context).curTheme.backgroundDark,
-          padding: EdgeInsets.all(0.0),
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          onPressed: () => transactionDetails.mainBottomSheet(context),
-          child: Center(
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 14.0, horizontal: 20.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      Container(
-                          margin: EdgeInsets.only(right: 16.0),
-                          child: Icon(icon, color: iconColor, size: 20)),
-                      Container(
-                        width: MediaQuery.of(context).size.width / 4,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              text,
-                              textAlign: TextAlign.left,
-                              style:
-                                  AppStyles.textStyleTransactionType(context),
-                            ),
-                            RichText(
-                              textAlign: TextAlign.left,
-                              text: TextSpan(
-                                text: '',
-                                children: [
-                                  TextSpan(
-                                    text: item.getFormattedAmount(),
-                                    style: AppStyles.textStyleTransactionAmount(
-                                        context),
-                                  ),
-                                  TextSpan(
-                                    text: " BAN",
-                                    style: AppStyles.textStyleTransactionUnit(
-                                        context),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                  Container(
-                    width: MediaQuery.of(context).size.width / 2.4,
-                    child: Text(
-                      displayName,
-                      textAlign: TextAlign.right,
-                      style: AppStyles.textStyleTransactionAddress(context),
-                    ),
-                  ),
+    return Slidable(
+      delegate: SlidableScrollDelegate(),
+      actionExtentRatio: 0.25,
+      movementDuration: Duration(milliseconds: 300),
+      secondaryActions: <Widget>[
+        SlideAction(
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.transparent,
+            ),
+            margin: EdgeInsets.only(right: 14, top: 4, bottom: 4),
+            child: Container(
+              constraints: BoxConstraints.expand(),
+              decoration: BoxDecoration(
+                boxShadow: [
+                  StateContainer.of(context).curTheme.boxShadow,
                 ],
+                borderRadius: BorderRadius.circular(10),
+                color: StateContainer.of(context).curTheme.backgroundDark,
+              ),
+              child: Icon(Icons.send,
+                  color: StateContainer.of(context).curTheme.primary,
+                  size: 26.0),
+            ),
+          ),
+
+          onTap: () {
+            AppSendSheet(address: item.account).mainBottomSheet(context);
+          },
+        ),
+      ],
+      child: _SizeTransitionNoClip(
+        sizeFactor: animation,
+        child: Container(
+          margin: EdgeInsets.fromLTRB(14.0, 4.0, 14.0, 4.0),
+          decoration: BoxDecoration(
+            color: StateContainer.of(context).curTheme.backgroundDark,
+            borderRadius: BorderRadius.circular(10.0),
+            boxShadow: [StateContainer.of(context).curTheme.boxShadow],
+          ),
+          child: FlatButton(
+            highlightColor: StateContainer.of(context).curTheme.text15,
+            splashColor: StateContainer.of(context).curTheme.text15,
+            color: StateContainer.of(context).curTheme.backgroundDark,
+            padding: EdgeInsets.all(0.0),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            onPressed: () => transactionDetails.mainBottomSheet(context),
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 14.0, horizontal: 20.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Container(
+                            margin: EdgeInsets.only(right: 16.0),
+                            child: Icon(icon, color: iconColor, size: 20)),
+                        Container(
+                          width: MediaQuery.of(context).size.width / 4,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                text,
+                                textAlign: TextAlign.left,
+                                style:
+                                    AppStyles.textStyleTransactionType(context),
+                              ),
+                              RichText(
+                                textAlign: TextAlign.left,
+                                text: TextSpan(
+                                  text: '',
+                                  children: [
+                                    TextSpan(
+                                      text: item.getFormattedAmount(),
+                                      style:
+                                          AppStyles.textStyleTransactionAmount(
+                                              context),
+                                    ),
+                                    TextSpan(
+                                      text: " BAN",
+                                      style: AppStyles.textStyleTransactionUnit(
+                                          context),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width / 2.4,
+                      child: Text(
+                        displayName,
+                        textAlign: TextAlign.right,
+                        style: AppStyles.textStyleTransactionAddress(context),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
