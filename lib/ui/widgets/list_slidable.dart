@@ -1048,7 +1048,7 @@ class SlidableState extends State<Slidable>
         close();
       });
       HapticUtil.success();
-      var delayed = new Future.delayed(new Duration(milliseconds: 250));
+      var delayed = new Future.delayed(new Duration(milliseconds: 200));
       delayed.then((_) {
         Future.delayed(Duration(milliseconds: 100), () {
           setState(() {

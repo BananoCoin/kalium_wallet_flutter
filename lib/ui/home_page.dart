@@ -106,7 +106,7 @@ class _AppHomePageState extends State<AppHomePage>
 
   bool advance(FlutterActorArtboard artboard, double elapsed) {
     if (releaseAnimation) {
-      _sendSlideReleaseAnimation.apply(_sendSlideReleaseAnimation.duration * (_fanimationPosition - 1),
+      _sendSlideReleaseAnimation.apply(_sendSlideReleaseAnimation.duration * (1-_fanimationPosition),
                                       artboard, 1.0);
     } else {
       _sendSlideAnimation.apply(
