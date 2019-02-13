@@ -672,6 +672,7 @@ class Slidable extends StatefulWidget {
     SlideToDismissDelegate slideToDismissDelegate,
     SlidableController controller,
     @required Function onTriggered,
+    Function onAnimationChanged,
   }) : this.builder(
           key: key,
           child: child,
@@ -687,7 +688,8 @@ class Slidable extends StatefulWidget {
           enabled: enabled,
           slideToDismissDelegate: slideToDismissDelegate,
           controller: controller,
-          onTriggered: onTriggered
+          onTriggered: onTriggered,
+          onAnimationChanged: onAnimationChanged
         );
 
   /// Creates a widget that can be slid.
@@ -720,6 +722,7 @@ class Slidable extends StatefulWidget {
     this.slideToDismissDelegate,
     this.controller,
     @required this.onTriggered,
+    this.onAnimationChanged
   })  : assert(delegate != null),
         assert(direction != null),
         assert(
@@ -788,6 +791,7 @@ class Slidable extends StatefulWidget {
 
   /// Triggled callback
   final Function onTriggered;
+  final Function onAnimationChanged;
 
   /// The state from the closest instance of this class that encloses the given context.
   static SlidableState of(BuildContext context) {
@@ -834,7 +838,8 @@ class SlidableState extends State<Slidable>
           ..addStatusListener(_handleDismissStatusChanged);
     _actionsMoveController =
         new AnimationController(duration: widget.movementDuration, vsync: this)
-          ..addStatusListener(_handleShowAllActionsStatusChanged);
+          ..addStatusListener(_handleShowAllActionsStatusChanged)
+          ..addListener(_handleShowAllActionsChanged);
   }
 
   AnimationController _overallMoveController;
@@ -1049,6 +1054,12 @@ class SlidableState extends State<Slidable>
     }
 
     updateKeepAlive();
+  }
+
+  void _handleShowAllActionsChanged() {
+    if (widget.onAnimationChanged != null) {
+      widget.onAnimationChanged(actionsMoveAnimation);
+    }
   }
 
   void _handleDismissStatusChanged(AnimationStatus status) async {

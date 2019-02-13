@@ -1,5 +1,8 @@
 import 'dart:async';
+import 'package:flare_flutter/flare.dart';
+import 'package:flare_dart/math/mat2d.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -48,7 +51,7 @@ class AppHomePage extends StatefulWidget {
 }
 
 class _AppHomePageState extends State<AppHomePage>
-    with WidgetsBindingObserver, SingleTickerProviderStateMixin {
+    with WidgetsBindingObserver, SingleTickerProviderStateMixin, FlareController {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   final GlobalKey<AppScaffoldState> _scaffoldKey =
       new GlobalKey<AppScaffoldState>();
@@ -86,6 +89,23 @@ class _AppHomePageState extends State<AppHomePage>
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
 
   StreamSubscription _deepLinkSub;
+
+  // Animation for swiping to send
+  ActorAnimation _sendSlideAnimation;
+  double _fanimationPosition;
+
+  void initialize(FlutterActorArtboard actor) {
+    _fanimationPosition = 0.0;
+    _sendSlideAnimation = actor.getAnimation("pull");
+  }
+
+  void setViewTransform(Mat2D viewTransform) {}
+
+  bool advance(FlutterActorArtboard artboard, double elapsed) {
+    _sendSlideAnimation.apply(
+        _sendSlideAnimation.duration * _fanimationPosition, artboard, 1.0);
+    return true;
+  }
 
   @override
   void initState() {
@@ -779,6 +799,11 @@ class _AppHomePageState extends State<AppHomePage>
               .mainBottomSheet(context);
         });
       },
+      onAnimationChanged: (animation) {
+        if (animation != null) {
+          _fanimationPosition = animation.value;
+        }
+      },
       secondaryActions: <Widget>[
         SlideAction(
           child: Container(
@@ -796,6 +821,7 @@ class _AppHomePageState extends State<AppHomePage>
                 "assets/pulltosend_animation.flr",
                 animation: "pull",
                 fit: BoxFit.contain,
+                controller: this,
               ),
             ),
           ),

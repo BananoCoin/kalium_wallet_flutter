@@ -109,6 +109,7 @@ class AppSendSheet {
     }
     AppSheets.showAppHeightNineSheet(
         context: context,
+        animationDurationMs: 300,
         builder: (BuildContext context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
