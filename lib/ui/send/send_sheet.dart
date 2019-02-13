@@ -541,6 +541,13 @@ class AppSendSheet {
                                         _sendAddressController.text =
                                             contact.name;
                                       }
+                                      // Fill amount
+                                      if (_localCurrencyMode) {
+                                        toggleLocalCurrency(context, setState);
+                                      }
+                                      if (address.amount != null) {
+                                        _sendAmountController.text = NumberUtil.getRawAsUsableString(address.amount);
+                                      }
                                     });
                                     _sendAddressFocusNode.unfocus();
                                   }
