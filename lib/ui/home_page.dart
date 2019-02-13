@@ -822,6 +822,7 @@ class _AppHomePageState extends State<AppHomePage>
                 animation: "pull",
                 fit: BoxFit.contain,
                 controller: this,
+                color: StateContainer.of(context).curTheme.primary
               ),
             ),
           ),
