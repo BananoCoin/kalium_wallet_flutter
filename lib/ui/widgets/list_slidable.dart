@@ -986,6 +986,9 @@ class SlidableState extends State<Slidable>
   }
 
   void _handleDragStart(DragStartDetails details) {
+    if (_callbackComplete) {
+      return;
+    }
     _dragUnderway = true;
     widget.controller?.activeState = this;
     _dragExtent = _actionsMoveController.value *
@@ -1002,6 +1005,8 @@ class SlidableState extends State<Slidable>
 
   void _handleDragUpdate(DragUpdateDetails details) {
     if (widget.controller != null && widget.controller.activeState != this) {
+      return;
+    } else if (_callbackComplete) {
       return;
     }
 
@@ -1036,21 +1041,28 @@ class SlidableState extends State<Slidable>
     }
 
     if (_dragExtent < 0 && status == AnimationStatus.completed && actionsMoveAnimation.value >= 1.0 && !_callbackComplete) {
-      _callbackComplete = true;
+      widget.onTriggered(true);
+      setState(() {
+        _dragUnderway = false;
+        _callbackComplete = true;
+        close();
+      });
       HapticUtil.success();
       var delayed = new Future.delayed(new Duration(milliseconds: 250));
       delayed.then((_) {
-        _callbackComplete = false;
+        Future.delayed(Duration(milliseconds: 100), () {
+          setState(() {
+            _callbackComplete = false;
+          });
+        });
         return true;
       });
       if (_callbackStream != null) {
         _callbackStream.cancel();
       }
       _callbackStream = delayed.asStream().listen((_) {
-        widget.onTriggered();
+        widget.onTriggered(false);
       });
-      _dragUnderway = false;
-      close();
     }
 
     updateKeepAlive();
@@ -1192,7 +1204,7 @@ class SlidableState extends State<Slidable>
       onHorizontalDragEnd: directionIsXAxis ? _handleDragEnd : null,
       onVerticalDragStart: directionIsXAxis ? null : _handleDragStart,
       onVerticalDragUpdate: directionIsXAxis ? null : _handleDragUpdate,
-      onVerticalDragEnd: directionIsXAxis ? null : _handleDragEnd,
+      onVerticalDragEnd: directionIsXAxis  ? null : _handleDragEnd,
       behavior: HitTestBehavior.opaque,
       child: content,
     );

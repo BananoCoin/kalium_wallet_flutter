@@ -92,18 +92,26 @@ class _AppHomePageState extends State<AppHomePage>
 
   // Animation for swiping to send
   ActorAnimation _sendSlideAnimation;
+  ActorAnimation _sendSlideReleaseAnimation;
   double _fanimationPosition;
+  bool releaseAnimation = false;
 
   void initialize(FlutterActorArtboard actor) {
     _fanimationPosition = 0.0;
     _sendSlideAnimation = actor.getAnimation("pull");
+    _sendSlideReleaseAnimation = actor.getAnimation("release");
   }
 
   void setViewTransform(Mat2D viewTransform) {}
 
   bool advance(FlutterActorArtboard artboard, double elapsed) {
-    _sendSlideAnimation.apply(
-        _sendSlideAnimation.duration * _fanimationPosition, artboard, 1.0);
+    if (releaseAnimation) {
+      _sendSlideReleaseAnimation.apply(_sendSlideReleaseAnimation.duration * (_fanimationPosition - 1),
+                                      artboard, 1.0);
+    } else {
+      _sendSlideAnimation.apply(
+          _sendSlideAnimation.duration * _fanimationPosition, artboard, 1.0);
+    }
     return true;
   }
 
@@ -791,17 +799,28 @@ class _AppHomePageState extends State<AppHomePage>
       delegate: SlidableScrollDelegate(),
       actionExtentRatio: 0.35,
       movementDuration: Duration(milliseconds: 300),
-      onTriggered: () {
-        // See if a contact
-        DBHelper().getContactWithAddress(item.account).then((contact) {
-          // Go to send with address
-          AppSendSheet(contact: contact, address: item.account)
-              .mainBottomSheet(context);
-        });
+      onTriggered: (preempt) {
+        if (preempt) {
+          setState(() {
+            releaseAnimation = true;
+          });
+        } else {
+          // See if a contact
+          DBHelper().getContactWithAddress(item.account).then((contact) {
+            // Go to send with address
+            AppSendSheet(contact: contact, address: item.account)
+                .mainBottomSheet(context);
+          });
+        }
       },
       onAnimationChanged: (animation) {
         if (animation != null) {
           _fanimationPosition = animation.value;
+          if (animation.value == 0.0 && releaseAnimation) {
+            setState(() {
+              releaseAnimation = false;
+            });
+          }
         }
       },
       secondaryActions: <Widget>[
