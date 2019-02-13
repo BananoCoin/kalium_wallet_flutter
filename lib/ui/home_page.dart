@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -747,10 +748,11 @@ class _AppHomePageState extends State<AppHomePage>
       ),
     );
   }
-
+  
   // Transaction Card/List Item
   Widget _buildTransactionCard(AccountHistoryResponseItem item,
       Animation<double> animation, String displayName, BuildContext context) {
+        
     TransactionDetailsSheet transactionDetails =
         TransactionDetailsSheet(item.hash, item.account, displayName);
     String text;
@@ -788,17 +790,13 @@ class _AppHomePageState extends State<AppHomePage>
                 top: 4,
                 bottom: 4),
             child: Container(
+              alignment: Alignment(-0.5, 0),
               constraints: BoxConstraints.expand(),
-              decoration: BoxDecoration(
-                boxShadow: [
-                  StateContainer.of(context).curTheme.boxShadow,
-                ],
-                borderRadius: BorderRadius.circular(10),
-                color: StateContainer.of(context).curTheme.backgroundDark,
+              child: FlareActor(
+                "assets/pulltosend_animation.flr",
+                animation: "pull",
+                fit: BoxFit.contain,
               ),
-              child: Icon(Icons.send,
-                  color: StateContainer.of(context).curTheme.primary,
-                  size: 26.0),
             ),
           ),
         ),

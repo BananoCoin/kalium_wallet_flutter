@@ -1033,7 +1033,7 @@ class SlidableState extends State<Slidable>
     if (_dragExtent < 0 && status == AnimationStatus.completed && actionsMoveAnimation.value >= 1.0 && !_callbackComplete) {
       _callbackComplete = true;
       HapticUtil.success();
-      var delayed = new Future.delayed(new Duration(milliseconds: 100));
+      var delayed = new Future.delayed(new Duration(milliseconds: 250));
       delayed.then((_) {
         _callbackComplete = false;
         return true;

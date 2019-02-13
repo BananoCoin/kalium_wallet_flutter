@@ -168,6 +168,7 @@ flutter:
     - assets/searchseedmanual_animation_seedonly.flr
     - assets/threedot_animation.flr
     - assets/offline_animation.flr
+    - assets/pulltosend_animation.flr
     - assets/sharecard_bananologo.svg
     - assets/transferfunds_illustration_start.svg
     - assets/transferfunds_illustration_start_paperwalletonly.svg
