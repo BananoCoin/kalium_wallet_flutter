@@ -258,6 +258,10 @@ class _AppHomePageState extends State<AppHomePage>
       setState(() {
         _isRefreshing = false;
       });
+      if (_initialDeepLink != null) {
+        handleDeepLink(_initialDeepLink);
+        _initialDeepLink = null;
+      }
     });
     _sendCompleteSub = EventTaxiImpl.singleton()
         .registerTo<SendCompleteEvent>()
@@ -503,43 +507,52 @@ class _AppHomePageState extends State<AppHomePage>
     });
   }
 
+  void handleDeepLink(link) {
+    Address address = Address(link);
+    if (!address.isValid()) {
+      return;
+    }
+    String amount;
+    String contactName;
+    if (address.amount != null) {
+      // Require minimum 1 BANOSHI to send
+      if (BigInt.parse(address.amount) >= BigInt.from(10).pow(27)) {
+        amount = address.amount;
+      }
+    }
+    // See if a contact
+    DBHelper().getContactWithAddress(address.address).then((contact) {
+      if (contact != null) {
+        contactName = contact.name;
+      }
+      // Remove any other screens from stack
+      Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
+      if (amount != null) {
+        // Go to send confirm with amount
+        AppSendConfirmSheet(
+                NumberUtil.getRawAsUsableString(amount).replaceAll(",", ""),
+                address.address,
+                contactName: contactName)
+            .mainBottomSheet(context);
+      } else {
+        // Go to send with address
+        AppSendSheet(contact: contact, address: address.address)
+            .mainBottomSheet(context);
+      }
+    });
+  }
+  String _initialDeepLink;
+
   @override
   Widget build(BuildContext context) {
-    if (_deepLinkSub == null && !StateContainer.of(context).wallet.loading) {
+    if (_deepLinkSub == null) {
       // Listen for deep link changes
       _deepLinkSub = getLinksStream().listen((String link) {
-        Address address = Address(link);
-        if (!address.isValid()) {
-          return;
+        if (link != null && !StateContainer.of(context).wallet.historyLoading) {
+          handleDeepLink(link);
+        } else if (link != null && StateContainer.of(context).wallet.historyLoading) {
+          _initialDeepLink = link;
         }
-        String amount;
-        String contactName;
-        if (address.amount != null) {
-          // Require minimum 1 BANOSHI to send
-          if (BigInt.parse(address.amount) >= BigInt.from(10).pow(27)) {
-            amount = address.amount;
-          }
-        }
-        // See if a contact
-        DBHelper().getContactWithAddress(address.address).then((contact) {
-          if (contact != null) {
-            contactName = contact.name;
-          }
-          // Remove any other screens from stack
-          Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-          if (amount != null) {
-            // Go to send confirm with amount
-            AppSendConfirmSheet(
-                    NumberUtil.getRawAsUsableString(amount).replaceAll(",", ""),
-                    address.address,
-                    contactName: contactName)
-                .mainBottomSheet(context);
-          } else {
-            // Go to send with address
-            AppSendSheet(contact: contact, address: address.address)
-                .mainBottomSheet(context);
-          }
-        });
       }, onError: (e) {
         log.severe(e.toString());
       });
