@@ -155,6 +155,7 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
     assert(_animationController == null);
     _animationController =
         BottomSheet.createAnimationController(navigator.overlay);
+    _animationController.duration = Duration(milliseconds: animationDurationMs);
     return _animationController;
   }
 
@@ -281,6 +282,7 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
     assert(_animationController == null);
     _animationController =
         BottomSheet.createAnimationController(navigator.overlay);
+    _animationController.duration = Duration(milliseconds: animationDurationMs);
     return _animationController;
   }
 
