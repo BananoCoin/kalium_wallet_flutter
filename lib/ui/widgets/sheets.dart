@@ -12,7 +12,7 @@ class AppSheets {
       Color color,
       double radius = 30.0,
       Color bgColor,
-      int animationDurationMs = 200,
+      int animationDurationMs = 275,
       bool removeUntilHome = false,
       bool closeOnTap = false,
       Function onDisposed}) {
@@ -49,7 +49,7 @@ class AppSheets {
       Color color,
       double radius = 30.0,
       Color bgColor,
-      int animationDurationMs = 200}) {
+      int animationDurationMs = 250}) {
     assert(context != null);
     assert(builder != null);
     assert(radius != null && radius > 0.0);

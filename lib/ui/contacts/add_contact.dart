@@ -54,7 +54,6 @@ class AddContactSheet {
   mainBottomSheet(BuildContext context) {
     AppSheets.showAppHeightNineSheet(
         context: context,
-        animationDurationMs: 200,
         builder: (BuildContext context) {
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
