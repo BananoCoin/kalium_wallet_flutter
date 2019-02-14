@@ -77,7 +77,7 @@ class AppSendSheet {
     _sendAddressController = new TextEditingController();
     _sendAddressStyle = AppStyles.textStyleAddressText60(context);
     if (quickSendAmount != null && StateContainer.of(context).wallet.accountBalance >= BigInt.parse(quickSendAmount)) {
-      _sendAmountController.text = NumberUtil.getRawAsUsableString(quickSendAmount);
+      _sendAmountController.text = NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
     }
     _contacts = List();
     if (contact != null) {

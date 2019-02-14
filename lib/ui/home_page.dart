@@ -820,6 +820,7 @@ class _AppHomePageState extends State<AppHomePage>
       delegate: SlidableScrollDelegate(),
       actionExtentRatio: 0.35,
       movementDuration: Duration(milliseconds: 300),
+      enabled: StateContainer.of(context).wallet.accountBalance > BigInt.zero,
       onTriggered: (preempt) {
         if (preempt) {
           setState(() {
