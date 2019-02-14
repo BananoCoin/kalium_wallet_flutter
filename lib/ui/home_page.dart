@@ -546,6 +546,14 @@ class _AppHomePageState extends State<AppHomePage>
   @override
   Widget build(BuildContext context) {
     if (_deepLinkSub == null) {
+      // Get initial deep link
+      getInitialLink().then((deepLink) {
+        if (deepLink != null && !StateContainer.of(context).wallet.historyLoading) {
+          handleDeepLink(deepLink);
+        } else if (deepLink != null) {
+          _initialDeepLink = deepLink;
+        }
+      });
       // Listen for deep link changes
       _deepLinkSub = getLinksStream().listen((String link) {
         if (link != null && !StateContainer.of(context).wallet.historyLoading) {
@@ -820,10 +828,8 @@ class _AppHomePageState extends State<AppHomePage>
         } else {
           // See if a contact
           DBHelper().getContactWithAddress(item.account).then((contact) {
-            // Get amount to prefill
-            String amount = item.type == BlockTypes.SEND ? item.amount : null;
             // Go to send with address
-            AppSendSheet(contact: contact, address: item.account, quickSendAmount: amount)
+            AppSendSheet(contact: contact, address: item.account, quickSendAmount: item.amount)
                 .mainBottomSheet(context);
           });
         }
