@@ -262,7 +262,9 @@ class ContactDetailsSheet {
                                 context,
                                 AppButtonType.PRIMARY,
                                 AppLocalization.of(context).send,
-                                Dimens.BUTTON_TOP_DIMENS, onPressed: () {
+                                Dimens.BUTTON_TOP_DIMENS,
+                                disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero,
+                                onPressed: () {
                               Navigator.of(context).pop();
                               AppSendSheet(contact: contact)
                                   .mainBottomSheet(context);
