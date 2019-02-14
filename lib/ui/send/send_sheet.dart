@@ -50,8 +50,9 @@ class AppSendSheet {
 
   Contact contact;
   String address;
+  String quickSendAmount;
 
-  AppSendSheet({this.contact, this.address});
+  AppSendSheet({this.contact, this.address, this.quickSendAmount});
 
   // A method for deciding if 1 or 3 line address text should be used
   _oneOrthreeLineAddressText(BuildContext context) {
@@ -75,6 +76,9 @@ class AppSendSheet {
     _sendAmountController = new TextEditingController();
     _sendAddressController = new TextEditingController();
     _sendAddressStyle = AppStyles.textStyleAddressText60(context);
+    if (quickSendAmount != null && StateContainer.of(context).wallet.accountBalance >= BigInt.parse(quickSendAmount)) {
+      _sendAmountController.text = NumberUtil.getRawAsUsableString(quickSendAmount);
+    }
     _contacts = List();
     if (contact != null) {
       // Setup initial state for contact pre-filled
@@ -115,6 +119,12 @@ class AppSendSheet {
             // On amount focus change
             _sendAmountFocusNode.addListener(() {
               if (_sendAmountFocusNode.hasFocus) {
+                if (quickSendAmount != null) {
+                  _sendAmountController.text = "";
+                  setState(() {
+                    quickSendAmount = null;
+                  });
+                }
                 setState(() {
                   _amountHint = "";
                 });

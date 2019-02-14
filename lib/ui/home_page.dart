@@ -820,8 +820,10 @@ class _AppHomePageState extends State<AppHomePage>
         } else {
           // See if a contact
           DBHelper().getContactWithAddress(item.account).then((contact) {
+            // Get amount to prefill
+            String amount = item.type == BlockTypes.SEND ? item.amount : null;
             // Go to send with address
-            AppSendSheet(contact: contact, address: item.account)
+            AppSendSheet(contact: contact, address: item.account, quickSendAmount: amount)
                 .mainBottomSheet(context);
           });
         }
