@@ -61,6 +61,7 @@ class AppButton {
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlineButton(
+              color: StateContainer.of(context).curTheme.backgroundDark,
               textColor: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
               borderSide: BorderSide(
                   color: disabled ? StateContainer.of(context).curTheme.primary60 : StateContainer.of(context).curTheme.primary,
@@ -133,6 +134,7 @@ class AppButton {
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlineButton(
+              color: StateContainer.of(context).curTheme.backgroundDark,
               textColor: StateContainer.of(context).curTheme.success,
               borderSide: BorderSide(color: StateContainer.of(context).curTheme.success, width: 2.0),
               highlightedBorderColor: StateContainer.of(context).curTheme.success,
@@ -168,6 +170,7 @@ class AppButton {
             margin:
                 EdgeInsets.fromLTRB(dimens[0], dimens[1], dimens[2], dimens[3]),
             child: OutlineButton(
+              color: StateContainer.of(context).curTheme.backgroundDark,
               textColor: StateContainer.of(context).curTheme.text,
               borderSide: BorderSide(color: StateContainer.of(context).curTheme.text, width: 2.0),
               highlightedBorderColor: StateContainer.of(context).curTheme.text,
