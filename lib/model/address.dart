@@ -34,7 +34,7 @@ class Address {
       var split = value.split(':');
       if (split.length > 1) {
         Uri uri = Uri.tryParse(value);
-        if (uri.queryParameters['amount'] != null) {
+        if (uri != null && uri.queryParameters['amount'] != null) {
           BigInt amount = BigInt.tryParse(uri.queryParameters['amount']);
           if (amount != null) {
             _amount = amount.toString();
