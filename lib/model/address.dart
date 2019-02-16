@@ -33,7 +33,7 @@ class Address {
       _address = NanoAccounts.findAccountInString(NanoAccountType.BANANO, value);
       var split = value.split(':');
       if (split.length > 1) {
-        Uri uri = Uri.parse(value);
+        Uri uri = Uri.tryParse(value);
         if (uri.queryParameters['amount'] != null) {
           BigInt amount = BigInt.tryParse(uri.queryParameters['amount']);
           if (amount != null) {
