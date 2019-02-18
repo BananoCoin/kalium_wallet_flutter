@@ -196,9 +196,7 @@ class AppReceiveSheet {
                               context,
                               // Share Address Button
                               AppButtonType.PRIMARY_OUTLINE,
-                              _showShareCard
-                                  ? "Loading"
-                                  : AppLocalization.of(context).addressShare,
+                              AppLocalization.of(context).addressShare,
                               Dimens.BUTTON_BOTTOM_DIMENS,
                               disabled: _showShareCard, onPressed: () {
                             String receiveCardFileName =
