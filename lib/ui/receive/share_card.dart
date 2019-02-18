@@ -37,7 +37,7 @@ class _AppShareCardState extends State<AppShareCard> {
         ),
         child: Container(
           margin:
-              EdgeInsets.only(left: 12.5, right: 12.5, top: 12.5, bottom: 12.5),
+              EdgeInsets.only(left: 12.5, right: 12.5, top: 12.5),
           constraints: BoxConstraints.expand(),
           // The main row that holds monkeyQR, logo, the address, ticker and the website text
           child: Row(
@@ -46,6 +46,7 @@ class _AppShareCardState extends State<AppShareCard> {
             children: <Widget>[
               // A container for monkeyQR
               Container(
+                margin: EdgeInsets.only(bottom: 12.5),
                 width: 105,
                 height: 100.0,
                 child: Stack(
@@ -106,7 +107,7 @@ class _AppShareCardState extends State<AppShareCard> {
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.primary,
                               fontFamily: "NeueHansKendrick",
-                              fontWeight: FontWeight.w500
+                              fontWeight: FontWeight.w500,
                             ),
                             maxLines: 1,
                             stepGranularity: 0.01,
@@ -245,6 +246,7 @@ class _AppShareCardState extends State<AppShareCard> {
                   Container(
                     width: 97,
                     height: 13,
+                    margin: EdgeInsets.only(bottom: 10.0),
                     child: AutoSizeText(
                       "\$BAN      BANANO.CC",
                       minFontSize: 1.0,
@@ -252,6 +254,7 @@ class _AppShareCardState extends State<AppShareCard> {
                       style: TextStyle(
                         color: StateContainer.of(context).curTheme.primary,
                         fontFamily: "NeueHansKendrick",
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                   ),

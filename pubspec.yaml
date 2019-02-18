@@ -149,7 +149,12 @@ flutter:
         - asset: fonts/AppIcons.ttf
     - family: NeueHansKendrick
       fonts:
+        - asset: fonts/NeueHansKendrick-Medium.ttf
+          weight: 600
         - asset: fonts/NeueHansKendrick-Regular.ttf
+          weight: 500
+        - asset: fonts/NeueHansKendrick-Light.ttf
+          weight: 300
      
   assets:
     - assets/monkeyQR.svg
