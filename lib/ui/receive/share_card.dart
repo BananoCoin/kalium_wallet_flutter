@@ -1,3 +1,5 @@
+
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
@@ -118,7 +120,7 @@ class _AppShareCardState extends State<AppShareCard> {
                   ),
                   // Address
                   Container(
-                    padding: EdgeInsets.only(bottom: 8),
+                    padding: Platform.isIOS ? EdgeInsets.only(bottom: 8) : EdgeInsets.zero,
                     child: Column(
                       children: <Widget>[
                         // First row of the address
