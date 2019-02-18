@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:barcode_scan/barcode_scan.dart';
@@ -501,6 +502,9 @@ class AppIcon {
   static const _channel = const MethodChannel('fappchannel');
 
   static Future<void> setAppIcon(AppIconEnum iconToChange) async {
+    if (!Platform.isIOS) {
+      return null;
+    }
     String iconStr = "kalium";
     switch (iconToChange) {
       case AppIconEnum.BERYLLIUM:
