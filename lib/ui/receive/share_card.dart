@@ -118,7 +118,7 @@ class _AppShareCardState extends State<AppShareCard> {
                   ),
                   // Address
                   Container(
-                    padding: EdgeInsets.only(bottom: 5),
+                    padding: EdgeInsets.only(bottom: 8),
                     child: Column(
                       children: <Widget>[
                         // First row of the address
@@ -246,7 +246,7 @@ class _AppShareCardState extends State<AppShareCard> {
                   Container(
                     width: 97,
                     height: 13,
-                    margin: EdgeInsets.only(bottom: 10.0),
+                    margin: EdgeInsets.only(bottom: 9.0),
                     child: AutoSizeText(
                       "\$BAN      BANANO.CC",
                       minFontSize: 1.0,
