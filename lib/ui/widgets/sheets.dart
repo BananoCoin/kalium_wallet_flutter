@@ -169,6 +169,11 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
         parent: _animationController,
         curve: Curves.easeOut,
         reverseCurve: Curves.linear);
+    appSheetAnimation.addStatusListener((animationStatus) {
+      if (animationStatus == AnimationStatus.completed) {
+        appSheetAnimation.curve = Curves.linear;
+      }
+    });
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -301,6 +306,11 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
         parent: _animationController,
         curve: Curves.easeOut,
         reverseCurve: Curves.linear);
+    appSheetAnimation.addStatusListener((animationStatus) {
+      if (animationStatus == AnimationStatus.completed) {
+        appSheetAnimation.curve = Curves.linear;
+      }
+    });
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
