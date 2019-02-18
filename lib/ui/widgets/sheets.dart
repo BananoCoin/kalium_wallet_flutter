@@ -84,8 +84,10 @@ class _AppHeightNineSheetLayout extends SingleChildLayoutDelegate {
           minWidth: constraints.maxWidth,
           maxWidth: constraints.maxWidth,
           minHeight: 0.0,
-          maxHeight: constraints.maxHeight * 0.95); 
-    if ((constraints.maxHeight/constraints.maxWidth > 2.1  && Platform.isAndroid) || constraints.maxHeight>812)
+          maxHeight: constraints.maxHeight * 0.95);
+    if ((constraints.maxHeight / constraints.maxWidth > 2.1 &&
+            Platform.isAndroid) ||
+        constraints.maxHeight > 812)
       return BoxConstraints(
           minWidth: constraints.maxWidth,
           maxWidth: constraints.maxWidth,
@@ -149,6 +151,7 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
   }
 
   AnimationController _animationController;
+  CurvedAnimation appSheetAnimation;
 
   @override
   AnimationController createAnimationController() {
@@ -162,6 +165,10 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
+    appSheetAnimation = CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOut,
+        reverseCurve: Curves.linear);
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
@@ -175,9 +182,9 @@ class _AppHeightNineModalRoute<T> extends PopupRoute<T> {
         child: Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
           child: AnimatedBuilder(
-            animation: animation,
+            animation: appSheetAnimation,
             builder: (context, child) => CustomSingleChildLayout(
-                  delegate: _AppHeightNineSheetLayout(animation.value),
+                  delegate: _AppHeightNineSheetLayout(appSheetAnimation.value),
                   child: BottomSheet(
                     animationController: _animationController,
                     onClosing: () => Navigator.pop(context),
@@ -276,6 +283,7 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
   String barrierLabel;
 
   AnimationController _animationController;
+  CurvedAnimation appSheetAnimation;
 
   @override
   AnimationController createAnimationController() {
@@ -289,15 +297,19 @@ class _AppHeightEightModalRoute<T> extends PopupRoute<T> {
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
+    appSheetAnimation = CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeOut,
+        reverseCurve: Curves.linear);
     return MediaQuery.removePadding(
       context: context,
       removeTop: true,
       child: Theme(
         data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
         child: AnimatedBuilder(
-          animation: animation,
+          animation: appSheetAnimation,
           builder: (context, child) => CustomSingleChildLayout(
-                delegate: _AppHeightEightSheetLayout(animation.value),
+                delegate: _AppHeightEightSheetLayout(appSheetAnimation.value),
                 child: BottomSheet(
                   animationController: _animationController,
                   onClosing: () => Navigator.pop(context),
