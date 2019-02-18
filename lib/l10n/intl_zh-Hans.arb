@@ -222,13 +222,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "backupYourSeed": "备份你的种子代码",
+    "backupYourSeed": "备份您的种子代码",
     "@backupYourSeed": {
         "description": "intro_new_wallet_seed_backup_header",
         "type": "text",
         "placeholders": {}
     },
-    "backupSeedConfirm": "你确认你备份了您的钱包种子吗？",
+    "backupSeedConfirm": "您确认您备份了您的钱包种子吗？",
     "@backupSeedConfirm": {
         "description": "intro_new_wallet_backup",
         "type": "text",
@@ -624,7 +624,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "这个过程会将纸钱包的钱币转移到你的 Kalium 钱包。\n\n请按 \"%1\" 键开始。",
+    "transferIntro": "这个过程会将纸钱包的钱币转移到您的 Kalium 钱包。\n\n请按 \"%1\" 键开始。",
     "@transferIntro": {
         "description": "transfer_intro",
         "type": "text",
@@ -672,7 +672,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO 成功传送到你的 Kalium 钱包。\n",
+    "transferComplete": "%1 BANANO 成功传送到您的 Kalium 钱包。\n",
     "@transferComplete": {
         "description": "transfer_complete_text",
         "type": "text",
