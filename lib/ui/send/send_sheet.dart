@@ -552,10 +552,10 @@ class AppSendSheet {
                                             contact.name;
                                       }
                                       // Fill amount
-                                      if (_localCurrencyMode) {
-                                        toggleLocalCurrency(context, setState);
-                                      }
                                       if (address.amount != null) {
+                                        if (_localCurrencyMode) {
+                                          toggleLocalCurrency(context, setState);
+                                        }
                                         _sendAmountController.text = NumberUtil.getRawAsUsableString(address.amount);
                                       }
                                     });
