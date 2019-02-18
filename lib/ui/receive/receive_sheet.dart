@@ -60,12 +60,10 @@ class AppReceiveSheet {
     double devicewidth = MediaQuery.of(context).size.width;
     // Create our SVG-heavy things in the constructor because they are slower operations
     monkeySVGBorder = SvgPicture.asset('assets/monkeyQR.svg');
-    shareCardLogoSvg = SvgPicture.asset('assets/sharecard_bananologo.svg',
-        color: StateContainer.of(context).curTheme.primary);
     // Share card initialization
     shareCardKey = GlobalKey();
     appShareCard = Container(
-      child: AppShareCard(shareCardKey, monkeySVGBorder, shareCardLogoSvg),
+      child: AppShareCard(shareCardKey, monkeySVGBorder),
       alignment: Alignment(0.0, 0.0),
     );
     qrCode = qrWidget;
@@ -213,7 +211,7 @@ class AppReceiveSheet {
                               setState(() {
                                 _showShareCard = true;
                               });
-                              Future.delayed(new Duration(milliseconds: 300),
+                              Future.delayed(new Duration(milliseconds: 50),
                                   () {
                                 if (_showShareCard) {
                                   _capturePng().then((byteData) {

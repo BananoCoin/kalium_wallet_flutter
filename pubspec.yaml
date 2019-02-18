@@ -147,6 +147,10 @@ flutter:
     - family:  AppIcons
       fonts:
         - asset: fonts/AppIcons.ttf
+    - family: NeueHansKendrick
+      fonts:
+        - asset: fonts/NeueHansKendrick-Regular.ttf
+     
   assets:
     - assets/monkeyQR.svg
     - assets/welcome_animation.flr
@@ -169,7 +173,6 @@ flutter:
     - assets/threedot_animation.flr
     - assets/offline_animation.flr
     - assets/pulltosend_animation.flr
-    - assets/sharecard_bananologo.svg
     - assets/transferfunds_illustration_start.svg
     - assets/transferfunds_illustration_start_paperwalletonly.svg
     - assets/transferfunds_illustration_start_kaliumwalletonly.svg

@@ -21,6 +21,7 @@ class AppIcons {
   static const _kFontFam = 'AppIcons';
 
   static const IconData theme = const IconData(0xe800, fontFamily: _kFontFam);
+  static const IconData bananohorizontal = const IconData(0xe801, fontFamily: _kFontFam);
   static const IconData changerepresentative = const IconData(0xe802, fontFamily: _kFontFam);
   static const IconData share = const IconData(0xe803, fontFamily: _kFontFam);
   static const IconData language = const IconData(0xe804, fontFamily: _kFontFam);
