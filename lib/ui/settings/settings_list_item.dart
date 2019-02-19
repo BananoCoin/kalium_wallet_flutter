@@ -45,17 +45,29 @@ class AppSettings {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    heading,
-                    style: disabled
-                        ? AppStyles.textStyleSettingItemHeader45(context)
-                        : AppStyles.textStyleSettingItemHeader(context),
+                  Container(
+                    width: UIUtil.drawerWidth(context)-100,
+                    child: AutoSizeText(
+                      heading,
+                      style: disabled
+                          ? AppStyles.textStyleSettingItemHeader45(context)
+                          : AppStyles.textStyleSettingItemHeader(context),
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                      minFontSize: 8,
+                    ),
                   ),
-                  Text(
-                    defaultMethod.getDisplayName(context),
-                    style: disabled
-                        ? AppStyles.textStyleSettingItemSubheader30(context)
-                        : AppStyles.textStyleSettingItemSubheader(context),
+                  Container(
+                    width: UIUtil.drawerWidth(context)-100,
+                    child: AutoSizeText(
+                      defaultMethod.getDisplayName(context),
+                      style: disabled
+                          ? AppStyles.textStyleSettingItemSubheader30(context)
+                          : AppStyles.textStyleSettingItemSubheader(context),
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                      minFontSize: 8,
+                    ),
                   ),
                 ],
               ),
