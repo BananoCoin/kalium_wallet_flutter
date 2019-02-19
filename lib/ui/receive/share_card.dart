@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -15,16 +14,14 @@ class AppShareCard extends StatefulWidget {
   AppShareCard(this.key, this.monkeySvg);
 
   @override
-  _AppShareCardState createState() =>
-      _AppShareCardState(key, monkeySvg);
+  _AppShareCardState createState() => _AppShareCardState(key, monkeySvg);
 }
 
 class _AppShareCardState extends State<AppShareCard> {
   GlobalKey globalKey;
   Widget monkeySvg;
 
-  _AppShareCardState(
-      this.globalKey, this.monkeySvg);
+  _AppShareCardState(this.globalKey, this.monkeySvg);
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +35,7 @@ class _AppShareCardState extends State<AppShareCard> {
           borderRadius: BorderRadius.circular(12.5),
         ),
         child: Container(
-          margin:
-              EdgeInsets.only(left: 12.5, right: 12.5, top: 12.5),
+          margin: EdgeInsets.only(left: 12.5, right: 12.5, top: 12.5),
           constraints: BoxConstraints.expand(),
           // The main row that holds monkeyQR, logo, the address, ticker and the website text
           child: Row(
@@ -85,42 +81,42 @@ class _AppShareCardState extends State<AppShareCard> {
                   // Logo
                   Container(
                     width: 97,
-                    height: 20,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          width: 35,
-                          height: 20,
-                          child: Text(
-                            "",
+                    child: AutoSizeText.rich(
+                      TextSpan(
+                        children: [
+                          // Currency Icon
+                          TextSpan(
+                            text: " ",
                             style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
-                              fontFamily: "AppIcons",
-                              fontSize: 16,
-                            ),                         ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top:2.5),
-                          width: 62,
-                          child: AutoSizeText(
-                            "BANANO",
+                                color:
+                                    StateContainer.of(context).curTheme.primary,
+                                fontFamily: "AppIcons",
+                                fontWeight: FontWeight.w500,
+                                fontSize: 30,
+                                ),
+                          ),
+                          TextSpan(
+                            text: "BANANO",
                             style: TextStyle(
-                              color: StateContainer.of(context).curTheme.primary,
+                              color:
+                                  StateContainer.of(context).curTheme.primary,
                               fontFamily: "NeueHansKendrick",
                               fontWeight: FontWeight.w500,
+                              fontSize: 30,
                             ),
-                            maxLines: 1,
-                            stepGranularity: 0.01,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                      minFontSize: 1,
                     ),
                   ),
                   // Address
                   Container(
-                    padding: Platform.isIOS ? EdgeInsets.only(bottom: 8) : EdgeInsets.zero,
+                    padding: Platform.isIOS
+                        ? EdgeInsets.only(bottom: 7)
+                        : EdgeInsets.zero,
                     child: Column(
                       children: <Widget>[
                         // First row of the address
@@ -136,7 +132,9 @@ class _AppShareCardState extends State<AppShareCard> {
                                     .address
                                     .substring(0, 11),
                                 style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary,
                                   fontFamily: "OverpassMono",
                                   fontWeight: FontWeight.w100,
                                 ),
@@ -156,7 +154,8 @@ class _AppShareCardState extends State<AppShareCard> {
                                 minFontSize: 1.0,
                                 stepGranularity: 0.1,
                                 style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.text,
+                                  color:
+                                      StateContainer.of(context).curTheme.text,
                                   fontFamily: "OverpassMono",
                                   fontWeight: FontWeight.w100,
                                 ),
@@ -215,7 +214,8 @@ class _AppShareCardState extends State<AppShareCard> {
                                 minFontSize: 1.0,
                                 stepGranularity: 0.1,
                                 style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.text,
+                                  color:
+                                      StateContainer.of(context).curTheme.text,
                                   fontFamily: "OverpassMono",
                                   fontWeight: FontWeight.w100,
                                 ),
@@ -233,7 +233,9 @@ class _AppShareCardState extends State<AppShareCard> {
                                 minFontSize: 1.0,
                                 stepGranularity: 0.1,
                                 style: TextStyle(
-                                  color: StateContainer.of(context).curTheme.primary,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary,
                                   fontFamily: "OverpassMono",
                                   fontWeight: FontWeight.w100,
                                 ),
