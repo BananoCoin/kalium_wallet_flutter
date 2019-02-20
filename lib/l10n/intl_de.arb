@@ -24,7 +24,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "close": "Schließen",
+    "close": "Schliessen",
     "@close": {
         "description": "dialog_close",
         "type": "text",
