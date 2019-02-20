@@ -45,7 +45,10 @@ class SubscribeResponse {
   @JsonKey(name:'nano', fromJson:_toDouble)
   double nanoPrice;
 
-  SubscribeResponse() {}
+  @JsonKey(name:'pending_count', fromJson:_toInt)
+  int pendingCount;
+
+  SubscribeResponse();
 
   factory SubscribeResponse.fromJson(Map<String, dynamic> json) => _$SubscribeResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SubscribeResponseToJson(this);

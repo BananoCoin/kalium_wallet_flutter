@@ -83,7 +83,7 @@ class StateContainer extends StatefulWidget {
 class StateContainerState extends State<StateContainer> {
   final Logger log = Logger("StateContainerState");
   // Minimum receive = 0.01 BANANO
-  static String RECEIVE_THRESHOLD = BigInt.from(10).pow(27).toString();
+  String receiveMinimum = BigInt.from(10).pow(27).toString();
 
   AppWallet wallet;
   String currencyLocale;
@@ -455,6 +455,11 @@ class StateContainerState extends State<StateContainer> {
   void handleSubscribeResponse(SubscribeResponse response) {
     // Check next request to update block count
     if (response.blockCount != null && !wallet.historyLoading) {
+      // Raise minimum receive if high pending block count
+      if (response.pendingCount != null && response.pendingCount > 50) {
+        // Raise receive minimum to 1 BANANO
+        receiveMinimum = BigInt.from(10).pow(29).toString();
+      }
       // Choose correct blockCount to minimize bandwidth
       // This is can still be improved because history excludes change/open, blockCount doesn't
       // Get largest count we have + 5 (just a safe-buffer)
@@ -565,7 +570,7 @@ class StateContainerState extends State<StateContainer> {
   void handlePendingItem(PendingResponseItem item) {
     BigInt amountBigInt = BigInt.tryParse(item.amount);
     if (amountBigInt != null) {
-      if (amountBigInt < BigInt.parse(RECEIVE_THRESHOLD)) {
+      if (amountBigInt < BigInt.parse(receiveMinimum)) {
         return;
       }
     }
@@ -659,10 +664,10 @@ class StateContainerState extends State<StateContainer> {
   void requestPending({String account}) {
     if (wallet.address != null && account == null) {
       AccountService.queueRequest(PendingRequest(
-          account: wallet.address, count: max(wallet.blockCount ?? 0, 10), threshold: RECEIVE_THRESHOLD));
+          account: wallet.address, count: max(wallet.blockCount ?? 0, 10), threshold: receiveMinimum));
       AccountService.processQueue();
     } else {
-      AccountService.queueRequest(PendingRequest(account: account, count: 20, threshold: RECEIVE_THRESHOLD),
+      AccountService.queueRequest(PendingRequest(account: account, count: 20, threshold: receiveMinimum),
           fromTransfer: true);
       AccountService.processQueue();
     }
