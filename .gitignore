@@ -1,5 +1,7 @@
 android/.project
 android/.settings
+android/key.properties
+android/app/release
 # Miscellaneous
 *.class
 *.lock
