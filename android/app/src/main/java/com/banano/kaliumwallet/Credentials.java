@@ -1,4 +1,4 @@
-package com.banano.kaliumf;
+package com.banano.kaliumwallet;
 
 import java.util.Arrays;
 import java.util.List;

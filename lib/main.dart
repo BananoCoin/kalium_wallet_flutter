@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:logging/logging.dart';
 import 'package:oktoast/oktoast.dart';
+import 'package:flutter_nano_core/flutter_nano_core.dart';
 
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
@@ -19,6 +21,7 @@ import 'package:kalium_wallet_flutter/ui/util/routes.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
+import 'package:kalium_wallet_flutter/util/legacyutil.dart';
 
 void main() async {
   // Setup logger
@@ -214,11 +217,33 @@ class Splash extends StatefulWidget {
 }
 
 class SplashState extends State<Splash> with WidgetsBindingObserver {
+  Future<bool> _doAndroidMigration() async {
+    bool migrated = false;
+    String legacySeed = await LegacyMigration.getLegacySeed();
+    if (legacySeed != null && NanoSeeds.isValidSeed(legacySeed)) {
+      migrated = true;
+      await Vault.inst.setSeed(legacySeed);
+      await SharedPrefsUtil.inst.setSeedBackedUp(true);
+      // TODO - show create new pin screen
+      await Vault.inst.writePin("000000");
+      // RIP if something went wrong before this
+      //await LegacyMigration.deleteLegacyData();
+    }
+    // TODO migrate contacts
+    return migrated;
+  }
+
   Future checkLoggedIn() async {
     // iOS key store is persistent, so if this is first launch then we will clear the keystore
     bool firstLaunch = await SharedPrefsUtil.inst.getFirstLaunch();
     if (firstLaunch) {
-      await Vault.inst.deleteAll();
+      bool migrated = false;
+      if (Platform.isAndroid) {
+        migrated = await _doAndroidMigration();
+      }
+      if (!migrated) {
+        await Vault.inst.deleteAll();
+      }
     }
     await SharedPrefsUtil.inst.setFirstLaunch();
     // See if logged in already

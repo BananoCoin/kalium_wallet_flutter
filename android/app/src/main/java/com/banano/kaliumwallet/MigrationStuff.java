@@ -1,4 +1,4 @@
-package com.banano.kaliumf;
+package com.banano.kaliumwallet;
 
 import org.json.JSONArray;
 

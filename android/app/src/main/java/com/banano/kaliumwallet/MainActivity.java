@@ -1,4 +1,4 @@
-package com.banano.kaliumf;
+package com.banano.kaliumwallet;
 
 import android.os.Bundle;
 import android.util.Base64;
@@ -7,6 +7,7 @@ import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
+import io.realm.Realm;
 
 public class MainActivity extends FlutterActivity {
   private static final String CHANNEL = "fappchannel";
@@ -14,6 +15,8 @@ public class MainActivity extends FlutterActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    Realm.init(this);
 
     Vault.initializeVault(this);
     generateEncryptionKey();

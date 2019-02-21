@@ -23,9 +23,10 @@ if (flutterVersionName == null) {
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.google.gms.google-services'
-apply plugin: 'realm-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 27
@@ -35,7 +36,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.banano.kaliumf"
+        applicationId "com.banano.kaliumwallet"
         minSdkVersion 18
         targetSdkVersion 27
         versionCode flutterVersionCode.toInteger()
