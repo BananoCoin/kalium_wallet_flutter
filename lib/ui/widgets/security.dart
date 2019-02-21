@@ -48,6 +48,7 @@ class _PinScreenState extends State<PinScreen>
   Function successCallback;
   String description;
   Color pinScreenBackgroundColor;
+  int _pinLength = 6;
   double buttonSize = 100.0;
 
   String pinEnterTitle = "";
@@ -70,7 +71,13 @@ class _PinScreenState extends State<PinScreen>
   void initState() {
     super.initState();
     // Initialize list all empty
-    _dotStates = List.filled(6, AppIcons.dotemtpy);
+    if (type == PinOverlayType.ENTER_PIN) {
+      _header = pinEnterTitle;
+      _pinLength = expectedPin.length;
+    } else {
+      _header = pinCreateTitle;
+    }
+    _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
     _awaitingConfirmation = false;
     _pin = "";
     _pinConfirmed = "";
@@ -80,11 +87,6 @@ class _PinScreenState extends State<PinScreen>
         _failedAttempts = attempts % MAX_ATTEMPTS;
       });
     });
-    if (type == PinOverlayType.ENTER_PIN) {
-      _header = pinEnterTitle;
-    } else {
-      _header = pinCreateTitle;
-    }
     // Set animation
     _controller = AnimationController(
         duration: const Duration(milliseconds: 350), vsync: this);
@@ -108,7 +110,7 @@ class _PinScreenState extends State<PinScreen>
                 setState(() {
                   _pin = "";
                   _header = AppLocalization.of(context).pinInvalid;
-                  _dotStates = List.filled(6, AppIcons.dotemtpy);
+                  _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
                   _controller.value = 0;
                 });
               }
@@ -116,7 +118,7 @@ class _PinScreenState extends State<PinScreen>
           } else {
             setState(() {
               _awaitingConfirmation = false;
-              _dotStates = List.filled(6, AppIcons.dotemtpy);
+              _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
               _pin = "";
               _pinConfirmed = "";
               _header = AppLocalization.of(context).pinConfirmError;
@@ -219,7 +221,7 @@ class _PinScreenState extends State<PinScreen>
                   // Switch to confirm pin
                   setState(() {
                     _awaitingConfirmation = true;
-                    _dotStates = List.filled(6, AppIcons.dotemtpy);
+                    _dotStates = List.filled(_pinLength, AppIcons.dotemtpy);
                     _header = AppLocalization.of(context).pinConfirmTitle;
                   });
                 } else {
@@ -250,6 +252,17 @@ class _PinScreenState extends State<PinScreen>
         ),
       ),
     );
+  }
+
+  List<Widget> _buildPinDots() {
+    List<Widget> ret = List();
+    for (int i = 0; i < _pinLength; i++) {
+      ret.add(Icon(
+                _dotStates[i],
+                color: StateContainer.of(context).curTheme.primary,
+                size: 20.0));
+    }
+    return ret;
   }
 
   @override
@@ -323,38 +336,7 @@ class _PinScreenState extends State<PinScreen>
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Icon(
-                            _dotStates[0],
-                            color: StateContainer.of(context).curTheme.primary,
-                            size: 20.0,
-                          ),
-                          Icon(
-                            _dotStates[1],
-                            color: StateContainer.of(context).curTheme.primary,
-                            size: 20.0,
-                          ),
-                          Icon(
-                            _dotStates[2],
-                            color: StateContainer.of(context).curTheme.primary,
-                            size: 20.0,
-                          ),
-                          Icon(
-                            _dotStates[3],
-                            color: StateContainer.of(context).curTheme.primary,
-                            size: 20.0,
-                          ),
-                          Icon(
-                            _dotStates[4],
-                            color: StateContainer.of(context).curTheme.primary,
-                            size: 20.0,
-                          ),
-                          Icon(
-                            _dotStates[5],
-                            color: StateContainer.of(context).curTheme.primary,
-                            size: 20.0,
-                          ),
-                        ],
+                        children: _buildPinDots()
                       ),
                     ),
                   ],

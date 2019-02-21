@@ -32,6 +32,16 @@ public class MigrationStuff {
         return contactJson.toString();
     }
 
+    // Get legacy PIN
+    public String getLegacyPin() {
+        Realm realm = new RealmUtil().getRealmInstance();
+        Credentials credentials = realm.where(Credentials.class).findFirst();
+        if (credentials != null) {
+            return credentials.getPin();
+        }
+        return null;
+    }
+
     public void clearLegacyData() {
         Realm realm = new RealmUtil().getRealmInstance();
         realm.deleteAll();

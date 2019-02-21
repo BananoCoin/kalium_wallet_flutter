@@ -33,6 +33,8 @@ public class MainActivity extends FlutterActivity {
                       result.success(new MigrationStuff().getLegacyContactsAsJson());
                   } else if (call.method.equals("clearLegacyData")) {
                       new MigrationStuff().clearLegacyData();
+                  } else if (call.method.equals("getLegacyPin")) {
+                      result.success(new MigrationStuff().getLegacyPin());
                   } else {
                       result.notImplemented();
                   }

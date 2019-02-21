@@ -13,6 +13,14 @@ class LegacyMigration {
     return await _channel.invokeMethod('getLegacySeed');
   }
 
+  static Future<String> getLegacyPin() async {
+    if (!Platform.isAndroid) {
+      return null;
+    }
+    return await _channel.invokeMethod('getLegacyPin');
+  }
+
+
   static Future<String> getLegacyContacts() async {
     if (!Platform.isAndroid) {
       return null;

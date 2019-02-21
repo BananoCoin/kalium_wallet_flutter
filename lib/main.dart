@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,10 @@ import 'package:kalium_wallet_flutter/ui/intro/intro_backup_seed.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_import_seed.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
+import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
+import 'package:kalium_wallet_flutter/model/db/appdb.dart';
+import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/util/legacyutil.dart';
@@ -219,17 +223,43 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash> with WidgetsBindingObserver {
   Future<bool> _doAndroidMigration() async {
     bool migrated = false;
+    // Migrate seed
     String legacySeed = await LegacyMigration.getLegacySeed();
     if (legacySeed != null && NanoSeeds.isValidSeed(legacySeed)) {
       migrated = true;
       await Vault.inst.setSeed(legacySeed);
       await SharedPrefsUtil.inst.setSeedBackedUp(true);
-      // TODO - show create new pin screen
-      await Vault.inst.writePin("000000");
-      // RIP if something went wrong before this
-      //await LegacyMigration.deleteLegacyData();
     }
-    // TODO migrate contacts
+    if (migrated) {
+      // Migrate PIN
+      String legacyPin = await LegacyMigration.getLegacyPin();
+      if (legacyPin != null && legacyPin.length == 4) {
+        await Vault.inst.writePin(legacyPin);
+      }
+      // Migrate Contacts
+      String legacyContacts = await LegacyMigration.getLegacyContacts();
+      if (legacyContacts != null) {
+        Iterable contactsJson = json.decode(legacyContacts);
+        List<Contact> contacts = List();
+        List<Contact> contactsToAdd = List();
+        contactsJson.forEach((contact) {
+          contacts.add(Contact.fromJson(contact));
+        });
+        DBHelper dbHelper = DBHelper();
+        for (Contact contact in contacts) {
+          if (!await dbHelper.contactExistsWithName(contact.name) &&
+              !await dbHelper.contactExistsWithAddress(contact.address)) {
+            // Contact doesnt exist, make sure name and address are valid
+            if (Address(contact.address).isValid()) {
+              if (contact.name.startsWith("@") && contact.name.length <= 20) {
+                contactsToAdd.add(contact);
+              }
+            }
+          }
+        }
+        await dbHelper.saveContacts(contactsToAdd);
+      }
+    }
     return migrated;
   }
 
