@@ -11,6 +11,8 @@ android/.settings
 .buildlog/
 .history
 .svn/
+.aab
+.apk
 
 # IntelliJ related
 *.iml
