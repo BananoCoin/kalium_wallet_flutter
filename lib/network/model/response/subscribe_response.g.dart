@@ -20,7 +20,8 @@ SubscribeResponse _$SubscribeResponseFromJson(Map<String, dynamic> json) {
     ..uuid = json['uuid'] as String
     ..price = json['price'] == null ? null : _toDouble(json['price'])
     ..btcPrice = json['btc'] == null ? null : _toDouble(json['btc'])
-    ..nanoPrice = json['nano'] == null ? null : _toDouble(json['nano']);
+    ..nanoPrice = json['nano'] == null ? null : _toDouble(json['nano'])
+    ..pendingCount = json['pending_count'] as int;
 }
 
 Map<String, dynamic> _$SubscribeResponseToJson(SubscribeResponse instance) =>
@@ -35,5 +36,6 @@ Map<String, dynamic> _$SubscribeResponseToJson(SubscribeResponse instance) =>
       'uuid': instance.uuid,
       'price': instance.price,
       'btc': instance.btcPrice,
-      'nano': instance.nanoPrice
+      'nano': instance.nanoPrice,
+      'pending_count': instance.pendingCount
     };
