@@ -214,7 +214,8 @@ class AppSendConfirmSheet {
                                     if (authMethod.method ==
                                             AuthMethod.BIOMETRICS &&
                                         hasBiometrics) {
-                                      BiometricUtil.authenticateWithBiometrics(context, 
+                                      BiometricUtil.authenticateWithBiometrics(
+                                              context,
                                               AppLocalization.of(context)
                                                   .sendAmountConfirm
                                                   .replaceAll("%1", _amount))
@@ -225,6 +226,12 @@ class AppSendConfirmSheet {
                                           Navigator.of(context).push(
                                               AnimationLoadingOverlay(
                                                   AnimationType.SEND,
+                                                  StateContainer.of(context)
+                                                      .curTheme
+                                                      .animationOverlayStrong,
+                                                  StateContainer.of(context)
+                                                      .curTheme
+                                                      .animationOverlayMedium,
                                                   onPoppedCallback: () =>
                                                       animationOpen = false));
                                           StateContainer.of(context)
@@ -252,6 +259,12 @@ class AppSendConfirmSheet {
                                               Navigator.of(context).push(
                                                   AnimationLoadingOverlay(
                                                       AnimationType.SEND,
+                                                      StateContainer.of(context)
+                                                          .curTheme
+                                                          .animationOverlayStrong,
+                                                      StateContainer.of(context)
+                                                          .curTheme
+                                                          .animationOverlayMedium,
                                                       onPoppedCallback: () =>
                                                           animationOpen =
                                                               false));

@@ -62,7 +62,7 @@ dependencies:
 
   # Android/iOS path provider
   path_provider: ^0.4.1
-
+  
   # TouchID/FaceID
   local_auth:
     git:

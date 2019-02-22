@@ -51,6 +51,9 @@ abstract class BaseTheme {
   Color overlay30;
   Color overlay20;
 
+  Color animationOverlayMedium;
+  Color animationOverlayStrong;
+
   Brightness brightness;
   SystemUiOverlayStyle statusBar;
 
@@ -123,6 +126,10 @@ class KaliumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Color animationOverlayMedium = black.withOpacity(0.7);
+  Color animationOverlayStrong = black.withOpacity(0.85);
+
+
   Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
@@ -193,6 +200,9 @@ class TitaniumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Color animationOverlayMedium = black.withOpacity(0.7);
+  Color animationOverlayStrong = black.withOpacity(0.85);
+
   Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
@@ -262,6 +272,9 @@ class IridiumTheme extends BaseTheme {
   Color overlay50 = black.withOpacity(0.5);
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
+
+  Color animationOverlayMedium = white.withOpacity(0.7);
+  Color animationOverlayStrong = white.withOpacity(0.85);
 
   Brightness brightness = Brightness.light;
   SystemUiOverlayStyle statusBar =
@@ -339,6 +352,9 @@ class BerylliumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Color animationOverlayMedium = black.withOpacity(0.7);
+  Color animationOverlayStrong = black.withOpacity(0.85);
+
   Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
       SystemUiOverlayStyle.light.copyWith(statusBarColor: Colors.transparent);
@@ -408,6 +424,9 @@ class RutheniumTheme extends BaseTheme {
   Color overlay50 = black.withOpacity(0.5);
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
+
+  Color animationOverlayMedium = pinkLight.withOpacity(0.7);
+  Color animationOverlayStrong = pinkLight.withOpacity(0.85);
 
   Brightness brightness = Brightness.light;
   SystemUiOverlayStyle statusBar =
@@ -484,6 +503,9 @@ class RadiumTheme extends BaseTheme {
   Color overlay50 = black.withOpacity(0.5);
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
+
+  Color animationOverlayMedium = black.withOpacity(0.7);
+  Color animationOverlayStrong = black.withOpacity(0.85);
 
   Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =

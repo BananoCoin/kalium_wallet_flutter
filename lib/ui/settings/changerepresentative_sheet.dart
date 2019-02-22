@@ -539,6 +539,12 @@ class AppChangeRepresentativeSheet {
                                               Navigator.of(context).push(
                                                   AnimationLoadingOverlay(
                                                       AnimationType.GENERIC,
+                                                      StateContainer.of(context)
+                                                          .curTheme
+                                                          .animationOverlayStrong,
+                                                      StateContainer.of(context)
+                                                          .curTheme
+                                                          .animationOverlayMedium,
                                                       onPoppedCallback: () =>
                                                           _animationOpen =
                                                               false));
@@ -592,8 +598,14 @@ class AppChangeRepresentativeSheet {
                                                   Navigator.of(context).pop();
                                                   Navigator.of(context).push(
                                                       AnimationLoadingOverlay(
-                                                          AnimationType
-                                                              .GENERIC));
+                                                    AnimationType.GENERIC,
+                                                    StateContainer.of(context)
+                                                        .curTheme
+                                                        .animationOverlayStrong,
+                                                    StateContainer.of(context)
+                                                        .curTheme
+                                                        .animationOverlayMedium,
+                                                  ));
                                                   // If account isnt open, just store the account in sharedprefs
                                                   if (StateContainer.of(context)
                                                           .wallet
