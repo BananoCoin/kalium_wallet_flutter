@@ -125,15 +125,6 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
-			<key>ruthium</key>
-			<dict>
-				<key>CFBundleIconFiles</key>
-				<array>
-					<string>Ru-Icon-App</string>
-				</array>
-				<key>UIPrerenderedIcon</key>
-				<false/>
-			</dict>
 		</dict>
 	</dict>
 </dict>

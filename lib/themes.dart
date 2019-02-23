@@ -367,97 +367,18 @@ class BerylliumTheme extends BaseTheme {
   AppIconEnum appIcon = AppIconEnum.BERYLLIUM;
 }
 
-class RutheniumTheme extends BaseTheme {
-  static const cherry = Color(0xFFD5727E);
-
-  static const purple = Color(0xFF9B72D5);
-
-  static const purpleLight = Color(0xFFCAA4FF);
-
-  static const pink = Color(0xFFFFC1C8);
-
-  static const pinkLight = Color(0xFFFFC9D0);
-
-  static const grey = Color(0xFF7A6262);
-
-  static const black = Color(0xFF000000);
-
-  static const veryDarkPink = Color(0xFF7C595D);
-
-  Color primary = cherry;
-  Color primary60 = cherry.withOpacity(0.6);
-  Color primary45 = cherry.withOpacity(0.45);
-  Color primary30 = cherry.withOpacity(0.3);
-  Color primary20 = cherry.withOpacity(0.2);
-  Color primary15 = cherry.withOpacity(0.15);
-  Color primary10 = cherry.withOpacity(0.1);
-
-  Color success = purple;
-  Color success60 = purple.withOpacity(0.6);
-  Color success30 = purple.withOpacity(0.3);
-  Color success15 = purple.withOpacity(0.15);
-
-  Color successDark = purpleLight;
-  Color successDark30 = purpleLight.withOpacity(0.3);
-
-  Color background = pink;
-  Color background40 = pink.withOpacity(0.4);
-  Color background00 = pink.withOpacity(0.0);
-
-  Color backgroundDark = pinkLight;
-  Color backgroundDark00 = pinkLight.withOpacity(0.0);
-
-  Color backgroundDarkest = pink;
-
-  Color text = grey.withOpacity(0.9);
-  Color text60 = grey.withOpacity(0.6);
-  Color text45 = grey.withOpacity(0.45);
-  Color text30 = grey.withOpacity(0.3);
-  Color text20 = grey.withOpacity(0.2);
-  Color text15 = grey.withOpacity(0.15);
-  Color text03 = grey.withOpacity(0.03);
-
-  Color overlay90 = black.withOpacity(0.9);
-  Color overlay85 = black.withOpacity(0.85);
-  Color overlay80 = black.withOpacity(0.8);
-  Color overlay70 = black.withOpacity(0.7);
-  Color overlay50 = black.withOpacity(0.5);
-  Color overlay30 = black.withOpacity(0.3);
-  Color overlay20 = black.withOpacity(0.2);
-
-  Color animationOverlayMedium = pinkLight.withOpacity(0.7);
-  Color animationOverlayStrong = pinkLight.withOpacity(0.85);
-
-  Brightness brightness = Brightness.light;
-  SystemUiOverlayStyle statusBar =
-      SystemUiOverlayStyle.dark.copyWith(statusBarColor: Colors.transparent);
-
-  BoxShadow boxShadow = BoxShadow(
-      color: veryDarkPink.withOpacity(0.08),
-      offset: Offset(0, 5),
-      blurRadius: 15);
-  BoxShadow boxShadowButton = BoxShadow(
-      color: veryDarkPink.withOpacity(0.16),
-      offset: Offset(0, 5),
-      blurRadius: 15);
-
-  OverlayTheme qrScanTheme = OverlayTheme.RUTHIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.RUTHIUM;
-  AppIconEnum appIcon = AppIconEnum.RUTHIUM;
-}
-
 class RadiumTheme extends BaseTheme {
-  static const electricGreen = Color(0xFF39E289);
+  static const electricGreen = Color(0xFF3DF291);
 
   static const pink = Color(0xFFA96BFF);
 
   static const pinkDark = Color(0xFF6E3AB6);
 
-  static const purpleDark = Color(0xFF130626);
+  static const purpleDark = Color(0xFF200A40);
 
-  static const purpleLight = Color(0xFF1A0636);
+  static const purpleLight = Color(0xFF2A1052);
 
-  static const purpleDarkest = Color(0xFF130626);
+  static const purpleDarkest = Color(0xFF200A40);
 
   static const white = Color(0xFFFFFFFF);
 
@@ -519,7 +440,7 @@ class RadiumTheme extends BaseTheme {
   AppIconEnum appIcon = AppIconEnum.RADIUM;
 }
 
-enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM, RUTHIUM, RADIUM }
+enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM, RADIUM }
 class AppIcon {
   static const _channel = const MethodChannel('fappchannel');
 
@@ -537,9 +458,6 @@ class AppIcon {
         break;
       case AppIconEnum.TITANIUM:
         iconStr = "titanium";
-        break;
-      case AppIconEnum.RUTHIUM:
-        iconStr = "ruthium";
         break;
       case AppIconEnum.RADIUM:
         iconStr = "radium";
