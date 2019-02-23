@@ -390,7 +390,7 @@
         "type": "text",
         "placeholders": {}
     },
-    "changeRepSucces": "指定代表成功改变",
+    "changeRepSucces": "指定代表更改成功",
     "@changeRepSucces": {
         "description": "change_representative_success",
         "type": "text",
@@ -774,13 +774,13 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "扫描Banano二维码地址",
+    "scanInstructions": "扫描BANANO二维码地址",
     "@scanInstructions": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "欢迎来到Kalium。当您收到或发送BANANO时，它将如下所示.",
+    "exampleCardIntro": "欢迎来到Kalium。当您收到或发送BANANO时，它将显示在下面.",
     "@exampleCardIntro": {
         "description": "example_card_intro",
         "type": "text",
