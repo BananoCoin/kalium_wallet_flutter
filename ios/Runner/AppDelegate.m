@@ -50,8 +50,6 @@
                 [self lc_setAlternateIconName:@"iridium"];
             } else if ([@"beryllium" isEqualToString:icon]) {
                 [self lc_setAlternateIconName:@"beryllium"];
-            } else if ([@"ruthium" isEqualToString:icon]) {
-                [self lc_setAlternateIconName:@"ruthium"];
             } else if ([@"radium" isEqualToString:icon]) {
                 [self lc_setAlternateIconName:@"radium"];
             }
