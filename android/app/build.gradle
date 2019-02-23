@@ -49,7 +49,12 @@ android {
         versionName flutterVersionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters 'armeabi-v7a' // arm64-v8a
+            if (project.hasProperty('target-platform') &&
+               project.property('target-platform') == 'android-arm64') {
+                abiFilters 'arm64-v8a'
+            } else {
+                abiFilters 'armeabi-v7a'
+            }
         }
     }
 
