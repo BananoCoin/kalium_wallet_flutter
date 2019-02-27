@@ -18,7 +18,11 @@ public class MainActivity extends FlutterActivity {
 
     Realm.init(this);
 
-    Vault.initializeVault(this);
+    try {
+        Vault.initializeVault(this);
+    } catch (Exception e) {
+
+    }
     generateEncryptionKey();
 
     GeneratedPluginRegistrant.registerWith(this);
