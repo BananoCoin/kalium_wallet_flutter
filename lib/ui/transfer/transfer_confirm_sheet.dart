@@ -268,6 +268,12 @@ class AppTransferConfirmSheet {
                                   Navigator.of(context).push(
                                       AnimationLoadingOverlay(
                                           AnimationType.TRANSFER_TRANSFERRING,
+                                          StateContainer.of(context)
+                                              .curTheme
+                                              .animationOverlayStrong,
+                                          StateContainer.of(context)
+                                              .curTheme
+                                              .animationOverlayMedium,
                                           onPoppedCallback: () {
                                     animationOpen = false;
                                   }));

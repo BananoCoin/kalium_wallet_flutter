@@ -127,7 +127,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Van papieren wallet importeren"),
     "shareKalium" : MessageLookupByLibrary.simpleMessage("Deel Kalium"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Check Kalium! Banano Android Wallet!"),
-    "systemDefault" : MessageLookupByLibrary.simpleMessage("Systeemfout"),
+    "systemDefault" : MessageLookupByLibrary.simpleMessage("Systeem standaard"),
     "themeHeader" : MessageLookupByLibrary.simpleMessage("Thema"),
     "to" : MessageLookupByLibrary.simpleMessage("Naar"),
     "tooManyFailedAttempts" : MessageLookupByLibrary.simpleMessage("Te veel mislukte ontgrendelpogingen."),

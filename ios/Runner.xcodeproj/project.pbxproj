@@ -9,12 +9,9 @@
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		2D5378261FAA1A9400D5DBA9 /* flutter_assets in Resources */ = {isa = PBXBuildFile; fileRef = 2D5378251FAA1A9400D5DBA9 /* flutter_assets */; };
-		395388BC221AB8F000DC6BA6 /* Ra-Icon-App@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395388B9221AB8EF00DC6BA6 /* Ra-Icon-App@2x.png */; };
-		395388BD221AB8F000DC6BA6 /* Ra-Icon-App@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395388BA221AB8EF00DC6BA6 /* Ra-Icon-App@3x.png */; };
-		395388BE221AB8F000DC6BA6 /* Ra-Icon-App@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 395388BB221AB8EF00DC6BA6 /* Ra-Icon-App@1x.png */; };
-		39CC67742210D37900FD3F26 /* Ru-Icon-App@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CC676E2210D37900FD3F26 /* Ru-Icon-App@1x.png */; };
-		39CC67752210D37900FD3F26 /* Ru-Icon-App@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CC676F2210D37900FD3F26 /* Ru-Icon-App@2x.png */; };
-		39CC67772210D37900FD3F26 /* Ru-Icon-App@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39CC67712210D37900FD3F26 /* Ru-Icon-App@3x.png */; };
+		39167EDA22219F00008D1855 /* Ra-Icon-App@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED722219F00008D1855 /* Ra-Icon-App@2x.png */; };
+		39167EDB22219F00008D1855 /* Ra-Icon-App@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED822219F00008D1855 /* Ra-Icon-App@3x.png */; };
+		39167EDC22219F00008D1855 /* Ra-Icon-App@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED922219F00008D1855 /* Ra-Icon-App@1x.png */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		3B80C3941E831B6300D905FE /* App.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B80C3931E831B6300D905FE /* App.framework */; };
 		3B80C3951E831B6300D905FE /* App.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 3B80C3931E831B6300D905FE /* App.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -60,12 +57,9 @@
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		2D5378251FAA1A9400D5DBA9 /* flutter_assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = flutter_assets; path = Flutter/flutter_assets; sourceTree = SOURCE_ROOT; };
-		395388B9221AB8EF00DC6BA6 /* Ra-Icon-App@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@2x.png"; sourceTree = "<group>"; };
-		395388BA221AB8EF00DC6BA6 /* Ra-Icon-App@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@3x.png"; sourceTree = "<group>"; };
-		395388BB221AB8EF00DC6BA6 /* Ra-Icon-App@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@1x.png"; sourceTree = "<group>"; };
-		39CC676E2210D37900FD3F26 /* Ru-Icon-App@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ru-Icon-App@1x.png"; sourceTree = "<group>"; };
-		39CC676F2210D37900FD3F26 /* Ru-Icon-App@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ru-Icon-App@2x.png"; sourceTree = "<group>"; };
-		39CC67712210D37900FD3F26 /* Ru-Icon-App@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ru-Icon-App@3x.png"; sourceTree = "<group>"; };
+		39167ED722219F00008D1855 /* Ra-Icon-App@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@2x.png"; sourceTree = "<group>"; };
+		39167ED822219F00008D1855 /* Ra-Icon-App@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@3x.png"; sourceTree = "<group>"; };
+		39167ED922219F00008D1855 /* Ra-Icon-App@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@1x.png"; sourceTree = "<group>"; };
 		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
 		3B80C3931E831B6300D905FE /* App.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = App.framework; path = Flutter/App.framework; sourceTree = "<group>"; };
 		552E09CE27D49778F805B244 /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Pods/Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
@@ -128,15 +122,12 @@
 		766B58692210874F009C8264 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				395388BB221AB8EF00DC6BA6 /* Ra-Icon-App@1x.png */,
-				395388B9221AB8EF00DC6BA6 /* Ra-Icon-App@2x.png */,
-				395388BA221AB8EF00DC6BA6 /* Ra-Icon-App@3x.png */,
+				39167ED922219F00008D1855 /* Ra-Icon-App@1x.png */,
+				39167ED722219F00008D1855 /* Ra-Icon-App@2x.png */,
+				39167ED822219F00008D1855 /* Ra-Icon-App@3x.png */,
 				766B58922210FFF0009C8264 /* Icon-App@1x.png */,
 				766B58912210FFF0009C8264 /* Icon-App@2x.png */,
 				766B58902210FFF0009C8264 /* Icon-App@3x.png */,
-				39CC676E2210D37900FD3F26 /* Ru-Icon-App@1x.png */,
-				39CC676F2210D37900FD3F26 /* Ru-Icon-App@2x.png */,
-				39CC67712210D37900FD3F26 /* Ru-Icon-App@3x.png */,
 				766B586B2210874F009C8264 /* Ir-Icon-App@3x.png */,
 				766B586C2210874F009C8264 /* Be-Icon-App@1x.png */,
 				766B586D2210874F009C8264 /* Ir-Icon-App@2x.png */,
@@ -302,29 +293,26 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				39167EDA22219F00008D1855 /* Ra-Icon-App@2x.png in Resources */,
 				766B587D2210874F009C8264 /* Ir-Icon-App@1x.png in Resources */,
 				766B58952210FFF0009C8264 /* Icon-App@1x.png in Resources */,
-				39CC67742210D37900FD3F26 /* Ru-Icon-App@1x.png in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				766B587A2210874F009C8264 /* Ir-Icon-App@2x.png in Resources */,
+				39167EDC22219F00008D1855 /* Ra-Icon-App@1x.png in Resources */,
 				766B587C2210874F009C8264 /* Ti-Icon-App@1x.png in Resources */,
 				2D5378261FAA1A9400D5DBA9 /* flutter_assets in Resources */,
 				766B58832210874F009C8264 /* Ti-Icon-App@3x.png in Resources */,
 				766B5805221081E2009C8264 /* Assets.xcassets in Resources */,
 				766B58792210874F009C8264 /* Be-Icon-App@1x.png in Resources */,
 				766B58932210FFF0009C8264 /* Icon-App@3x.png in Resources */,
-				395388BD221AB8F000DC6BA6 /* Ra-Icon-App@3x.png in Resources */,
 				766B58812210874F009C8264 /* Be-Icon-App@2x.png in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 				766B587F2210874F009C8264 /* Ti-Icon-App@2x.png in Resources */,
-				39CC67752210D37900FD3F26 /* Ru-Icon-App@2x.png in Resources */,
+				39167EDB22219F00008D1855 /* Ra-Icon-App@3x.png in Resources */,
 				766B58802210874F009C8264 /* Be-Icon-App@3x.png in Resources */,
 				76E821F821FB9FE700B97509 /* GoogleService-Info.plist in Resources */,
 				766B58782210874F009C8264 /* Ir-Icon-App@3x.png in Resources */,
 				766B58942210FFF0009C8264 /* Icon-App@2x.png in Resources */,
-				395388BE221AB8F000DC6BA6 /* Ra-Icon-App@1x.png in Resources */,
-				395388BC221AB8F000DC6BA6 /* Ra-Icon-App@2x.png in Resources */,
-				39CC67772210D37900FD3F26 /* Ru-Icon-App@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
