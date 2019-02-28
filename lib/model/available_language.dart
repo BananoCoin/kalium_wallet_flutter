@@ -21,6 +21,7 @@ enum AvailableLanguage {
   PORTUGUESE,
   ROMANIAN,
   RUSSIAN,
+  SLOVENIAN,
   SPANISH,
   SWEDISH,
   TAGALOG,
@@ -66,6 +67,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "Romanian (ro)";
       case AvailableLanguage.RUSSIAN:
         return "Русский язык (ru)";
+      case AvailableLanguage.SLOVENIAN:
+        return "Slovenščina (sl)";
       case AvailableLanguage.SWEDISH:
         return "Svenska (sv)";
       case AvailableLanguage.TAGALOG:
@@ -117,6 +120,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "ro";
       case AvailableLanguage.RUSSIAN:
         return "ru";
+      case AvailableLanguage.SLOVENIAN:
+        return "sl";
       case AvailableLanguage.SWEDISH:
         return "sv";
       case AvailableLanguage.TAGALOG:
