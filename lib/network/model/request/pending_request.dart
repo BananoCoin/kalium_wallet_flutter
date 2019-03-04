@@ -21,7 +21,10 @@ class PendingRequest extends BaseRequest {
   @JsonKey(name:"threshold", includeIfNull: false)
   String threshold;
 
-  PendingRequest({this.action = Actions.PENDING, this.account, this.source = true, this.count, this.threshold});
+  @JsonKey(name:"include_active")
+  bool includeActive;
+
+  PendingRequest({this.action = Actions.PENDING, this.account, this.source = true, this.count, this.threshold, this.includeActive = true});
 
   factory PendingRequest.fromJson(Map<String, dynamic> json) => _$PendingRequestFromJson(json);
   Map<String, dynamic> toJson() => _$PendingRequestToJson(this);
