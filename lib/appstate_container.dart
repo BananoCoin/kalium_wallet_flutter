@@ -15,6 +15,8 @@ import 'package:kalium_wallet_flutter/model/available_language.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/state_block.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
+import 'package:kalium_wallet_flutter/model/db/appdb.dart';
+import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/network/model/block_types.dart';
 import 'package:kalium_wallet_flutter/network/model/request_item.dart';
 import 'package:kalium_wallet_flutter/network/model/request/accounts_balances_request.dart';
@@ -91,9 +93,17 @@ class StateContainerState extends State<StateContainer> {
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
   BaseTheme curTheme = KaliumTheme();
+  // Currently selected account
+  Account selectedAccount = Account(id:1, name: "AB", index: 0, lastAccess: 0, selected: true);
+  // Two most recently used accounts
+  Account recentLast;
+  Account recentSecondLast;
 
   // If callback is locked
   bool _locked = false;
+
+  // Database Helper
+  DBHelper dbHelper;
 
   // This map stashes pending process requests, this is because we need to update these requests
   // after a blocks_info with the balance after send, and sign the block
@@ -104,6 +114,10 @@ class StateContainerState extends State<StateContainer> {
 
   // Maps all pending receives to previous blocks
   Map<String, StateBlock> pendingBlockMap = Map();
+
+  StateContainerState() {
+    dbHelper = DBHelper();
+  }
 
   @override
   void initState() {
@@ -140,6 +154,8 @@ class StateContainerState extends State<StateContainer> {
   StreamSubscription<CallbackEvent> _callbackSub;
   StreamSubscription<ErrorEvent> _errorSub;
   StreamSubscription<FcmUpdateEvent> _fcmUpdateSub;
+  StreamSubscription<AccountsBalancesEvent> _balancesSub;
+  StreamSubscription<AccountModifiedEvent> _accountModifiedSub;
 
   // Register RX event listenerss
   void _registerBus() {
@@ -236,6 +252,60 @@ class StateContainerState extends State<StateContainer> {
             account: wallet.address, fcmToken: event.token, enabled: enabled));
       });
     });
+    // Balances for our accounts
+    _balancesSub = EventTaxiImpl.singleton().registerTo<AccountsBalancesEvent>().listen((event) {
+      if (event.transfer) {
+        return;
+      }
+      dbHelper.getAccounts().then((accounts) {
+        accounts.forEach((account) {
+          event.response.balances.forEach((address, balance) {
+            String combinedBalance = (BigInt.tryParse(balance.balance) + BigInt.tryParse(balance.pending)).toString();
+            if (address == account.address && combinedBalance != account.balance) {
+              dbHelper.updateAccountBalance(account, combinedBalance);
+            }
+          });
+        });
+      });
+    });
+    // Account has been deleted or name changed
+    _accountModifiedSub = EventTaxiImpl.singleton().registerTo<AccountModifiedEvent>().listen((event) {
+      if (!event.deleted) {
+        if (event.account.index == selectedAccount.index) {
+          setState(() {
+            selectedAccount.name = event.account.name;
+          });
+        } else {
+          updateRecentlyUsedAccounts();
+        }
+      } else {
+        // Remove account
+        updateRecentlyUsedAccounts().then((_) {
+          if (event.account.index == selectedAccount.index && recentLast != null) {
+            dbHelper.changeAccount(recentLast);
+            setState(() {
+              selectedAccount = recentLast;
+            });
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: recentLast, noPop: true));
+          } else if (event.account.index == selectedAccount.index && recentSecondLast != null) {
+            dbHelper.changeAccount(recentSecondLast);
+            setState(() {
+              selectedAccount = recentSecondLast;
+            });
+            EventTaxiImpl.singleton().fire(AccountChangedEvent(account: recentSecondLast, noPop: true));
+          } else if (event.account.index == selectedAccount.index) {
+            dbHelper.getMainAccount().then((mainAccount) {
+              dbHelper.changeAccount(mainAccount);
+              setState(() {
+                selectedAccount = mainAccount;
+              });
+              EventTaxiImpl.singleton().fire(AccountChangedEvent(account: mainAccount, noPop: true)); 
+            });         
+          }
+        });
+        updateRecentlyUsedAccounts();
+      }
+    });
   }
 
   @override
@@ -275,14 +345,45 @@ class StateContainerState extends State<StateContainer> {
     if (_fcmUpdateSub != null) {
       _fcmUpdateSub.cancel();
     }
+    if (_balancesSub != null) {
+      _balancesSub.cancel();
+    }
+    if (_accountModifiedSub != null) {
+      _accountModifiedSub.cancel();
+    }
   }
 
   // Update the global wallet instance with a new address
-  void updateWallet({address}) {
+  Future<void> updateWallet({Account account}) async {
+    String address = NanoUtil.seedToAddress(await Vault.inst.getSeed(), account.index);
+    selectedAccount = account;
+    updateRecentlyUsedAccounts();
     setState(() {
       wallet = AppWallet(address: address, loading: true);
       requestUpdate();
     });
+  }
+
+  Future<void> updateRecentlyUsedAccounts() async {
+    List<Account> otherAccounts = await dbHelper.getRecentlyUsedAccounts();
+    if (otherAccounts != null && otherAccounts.length > 0) {
+      if (otherAccounts.length > 1) {
+        setState(() {
+          recentLast = otherAccounts[0];
+          recentSecondLast = otherAccounts[1];
+        });
+      } else {
+        setState(() {
+          recentLast = otherAccounts[0];
+          recentSecondLast = null;
+        });
+      }
+    } else {
+      setState(() {
+        recentLast = null;
+        recentSecondLast = null;
+      });
+    }
   }
 
   // Change language
@@ -641,10 +742,10 @@ class StateContainerState extends State<StateContainer> {
 
   ///
   /// Request accounts_balances
-  ///
-  void requestAccountsBalances(List<String> accounts) {
+  /// 
+  void requestAccountsBalances(List<String> accounts, {bool fromTransfer = false}) {
     if (accounts != null && accounts.isNotEmpty) {
-      AccountService.queueRequest(AccountsBalancesRequest(accounts: accounts));
+      AccountService.queueRequest(AccountsBalancesRequest(accounts: accounts), fromTransfer: fromTransfer);
       AccountService.processQueue();
     }
   }

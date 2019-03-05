@@ -754,6 +754,50 @@ class AppLocalization {
 
   /// -- END EXAMPLE HOME SCREEN CARDS
 
+  /// -- START MULTI-ACCOUNT
+
+  String get defaultAccountName {
+    return Intl.message("Main Account",
+      desc: "Default account name", name: 'defaultAccountName');
+  }
+
+  String get defaultNewAccountName {
+    return Intl.message("Account %1",
+      desc: "Default new account name - e.g. Account 1", name: 'defaultNewAccountName');
+  }
+
+  String get newAccountIntro {
+    return Intl.message("This is your new account. Once you receive BANANO, transactions will show up like this:",
+      desc: 'Alternate account intro card', name: 'newAccountIntro');
+  }
+
+  String get account {
+    return Intl.message("Account",
+      desc: "Account text", name: 'account');
+  }
+
+  String get accounts {
+    return Intl.message("Accounts",
+      desc: "Accounts header", name: 'accounts');
+  }
+
+  String get addAccount {
+    return Intl.message("Add Account",
+      desc: "Default new account name - e.g. Account 1", name: 'addAccount');
+  }
+
+  String get hideAccountHeader {
+    return Intl.message("Hide Account?",
+      desc: "Confirmation dialog header", name: 'hideAccountHeader');
+  }
+
+  String get removeAccountText {
+    return Intl.message("Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
+      desc: "Remove account dialog body", name: 'removeAccountText');
+  }
+
+  /// -- END MULTI-ACCOUNT
+
   /// -- NON-TRANSLATABLE ITEMS
   String getBlockExplorerUrl(String hash) {
     return 'https://creeper.banano.cc/explorer/block/$hash';

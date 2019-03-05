@@ -264,7 +264,7 @@ class AppTransferOverviewSheet {
     // Get accounts from seed
     List<String> accountsToRequest = getAccountsFromSeed(context, seed);
     // Make balances request
-    StateContainer.of(context).requestAccountsBalances(accountsToRequest);
+    StateContainer.of(context).requestAccountsBalances(accountsToRequest, fromTransfer: true);
   }
 
   /// Get NUM_SWEEP accounts from seed to request balances for

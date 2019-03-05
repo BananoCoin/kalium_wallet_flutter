@@ -63,4 +63,8 @@ class AppIcons {
   static const IconData import_icon = const IconData(0xe828, fontFamily: _kFontFam);
   static const IconData lock = const IconData(0xe829, fontFamily: _kFontFam);
   static const IconData transferfunds = const IconData(0xe82a, fontFamily: _kFontFam);
+  static const IconData nanohorizontal = const IconData(0xe82b, fontFamily: _kFontFam);
+  static const IconData natriumhorizontal = const IconData(0xe82c, fontFamily: _kFontFam);
+  static const IconData accountswitcher = const IconData(0xe82d, fontFamily: _kFontFam);
+  static const IconData accountwallet = const IconData(0xe82e, fontFamily: _kFontFam);
 }

@@ -277,6 +277,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       }
     }
     await SharedPrefsUtil.inst.setFirstLaunch();
+    await SharedPrefsUtil.inst.setFirstLaunch();
     // See if logged in already
     bool isLoggedIn = false;
     var seed = await Vault.inst.getSeed();
@@ -296,7 +297,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (await SharedPrefsUtil.inst.getLock() || await SharedPrefsUtil.inst.shouldLock()) {
         Navigator.of(context).pushReplacementNamed('/lock_screen');
       } else {
-        StateContainer.of(context).updateWallet(address: NanoUtil.seedToAddress(seed));
+        await NanoUtil().loginAccount(context);
         Navigator.of(context).pushReplacementNamed('/home');
       }
     } else {
