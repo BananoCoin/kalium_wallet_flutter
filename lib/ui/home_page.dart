@@ -593,7 +593,7 @@ class _AppHomePageState extends State<AppHomePage>
         if (result != null) {
           /* TODO Validate */
           setState(() {
-            _monKey = SvgPicture.asset('assets/test.svg');
+            _monKey = SvgPicture.file(result);
           });
         }
       });

@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
-		2D5378261FAA1A9400D5DBA9 /* flutter_assets in Resources */ = {isa = PBXBuildFile; fileRef = 2D5378251FAA1A9400D5DBA9 /* flutter_assets */; };
 		39167EDA22219F00008D1855 /* Ra-Icon-App@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED722219F00008D1855 /* Ra-Icon-App@2x.png */; };
 		39167EDB22219F00008D1855 /* Ra-Icon-App@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED822219F00008D1855 /* Ra-Icon-App@3x.png */; };
 		39167EDC22219F00008D1855 /* Ra-Icon-App@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED922219F00008D1855 /* Ra-Icon-App@1x.png */; };
@@ -56,7 +55,6 @@
 /* Begin PBXFileReference section */
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
-		2D5378251FAA1A9400D5DBA9 /* flutter_assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = flutter_assets; path = Flutter/flutter_assets; sourceTree = SOURCE_ROOT; };
 		39167ED722219F00008D1855 /* Ra-Icon-App@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@2x.png"; sourceTree = "<group>"; };
 		39167ED822219F00008D1855 /* Ra-Icon-App@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@3x.png"; sourceTree = "<group>"; };
 		39167ED922219F00008D1855 /* Ra-Icon-App@1x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Ra-Icon-App@1x.png"; sourceTree = "<group>"; };
@@ -151,7 +149,6 @@
 		9740EEB11CF90186004384FC /* Flutter */ = {
 			isa = PBXGroup;
 			children = (
-				2D5378251FAA1A9400D5DBA9 /* flutter_assets */,
 				3B80C3931E831B6300D905FE /* App.framework */,
 				3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */,
 				9740EEBA1CF902C7004384FC /* Flutter.framework */,
@@ -300,7 +297,6 @@
 				766B587A2210874F009C8264 /* Ir-Icon-App@2x.png in Resources */,
 				39167EDC22219F00008D1855 /* Ra-Icon-App@1x.png in Resources */,
 				766B587C2210874F009C8264 /* Ti-Icon-App@1x.png in Resources */,
-				2D5378261FAA1A9400D5DBA9 /* flutter_assets in Resources */,
 				766B58832210874F009C8264 /* Ti-Icon-App@3x.png in Resources */,
 				766B5805221081E2009C8264 /* Assets.xcassets in Resources */,
 				766B58792210874F009C8264 /* Be-Icon-App@1x.png in Resources */,
