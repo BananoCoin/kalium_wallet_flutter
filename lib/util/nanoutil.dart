@@ -12,7 +12,7 @@ class NanoUtil {
   }
 
   static String seedToAddress(String seed, int index) {
-    return NanoAccounts.createAccount(NanoAccountType.NANO, NanoKeys.createPublicKey(seedToPrivate(seed, index)));
+    return NanoAccounts.createAccount(NanoAccountType.BANANO, NanoKeys.createPublicKey(seedToPrivate(seed, index)));
   }
 
   Future<void> loginAccount(BuildContext context) async {

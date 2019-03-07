@@ -16,7 +16,7 @@ import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
-enum MonkeySize { SMALL, HOME_SMALL, NORMAL, LARGE }
+enum MonkeySize { SMALL, HOME_SMALL, NORMAL, LARGE, SVG }
 
 class UIUtil {
   static Widget threeLineAddressText(BuildContext context, String address,
@@ -417,6 +417,9 @@ class UIUtil {
         prefix = "home_";
         size = (90 * MediaQuery.of(context).devicePixelRatio).toInt();
         break;
+      case MonkeySize.SVG:
+        prefix = "svg_";
+        break;
     }
     String fileName = '$dir/$prefix$address.png';
     if (await File(fileName).exists()) {
@@ -424,8 +427,15 @@ class UIUtil {
     }
     // Download monKey and return file
     http.Client client = http.Client();
-    var req = await client.get(Uri.parse(AppLocalization.of(context)
-        .getMonkeyDownloadUrl(address, size: size)));
+    http.Response req;
+    if (monkeySize ==MonkeySize.SVG) {
+      req = await client.get(Uri.parse(AppLocalization.of(context)
+          .getMonkeyDownloadUrl(address, svg: true)));
+      print("DOWNLOADED SVG");
+    } else {
+      req = await client.get(Uri.parse(AppLocalization.of(context)
+          .getMonkeyDownloadUrl(address, size: size)));
+    }
     var bytes = req.bodyBytes;
     File file = File(fileName);
     await file.writeAsBytes(bytes);

@@ -5,6 +5,7 @@ import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:uni_links/uni_links.dart';
@@ -71,7 +72,6 @@ class _AppHomePageState extends State<AppHomePage>
 
   // monKey widget
   Widget _monKey;
-  Widget _largeMonKey;
   bool _monkeyOverlayOpen = false;
   bool _monkeyDownloadTriggered = false;
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
@@ -588,28 +588,12 @@ class _AppHomePageState extends State<AppHomePage>
     if (!_monkeyDownloadTriggered) {
       _monkeyDownloadTriggered = true;
       UIUtil.downloadOrRetrieveMonkey(context,
-              StateContainer.of(context).wallet.address, MonkeySize.HOME_SMALL)
+              StateContainer.of(context).wallet.address, MonkeySize.SVG)
           .then((result) {
         if (result != null) {
-          FileUtil.pngHasValidSignature(result).then((valid) {
-            if (valid) {
-              setState(() {
-                _monKey = Image.file(result);
-              });
-            }
-          });
-        }
-      });
-      UIUtil.downloadOrRetrieveMonkey(context,
-              StateContainer.of(context).wallet.address, MonkeySize.LARGE)
-          .then((result) {
-        if (result != null) {
-          FileUtil.pngHasValidSignature(result).then((valid) {
-            if (valid) {
-              setState(() {
-                _largeMonKey = Image.file(result);
-              });
-            }
+          /* TODO Validate */
+          setState(() {
+            _monKey = SvgPicture.file(result);
           });
         }
       });
@@ -1364,7 +1348,7 @@ class _AppHomePageState extends State<AppHomePage>
                 child: _monkeyOverlayOpen
                     ? SizedBox()
                     : Stack(children: <Widget>[
-                        Container(width: 80, height: 80, child: _largeMonKey),
+                        Container(width: 80, height: 80, child: _monKey),
                         Center(
                           child: Container(
                             width: 90,
@@ -1380,13 +1364,13 @@ class _AppHomePageState extends State<AppHomePage>
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100.0)),
                 onPressed: () {
-                  if (_monkeyOverlayOpen || _largeMonKey == null) {
+                  if (_monkeyOverlayOpen) {
                     return;
                   }
                   setState(() {
                     _monkeyOverlayOpen = true;
                   });
-                  Navigator.of(context).push(MonkeyOverlay(_largeMonKey));
+                  Navigator.of(context).push(MonkeyOverlay(_monKey));
                 }),
           ),
         ],

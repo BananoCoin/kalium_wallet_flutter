@@ -807,7 +807,10 @@ class AppLocalization {
     return 'https://creeper.banano.cc/explorer/account/$account';
   }
 
-  String getMonkeyDownloadUrl(String account, { int size = 1000 }) {
+  String getMonkeyDownloadUrl(String account, { int size = 1000, bool svg = false }) {
+    if (svg) {
+      return 'http://monkeys.appditto.com?address=$account';
+    }
     return 'https://bananomonkeys.herokuapp.com/image?format=png&address=$account&size=$size';
   }
 
