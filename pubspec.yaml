@@ -188,7 +188,6 @@ flutter:
     - assets/transferfunds_illustration_end.svg
     - assets/transferfunds_illustration_end_paperwalletonly.svg
     - assets/transferfunds_illustration_end_kaliumwalletonly.svg
-    - assets/test.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
