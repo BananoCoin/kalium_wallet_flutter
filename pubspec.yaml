@@ -74,7 +74,7 @@ dependencies:
   event_taxi: ^0.1.5
 
   # SVG
-  flutter_svg: ^0.10.3
+  flutter_svg: ^0.12.0
     
   # QR Codes
   qr_flutter: ^2.0.0+51 # Generator
@@ -188,6 +188,7 @@ flutter:
     - assets/transferfunds_illustration_end.svg
     - assets/transferfunds_illustration_end_paperwalletonly.svg
     - assets/transferfunds_illustration_end_kaliumwalletonly.svg
+    - assets/test.svg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
