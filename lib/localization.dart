@@ -809,7 +809,7 @@ class AppLocalization {
 
   String getMonkeyDownloadUrl(String account, { int size = 1000, bool svg = false }) {
     if (svg) {
-      return 'http://monkeys.appditto.com?address=$account';
+      return 'https://monkeys.appditto.com?address=$account';
     }
     return 'https://bananomonkeys.herokuapp.com/image?format=png&address=$account&size=$size';
   }
