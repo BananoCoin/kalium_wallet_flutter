@@ -76,6 +76,8 @@ class _AppHomePageState extends State<AppHomePage>
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
 
+  DBHelper dbHelper;
+
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion _priceConversion;
   bool _pricesHidden = false;
@@ -115,6 +117,7 @@ class _AppHomePageState extends State<AppHomePage>
   @override
   void initState() {
     super.initState();
+    this.dbHelper = DBHelper();
     _registerBus();
     _monKey = SizedBox();
     WidgetsBinding.instance.addObserver(this);
@@ -214,13 +217,12 @@ class _AppHomePageState extends State<AppHomePage>
   Future<void> _addSampleContact() async {
     bool contactAdded = await SharedPrefsUtil.inst.getFirstContactAdded();
     if (!contactAdded) {
-      DBHelper db = DBHelper();
-      bool addressExists = await db.contactExistsWithAddress(
+      bool addressExists = await dbHelper.contactExistsWithAddress(
           "ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo");
       if (addressExists) {
         return;
       }
-      bool nameExists = await db.contactExistsWithName("@KaliumDonations");
+      bool nameExists = await dbHelper.contactExistsWithName("@KaliumDonations");
       if (nameExists) {
         return;
       }
@@ -229,12 +231,12 @@ class _AppHomePageState extends State<AppHomePage>
           name: "@KaliumDonations",
           address:
               "ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo");
-      await db.saveContact(c);
+      await dbHelper.saveContact(c);
     }
   }
 
   void _updateContacts() {
-    DBHelper().getContacts().then((contacts) {
+    dbHelper.getContacts().then((contacts) {
       setState(() {
         _contacts = contacts;
       });
@@ -268,7 +270,7 @@ class _AppHomePageState extends State<AppHomePage>
         // Route to send complete
         String displayAmount =
             NumberUtil.getRawAsUsableString(event.previous.sendAmount);
-        DBHelper().getContactWithAddress(event.previous.link).then((contact) {
+        dbHelper.getContactWithAddress(event.previous.link).then((contact) {
           String contactName = contact == null ? null : contact.name;
           Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
           AppSendCompleteSheet(displayAmount, event.previous.link, contactName,
@@ -515,7 +517,7 @@ class _AppHomePageState extends State<AppHomePage>
       }
     }
     // See if a contact
-    DBHelper().getContactWithAddress(address.address).then((contact) {
+    dbHelper.getContactWithAddress(address.address).then((contact) {
       if (contact != null) {
         contactName = contact.name;
       }
@@ -524,7 +526,7 @@ class _AppHomePageState extends State<AppHomePage>
       if (amount != null) {
         // Go to send confirm with amount
         AppSendConfirmSheet(
-                NumberUtil.getRawAsUsableString(amount).replaceAll(",", ""),
+                amount,
                 address.address,
                 contactName: contactName)
             .mainBottomSheet(context);
@@ -784,7 +786,7 @@ class _AppHomePageState extends State<AppHomePage>
           });
         } else {
           // See if a contact
-          DBHelper().getContactWithAddress(item.account).then((contact) {
+          dbHelper.getContactWithAddress(item.account).then((contact) {
             // Go to send with address
             AppSendSheet(contact: contact, address: item.account, quickSendAmount: item.amount)
                 .mainBottomSheet(context);

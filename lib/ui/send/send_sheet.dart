@@ -52,6 +52,9 @@ class AppSendSheet {
   String address;
   String quickSendAmount;
 
+  DBHelper dbHelper = DBHelper();
+  String _rawAmount;
+
   AppSendSheet({this.contact, this.address, this.quickSendAmount});
 
   // A method for deciding if 1 or 3 line address text should be used
@@ -144,7 +147,7 @@ class AppSendSheet {
                 _sendAddressController.selection = TextSelection.fromPosition(
                     TextPosition(offset: _sendAddressController.text.length));
                 if (_sendAddressController.text.startsWith("@")) {
-                  DBHelper()
+                  dbHelper
                       .getContactsWithNameLike(_sendAddressController.text)
                       .then((contactList) {
                     setState(() {
@@ -457,7 +460,7 @@ class AppSendSheet {
                               if (_sendAddressController.text.startsWith("@") &&
                                   validRequest) {
                                 // Need to make sure its a valid contact
-                                DBHelper()
+                                dbHelper
                                     .getContactWithName(
                                         _sendAddressController.text)
                                     .then((contact) {
@@ -470,9 +473,9 @@ class AppSendSheet {
                                   } else {
                                     AppSendConfirmSheet(
                                             _localCurrencyMode
-                                                ? _convertLocalCurrencyToCrypto(
-                                                    context)
-                                                : _sendAmountController.text,
+                                              ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(
+                                                  context))
+                                              : _rawAmount == null ? NumberUtil.getAmountAsRaw(_sendAmountController.text) :_rawAmount,
                                             contact.address,
                                             contactName: contact.name,
                                             maxSend: _isMaxSend(context),
@@ -486,9 +489,9 @@ class AppSendSheet {
                               } else if (validRequest) {
                                 AppSendConfirmSheet(
                                         _localCurrencyMode
-                                            ? _convertLocalCurrencyToCrypto(
-                                                context)
-                                            : _sendAmountController.text,
+                                            ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(
+                                                context))
+                                            : _rawAmount == null ? NumberUtil.getAmountAsRaw(_sendAmountController.text) :_rawAmount,
                                         _sendAddressController.text,
                                         maxSend: _isMaxSend(context),
                                         localCurrencyAmount: _localCurrencyMode
@@ -518,7 +521,7 @@ class AppSendSheet {
                                             .qrInvalidAddress,
                                         context);
                                   } else {
-                                    DBHelper()
+                                    dbHelper
                                         .getContactWithAddress(address.address)
                                         .then((contact) {
                                       if (contact == null) {
@@ -555,6 +558,10 @@ class AppSendSheet {
                                       if (address.amount != null) {
                                         if (_localCurrencyMode) {
                                           toggleLocalCurrency(context, setState);
+                                        } else {
+                                          setState(() {
+                                            _rawAmount = address.amount;
+                                          });
                                         }
                                         _sendAmountController.text = NumberUtil.getRawAsUsableString(address.amount);
                                       }
@@ -823,6 +830,8 @@ class AppSendSheet {
           // Always reset the error message to be less annoying
           setState(() {
             _amountValidationText = "";
+            // Reset the raw amount
+            _rawAmount = null;
           });
         },
         textInputAction: TextInputAction.next,
@@ -992,7 +1001,7 @@ class AppSendSheet {
                                     offset:
                                         _sendAddressController.text.length));
                           }
-                          DBHelper().getContacts().then((contactList) {
+                          dbHelper.getContacts().then((contactList) {
                             setState(() {
                               _contacts = contactList;
                             });
@@ -1034,7 +1043,7 @@ class AppSendSheet {
                           }
                           Address address = new Address(data.text);
                           if (address.isValid()) {
-                            DBHelper()
+                            dbHelper
                                 .getContactWithAddress(address.address)
                                 .then((contact) {
                               if (contact == null) {
@@ -1098,7 +1107,7 @@ class AppSendSheet {
                   setState(() {
                     _isContact = true;
                   });
-                  DBHelper().getContactsWithNameLike(text).then((matchedList) {
+                  dbHelper.getContactsWithNameLike(text).then((matchedList) {
                     setState(() {
                       _contacts = matchedList;
                     });
@@ -1128,7 +1137,7 @@ class AppSendSheet {
                     _pasteButtonVisible = true;
                   });
                 } else {
-                  DBHelper().getContactWithName(text).then((contact) {
+                  dbHelper.getContactWithName(text).then((contact) {
                     if (contact == null) {
                       setState(() {
                         _sendAddressStyle =

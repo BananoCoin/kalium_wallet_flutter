@@ -79,6 +79,8 @@ class _SettingsSheetState extends State<SettingsSheet>
 
   bool notNull(Object o) => o != null;
 
+  DBHelper dbHelper;
+
   // Called if transfer fails
   void transferError() {
     Navigator.of(context).pop();
@@ -86,7 +88,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _exportContacts() async {
-    List<Contact> contacts = await DBHelper().getContacts();
+    List<Contact> contacts = await dbHelper.getContacts();
     if (contacts.length == 0) {
       UIUtil.showSnackbar(
           AppLocalization.of(context).noContactsExport, context);
@@ -124,7 +126,6 @@ class _SettingsSheetState extends State<SettingsSheet>
       contactsJson.forEach((contact) {
         contacts.add(Contact.fromJson(contact));
       });
-      DBHelper dbHelper = DBHelper();
       for (Contact contact in contacts) {
         if (!await dbHelper.contactExistsWithName(contact.name) &&
             !await dbHelper.contactExistsWithAddress(contact.address)) {
@@ -164,6 +165,7 @@ class _SettingsSheetState extends State<SettingsSheet>
     super.initState();
     _contactsOpen = false;
     _securityOpen = false;
+    this.dbHelper = DBHelper();
     // Determine if they have face or fingerprint enrolled, if not hide the setting
     BiometricUtil.hasBiometrics().then((bool hasBiometrics) {
       setState(() {
@@ -333,7 +335,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   void _updateContacts() {
-    DBHelper().getContacts().then((contacts) {
+    dbHelper.getContacts().then((contacts) {
       for (Contact c in contacts) {
         if (!_contacts.contains(c)) {
           setState(() {
@@ -367,7 +369,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                     c.monkeyWidget = Image.file(result);
                     c.monkeyPath = path.basename(result.path);
                   });
-                  DBHelper().setMonkeyForContact(c, c.monkeyPath);
+                  dbHelper.setMonkeyForContact(c, c.monkeyPath);
                 }
               });
             });
@@ -1217,7 +1219,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                             .exists()
                             .then((exists) {
                           if (!exists) {
-                            DBHelper()
+                            dbHelper
                                 .setMonkeyForContact(_contacts[index], null);
                           }
                         });
