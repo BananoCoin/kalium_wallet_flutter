@@ -17,8 +17,6 @@ class Contact {
   String monkeyPath;
   @JsonKey(ignore:true)
   Widget monkeyWidget;
-  @JsonKey(ignore:true)
-  Widget monkeyWidgetLarge;
 
   Contact({@required this.name, @required this.address, this.monkeyPath, int id});
 

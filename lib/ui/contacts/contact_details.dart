@@ -160,8 +160,12 @@ class ContactDetailsSheet {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         // monKey container
-                        contact.monkeyWidgetLarge != null
-                            ? contact.monkeyWidgetLarge
+                        contact.monkeyWidget != null
+                            ? Container(
+                                child:contact.monkeyWidget,
+                                width: smallScreen(context) ? 130 : 200,
+                                height: smallScreen(context) ? 130 : 200,
+                            )
                             : SizedBox(
                                 width: smallScreen(context) ? 130 : 200,
                                 height: smallScreen(context) ? 130 : 200),

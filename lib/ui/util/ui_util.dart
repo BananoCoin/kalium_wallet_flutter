@@ -431,7 +431,6 @@ class UIUtil {
     if (monkeySize ==MonkeySize.SVG) {
       req = await client.get(Uri.parse(AppLocalization.of(context)
           .getMonkeyDownloadUrl(address, svg: true)));
-      print("DOWNLOADED SVG");
     } else {
       req = await client.get(Uri.parse(AppLocalization.of(context)
           .getMonkeyDownloadUrl(address, size: size)));

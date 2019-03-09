@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -352,17 +353,22 @@ class _SettingsSheetState extends State<SettingsSheet>
       for (Contact c in _contacts) {
         // Download monKeys if not existing
         if (c.monkeyWidget == null) {
-          if (c.monkeyPath != null) {
+          if (c.monkeyPath != null && !c.monkeyPath.contains(".png")) {
             setState(() {
-              c.monkeyWidget = Image.file(
-                  File("$documentsDirectory/${c.monkeyPath}"),
-                  width: smallScreen(context) ? 55 : 70,
-                  height: smallScreen(context) ? 55 : 70);
+              c.monkeyWidget = SvgPicture.file(
+                  File("$documentsDirectory/${c.monkeyPath}"));
             });
           } else {
             UIUtil.downloadOrRetrieveMonkey(
-                    context, c.address, MonkeySize.SMALL)
+                    context, c.address, MonkeySize.SVG)
                 .then((result) {
+              // TODO - Validate SVG
+              setState(() {
+                 c.monkeyWidget = SvgPicture.file(result);
+                 c.monkeyPath = path.basename(result.path);
+              });
+              dbHelper.setMonkeyForContact(c, c.monkeyPath);
+              /*
               FileUtil.pngHasValidSignature(result).then((valid) {
                 if (valid) {
                   setState(() {
@@ -372,22 +378,9 @@ class _SettingsSheetState extends State<SettingsSheet>
                   dbHelper.setMonkeyForContact(c, c.monkeyPath);
                 }
               });
+              */
             });
           }
-        }
-        if (c.monkeyWidgetLarge == null) {
-          UIUtil.downloadOrRetrieveMonkey(context, c.address, MonkeySize.NORMAL)
-              .then((result) {
-            FileUtil.pngHasValidSignature(result).then((valid) {
-              if (valid) {
-                setState(() {
-                  c.monkeyWidgetLarge = Image.file(result,
-                      width: smallScreen(context) ? 130 : 200,
-                      height: smallScreen(context) ? 130 : 200);
-                });
-              }
-            });
-          });
         }
       }
     });
