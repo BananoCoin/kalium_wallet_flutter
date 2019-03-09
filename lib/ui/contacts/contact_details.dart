@@ -163,12 +163,12 @@ class ContactDetailsSheet {
                         contact.monkeyWidget != null
                             ? Container(
                                 child:contact.monkeyWidget,
-                                width: smallScreen(context) ? 130 : 200,
-                                height: smallScreen(context) ? 130 : 200,
+                                width: MediaQuery.of(context).size.height*0.235,
+                                height: MediaQuery.of(context).size.height*0.235,
                             )
                             : SizedBox(
-                                width: smallScreen(context) ? 130 : 200,
-                                height: smallScreen(context) ? 130 : 200),
+                                width: MediaQuery.of(context).size.height*0.235,
+                                height: MediaQuery.of(context).size.height*0.235),
                         // Contact Name container
                         Container(
                           width: double.infinity,
