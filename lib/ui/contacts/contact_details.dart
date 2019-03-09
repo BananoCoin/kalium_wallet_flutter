@@ -108,7 +108,7 @@ class ContactDetailsSheet {
                       ),
                       // The header of the sheet
                       Container(
-                        margin: EdgeInsets.only(top: 25.0),
+                        margin: EdgeInsets.only(top: 25.0, bottom: MediaQuery.of(context).size.height*0.01),
                         constraints: BoxConstraints(
                             maxWidth: MediaQuery.of(context).size.width - 140),
                         child: Column(
@@ -161,14 +161,12 @@ class ContactDetailsSheet {
                       children: <Widget>[
                         // monKey container
                         contact.monkeyWidget != null
-                            ? Container(
+                            ? Expanded(
                                 child:contact.monkeyWidget,
-                                width: MediaQuery.of(context).size.height*0.235,
-                                height: MediaQuery.of(context).size.height*0.235,
                             )
-                            : SizedBox(
-                                width: MediaQuery.of(context).size.height*0.235,
-                                height: MediaQuery.of(context).size.height*0.235),
+                            : Expanded(
+                              child: SizedBox(),
+                            ),
                         // Contact Name container
                         Container(
                           width: double.infinity,
@@ -257,6 +255,7 @@ class ContactDetailsSheet {
 
                   // A column with "Send" and "Close" buttons
                   Container(
+                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.025),
                     child: Column(
                       children: <Widget>[
                         Row(
