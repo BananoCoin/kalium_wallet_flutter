@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logging/logging.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:uni_links/uni_links.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
 import 'package:kalium_wallet_flutter/model/available_themes.dart';
 import 'package:kalium_wallet_flutter/model/available_currency.dart';
@@ -102,6 +103,11 @@ class StateContainerState extends State<StateContainer> {
   // If callback is locked
   bool _locked = false;
 
+  // Initial deep link
+  String initialDeepLink;
+  // Deep link changes
+  StreamSubscription _deepLinkSub;
+
   // Database Helper
   DBHelper dbHelper;
 
@@ -140,6 +146,10 @@ class StateContainerState extends State<StateContainer> {
     // Get theme default
     SharedPrefsUtil.inst.getTheme().then((theme) {
       updateTheme(theme, setIcon: false);
+    });
+    // Get initial deep link
+    getInitialLink().then((initialLink) {
+      initialDeepLink = initialLink;
     });
   }
 
@@ -306,6 +316,10 @@ class StateContainerState extends State<StateContainer> {
         updateRecentlyUsedAccounts();
       }
     });
+    // Deep link has been updated
+    _deepLinkSub = getLinksStream().listen((String link) {
+      initialDeepLink = link;
+    });
   }
 
   @override
@@ -350,6 +364,9 @@ class StateContainerState extends State<StateContainer> {
     }
     if (_accountModifiedSub != null) {
       _accountModifiedSub.cancel();
+    }
+    if (_deepLinkSub != null) {
+      _deepLinkSub.cancel();
     }
   }
 
