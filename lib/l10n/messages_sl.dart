@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static _notInlinedMessages(_) => <String, Function> {
     "addContact" : MessageLookupByLibrary.simpleMessage("Dodaj stik"),
     "addressCopied" : MessageLookupByLibrary.simpleMessage("Naslov skopiran"),
-    "addressHint" : MessageLookupByLibrary.simpleMessage("Vnesi naslov"),
+    "addressHint" : MessageLookupByLibrary.simpleMessage("Vnesite naslov"),
     "addressMising" : MessageLookupByLibrary.simpleMessage("Prosim vnesite naslov"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Deli naslov"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Prosim vnesite znesek"),
@@ -125,7 +125,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sent" : MessageLookupByLibrary.simpleMessage("Poslano"),
     "sentTo" : MessageLookupByLibrary.simpleMessage("Poslano"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Nastavitve"),
-    "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Naloži iz papirne"),
+    "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Naloži iz papirnate denarnice"),
     "shareKalium" : MessageLookupByLibrary.simpleMessage("Deli Kalium"),
     "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Preveri Kalium! Uradna mobilna Banano denarnica!"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Sistemski"),
