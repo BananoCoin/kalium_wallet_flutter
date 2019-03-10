@@ -11,7 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share/share.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -335,49 +334,41 @@ class _SettingsSheetState extends State<SettingsSheet>
     }
   }
 
-  void _updateContacts() {
-    dbHelper.getContacts().then((contacts) {
-      for (Contact c in contacts) {
-        if (!_contacts.contains(c)) {
+  Future<void> _updateContacts() async {
+    List<Contact> contacts = await dbHelper.getContacts();
+    for (Contact c in contacts) {
+      if (!_contacts.contains(c)) {
+        setState(() {
+          _contacts.add(c);
+        });
+      }
+    }
+    // Re-sort list
+    setState(() {
+      _contacts.sort(
+          (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+    });
+    // Get any monKeys that are missing
+    for (Contact c in _contacts) {
+      // Download monKeys if not existing
+      if (c.monkeyPath == null || c.monkeyPath.contains(".png")) {
+        File svgFile = await UIUtil.downloadOrRetrieveMonkey(
+                        context, c.address, MonkeySize.SVG);
+        // TODO - Validate SVG
+        setState(() {
+            c.monkeyPath = path.basename(svgFile.path);
+        });
+        await dbHelper.setMonkeyForContact(c, c.monkeyPath);
+      }
+      if (c.monkeyPng == null) {
+        File pngFile = await UIUtil.downloadOrRetrieveMonkey(context, c.address, MonkeySize.SMALL);
+        if (await FileUtil.pngHasValidSignature(pngFile)) {
           setState(() {
-            _contacts.add(c);
+            c.monkeyPng = pngFile;
           });
         }
       }
-      // Re-sort list
-      setState(() {
-        _contacts.sort(
-            (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
-      });
-      // Get any monKeys that are missing
-      for (Contact c in _contacts) {
-        // Download monKeys if not existing
-        if (c.monkeyPath == null) {
-          if (c.monkeyPath == null || c.monkeyPath.contains(".png")) {
-            UIUtil.downloadOrRetrieveMonkey(
-                    context, c.address, MonkeySize.SVG)
-                .then((result) {
-              // TODO - Validate SVG
-              setState(() {
-                 c.monkeyPath = path.basename(result.path);
-              });
-              dbHelper.setMonkeyForContact(c, c.monkeyPath);
-              /*
-              FileUtil.pngHasValidSignature(result).then((valid) {
-                if (valid) {
-                  setState(() {
-                    c.monkeyWidget = Image.file(result);
-                    c.monkeyPath = path.basename(result.path);
-                  });
-                  dbHelper.setMonkeyForContact(c, c.monkeyPath);
-                }
-              });
-              */
-            });
-          }
-        }
-      }
-    });
+    }
   }
 
   Future<void> _authMethodDialog() async {
@@ -1298,9 +1289,9 @@ class _SettingsSheetState extends State<SettingsSheet>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //Container for monKey
-              contact.monkeyPath != null && _contactsOpen
-                  ? SvgPicture.file(
-                    File("$documentsDirectory/${contact.monkeyPath}"),
+              contact.monkeyPng != null && _contactsOpen
+                  ? Image.file(
+                    contact.monkeyPng,
                     width: smallScreen(context) ? 55 : 70,
                     height: smallScreen(context) ? 55 : 70,
                   )

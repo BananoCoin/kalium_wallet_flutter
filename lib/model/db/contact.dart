@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:meta/meta.dart';
@@ -15,6 +16,8 @@ class Contact {
   String address;
   @JsonKey(ignore:true)
   String monkeyPath;
+  @JsonKey(ignore:true)
+  File monkeyPng;
 
   Contact({@required this.name, @required this.address, this.monkeyPath, int id});
 
