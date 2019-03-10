@@ -130,10 +130,10 @@ class StateContainerState extends State<StateContainer> {
     dbHelper = DBHelper();
   }
 
-    /// A [PictureInfoDecoder] for [Uint8List]s that will not clip to the viewBox.
-  static final PictureInfoDecoder<Uint8List> svgByteDecoderOutsideViewBox =
+  /// A [PictureInfoDecoder] for [Uint8List]s that will clip to the viewBox.
+  static final PictureInfoDecoder<Uint8List> svgByteDecoder =
       (Uint8List bytes, ColorFilter colorFilter, String key) =>
-          svg.svgPictureDecoder(bytes, true, colorFilter, key);
+          svg.svgPictureDecoder(bytes, false, colorFilter, key);
 
 
   /// Precache SVG images for contacts
@@ -145,7 +145,7 @@ class StateContainerState extends State<StateContainer> {
         File svgFile = File("$documentsDirectory/${c.monkeyPath}");
         if (await svgFile.exists()) {
           precachePicture(FilePicture(
-            svgByteDecoderOutsideViewBox,
+            svgByteDecoder,
             svgFile
           ), context);
         }
