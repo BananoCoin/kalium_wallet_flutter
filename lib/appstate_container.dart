@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
+import 'dart:typed_data';
 
 import 'package:kalium_wallet_flutter/model/wallet.dart';
 import 'package:flutter/foundation.dart';
@@ -9,6 +11,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:logging/logging.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:uni_links/uni_links.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
 import 'package:kalium_wallet_flutter/model/available_themes.dart';
 import 'package:kalium_wallet_flutter/model/available_currency.dart';
@@ -18,6 +22,7 @@ import 'package:kalium_wallet_flutter/model/state_block.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/model/db/account.dart';
+import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/network/model/block_types.dart';
 import 'package:kalium_wallet_flutter/network/model/request_item.dart';
 import 'package:kalium_wallet_flutter/network/model/request/accounts_balances_request.dart';
@@ -125,6 +130,29 @@ class StateContainerState extends State<StateContainer> {
     dbHelper = DBHelper();
   }
 
+    /// A [PictureInfoDecoder] for [Uint8List]s that will not clip to the viewBox.
+  static final PictureInfoDecoder<Uint8List> svgByteDecoderOutsideViewBox =
+      (Uint8List bytes, ColorFilter colorFilter, String key) =>
+          svg.svgPictureDecoder(bytes, true, colorFilter, key);
+
+
+  /// Precache SVG images for contacts
+  Future<void> _precacheSvgs() async {
+    List<Contact> contacts = await dbHelper.getContacts();
+    String documentsDirectory = (await getApplicationDocumentsDirectory()).path;
+    contacts.forEach((c) async {
+      if (c.monkeyPath != null) {
+        File svgFile = File("$documentsDirectory/${c.monkeyPath}");
+        if (await svgFile.exists()) {
+          precachePicture(FilePicture(
+            svgByteDecoderOutsideViewBox,
+            svgFile
+          ), context);
+        }
+      }
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -151,6 +179,8 @@ class StateContainerState extends State<StateContainer> {
     getInitialLink().then((initialLink) {
       initialDeepLink = initialLink;
     });
+    // Precache contact SVGs
+    _precacheSvgs();
   }
 
   // Subscriptions
