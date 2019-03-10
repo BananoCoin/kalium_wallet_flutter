@@ -352,19 +352,13 @@ class _SettingsSheetState extends State<SettingsSheet>
       // Get any monKeys that are missing
       for (Contact c in _contacts) {
         // Download monKeys if not existing
-        if (c.monkeyWidget == null) {
-          if (c.monkeyPath != null && !c.monkeyPath.contains(".png")) {
-            setState(() {
-              c.monkeyWidget = SvgPicture.file(
-                  File("$documentsDirectory/${c.monkeyPath}"));
-            });
-          } else {
+        if (c.monkeyPath == null) {
+          if (c.monkeyPath == null || c.monkeyPath.contains(".png")) {
             UIUtil.downloadOrRetrieveMonkey(
                     context, c.address, MonkeySize.SVG)
                 .then((result) {
               // TODO - Validate SVG
               setState(() {
-                 c.monkeyWidget = SvgPicture.file(result);
                  c.monkeyPath = path.basename(result.path);
               });
               dbHelper.setMonkeyForContact(c, c.monkeyPath);
@@ -1304,12 +1298,12 @@ class _SettingsSheetState extends State<SettingsSheet>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //Container for monKey
-              contact.monkeyWidget != null && _contactsOpen
-                  ? Container(
-                      width: smallScreen(context) ? 55 : 70,
-                      height: smallScreen(context) ? 55 : 70,
-                      child: contact.monkeyWidget,
-                    )
+              contact.monkeyPath != null && _contactsOpen
+                  ? SvgPicture.file(
+                    File("$documentsDirectory/${contact.monkeyPath}"),
+                    width: smallScreen(context) ? 55 : 70,
+                    height: smallScreen(context) ? 55 : 70,
+                  )
                   : SizedBox(
                       width: smallScreen(context) ? 55 : 70,
                       height: smallScreen(context) ? 55 : 70),

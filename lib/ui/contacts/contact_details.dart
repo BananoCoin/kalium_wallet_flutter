@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -160,9 +161,9 @@ class ContactDetailsSheet {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         // monKey container
-                        contact.monkeyWidget != null
+                        contact.monkeyPath != null
                             ? Expanded(
-                                child:contact.monkeyWidget,
+                                child: SvgPicture.file(File("$documentsDirectory/${contact.monkeyPath}")),
                             )
                             : Expanded(
                               child: SizedBox(),
