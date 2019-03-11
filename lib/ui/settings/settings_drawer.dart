@@ -360,11 +360,13 @@ class _SettingsSheetState extends State<SettingsSheet>
         });
         await dbHelper.setMonkeyForContact(c, c.monkeyPath);
       }
-      if (c.monkeyPng == null) {
+      if (c.monkeyImage == null) {
         File pngFile = await UIUtil.downloadOrRetrieveMonkey(context, c.address, MonkeySize.SMALL);
         if (await FileUtil.pngHasValidSignature(pngFile)) {
           setState(() {
-            c.monkeyPng = pngFile;
+            c.monkeyImage = Image.file(pngFile,
+                                       width: smallScreen(context) ? 55 : 70,
+                                      height: smallScreen(context) ? 55 : 70);
           });
         }
       }
@@ -1289,12 +1291,8 @@ class _SettingsSheetState extends State<SettingsSheet>
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               //Container for monKey
-              contact.monkeyPng != null && _contactsOpen
-                  ? Image.file(
-                    contact.monkeyPng,
-                    width: smallScreen(context) ? 55 : 70,
-                    height: smallScreen(context) ? 55 : 70,
-                  )
+              contact.monkeyImage != null && _contactsOpen
+                  ? contact.monkeyImage
                   : SizedBox(
                       width: smallScreen(context) ? 55 : 70,
                       height: smallScreen(context) ? 55 : 70),
