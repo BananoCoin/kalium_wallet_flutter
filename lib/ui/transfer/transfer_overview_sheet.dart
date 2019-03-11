@@ -154,10 +154,9 @@ class AppTransferOverviewSheet {
                           children: <Widget>[
                             Container(
                               constraints: BoxConstraints(
-                                  maxHeight:
-                                      MediaQuery.of(context).size.height * 0.2,
-                                  maxWidth:
-                                      MediaQuery.of(context).size.width * 0.6),
+                                maxHeight: MediaQuery.of(context).size.height * 0.2,
+                                maxWidth: MediaQuery.of(context).size.width * 0.6
+                              ),
                               child: Stack(
                                 children: <Widget>[
                                   Center(
@@ -166,6 +165,7 @@ class AppTransferOverviewSheet {
                                       color: StateContainer.of(context)
                                           .curTheme
                                           .text45,
+                                      width: MediaQuery.of(context).size.width
                                     ),
                                   ),
                                   Center(
@@ -174,6 +174,7 @@ class AppTransferOverviewSheet {
                                       color: StateContainer.of(context)
                                           .curTheme
                                           .primary,
+                                      width: MediaQuery.of(context).size.width,
                                     ),
                                   ),
                                 ],
