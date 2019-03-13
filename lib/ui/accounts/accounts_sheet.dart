@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -292,19 +293,32 @@ class AppAccountsSheet {
                                                 RenderBox box = expandedKey
                                                     .currentContext
                                                     .findRenderObject();
-                                                if (_accounts.length * (smallScreen(context) ? 72.0 : 87.0) >=
+                                                if (_accounts.length *
+                                                        (smallScreen(context)
+                                                            ? 72.0
+                                                            : 87.0) >=
                                                     box.size.height) {
                                                   _scrollController.animateTo(
-                                                    newAccount.index * (smallScreen(context) ? 72.0 : 87.0) >
+                                                    newAccount.index *
+                                                                (smallScreen(
+                                                                        context)
+                                                                    ? 72.0
+                                                                    : 87.0) >
                                                             _scrollController
                                                                 .position
                                                                 .maxScrollExtent
                                                         ? _scrollController
                                                                 .position
                                                                 .maxScrollExtent +
-                                                            (smallScreen(context) ? 72.0 : 87.0)
+                                                            (smallScreen(
+                                                                    context)
+                                                                ? 72.0
+                                                                : 87.0)
                                                         : newAccount.index *
-                                                            (smallScreen(context) ? 72.0 : 87.0),
+                                                            (smallScreen(
+                                                                    context)
+                                                                ? 72.0
+                                                                : 87.0),
                                                     curve: Curves.easeOut,
                                                     duration: const Duration(
                                                         milliseconds: 200),
@@ -339,16 +353,21 @@ class AppAccountsSheet {
         });
   }
 
-  Widget _getMonkeyWidget(Account account) {
+  Widget _getMonkeyWidget(Account account, BuildContext context) {
     if (account.monKey == null) {
-      return Text("Placeholder");
+      return FlareActor("assets/monkey_placeholder_animation.flr",
+          animation: "main",
+          fit: BoxFit.contain,
+          color: StateContainer.of(context).curTheme.primary);
     }
     // Return monkey widget
     return account.monKey;
   }
 
-  Future<void> _getMonkeyForAccount(BuildContext context, Account account, StateSetter setState) async {
-    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+  Future<void> _getMonkeyForAccount(
+      BuildContext context, Account account, StateSetter setState) async {
+    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(
+        context, account.address, MonkeySize.SMALL);
     if (await FileUtil.pngHasValidSignature(monkeyFile)) {
       setState(() {
         account.monKey = Image.file(monkeyFile);
@@ -399,14 +418,13 @@ class AppAccountsSheet {
                       children: <Widget>[
                         // Account Icon
                         Container(
-                          width: smallScreen(context) ? 55 : 70,
-                          child: _getMonkeyWidget(account)
-                        ),
+                            width: smallScreen(context) ? 55 : 70,
+                            child: _getMonkeyWidget(account, context)),
                         // Account name and address
                         Container(
                           width:
-                              (MediaQuery.of(context).size.width - 108) * 0.5,
-                          margin: EdgeInsets.only(left: 8),
+                              (MediaQuery.of(context).size.width - (108)) * 0.5,
+                          margin: EdgeInsets.only(left: smallScreen(context) ? 10 : 8 ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -418,9 +436,8 @@ class AppAccountsSheet {
                                   fontFamily: "NunitoSans",
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.0,
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .text,
+                                  color:
+                                      StateContainer.of(context).curTheme.text,
                                 ),
                                 minFontSize: 8.0,
                                 stepGranularity: 0.1,
@@ -455,18 +472,18 @@ class AppAccountsSheet {
                           children: [
                             // Currency Icon
                             TextSpan(
-                              text: account.balance != null ? "": "",
+                              text: account.balance != null ? "" : "",
                               style: TextStyle(
                                 fontFamily: 'AppIcons',
-                                color:
-                                    StateContainer.of(context).curTheme.text,
+                                color: StateContainer.of(context).curTheme.text,
                                 fontSize: 13.0,
                               ),
                             ),
                             // Main balance text
                             TextSpan(
                               text: account.balance != null
-                                  ? NumberUtil.getRawAsUsableString(account.balance)
+                                  ? NumberUtil.getRawAsUsableString(
+                                      account.balance)
                                   : "",
                               style: TextStyle(
                                   fontSize: 16.0,
