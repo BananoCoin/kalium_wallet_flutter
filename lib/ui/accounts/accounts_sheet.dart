@@ -292,19 +292,19 @@ class AppAccountsSheet {
                                                 RenderBox box = expandedKey
                                                     .currentContext
                                                     .findRenderObject();
-                                                if (_accounts.length * 72.0 >=
+                                                if (_accounts.length * (smallScreen(context) ? 72.0 : 87.0) >=
                                                     box.size.height) {
                                                   _scrollController.animateTo(
-                                                    newAccount.index * 72.0 >
+                                                    newAccount.index * (smallScreen(context) ? 72.0 : 87.0) >
                                                             _scrollController
                                                                 .position
                                                                 .maxScrollExtent
                                                         ? _scrollController
                                                                 .position
                                                                 .maxScrollExtent +
-                                                            72.0
+                                                            (smallScreen(context) ? 72.0 : 87.0)
                                                         : newAccount.index *
-                                                            72.0,
+                                                            (smallScreen(context) ? 72.0 : 87.0),
                                                     curve: Curves.easeOut,
                                                     duration: const Duration(
                                                         milliseconds: 200),
@@ -387,8 +387,8 @@ class AppAccountsSheet {
                 color: StateContainer.of(context).curTheme.text15,
               ),
               Container(
-                height: 70.0,
-                margin: new EdgeInsets.symmetric(horizontal: 30),
+                height: smallScreen(context) ? 70.0 : 85,
+                margin: EdgeInsets.only(right: 30, left: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -399,38 +399,14 @@ class AppAccountsSheet {
                       children: <Widget>[
                         // Account Icon
                         Container(
-                          child: Stack(
-                            children: <Widget>[
-                              Center(
-                                child:
-                                  Container(
-                                    width: 30, 
-                                    child: _getMonkeyWidget(account)
-                                  ),
-                              ),
-                              Center(
-                                child: Container(
-                                  width: 40,
-                                  height: 30,
-                                  alignment: Alignment(0, 0.3),
-                                  child: Text(account.getShortName(),
-                                      style: TextStyle(
-                                        color: StateContainer.of(context)
-                                            .curTheme
-                                            .backgroundDark,
-                                        fontSize: 12.0,
-                                        fontWeight: FontWeight.w800,
-                                      )),
-                                ),
-                              ),
-                            ],
-                          ),
+                          width: smallScreen(context) ? 55 : 70,
+                          child: _getMonkeyWidget(account)
                         ),
                         // Account name and address
                         Container(
                           width:
-                              (MediaQuery.of(context).size.width - 116) * 0.5,
-                          margin: EdgeInsets.only(left: 16),
+                              (MediaQuery.of(context).size.width - 108) * 0.5,
+                          margin: EdgeInsets.only(left: 8),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,

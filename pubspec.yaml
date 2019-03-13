@@ -179,6 +179,7 @@ flutter:
     - assets/threedot_animation.flr
     - assets/offline_animation.flr
     - assets/pulltosend_animation.flr
+    - assets/monkey_placeholder_animation.flr
     - assets/transferfunds_illustration_start.svg
     - assets/transferfunds_illustration_start_paperwalletonly.svg
     - assets/transferfunds_illustration_start_kaliumwalletonly.svg
