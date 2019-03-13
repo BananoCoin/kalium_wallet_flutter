@@ -16,6 +16,7 @@ import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/list_model.dart';
+import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/network/model/block_types.dart';
@@ -114,6 +115,27 @@ class _AppHomePageState extends State<AppHomePage>
     return true;
   }
 
+  /// Notification includes which account its for, automatically switch to it if they're entering app from notification
+  Future<void> _chooseCorrectAccountFromNotification(Map<String, dynamic> message) async {
+    try {
+      if (message.containsKey("account")) {
+        Account selectedAccount = await dbHelper.getSelectedAccount();
+        if (message['account'] != selectedAccount.address) {
+          List<Account> accounts = await dbHelper.getAccounts();
+          for (int i = 0; i < accounts.length; i++) {
+            if (accounts[i].address == message['account']) {
+              await dbHelper.changeAccount(accounts[i]);
+              EventTaxiImpl.singleton().fire(AccountChangedEvent(account: accounts[i]));
+              break;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      log.severe(e.toString());
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -150,10 +172,10 @@ class _AppHomePageState extends State<AppHomePage>
         print("onMessage: $message");
       },
       onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
+        _chooseCorrectAccountFromNotification(message);
       },
       onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
+        _chooseCorrectAccountFromNotification(message);
       },
     );
     _firebaseMessaging.requestNotificationPermissions(
@@ -203,6 +225,16 @@ class _AppHomePageState extends State<AppHomePage>
     setState(() {});
   }
 
+  void _startAnimation() {
+    if (_animationDisposed) {
+      _animationDisposed = false;
+      _placeholderCardAnimationController
+          .addListener(_animationControllerListener);
+      _opacityAnimation.addStatusListener(_animationStatusListener);
+      _placeholderCardAnimationController.forward();
+    }
+  }
+
   void _disposeAnimation() {
     if (!_animationDisposed) {
       _animationDisposed = true;
@@ -248,6 +280,7 @@ class _AppHomePageState extends State<AppHomePage>
   StreamSubscription<SendCompleteEvent> _sendCompleteSub;
   StreamSubscription<DisableLockTimeoutEvent> _disableLockSub;
   StreamSubscription<MonkeyOverlayClosedEvent> _monkeyOverlaySub;
+  StreamSubscription<AccountChangedEvent> _switchAccountSub;
 
   void _registerBus() {
     _historySub = EventTaxiImpl.singleton()
@@ -302,6 +335,22 @@ class _AppHomePageState extends State<AppHomePage>
       }
       _lockDisabled = event.disable;
     });
+    // User changed account
+    _switchAccountSub = EventTaxiImpl.singleton()
+        .registerTo<AccountChangedEvent>()
+        .listen((event) {
+      _startAnimation();
+      setState(() {
+        StateContainer.of(context).updateWallet(account: event.account);
+      });
+      if (event.delayPop) {
+        Future.delayed(Duration(milliseconds: 300), () {
+          Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+        });
+      } else if (!event.noPop) {
+        Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
+      }
+    });
   }
 
   @override
@@ -327,6 +376,9 @@ class _AppHomePageState extends State<AppHomePage>
     }
     if (_monkeyOverlaySub != null) {
       _monkeyOverlaySub.cancel();
+    }
+    if (_switchAccountSub != null) {
+      _switchAccountSub.cancel();
     }
   }
 

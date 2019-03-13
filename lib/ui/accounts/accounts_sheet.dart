@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -15,9 +16,11 @@ import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
+import 'package:kalium_wallet_flutter/util/fileutil.dart';
 
 class AppAccountsSheet {
   static const int MAX_ACCOUNTS = 20;
@@ -76,6 +79,7 @@ class AppAccountsSheet {
                 BigInt.tryParse(balance.pending))
             .toString();
         if (account.address == address && combinedBalance != account.balance) {
+          dbHelper.updateAccountBalance(account, combinedBalance);
           setState(() {
             account.balance = combinedBalance;
           });
@@ -335,8 +339,28 @@ class AppAccountsSheet {
         });
   }
 
+  Widget _getMonkeyWidget(Account account) {
+    if (account.monKey == null) {
+      return Text("Placeholder");
+    }
+    // Return monkey widget
+    return account.monKey;
+  }
+
+  Future<void> _getMonkeyForAccount(BuildContext context, Account account, StateSetter setState) async {
+    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+    if (await FileUtil.pngHasValidSignature(monkeyFile)) {
+      setState(() {
+        account.monKey = Image.file(monkeyFile);
+      });
+    }
+  }
+
   Widget _buildAccountListItem(
       BuildContext context, Account account, StateSetter setState) {
+    if (account.monKey == null) {
+      _getMonkeyForAccount(context, account, setState);
+    }
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
       actionExtentRatio: 0.2,
@@ -378,17 +402,11 @@ class AppAccountsSheet {
                           child: Stack(
                             children: <Widget>[
                               Center(
-                                child: Icon(
-                                  AppIcons.accountwallet,
-                                  color: account.selected
-                                      ? StateContainer.of(context)
-                                          .curTheme
-                                          .success
-                                      : StateContainer.of(context)
-                                          .curTheme
-                                          .primary,
-                                  size: 30,
-                                ),
+                                child:
+                                  Container(
+                                    width: 30, 
+                                    child: _getMonkeyWidget(account)
+                                  ),
                               ),
                               Center(
                                 child: Container(

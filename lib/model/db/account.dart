@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 
 // Represent user-account
 class Account {
@@ -8,6 +9,7 @@ class Account {
   bool selected; // Whether this is the currently selected account
   String address;
   String balance; // Last known balance in RAW
+  Widget monKey;
 
   Account({this.id, this.index, this.name, this.lastAccess, this.selected = false, this.address, this.balance});
 
