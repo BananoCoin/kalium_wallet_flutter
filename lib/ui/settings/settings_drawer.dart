@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flare_flutter/flare_actor.dart';
+import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:path/path.dart' as path;
@@ -349,28 +351,29 @@ class _SettingsSheetState extends State<SettingsSheet>
     }
     // Re-sort list
     setState(() {
-      _contacts.sort(
-          (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
+      _contacts
+          .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     });
     // Get any monKeys that are missing
     for (Contact c in _contacts) {
       // Download monKeys if not existing
       if (c.monkeyPath == null || c.monkeyPath.contains(".png")) {
         File svgFile = await UIUtil.downloadOrRetrieveMonkey(
-                        context, c.address, MonkeySize.SVG);
+            context, c.address, MonkeySize.SVG);
         // TODO - Validate SVG
         setState(() {
-            c.monkeyPath = path.basename(svgFile.path);
+          c.monkeyPath = path.basename(svgFile.path);
         });
         await dbHelper.setMonkeyForContact(c, c.monkeyPath);
       }
       if (c.monkeyImage == null) {
-        File pngFile = await UIUtil.downloadOrRetrieveMonkey(context, c.address, MonkeySize.SMALL);
+        File pngFile = await UIUtil.downloadOrRetrieveMonkey(
+            context, c.address, MonkeySize.SMALL);
         if (await FileUtil.pngHasValidSignature(pngFile)) {
           setState(() {
             c.monkeyImage = Image.file(pngFile,
-                                       width: smallScreen(context) ? 55 : 70,
-                                      height: smallScreen(context) ? 55 : 70);
+                width: smallScreen(context) ? 55 : 70,
+                height: smallScreen(context) ? 55 : 70);
           });
         }
       }
@@ -807,44 +810,17 @@ class _SettingsSheetState extends State<SettingsSheet>
                           children: <Widget>[
                             Center(
                               child: Container(
-                                  width: 60,
-                                  height: 45,
-                                  alignment: Alignment(-1, 0),
-                                  child: Icon(
-                                    AppIcons.accountwallet,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .success,
-                                    size: 45,
-                                  )),
-                            ),
-                            Center(
-                              child: Container(
                                 width: 60,
-                                height: 45,
-                                alignment: Alignment(0, 0.3),
-                                child: Text(
-                                  StateContainer.of(context)
-                                      .selectedAccount
-                                      .getShortName(),
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .backgroundDark,
-                                    fontSize: 16,
-                                    fontFamily: "NunitoSans",
-                                    fontWeight: FontWeight.w900,
-                                  ),
-                                ),
+                                height: 60,
+                                child: _getMonkeyWidget(StateContainer.of(context)
+                                      .selectedAccount, context),  
                               ),
                             ),
                             Center(
                               child: Container(
                                 width: 60,
-                                height: 45,
+                                height: 60,
                                 child: FlatButton(
-                              
                                   highlightColor: StateContainer.of(context)
                                       .curTheme
                                       .backgroundDark
@@ -858,8 +834,11 @@ class _SettingsSheetState extends State<SettingsSheet>
                                     width: 60,
                                     height: 45,
                                   ),
-                                  onPressed: (){
-                                    AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
+                                  onPressed: () {
+                                    AccountDetailsSheet(
+                                            StateContainer.of(context)
+                                                .selectedAccount)
+                                        .mainBottomSheet(context);
                                   },
                                 ),
                               ),
@@ -872,130 +851,159 @@ class _SettingsSheetState extends State<SettingsSheet>
                         children: <Widget>[
                           // Second Account
                           StateContainer.of(context).recentLast != null
-                          ? Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Stack(
-                              children: <Widget>[
-                                Center(
-                                  child: Icon(
-                                    AppIcons.accountwallet,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
-                                    size: 36,
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                    width: 48,
-                                    height: 36,
-                                    alignment: Alignment(0, 0.3),
-                                    child: Text(StateContainer.of(context).recentLast.getShortName(),
-                                        style: TextStyle(
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Icon(
+                                          AppIcons.accountwallet,
                                           color: StateContainer.of(context)
                                               .curTheme
-                                              .backgroundDark,
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.w800,
-                                        )),
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                    width: 48,
-                                    height: 36,
-                                    color: Colors.transparent,
-                                    child: FlatButton(
-                                      onPressed: () {
-                                        dbHelper.changeAccount(StateContainer.of(context).recentLast).then((_) {
-                                          EventTaxiImpl.singleton().fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
-                                        });
-                                      },
-                                      highlightColor: StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDark
-                                          .withOpacity(0.75),
-                                      splashColor: StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDark
-                                          .withOpacity(0.75),
-                                      padding: EdgeInsets.all(0.0),
-                                      child: Container(
-                                        width: 48,
-                                        height: 36,
-                                        color: Colors.transparent,
+                                              .primary,
+                                          size: 36,
+                                        ),
                                       ),
-                                    ),
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          alignment: Alignment(0, 0.3),
+                                          child: Text(
+                                              StateContainer.of(context)
+                                                  .recentLast
+                                                  .getShortName(),
+                                              style: TextStyle(
+                                                color:
+                                                    StateContainer.of(context)
+                                                        .curTheme
+                                                        .backgroundDark,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w800,
+                                              )),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          color: Colors.transparent,
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              dbHelper
+                                                  .changeAccount(
+                                                      StateContainer.of(context)
+                                                          .recentLast)
+                                                  .then((_) {
+                                                EventTaxiImpl.singleton().fire(
+                                                    AccountChangedEvent(
+                                                        account:
+                                                            StateContainer.of(
+                                                                    context)
+                                                                .recentLast,
+                                                        delayPop: true));
+                                              });
+                                            },
+                                            highlightColor:
+                                                StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
+                                            splashColor:
+                                                StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
+                                            padding: EdgeInsets.all(0.0),
+                                            child: Container(
+                                              width: 48,
+                                              height: 36,
+                                              color: Colors.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                          : SizedBox()
-                          ,
+                                )
+                              : SizedBox(),
                           // Third Account
                           StateContainer.of(context).recentSecondLast != null
-                          ? Container(
-                            margin: EdgeInsets.symmetric(horizontal: 8.0),
-                            child: Stack(
-                              children: <Widget>[
-                                Center(
-                                  child: Icon(
-                                    AppIcons.accountwallet,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
-                                    size: 36,
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                    width: 48,
-                                    height: 36,
-                                    alignment: Alignment(0, 0.3),
-                                    child: Text(StateContainer.of(context).recentSecondLast.getShortName(),
-                                        style: TextStyle(
+                              ? Container(
+                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  child: Stack(
+                                    children: <Widget>[
+                                      Center(
+                                        child: Icon(
+                                          AppIcons.accountwallet,
                                           color: StateContainer.of(context)
                                               .curTheme
-                                              .backgroundDark,
-                                          fontSize: 12.0,
-                                          fontWeight: FontWeight.w800,
-                                        )),
-                                  ),
-                                ),
-                                Center(
-                                  child: Container(
-                                    width: 48,
-                                    height: 36,
-                                    color: Colors.transparent,
-                                    child: FlatButton(
-                                      onPressed: () {
-                                        dbHelper.changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
-                                          EventTaxiImpl.singleton().fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
-                                        });
-                                      },
-                                      highlightColor: StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDark
-                                          .withOpacity(0.75),
-                                      splashColor: StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDark
-                                          .withOpacity(0.75),
-                                      padding: EdgeInsets.all(0.0),
-                                      child: Container(
-                                        width: 48,
-                                        height: 36,
-                                        color: Colors.transparent,
+                                              .primary,
+                                          size: 36,
+                                        ),
                                       ),
-                                    ),
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          alignment: Alignment(0, 0.3),
+                                          child: Text(
+                                              StateContainer.of(context)
+                                                  .recentSecondLast
+                                                  .getShortName(),
+                                              style: TextStyle(
+                                                color:
+                                                    StateContainer.of(context)
+                                                        .curTheme
+                                                        .backgroundDark,
+                                                fontSize: 12.0,
+                                                fontWeight: FontWeight.w800,
+                                              )),
+                                        ),
+                                      ),
+                                      Center(
+                                        child: Container(
+                                          width: 48,
+                                          height: 36,
+                                          color: Colors.transparent,
+                                          child: FlatButton(
+                                            onPressed: () {
+                                              dbHelper
+                                                  .changeAccount(
+                                                      StateContainer.of(context)
+                                                          .recentSecondLast)
+                                                  .then((_) {
+                                                EventTaxiImpl.singleton().fire(
+                                                    AccountChangedEvent(
+                                                        account: StateContainer
+                                                                .of(context)
+                                                            .recentSecondLast,
+                                                        delayPop: true));
+                                              });
+                                            },
+                                            highlightColor:
+                                                StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
+                                            splashColor:
+                                                StateContainer.of(context)
+                                                    .curTheme
+                                                    .backgroundDark
+                                                    .withOpacity(0.75),
+                                            padding: EdgeInsets.all(0.0),
+                                            child: Container(
+                                              width: 48,
+                                              height: 36,
+                                              color: Colors.transparent,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ),
-                              ],
-                            ),
-                          )
-                          : SizedBox()
-                          ,
+                                )
+                              : SizedBox(),
                           // Account switcher
                           Container(
                             height: 36,
@@ -1014,27 +1022,32 @@ class _SettingsSheetState extends State<SettingsSheet>
                                     setState(() {
                                       _loadingAccounts = false;
                                     });
-                                    BigInt selectedBalance = StateContainer.of(context).wallet.accountBalance;
-                                    AppAccountsSheet(accounts, selectedBalance).mainBottomSheet(context);
+                                    BigInt selectedBalance =
+                                        StateContainer.of(context)
+                                            .wallet
+                                            .accountBalance;
+                                    AppAccountsSheet(accounts, selectedBalance)
+                                        .mainBottomSheet(context);
                                   });
                                 }
                               },
                               padding: EdgeInsets.all(0.0),
                               shape: CircleBorder(),
-                              splashColor:
-                                  _loadingAccounts ? Colors.transparent
+                              splashColor: _loadingAccounts
+                                  ? Colors.transparent
                                   : StateContainer.of(context).curTheme.text30,
-                              highlightColor:
-                                  _loadingAccounts ? Colors.transparent
+                              highlightColor: _loadingAccounts
+                                  ? Colors.transparent
                                   : StateContainer.of(context).curTheme.text15,
-                              child: Icon(
-                                AppIcons.accountswitcher,
-                                size: 36,
-                                color:
-                                  _loadingAccounts
-                                    ? StateContainer.of(context).curTheme.primary60
-                                    : StateContainer.of(context).curTheme.primary
-                              ),
+                              child: Icon(AppIcons.accountswitcher,
+                                  size: 36,
+                                  color: _loadingAccounts
+                                      ? StateContainer.of(context)
+                                          .curTheme
+                                          .primary60
+                                      : StateContainer.of(context)
+                                          .curTheme
+                                          .primary),
                             ),
                           ),
                         ],
@@ -1042,14 +1055,18 @@ class _SettingsSheetState extends State<SettingsSheet>
                     ],
                   ),
                   Container(
-                    margin: EdgeInsets.only(top:10),
+                    margin: EdgeInsets.only(top: 10),
                     child: FlatButton(
                       padding: EdgeInsets.all(4.0),
-                      highlightColor: StateContainer.of(context).curTheme.text15,
+                      highlightColor:
+                          StateContainer.of(context).curTheme.text15,
                       splashColor: StateContainer.of(context).curTheme.text30,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
-                      onPressed: (){
-                        AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6.0)),
+                      onPressed: () {
+                        AccountDetailsSheet(
+                                StateContainer.of(context).selectedAccount)
+                            .mainBottomSheet(context);
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -1078,7 +1095,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                 fontFamily: "OverpassMono",
                                 fontWeight: FontWeight.w100,
                                 fontSize: 14.0,
-                                color: StateContainer.of(context).curTheme.text60,
+                                color:
+                                    StateContainer.of(context).curTheme.text60,
                               ),
                             ),
                           ),
@@ -1197,7 +1215,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                         BiometricUtil.hasBiometrics().then((hasBiometrics) {
                           if (authMethod.method == AuthMethod.BIOMETRICS &&
                               hasBiometrics) {
-                            BiometricUtil.authenticateWithBiometrics(context,
+                            BiometricUtil.authenticateWithBiometrics(
+                                    context,
                                     AppLocalization.of(context)
                                         .fingerprintSeedBackup)
                                 .then((authenticated) {
@@ -1309,7 +1328,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 10.0, bottom: 10.0, left:20, right: 20),
+                      padding: EdgeInsets.only(
+                          top: 10.0, bottom: 10.0, left: 20, right: 20),
                       child: Wrap(
                         alignment: WrapAlignment.center,
                         children: <Widget>[
@@ -1371,6 +1391,28 @@ class _SettingsSheetState extends State<SettingsSheet>
         ),
       ),
     );
+  }
+
+  Widget _getMonkeyWidget(Account account, BuildContext context) {
+    if (account.monKey == null) {
+      return FlareActor("assets/monkey_placeholder_animation.flr",
+          animation: "main",
+          fit: BoxFit.contain,
+          color: StateContainer.of(context).curTheme.primary);
+    }
+    // Return monkey widget
+    return account.monKey;
+  }
+
+  Future<void> _getMonkeyForAccount(
+      BuildContext context, Account account, StateSetter setState) async {
+    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(
+        context, account.address, MonkeySize.SMALL);
+    if (await FileUtil.pngHasValidSignature(monkeyFile)) {
+      setState(() {
+        account.monKey = Image.file(monkeyFile);
+      });
+    }
   }
 
   Widget buildContacts(BuildContext context) {
@@ -1492,8 +1534,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                             .exists()
                             .then((exists) {
                           if (!exists) {
-                            dbHelper
-                                .setMonkeyForContact(_contacts[index], null);
+                            dbHelper.setMonkeyForContact(
+                                _contacts[index], null);
                           }
                         });
                       }
