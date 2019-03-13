@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
+import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:path/path.dart' as path;
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:logging/logging.dart';
@@ -74,6 +76,7 @@ class _SettingsSheetState extends State<SettingsSheet>
 
   bool _contactsOpen;
   bool _securityOpen;
+  bool _loadingAccounts;
 
   List<Contact> _contacts;
 
@@ -165,6 +168,7 @@ class _SettingsSheetState extends State<SettingsSheet>
     super.initState();
     _contactsOpen = false;
     _securityOpen = false;
+    _loadingAccounts = false;
     this.dbHelper = DBHelper();
     // Determine if they have face or fingerprint enrolled, if not hide the setting
     BiometricUtil.hasBiometrics().then((bool hasBiometrics) {
@@ -785,13 +789,302 @@ class _SettingsSheetState extends State<SettingsSheet>
         ),
         child: Column(
           children: <Widget>[
+            // A container for accounts area
             Container(
-              margin: EdgeInsets.only(left: 30.0, bottom: 10, top: 5),
-              child: Row(
+              margin: EdgeInsets.only(left: 26.0, right: 20, bottom: 20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                    AppLocalization.of(context).settingsHeader,
-                    style: AppStyles.textStyleSettingsHeader(context),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      // Main Account
+                      Container(
+                        margin: EdgeInsets.only(left: 4.0),
+                        child: Stack(
+                          children: <Widget>[
+                            Center(
+                              child: Container(
+                                  width: 60,
+                                  height: 45,
+                                  alignment: Alignment(-1, 0),
+                                  child: Icon(
+                                    AppIcons.accountwallet,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .success,
+                                    size: 45,
+                                  )),
+                            ),
+                            Center(
+                              child: Container(
+                                width: 60,
+                                height: 45,
+                                alignment: Alignment(0, 0.3),
+                                child: Text(
+                                  StateContainer.of(context)
+                                      .selectedAccount
+                                      .getShortName(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .backgroundDark,
+                                    fontSize: 16,
+                                    fontFamily: "NunitoSans",
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                width: 60,
+                                height: 45,
+                                child: FlatButton(
+                              
+                                  highlightColor: StateContainer.of(context)
+                                      .curTheme
+                                      .backgroundDark
+                                      .withOpacity(0.75),
+                                  splashColor: StateContainer.of(context)
+                                      .curTheme
+                                      .backgroundDark
+                                      .withOpacity(0.75),
+                                  padding: EdgeInsets.all(0.0),
+                                  child: SizedBox(
+                                    width: 60,
+                                    height: 45,
+                                  ),
+                                  onPressed: (){
+                                    AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
+                                  },
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      // A row for other accounts and account switcher
+                      Row(
+                        children: <Widget>[
+                          // Second Account
+                          StateContainer.of(context).recentLast != null
+                          ? Container(
+                            margin: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Stack(
+                              children: <Widget>[
+                                Center(
+                                  child: Icon(
+                                    AppIcons.accountwallet,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
+                                    size: 36,
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                    width: 48,
+                                    height: 36,
+                                    alignment: Alignment(0, 0.3),
+                                    child: Text(StateContainer.of(context).recentLast.getShortName(),
+                                        style: TextStyle(
+                                          color: StateContainer.of(context)
+                                              .curTheme
+                                              .backgroundDark,
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w800,
+                                        )),
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                    width: 48,
+                                    height: 36,
+                                    color: Colors.transparent,
+                                    child: FlatButton(
+                                      onPressed: () {
+                                        dbHelper.changeAccount(StateContainer.of(context).recentLast).then((_) {
+                                          EventTaxiImpl.singleton().fire(AccountChangedEvent(account: StateContainer.of(context).recentLast, delayPop: true));
+                                        });
+                                      },
+                                      highlightColor: StateContainer.of(context)
+                                          .curTheme
+                                          .backgroundDark
+                                          .withOpacity(0.75),
+                                      splashColor: StateContainer.of(context)
+                                          .curTheme
+                                          .backgroundDark
+                                          .withOpacity(0.75),
+                                      padding: EdgeInsets.all(0.0),
+                                      child: Container(
+                                        width: 48,
+                                        height: 36,
+                                        color: Colors.transparent,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                          : SizedBox()
+                          ,
+                          // Third Account
+                          StateContainer.of(context).recentSecondLast != null
+                          ? Container(
+                            margin: EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Stack(
+                              children: <Widget>[
+                                Center(
+                                  child: Icon(
+                                    AppIcons.accountwallet,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
+                                    size: 36,
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                    width: 48,
+                                    height: 36,
+                                    alignment: Alignment(0, 0.3),
+                                    child: Text(StateContainer.of(context).recentSecondLast.getShortName(),
+                                        style: TextStyle(
+                                          color: StateContainer.of(context)
+                                              .curTheme
+                                              .backgroundDark,
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w800,
+                                        )),
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                    width: 48,
+                                    height: 36,
+                                    color: Colors.transparent,
+                                    child: FlatButton(
+                                      onPressed: () {
+                                        dbHelper.changeAccount(StateContainer.of(context).recentSecondLast).then((_) {
+                                          EventTaxiImpl.singleton().fire(AccountChangedEvent(account: StateContainer.of(context).recentSecondLast, delayPop: true));
+                                        });
+                                      },
+                                      highlightColor: StateContainer.of(context)
+                                          .curTheme
+                                          .backgroundDark
+                                          .withOpacity(0.75),
+                                      splashColor: StateContainer.of(context)
+                                          .curTheme
+                                          .backgroundDark
+                                          .withOpacity(0.75),
+                                      padding: EdgeInsets.all(0.0),
+                                      child: Container(
+                                        width: 48,
+                                        height: 36,
+                                        color: Colors.transparent,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                          : SizedBox()
+                          ,
+                          // Account switcher
+                          Container(
+                            height: 36,
+                            width: 36,
+                            margin: EdgeInsets.symmetric(horizontal: 6.0),
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                            ),
+                            child: FlatButton(
+                              onPressed: () {
+                                if (!_loadingAccounts) {
+                                  setState(() {
+                                    _loadingAccounts = true;
+                                  });
+                                  dbHelper.getAccounts().then((accounts) {
+                                    setState(() {
+                                      _loadingAccounts = false;
+                                    });
+                                    BigInt selectedBalance = StateContainer.of(context).wallet.accountBalance;
+                                    AppAccountsSheet(accounts, selectedBalance).mainBottomSheet(context);
+                                  });
+                                }
+                              },
+                              padding: EdgeInsets.all(0.0),
+                              shape: CircleBorder(),
+                              splashColor:
+                                  _loadingAccounts ? Colors.transparent
+                                  : StateContainer.of(context).curTheme.text30,
+                              highlightColor:
+                                  _loadingAccounts ? Colors.transparent
+                                  : StateContainer.of(context).curTheme.text15,
+                              child: Icon(
+                                AppIcons.accountswitcher,
+                                size: 36,
+                                color:
+                                  _loadingAccounts
+                                    ? StateContainer.of(context).curTheme.primary60
+                                    : StateContainer.of(context).curTheme.primary
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(top:10),
+                    child: FlatButton(
+                      padding: EdgeInsets.all(4.0),
+                      highlightColor: StateContainer.of(context).curTheme.text15,
+                      splashColor: StateContainer.of(context).curTheme.text30,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6.0)),
+                      onPressed: (){
+                        AccountDetailsSheet(StateContainer.of(context).selectedAccount).mainBottomSheet(context);
+                      },
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          // Main account name
+                          Container(
+                            child: Text(
+                              StateContainer.of(context).selectedAccount.name,
+                              style: TextStyle(
+                                fontFamily: "NunitoSans",
+                                fontWeight: FontWeight.w600,
+                                fontSize: 16.0,
+                                color: StateContainer.of(context).curTheme.text,
+                              ),
+                            ),
+                          ),
+                          // Main account address
+                          Container(
+                            child: Text(
+                              StateContainer.of(context)
+                                  .wallet
+                                  .address
+                                  .substring(0, 11),
+                              style: TextStyle(
+                                fontFamily: "OverpassMono",
+                                fontWeight: FontWeight.w100,
+                                fontSize: 14.0,
+                                color: StateContainer.of(context).curTheme.text60,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),

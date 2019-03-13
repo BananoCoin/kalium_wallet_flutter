@@ -461,12 +461,12 @@ class AppAccountsSheet {
                           children: [
                             // Currency Icon
                             TextSpan(
-                              text: account.balance != null ? "": "",
+                              text: account.balance != null ? "": "",
                               style: TextStyle(
                                 fontFamily: 'AppIcons',
                                 color:
                                     StateContainer.of(context).curTheme.text,
-                                fontSize: 15.0,
+                                fontSize: 13.0,
                               ),
                             ),
                             // Main balance text
