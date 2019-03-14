@@ -810,8 +810,24 @@ class _SettingsSheetState extends State<SettingsSheet>
                           children: <Widget>[
                             Center(
                               child: Container(
-                                width: 60,
-                                height: 60,
+                                width: 70,
+                                height: 70,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                      width: 1.5,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .primary),
+                                ),
+                                child: SizedBox(),
+                              ),
+                            ),
+                            Center(
+                              child: Container(
+                                width: 70,
+                                height: 70,
+                                alignment: Alignment(0.5, 0.5),
                                 child: _getMonkeyWidget(
                                     StateContainer.of(context).selectedAccount,
                                     context),
@@ -819,8 +835,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                             ),
                             Center(
                               child: Container(
-                                width: 60,
-                                height: 60,
+                                width: 70,
+                                height: 70,
                                 child: FlatButton(
                                   highlightColor: StateContainer.of(context)
                                       .curTheme
@@ -832,8 +848,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                       .withOpacity(0.75),
                                   padding: EdgeInsets.all(0.0),
                                   child: SizedBox(
-                                    width: 60,
-                                    height: 45,
+                                    width: 70,
+                                    height: 70,
                                   ),
                                   onPressed: () {
                                     AccountDetailsSheet(
@@ -899,7 +915,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                             padding: EdgeInsets.all(0.0),
                                             child: Container(
                                               width: 48,
-                                              height: 36,
+                                              height: 48,
                                               color: Colors.transparent,
                                             ),
                                           ),
@@ -962,7 +978,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                             padding: EdgeInsets.all(0.0),
                                             child: Container(
                                               width: 48,
-                                              height: 36,
+                                              height: 48,
                                               color: Colors.transparent,
                                             ),
                                           ),
@@ -1003,10 +1019,14 @@ class _SettingsSheetState extends State<SettingsSheet>
                               shape: CircleBorder(),
                               splashColor: _loadingAccounts
                                   ? Colors.transparent
-                                  : StateContainer.of(context).curTheme.text30,
+                                  : StateContainer.of(context)
+                                      .curTheme
+                                      .primary30,
                               highlightColor: _loadingAccounts
                                   ? Colors.transparent
-                                  : StateContainer.of(context).curTheme.text15,
+                                  : StateContainer.of(context)
+                                      .curTheme
+                                      .primary15,
                               child: Icon(AppIcons.accountswitcher,
                                   size: 36,
                                   color: _loadingAccounts
