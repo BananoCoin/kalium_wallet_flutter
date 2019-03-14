@@ -43,6 +43,8 @@ import 'package:kalium_wallet_flutter/network/model/response/pending_response.da
 import 'package:kalium_wallet_flutter/network/model/response/pending_response_item.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
+import 'package:kalium_wallet_flutter/util/fileutil.dart';
+import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/network/account_service.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 
@@ -404,7 +406,7 @@ class StateContainerState extends State<StateContainer> {
   Future<void> updateWallet({Account account}) async {
     String address = NanoUtil.seedToAddress(await Vault.inst.getSeed(), account.index);
     selectedAccount = account;
-    updateRecentlyUsedAccounts();
+    await updateRecentlyUsedAccounts();
     setState(() {
       wallet = AppWallet(address: address, loading: true);
       requestUpdate();
@@ -431,6 +433,24 @@ class StateContainerState extends State<StateContainer> {
         recentSecondLast = null;
       });
     }
+  }
+
+  Future<void> _getMonkeyForAccount(BuildContext context, Account account) async {
+    if (account != null && account.monKey == null) {
+      File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(
+          context, account.address, MonkeySize.SMALL);
+      if (await FileUtil.pngHasValidSignature(monkeyFile)) {
+        setState(() {
+          account.monKey = Image.file(monkeyFile);
+        });
+      }
+    }
+  }
+
+  Future<void> getMonkeysForRecentAccounts(BuildContext context) async {
+    _getMonkeyForAccount(context, selectedAccount);
+    _getMonkeyForAccount(context, recentLast);
+    _getMonkeyForAccount(context, recentSecondLast);
   }
 
   // Change language
@@ -948,6 +968,7 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet = AppWallet();
     });
+    dbHelper.dropAccounts();
     AccountService.clearQueue();
   }
 
