@@ -406,11 +406,11 @@ class StateContainerState extends State<StateContainer> {
   Future<void> updateWallet({Account account}) async {
     String address = NanoUtil.seedToAddress(await Vault.inst.getSeed(), account.index);
     selectedAccount = account;
-    await updateRecentlyUsedAccounts();
     setState(() {
       wallet = AppWallet(address: address, loading: true);
       requestUpdate();
     });
+    await updateRecentlyUsedAccounts();
   }
 
   Future<void> updateRecentlyUsedAccounts() async {

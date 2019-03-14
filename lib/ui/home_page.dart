@@ -346,10 +346,10 @@ class _AppHomePageState extends State<AppHomePage>
     _switchAccountSub = EventTaxiImpl.singleton()
         .registerTo<AccountChangedEvent>()
         .listen((event) {
-      _startAnimation();
       setState(() {
         StateContainer.of(context).updateWallet(account: event.account);
       });
+      _startAnimation();
       if (event.delayPop) {
         Future.delayed(Duration(milliseconds: 300), () {
           Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
@@ -1064,7 +1064,12 @@ class _AppHomePageState extends State<AppHomePage>
 
   // Welcome Card
   TextSpan _getExampleHeaderSpan(BuildContext context) {
-    String workingStr = AppLocalization.of(context).exampleCardIntro;
+    String workingStr;
+    if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount.index == 0) {
+      workingStr = AppLocalization.of(context).exampleCardIntro;
+    } else {
+      workingStr = AppLocalization.of(context).newAccountIntro;
+    }
     if (!workingStr.contains("BANANO")) {
       return TextSpan(
         text: workingStr,
