@@ -6,7 +6,6 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
-import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -353,33 +352,26 @@ class AppAccountsSheet {
         });
   }
 
-  Widget _getMonkeyWidget(Account account, BuildContext context) {
-    if (account.monKey == null) {
-      return FlareActor("assets/monkey_placeholder_animation.flr",
-          animation: "main",
-          fit: BoxFit.contain,
-          color: StateContainer.of(context).curTheme.primary);
+  Future<Widget> _getMonkey(Account account, BuildContext context) async {
+    if (account == null) {
+      return null;
+    } else if (account.address == null) {
+      if (account.selected) {
+        account.address = StateContainer.of(context).wallet.address;
+      } else {
+        return null;
+      }
     }
-    // Return monkey widget
-    return account.monKey;
-  }
-
-  Future<void> _getMonkeyForAccount(
-      BuildContext context, Account account, StateSetter setState) async {
-    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(
-        context, account.address, MonkeySize.SMALL);
+    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
     if (await FileUtil.pngHasValidSignature(monkeyFile)) {
-      setState(() {
-        account.monKey = Image.file(monkeyFile);
-      });
+      account.monKey = Image.file(monkeyFile);
+      return account.monKey;
     }
+    return null;
   }
 
   Widget _buildAccountListItem(
       BuildContext context, Account account, StateSetter setState) {
-    if (account.monKey == null) {
-      _getMonkeyForAccount(context, account, setState);
-    }
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
       actionExtentRatio: 0.2,
@@ -419,7 +411,23 @@ class AppAccountsSheet {
                         // Account Icon
                         Container(
                             width: smallScreen(context) ? 55 : 70,
-                            child: _getMonkeyWidget(account, context)),
+                            child: FutureBuilder(
+                              future: _getMonkey(
+                                        account,
+                                        context
+                              ),
+                              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                if (snapshot.hasData && snapshot.data != null) {
+                                  return snapshot.data;
+                                } else {
+                                  return FlareActor("assets/monkey_placeholder_animation.flr",
+                                      animation: "main",
+                                      fit: BoxFit.contain,
+                                      color: StateContainer.of(context).curTheme.primary);
+                                }
+                              },
+                            ),
+                        ),
                         // Account name and address
                         Container(
                           width:

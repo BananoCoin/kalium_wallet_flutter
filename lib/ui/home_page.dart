@@ -56,7 +56,6 @@ class _AppHomePageState extends State<AppHomePage>
         WidgetsBindingObserver,
         SingleTickerProviderStateMixin,
         FlareController {
-  final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   final GlobalKey<AppScaffoldState> _scaffoldKey =
       new GlobalKey<AppScaffoldState>();
   final Logger log = Logger("HomePage");
@@ -71,7 +70,8 @@ class _AppHomePageState extends State<AppHomePage>
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
-  ListModel<AccountHistoryResponseItem> _historyList;
+  final Map<String, GlobalKey<AnimatedListState>> _listKeyMap = Map();
+  final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
 
   // monKey widget
   Widget _monKey;
@@ -439,15 +439,15 @@ class _AppHomePageState extends State<AppHomePage>
   Widget _buildItem(
       BuildContext context, int index, Animation<double> animation) {
     String displayName = smallScreen(context)
-        ? _historyList[index].getShorterString()
-        : _historyList[index].getShortString();
+        ? _historyListMap[StateContainer.of(context).wallet.address][index].getShorterString()
+        : _historyListMap[StateContainer.of(context).wallet.address][index].getShortString();
     _contacts.forEach((contact) {
-      if (contact.address == _historyList[index].account) {
+      if (contact.address == _historyListMap[StateContainer.of(context).wallet.address][index].account) {
         displayName = contact.name;
       }
     });
     return _buildTransactionCard(
-        _historyList[index], animation, displayName, context);
+        _historyListMap[StateContainer.of(context).wallet.address][index], animation, displayName, context);
   }
 
   // Return widget for list
@@ -506,20 +506,24 @@ class _AppHomePageState extends State<AppHomePage>
       _disposeAnimation();
     }
     // Setup history list
-    if (_historyList == null) {
+    if (!_listKeyMap.containsKey(StateContainer.of(context).wallet.address)) {
+      _listKeyMap.putIfAbsent(StateContainer.of(context).wallet.address, () => GlobalKey<AnimatedListState>());
       setState(() {
-        _historyList = ListModel<AccountHistoryResponseItem>(
-          listKey: _listKey,
-          initialItems: StateContainer.of(context).wallet.history,
+        _historyListMap.putIfAbsent(
+          StateContainer.of(context).wallet.address,
+          () => ListModel<AccountHistoryResponseItem>(
+                listKey: _listKeyMap[StateContainer.of(context).wallet.address],
+                initialItems: StateContainer.of(context).wallet.history,
+                )
         );
       });
     }
     return ReactiveRefreshIndicator(
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
       child: AnimatedList(
-        key: _listKey,
+        key: _listKeyMap[StateContainer.of(context).wallet.address],
         padding: EdgeInsets.fromLTRB(0, 5.0, 0, 15.0),
-        initialItemCount: _historyList.length,
+        initialItemCount: _historyListMap[StateContainer.of(context).wallet.address].length,
         itemBuilder: _buildItem,
       ),
       onRefresh: _refresh,
@@ -551,13 +555,13 @@ class _AppHomePageState extends State<AppHomePage>
   /// Required to do it this way for the animation
   ///
   void diffAndUpdateHistoryList(List<AccountHistoryResponseItem> newList) {
-    if (newList == null || newList.length == 0 || _historyList == null) return;
+    if (newList == null || newList.length == 0 || _historyListMap[StateContainer.of(context).wallet.address] == null) return;
     // Get items not in current list, and add them from top-down
     newList.reversed
-        .where((item) => !_historyList.items.contains(item))
+        .where((item) => !_historyListMap[StateContainer.of(context).wallet.address].items.contains(item))
         .forEach((historyItem) {
       setState(() {
-        _historyList.insertAtTop(historyItem);
+        _historyListMap[StateContainer.of(context).wallet.address].insertAtTop(historyItem);
       });
     });
   }
