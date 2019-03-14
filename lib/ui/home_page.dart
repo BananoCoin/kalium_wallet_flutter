@@ -148,7 +148,6 @@ class _AppHomePageState extends State<AppHomePage>
     super.initState();
     this.dbHelper = DBHelper();
     _registerBus();
-    _monKey = SizedBox();
     WidgetsBinding.instance.addObserver(this);
     SharedPrefsUtil.inst.getPriceConversion().then((result) {
       _priceConversion = result;
@@ -1373,36 +1372,42 @@ class _AppHomePageState extends State<AppHomePage>
           Container(
             width: 90.0,
             height: 90.0,
-            child: FlatButton(
-                highlightColor: StateContainer.of(context).curTheme.text15,
-                splashColor: StateContainer.of(context).curTheme.text15,
-                child: _monkeyOverlayOpen
-                    ? SizedBox()
-                    : Stack(children: <Widget>[
-                        Container(width: 80, height: 80, child: _monKey),
-                        Center(
-                          child: Container(
-                            width: 90,
-                            height: 90,
-                            color: StateContainer.of(context)
-                                .curTheme
-                                .backgroundDark,
-                          ),
-                        ),
-                        _monKey
-                      ]),
-                padding: EdgeInsets.all(0.0),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100.0)),
-                onPressed: () {
-                  if (_monkeyOverlayOpen) {
-                    return;
-                  }
-                  setState(() {
-                    _monkeyOverlayOpen = true;
-                  });
-                  Navigator.of(context).push(MonkeyOverlay(_monKey));
-                }),
+            child: _monKey == null
+                ? _monKey = FlareActor(
+                    "assets/monkey_placeholder_animation.flr",
+                    animation: "main",
+                    fit: BoxFit.contain,
+                    color: StateContainer.of(context).curTheme.primary)
+                : FlatButton(
+                    highlightColor: StateContainer.of(context).curTheme.text15,
+                    splashColor: StateContainer.of(context).curTheme.text15,
+                    child: _monkeyOverlayOpen
+                        ? SizedBox()
+                        : Stack(children: <Widget>[
+                            Container(width: 80, height: 80, child: _monKey),
+                            Center(
+                              child: Container(
+                                width: 90,
+                                height: 90,
+                                color: StateContainer.of(context)
+                                    .curTheme
+                                    .backgroundDark,
+                              ),
+                            ),
+                            _monKey
+                          ]),
+                    padding: EdgeInsets.all(0.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(100.0)),
+                    onPressed: () {
+                      if (_monkeyOverlayOpen) {
+                        return;
+                      }
+                      setState(() {
+                        _monkeyOverlayOpen = true;
+                      });
+                      Navigator.of(context).push(MonkeyOverlay(_monKey));
+                    }),
           ),
         ],
       ),
