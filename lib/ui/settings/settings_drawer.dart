@@ -828,9 +828,22 @@ class _SettingsSheetState extends State<SettingsSheet>
                                 width: smallScreen(context)?55:70,
                                 height: smallScreen(context)?55:70,
                                 alignment: Alignment(0.5, 0.5),
-                                child: _getMonkeyWidget(
-                                    StateContainer.of(context).selectedAccount,
-                                    context),
+                                child: FutureBuilder(
+                                  future: _getMonkey(
+                                            StateContainer.of(context).selectedAccount,
+                                            context
+                                  ),
+                                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                    if (snapshot.hasData && snapshot.data != null) {
+                                      return snapshot.data;
+                                    } else {
+                                      return FlareActor("assets/monkey_placeholder_animation.flr",
+                                          animation: "main",
+                                          fit: BoxFit.contain,
+                                          color: StateContainer.of(context).curTheme.primary);
+                                    }
+                                  },
+                                ),
                               ),
                             ),
                             Center(
@@ -876,10 +889,22 @@ class _SettingsSheetState extends State<SettingsSheet>
                                         child: Container(
                                           width: 48,
                                           height: 48,
-                                          child: _getMonkeyWidget(
-                                              StateContainer.of(context)
-                                                  .recentLast,
-                                              context),
+                                          child: FutureBuilder(
+                                            future: _getMonkey(
+                                                      StateContainer.of(context).recentLast,
+                                                      context
+                                            ),
+                                            builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                              if (snapshot.hasData && snapshot.data != null) {
+                                                return snapshot.data;
+                                              } else {
+                                                return FlareActor("assets/monkey_placeholder_animation.flr",
+                                                    animation: "main",
+                                                    fit: BoxFit.contain,
+                                                    color: StateContainer.of(context).curTheme.primary);
+                                              }
+                                            },
+                                          ),
                                         ),
                                       ),
                                       Center(
@@ -936,10 +961,22 @@ class _SettingsSheetState extends State<SettingsSheet>
                                         child: Container(
                                           width: 48,
                                           height: 48,
-                                          child: _getMonkeyWidget(
-                                              StateContainer.of(context)
-                                                  .recentSecondLast,
-                                              context),
+                                          child: FutureBuilder(
+                                            future: _getMonkey(
+                                                      StateContainer.of(context).recentSecondLast,
+                                                      context
+                                            ),
+                                            builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                              if (snapshot.hasData && snapshot.data != null) {
+                                                return snapshot.data;
+                                              } else {
+                                                return FlareActor("assets/monkey_placeholder_animation.flr",
+                                                    animation: "main",
+                                                    fit: BoxFit.contain,
+                                                    color: StateContainer.of(context).curTheme.primary);
+                                              }
+                                            },
+                                          ),
                                         ),
                                       ),
                                       Center(
@@ -1378,15 +1415,22 @@ class _SettingsSheetState extends State<SettingsSheet>
     );
   }
 
-  Widget _getMonkeyWidget(Account account, BuildContext context) {
-    if (account.monKey == null) {
-      return FlareActor("assets/monkey_placeholder_animation.flr",
-          animation: "main",
-          fit: BoxFit.contain,
-          color: StateContainer.of(context).curTheme.primary);
+  Future<Widget> _getMonkey(Account account, BuildContext context) async {
+    if (account == null) {
+      return null;
+    } else if (account.address == null) {
+      if (account.selected) {
+        account.address = StateContainer.of(context).wallet.address;
+      } else {
+        return null;
+      }
     }
-    // Return monkey widget
-    return account.monKey;
+    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+    if (await FileUtil.pngHasValidSignature(monkeyFile)) {
+      account.monKey = Image.file(monkeyFile);
+      return account.monKey;
+    }
+    return null;
   }
 
   Widget buildContacts(BuildContext context) {
