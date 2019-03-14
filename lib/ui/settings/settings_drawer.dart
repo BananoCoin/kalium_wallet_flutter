@@ -857,37 +857,18 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
-                                        child: Icon(
-                                          AppIcons.accountwallet,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .primary,
-                                          size: 36,
-                                        ),
-                                      ),
-                                      Center(
                                         child: Container(
                                           width: 48,
-                                          height: 36,
-                                          alignment: Alignment(0, 0.3),
-                                          child: Text(
+                                          child: _getMonkeyWidget(
                                               StateContainer.of(context)
-                                                  .recentLast
-                                                  .getShortName(),
-                                              style: TextStyle(
-                                                color:
-                                                    StateContainer.of(context)
-                                                        .curTheme
-                                                        .backgroundDark,
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w800,
-                                              )),
+                                                  .recentLast,
+                                              context),
                                         ),
                                       ),
                                       Center(
                                         child: Container(
                                           width: 48,
-                                          height: 36,
+                                          height: 48,
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
@@ -935,37 +916,23 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
-                                        child: Icon(
-                                          AppIcons.accountwallet,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .primary,
-                                          size: 36,
+                                        child: Container(
+                                          width: 48,
+                                          child: Center(
+                                            child: Container(
+                                              width: 48,
+                                              child: _getMonkeyWidget(
+                                                  StateContainer.of(context)
+                                                      .recentSecondLast,
+                                                  context),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                       Center(
                                         child: Container(
                                           width: 48,
-                                          height: 36,
-                                          alignment: Alignment(0, 0.3),
-                                          child: Text(
-                                              StateContainer.of(context)
-                                                  .recentSecondLast
-                                                  .getShortName(),
-                                              style: TextStyle(
-                                                color:
-                                                    StateContainer.of(context)
-                                                        .curTheme
-                                                        .backgroundDark,
-                                                fontSize: 12.0,
-                                                fontWeight: FontWeight.w800,
-                                              )),
-                                        ),
-                                      ),
-                                      Center(
-                                        child: Container(
-                                          width: 48,
-                                          height: 36,
+                                          height: 48,
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
