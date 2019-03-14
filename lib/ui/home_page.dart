@@ -52,7 +52,10 @@ class AppHomePage extends StatefulWidget {
 }
 
 class _AppHomePageState extends State<AppHomePage>
-    with WidgetsBindingObserver, SingleTickerProviderStateMixin, FlareController {
+    with
+        WidgetsBindingObserver,
+        SingleTickerProviderStateMixin,
+        FlareController {
   final GlobalKey<AnimatedListState> _listKey = GlobalKey<AnimatedListState>();
   final GlobalKey<AppScaffoldState> _scaffoldKey =
       new GlobalKey<AppScaffoldState>();
@@ -106,8 +109,10 @@ class _AppHomePageState extends State<AppHomePage>
 
   bool advance(FlutterActorArtboard artboard, double elapsed) {
     if (releaseAnimation) {
-      _sendSlideReleaseAnimation.apply(_sendSlideReleaseAnimation.duration * (1-_fanimationPosition),
-                                      artboard, 1.0);
+      _sendSlideReleaseAnimation.apply(
+          _sendSlideReleaseAnimation.duration * (1 - _fanimationPosition),
+          artboard,
+          1.0);
     } else {
       _sendSlideAnimation.apply(
           _sendSlideAnimation.duration * _fanimationPosition, artboard, 1.0);
@@ -116,7 +121,8 @@ class _AppHomePageState extends State<AppHomePage>
   }
 
   /// Notification includes which account its for, automatically switch to it if they're entering app from notification
-  Future<void> _chooseCorrectAccountFromNotification(Map<String, dynamic> message) async {
+  Future<void> _chooseCorrectAccountFromNotification(
+      Map<String, dynamic> message) async {
     try {
       if (message.containsKey("account")) {
         Account selectedAccount = await dbHelper.getSelectedAccount();
@@ -125,7 +131,8 @@ class _AppHomePageState extends State<AppHomePage>
           for (int i = 0; i < accounts.length; i++) {
             if (accounts[i].address == message['account']) {
               await dbHelper.changeAccount(accounts[i]);
-              EventTaxiImpl.singleton().fire(AccountChangedEvent(account: accounts[i]));
+              EventTaxiImpl.singleton()
+                  .fire(AccountChangedEvent(account: accounts[i]));
               break;
             }
           }
@@ -254,7 +261,8 @@ class _AppHomePageState extends State<AppHomePage>
       if (addressExists) {
         return;
       }
-      bool nameExists = await dbHelper.contactExistsWithName("@KaliumDonations");
+      bool nameExists =
+          await dbHelper.contactExistsWithName("@KaliumDonations");
       if (nameExists) {
         return;
       }
@@ -577,10 +585,7 @@ class _AppHomePageState extends State<AppHomePage>
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       if (amount != null) {
         // Go to send confirm with amount
-        AppSendConfirmSheet(
-                amount,
-                address.address,
-                contactName: contactName)
+        AppSendConfirmSheet(amount, address.address, contactName: contactName)
             .mainBottomSheet(context);
       } else {
         // Go to send with address
@@ -807,11 +812,10 @@ class _AppHomePageState extends State<AppHomePage>
       ),
     );
   }
-  
+
   // Transaction Card/List Item
   Widget _buildTransactionCard(AccountHistoryResponseItem item,
       Animation<double> animation, String displayName, BuildContext context) {
-        
     TransactionDetailsSheet transactionDetails =
         TransactionDetailsSheet(item.hash, item.account, displayName);
     String text;
@@ -840,7 +844,10 @@ class _AppHomePageState extends State<AppHomePage>
           // See if a contact
           dbHelper.getContactWithAddress(item.account).then((contact) {
             // Go to send with address
-            AppSendSheet(contact: contact, address: item.account, quickSendAmount: item.amount)
+            AppSendSheet(
+                    contact: contact,
+                    address: item.account,
+                    quickSendAmount: item.amount)
                 .mainBottomSheet(context);
           });
         }
@@ -868,13 +875,11 @@ class _AppHomePageState extends State<AppHomePage>
             child: Container(
               alignment: Alignment(-0.5, 0),
               constraints: BoxConstraints.expand(),
-              child: FlareActor(
-                "assets/pulltosend_animation.flr",
-                animation: "pull",
-                fit: BoxFit.contain,
-                controller: this,
-                color: StateContainer.of(context).curTheme.primary
-              ),
+              child: FlareActor("assets/pulltosend_animation.flr",
+                  animation: "pull",
+                  fit: BoxFit.contain,
+                  controller: this,
+                  color: StateContainer.of(context).curTheme.primary),
             ),
           ),
         ),

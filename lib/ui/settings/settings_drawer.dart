@@ -814,8 +814,9 @@ class _SettingsSheetState extends State<SettingsSheet>
                               child: Container(
                                 width: 60,
                                 height: 60,
-                                child: _getMonkeyWidget(StateContainer.of(context)
-                                      .selectedAccount, context),  
+                                child: _getMonkeyWidget(
+                                    StateContainer.of(context).selectedAccount,
+                                    context),
                               ),
                             ),
                             Center(
@@ -1637,9 +1638,15 @@ class _SettingsSheetState extends State<SettingsSheet>
               //Container for monKey
               contact.monkeyImage != null && _contactsOpen
                   ? contact.monkeyImage
-                  : SizedBox(
+                  : Container(
                       width: smallScreen(context) ? 55 : 70,
-                      height: smallScreen(context) ? 55 : 70),
+                      height: smallScreen(context) ? 55 : 70,
+                      child: FlareActor(
+                          "assets/monkey_placeholder_animation.flr",
+                          animation: "main",
+                          fit: BoxFit.contain,
+                          color: StateContainer.of(context).curTheme.primary),
+                    ),
               //Contact info
               Container(
                 margin: EdgeInsets.only(left: 5),
