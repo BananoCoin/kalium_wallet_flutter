@@ -245,6 +245,8 @@ class _SettingsSheetState extends State<SettingsSheet>
         versionString = "v${packageInfo.version}";
       });
     });
+    // Setup monKeys for header accounts
+    _getMonkeysForTopAccounts();
   }
 
   StreamSubscription<ContactAddedEvent> _contactAddedSub;
@@ -1393,6 +1395,24 @@ class _SettingsSheetState extends State<SettingsSheet>
     );
   }
 
+  Future<void> _getMonkeysForTopAccounts() async {
+    _getMonkeyForAccount(StateContainer.of(context).selectedAccount);
+    _getMonkeyForAccount(StateContainer.of(context).recentLast);
+    _getMonkeyForAccount(StateContainer.of(context).recentSecondLast);
+  }
+
+  Future<void> _getMonkeyForAccount(Account account) async {
+    if (account.monKey == null) {
+      File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(
+          context, account.address, MonkeySize.SMALL);
+      if (await FileUtil.pngHasValidSignature(monkeyFile)) {
+        setState(() {
+          account.monKey = Image.file(monkeyFile);
+        });
+      }
+    }
+  }
+
   Widget _getMonkeyWidget(Account account, BuildContext context) {
     if (account.monKey == null) {
       return FlareActor("assets/monkey_placeholder_animation.flr",
@@ -1402,17 +1422,6 @@ class _SettingsSheetState extends State<SettingsSheet>
     }
     // Return monkey widget
     return account.monKey;
-  }
-
-  Future<void> _getMonkeyForAccount(
-      BuildContext context, Account account, StateSetter setState) async {
-    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(
-        context, account.address, MonkeySize.SMALL);
-    if (await FileUtil.pngHasValidSignature(monkeyFile)) {
-      setState(() {
-        account.monKey = Image.file(monkeyFile);
-      });
-    }
   }
 
   Widget buildContacts(BuildContext context) {

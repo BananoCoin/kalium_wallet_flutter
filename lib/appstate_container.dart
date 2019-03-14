@@ -952,7 +952,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<String> _getPrivKey() async {
-    return NanoUtil.seedToPrivate(await Vault.inst.getSeed(), 0);
+    return NanoUtil.seedToPrivate(await Vault.inst.getSeed(), selectedAccount.index);
   }
 
   // Simple build method that just passes this state through
