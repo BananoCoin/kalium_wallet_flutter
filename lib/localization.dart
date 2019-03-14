@@ -811,7 +811,7 @@ class AppLocalization {
     if (svg) {
       return 'https://monkeys.appditto.com?address=$account';
     }
-    return 'https://monkeys.appditto.com?format=png&address=$account&size=$size';
+    return 'https://monkeys.appditto.com?address=$account&png=true&size=$size';
   }
 
   String get eulaUrl {
