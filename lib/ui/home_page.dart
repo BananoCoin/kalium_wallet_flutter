@@ -347,9 +347,20 @@ class _AppHomePageState extends State<AppHomePage>
         .registerTo<AccountChangedEvent>()
         .listen((event) {
       setState(() {
+        _monKey = null;
         StateContainer.of(context).updateWallet(account: event.account);
       });
       _startAnimation();
+      UIUtil.downloadOrRetrieveMonkey(context,
+              event.account.address, MonkeySize.SVG)
+          .then((result) {
+        if (result != null) {
+          /* TODO Validate */
+          setState(() {
+            _monKey = SvgPicture.file(result);
+          });
+        }
+      });
       if (event.delayPop) {
         Future.delayed(Duration(milliseconds: 300), () {
           Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
