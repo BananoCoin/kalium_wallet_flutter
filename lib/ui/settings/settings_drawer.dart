@@ -810,8 +810,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                           children: <Widget>[
                             Center(
                               child: Container(
-                                width: 70,
-                                height: 70,
+                                width: smallScreen(context)?55:70,
+                                height: smallScreen(context)?55:70,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
@@ -825,8 +825,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                             ),
                             Center(
                               child: Container(
-                                width: 70,
-                                height: 70,
+                                width: smallScreen(context)?55:70,
+                                height: smallScreen(context)?55:70,
                                 alignment: Alignment(0.5, 0.5),
                                 child: _getMonkeyWidget(
                                     StateContainer.of(context).selectedAccount,
@@ -835,8 +835,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                             ),
                             Center(
                               child: Container(
-                                width: 70,
-                                height: 70,
+                                width: smallScreen(context)?55:70,
+                                height: smallScreen(context)?55:70,
                                 child: FlatButton(
                                   highlightColor: StateContainer.of(context)
                                       .curTheme
@@ -848,8 +848,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                       .withOpacity(0.75),
                                   padding: EdgeInsets.all(0.0),
                                   child: SizedBox(
-                                    width: 70,
-                                    height: 70,
+                                    width: smallScreen(context)?55:70,
+                                    height: smallScreen(context)?55:70,
                                   ),
                                   onPressed: () {
                                     AccountDetailsSheet(
