@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-02-04T09:26:48.408903",
+  "@@last_modified": "2019-03-14T16:11:46.585019",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -86,7 +86,7 @@
   },
   "addressShare": "Share Address",
   "@addressShare": {
-    "description": "share_address",
+    "description": "receive_share_cta",
     "type": "text",
     "placeholders": {}
   },
@@ -200,7 +200,7 @@
   },
   "contactsImportSuccess": "Sucessfully imported %1 contacts.",
   "@contactsImportSuccess": {
-    "description": "contacts_import_success",
+    "description": "contact_import_success",
     "type": "text",
     "placeholders": {}
   },
@@ -218,7 +218,7 @@
   },
   "contactNameMissing": "Choose a Name for this Contact",
   "@contactNameMissing": {
-    "description": "contact_export_none",
+    "description": "contact_name_missing",
     "type": "text",
     "placeholders": {}
   },
@@ -391,11 +391,11 @@
     "placeholders": {}
   },
   "themeHeader": "Theme",
-    "@themeHeader": {
-      "description": "theme_header",
-      "type": "text",
-      "placeholders": {}
- },
+  "@themeHeader": {
+    "description": "theme_header",
+    "type": "text",
+    "placeholders": {}
+  },
   "changeRepButton": "Change",
   "@changeRepButton": {
     "description": "change_representative_change",
@@ -813,6 +813,54 @@
   "exampleCardFrom": "from a random monkey",
   "@exampleCardFrom": {
     "description": "example_card_from",
+    "type": "text",
+    "placeholders": {}
+  },
+  "defaultAccountName": "Main Account",
+  "@defaultAccountName": {
+    "description": "Default account name",
+    "type": "text",
+    "placeholders": {}
+  },
+  "defaultNewAccountName": "Account %1",
+  "@defaultNewAccountName": {
+    "description": "Default new account name - e.g. Account 1",
+    "type": "text",
+    "placeholders": {}
+  },
+  "newAccountIntro": "This is your new account. Once you receive BANANO, transactions will show up like this:",
+  "@newAccountIntro": {
+    "description": "Alternate account intro card",
+    "type": "text",
+    "placeholders": {}
+  },
+  "account": "Account",
+  "@account": {
+    "description": "Account text",
+    "type": "text",
+    "placeholders": {}
+  },
+  "accounts": "Accounts",
+  "@accounts": {
+    "description": "Accounts header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "addAccount": "Add Account",
+  "@addAccount": {
+    "description": "Default new account name - e.g. Account 1",
+    "type": "text",
+    "placeholders": {}
+  },
+  "hideAccountHeader": "Hide Account?",
+  "@hideAccountHeader": {
+    "description": "Confirmation dialog header",
+    "type": "text",
+    "placeholders": {}
+  },
+  "removeAccountText": "Are you sure you want to hide this account? You can re-add it later by tapping the \"%1\" button.",
+  "@removeAccountText": {
+    "description": "Remove account dialog body",
     "type": "text",
     "placeholders": {}
   }
