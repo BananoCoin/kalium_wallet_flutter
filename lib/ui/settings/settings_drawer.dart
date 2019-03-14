@@ -869,12 +869,13 @@ class _SettingsSheetState extends State<SettingsSheet>
                           // Second Account
                           StateContainer.of(context).recentLast != null
                               ? Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  margin: EdgeInsets.only(right: 2),
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
                                         child: Container(
                                           width: 48,
+                                          height: 48,
                                           child: _getMonkeyWidget(
                                               StateContainer.of(context)
                                                   .recentLast,
@@ -928,21 +929,17 @@ class _SettingsSheetState extends State<SettingsSheet>
                           // Third Account
                           StateContainer.of(context).recentSecondLast != null
                               ? Container(
-                                  margin: EdgeInsets.symmetric(horizontal: 8.0),
+                                  margin: EdgeInsets.only(right: 6),
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
                                         child: Container(
                                           width: 48,
-                                          child: Center(
-                                            child: Container(
-                                              width: 48,
-                                              child: _getMonkeyWidget(
-                                                  StateContainer.of(context)
-                                                      .recentSecondLast,
-                                                  context),
-                                            ),
-                                          ),
+                                          height: 48,
+                                          child: _getMonkeyWidget(
+                                              StateContainer.of(context)
+                                                  .recentSecondLast,
+                                              context),
                                         ),
                                       ),
                                       Center(
@@ -992,7 +989,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                           Container(
                             height: 36,
                             width: 36,
-                            margin: EdgeInsets.symmetric(horizontal: 6.0),
+                            margin: EdgeInsets.only(right: 6),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                             ),
