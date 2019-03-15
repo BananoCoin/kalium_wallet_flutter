@@ -108,8 +108,6 @@ class AppAccountsSheet {
   }
 
   mainBottomSheet(BuildContext context) {
-    // TODO - move this elsewhere
-    //_requestBalances(context, _accounts);
     AppSheets.showAppHeightNineSheet(
         context: context,
         onDisposed: _onWillPop,
