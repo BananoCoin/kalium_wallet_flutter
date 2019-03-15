@@ -25,7 +25,6 @@ import 'package:kalium_wallet_flutter/util/fileutil.dart';
 class AppAccountsSheet {
   static const int MAX_ACCOUNTS = 20;
   final GlobalKey expandedKey = GlobalKey();
-  final Map<String, int> monkeyDownloadingMap = Map();
 
   List<Account> _accounts;
   bool _addingAccount;
@@ -34,6 +33,7 @@ class AppAccountsSheet {
   StreamSubscription<AccountsBalancesEvent> _balancesSub;
   StreamSubscription<AccountModifiedEvent> _accountModifiedSub;
   bool _accountIsChanging;
+  bool _monkeyDownloadStarted = false;
 
   DBHelper dbHelper;
 
@@ -108,7 +108,8 @@ class AppAccountsSheet {
   }
 
   mainBottomSheet(BuildContext context) {
-    _requestBalances(context, _accounts);
+    // TODO - move this elsewhere
+    //_requestBalances(context, _accounts);
     AppSheets.showAppHeightNineSheet(
         context: context,
         onDisposed: _onWillPop,
@@ -154,6 +155,23 @@ class AppAccountsSheet {
                     _accounts.add(event.account);
                     _accounts.sort((a, b) => a.index.compareTo(b.index));
                   });
+                }
+              });
+            }
+            // Download monKeys
+            if (!_monkeyDownloadStarted) {
+              _monkeyDownloadStarted = true;
+              _accounts.forEach((account) async {
+                if (account.monKey == null) {
+                  if (account.address == null && account.selected) {
+                    account.address = StateContainer.of(context).wallet.address;
+                  }
+                  File monkeyF = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+                  if (await FileUtil.pngHasValidSignature(monkeyF)) {
+                    setState(() {
+                      account.monKey = Image.file(monkeyF);
+                    });
+                  }
                 }
               });
             }
@@ -326,6 +344,7 @@ class AppAccountsSheet {
                                                 }
                                               }
                                             });
+                                            _getMonkey(context, newAccount, setState);
                                           });
                                         }
                                       },
@@ -353,34 +372,13 @@ class AppAccountsSheet {
         });
   }
 
-  Future<Widget> _getMonkey(Account account, BuildContext context) async {
-    if (account == null) {
-      return null;
-    } else if (account.address == null) {
-      if (account.selected) {
-        account.address = StateContainer.of(context).wallet.address;
-      } else {
-        return null;
-      }
-    } else if (!monkeyDownloadingMap.containsKey(account.address)) {
-      monkeyDownloadingMap.putIfAbsent(account.address, () => 0);
+  Future<void> _getMonkey(BuildContext context, Account account, StateSetter setState) async {
+    File monkeyF = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+    if (await FileUtil.pngHasValidSignature(monkeyF)) {
+      setState(() {
+        account.monKey = Image.file(monkeyF);
+      });
     }
-    if (monkeyDownloadingMap[account.address] == 1) {
-      return null;
-    } else {
-      if (monkeyDownloadingMap[account.address] == 0) {
-        monkeyDownloadingMap[account.address] = 1;
-      }
-      File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-      if (await FileUtil.pngHasValidSignature(monkeyFile)) {
-        monkeyDownloadingMap[account.address] = 2;
-        account.monKey = Image.file(monkeyFile);
-        return account.monKey;
-      } else {
-        monkeyDownloadingMap[account.address] = 0;
-      }
-    }
-    return null;
   }
 
   Widget _buildAccountListItem(
@@ -424,22 +422,12 @@ class AppAccountsSheet {
                         // Account Icon
                         Container(
                             width: smallScreen(context) ? 55 : 70,
-                            child: FutureBuilder(
-                              future: _getMonkey(
-                                        account,
-                                        context
-                              ),
-                              builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                if (snapshot.hasData && snapshot.data != null) {
-                                  return snapshot.data;
-                                } else {
-                                  return FlareActor("assets/monkey_placeholder_animation.flr",
+                            child: account.monKey == null
+                            ? FlareActor("assets/monkey_placeholder_animation.flr",
                                       animation: "main",
                                       fit: BoxFit.contain,
-                                      color: StateContainer.of(context).curTheme.primary);
-                                }
-                              },
-                            ),
+                                      color: StateContainer.of(context).curTheme.primary)
+                            : account.monKey
                         ),
                         // Account name and address
                         Container(
