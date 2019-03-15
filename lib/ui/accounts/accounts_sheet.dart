@@ -25,6 +25,7 @@ import 'package:kalium_wallet_flutter/util/fileutil.dart';
 class AppAccountsSheet {
   static const int MAX_ACCOUNTS = 20;
   final GlobalKey expandedKey = GlobalKey();
+  final Map<String, int> monkeyDownloadingMap = Map();
 
   List<Account> _accounts;
   bool _addingAccount;
@@ -361,11 +362,23 @@ class AppAccountsSheet {
       } else {
         return null;
       }
+    } else if (!monkeyDownloadingMap.containsKey(account.address)) {
+      monkeyDownloadingMap.putIfAbsent(account.address, () => 0);
     }
-    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-    if (await FileUtil.pngHasValidSignature(monkeyFile)) {
-      account.monKey = Image.file(monkeyFile);
-      return account.monKey;
+    if (monkeyDownloadingMap[account.address] == 1) {
+      return null;
+    } else {
+      if (monkeyDownloadingMap[account.address] == 0) {
+        monkeyDownloadingMap[account.address] = 1;
+      }
+      File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+      if (await FileUtil.pngHasValidSignature(monkeyFile)) {
+        monkeyDownloadingMap[account.address] = 2;
+        account.monKey = Image.file(monkeyFile);
+        return account.monKey;
+      } else {
+        monkeyDownloadingMap[account.address] = 0;
+      }
     }
     return null;
   }
