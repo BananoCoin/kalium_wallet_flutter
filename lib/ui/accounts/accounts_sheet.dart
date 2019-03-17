@@ -387,7 +387,7 @@ class AppAccountsSheet {
       BuildContext context, Account account, StateSetter setState) {
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
-      actionExtentRatio: 0.2,
+      actionExtentRatio: 0.24,
       delegate: SlidableStrechDelegate(),
       child: FlatButton(
           highlightColor: StateContainer.of(context).curTheme.text15,
@@ -412,7 +412,10 @@ class AppAccountsSheet {
               ),
               Container(
                 height: smallScreen(context) ? 70.0 : 85,
-                margin: EdgeInsets.only(right: 30, left: 15),
+                padding: EdgeInsets.only(right: 23, left: 10),
+                decoration: BoxDecoration(
+                  border: Border(left: BorderSide(width: 5, color: account.selected ? StateContainer.of(context).curTheme.primary:Colors.transparent), right: BorderSide(width: 5, color: account.selected?StateContainer.of(context).curTheme.primary:Colors.transparent))
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,

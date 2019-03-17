@@ -794,7 +794,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           children: <Widget>[
             // A container for accounts area
             Container(
-              margin: EdgeInsets.only(left: 26.0, right: 20, bottom: 20),
+              margin: EdgeInsets.only(left: 26.0, right: 20, bottom: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -810,8 +810,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                           children: <Widget>[
                             Center(
                               child: Container(
-                                width: smallScreen(context)?55:70,
-                                height: smallScreen(context)?55:70,
+                                width: smallScreen(context)?63:78,
+                                height: smallScreen(context)?63:78,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
@@ -824,32 +824,35 @@ class _SettingsSheetState extends State<SettingsSheet>
                               ),
                             ),
                             Center(
-                              child: Container(
-                                width: smallScreen(context)?55:70,
-                                height: smallScreen(context)?55:70,
-                                alignment: Alignment(0.5, 0.5),
-                                child: FutureBuilder(
-                                  future: _getMonkey(
-                                            StateContainer.of(context).selectedAccount,
-                                            context
+                              child: Padding(
+                                padding: EdgeInsets.all(4.0),
+                                child: Container(
+                                  width: smallScreen(context)?55:70,
+                                  height: smallScreen(context)?55:70,
+                                  alignment: Alignment(0.5, 0.5),
+                                  child: FutureBuilder(
+                                    future: _getMonkey(
+                                              StateContainer.of(context).selectedAccount,
+                                              context
+                                    ),
+                                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                                      if (snapshot.hasData && snapshot.data != null) {
+                                        return snapshot.data;
+                                      } else {
+                                        return FlareActor("assets/monkey_placeholder_animation.flr",
+                                            animation: "main",
+                                            fit: BoxFit.contain,
+                                            color: StateContainer.of(context).curTheme.primary);
+                                      }
+                                    },
                                   ),
-                                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                    if (snapshot.hasData && snapshot.data != null) {
-                                      return snapshot.data;
-                                    } else {
-                                      return FlareActor("assets/monkey_placeholder_animation.flr",
-                                          animation: "main",
-                                          fit: BoxFit.contain,
-                                          color: StateContainer.of(context).curTheme.primary);
-                                    }
-                                  },
                                 ),
                               ),
                             ),
                             Center(
                               child: Container(
-                                width: smallScreen(context)?55:70,
-                                height: smallScreen(context)?55:70,
+                                width: smallScreen(context)?63:78,
+                                height: smallScreen(context)?63:78,
                                 child: FlatButton(
                                   highlightColor: StateContainer.of(context)
                                       .curTheme
@@ -861,8 +864,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                       .withOpacity(0.75),
                                   padding: EdgeInsets.all(0.0),
                                   child: SizedBox(
-                                    width: smallScreen(context)?55:70,
-                                    height: smallScreen(context)?55:70,
+                                    width: smallScreen(context)?63:78,
+                                    height: smallScreen(context)?63:78,
                                   ),
                                   onPressed: () {
                                     AccountDetailsSheet(
@@ -954,7 +957,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                           // Third Account
                           StateContainer.of(context).recentSecondLast != null
                               ? Container(
-                                  margin: EdgeInsets.only(right: 6),
+                                  margin: EdgeInsets.only(right: 8),
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
