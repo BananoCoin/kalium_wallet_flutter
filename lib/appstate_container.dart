@@ -218,6 +218,8 @@ class StateContainerState extends State<StateContainer> {
         return;
       }
 
+      // Update seconday account balances
+      _requestBalances();
       bool postedToHome = false;
       // Iterate list in reverse (oldest to newest block)
       for (AccountHistoryResponseItem item in historyResponse.history) {
@@ -762,6 +764,18 @@ class StateContainerState extends State<StateContainer> {
         });
       }
     }
+  }
+
+  /// Request balances for accounts in our database
+  Future<void> _requestBalances() async {
+    List<Account> accounts = await dbHelper.getAccounts();
+    List<String> addressToRequest = List();
+    accounts.forEach((account) {
+      if (account.address != null) {
+        addressToRequest.add(account.address);
+      }
+    });
+    requestAccountsBalances(addressToRequest);
   }
 
   Future<void> requestUpdate() async {
