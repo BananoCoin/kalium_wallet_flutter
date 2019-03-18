@@ -88,12 +88,12 @@ class _AppShareCardState extends State<AppShareCard> {
                           TextSpan(
                             text: " ",
                             style: TextStyle(
-                                color:
-                                    StateContainer.of(context).curTheme.primary,
-                                fontFamily: "AppIcons",
-                                fontWeight: FontWeight.w500,
-                                fontSize: 30,
-                                ),
+                              color:
+                                  StateContainer.of(context).curTheme.primary,
+                              fontFamily: "AppIcons",
+                              fontWeight: FontWeight.w500,
+                              fontSize: 50,
+                            ),
                           ),
                           TextSpan(
                             text: "BANANO",
@@ -102,7 +102,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                   StateContainer.of(context).curTheme.primary,
                               fontFamily: "NeueHansKendrick",
                               fontWeight: FontWeight.w500,
-                              fontSize: 30,
+                              fontSize: 50,
                             ),
                           ),
                         ],
@@ -110,63 +110,72 @@ class _AppShareCardState extends State<AppShareCard> {
                       maxLines: 1,
                       stepGranularity: 0.1,
                       minFontSize: 1,
+                      style: TextStyle(
+                        fontFamily: "NeueHansKendrick",
+                        fontSize: 50,
+                      ),
                     ),
                   ),
                   // Address
                   Container(
                     padding: Platform.isIOS
-                        ? EdgeInsets.only(bottom: 7)
+                        ? EdgeInsets.only(bottom: 6)
                         : EdgeInsets.zero,
                     child: Column(
                       children: <Widget>[
                         // First row of the address
-                        Row(
-                          children: <Widget>[
-                            // Primary part of the first row
-                            Container(
-                              width: 66.6875,
-                              height: 12.5,
-                              child: AutoSizeText(
-                                StateContainer.of(context)
-                                    .wallet
-                                    .address
-                                    .substring(0, 11),
-                                style: TextStyle(
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
-                                  fontFamily: "OverpassMono",
-                                  fontWeight: FontWeight.w100,
+                        Container(
+                          width: 97,
+                          child: AutoSizeText.rich(
+                            TextSpan(
+                              children: [
+                                // Primary part of the first row
+                                TextSpan(
+                                  text: StateContainer.of(context)
+                                      .wallet
+                                      .address
+                                      .substring(0, 11),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
+                                    fontFamily: "OverpassMono",
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 50.0,
+                                    height: 0.9,
+                                  ),
                                 ),
-                                minFontSize: 1.0,
-                                stepGranularity: 0.1,
-                              ),
-                            ),
-                            // White part of the first row
-                            Container(
-                              width: 30.3125,
-                              height: 12.5,
-                              child: AutoSizeText(
-                                StateContainer.of(context)
-                                    .wallet
-                                    .address
-                                    .substring(11, 16),
-                                minFontSize: 1.0,
-                                stepGranularity: 0.1,
-                                style: TextStyle(
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  fontFamily: "OverpassMono",
-                                  fontWeight: FontWeight.w100,
+                                TextSpan(
+                                  text: StateContainer.of(context)
+                                      .wallet
+                                      .address
+                                      .substring(11, 16),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .text,
+                                    fontFamily: "OverpassMono",
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 50.0,
+                                    height: 0.9,
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                            maxLines: 1,
+                            stepGranularity: 0.1,
+                            minFontSize: 1,
+                            style: TextStyle(
+                              fontSize: 50.0,
+                              fontFamily: "OverpassMono",
+                              fontWeight: FontWeight.w100,
+                              height: 0.9,
+                            ),
+                          ),
                         ),
                         // Second row of the address
                         Container(
                           width: 97,
-                          height: 12.5,
                           child: AutoSizeText(
                             StateContainer.of(context)
                                 .wallet
@@ -174,17 +183,20 @@ class _AppShareCardState extends State<AppShareCard> {
                                 .substring(16, 32),
                             minFontSize: 1.0,
                             stepGranularity: 0.1,
+                            maxFontSize: 50,
+                            maxLines: 1,
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.text,
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
+                              fontSize: 50,
+                              height: 0.9,
                             ),
                           ),
                         ),
                         // Third row of the address
                         Container(
                           width: 97,
-                          height: 12.5,
                           child: AutoSizeText(
                             StateContainer.of(context)
                                 .wallet
@@ -192,56 +204,67 @@ class _AppShareCardState extends State<AppShareCard> {
                                 .substring(32, 48),
                             minFontSize: 1.0,
                             stepGranularity: 0.1,
+                            maxFontSize: 50,
+                            maxLines: 1,
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.text,
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
+                              fontSize: 50,
+                              height: 0.9,
                             ),
                           ),
                         ),
                         // Fourth(last) row of the address
-                        Row(
-                          children: <Widget>[
-                            // White part of the first row
-                            Container(
-                              width: 60.625,
-                              height: 12.5,
-                              child: AutoSizeText(
-                                StateContainer.of(context)
-                                    .wallet
-                                    .address
-                                    .substring(48, 58),
-                                minFontSize: 1.0,
-                                stepGranularity: 0.1,
-                                style: TextStyle(
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  fontFamily: "OverpassMono",
-                                  fontWeight: FontWeight.w100,
+                        Container(
+                          width: 97,
+                          child: AutoSizeText.rich(
+                            TextSpan(
+                              children: [
+                                // Text colored part of the last row
+                                TextSpan(
+                                  text: StateContainer.of(context)
+                                      .wallet
+                                      .address
+                                      .substring(48, 58),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .text,
+                                    fontFamily: "OverpassMono",
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 50.0,
+                                    height: 0.9,
+                                  ),
                                 ),
-                              ),
-                            ),
-                            // Primary colored part of the first row
-                            Container(
-                              width: 36.375,
-                              height: 12.5,
-                              child: AutoSizeText(
-                                StateContainer.of(context)
-                                    .wallet
-                                    .address
-                                    .substring(58, 64),
-                                minFontSize: 1.0,
-                                stepGranularity: 0.1,
-                                style: TextStyle(
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
-                                  fontFamily: "OverpassMono",
-                                  fontWeight: FontWeight.w100,
+                                // Primary colored part of the last row
+                                TextSpan(
+                                  text: StateContainer.of(context)
+                                      .wallet
+                                      .address
+                                      .substring(58, 64),
+                                  style: TextStyle(
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
+                                    fontFamily: "OverpassMono",
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 50.0,
+                                    height: 0.9,
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ],
+                            maxLines: 1,
+                            stepGranularity: 0.1,
+                            minFontSize: 1,
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontFamily: "OverpassMono",
+                              fontWeight: FontWeight.w100,
+                              height: 0.9,
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -249,12 +272,12 @@ class _AppShareCardState extends State<AppShareCard> {
                   // Ticker & Website
                   Container(
                     width: 97,
-                    height: 13,
-                    margin: EdgeInsets.only(bottom: 9.0),
+                    margin: EdgeInsets.only(bottom: 12),
                     child: AutoSizeText(
                       "\$BAN      BANANO.CC",
                       minFontSize: 1.0,
                       stepGranularity: 0.1,
+                      maxLines: 1,
                       style: TextStyle(
                         color: StateContainer.of(context).curTheme.primary,
                         fontFamily: "NeueHansKendrick",
