@@ -24,7 +24,7 @@ class AppSendCompleteSheet {
     if (NumberUtil.getRawAsUsableString(_amountRaw) == NumberUtil.getRawAsUsableDecimal(_amountRaw).toString()) {
       _amount = NumberUtil.getRawAsUsableString(_amountRaw);
     } else {
-      _amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(_amountRaw), digits: 6).toString() + "~";
+      _amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(_amountRaw), digits: 6).toStringAsFixed(6) + "~";
     }
     _destination = destinaton;
     _contactName = contactName;

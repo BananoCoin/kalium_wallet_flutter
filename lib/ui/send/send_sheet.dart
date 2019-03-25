@@ -572,7 +572,7 @@ class AppSendSheet {
                                             if (NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(_rawAmount).toString()) {
                                               _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll("," ,"");
                                             } else {
-                                              _sendAmountController.text = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(address.amount), digits: 6).toString() + "~";
+                                              _sendAmountController.text = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(address.amount), digits: 6).toStringAsFixed(6) + "~";
                                             }
                                           });
                                         }
