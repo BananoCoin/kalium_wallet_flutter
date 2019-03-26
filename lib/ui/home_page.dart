@@ -308,12 +308,10 @@ class _AppHomePageState extends State<AppHomePage>
       // Route to send complete if received process response for send block
       if (event.previous != null) {
         // Route to send complete
-        String displayAmount =
-            NumberUtil.getRawAsUsableString(event.previous.sendAmount);
         dbHelper.getContactWithAddress(event.previous.link).then((contact) {
           String contactName = contact == null ? null : contact.name;
           Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-          AppSendCompleteSheet(displayAmount, event.previous.link, contactName,
+          AppSendCompleteSheet(event.previous.sendAmount, event.previous.link, contactName,
                   localAmount: event.previous.localCurrencyValue)
               .mainBottomSheet(context);
         });
@@ -413,6 +411,10 @@ class _AppHomePageState extends State<AppHomePage>
       case AppLifecycleState.resumed:
         cancelLockEvent();
         StateContainer.of(context).reconnect();
+        if (!StateContainer.of(context).wallet.loading && StateContainer.of(context).initialDeepLink != null) {
+          handleDeepLink(StateContainer.of(context).initialDeepLink);
+          StateContainer.of(context).initialDeepLink = null;
+        }
         super.didChangeAppLifecycleState(state);
         break;
       default:

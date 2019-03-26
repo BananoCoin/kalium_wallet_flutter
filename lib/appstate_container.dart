@@ -179,7 +179,9 @@ class StateContainerState extends State<StateContainer> {
     });
     // Get initial deep link
     getInitialLink().then((initialLink) {
-      initialDeepLink = initialLink;
+      setState(() {
+       initialDeepLink = initialLink;
+      });
     });
     // Precache contact SVGs
     _precacheSvgs();
@@ -352,7 +354,9 @@ class StateContainerState extends State<StateContainer> {
     });
     // Deep link has been updated
     _deepLinkSub = getLinksStream().listen((String link) {
-      initialDeepLink = link;
+      setState(() {
+        initialDeepLink = link;
+      });
     });
   }
 

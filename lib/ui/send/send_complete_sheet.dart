@@ -8,8 +8,10 @@ import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
+import 'package:kalium_wallet_flutter/util/numberutil.dart';
 
 class AppSendCompleteSheet {
+  String _amountRaw;
   String _amount;
   String _destination;
   String _contactName;
@@ -17,7 +19,13 @@ class AppSendCompleteSheet {
 
   AppSendCompleteSheet(String amount, String destinaton, String contactName,
       {String localAmount}) {
-    _amount = amount;
+    _amountRaw = amount;
+    // Indicate that this is a special amount if some digits are not displayed
+    if (NumberUtil.getRawAsUsableString(_amountRaw) == NumberUtil.getRawAsUsableDecimal(_amountRaw).toString()) {
+      _amount = NumberUtil.getRawAsUsableString(_amountRaw);
+    } else {
+      _amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(_amountRaw), digits: 6).toStringAsFixed(6) + "~";
+    }
     _destination = destinaton;
     _contactName = contactName;
     _localAmount = localAmount;

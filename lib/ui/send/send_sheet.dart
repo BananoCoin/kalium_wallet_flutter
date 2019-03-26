@@ -122,6 +122,12 @@ class AppSendSheet {
             // On amount focus change
             _sendAmountFocusNode.addListener(() {
               if (_sendAmountFocusNode.hasFocus) {
+                if (_rawAmount != null) {
+                  setState(() {
+                    _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+                    _rawAmount = null;
+                  });
+                }
                 if (quickSendAmount != null) {
                   _sendAmountController.text = "";
                   setState(() {
@@ -558,12 +564,19 @@ class AppSendSheet {
                                       if (address.amount != null) {
                                         if (_localCurrencyMode) {
                                           toggleLocalCurrency(context, setState);
+                                          _sendAmountController.text = NumberUtil.getRawAsUsableString(address.amount);
                                         } else {
                                           setState(() {
                                             _rawAmount = address.amount;
+                                            // Indicate that this is a special amount if some digits are not displayed
+                                            if (NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(_rawAmount).toString()) {
+                                              _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll("," ,"");
+                                            } else {
+                                              _sendAmountController.text = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(address.amount), digits: 6).toStringAsFixed(6) + "~";
+                                            }
                                           });
                                         }
-                                        _sendAmountController.text = NumberUtil.getRawAsUsableString(address.amount);
+                                        
                                       }
                                     });
                                     _sendAddressFocusNode.unfocus();
@@ -756,7 +769,7 @@ class AppSendSheet {
     } else {
       String bananoAmount = _localCurrencyMode
           ? _convertLocalCurrencyToCrypto(context)
-          : _sendAmountController.text;
+          : _rawAmount == null ? _sendAmountController.text : NumberUtil.getRawAsUsableString(_rawAmount);
       BigInt balanceRaw = StateContainer.of(context).wallet.accountBalance;
       BigInt sendAmount =
           BigInt.tryParse(NumberUtil.getAmountAsRaw(bananoAmount));
@@ -816,7 +829,7 @@ class AppSendSheet {
         focusNode: _sendAmountFocusNode,
         controller: _sendAmountController,
         cursorColor: StateContainer.of(context).curTheme.primary,
-        inputFormatters: [
+        inputFormatters: _rawAmount != null ? [
           LengthLimitingTextInputFormatter(13),
           _localCurrencyMode
               ? CurrencyFormatter(
@@ -825,7 +838,7 @@ class AppSendSheet {
               : CurrencyFormatter(),
           LocalCurrencyFormatter(
               active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
-        ],
+        ] : [LengthLimitingTextInputFormatter(13)],
         onChanged: (text) {
           // Always reset the error message to be less annoying
           setState(() {
@@ -850,7 +863,8 @@ class AppSendSheet {
           prefixIcon: Container(
             width: 48,
             height: 48,
-            child: FlatButton(
+            child: _rawAmount == null ?
+             FlatButton(
               padding: EdgeInsets.all(14.0),
               highlightColor: StateContainer.of(context).curTheme.primary15,
               splashColor: StateContainer.of(context).curTheme.primary30,
@@ -861,7 +875,7 @@ class AppSendSheet {
                   size: 20, color: StateContainer.of(context).curTheme.primary),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(200.0)),
-            ),
+            ) : SizedBox(),
           ), // MAX Button
           suffixIcon: AnimatedCrossFade(
             duration: Duration(milliseconds: 100),
