@@ -40,9 +40,19 @@ class AppSeedBackupSheet {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
+                      // Sheet handle
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        height: 5,
+                        width: MediaQuery.of(context).size.width * 0.15,
+                        decoration: BoxDecoration(
+                          color: StateContainer.of(context).curTheme.text10,
+                          borderRadius: BorderRadius.circular(100.0),
+                        ),
+                      ),
                       //A container for the header
                       Container(
-                        margin: EdgeInsets.only(top: 30.0),
+                        margin: EdgeInsets.only(top: 15.0),
                         constraints: BoxConstraints(
                             maxWidth: MediaQuery.of(context).size.width - 140),
                         child: Column(
@@ -66,14 +76,15 @@ class AppSeedBackupSheet {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                  margin: EdgeInsets.only(left: smallScreen(context)?35:50, right: smallScreen(context)?35:50),
-                                  child: AutoSizeText(
-                                    AppLocalization.of(context).seedBackupInfo,
-                                    style:
-                                        AppStyles.textStyleParagraph(context),
-                                    maxLines: 4,
-                                    stepGranularity: 0.5,
-                                  ),
+                                margin: EdgeInsets.only(
+                                    left: smallScreen(context) ? 35 : 50,
+                                    right: smallScreen(context) ? 35 : 50),
+                                child: AutoSizeText(
+                                  AppLocalization.of(context).seedBackupInfo,
+                                  style: AppStyles.textStyleParagraph(context),
+                                  maxLines: 4,
+                                  stepGranularity: 0.5,
+                                ),
                               ),
                               new GestureDetector(
                                 onTap: () {
@@ -111,7 +122,11 @@ class AppSeedBackupSheet {
                                                   context)),
                                     ),
                                     Container(
-                                      margin: EdgeInsets.only(top: 5, left:smallScreen(context)?35:50, right: smallScreen(context)?35:50),
+                                      margin: EdgeInsets.only(
+                                          top: 5,
+                                          left: smallScreen(context) ? 35 : 50,
+                                          right:
+                                              smallScreen(context) ? 35 : 50),
                                       child: Text(
                                           AppLocalization.of(context)
                                               .seedCopied,

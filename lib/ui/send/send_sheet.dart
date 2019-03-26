@@ -79,8 +79,11 @@ class AppSendSheet {
     _sendAmountController = new TextEditingController();
     _sendAddressController = new TextEditingController();
     _sendAddressStyle = AppStyles.textStyleAddressText60(context);
-    if (quickSendAmount != null && StateContainer.of(context).wallet.accountBalance >= BigInt.parse(quickSendAmount)) {
-      _sendAmountController.text = NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
+    if (quickSendAmount != null &&
+        StateContainer.of(context).wallet.accountBalance >=
+            BigInt.parse(quickSendAmount)) {
+      _sendAmountController.text =
+          NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
     }
     _contacts = List();
     if (contact != null) {
@@ -124,7 +127,9 @@ class AppSendSheet {
               if (_sendAmountFocusNode.hasFocus) {
                 if (_rawAmount != null) {
                   setState(() {
-                    _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+                    _sendAmountController.text =
+                        NumberUtil.getRawAsUsableString(_rawAmount)
+                            .replaceAll(",", "");
                     _rawAmount = null;
                   });
                 }
@@ -188,53 +193,51 @@ class AppSendSheet {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      // Close Button
-                      Container(
-                        width: 50,
-                        height: 50,
-                        margin: EdgeInsets.only(top: 10.0, left: 10.0),
-                        child: FlatButton(
-                          highlightColor:
-                              StateContainer.of(context).curTheme.text15,
-                          splashColor:
-                              StateContainer.of(context).curTheme.text15,
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Icon(AppIcons.close,
-                              size: 16,
-                              color: StateContainer.of(context).curTheme.text),
-                          padding: EdgeInsets.all(17.0),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(100.0)),
-                          materialTapTargetSize: MaterialTapTargetSize.padded,
-                        ),
+                      //Empty SizedBox
+                      SizedBox(
+                        width: 60,
+                        height: 60,
                       ),
 
-                      // Container for the header, address and balance text
-                      Container(
-                        margin: EdgeInsets.only(top: 30.0),
-                        constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width - 140),
-                        child: Column(
-                          children: <Widget>[
-                            // Header
-                            AutoSizeText(
-                              CaseChange.toUpperCase(
-                                  AppLocalization.of(context).sendFrom,
-                                  context),
-                              style: AppStyles.textStyleHeader(context),
-                              textAlign: TextAlign.center,
-                              maxLines: 1,
-                              stepGranularity: 0.1,
+                      // Container for the header, address and balance text and sheet handle
+                      Column(
+                        children: <Widget>[
+                          // Sheet handle
+                          Container(
+                            margin: EdgeInsets.only(top: 10),
+                            height: 5,
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            decoration: BoxDecoration(
+                              color: StateContainer.of(context).curTheme.text10,
+                              borderRadius: BorderRadius.circular(100.0),
                             ),
-                            // Address Text
-                            Container(
-                              margin: EdgeInsets.only(top: 10.0),
-                              child: _oneOrthreeLineAddressText(context),
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: 15.0),
+                            constraints: BoxConstraints(
+                                maxWidth:
+                                    MediaQuery.of(context).size.width - 140),
+                            child: Column(
+                              children: <Widget>[
+                                // Header
+                                AutoSizeText(
+                                  CaseChange.toUpperCase(
+                                      AppLocalization.of(context).sendFrom,
+                                      context),
+                                  style: AppStyles.textStyleHeader(context),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 1,
+                                  stepGranularity: 0.1,
+                                ),
+                                // Address Text
+                                Container(
+                                  margin: EdgeInsets.only(top: 10.0),
+                                  child: _oneOrthreeLineAddressText(context),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                       //Empty SizedBox
                       SizedBox(
@@ -479,9 +482,14 @@ class AppSendSheet {
                                   } else {
                                     AppSendConfirmSheet(
                                             _localCurrencyMode
-                                              ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(
-                                                  context))
-                                              : _rawAmount == null ? NumberUtil.getAmountAsRaw(_sendAmountController.text) :_rawAmount,
+                                                ? NumberUtil.getAmountAsRaw(
+                                                    _convertLocalCurrencyToCrypto(
+                                                        context))
+                                                : _rawAmount == null
+                                                    ? NumberUtil.getAmountAsRaw(
+                                                        _sendAmountController
+                                                            .text)
+                                                    : _rawAmount,
                                             contact.address,
                                             contactName: contact.name,
                                             maxSend: _isMaxSend(context),
@@ -495,9 +503,13 @@ class AppSendSheet {
                               } else if (validRequest) {
                                 AppSendConfirmSheet(
                                         _localCurrencyMode
-                                            ? NumberUtil.getAmountAsRaw(_convertLocalCurrencyToCrypto(
-                                                context))
-                                            : _rawAmount == null ? NumberUtil.getAmountAsRaw(_sendAmountController.text) :_rawAmount,
+                                            ? NumberUtil.getAmountAsRaw(
+                                                _convertLocalCurrencyToCrypto(
+                                                    context))
+                                            : _rawAmount == null
+                                                ? NumberUtil.getAmountAsRaw(
+                                                    _sendAmountController.text)
+                                                : _rawAmount,
                                         _sendAddressController.text,
                                         maxSend: _isMaxSend(context),
                                         localCurrencyAmount: _localCurrencyMode
@@ -518,7 +530,9 @@ class AppSendSheet {
                                 Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               try {
                                 UIUtil.cancelLockEvent();
-                                BarcodeScanner.scan(StateContainer.of(context).curTheme.qrScanTheme)
+                                BarcodeScanner.scan(StateContainer.of(context)
+                                        .curTheme
+                                        .qrScanTheme)
                                     .then((value) {
                                   Address address = Address(value);
                                   if (!address.isValid()) {
@@ -563,20 +577,40 @@ class AppSendSheet {
                                       // Fill amount
                                       if (address.amount != null) {
                                         if (_localCurrencyMode) {
-                                          toggleLocalCurrency(context, setState);
-                                          _sendAmountController.text = NumberUtil.getRawAsUsableString(address.amount);
+                                          toggleLocalCurrency(
+                                              context, setState);
+                                          _sendAmountController.text =
+                                              NumberUtil.getRawAsUsableString(
+                                                  address.amount);
                                         } else {
                                           setState(() {
                                             _rawAmount = address.amount;
                                             // Indicate that this is a special amount if some digits are not displayed
-                                            if (NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(_rawAmount).toString()) {
-                                              _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll("," ,"");
+                                            if (NumberUtil.getRawAsUsableString(
+                                                        _rawAmount)
+                                                    .replaceAll(",", "") ==
+                                                NumberUtil
+                                                        .getRawAsUsableDecimal(
+                                                            _rawAmount)
+                                                    .toString()) {
+                                              _sendAmountController.text =
+                                                  NumberUtil
+                                                          .getRawAsUsableString(
+                                                              _rawAmount)
+                                                      .replaceAll(",", "");
                                             } else {
-                                              _sendAmountController.text = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(address.amount), digits: 6).toStringAsFixed(6) + "~";
+                                              _sendAmountController
+                                                  .text = NumberUtil.truncateDecimal(
+                                                          NumberUtil
+                                                              .getRawAsUsableDecimal(
+                                                                  address
+                                                                      .amount),
+                                                          digits: 6)
+                                                      .toStringAsFixed(6) +
+                                                  "~";
                                             }
                                           });
                                         }
-                                        
                                       }
                                     });
                                     _sendAddressFocusNode.unfocus();
@@ -769,7 +803,9 @@ class AppSendSheet {
     } else {
       String bananoAmount = _localCurrencyMode
           ? _convertLocalCurrencyToCrypto(context)
-          : _rawAmount == null ? _sendAmountController.text : NumberUtil.getRawAsUsableString(_rawAmount);
+          : _rawAmount == null
+              ? _sendAmountController.text
+              : NumberUtil.getRawAsUsableString(_rawAmount);
       BigInt balanceRaw = StateContainer.of(context).wallet.accountBalance;
       BigInt sendAmount =
           BigInt.tryParse(NumberUtil.getAmountAsRaw(bananoAmount));
@@ -829,16 +865,20 @@ class AppSendSheet {
         focusNode: _sendAmountFocusNode,
         controller: _sendAmountController,
         cursorColor: StateContainer.of(context).curTheme.primary,
-        inputFormatters: _rawAmount != null ? [
-          LengthLimitingTextInputFormatter(13),
-          _localCurrencyMode
-              ? CurrencyFormatter(
-                  decimalSeparator: _localCurrencyFormat.symbols.DECIMAL_SEP,
-                  commaSeparator: _localCurrencyFormat.symbols.GROUP_SEP)
-              : CurrencyFormatter(),
-          LocalCurrencyFormatter(
-              active: _localCurrencyMode, currencyFormat: _localCurrencyFormat)
-        ] : [LengthLimitingTextInputFormatter(13)],
+        inputFormatters: _rawAmount != null
+            ? [
+                LengthLimitingTextInputFormatter(13),
+                _localCurrencyMode
+                    ? CurrencyFormatter(
+                        decimalSeparator:
+                            _localCurrencyFormat.symbols.DECIMAL_SEP,
+                        commaSeparator: _localCurrencyFormat.symbols.GROUP_SEP)
+                    : CurrencyFormatter(),
+                LocalCurrencyFormatter(
+                    active: _localCurrencyMode,
+                    currencyFormat: _localCurrencyFormat)
+              ]
+            : [LengthLimitingTextInputFormatter(13)],
         onChanged: (text) {
           // Always reset the error message to be less annoying
           setState(() {
@@ -863,19 +903,22 @@ class AppSendSheet {
           prefixIcon: Container(
             width: 48,
             height: 48,
-            child: _rawAmount == null ?
-             FlatButton(
-              padding: EdgeInsets.all(14.0),
-              highlightColor: StateContainer.of(context).curTheme.primary15,
-              splashColor: StateContainer.of(context).curTheme.primary30,
-              onPressed: () {
-                toggleLocalCurrency(context, setState);
-              },
-              child: Icon(AppIcons.swapcurrency,
-                  size: 20, color: StateContainer.of(context).curTheme.primary),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(200.0)),
-            ) : SizedBox(),
+            child: _rawAmount == null
+                ? FlatButton(
+                    padding: EdgeInsets.all(14.0),
+                    highlightColor:
+                        StateContainer.of(context).curTheme.primary15,
+                    splashColor: StateContainer.of(context).curTheme.primary30,
+                    onPressed: () {
+                      toggleLocalCurrency(context, setState);
+                    },
+                    child: Icon(AppIcons.swapcurrency,
+                        size: 20,
+                        color: StateContainer.of(context).curTheme.primary),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(200.0)),
+                  )
+                : SizedBox(),
           ), // MAX Button
           suffixIcon: AnimatedCrossFade(
             duration: Duration(milliseconds: 100),

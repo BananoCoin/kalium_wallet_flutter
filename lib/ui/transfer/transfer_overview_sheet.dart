@@ -98,45 +98,44 @@ class AppTransferOverviewSheet {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          //Close Button
-                          Container(
-                            width: 50,
-                            height: 50,
-                            margin: EdgeInsets.only(top: 10.0, left: 10.0),
-                            child: FlatButton(
-                              highlightColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              splashColor:
-                                  StateContainer.of(context).curTheme.text15,
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              child: Icon(AppIcons.close,
-                                  size: 16,
-                                  color:
-                                      StateContainer.of(context).curTheme.text),
-                              padding: EdgeInsets.all(17.0),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(100.0)),
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.padded,
-                            ),
+                          // Emtpy SizedBox
+                          SizedBox(
+                            height: 60,
+                            width: 60,
                           ),
                           // The header
-                          Container(
-                            margin: EdgeInsets.only(top: 30.0),
-                            constraints: BoxConstraints(
-                                maxWidth:
-                                    MediaQuery.of(context).size.width - 140),
-                            child: AutoSizeText(
-                              CaseChange.toUpperCase(
-                                  AppLocalization.of(context).transferHeader,
-                                  context),
-                              style: AppStyles.textStyleHeader(context),
-                              textAlign: TextAlign.center,
-                              maxLines: 2,
-                              stepGranularity: 0.1,
-                            ),
+                          Column(
+                            children: <Widget>[
+                              // Sheet handle
+                              Container(
+                                margin: EdgeInsets.only(top: 10),
+                                height: 5,
+                                width: MediaQuery.of(context).size.width * 0.15,
+                                decoration: BoxDecoration(
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .text10,
+                                  borderRadius: BorderRadius.circular(100.0),
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.only(top: 15.0),
+                                constraints: BoxConstraints(
+                                    maxWidth:
+                                        MediaQuery.of(context).size.width -
+                                            140),
+                                child: AutoSizeText(
+                                  CaseChange.toUpperCase(
+                                      AppLocalization.of(context)
+                                          .transferHeader,
+                                      context),
+                                  style: AppStyles.textStyleHeader(context),
+                                  textAlign: TextAlign.center,
+                                  maxLines: 2,
+                                  stepGranularity: 0.1,
+                                ),
+                              ),
+                            ],
                           ),
                           // Emtpy SizedBox
                           SizedBox(
@@ -154,19 +153,20 @@ class AppTransferOverviewSheet {
                           children: <Widget>[
                             Container(
                               constraints: BoxConstraints(
-                                maxHeight: MediaQuery.of(context).size.height * 0.2,
-                                maxWidth: MediaQuery.of(context).size.width * 0.6
-                              ),
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  maxWidth:
+                                      MediaQuery.of(context).size.width * 0.6),
                               child: Stack(
                                 children: <Widget>[
                                   Center(
                                     child: SvgPicture.asset(
-                                      'assets/transferfunds_illustration_start_paperwalletonly.svg',
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .text45,
-                                      width: MediaQuery.of(context).size.width
-                                    ),
+                                        'assets/transferfunds_illustration_start_paperwalletonly.svg',
+                                        color: StateContainer.of(context)
+                                            .curTheme
+                                            .text45,
+                                        width:
+                                            MediaQuery.of(context).size.width),
                                   ),
                                   Center(
                                     child: SvgPicture.asset(
@@ -265,7 +265,8 @@ class AppTransferOverviewSheet {
     // Get accounts from seed
     List<String> accountsToRequest = getAccountsFromSeed(context, seed);
     // Make balances request
-    StateContainer.of(context).requestAccountsBalances(accountsToRequest, fromTransfer: true);
+    StateContainer.of(context)
+        .requestAccountsBalances(accountsToRequest, fromTransfer: true);
   }
 
   /// Get NUM_SWEEP accounts from seed to request balances for
