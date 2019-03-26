@@ -41,6 +41,8 @@ abstract class BaseTheme {
   Color text30;
   Color text20;
   Color text15;
+  Color text10;
+  Color text5;
   Color text03;
 
   Color overlay90;
@@ -116,6 +118,8 @@ class KaliumTheme extends BaseTheme {
   Color text30 = white.withOpacity(0.3);
   Color text20 = white.withOpacity(0.2);
   Color text15 = white.withOpacity(0.15);
+  Color text10 = white.withOpacity(0.1);
+  Color text05 = white.withOpacity(0.05);
   Color text03 = white.withOpacity(0.03);
 
   Color overlay90 = black.withOpacity(0.9);
@@ -190,6 +194,8 @@ class TitaniumTheme extends BaseTheme {
   Color text30 = white.withOpacity(0.3);
   Color text20 = white.withOpacity(0.2);
   Color text15 = white.withOpacity(0.15);
+  Color text10 = white.withOpacity(0.1);
+  Color text05 = white.withOpacity(0.05);
   Color text03 = white.withOpacity(0.03);
 
   Color overlay90 = black.withOpacity(0.9);
@@ -263,6 +269,8 @@ class IridiumTheme extends BaseTheme {
   Color text30 = grey.withOpacity(0.3);
   Color text20 = grey.withOpacity(0.2);
   Color text15 = grey.withOpacity(0.15);
+  Color text10 = grey.withOpacity(0.1);
+  Color text05 = grey.withOpacity(0.05);
   Color text03 = grey.withOpacity(0.03);
 
   Color overlay90 = black.withOpacity(0.9);
@@ -342,6 +350,8 @@ class BerylliumTheme extends BaseTheme {
   Color text30 = white.withOpacity(0.3);
   Color text20 = white.withOpacity(0.2);
   Color text15 = white.withOpacity(0.15);
+  Color text10 = white.withOpacity(0.1);
+  Color text05 = white.withOpacity(0.05);
   Color text03 = white.withOpacity(0.03);
 
   Color overlay90 = black.withOpacity(0.9);
@@ -415,6 +425,8 @@ class RadiumTheme extends BaseTheme {
   Color text30 = white.withOpacity(0.3);
   Color text20 = white.withOpacity(0.2);
   Color text15 = white.withOpacity(0.15);
+  Color text10 = white.withOpacity(0.1);
+  Color text05 = white.withOpacity(0.05);
   Color text03 = white.withOpacity(0.03);
 
   Color overlay90 = black.withOpacity(0.9);
