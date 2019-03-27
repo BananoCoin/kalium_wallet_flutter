@@ -48,7 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Контакт"),
     "contactInvalid" : MessageLookupByLibrary.simpleMessage("Недопустимое имя"),
     "contactNameHint" : MessageLookupByLibrary.simpleMessage("Введите имя @"),
-    "contactNameMissing" : MessageLookupByLibrary.simpleMessage("Нет контактов для экспорта"),
+    "contactNameMissing" : MessageLookupByLibrary.simpleMessage("Выберите имя для контакта"),
     "contactRemoved" : MessageLookupByLibrary.simpleMessage("%1 удален из контактов! "),
     "contactsHeader" : MessageLookupByLibrary.simpleMessage("Контакты"),
     "contactsImportErr" : MessageLookupByLibrary.simpleMessage("Не удалось импортировать"),

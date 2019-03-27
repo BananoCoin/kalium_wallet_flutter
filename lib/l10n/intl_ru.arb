@@ -222,12 +222,6 @@
         "type": "text",
         "placeholders": {}
     },
-    "contactNameMissing": "Нет контактов для экспорта",
-    "@contactNameMissing": {
-        "description": "contact_export_none",
-        "type": "text",
-        "placeholders": {}
-    },
     "contactExists": "Контакт уже существует",
     "@contactExists": {
         "description": "contact_name_exists",
