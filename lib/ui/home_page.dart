@@ -359,6 +359,7 @@ class _AppHomePageState extends State<AppHomePage>
           });
         }
       });
+      paintQrCode(address: event.account.address);
       if (event.delayPop) {
         Future.delayed(Duration(milliseconds: 300), () {
           Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
@@ -611,24 +612,28 @@ class _AppHomePageState extends State<AppHomePage>
     });
   }
 
+  void paintQrCode({String address}) {
+    QrPainter painter = QrPainter(
+      data: address == null ? StateContainer.of(context).wallet.address : address,
+      version: 6,
+      errorCorrectionLevel: QrErrorCorrectLevel.Q,
+    );
+    painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
+      setState(() {
+        receive = AppReceiveSheet(
+          Container(
+              width: MediaQuery.of(context).size.width / 2.675,
+              child: Image.memory(byteData.buffer.asUint8List())),
+        );
+      });
+    });    
+  }
+
   @override
   Widget build(BuildContext context) {
     // Create QR ahead of time because it improves performance this way
     if (receive == null) {
-      QrPainter painter = QrPainter(
-        data: StateContainer.of(context).wallet.address,
-        version: 6,
-        errorCorrectionLevel: QrErrorCorrectLevel.Q,
-      );
-      painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
-        setState(() {
-          receive = AppReceiveSheet(
-            Container(
-                width: MediaQuery.of(context).size.width / 3.13,
-                child: Image.memory(byteData.buffer.asUint8List())),
-          );
-        });
-      });
+      paintQrCode();
     }
 
     // Download/Retrieve smaller and large monKeys
