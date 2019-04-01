@@ -197,7 +197,7 @@ class AccountDetailsSheet {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: " NANO)",
+                                  text: " BANANO)",
                                   style: TextStyle(
                                     color: StateContainer.of(context)
                                         .curTheme
