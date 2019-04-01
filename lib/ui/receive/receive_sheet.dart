@@ -146,6 +146,7 @@ class AppReceiveSheet {
                           Center(
                             child: Container(
                               margin: EdgeInsets.only(top: devicewidth / 6),
+                              width: devicewidth / 3.12,
                               child: qrCode,
                             ),
                           ),
