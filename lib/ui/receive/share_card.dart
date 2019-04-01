@@ -102,7 +102,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                   StateContainer.of(context).curTheme.primary,
                               fontFamily: "NeueHansKendrick",
                               fontWeight: FontWeight.w500,
-                              fontSize: 50,
+                              fontSize: 49,
                             ),
                           ),
                         ],
