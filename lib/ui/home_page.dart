@@ -363,7 +363,7 @@ class _AppHomePageState extends State<AppHomePage>
         }
       });
       UIUtil.downloadOrRetrieveMonkey(context,
-              StateContainer.of(context).wallet.address, MonkeySize.LARGE)
+              event.account.address, MonkeySize.LARGE)
           .then((result) {
         if (result != null) {
           FileUtil.pngHasValidSignature(result).then((valid) {
