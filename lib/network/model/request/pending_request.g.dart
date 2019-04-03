@@ -22,7 +22,6 @@ Map<String, dynamic> _$PendingRequestToJson(PendingRequest instance) {
     'account': instance.account,
     'source': instance.source,
     'count': instance.count,
-    'include_active': instance.includeActive,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -32,5 +31,6 @@ Map<String, dynamic> _$PendingRequestToJson(PendingRequest instance) {
   }
 
   writeNotNull('threshold', instance.threshold);
+  val['include_active'] = instance.includeActive;
   return val;
 }
