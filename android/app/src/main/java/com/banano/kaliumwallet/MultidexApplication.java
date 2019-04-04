@@ -34,10 +34,10 @@ public class MultidexApplication extends Application {
 
         try {
             Vault.initializeVault(this);
+            generateEncryptionKey();
         } catch (Exception e) {
     
         }
-        generateEncryptionKey();
         FlutterMain.startInitialization(this);
     }
 
