@@ -741,7 +741,6 @@ class StateContainerState extends State<StateContainer> {
     }
     log.fine("Received callback ${json.encode(resp.toJson())}");
     if (resp.isSend != "true") {
-      log.fine("Is not send");
       AccountService.processQueue();
       return;
     }
