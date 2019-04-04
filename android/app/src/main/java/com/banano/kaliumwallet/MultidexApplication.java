@@ -4,11 +4,14 @@
 
 package com.banano.kaliumwallet;
 
+import android.util.Base64;
+
 import android.app.Activity;
 import android.app.Application;
 import androidx.annotation.CallSuper;
 import android.content.Context;
 import androidx.multidex.MultiDex;
+import io.realm.Realm;
 
 import io.flutter.view.FlutterMain;
 
@@ -27,6 +30,14 @@ public class MultidexApplication extends Application {
     @CallSuper
     public void onCreate() {
         super.onCreate();
+        Realm.init(this);
+
+        try {
+            Vault.initializeVault(this);
+        } catch (Exception e) {
+    
+        }
+        generateEncryptionKey();
         FlutterMain.startInitialization(this);
     }
 
@@ -36,5 +47,18 @@ public class MultidexApplication extends Application {
     }
     public void setCurrentActivity(Activity mCurrentActivity) {
         this.mCurrentActivity = mCurrentActivity;
+    }
+
+    /**
+     * generate an encryption key and store in the vault
+     */
+    private void generateEncryptionKey() {
+        if (Vault.getVault().getString(Vault.ENCRYPTION_KEY_NAME, null) == null) {
+        Vault.getVault()
+                .edit()
+                .putString(Vault.ENCRYPTION_KEY_NAME,
+                        Base64.encodeToString(Vault.generateKey(), Base64.DEFAULT))
+                .apply();
+        }
     }
 }
