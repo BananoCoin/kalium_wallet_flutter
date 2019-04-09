@@ -346,6 +346,7 @@ class _AppHomePageState extends State<AppHomePage>
         .listen((event) {
       setState(() {
         _monKey = null;
+        _largeMonkey = null;
         StateContainer.of(context).updateWallet(account: event.account);
       });
       _startAnimation();

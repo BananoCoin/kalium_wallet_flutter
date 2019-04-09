@@ -79,6 +79,11 @@ class _SettingsSheetState extends State<SettingsSheet>
   bool _contactsOpen;
   bool _securityOpen;
   bool _loadingAccounts;
+  bool _monkeysLoaded;
+
+  Widget _mainMonkey;
+  Widget _recentMonkey;
+  Widget _recentSecondMonkey;
 
   List<Contact> _contacts;
 
@@ -171,6 +176,7 @@ class _SettingsSheetState extends State<SettingsSheet>
     _contactsOpen = false;
     _securityOpen = false;
     _loadingAccounts = false;
+    _monkeysLoaded = false;
     this.dbHelper = DBHelper();
     // Determine if they have face or fingerprint enrolled, if not hide the setting
     BiometricUtil.hasBiometrics().then((bool hasBiometrics) {
@@ -252,6 +258,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   StreamSubscription<TransferConfirmEvent> _transferConfirmSub;
   StreamSubscription<TransferCompleteEvent> _transferCompleteSub;
   StreamSubscription<UnlockCallbackEvent> _callbackUnlockSub;
+  StreamSubscription<AccountRecentsUpdatedEvent> _monkeysChangedSub;
 
   void _registerBus() {
     // Contact added bus event
@@ -297,6 +304,12 @@ class _SettingsSheetState extends State<SettingsSheet>
         .listen((event) {
       StateContainer.of(context).unlockCallback();
     });
+    // Monkeys were changed
+    _monkeysChangedSub = EventTaxiImpl.singleton()
+        .registerTo<AccountRecentsUpdatedEvent>()
+        .listen((event) {
+      _getMonkeys();
+    });
   }
 
   void _destroyBus() {
@@ -314,6 +327,9 @@ class _SettingsSheetState extends State<SettingsSheet>
     }
     if (_callbackUnlockSub != null) {
       _callbackUnlockSub.cancel();
+    }
+    if (_monkeysChangedSub != null) {
+      _monkeysChangedSub.cancel();
     }
   }
 
@@ -755,8 +771,30 @@ class _SettingsSheetState extends State<SettingsSheet>
     return true;
   }
 
+  Future<void> _getMonkeys() async {
+    File mainF = await UIUtil.downloadOrRetrieveMonkey(context, StateContainer.of(context).wallet.address, MonkeySize.SMALL);
+    File recentF;
+    File recentLastF;
+    if (StateContainer.of(context).recentLast != null) {
+      recentF = await UIUtil.downloadOrRetrieveMonkey(context, StateContainer.of(context).recentLast.address, MonkeySize.SMALLEST);
+    }
+    if (StateContainer.of(context).recentSecondLast != null) {
+      recentLastF = await UIUtil.downloadOrRetrieveMonkey(context, StateContainer.of(context).recentSecondLast.address, MonkeySize.SMALLEST);
+    }
+    setState(() {
+      _mainMonkey = Image.file(mainF);
+      _recentMonkey = recentF != null ?Image.file(recentF) : null;
+      _recentSecondMonkey = recentLastF != null ? Image.file(recentLastF) : null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // Monkeys
+    if (!_monkeysLoaded) {
+      _monkeysLoaded = true;
+      _getMonkeys();
+    }
     // Drawer in flutter doesn't have a built-in way to push/pop elements
     // on top of it like our Android counterpart. So we can override back button
     // presses and replace the main settings widget with contacts based on a bool
@@ -830,22 +868,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   width: smallScreen(context)?55:70,
                                   height: smallScreen(context)?55:70,
                                   alignment: Alignment(0.5, 0.5),
-                                  child: FutureBuilder(
-                                    future: _getMonkey(
-                                              StateContainer.of(context).selectedAccount,
-                                              context
-                                    ),
-                                    builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                      if (snapshot.hasData && snapshot.data != null) {
-                                        return snapshot.data;
-                                      } else {
-                                        return FlareActor("assets/monkey_placeholder_animation.flr",
+                                  child: _mainMonkey == null ? 
+                                        FlareActor("assets/monkey_placeholder_animation.flr",
                                             animation: "main",
                                             fit: BoxFit.contain,
-                                            color: StateContainer.of(context).curTheme.primary);
-                                      }
-                                    },
-                                  ),
+                                            color: StateContainer.of(context).curTheme.primary)
+                                        : _mainMonkey,
                                 ),
                               ),
                             ),
@@ -892,22 +920,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                         child: Container(
                                           width: 48,
                                           height: 48,
-                                          child: FutureBuilder(
-                                            future: _getMonkey(
-                                                      StateContainer.of(context).recentLast,
-                                                      context
-                                            ),
-                                            builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasData && snapshot.data != null) {
-                                                return snapshot.data;
-                                              } else {
-                                                return FlareActor("assets/monkey_placeholder_animation.flr",
+                                          child: _recentMonkey == null ?
+                                              FlareActor("assets/monkey_placeholder_animation.flr",
                                                     animation: "main",
                                                     fit: BoxFit.contain,
-                                                    color: StateContainer.of(context).curTheme.primary);
-                                              }
-                                            },
-                                          ),
+                                                    color: StateContainer.of(context).curTheme.primary)
+                                                : _recentMonkey,
                                         ),
                                       ),
                                       Center(
@@ -964,22 +982,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                         child: Container(
                                           width: 48,
                                           height: 48,
-                                          child: FutureBuilder(
-                                            future: _getMonkey(
-                                                      StateContainer.of(context).recentSecondLast,
-                                                      context
-                                            ),
-                                            builder: (BuildContext context, AsyncSnapshot snapshot) {
-                                              if (snapshot.hasData && snapshot.data != null) {
-                                                return snapshot.data;
-                                              } else {
-                                                return FlareActor("assets/monkey_placeholder_animation.flr",
+                                          child: _recentSecondMonkey == null ?
+                                              FlareActor("assets/monkey_placeholder_animation.flr",
                                                     animation: "main",
                                                     fit: BoxFit.contain,
-                                                    color: StateContainer.of(context).curTheme.primary);
-                                              }
-                                            },
-                                          ),
+                                                    color: StateContainer.of(context).curTheme.primary)
+                                                : _recentSecondMonkey,
                                         ),
                                       ),
                                       Center(
@@ -1416,24 +1424,6 @@ class _SettingsSheetState extends State<SettingsSheet>
         ),
       ),
     );
-  }
-
-  Future<Widget> _getMonkey(Account account, BuildContext context) async {
-    if (account == null) {
-      return null;
-    } else if (account.address == null) {
-      if (account.selected) {
-        account.address = StateContainer.of(context).wallet.address;
-      } else {
-        return null;
-      }
-    }
-    File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-    if (await FileUtil.pngHasValidSignature(monkeyFile)) {
-      account.monKey = Image.file(monkeyFile);
-      return account.monKey;
-    }
-    return null;
   }
 
   Widget buildContacts(BuildContext context) {

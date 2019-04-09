@@ -23,6 +23,5 @@ class NanoUtil {
       await dbHelper.saveAccount(selectedAcct);
     }
     await StateContainer.of(context).updateWallet(account: selectedAcct);
-    await StateContainer.of(context).getMonkeysForRecentAccounts(context);
   }
 }

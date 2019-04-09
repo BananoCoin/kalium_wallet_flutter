@@ -16,7 +16,7 @@ import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
-enum MonkeySize { SMALL, HOME_SMALL, NORMAL, LARGE, SVG }
+enum MonkeySize { SMALLEST, SMALL, HOME_SMALL, NORMAL, LARGE, SVG }
 
 class UIUtil {
   static Widget threeLineAddressText(BuildContext context, String address,
@@ -411,6 +411,11 @@ class UIUtil {
       case MonkeySize.SMALL:
         prefix = "small_";
         int multiplier = smallScreen(context) ? 55 : 70;
+        size = (multiplier * MediaQuery.of(context).devicePixelRatio).toInt();
+        break;
+      case MonkeySize.SMALLEST:
+        prefix = "smallest_";
+        int multiplier = 48;
         size = (multiplier * MediaQuery.of(context).devicePixelRatio).toInt();
         break;
       case MonkeySize.HOME_SMALL:

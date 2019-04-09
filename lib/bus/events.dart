@@ -27,3 +27,4 @@ export 'transfer_process_response_event.dart';
 export 'unlock_callback_event.dart';
 export 'account_changed_event.dart';
 export 'account_modified_event.dart';
+export 'account_recents_updated_event.dart';

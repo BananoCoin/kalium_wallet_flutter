@@ -439,24 +439,9 @@ class StateContainerState extends State<StateContainer> {
         recentSecondLast = null;
       });
     }
-  }
-
-  Future<void> _getMonkeyForAccount(BuildContext context, Account account) async {
-    if (account != null && account.monKey == null) {
-      File monkeyFile = await UIUtil.downloadOrRetrieveMonkey(
-          context, account.address, MonkeySize.SMALL);
-      if (await FileUtil.pngHasValidSignature(monkeyFile)) {
-        setState(() {
-          account.monKey = Image.file(monkeyFile);
-        });
-      }
-    }
-  }
-
-  Future<void> getMonkeysForRecentAccounts(BuildContext context) async {
-    _getMonkeyForAccount(context, selectedAccount);
-    _getMonkeyForAccount(context, recentLast);
-    _getMonkeyForAccount(context, recentSecondLast);
+    Future.delayed((Duration(milliseconds: 50)), () {
+      EventTaxiImpl.singleton().fire(AccountRecentsUpdatedEvent());
+    });
   }
 
   // Change language
