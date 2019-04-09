@@ -347,9 +347,11 @@ class _AppHomePageState extends State<AppHomePage>
       setState(() {
         _monKey = null;
         _largeMonkey = null;
+        StateContainer.of(context).wallet.loading = true;
+        StateContainer.of(context).wallet.historyLoading = true;
+        _startAnimation();
         StateContainer.of(context).updateWallet(account: event.account);
       });
-      _startAnimation();
       UIUtil.downloadOrRetrieveMonkey(context,
               event.account.address, MonkeySize.HOME_SMALL)
           .then((result) {
