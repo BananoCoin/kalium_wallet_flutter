@@ -229,11 +229,6 @@ class AppSendSheet {
                                   maxLines: 1,
                                   stepGranularity: 0.1,
                                 ),
-                                // Address Text
-                                Container(
-                                  margin: EdgeInsets.only(top: 10.0),
-                                  child: _oneOrthreeLineAddressText(context),
-                                ),
                               ],
                             ),
                           ),
@@ -246,7 +241,11 @@ class AppSendSheet {
                       ),
                     ],
                   ),
-
+                  // Address Text
+                  Container(
+                    margin: EdgeInsets.only(top: 10.0, left: 30, right: 30),
+                    child: _oneOrthreeLineAddressText(context),
+                  ),
                   // A main container that holds everything
                   Expanded(
                     child: Container(
