@@ -148,7 +148,7 @@ class AccountService {
     await _lock.synchronized(() async {
       _isConnected = true;
       _isConnecting = false;
-      log.fine("Received $message");
+      log.fine("Received ${message.length > 30 ? message.substring(0, 30) : message}");
       Map msg = json.decode(message);
       // Determine response type
       if (msg.containsKey("uuid") || (msg.containsKey("frontier") && msg.containsKey("representative_block")) ||

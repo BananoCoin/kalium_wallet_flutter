@@ -865,7 +865,7 @@ class AppSendSheet {
         focusNode: _sendAmountFocusNode,
         controller: _sendAmountController,
         cursorColor: StateContainer.of(context).curTheme.primary,
-        inputFormatters: _rawAmount != null
+        inputFormatters: _rawAmount == null
             ? [
                 LengthLimitingTextInputFormatter(13),
                 _localCurrencyMode
