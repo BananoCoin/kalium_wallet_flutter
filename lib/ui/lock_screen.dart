@@ -126,9 +126,9 @@ class _AppLockScreenState extends State<AppLockScreen> {
   Future<void> _authenticate({bool transitions = false}) async {
     // Test if user is locked out
     // Get duration of lockout
-    DateTime lockUntil = await SharedPrefsUtil.inst.getLockDate();
+    DateTime lockUntil = await sl.get<SharedPrefsUtil>().getLockDate();
     if (lockUntil == null) {
-      await SharedPrefsUtil.inst.resetLockAttempts();
+      await sl.get<SharedPrefsUtil>().resetLockAttempts();
     } else {
       int countDown = lockUntil.difference(DateTime.now().toUtc()).inSeconds;
       // They're not allowed to attempt
@@ -140,7 +140,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
     setState(() {
       _lockedOut = false;
     });
-    SharedPrefsUtil.inst.getAuthMethod().then((authMethod) {
+    sl.get<SharedPrefsUtil>().getAuthMethod().then((authMethod) {
       sl.get<BiometricUtil>().hasBiometrics().then((hasBiometrics) {
         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
           setState(() {

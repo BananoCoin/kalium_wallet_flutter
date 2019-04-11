@@ -519,7 +519,7 @@ class AppChangeRepresentativeSheet {
                                       return;
                                     }
                                     // Authenticate
-                                    SharedPrefsUtil.inst
+                                    sl.get<SharedPrefsUtil>()
                                         .getAuthMethod()
                                         .then((authMethod) {
                                       sl.get<BiometricUtil>().hasBiometrics()
@@ -554,7 +554,7 @@ class AppChangeRepresentativeSheet {
                                                       .wallet
                                                       .openBlock ==
                                                   null) {
-                                                SharedPrefsUtil.inst
+                                                sl.get<SharedPrefsUtil>()
                                                     .setRepresentative(
                                                         _repController.text)
                                                     .then((result) {
@@ -612,7 +612,7 @@ class AppChangeRepresentativeSheet {
                                                           .wallet
                                                           .openBlock ==
                                                       null) {
-                                                    SharedPrefsUtil.inst
+                                                    sl.get<SharedPrefsUtil>()
                                                         .setRepresentative(
                                                             _repController.text)
                                                         .then((result) {

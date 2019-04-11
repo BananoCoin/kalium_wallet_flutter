@@ -82,7 +82,7 @@ class _PinScreenState extends State<PinScreen>
     _pin = "";
     _pinConfirmed = "";
     // Get adjusted failed attempts
-    SharedPrefsUtil.inst.getLockAttempts().then((attempts) {
+    sl.get<SharedPrefsUtil>().getLockAttempts().then((attempts) {
       setState(() {
         _failedAttempts = attempts % MAX_ATTEMPTS;
       });
@@ -96,13 +96,13 @@ class _PinScreenState extends State<PinScreen>
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
           if (type == PinOverlayType.ENTER_PIN) {
-            SharedPrefsUtil.inst.incrementLockAttempts().then((_) {
+            sl.get<SharedPrefsUtil>().incrementLockAttempts().then((_) {
               _failedAttempts++;
               if (_failedAttempts >= MAX_ATTEMPTS) {
                 setState(() {
                   _controller.value = 0;
                 });
-                SharedPrefsUtil.inst.updateLockDate().then((_) {
+                sl.get<SharedPrefsUtil>().updateLockDate().then((_) {
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil('/lock_screen_transition', (Route<dynamic> route) => false);
                 });
@@ -212,7 +212,7 @@ class _PinScreenState extends State<PinScreen>
                   sl.get<HapticUtil>().error();
                   _controller.forward();
                 } else {
-                  SharedPrefsUtil.inst.resetLockAttempts().then((_) {
+                  sl.get<SharedPrefsUtil>().resetLockAttempts().then((_) {
                     successCallback(_pin);
                   });
                 }

@@ -147,7 +147,7 @@ class _AppHomePageState extends State<AppHomePage>
     super.initState();
     _registerBus();
     WidgetsBinding.instance.addObserver(this);
-    SharedPrefsUtil.inst.getPriceConversion().then((result) {
+    sl.get<SharedPrefsUtil>().getPriceConversion().then((result) {
       _priceConversion = result;
     });
     _addSampleContact();
@@ -187,9 +187,9 @@ class _AppHomePageState extends State<AppHomePage>
     _firebaseMessaging.onIosSettingsRegistered
         .listen((IosNotificationSettings settings) {
       if (settings.alert || settings.badge || settings.sound) {
-        SharedPrefsUtil.inst.getNotificationsSet().then((beenSet) {
+        sl.get<SharedPrefsUtil>().getNotificationsSet().then((beenSet) {
           if (!beenSet) {
-            SharedPrefsUtil.inst.setNotificationsOn(true);
+            sl.get<SharedPrefsUtil>().setNotificationsOn(true);
           }
         });
         _firebaseMessaging.getToken().then((String token) {
@@ -198,7 +198,7 @@ class _AppHomePageState extends State<AppHomePage>
           }
         });
       } else {
-        SharedPrefsUtil.inst.setNotificationsOn(false).then((_) {
+        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((_) {
           _firebaseMessaging.getToken().then((String token) {
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: token));
           });
@@ -251,7 +251,7 @@ class _AppHomePageState extends State<AppHomePage>
 
   /// Add donations contact if it hasnt already been added
   Future<void> _addSampleContact() async {
-    bool contactAdded = await SharedPrefsUtil.inst.getFirstContactAdded();
+    bool contactAdded = await sl.get<SharedPrefsUtil>().getFirstContactAdded();
     if (!contactAdded) {
       bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress(
           "ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo");
@@ -263,7 +263,7 @@ class _AppHomePageState extends State<AppHomePage>
       if (nameExists) {
         return;
       }
-      await SharedPrefsUtil.inst.setFirstContactAdded(true);
+      await sl.get<SharedPrefsUtil>().setFirstContactAdded(true);
       Contact c = Contact(
           name: "@KaliumDonations",
           address:
@@ -445,12 +445,12 @@ class _AppHomePageState extends State<AppHomePage>
   StreamSubscription<dynamic> lockStreamListener;
 
   Future<void> setAppLockEvent() async {
-    if (await SharedPrefsUtil.inst.getLock() && !_lockDisabled) {
+    if (await sl.get<SharedPrefsUtil>().getLock() && !_lockDisabled) {
       if (lockStreamListener != null) {
         lockStreamListener.cancel();
       }
       Future<dynamic> delayed = new Future.delayed(
-          (await SharedPrefsUtil.inst.getLockTimeout()).getDuration());
+          (await sl.get<SharedPrefsUtil>().getLockTimeout()).getDuration());
       delayed.then((_) {
         return true;
       });
@@ -1605,21 +1605,21 @@ class _AppHomePageState extends State<AppHomePage>
             _pricesHidden = false;
             _priceConversion = PriceConversion.NANO;
           });
-          SharedPrefsUtil.inst.setPriceConversion(PriceConversion.NANO);
+          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.NANO);
         } else if (_priceConversion == PriceConversion.NANO) {
           // Hide prices
           setState(() {
             _pricesHidden = true;
             _priceConversion = PriceConversion.NONE;
           });
-          SharedPrefsUtil.inst.setPriceConversion(PriceConversion.NONE);
+          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.NONE);
         } else {
           // Cycle to BTC price
           setState(() {
             _pricesHidden = false;
             _priceConversion = PriceConversion.BTC;
           });
-          SharedPrefsUtil.inst.setPriceConversion(PriceConversion.BTC);
+          sl.get<SharedPrefsUtil>().setPriceConversion(PriceConversion.BTC);
         }
       },
       child: Container(

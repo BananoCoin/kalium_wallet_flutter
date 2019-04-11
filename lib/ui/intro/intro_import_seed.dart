@@ -278,7 +278,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                   // If seed valid, log them in
                                   if (NanoSeeds.isValidSeed(
                                       _seedInputController.text)) {
-                                    SharedPrefsUtil.inst
+                                    sl.get<SharedPrefsUtil>()
                                         .setSeedBackedUp(true)
                                         .then((result) {
                                       sl.get<Vault>()

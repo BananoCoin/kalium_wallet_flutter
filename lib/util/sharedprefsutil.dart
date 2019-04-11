@@ -17,10 +17,6 @@ enum PriceConversion { BTC, NANO, NONE }
 
 /// Singleton wrapper for shared preferences
 class SharedPrefsUtil {
-  SharedPrefsUtil._internal();
-  static final SharedPrefsUtil _singleton = new SharedPrefsUtil._internal();
-  static SharedPrefsUtil get inst => _singleton;
-
   // Keys
   static const String first_launch_key = 'fkalium_first_launch';
   static const String seed_backed_up_key = 'fkalium_seed_backup';

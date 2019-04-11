@@ -233,7 +233,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     if (legacySeed != null && NanoSeeds.isValidSeed(legacySeed)) {
       migrated = true;
       await sl.get<Vault>().setSeed(legacySeed);
-      await SharedPrefsUtil.inst.setSeedBackedUp(true);
+      await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
     }
     if (migrated) {
       // Migrate PIN
@@ -270,7 +270,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
   Future checkLoggedIn() async {
     try {
       // iOS key store is persistent, so if this is first launch then we will clear the keystore
-      bool firstLaunch = await SharedPrefsUtil.inst.getFirstLaunch();
+      bool firstLaunch = await sl.get<SharedPrefsUtil>().getFirstLaunch();
       if (firstLaunch) {
         bool migrated = false;
         if (Platform.isAndroid) {
@@ -280,8 +280,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
           await sl.get<Vault>().deleteAll();
         }
       }
-      await SharedPrefsUtil.inst.setFirstLaunch();
-      await SharedPrefsUtil.inst.setFirstLaunch();
+      await sl.get<SharedPrefsUtil>().setFirstLaunch();
+      await sl.get<SharedPrefsUtil>().setFirstLaunch();
       // See if logged in already
       bool isLoggedIn = false;
       var seed = await sl.get<Vault>().getSeed();
@@ -298,7 +298,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       }
 
       if (isLoggedIn) {
-        if (await SharedPrefsUtil.inst.getLock() || await SharedPrefsUtil.inst.shouldLock()) {
+        if (await sl.get<SharedPrefsUtil>().getLock() || await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtil().loginAccount(context);
@@ -316,8 +316,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       /// It will generate a 64-byte secret using the native android "bottlerocketstudios" Vault
       /// This secret is used to encrypt sensitive data and save it in SharedPreferences
       if (Platform.isAndroid && e.toString().contains("flutter_secure")) {
-        if (!(await SharedPrefsUtil.inst.useLegacyStorage())) {
-          await SharedPrefsUtil.inst.setUseLegacyStorage();
+        if (!(await sl.get<SharedPrefsUtil>().useLegacyStorage())) {
+          await sl.get<SharedPrefsUtil>().setUseLegacyStorage();
           checkLoggedIn();
         }
       }
@@ -358,7 +358,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
     setState(() {
       StateContainer.of(context).deviceLocale = Localizations.localeOf(context);
     });
-    SharedPrefsUtil.inst.getLanguage().then((setting) {
+    sl.get<SharedPrefsUtil>().getLanguage().then((setting) {
       setState(() {
         StateContainer.of(context).updateLanguage(setting);
       });
@@ -369,7 +369,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     // This seems to be the earliest place we can retrieve the device Locale
     setLanguage();
-    SharedPrefsUtil.inst.getCurrency(StateContainer.of(context).deviceLocale).then((currency) {
+    sl.get<SharedPrefsUtil>().getCurrency(StateContainer.of(context).deviceLocale).then((currency) {
       StateContainer.of(context).curCurrency = currency;
     });
     return new Scaffold(

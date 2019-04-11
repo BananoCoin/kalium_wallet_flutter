@@ -9,6 +9,7 @@ import 'package:kalium_wallet_flutter/util/legacyutil.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/fileutil.dart';
 import 'package:kalium_wallet_flutter/util/biometrics.dart';
+import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 
 GetIt sl = new GetIt();
 
@@ -22,4 +23,5 @@ void setupServiceLocator() {
   sl.registerLazySingleton<FileUtil>(() => FileUtil());
   sl.registerLazySingleton<BiometricUtil>(() => BiometricUtil());
   sl.registerLazySingleton<Vault>(() => Vault());
+  sl.registerLazySingleton<SharedPrefsUtil>(() => SharedPrefsUtil());
 }

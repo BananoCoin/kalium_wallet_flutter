@@ -153,20 +153,20 @@ class StateContainerState extends State<StateContainer> {
     // Register RxBus
     _registerBus();
     // Set currency locale here for the UI to access
-    SharedPrefsUtil.inst.getCurrency(deviceLocale).then((currency) {
+    sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
       setState(() {
         currencyLocale = currency.getLocale().toString();
         curCurrency = currency;
       });
     });
     // Get default language setting
-    SharedPrefsUtil.inst.getLanguage().then((language) {
+    sl.get<SharedPrefsUtil>().getLanguage().then((language) {
       setState(() {
         curLanguage = language;
       });
     });
     // Get theme default
-    SharedPrefsUtil.inst.getTheme().then((theme) {
+    sl.get<SharedPrefsUtil>().getTheme().then((theme) {
       updateTheme(theme, setIcon: false);
     });
     // Get initial deep link
@@ -285,7 +285,7 @@ class StateContainerState extends State<StateContainer> {
     });
     _fcmUpdateSub =
         EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
-      SharedPrefsUtil.inst.getNotificationsOn().then((enabled) {
+      sl.get<SharedPrefsUtil>().getNotificationsOn().then((enabled) {
         sl.get<AccountService>().sendRequest(FcmUpdateRequest(
             account: wallet.address, fcmToken: event.token, enabled: enabled));
       });
@@ -630,7 +630,7 @@ class StateContainerState extends State<StateContainer> {
       });
     }
     // Set currency locale here for the UI to access
-    SharedPrefsUtil.inst.getCurrency(deviceLocale).then((currency) {
+    sl.get<SharedPrefsUtil>().getCurrency(deviceLocale).then((currency) {
       setState(() {
         currencyLocale = currency.getLocale().toString();
         curCurrency = currency;
@@ -638,7 +638,7 @@ class StateContainerState extends State<StateContainer> {
     });
     // Server gives us a UUID for future requests on subscribe
     if (response.uuid != null) {
-      SharedPrefsUtil.inst.setUuid(response.uuid);
+      sl.get<SharedPrefsUtil>().setUuid(response.uuid);
     }
     setState(() {
       wallet.loading = false;
@@ -770,10 +770,10 @@ class StateContainerState extends State<StateContainer> {
     if (wallet != null &&
         wallet.address != null &&
         Address(wallet.address).isValid()) {
-      String uuid = await SharedPrefsUtil.inst.getUuid();
+      String uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String fcmToken = await FirebaseMessaging().getToken();
       bool notificationsEnabled =
-          await SharedPrefsUtil.inst.getNotificationsOn();
+          await sl.get<SharedPrefsUtil>().getNotificationsOn();
       sl.get<AccountService>().clearQueue();
       pendingBlockMap.clear();
       pendingResponseBlockMap.clear();
@@ -794,10 +794,10 @@ class StateContainerState extends State<StateContainer> {
     if (wallet != null &&
         wallet.address != null &&
         Address(wallet.address).isValid()) {
-      String uuid = await SharedPrefsUtil.inst.getUuid();
+      String uuid = await sl.get<SharedPrefsUtil>().getUuid();
       String fcmToken = await FirebaseMessaging().getToken();
       bool notificationsEnabled =
-          await SharedPrefsUtil.inst.getNotificationsOn();
+          await sl.get<SharedPrefsUtil>().getNotificationsOn();
       sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
           account: wallet.address,

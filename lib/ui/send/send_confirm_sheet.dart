@@ -212,7 +212,7 @@ class AppSendConfirmSheet {
                                       context),
                                   Dimens.BUTTON_TOP_DIMENS, onPressed: () {
                                 // Authenticate
-                                SharedPrefsUtil.inst
+                                sl.get<SharedPrefsUtil>()
                                     .getAuthMethod()
                                     .then((authMethod) {
                                   sl.get<BiometricUtil>().hasBiometrics()

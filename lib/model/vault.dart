@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/util/encrypt.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 
@@ -16,7 +17,7 @@ class Vault {
   final FlutterSecureStorage secureStorage = new FlutterSecureStorage();
 
   Future<bool> legacy() async {
-    return await SharedPrefsUtil.inst.useLegacyStorage();
+    return await sl.get<SharedPrefsUtil>().useLegacyStorage();
   }
 
   // Re-usable
