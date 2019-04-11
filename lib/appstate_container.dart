@@ -14,6 +14,7 @@ import 'package:uni_links/uni_links.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/available_themes.dart';
 import 'package:kalium_wallet_flutter/model/available_currency.dart';
 import 'package:kalium_wallet_flutter/model/available_language.dart';
@@ -43,8 +44,6 @@ import 'package:kalium_wallet_flutter/network/model/response/pending_response.da
 import 'package:kalium_wallet_flutter/network/model/response/pending_response_item.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
-import 'package:kalium_wallet_flutter/util/fileutil.dart';
-import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/network/account_service.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 
@@ -211,9 +210,9 @@ class StateContainerState extends State<StateContainer> {
         EventTaxiImpl.singleton().registerTo<HistoryEvent>().listen((event) {
       AccountHistoryResponse historyResponse = event.response;
       // Special handling if from transfer
-      RequestItem topItem = AccountService.peek();
+      RequestItem topItem = sl.get<AccountService>().peek();
       if (topItem != null && topItem.fromTransfer) {
-        AccountHistoryRequest origRequest = AccountService.pop().request;
+        AccountHistoryRequest origRequest = sl.get<AccountService>().pop().request;
         historyResponse.account = origRequest.account;
         EventTaxiImpl.singleton()
             .fire(TransferAccountHistoryEvent(response: historyResponse));
@@ -250,8 +249,8 @@ class StateContainerState extends State<StateContainer> {
       if (!postedToHome) {
         EventTaxiImpl.singleton().fire(HistoryHomeEvent(items: wallet.history));
       }
-      AccountService.pop();
-      AccountService.processQueue();
+      sl.get<AccountService>().pop();
+      sl.get<AccountService>().processQueue();
       requestPending();
     });
     _priceEventSub =
@@ -272,7 +271,7 @@ class StateContainerState extends State<StateContainer> {
       if (event.status == ConnectionStatus.CONNECTED) {
         requestUpdate();
       } else {
-        AccountService.initCommunication();
+        sl.get<AccountService>().initCommunication();
       }
     });
     _callbackSub =
@@ -294,7 +293,7 @@ class StateContainerState extends State<StateContainer> {
     _fcmUpdateSub =
         EventTaxiImpl.singleton().registerTo<FcmUpdateEvent>().listen((event) {
       SharedPrefsUtil.inst.getNotificationsOn().then((enabled) {
-        AccountService.sendRequest(FcmUpdateRequest(
+        sl.get<AccountService>().sendRequest(FcmUpdateRequest(
             account: wallet.address, fcmToken: event.token, enabled: enabled));
       });
     });
@@ -469,11 +468,11 @@ class StateContainerState extends State<StateContainer> {
   }
 
   void disconnect() {
-    AccountService.reset(suspend: true);
+    sl.get<AccountService>().reset(suspend: true);
   }
 
   void reconnect() {
-    AccountService.initCommunication(unsuspend: true);
+    sl.get<AccountService>().initCommunication(unsuspend: true);
   }
 
   void lockCallback() {
@@ -488,8 +487,8 @@ class StateContainerState extends State<StateContainer> {
   /// When an error is returned from server
   ///
   void handleErrorResponse(ErrorResponse errorResponse) {
-    RequestItem prevRequest = AccountService.pop();
-    AccountService.processQueue();
+    RequestItem prevRequest = sl.get<AccountService>().pop();
+    sl.get<AccountService>().processQueue();
     if (errorResponse.error == null) {
       return;
     }
@@ -527,7 +526,7 @@ class StateContainerState extends State<StateContainer> {
   void handleProcessResponse(ProcessResponse processResponse) {
     // see what type of request sent this response
     bool doUpdate = true;
-    RequestItem lastRequest = AccountService.pop();
+    RequestItem lastRequest = sl.get<AccountService>().pop();
     // We always store the block we send for processing in a Map, get the entire block using hash
     StateBlock previous = pendingResponseBlockMap.remove(processResponse.hash);
     // Standard process response handling (not from seed sweep/transfer)
@@ -567,10 +566,10 @@ class StateContainerState extends State<StateContainer> {
               pendingBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
               pendingResponseBlockMap.putIfAbsent(
                   nextBlock.hash, () => nextBlock);
-              AccountService.queueRequest(ProcessRequest(
+              sl.get<AccountService>().queueRequest(ProcessRequest(
                   block: json.encode(nextBlock.toJson()),
                   subType: nextBlock.subType));
-              AccountService.processQueue();
+              sl.get<AccountService>().processQueue();
             });
           }
         } else if (previous.subType == BlockTypes.CHANGE) {
@@ -589,13 +588,13 @@ class StateContainerState extends State<StateContainer> {
     if (doUpdate) {
       requestUpdate();
     } else {
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     }
   }
 
   // Handle pending response
   void handlePendingResponse(PendingResponse response) {
-    RequestItem prevRequest = AccountService.pop();
+    RequestItem prevRequest = sl.get<AccountService>().pop();
     if (prevRequest != null && prevRequest.fromTransfer) {
       // Transfer/sweep pending requests get different handling
       PendingRequest pendingRequest = prevRequest.request;
@@ -609,7 +608,7 @@ class StateContainerState extends State<StateContainer> {
         handlePendingItem(pendingResponseItemN);
       });
       if (response.blocks.length == 0) {
-        AccountService.processQueue();
+        sl.get<AccountService>().processQueue();
       }
     }
   }
@@ -631,7 +630,7 @@ class StateContainerState extends State<StateContainer> {
       count -= wallet.history.length;
       // Minimum of 10 to request
       count = count <= 0 ? 10 : count;
-      AccountService.requestQueue.forEach((requestItem) {
+      sl.get<AccountService>().requestQueue.forEach((requestItem) {
         if (requestItem.request is AccountHistoryRequest) {
           requestItem.request.count = count;
         }
@@ -664,17 +663,17 @@ class StateContainerState extends State<StateContainer> {
       wallet.nanoPrice = response.nanoPrice.toString();
       wallet.btcPrice = response.btcPrice.toString();
     });
-    AccountService.pop();
-    AccountService.processQueue();
+    sl.get<AccountService>().pop();
+    sl.get<AccountService>().processQueue();
   }
 
   /// Handle blocks_info response
   /// Typically, this preceeds a process request. And we want to update
   /// that request with data from the previous block (which is what we got from this request)
   void handleBlockInfoResponse(BlockInfoItem resp) {
-    RequestItem lastRequest = AccountService.pop();
+    RequestItem lastRequest = sl.get<AccountService>().pop();
     if (lastRequest == null || !(lastRequest.request is BlockInfoRequest)) {
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
       return;
     }
     String hash = lastRequest.request.hash;
@@ -709,12 +708,12 @@ class StateContainerState extends State<StateContainer> {
           pendingBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
         }
       }
-      AccountService.queueRequest(
+      sl.get<AccountService>().queueRequest(
           ProcessRequest(
               block: json.encode(nextBlock.toJson()),
               subType: nextBlock.subType),
           fromTransfer: lastRequest.fromTransfer);
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     });
   }
 
@@ -726,7 +725,7 @@ class StateContainerState extends State<StateContainer> {
     }
     log.fine("Received callback ${json.encode(resp.toJson())}");
     if (resp.isSend != "true") {
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
       return;
     }
     PendingResponseItem pendingItem = PendingResponseItem(
@@ -741,10 +740,10 @@ class StateContainerState extends State<StateContainer> {
         return;
       }
     }
-    if (!AccountService.queueContainsRequestWithHash(item.hash) &&
+    if (!sl.get<AccountService>().queueContainsRequestWithHash(item.hash) &&
         !pendingBlockMap.containsKey(item.hash)) {
       if (wallet.openBlock == null &&
-          !AccountService.queueContainsOpenBlock()) {
+          !sl.get<AccountService>().queueContainsOpenBlock()) {
         requestOpen("0", item.hash, item.amount);
       } else if (pendingBlockMap.length == 0) {
         requestReceive(wallet.frontier, item.hash, item.amount);
@@ -782,19 +781,19 @@ class StateContainerState extends State<StateContainer> {
       String fcmToken = await FirebaseMessaging().getToken();
       bool notificationsEnabled =
           await SharedPrefsUtil.inst.getNotificationsOn();
-      AccountService.clearQueue();
+      sl.get<AccountService>().clearQueue();
       pendingBlockMap.clear();
       pendingResponseBlockMap.clear();
       previousPendingMap.clear();
-      AccountService.queueRequest(SubscribeRequest(
+      sl.get<AccountService>().queueRequest(SubscribeRequest(
           account: wallet.address,
           currency: curCurrency.getIso4217Code(),
           uuid: uuid,
           fcmToken: fcmToken,
           notificationEnabled: notificationsEnabled));
-      AccountService.queueRequest(
+      sl.get<AccountService>().queueRequest(
           AccountHistoryRequest(account: wallet.address));
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     }
   }
 
@@ -806,14 +805,14 @@ class StateContainerState extends State<StateContainer> {
       String fcmToken = await FirebaseMessaging().getToken();
       bool notificationsEnabled =
           await SharedPrefsUtil.inst.getNotificationsOn();
-      AccountService.removeSubscribeHistoryPendingFromQueue();
-      AccountService.queueRequest(SubscribeRequest(
+      sl.get<AccountService>().removeSubscribeHistoryPendingFromQueue();
+      sl.get<AccountService>().queueRequest(SubscribeRequest(
           account: wallet.address,
           currency: curCurrency.getIso4217Code(),
           uuid: uuid,
           fcmToken: fcmToken,
           notificationEnabled: notificationsEnabled));
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     }
   }
 
@@ -822,8 +821,8 @@ class StateContainerState extends State<StateContainer> {
   /// 
   void requestAccountsBalances(List<String> accounts, {bool fromTransfer = false}) {
     if (accounts != null && accounts.isNotEmpty) {
-      AccountService.queueRequest(AccountsBalancesRequest(accounts: accounts), fromTransfer: fromTransfer);
-      AccountService.processQueue();
+      sl.get<AccountService>().queueRequest(AccountsBalancesRequest(accounts: accounts), fromTransfer: fromTransfer);
+      sl.get<AccountService>().processQueue();
     }
   }
 
@@ -831,10 +830,10 @@ class StateContainerState extends State<StateContainer> {
   /// Request account history
   ///
   void requestAccountHistory(String account) {
-    AccountService.queueRequest(
+    sl.get<AccountService>().queueRequest(
         AccountHistoryRequest(account: account, count: 1),
         fromTransfer: true);
-    AccountService.processQueue();
+    sl.get<AccountService>().processQueue();
   }
 
   ///
@@ -842,13 +841,13 @@ class StateContainerState extends State<StateContainer> {
   ///
   void requestPending({String account}) {
     if (wallet.address != null && account == null) {
-      AccountService.queueRequest(PendingRequest(
+      sl.get<AccountService>().queueRequest(PendingRequest(
           account: wallet.address, count: max(wallet.blockCount ?? 0, 10), threshold: receiveMinimum));
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     } else {
-      AccountService.queueRequest(PendingRequest(account: account, count: 20, threshold: receiveMinimum),
+      sl.get<AccountService>().queueRequest(PendingRequest(account: account, count: 20, threshold: receiveMinimum),
           fromTransfer: true);
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     }
   }
 
@@ -875,9 +874,9 @@ class StateContainerState extends State<StateContainer> {
         localCurrencyValue: localCurrencyAmount);
     previousPendingMap.putIfAbsent(previous, () => sendBlock);
 
-    AccountService.queueRequest(BlockInfoRequest(hash: previous),
+    sl.get<AccountService>().queueRequest(BlockInfoRequest(hash: previous),
         fromTransfer: fromTransfer);
-    AccountService.processQueue();
+    sl.get<AccountService>().processQueue();
   }
 
   ///
@@ -906,9 +905,9 @@ class StateContainerState extends State<StateContainer> {
       pendingBlockMap.putIfAbsent(source, () => receiveBlock);
     }
 
-    AccountService.queueRequest(BlockInfoRequest(hash: previous),
+    sl.get<AccountService>().queueRequest(BlockInfoRequest(hash: previous),
         fromTransfer: fromTransfer);
-    AccountService.processQueue();
+    sl.get<AccountService>().processQueue();
   }
 
   ///
@@ -939,11 +938,11 @@ class StateContainerState extends State<StateContainer> {
       }
       pendingResponseBlockMap.putIfAbsent(openBlock.hash, () => openBlock);
 
-      AccountService.queueRequest(
+      sl.get<AccountService>().queueRequest(
           ProcessRequest(
               block: json.encode(openBlock.toJson()), subType: BlockTypes.OPEN),
           fromTransfer: fromTransfer);
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     });
   }
 
@@ -967,10 +966,10 @@ class StateContainerState extends State<StateContainer> {
       changeBlock.sign(result);
       pendingResponseBlockMap.putIfAbsent(changeBlock.hash, () => changeBlock);
 
-      AccountService.queueRequest(ProcessRequest(
+      sl.get<AccountService>().queueRequest(ProcessRequest(
           block: json.encode(changeBlock.toJson()),
           subType: BlockTypes.CHANGE));
-      AccountService.processQueue();
+      sl.get<AccountService>().processQueue();
     });
   }
 
@@ -979,7 +978,7 @@ class StateContainerState extends State<StateContainer> {
       wallet = AppWallet();
     });
     dbHelper.dropAccounts();
-    AccountService.clearQueue();
+    sl.get<AccountService>().clearQueue();
   }
 
   Future<String> _getPrivKey() async {

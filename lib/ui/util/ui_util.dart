@@ -4,7 +4,6 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
