@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/setting_item.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
@@ -46,7 +47,7 @@ class AppSettings {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    width: UIUtil.drawerWidth(context)-100,
+                    width: sl.get<UIUtil>().drawerWidth(context)-100,
                     child: AutoSizeText(
                       heading,
                       style: disabled
@@ -58,7 +59,7 @@ class AppSettings {
                     ),
                   ),
                   Container(
-                    width: UIUtil.drawerWidth(context)-100,
+                    width: sl.get<UIUtil>().drawerWidth(context)-100,
                     child: AutoSizeText(
                       defaultMethod.getDisplayName(context),
                       style: disabled
@@ -115,7 +116,7 @@ class AppSettings {
               ),
             ),
             Container( 
-              width: UIUtil.drawerWidth(context)-100,
+              width: sl.get<UIUtil>().drawerWidth(context)-100,
               child: Text(
                 heading,
                 style: AppStyles.textStyleSettingItemHeader(context),

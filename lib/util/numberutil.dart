@@ -3,15 +3,19 @@ import 'package:intl/intl.dart';
 import 'package:decimal/decimal.dart';
 
 class NumberUtil {
-  static final BigInt rawPerBan = BigInt.from(10).pow(29);
-  static const int maxDecimalDigits = 2; // Max digits after decimal
+  final BigInt rawPerBan = BigInt.from(10).pow(29);
+  static const int DEFAULT_DECIMAL_DIGITS = 2;
+
+  int maxDecimalDigits; // Max digits after decimal
+
+  NumberUtil({this.maxDecimalDigits = DEFAULT_DECIMAL_DIGITS});
 
   /// Convert raw to ban and return as BigDecimal
   ///
   /// @param raw 100000000000000000000000000000
   /// @return Decimal value 1.000000000000000000000000000000
   ///
-  static Decimal getRawAsUsableDecimal(String raw) {
+  Decimal getRawAsUsableDecimal(String raw) {
     Decimal amount = Decimal.parse(raw.toString());
     Decimal result = amount / Decimal.parse(rawPerBan.toString());
     return result;
@@ -22,7 +26,7 @@ class NumberUtil {
   /// @param input 1.059
   /// @return double value 1.05
   ///
-  static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
+  double truncateDecimal(Decimal input, {int digits = DEFAULT_DECIMAL_DIGITS}) {
     return (input * Decimal.fromInt(pow(10, digits))).truncateToDouble() / pow(10, digits);
   }
 
@@ -31,7 +35,7 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @returns 1
   ///
-  static String getRawAsUsableString(String raw) {
+  String getRawAsUsableString(String raw) {
     NumberFormat nf = new NumberFormat.currency(locale:'en_US', decimalDigits: maxDecimalDigits, symbol:'');
     String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));
     var split = asString.split(".");
@@ -62,7 +66,7 @@ class NumberUtil {
   /// @param amount 1.01
   /// @returns  101000000000000000000000000000
   ///
-  static String getAmountAsRaw(String amount) {
+  String getAmountAsRaw(String amount) {
     Decimal asDecimal = Decimal.parse(amount);
     Decimal rawDecimal = Decimal.parse(rawPerBan.toString());
     return (asDecimal * rawDecimal).toString();
@@ -72,7 +76,7 @@ class NumberUtil {
   /// be parsed. Expects "." to be decimal separator
   /// @param amount $1,512
   /// @returns 1.512
-  static String sanitizeNumber(String input) {
+  String sanitizeNumber(String input) {
     String sanitized = "";
     for (int i=0; i< input.length; i++) {
       try {

@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
 
@@ -38,7 +39,7 @@ class AccountHistoryResponseItem {
    * Return amount formatted for use in the UI
    */
   String getFormattedAmount() {
-    return NumberUtil.getRawAsUsableString(amount);
+    return sl.get<NumberUtil>().getRawAsUsableString(amount);
   }
 
   factory AccountHistoryResponseItem.fromJson(Map<String, dynamic> json) => _$AccountHistoryResponseItemFromJson(json);

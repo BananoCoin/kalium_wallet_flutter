@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
@@ -110,7 +111,7 @@ class AppSeedBackupSheet {
                                             .backgroundDarkest,
                                         borderRadius: BorderRadius.circular(25),
                                       ),
-                                      child: UIUtil.threeLineSeedText(
+                                      child: sl.get<UIUtil>().threeLineSeedText(
                                           context,
                                           _seedHidden
                                               ? _placeholderSeed

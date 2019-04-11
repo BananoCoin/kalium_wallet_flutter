@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
@@ -60,13 +61,13 @@ class AppSendSheet {
   // A method for deciding if 1 or 3 line address text should be used
   _oneOrthreeLineAddressText(BuildContext context) {
     if (MediaQuery.of(context).size.height < 667)
-      return UIUtil.oneLineAddressText(
+      return sl.get<UIUtil>().oneLineAddressText(
         context,
         StateContainer.of(context).wallet.address,
         type: OneLineAddressTextType.PRIMARY60,
       );
     else
-      return UIUtil.threeLineAddressText(
+      return sl.get<UIUtil>().threeLineAddressText(
         context,
         StateContainer.of(context).wallet.address,
         type: ThreeLineAddressTextType.PRIMARY60,
@@ -83,7 +84,7 @@ class AppSendSheet {
         StateContainer.of(context).wallet.accountBalance >=
             BigInt.parse(quickSendAmount)) {
       _sendAmountController.text =
-          NumberUtil.getRawAsUsableString(quickSendAmount).replaceAll(",", "");
+          sl.get<NumberUtil>().getRawAsUsableString(quickSendAmount).replaceAll(",", "");
     }
     _contacts = List();
     if (contact != null) {
@@ -128,7 +129,7 @@ class AppSendSheet {
                 if (_rawAmount != null) {
                   setState(() {
                     _sendAmountController.text =
-                        NumberUtil.getRawAsUsableString(_rawAmount)
+                        sl.get<NumberUtil>().getRawAsUsableString(_rawAmount)
                             .replaceAll(",", "");
                     _rawAmount = null;
                   });
@@ -481,11 +482,11 @@ class AppSendSheet {
                                   } else {
                                     AppSendConfirmSheet(
                                             _localCurrencyMode
-                                                ? NumberUtil.getAmountAsRaw(
+                                                ? sl.get<NumberUtil>().getAmountAsRaw(
                                                     _convertLocalCurrencyToCrypto(
                                                         context))
                                                 : _rawAmount == null
-                                                    ? NumberUtil.getAmountAsRaw(
+                                                    ? sl.get<NumberUtil>().getAmountAsRaw(
                                                         _sendAmountController
                                                             .text)
                                                     : _rawAmount,
@@ -502,11 +503,11 @@ class AppSendSheet {
                               } else if (validRequest) {
                                 AppSendConfirmSheet(
                                         _localCurrencyMode
-                                            ? NumberUtil.getAmountAsRaw(
+                                            ? sl.get<NumberUtil>().getAmountAsRaw(
                                                 _convertLocalCurrencyToCrypto(
                                                     context))
                                             : _rawAmount == null
-                                                ? NumberUtil.getAmountAsRaw(
+                                                ? sl.get<NumberUtil>().getAmountAsRaw(
                                                     _sendAmountController.text)
                                                 : _rawAmount,
                                         _sendAddressController.text,
@@ -528,14 +529,14 @@ class AppSendSheet {
                                 AppLocalization.of(context).scanQrCode,
                                 Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               try {
-                                UIUtil.cancelLockEvent();
+                                sl.get<UIUtil>().cancelLockEvent();
                                 BarcodeScanner.scan(StateContainer.of(context)
                                         .curTheme
                                         .qrScanTheme)
                                     .then((value) {
                                   Address address = Address(value);
                                   if (!address.isValid()) {
-                                    UIUtil.showSnackbar(
+                                    sl.get<UIUtil>().showSnackbar(
                                         AppLocalization.of(context)
                                             .qrInvalidAddress,
                                         context);
@@ -579,28 +580,28 @@ class AppSendSheet {
                                           toggleLocalCurrency(
                                               context, setState);
                                           _sendAmountController.text =
-                                              NumberUtil.getRawAsUsableString(
+                                              sl.get<NumberUtil>().getRawAsUsableString(
                                                   address.amount);
                                         } else {
                                           setState(() {
                                             _rawAmount = address.amount;
                                             // Indicate that this is a special amount if some digits are not displayed
-                                            if (NumberUtil.getRawAsUsableString(
+                                            if (sl.get<NumberUtil>().getRawAsUsableString(
                                                         _rawAmount)
                                                     .replaceAll(",", "") ==
-                                                NumberUtil
+                                                sl.get<NumberUtil>()
                                                         .getRawAsUsableDecimal(
                                                             _rawAmount)
                                                     .toString()) {
                                               _sendAmountController.text =
-                                                  NumberUtil
+                                                  sl.get<NumberUtil>()
                                                           .getRawAsUsableString(
                                                               _rawAmount)
                                                       .replaceAll(",", "");
                                             } else {
                                               _sendAmountController
-                                                  .text = NumberUtil.truncateDecimal(
-                                                          NumberUtil
+                                                  .text = sl.get<NumberUtil>().truncateDecimal(
+                                                          sl.get<NumberUtil>()
                                                               .getRawAsUsableDecimal(
                                                                   address
                                                                       .amount),
@@ -638,18 +639,18 @@ class AppSendSheet {
 
   String _convertLocalCurrencyToCrypto(BuildContext context) {
     String convertedAmt = _sendAmountController.text.replaceAll(",", ".");
-    convertedAmt = NumberUtil.sanitizeNumber(convertedAmt);
+    convertedAmt = sl.get<NumberUtil>().sanitizeNumber(convertedAmt);
     if (convertedAmt.isEmpty) {
       return "";
     }
     Decimal valueLocal = Decimal.parse(convertedAmt);
     Decimal conversion = Decimal.parse(
         StateContainer.of(context).wallet.localCurrencyConversion);
-    return NumberUtil.truncateDecimal(valueLocal / conversion).toString();
+    return sl.get<NumberUtil>().truncateDecimal(valueLocal / conversion).toString();
   }
 
   String _convertCryptoToLocalCurrency(BuildContext context) {
-    String convertedAmt = NumberUtil.sanitizeNumber(_sendAmountController.text);
+    String convertedAmt = sl.get<NumberUtil>().sanitizeNumber(_sendAmountController.text);
     if (convertedAmt.isEmpty) {
       return "";
     }
@@ -657,7 +658,7 @@ class AppSendSheet {
     Decimal conversion = Decimal.parse(
         StateContainer.of(context).wallet.localCurrencyConversion);
     convertedAmt =
-        NumberUtil.truncateDecimal(valueCrypto * conversion).toString();
+        sl.get<NumberUtil>().truncateDecimal(valueCrypto * conversion).toString();
     convertedAmt =
         convertedAmt.replaceAll(".", _localCurrencyFormat.symbols.DECIMAL_SEP);
     convertedAmt = _localCurrencyFormat.currencySymbol + convertedAmt;
@@ -688,11 +689,11 @@ class AppSendSheet {
       if (_localCurrencyMode) {
         // Sanitize currency values into plain integer representations
         textField = textField.replaceAll(",", ".");
-        String sanitizedTextField = NumberUtil.sanitizeNumber(textField);
+        String sanitizedTextField = sl.get<NumberUtil>().sanitizeNumber(textField);
         balance =
             balance.replaceAll(_localCurrencyFormat.symbols.GROUP_SEP, "");
         balance = balance.replaceAll(",", ".");
-        String sanitizedBalance = NumberUtil.sanitizeNumber(balance);
+        String sanitizedBalance = sl.get<NumberUtil>().sanitizeNumber(balance);
         textFieldInt =
             (Decimal.parse(sanitizedTextField) * Decimal.fromInt(100)).toInt();
         balanceInt =
@@ -804,10 +805,10 @@ class AppSendSheet {
           ? _convertLocalCurrencyToCrypto(context)
           : _rawAmount == null
               ? _sendAmountController.text
-              : NumberUtil.getRawAsUsableString(_rawAmount);
+              : sl.get<NumberUtil>().getRawAsUsableString(_rawAmount);
       BigInt balanceRaw = StateContainer.of(context).wallet.accountBalance;
       BigInt sendAmount =
-          BigInt.tryParse(NumberUtil.getAmountAsRaw(bananoAmount));
+          BigInt.tryParse(sl.get<NumberUtil>().getAmountAsRaw(bananoAmount));
       if (sendAmount == null || sendAmount == BigInt.zero) {
         isValid = false;
         setState(() {
@@ -949,7 +950,7 @@ class AppSendSheet {
                         _localCurrencyFormat.symbols.GROUP_SEP, "");
                     localAmount = localAmount.replaceAll(
                         _localCurrencyFormat.symbols.DECIMAL_SEP, ".");
-                    localAmount = NumberUtil.sanitizeNumber(localAmount)
+                    localAmount = sl.get<NumberUtil>().sanitizeNumber(localAmount)
                         .replaceAll(
                             ".", _localCurrencyFormat.symbols.DECIMAL_SEP);
                     _sendAmountController.text =
@@ -1219,7 +1220,7 @@ class AppSendSheet {
                   FocusScope.of(context).requestFocus(_sendAddressFocusNode);
                 });
               },
-              child: UIUtil.threeLineAddressText(
+              child: sl.get<UIUtil>().threeLineAddressText(
                   context, _sendAddressController.text),
             ),
     );

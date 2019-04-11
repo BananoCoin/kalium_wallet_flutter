@@ -9,6 +9,7 @@ import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
@@ -164,7 +165,7 @@ class AppAccountsSheet {
                   if (account.address == null && account.selected) {
                     account.address = StateContainer.of(context).wallet.address;
                   }
-                  File monkeyF = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+                  File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
                   if (await FileUtil.pngHasValidSignature(monkeyF)) {
                     setState(() {
                       account.monKey = Image.file(monkeyF);
@@ -371,7 +372,7 @@ class AppAccountsSheet {
   }
 
   Future<void> _getMonkey(BuildContext context, Account account, StateSetter setState) async {
-    File monkeyF = await UIUtil.downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+    File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
     if (await FileUtil.pngHasValidSignature(monkeyF)) {
       setState(() {
         account.monKey = Image.file(monkeyF);
@@ -492,7 +493,7 @@ class AppAccountsSheet {
                             // Main balance text
                             TextSpan(
                               text: account.balance != null
-                                  ? NumberUtil.getRawAsUsableString(
+                                  ? sl.get<NumberUtil>().getRawAsUsableString(
                                       account.balance)
                                   : "",
                               style: TextStyle(

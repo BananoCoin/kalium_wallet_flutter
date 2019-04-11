@@ -4,6 +4,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/network/model/response/account_balance_item.dart';
@@ -84,7 +85,7 @@ class AppTransferConfirmSheet {
       privKeyBalanceMap.remove(account);
     });
     totalAsReadableAmount =
-        NumberUtil.getRawAsUsableString(totalToTransfer.toString());
+        sl.get<NumberUtil>().getRawAsUsableString(totalToTransfer.toString());
 
     // Register event buses (this will probably get a little messy)
     // Receiving account history

@@ -7,6 +7,7 @@ import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
@@ -35,10 +36,10 @@ class AppSendConfirmSheet {
       {bool maxSend = false, String contactName, String localCurrencyAmount}) {
     _amountRaw = amount;
     // Indicate that this is a special amount if some digits are not displayed
-    if (NumberUtil.getRawAsUsableString(_amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(_amountRaw).toString()) {
-      _amount = NumberUtil.getRawAsUsableString(_amountRaw);
+    if (sl.get<NumberUtil>().getRawAsUsableString(_amountRaw).replaceAll(",", "") == sl.get<NumberUtil>().getRawAsUsableDecimal(_amountRaw).toString()) {
+      _amount = sl.get<NumberUtil>().getRawAsUsableString(_amountRaw);
     } else {
-      _amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(_amountRaw), digits: 6).toStringAsFixed(6) + "~";
+      _amount = sl.get<NumberUtil>().truncateDecimal(sl.get<NumberUtil>().getRawAsUsableDecimal(_amountRaw), digits: 6).toStringAsFixed(6) + "~";
     }
     _destination = destinaton;
     _contactName = contactName;
@@ -62,7 +63,7 @@ class AppSendConfirmSheet {
       if (animationOpen) {
         Navigator.of(context).pop();
       }
-      UIUtil.showSnackbar(AppLocalization.of(context).sendError, context);
+      sl.get<UIUtil>().showSnackbar(AppLocalization.of(context).sendError, context);
       Navigator.of(context).pop();
     });
 
@@ -188,7 +189,7 @@ class AppSendConfirmSheet {
                                     .backgroundDarkest,
                                 borderRadius: BorderRadius.circular(25),
                               ),
-                              child: UIUtil.threeLineAddressText(
+                              child: sl.get<UIUtil>().threeLineAddressText(
                                   context, _destination,
                                   contactName: _contactName)),
                         ],

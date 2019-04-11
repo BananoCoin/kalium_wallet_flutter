@@ -7,6 +7,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/model/db/account.dart';
@@ -161,8 +162,8 @@ class AccountDetailsSheet {
                         Container(
                           margin: EdgeInsets.only(top: 10.0),
                           child: account.address != null
-                            ? UIUtil.threeLineAddressText(context, account.address, type: ThreeLineAddressTextType.PRIMARY60)
-                            : account.selected ? UIUtil.threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60) : SizedBox()
+                            ? sl.get<UIUtil>().threeLineAddressText(context, account.address, type: ThreeLineAddressTextType.PRIMARY60)
+                            : account.selected ? sl.get<UIUtil>().threeLineAddressText(context, StateContainer.of(context).wallet.address, type: ThreeLineAddressTextType.PRIMARY60) : SizedBox()
                             ,
                         ),
                         // Balance Text
@@ -186,7 +187,7 @@ class AccountDetailsSheet {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: NumberUtil.getRawAsUsableString(account.balance == null ? StateContainer.of(context).wallet.accountBalance.toString() : account.balance),
+                                  text: sl.get<NumberUtil>().getRawAsUsableString(account.balance == null ? StateContainer.of(context).wallet.accountBalance.toString() : account.balance),
                                   style: TextStyle(
                                     color: StateContainer.of(context)
                                         .curTheme

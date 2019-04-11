@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/rendering.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
-import 'package:kalium_wallet_flutter/app_icons.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
@@ -105,7 +105,7 @@ class AppReceiveSheet {
                           ),
                           Container(
                             margin: EdgeInsets.only(top: 15.0),
-                            child: UIUtil.threeLineAddressText(
+                            child: sl.get<UIUtil>().threeLineAddressText(
                                 context, _wallet.address,
                                 type: ThreeLineAddressTextType.PRIMARY60),
                           ),
@@ -213,7 +213,7 @@ class AppReceiveSheet {
                                   _capturePng().then((byteData) {
                                     if (byteData != null) {
                                       f.writeAsBytes(byteData).then((file) {
-                                        UIUtil.cancelLockEvent();
+                                        sl.get<UIUtil>().cancelLockEvent();
                                         Share.shareFile(file,
                                             text: StateContainer.of(context)
                                                 .wallet

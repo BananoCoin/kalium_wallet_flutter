@@ -4,6 +4,7 @@ import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
@@ -21,10 +22,10 @@ class AppSendCompleteSheet {
       {String localAmount}) {
     _amountRaw = amount;
     // Indicate that this is a special amount if some digits are not displayed
-    if (NumberUtil.getRawAsUsableString(_amountRaw).replaceAll(",", "") == NumberUtil.getRawAsUsableDecimal(_amountRaw).toString()) {
-      _amount = NumberUtil.getRawAsUsableString(_amountRaw);
+    if (sl.get<NumberUtil>().getRawAsUsableString(_amountRaw).replaceAll(",", "") == sl.get<NumberUtil>().getRawAsUsableDecimal(_amountRaw).toString()) {
+      _amount = sl.get<NumberUtil>().getRawAsUsableString(_amountRaw);
     } else {
-      _amount = NumberUtil.truncateDecimal(NumberUtil.getRawAsUsableDecimal(_amountRaw), digits: 6).toStringAsFixed(6) + "~";
+      _amount = sl.get<NumberUtil>().truncateDecimal(sl.get<NumberUtil>().getRawAsUsableDecimal(_amountRaw), digits: 6).toStringAsFixed(6) + "~";
     }
     _destination = destinaton;
     _contactName = contactName;
@@ -155,7 +156,7 @@ class AppSendCompleteSheet {
                                   .backgroundDarkest,
                               borderRadius: BorderRadius.circular(25),
                             ),
-                            child: UIUtil.threeLineAddressText(
+                            child: sl.get<UIUtil>().threeLineAddressText(
                                 context, _destination,
                                 type: ThreeLineAddressTextType.SUCCESS,
                                 contactName: _contactName)),

@@ -7,6 +7,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
@@ -135,7 +136,7 @@ class AddContactSheet {
                                     StateContainer.of(context).curTheme.text15,
                                 onPressed: () {
                                   try {
-                                    UIUtil.cancelLockEvent();
+                                    sl.get<UIUtil>().cancelLockEvent();
                                     BarcodeScanner.scan(
                                             StateContainer.of(context)
                                                 .curTheme
@@ -143,7 +144,7 @@ class AddContactSheet {
                                         .then((value) {
                                       Address address = Address(value);
                                       if (!address.isValid()) {
-                                        UIUtil.showSnackbar(
+                                        sl.get<UIUtil>().showSnackbar(
                                             AppLocalization.of(context)
                                                 .qrInvalidAddress,
                                             context);
@@ -446,7 +447,7 @@ class AddContactSheet {
                                                 _addressFocusNode);
                                           });
                                         },
-                                        child: UIUtil.threeLineAddressText(
+                                        child: sl.get<UIUtil>().threeLineAddressText(
                                             context,
                                             address != null
                                                 ? address
@@ -499,7 +500,7 @@ class AddContactSheet {
                                     EventTaxiImpl.singleton().fire(
                                         ContactAddedEvent(contact: newContact));
                                   }
-                                  UIUtil.showSnackbar(
+                                  sl.get<UIUtil>().showSnackbar(
                                       AppLocalization.of(context)
                                           .contactAdded
                                           .replaceAll("%1", newContact.name),

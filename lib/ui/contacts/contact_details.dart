@@ -10,6 +10,7 @@ import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
@@ -84,7 +85,7 @@ class ContactDetailsSheet {
                                       ContactRemovedEvent(contact: contact));
                                   EventTaxiImpl.singleton().fire(
                                       ContactModifiedEvent(contact: contact));
-                                  UIUtil.showSnackbar(
+                                  sl.get<UIUtil>().showSnackbar(
                                       AppLocalization.of(context)
                                           .contactRemoved
                                           .replaceAll("%1", contact.name),
@@ -139,7 +140,7 @@ class ContactDetailsSheet {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return UIUtil.showAccountWebview(
+                              return sl.get<UIUtil>().showAccountWebview(
                                   context, contact.address);
                             }));
                           },
@@ -228,7 +229,7 @@ class ContactDetailsSheet {
                                   .backgroundDarkest,
                               borderRadius: BorderRadius.circular(25),
                             ),
-                            child: UIUtil.threeLineAddressText(
+                            child: sl.get<UIUtil>().threeLineAddressText(
                                 context, contact.address,
                                 type: _addressCopied
                                     ? ThreeLineAddressTextType.SUCCESS_FULL

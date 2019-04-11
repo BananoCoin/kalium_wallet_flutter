@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_nano_core/flutter_nano_core.dart';
-import 'package:kalium_wallet_flutter/app_icons.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
@@ -61,7 +61,7 @@ class AppTransferOverviewSheet {
         privKeyBalanceMap.remove(account);
       });
       if (privKeyBalanceMap.length == 0) {
-        UIUtil.showSnackbar(
+        sl.get<UIUtil>().showSnackbar(
             AppLocalization.of(context).transferNoFunds, context);
         return;
       }
@@ -208,13 +208,13 @@ class AppTransferOverviewSheet {
                             AppLocalization.of(context).scanQrCode,
                             Dimens.BUTTON_TOP_DIMENS,
                             onPressed: () {
-                              UIUtil.cancelLockEvent();
+                              sl.get<UIUtil>().cancelLockEvent();
                               BarcodeScanner.scan(StateContainer.of(context)
                                       .curTheme
                                       .qrScanTheme)
                                   .then((value) {
                                 if (!NanoSeeds.isValidSeed(value)) {
-                                  UIUtil.showSnackbar(
+                                  sl.get<UIUtil>().showSnackbar(
                                       AppLocalization.of(context).qrInvalidSeed,
                                       context);
                                   return;

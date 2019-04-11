@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:path/path.dart' as path;
@@ -19,6 +18,7 @@ import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
@@ -94,13 +94,13 @@ class _SettingsSheetState extends State<SettingsSheet>
   // Called if transfer fails
   void transferError() {
     Navigator.of(context).pop();
-    UIUtil.showSnackbar(AppLocalization.of(context).transferError, context);
+    sl.get<UIUtil>().showSnackbar(AppLocalization.of(context).transferError, context);
   }
 
   Future<void> _exportContacts() async {
     List<Contact> contacts = await dbHelper.getContacts();
     if (contacts.length == 0) {
-      UIUtil.showSnackbar(
+      sl.get<UIUtil>().showSnackbar(
           AppLocalization.of(context).noContactsExport, context);
       return;
     }
@@ -114,17 +114,17 @@ class _SettingsSheetState extends State<SettingsSheet>
     Directory baseDirectory = await getApplicationDocumentsDirectory();
     File contactsFile = File("${baseDirectory.path}/$filename");
     await contactsFile.writeAsString(json.encode(jsonList));
-    UIUtil.cancelLockEvent();
+    sl.get<UIUtil>().cancelLockEvent();
     Share.shareFile(contactsFile);
   }
 
   Future<void> _importContacts() async {
-    UIUtil.cancelLockEvent();
+    sl.get<UIUtil>().cancelLockEvent();
     String filePath = await FilePicker.getFilePath(
         type: FileType.CUSTOM, fileExtension: "txt");
     File f = File(filePath);
     if (!await f.exists()) {
-      UIUtil.showSnackbar(
+      sl.get<UIUtil>().showSnackbar(
           AppLocalization.of(context).contactsImportErr, context);
       return;
     }
@@ -153,18 +153,18 @@ class _SettingsSheetState extends State<SettingsSheet>
         _updateContacts();
         EventTaxiImpl.singleton().fire(
             ContactModifiedEvent(contact: Contact(name: "", address: "")));
-        UIUtil.showSnackbar(
+        sl.get<UIUtil>().showSnackbar(
             AppLocalization.of(context)
                 .contactsImportSuccess
                 .replaceAll("%1", numSaved.toString()),
             context);
       } else {
-        UIUtil.showSnackbar(
+        sl.get<UIUtil>().showSnackbar(
             AppLocalization.of(context).noContactsImport, context);
       }
     } catch (e) {
       log.severe(e.toString());
-      UIUtil.showSnackbar(
+      sl.get<UIUtil>().showSnackbar(
           AppLocalization.of(context).contactsImportErr, context);
       return;
     }
@@ -295,7 +295,7 @@ class _SettingsSheetState extends State<SettingsSheet>
         .listen((event) {
       StateContainer.of(context).requestUpdate();
       AppTransferCompleteSheet(
-              NumberUtil.getRawAsUsableString(event.amount.toString()))
+              sl.get<NumberUtil>().getRawAsUsableString(event.amount.toString()))
           .mainBottomSheet(context);
     });
     // Unlock callback
@@ -374,7 +374,7 @@ class _SettingsSheetState extends State<SettingsSheet>
     for (Contact c in _contacts) {
       // Download monKeys if not existing
       if (c.monkeyPath == null || c.monkeyPath.contains(".png")) {
-        File svgFile = await UIUtil.downloadOrRetrieveMonkey(
+        File svgFile = await sl.get<UIUtil>().downloadOrRetrieveMonkey(
             context, c.address, MonkeySize.SVG);
         // TODO - Validate SVG
         setState(() {
@@ -383,7 +383,7 @@ class _SettingsSheetState extends State<SettingsSheet>
         await dbHelper.setMonkeyForContact(c, c.monkeyPath);
       }
       if (c.monkeyImage == null) {
-        File pngFile = await UIUtil.downloadOrRetrieveMonkey(
+        File pngFile = await sl.get<UIUtil>().downloadOrRetrieveMonkey(
             context, c.address, MonkeySize.SMALL);
         if (await FileUtil.pngHasValidSignature(pngFile)) {
           setState(() {
@@ -772,14 +772,14 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _getMonkeys() async {
-    File mainF = await UIUtil.downloadOrRetrieveMonkey(context, StateContainer.of(context).wallet.address, MonkeySize.SMALL);
+    File mainF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, StateContainer.of(context).wallet.address, MonkeySize.SMALL);
     File recentF;
     File recentLastF;
     if (StateContainer.of(context).recentLast != null) {
-      recentF = await UIUtil.downloadOrRetrieveMonkey(context, StateContainer.of(context).recentLast.address, MonkeySize.SMALLEST);
+      recentF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, StateContainer.of(context).recentLast.address, MonkeySize.SMALLEST);
     }
     if (StateContainer.of(context).recentSecondLast != null) {
-      recentLastF = await UIUtil.downloadOrRetrieveMonkey(context, StateContainer.of(context).recentSecondLast.address, MonkeySize.SMALLEST);
+      recentLastF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, StateContainer.of(context).recentSecondLast.address, MonkeySize.SMALLEST);
     }
     setState(() {
       _mainMonkey = Image.file(mainF);
@@ -1374,7 +1374,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                  return UIUtil.showWebview(context,
+                                  return sl.get<UIUtil>().showWebview(context,
                                       AppLocalization.of(context).privacyUrl);
                                 }));
                               },
@@ -1388,7 +1388,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
                                     builder: (BuildContext context) {
-                                  return UIUtil.showWebview(context,
+                                  return sl.get<UIUtil>().showWebview(context,
                                       AppLocalization.of(context).eulaUrl);
                                 }));
                               },

@@ -14,11 +14,11 @@ import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
-
 enum MonkeySize { SMALLEST, SMALL, HOME_SMALL, NORMAL, LARGE, SVG }
 
-class UIUtil {
-  static Widget threeLineAddressText(BuildContext context, String address,
+class UIUtil{
+
+  Widget threeLineAddressText(BuildContext context, String address,
       {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY,
       String contactName}) {
     String stringPartOne = address.substring(0, 11);
@@ -244,7 +244,7 @@ class UIUtil {
     }
   }
 
-  static Widget oneLineAddressText(BuildContext context, String address,
+  Widget oneLineAddressText(BuildContext context, String address,
       {OneLineAddressTextType type = OneLineAddressTextType.PRIMARY}) {
     String stringPartOne = address.substring(0, 11);
     String stringPartFive = address.substring(58, 64);
@@ -329,7 +329,7 @@ class UIUtil {
     }
   }
 
-  static Widget threeLineSeedText(BuildContext context, String address, {TextStyle textStyle}) {
+  Widget threeLineSeedText(BuildContext context, String address, {TextStyle textStyle}) {
     textStyle = textStyle ?? AppStyles.textStyleSeed(context);
     String stringPartOne = address.substring(0, 22);
     String stringPartTwo = address.substring(22, 44);
@@ -352,7 +352,7 @@ class UIUtil {
     );
   }
 
-  static Widget showBlockExplorerWebview(BuildContext context, String hash) {
+  Widget showBlockExplorerWebview(BuildContext context, String hash) {
     cancelLockEvent();
     return WebviewScaffold(
       url: AppLocalization.of(context).getBlockExplorerUrl(hash),
@@ -364,7 +364,7 @@ class UIUtil {
     );
   }
 
-  static Widget showAccountWebview(BuildContext context, String account) {
+  Widget showAccountWebview(BuildContext context, String account) {
     cancelLockEvent();
     return WebviewScaffold(
       url: AppLocalization.of(context).getAccountExplorerUrl(account),
@@ -376,7 +376,7 @@ class UIUtil {
     );
   }
 
-  static Widget showWebview(BuildContext context, String url) {
+  Widget showWebview(BuildContext context, String url) {
     cancelLockEvent();
     return WebviewScaffold(
       url: url,
@@ -388,7 +388,7 @@ class UIUtil {
     );
   }
 
-  static Future<File> downloadOrRetrieveMonkey(
+  Future<File> downloadOrRetrieveMonkey(
       BuildContext context, String address, MonkeySize monkeySize) async {
     // Get expected path
     String dir = (await getApplicationDocumentsDirectory()).path;
@@ -445,14 +445,14 @@ class UIUtil {
     return file;
   }
 
-  static double drawerWidth(BuildContext context) {
+  double drawerWidth(BuildContext context) {
     if (MediaQuery.of(context).size.width < 375)
       return MediaQuery.of(context).size.width * 0.94;
     else
       return MediaQuery.of(context).size.width * 0.85;
   }
 
-  static void showSnackbar(String content, BuildContext context) {
+  void showSnackbar(String content, BuildContext context) {
     showToastWidget(
       Align(
         alignment: Alignment.topCenter,
@@ -479,9 +479,9 @@ class UIUtil {
     );
   }
 
- static StreamSubscription<dynamic> _lockDisableSub;
+  StreamSubscription<dynamic> _lockDisableSub;
 
-  static Future<void> cancelLockEvent() async {
+  Future<void> cancelLockEvent() async {
     // Cancel auto-lock event, usually if we are launching another intent
     if (_lockDisableSub != null) {
       _lockDisableSub.cancel();

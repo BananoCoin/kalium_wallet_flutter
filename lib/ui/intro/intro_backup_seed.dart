@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_nano_core/flutter_nano_core.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
@@ -149,7 +150,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                           .backgroundDarkest,
                                       borderRadius: BorderRadius.circular(25),
                                     ),
-                                    child: UIUtil.threeLineSeedText(
+                                    child: sl.get<UIUtil>().threeLineSeedText(
                                         context, _seed,
                                         textStyle: _seedCopied
                                             ? AppStyles.textStyleSeedGreen(

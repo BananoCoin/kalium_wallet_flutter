@@ -12,6 +12,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/list_model.dart';
@@ -352,7 +353,7 @@ class _AppHomePageState extends State<AppHomePage>
         _startAnimation();
         StateContainer.of(context).updateWallet(account: event.account);
       });
-      UIUtil.downloadOrRetrieveMonkey(context,
+      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
               event.account.address, MonkeySize.HOME_SMALL)
           .then((result) {
         if (result != null) {
@@ -365,7 +366,7 @@ class _AppHomePageState extends State<AppHomePage>
           });
         }
       });
-      UIUtil.downloadOrRetrieveMonkey(context,
+      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
               event.account.address, MonkeySize.LARGE)
           .then((result) {
         if (result != null) {
@@ -658,7 +659,7 @@ class _AppHomePageState extends State<AppHomePage>
     // Download/Retrieve smaller and large monKeys
     if (!_monkeyDownloadTriggered) {
       _monkeyDownloadTriggered = true;
-      UIUtil.downloadOrRetrieveMonkey(context,
+      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
               StateContainer.of(context).wallet.address, MonkeySize.HOME_SMALL)
           .then((result) {
         if (result != null) {
@@ -671,7 +672,7 @@ class _AppHomePageState extends State<AppHomePage>
           });
         }
       });
-      UIUtil.downloadOrRetrieveMonkey(context,
+      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
               StateContainer.of(context).wallet.address, MonkeySize.LARGE)
           .then((result) {
         if (result != null) {
@@ -690,7 +691,7 @@ class _AppHomePageState extends State<AppHomePage>
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.background,
       drawer: SizedBox(
-        width: UIUtil.drawerWidth(context),
+        width: sl.get<UIUtil>().drawerWidth(context),
         child: AppDrawer(
           child: SettingsSheet(),
         ),
@@ -1830,7 +1831,7 @@ class TransactionDetailsSheet {
                                 Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) {
-                                return UIUtil.showBlockExplorerWebview(
+                                return sl.get<UIUtil>().showBlockExplorerWebview(
                                     context, _hash);
                               }));
                             }),

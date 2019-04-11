@@ -9,6 +9,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
@@ -68,7 +69,7 @@ class AppChangeRepresentativeSheet {
       if (event.previous != null) {
         StateContainer.of(context).wallet.representative =
             event.previous.representative;
-        UIUtil.showSnackbar(
+        sl.get<UIUtil>().showSnackbar(
             AppLocalization.of(context).changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       }
@@ -175,7 +176,7 @@ class AppChangeRepresentativeSheet {
                                 splashColor:
                                     StateContainer.of(context).curTheme.text15,
                                 onPressed: () {
-                                  UIUtil.cancelLockEvent();
+                                  sl.get<UIUtil>().cancelLockEvent();
                                   BarcodeScanner.scan(StateContainer.of(context)
                                           .curTheme
                                           .qrScanTheme)
@@ -195,7 +196,7 @@ class AppChangeRepresentativeSheet {
                                       _repController.text = address.address;
                                       _repFocusNode.unfocus();
                                     } else {
-                                      UIUtil.showSnackbar(
+                                      sl.get<UIUtil>().showSnackbar(
                                           AppLocalization.of(context)
                                               .qrInvalidAddress,
                                           context);
@@ -295,7 +296,7 @@ class AppChangeRepresentativeSheet {
                                             .backgroundDarkest,
                                         borderRadius: BorderRadius.circular(25),
                                       ),
-                                      child: UIUtil.threeLineAddressText(
+                                      child: sl.get<UIUtil>().threeLineAddressText(
                                           context,
                                           StateContainer.of(context)
                                               .wallet
@@ -489,7 +490,7 @@ class AppChangeRepresentativeSheet {
                                                         _repFocusNode);
                                               });
                                             },
-                                            child: UIUtil.threeLineAddressText(
+                                            child: sl.get<UIUtil>().threeLineAddressText(
                                                 context, _repController.text),
                                           ),
                                   ),
