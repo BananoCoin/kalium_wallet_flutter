@@ -42,7 +42,7 @@ class AccountService {
   // WS connection status
   bool _isConnected;
   bool _isConnecting;
-  bool _suspended; // When the app explicity closes the connection
+  bool suspended; // When the app explicity closes the connection
 
   // Lock instnace for synchronization
   Lock _lock;
@@ -52,7 +52,7 @@ class AccountService {
     _requestQueue = Queue();
     _isConnected = false;
     _isConnecting = false;
-    _suspended = false;
+    suspended = false;
     _lock = Lock();
     initCommunication();
   }
@@ -61,7 +61,7 @@ class AccountService {
   Future<void> initCommunication({bool unsuspend = false}) async {
     if (_isConnected || _isConnecting) {
       return;
-    } else if (_suspended && !unsuspend) {
+    } else if (suspended && !unsuspend) {
       return;
     }
 
@@ -69,7 +69,7 @@ class AccountService {
       var packageInfo = await PackageInfo.fromPlatform();
 
       _isConnecting = true;
-      _suspended = false;
+      suspended = false;
       _channel = new IOWebSocketChannel
                       .connect(_SERVER_ADDRESS,
                                headers: {
@@ -108,13 +108,11 @@ class AccountService {
 
   // Close connection
   void reset({bool suspend = false}){
-    _suspended = suspend;
-    if (_channel != null){
-      if (_channel.sink != null){
-        _channel.sink.close();
-        _isConnected = false;
-        _isConnecting = false;
-      }
+    suspended = suspend;
+    if (_channel != null && _channel.sink != null) {
+      _channel.sink.close();
+      _isConnected = false;
+      _isConnecting = false;
     }
   }
 
@@ -122,13 +120,11 @@ class AccountService {
   Future<void> _send(String message) async {
     bool reset = false;
     try {
-    if (_channel != null){
-      if (_channel.sink != null && _isConnected){
+      if (_channel != null && _channel.sink != null && _isConnected) {
         _channel.sink.add(message);
       } else {
         reset = true; // Re-establish connection
       }
-    }
     } catch (e) {
       reset = true;
     } finally {
@@ -137,7 +133,7 @@ class AccountService {
         _requestQueue.forEach((requestItem) {
           requestItem.isProcessing = false;
         });
-        if (!_isConnecting) {
+        if (!_isConnecting && !suspended) {
           initCommunication();
         }
       }
@@ -145,6 +141,9 @@ class AccountService {
   }
 
   Future<void> _onMessageReceived(message) async {
+    if (suspended) {
+      return;
+    }
     await _lock.synchronized(() async {
       _isConnected = true;
       _isConnecting = false;
@@ -233,10 +232,10 @@ class AccountService {
       if (_requestQueue != null && _requestQueue.length > 0) {
         RequestItem requestItem = _requestQueue.first;
         if (requestItem != null && !requestItem.isProcessing) {
-          if (!_isConnected) {
-            if (!_isConnecting) {
-              await initCommunication();
-            }
+          if (!_isConnected && !_isConnecting && !suspended) {
+            initCommunication();
+            return;
+          } else if (suspended) {
             return;
           }
           requestItem.isProcessing = true;
