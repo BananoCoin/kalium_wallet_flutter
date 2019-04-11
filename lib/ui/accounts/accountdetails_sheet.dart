@@ -26,7 +26,6 @@ class AccountDetailsSheet {
   String originalName;
   TextEditingController _nameController;
   FocusNode _nameFocusNode;
-  DBHelper dbHelper;
   bool deleted;
   // Address copied or not
   bool _addressCopied;
@@ -34,7 +33,6 @@ class AccountDetailsSheet {
   Timer _addressCopiedTimer;
 
   AccountDetailsSheet(this.account) {
-    dbHelper = DBHelper();
     this.originalName = account.name;
     this.deleted = false;
   }
@@ -44,7 +42,7 @@ class AccountDetailsSheet {
     if (originalName != _nameController.text &&
         _nameController.text.trim().length > 0 &&
         !deleted) {
-      dbHelper.changeAccountName(account, _nameController.text);
+      sl.get<DBHelper>().changeAccountName(account, _nameController.text);
       account.name = _nameController.text;
       EventTaxiImpl.singleton().fire(AccountModifiedEvent(account: account));
     }
@@ -105,7 +103,7 @@ class AccountDetailsSheet {
                                                   context), () {
                                             // Remove account
                                             deleted = true;
-                                            dbHelper
+                                            sl.get<DBHelper>()
                                                 .deleteAccount(account)
                                                 .then((id) {
                                               EventTaxiImpl.singleton().fire(

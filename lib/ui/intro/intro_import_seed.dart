@@ -4,6 +4,7 @@ import 'package:flutter_nano_core/flutter_nano_core.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
@@ -29,9 +30,9 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
     // Back button pressed
     Future<bool> _onWillPop() async {
       // Delete seed
-      await Vault.inst.deleteAll();
+      await sl.get<Vault>().deleteAll();
       // Delete any shared prefs
-      await Vault.inst.deleteAll();
+      await sl.get<Vault>().deleteAll();
       return true;
     }
 
@@ -280,7 +281,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                     SharedPrefsUtil.inst
                                         .setSeedBackedUp(true)
                                         .then((result) {
-                                      Vault.inst
+                                      sl.get<Vault>()
                                           .setSeed(_seedInputController.text)
                                           .then((result) {
                                         NanoUtil().loginAccount(context).then((_) {
@@ -321,7 +322,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
 
   void _pinEnteredCallback(String pin) {
     Navigator.of(context).pop();
-    Vault.inst.writePin(pin).then((result) {
+    sl.get<Vault>().writePin(pin).then((result) {
       // Update wallet
       Navigator.of(context)
           .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);

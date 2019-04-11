@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/util/encrypt.dart';
 import 'package:kalium_wallet_flutter/model/available_themes.dart';
 import 'package:kalium_wallet_flutter/model/authentication_method.dart';
@@ -62,10 +63,10 @@ class SharedPrefsUtil {
   // For encrypted data
   Future<void> setEncrypted(String key, String value) async {
     // Retrieve/Generate encryption password
-    String secret = await Vault.inst.getEncryptionPhrase();
+    String secret = await sl.get<Vault>().getEncryptionPhrase();
     if (secret == null) {
       secret = Salsa20Encryptor.generateEncryptionSecret(16) + ":" + Salsa20Encryptor.generateEncryptionSecret(8);
-      await Vault.inst.writeEncryptionPhrase(secret);
+      await sl.get<Vault>().writeEncryptionPhrase(secret);
     }
     // Encrypt and save
     Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
@@ -74,7 +75,7 @@ class SharedPrefsUtil {
   }
 
   Future<String> getEncrypted(String key) async {
-    String secret = await Vault.inst.getEncryptionPhrase();
+    String secret = await sl.get<Vault>().getEncryptionPhrase();
     if (secret == null) return null;
     // Decrypt and return
     Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);

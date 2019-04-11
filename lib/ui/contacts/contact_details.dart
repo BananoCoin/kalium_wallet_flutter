@@ -69,8 +69,7 @@ class ContactDetailsSheet {
                                 CaseChange.toUpperCase(
                                     AppLocalization.of(context).yes, context),
                                 () {
-                              DBHelper dbHelper = DBHelper();
-                              dbHelper.deleteContact(contact).then((deleted) {
+                              sl.get<DBHelper>().deleteContact(contact).then((deleted) {
                                 if (deleted) {
                                   // Delete image if exists
                                   if (contact.monkeyPath != null) {

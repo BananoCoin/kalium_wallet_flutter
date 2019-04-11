@@ -38,9 +38,9 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
     // Back button pressed
     Future<bool> _onWillPop() async {
       // Delete seed
-      await Vault.inst.deleteAll();
+      await sl.get<Vault>().deleteAll();
       // Delete any shared prefs
-      await Vault.inst.deleteAll();
+      await sl.get<Vault>().deleteAll();
       return true;
     }
 
@@ -191,7 +191,7 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                                     .curTheme
                                     .primary15,
                                 onPressed: () {
-                                  Vault.inst.setSeed(_seed).then((result) {
+                                  sl.get<Vault>().setSeed(_seed).then((result) {
                                     // Update wallet
                                     NanoUtil().loginAccount(context).then((_) {
                                       StateContainer.of(context).requestUpdate();

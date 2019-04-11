@@ -23,7 +23,7 @@ class AppSeedBackupSheet {
   bool _seedHidden = true;
 
   mainBottomSheet(BuildContext context) {
-    Vault.inst.getSeed().then((result) {
+    sl.get<Vault>().getSeed().then((result) {
       _seed = result;
       // Set initial seed copy state
       _seedCopied = false;

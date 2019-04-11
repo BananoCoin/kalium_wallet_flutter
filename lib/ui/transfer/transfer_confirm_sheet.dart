@@ -309,7 +309,7 @@ class AppTransferConfirmSheet {
   }
 
   Future<String> _getPrivKey() async {
-    return NanoUtil.seedToPrivate(await Vault.inst.getSeed(), 0);
+    return NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(), 0);
   }
 
   ///

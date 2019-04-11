@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
@@ -134,7 +134,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
   void _pinEnteredCallback(String pin) {
     Navigator.of(context).pop();
     SharedPrefsUtil.inst.setSeedBackedUp(true).then((result) {
-      Vault.inst.writePin(pin).then((result) {
+      sl.get<Vault>().writePin(pin).then((result) {
         Navigator.of(context)
             .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
       });

@@ -1,11 +1,10 @@
 import 'dart:io';
 
 class FileUtil {
-
   /// Check first 8-bytes of PNG
   /// This isn't 100% sufficient to determine if our download was successful,
   /// but it's probably good enough for most cases
-  static Future<bool> pngHasValidSignature(File file) async {
+  Future<bool> pngHasValidSignature(File file) async {
     if (!await file.exists()) {
       return false;
     }
@@ -30,7 +29,7 @@ class FileUtil {
   }
 
   /// Return true if a SVG is valid
-  static Future<bool> isValidSVG(File file) async {
+  Future<bool> isValidSVG(File file) async {
     if (!await file.exists()) {
       return false;
     }

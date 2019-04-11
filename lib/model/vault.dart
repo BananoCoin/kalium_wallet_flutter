@@ -10,10 +10,6 @@ import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
  * Singleton for keystore access methods in android/iOS
  */
 class Vault {
-  Vault._internal();
-  static final Vault _singleton = new Vault._internal();
-  static Vault get inst => _singleton;
-
   static const String seedKey = 'fkalium_seed';
   static const String encryptionKey = 'fkalium_secret_phrase';
   static const String pinKey = 'fkalium_pin';
@@ -124,7 +120,7 @@ class Vault {
 
   static const _channel = const MethodChannel('fappchannel');
 
-  static Future<String> getSecret() async {
+  Future<String> getSecret() async {
     return await _channel.invokeMethod('getSecret');
   }
 

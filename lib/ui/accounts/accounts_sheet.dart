@@ -36,8 +36,6 @@ class AppAccountsSheet {
   bool _accountIsChanging;
   bool _monkeyDownloadStarted = false;
 
-  DBHelper dbHelper;
-
   Future<bool> _onWillPop() async {
     if (_balancesSub != null) {
       _balancesSub.cancel();
@@ -55,7 +53,6 @@ class AppAccountsSheet {
     this._accounts.where((a) => a.selected).forEach((acct) {
       acct.balance = selectedBalance.toString();
     });
-    this.dbHelper = DBHelper();
   }
 
   Future<void> _requestBalances(
@@ -81,7 +78,7 @@ class AppAccountsSheet {
                 BigInt.tryParse(balance.pending))
             .toString();
         if (account.address == address && combinedBalance != account.balance) {
-          dbHelper.updateAccountBalance(account, combinedBalance);
+          sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
           setState(() {
             account.balance = combinedBalance;
           });
@@ -103,7 +100,7 @@ class AppAccountsSheet {
         });
       }
     });
-    await dbHelper.changeAccount(account);
+    await sl.get<DBHelper>().changeAccount(account);
     EventTaxiImpl.singleton()
         .fire(AccountChangedEvent(account: account, delayPop: true));
   }
@@ -166,7 +163,7 @@ class AppAccountsSheet {
                     account.address = StateContainer.of(context).wallet.address;
                   }
                   File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-                  if (await FileUtil.pngHasValidSignature(monkeyF)) {
+                  if (await sl.get<FileUtil>().pngHasValidSignature(monkeyF)) {
                     setState(() {
                       account.monKey = Image.file(monkeyF);
                     });
@@ -289,7 +286,7 @@ class AppAccountsSheet {
                                           setState(() {
                                             _addingAccount = true;
                                           });
-                                          dbHelper
+                                          sl.get<DBHelper>()
                                               .addAccount(
                                                   nameBuilder: AppLocalization
                                                           .of(context)
@@ -373,7 +370,7 @@ class AppAccountsSheet {
 
   Future<void> _getMonkey(BuildContext context, Account account, StateSetter setState) async {
     File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-    if (await FileUtil.pngHasValidSignature(monkeyF)) {
+    if (await sl.get<FileUtil>().pngHasValidSignature(monkeyF)) {
       setState(() {
         account.monKey = Image.file(monkeyF);
       });
@@ -561,7 +558,7 @@ class AppAccountsSheet {
                 CaseChange.toUpperCase(
                     AppLocalization.of(context).yes, context), () {
               // Remove account
-              dbHelper.deleteAccount(account).then((id) {
+              sl.get<DBHelper>().deleteAccount(account).then((id) {
                 EventTaxiImpl.singleton().fire(
                     AccountModifiedEvent(account: account, deleted: true));
                 setState(() {

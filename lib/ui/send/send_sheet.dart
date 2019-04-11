@@ -53,7 +53,6 @@ class AppSendSheet {
   String address;
   String quickSendAmount;
 
-  DBHelper dbHelper = DBHelper();
   String _rawAmount;
 
   AppSendSheet({this.contact, this.address, this.quickSendAmount});
@@ -159,7 +158,7 @@ class AppSendSheet {
                 _sendAddressController.selection = TextSelection.fromPosition(
                     TextPosition(offset: _sendAddressController.text.length));
                 if (_sendAddressController.text.startsWith("@")) {
-                  dbHelper
+                  sl.get<DBHelper>()
                       .getContactsWithNameLike(_sendAddressController.text)
                       .then((contactList) {
                     setState(() {
@@ -469,7 +468,7 @@ class AppSendSheet {
                               if (_sendAddressController.text.startsWith("@") &&
                                   validRequest) {
                                 // Need to make sure its a valid contact
-                                dbHelper
+                                sl.get<DBHelper>()
                                     .getContactWithName(
                                         _sendAddressController.text)
                                     .then((contact) {
@@ -541,7 +540,7 @@ class AppSendSheet {
                                             .qrInvalidAddress,
                                         context);
                                   } else {
-                                    dbHelper
+                                    sl.get<DBHelper>()
                                         .getContactWithAddress(address.address)
                                         .then((contact) {
                                       if (contact == null) {
@@ -1058,7 +1057,7 @@ class AppSendSheet {
                                     offset:
                                         _sendAddressController.text.length));
                           }
-                          dbHelper.getContacts().then((contactList) {
+                          sl.get<DBHelper>().getContacts().then((contactList) {
                             setState(() {
                               _contacts = contactList;
                             });
@@ -1100,7 +1099,7 @@ class AppSendSheet {
                           }
                           Address address = new Address(data.text);
                           if (address.isValid()) {
-                            dbHelper
+                            sl.get<DBHelper>()
                                 .getContactWithAddress(address.address)
                                 .then((contact) {
                               if (contact == null) {
@@ -1164,7 +1163,7 @@ class AppSendSheet {
                   setState(() {
                     _isContact = true;
                   });
-                  dbHelper.getContactsWithNameLike(text).then((matchedList) {
+                  sl.get<DBHelper>().getContactsWithNameLike(text).then((matchedList) {
                     setState(() {
                       _contacts = matchedList;
                     });
@@ -1194,7 +1193,7 @@ class AppSendSheet {
                     _pasteButtonVisible = true;
                   });
                 } else {
-                  dbHelper.getContactWithName(text).then((contact) {
+                  sl.get<DBHelper>().getContactWithName(text).then((contact) {
                     if (contact == null) {
                       setState(() {
                         _sendAddressStyle =

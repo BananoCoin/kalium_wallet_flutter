@@ -522,12 +522,12 @@ class AppChangeRepresentativeSheet {
                                     SharedPrefsUtil.inst
                                         .getAuthMethod()
                                         .then((authMethod) {
-                                      BiometricUtil.hasBiometrics()
+                                      sl.get<BiometricUtil>().hasBiometrics()
                                           .then((hasBiometrics) {
                                         if (authMethod.method ==
                                                 AuthMethod.BIOMETRICS &&
                                             hasBiometrics) {
-                                          BiometricUtil
+                                          sl.get<BiometricUtil>()
                                                   .authenticateWithBiometrics(
                                                       context,
                                                       AppLocalization.of(
@@ -535,7 +535,7 @@ class AppChangeRepresentativeSheet {
                                                           .changeRepAuthenticate)
                                               .then((authenticated) {
                                             if (authenticated) {
-                                              HapticUtil.fingerprintSucess();
+                                              sl.get<HapticUtil>().fingerprintSucess();
                                               _animationOpen = true;
                                               Navigator.of(context).push(
                                                   AnimationLoadingOverlay(
@@ -587,7 +587,7 @@ class AppChangeRepresentativeSheet {
                                           });
                                         } else {
                                           // PIN Authentication
-                                          Vault.inst
+                                          sl.get<Vault>()
                                               .getPin()
                                               .then((expectedPin) {
                                             Navigator.of(context).push(

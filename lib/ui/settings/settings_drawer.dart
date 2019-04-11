@@ -89,8 +89,6 @@ class _SettingsSheetState extends State<SettingsSheet>
 
   bool notNull(Object o) => o != null;
 
-  DBHelper dbHelper;
-
   // Called if transfer fails
   void transferError() {
     Navigator.of(context).pop();
@@ -98,7 +96,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _exportContacts() async {
-    List<Contact> contacts = await dbHelper.getContacts();
+    List<Contact> contacts = await sl.get<DBHelper>().getContacts();
     if (contacts.length == 0) {
       sl.get<UIUtil>().showSnackbar(
           AppLocalization.of(context).noContactsExport, context);
@@ -137,8 +135,8 @@ class _SettingsSheetState extends State<SettingsSheet>
         contacts.add(Contact.fromJson(contact));
       });
       for (Contact contact in contacts) {
-        if (!await dbHelper.contactExistsWithName(contact.name) &&
-            !await dbHelper.contactExistsWithAddress(contact.address)) {
+        if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) &&
+            !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
           // Contact doesnt exist, make sure name and address are valid
           if (Address(contact.address).isValid()) {
             if (contact.name.startsWith("@") && contact.name.length <= 20) {
@@ -148,7 +146,7 @@ class _SettingsSheetState extends State<SettingsSheet>
         }
       }
       // Save all the new contacts and update states
-      int numSaved = await dbHelper.saveContacts(contactsToAdd);
+      int numSaved = await sl.get<DBHelper>().saveContacts(contactsToAdd);
       if (numSaved > 0) {
         _updateContacts();
         EventTaxiImpl.singleton().fire(
@@ -177,9 +175,8 @@ class _SettingsSheetState extends State<SettingsSheet>
     _securityOpen = false;
     _loadingAccounts = false;
     _monkeysLoaded = false;
-    this.dbHelper = DBHelper();
     // Determine if they have face or fingerprint enrolled, if not hide the setting
-    BiometricUtil.hasBiometrics().then((bool hasBiometrics) {
+    sl.get<BiometricUtil>().hasBiometrics().then((bool hasBiometrics) {
       setState(() {
         _hasBiometrics = hasBiometrics;
       });
@@ -357,7 +354,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _updateContacts() async {
-    List<Contact> contacts = await dbHelper.getContacts();
+    List<Contact> contacts = await sl.get<DBHelper>().getContacts();
     for (Contact c in contacts) {
       if (!_contacts.contains(c)) {
         setState(() {
@@ -380,12 +377,12 @@ class _SettingsSheetState extends State<SettingsSheet>
         setState(() {
           c.monkeyPath = path.basename(svgFile.path);
         });
-        await dbHelper.setMonkeyForContact(c, c.monkeyPath);
+        await sl.get<DBHelper>().setMonkeyForContact(c, c.monkeyPath);
       }
       if (c.monkeyImage == null) {
         File pngFile = await sl.get<UIUtil>().downloadOrRetrieveMonkey(
             context, c.address, MonkeySize.SMALL);
-        if (await FileUtil.pngHasValidSignature(pngFile)) {
+        if (await sl.get<FileUtil>().pngHasValidSignature(pngFile)) {
           setState(() {
             c.monkeyImage = Image.file(pngFile,
                 width: smallScreen(context) ? 55 : 70,
@@ -935,7 +932,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
-                                              dbHelper
+                                              sl.get<DBHelper>()
                                                   .changeAccount(
                                                       StateContainer.of(context)
                                                           .recentLast)
@@ -997,7 +994,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
-                                              dbHelper
+                                              sl.get<DBHelper>()
                                                   .changeAccount(
                                                       StateContainer.of(context)
                                                           .recentSecondLast)
@@ -1047,7 +1044,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   setState(() {
                                     _loadingAccounts = true;
                                   });
-                                  dbHelper.getAccounts().then((accounts) {
+                                  sl.get<DBHelper>().getAccounts().then((accounts) {
                                     setState(() {
                                       _loadingAccounts = false;
                                     });
@@ -1245,23 +1242,23 @@ class _SettingsSheetState extends State<SettingsSheet>
                         AppIcons.backupseed, onPressed: () {
                       // Authenticate
                       SharedPrefsUtil.inst.getAuthMethod().then((authMethod) {
-                        BiometricUtil.hasBiometrics().then((hasBiometrics) {
+                        sl.get<BiometricUtil>().hasBiometrics().then((hasBiometrics) {
                           if (authMethod.method == AuthMethod.BIOMETRICS &&
                               hasBiometrics) {
-                            BiometricUtil.authenticateWithBiometrics(
+                            sl.get<BiometricUtil>().authenticateWithBiometrics(
                                     context,
                                     AppLocalization.of(context)
                                         .fingerprintSeedBackup)
                                 .then((authenticated) {
                               if (authenticated) {
-                                HapticUtil.fingerprintSucess();
+                                sl.get<HapticUtil>().fingerprintSucess();
                                 new AppSeedBackupSheet()
                                     .mainBottomSheet(context);
                               }
                             });
                           } else {
                             // PIN Authentication
-                            Vault.inst.getPin().then((expectedPin) {
+                            sl.get<Vault>().getPin().then((expectedPin) {
                               Navigator.of(context).push(MaterialPageRoute(
                                   builder: (BuildContext context) {
                                 return new PinScreen(
@@ -1344,7 +1341,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               EventTaxiImpl.singleton()
                                   .fire(FcmUpdateEvent(token: fcmToken));
                               // Delete all data
-                              Vault.inst.deleteAll().then((_) {
+                              sl.get<Vault>().deleteAll().then((_) {
                                 SharedPrefsUtil.inst.deleteAll().then((result) {
                                   StateContainer.of(context).logOut();
                                   Navigator.of(context).pushNamedAndRemoveUntil(
@@ -1545,7 +1542,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                             .exists()
                             .then((exists) {
                           if (!exists) {
-                            dbHelper.setMonkeyForContact(
+                            sl.get<DBHelper>().setMonkeyForContact(
                                 _contacts[index], null);
                           }
                         });

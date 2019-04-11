@@ -114,9 +114,6 @@ class StateContainerState extends State<StateContainer> {
   // Deep link changes
   StreamSubscription _deepLinkSub;
 
-  // Database Helper
-  DBHelper dbHelper;
-
   // This map stashes pending process requests, this is because we need to update these requests
   // after a blocks_info with the balance after send, and sign the block
   Map<String, StateBlock> previousPendingMap = Map();
@@ -127,10 +124,6 @@ class StateContainerState extends State<StateContainer> {
   // Maps all pending receives to previous blocks
   Map<String, StateBlock> pendingBlockMap = Map();
 
-  StateContainerState() {
-    dbHelper = DBHelper();
-  }
-
   /// A [PictureInfoDecoder] for [Uint8List]s that will clip to the viewBox.
   static final PictureInfoDecoder<Uint8List> svgByteDecoder =
       (Uint8List bytes, ColorFilter colorFilter, String key) =>
@@ -139,7 +132,7 @@ class StateContainerState extends State<StateContainer> {
 
   /// Precache SVG images for contacts
   Future<void> _precacheSvgs() async {
-    List<Contact> contacts = await dbHelper.getContacts();
+    List<Contact> contacts = await sl.get<DBHelper>().getContacts();
     String documentsDirectory = (await getApplicationDocumentsDirectory()).path;
     contacts.forEach((c) async {
       if (c.monkeyPath != null) {
@@ -302,12 +295,12 @@ class StateContainerState extends State<StateContainer> {
       if (event.transfer) {
         return;
       }
-      dbHelper.getAccounts().then((accounts) {
+      sl.get<DBHelper>().getAccounts().then((accounts) {
         accounts.forEach((account) {
           event.response.balances.forEach((address, balance) {
             String combinedBalance = (BigInt.tryParse(balance.balance) + BigInt.tryParse(balance.pending)).toString();
             if (address == account.address && combinedBalance != account.balance) {
-              dbHelper.updateAccountBalance(account, combinedBalance);
+              sl.get<DBHelper>().updateAccountBalance(account, combinedBalance);
             }
           });
         });
@@ -327,20 +320,20 @@ class StateContainerState extends State<StateContainer> {
         // Remove account
         updateRecentlyUsedAccounts().then((_) {
           if (event.account.index == selectedAccount.index && recentLast != null) {
-            dbHelper.changeAccount(recentLast);
+            sl.get<DBHelper>().changeAccount(recentLast);
             setState(() {
               selectedAccount = recentLast;
             });
             EventTaxiImpl.singleton().fire(AccountChangedEvent(account: recentLast, noPop: true));
           } else if (event.account.index == selectedAccount.index && recentSecondLast != null) {
-            dbHelper.changeAccount(recentSecondLast);
+            sl.get<DBHelper>().changeAccount(recentSecondLast);
             setState(() {
               selectedAccount = recentSecondLast;
             });
             EventTaxiImpl.singleton().fire(AccountChangedEvent(account: recentSecondLast, noPop: true));
           } else if (event.account.index == selectedAccount.index) {
-            dbHelper.getMainAccount().then((mainAccount) {
-              dbHelper.changeAccount(mainAccount);
+            sl.get<DBHelper>().getMainAccount().then((mainAccount) {
+              sl.get<DBHelper>().changeAccount(mainAccount);
               setState(() {
                 selectedAccount = mainAccount;
               });
@@ -409,7 +402,7 @@ class StateContainerState extends State<StateContainer> {
 
   // Update the global wallet instance with a new address
   Future<void> updateWallet({Account account}) async {
-    String address = NanoUtil.seedToAddress(await Vault.inst.getSeed(), account.index);
+    String address = NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), account.index);
     selectedAccount = account;
     setState(() {
       wallet = AppWallet(address: address, loading: true);
@@ -419,7 +412,7 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<void> updateRecentlyUsedAccounts() async {
-    List<Account> otherAccounts = await dbHelper.getRecentlyUsedAccounts();
+    List<Account> otherAccounts = await sl.get<DBHelper>().getRecentlyUsedAccounts();
     if (otherAccounts != null && otherAccounts.length > 0) {
       if (otherAccounts.length > 1) {
         setState(() {
@@ -763,7 +756,7 @@ class StateContainerState extends State<StateContainer> {
 
   /// Request balances for accounts in our database
   Future<void> _requestBalances() async {
-    List<Account> accounts = await dbHelper.getAccounts();
+    List<Account> accounts = await sl.get<DBHelper>().getAccounts();
     List<String> addressToRequest = List();
     accounts.forEach((account) {
       if (account.address != null) {
@@ -977,12 +970,12 @@ class StateContainerState extends State<StateContainer> {
     setState(() {
       wallet = AppWallet();
     });
-    dbHelper.dropAccounts();
+    sl.get<DBHelper>().dropAccounts();
     sl.get<AccountService>().clearQueue();
   }
 
   Future<String> _getPrivKey() async {
-    return NanoUtil.seedToPrivate(await Vault.inst.getSeed(), selectedAccount.index);
+    return NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(), selectedAccount.index);
   }
 
   // Simple build method that just passes this state through

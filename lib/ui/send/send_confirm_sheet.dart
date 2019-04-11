@@ -215,19 +215,19 @@ class AppSendConfirmSheet {
                                 SharedPrefsUtil.inst
                                     .getAuthMethod()
                                     .then((authMethod) {
-                                  BiometricUtil.hasBiometrics()
+                                  sl.get<BiometricUtil>().hasBiometrics()
                                       .then((hasBiometrics) {
                                     if (authMethod.method ==
                                             AuthMethod.BIOMETRICS &&
                                         hasBiometrics) {
-                                      BiometricUtil.authenticateWithBiometrics(
+                                      sl.get<BiometricUtil>().authenticateWithBiometrics(
                                               context,
                                               AppLocalization.of(context)
                                                   .sendAmountConfirm
                                                   .replaceAll("%1", _amount))
                                           .then((authenticated) {
                                         if (authenticated) {
-                                          HapticUtil.fingerprintSucess();
+                                          sl.get<HapticUtil>().fingerprintSucess();
                                           animationOpen = true;
                                           Navigator.of(context).push(
                                               AnimationLoadingOverlay(
@@ -253,7 +253,7 @@ class AppSendConfirmSheet {
                                       });
                                     } else {
                                       // PIN Authentication
-                                      Vault.inst.getPin().then((expectedPin) {
+                                      sl.get<Vault>().getPin().then((expectedPin) {
                                         Navigator.of(context).push(
                                             MaterialPageRoute(builder:
                                                 (BuildContext context) {

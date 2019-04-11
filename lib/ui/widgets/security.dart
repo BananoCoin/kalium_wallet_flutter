@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
@@ -209,7 +209,7 @@ class _PinScreenState extends State<PinScreen>
               if (type == PinOverlayType.ENTER_PIN) {
                 // Pin is not what was expected
                 if (_pin != expectedPin) {
-                  HapticUtil.error();
+                  sl.get<HapticUtil>().error();
                   _controller.forward();
                 } else {
                   SharedPrefsUtil.inst.resetLockAttempts().then((_) {
@@ -229,7 +229,7 @@ class _PinScreenState extends State<PinScreen>
                   if (_pin == _pinConfirmed) {
                     successCallback(_pin);
                   } else {
-                    HapticUtil.error();
+                    sl.get<HapticUtil>().error();
                     _controller.forward();
                   }
                 }

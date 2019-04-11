@@ -81,8 +81,6 @@ class _AppHomePageState extends State<AppHomePage>
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
 
-  DBHelper dbHelper;
-
   // Price conversion state (BTC, NANO, NONE)
   PriceConversion _priceConversion;
   bool _pricesHidden = false;
@@ -126,12 +124,12 @@ class _AppHomePageState extends State<AppHomePage>
       Map<String, dynamic> message) async {
     try {
       if (message.containsKey("account")) {
-        Account selectedAccount = await dbHelper.getSelectedAccount();
+        Account selectedAccount = await sl.get<DBHelper>().getSelectedAccount();
         if (message['account'] != selectedAccount.address) {
-          List<Account> accounts = await dbHelper.getAccounts();
+          List<Account> accounts = await sl.get<DBHelper>().getAccounts();
           for (int i = 0; i < accounts.length; i++) {
             if (accounts[i].address == message['account']) {
-              await dbHelper.changeAccount(accounts[i]);
+              await sl.get<DBHelper>().changeAccount(accounts[i]);
               EventTaxiImpl.singleton()
                   .fire(AccountChangedEvent(account: accounts[i]));
               break;
@@ -147,7 +145,6 @@ class _AppHomePageState extends State<AppHomePage>
   @override
   void initState() {
     super.initState();
-    this.dbHelper = DBHelper();
     _registerBus();
     WidgetsBinding.instance.addObserver(this);
     SharedPrefsUtil.inst.getPriceConversion().then((result) {
@@ -256,13 +253,13 @@ class _AppHomePageState extends State<AppHomePage>
   Future<void> _addSampleContact() async {
     bool contactAdded = await SharedPrefsUtil.inst.getFirstContactAdded();
     if (!contactAdded) {
-      bool addressExists = await dbHelper.contactExistsWithAddress(
+      bool addressExists = await sl.get<DBHelper>().contactExistsWithAddress(
           "ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo");
       if (addressExists) {
         return;
       }
       bool nameExists =
-          await dbHelper.contactExistsWithName("@KaliumDonations");
+          await sl.get<DBHelper>().contactExistsWithName("@KaliumDonations");
       if (nameExists) {
         return;
       }
@@ -271,12 +268,12 @@ class _AppHomePageState extends State<AppHomePage>
           name: "@KaliumDonations",
           address:
               "ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo");
-      await dbHelper.saveContact(c);
+      await sl.get<DBHelper>().saveContact(c);
     }
   }
 
   void _updateContacts() {
-    dbHelper.getContacts().then((contacts) {
+    sl.get<DBHelper>().getContacts().then((contacts) {
       setState(() {
         _contacts = contacts;
       });
@@ -309,7 +306,7 @@ class _AppHomePageState extends State<AppHomePage>
       // Route to send complete if received process response for send block
       if (event.previous != null) {
         // Route to send complete
-        dbHelper.getContactWithAddress(event.previous.link).then((contact) {
+        sl.get<DBHelper>().getContactWithAddress(event.previous.link).then((contact) {
           String contactName = contact == null ? null : contact.name;
           Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
           AppSendCompleteSheet(event.previous.sendAmount, event.previous.link, contactName,
@@ -357,7 +354,7 @@ class _AppHomePageState extends State<AppHomePage>
               event.account.address, MonkeySize.HOME_SMALL)
           .then((result) {
         if (result != null) {
-          FileUtil.pngHasValidSignature(result).then((valid) {
+          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
             if (valid) {
               setState(() {
                 _monKey = Image.file(result);
@@ -370,7 +367,7 @@ class _AppHomePageState extends State<AppHomePage>
               event.account.address, MonkeySize.LARGE)
           .then((result) {
         if (result != null) {
-          FileUtil.pngHasValidSignature(result).then((valid) {
+          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
             if (valid) {
               setState(() {
                 _largeMonkey = Image.file(result);
@@ -570,7 +567,7 @@ class _AppHomePageState extends State<AppHomePage>
     setState(() {
       _isRefreshing = true;
     });
-    HapticUtil.success();
+    sl.get<HapticUtil>().success();
     StateContainer.of(context).requestUpdate();
     // Hide refresh indicator after 3 seconds if no server response
     Future.delayed(new Duration(seconds: 3), () {
@@ -614,7 +611,7 @@ class _AppHomePageState extends State<AppHomePage>
       }
     }
     // See if a contact
-    dbHelper.getContactWithAddress(address.address).then((contact) {
+    sl.get<DBHelper>().getContactWithAddress(address.address).then((contact) {
       if (contact != null) {
         contactName = contact.name;
       }
@@ -663,7 +660,7 @@ class _AppHomePageState extends State<AppHomePage>
               StateContainer.of(context).wallet.address, MonkeySize.HOME_SMALL)
           .then((result) {
         if (result != null) {
-          FileUtil.pngHasValidSignature(result).then((valid) {
+          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
             if (valid) {
               setState(() {
                 _monKey = Image.file(result);
@@ -676,7 +673,7 @@ class _AppHomePageState extends State<AppHomePage>
               StateContainer.of(context).wallet.address, MonkeySize.LARGE)
           .then((result) {
         if (result != null) {
-          FileUtil.pngHasValidSignature(result).then((valid) {
+          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
             if (valid) {
               setState(() {
                 _largeMonkey = Image.file(result);
@@ -899,7 +896,7 @@ class _AppHomePageState extends State<AppHomePage>
           });
         } else {
           // See if a contact
-          dbHelper.getContactWithAddress(item.account).then((contact) {
+          sl.get<DBHelper>().getContactWithAddress(item.account).then((contact) {
             // Go to send with address
             AppSendSheet(
                     contact: contact,

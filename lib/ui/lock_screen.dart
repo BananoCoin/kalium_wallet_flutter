@@ -3,6 +3,7 @@ import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/model/authentication_method.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/util/biometrics.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
@@ -140,13 +141,13 @@ class _AppLockScreenState extends State<AppLockScreen> {
       _lockedOut = false;
     });
     SharedPrefsUtil.inst.getAuthMethod().then((authMethod) {
-      BiometricUtil.hasBiometrics().then((hasBiometrics) {
+      sl.get<BiometricUtil>().hasBiometrics().then((hasBiometrics) {
         if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
           setState(() {
             _showLock = true;
             _showUnlockButton = true;
           });
-          BiometricUtil.authenticateWithBiometrics(context, 
+          sl.get<BiometricUtil>().authenticateWithBiometrics(context, 
                   AppLocalization.of(context).unlockBiometrics)
               .then((authenticated) {
             if (authenticated) {
@@ -159,7 +160,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
           });
         } else {
           // PIN Authentication
-          Vault.inst.getPin().then((expectedPin) {
+          sl.get<Vault>().getPin().then((expectedPin) {
             if (transitions) {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) {
