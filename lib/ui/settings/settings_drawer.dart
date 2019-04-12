@@ -81,6 +81,10 @@ class _SettingsSheetState extends State<SettingsSheet>
   bool _loadingAccounts;
   bool _monkeysLoaded;
 
+  Widget _mainMonkey;
+  Widget _recentMonkey;
+  Widget _recentSecondMonkey;
+
   List<Contact> _contacts;
 
   bool notNull(Object o) => o != null;
@@ -765,19 +769,20 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   Future<void> _getMonkeys() async {
-    File mainF;
+    File mainF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, StateContainer.of(context).wallet.address, MonkeySize.SMALL);
     File recentF;
     File recentLastF;
-    if (StateContainer.of(context).selectedAccount != null && StateContainer.of(context).selectedAccount.monKey == null) {
-       mainF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, StateContainer.of(context).wallet.address, MonkeySize.SMALL);
-    }
-    if (StateContainer.of(context).recentLast != null && StateContainer.of(context).recentLast.monKey == null) {
+    if (StateContainer.of(context).recentLast != null) {
       recentF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, StateContainer.of(context).recentLast.address, MonkeySize.SMALLEST);
     }
-    if (StateContainer.of(context).recentSecondLast != null && StateContainer.of(context).recentSecondLast.monKey == null) {
+    if (StateContainer.of(context).recentSecondLast != null) {
       recentLastF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, StateContainer.of(context).recentSecondLast.address, MonkeySize.SMALLEST);
     }
-    StateContainer.of(context).updateRecentMonkeys(mainF, recentF, recentLastF);
+    setState(() {
+      _mainMonkey = Image.file(mainF);
+      _recentMonkey = recentF != null ?Image.file(recentF) : null;
+      _recentSecondMonkey = recentLastF != null ? Image.file(recentLastF) : null;
+    });
   }
 
   @override
@@ -860,12 +865,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   width: smallScreen(context)?55:70,
                                   height: smallScreen(context)?55:70,
                                   alignment: Alignment(0.5, 0.5),
-                                  child: StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount.monKey == null ? 
+                                  child: _mainMonkey == null ? 
                                         FlareActor("assets/monkey_placeholder_animation.flr",
                                             animation: "main",
                                             fit: BoxFit.contain,
                                             color: StateContainer.of(context).curTheme.primary)
-                                        : StateContainer.of(context).selectedAccount.monKey,
+                                        : _mainMonkey,
                                 ),
                               ),
                             ),
@@ -912,12 +917,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                         child: Container(
                                           width: 48,
                                           height: 48,
-                                          child: StateContainer.of(context).recentLast == null || StateContainer.of(context).recentLast.monKey == null  ?
+                                          child: _recentMonkey == null ?
                                               FlareActor("assets/monkey_placeholder_animation.flr",
                                                     animation: "main",
                                                     fit: BoxFit.contain,
                                                     color: StateContainer.of(context).curTheme.primary)
-                                                : StateContainer.of(context).recentLast.monKey,
+                                                : _recentMonkey,
                                         ),
                                       ),
                                       Center(
@@ -974,12 +979,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                         child: Container(
                                           width: 48,
                                           height: 48,
-                                          child: StateContainer.of(context).recentSecondLast == null || StateContainer.of(context).recentSecondLast.monKey == null  ?
+                                          child: _recentSecondMonkey == null ?
                                               FlareActor("assets/monkey_placeholder_animation.flr",
                                                     animation: "main",
                                                     fit: BoxFit.contain,
                                                     color: StateContainer.of(context).curTheme.primary)
-                                                : StateContainer.of(context).recentSecondLast.monKey,
+                                                : _recentSecondMonkey,
                                         ),
                                       ),
                                       Center(
