@@ -403,12 +403,20 @@ class StateContainerState extends State<StateContainer> {
   // Update the global wallet instance with a new address
   Future<void> updateWallet({Account account}) async {
     String address = NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), account.index);
-    selectedAccount = account;
     setState(() {
+      selectedAccount = account;
       wallet = AppWallet(address: address, loading: true);
       requestUpdate();
     });
     await updateRecentlyUsedAccounts();
+  }
+
+  void updateRecentMonkeys(File mainF, File recentF, File recentLastF) {
+    setState(() {
+      selectedAccount.monKey = mainF != null ? Image.file(mainF) : selectedAccount.monKey;
+      recentLast.monKey = recentF != null ? Image.file(recentF) : recentLast.monKey;
+      recentSecondLast.monKey = recentLastF != null ? Image.file(recentLastF) : recentSecondLast.monKey;
+    });
   }
 
   Future<void> updateRecentlyUsedAccounts() async {

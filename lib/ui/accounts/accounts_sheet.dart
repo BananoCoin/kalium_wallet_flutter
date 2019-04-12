@@ -105,6 +105,21 @@ class AppAccountsSheet {
         .fire(AccountChangedEvent(account: account, delayPop: true));
   }
 
+  Future<void> _getMonkeys(BuildContext context, StateSetter setState) async {
+    _accounts.forEach((account) async {
+      if (account.monKey == null) {
+        if (account.address == null && account.selected) {
+          account.address = StateContainer.of(context).wallet.address;
+        }
+        File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
+        if (await sl.get<FileUtil>().pngHasValidSignature(monkeyF)) {
+          account.monKey = Image.file(monkeyF);
+        }
+      }
+    });
+    setState(() {});    
+  }
+
   mainBottomSheet(BuildContext context) {
     AppSheets.showAppHeightNineSheet(
         context: context,
@@ -157,19 +172,7 @@ class AppAccountsSheet {
             // Download monKeys
             if (!_monkeyDownloadStarted) {
               _monkeyDownloadStarted = true;
-              _accounts.forEach((account) async {
-                if (account.monKey == null) {
-                  if (account.address == null && account.selected) {
-                    account.address = StateContainer.of(context).wallet.address;
-                  }
-                  File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-                  if (await sl.get<FileUtil>().pngHasValidSignature(monkeyF)) {
-                    setState(() {
-                      account.monKey = Image.file(monkeyF);
-                    });
-                  }
-                }
-              });
+              _getMonkeys(context, setState);
             }
             return WillPopScope(
                 onWillPop: _onWillPop,
