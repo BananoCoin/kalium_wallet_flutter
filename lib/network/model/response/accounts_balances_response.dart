@@ -4,6 +4,11 @@ import 'package:kalium_wallet_flutter/network/model/response/account_balance_ite
 
 part 'accounts_balances_response.g.dart';
 
+/// For running in an isolate, needs to be top-level function
+AccountsBalancesResponse accountsBalancesResponseFromJson(Map<dynamic, dynamic> json) {
+  return AccountsBalancesResponse.fromJson(json);
+} 
+
 @JsonSerializable()
 class AccountsBalancesResponse {
   @JsonKey(name:'balances')

@@ -4,6 +4,11 @@ import 'package:kalium_wallet_flutter/network/model/response/account_history_res
 
 part 'account_history_response.g.dart';
 
+/// For running in an isolate, needs to be top-level function
+AccountHistoryResponse accountHistoryresponseFromJson(Map<dynamic, dynamic> json) {
+  return AccountHistoryResponse.fromJson(json);
+} 
+
 @JsonSerializable()
 class AccountHistoryResponse {
   @JsonKey(name:'history')

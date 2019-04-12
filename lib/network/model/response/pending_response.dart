@@ -4,6 +4,11 @@ import 'package:kalium_wallet_flutter/network/model/response/pending_response_it
 
 part 'pending_response.g.dart';
 
+/// For running in an isolate, needs to be top-level function
+PendingResponse pendingResponseFromJson(Map<dynamic, dynamic> json) {
+  return PendingResponse.fromJson(json);
+} 
+
 @JsonSerializable()
 class PendingResponse {
   @JsonKey(name:"blocks")

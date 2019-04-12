@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:async';
+import 'package:flutter/foundation.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
@@ -16,8 +17,24 @@ enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 enum MonkeySize { SMALLEST, SMALL, HOME_SMALL, NORMAL, LARGE, SVG }
 
-class UIUtil{
+/// monKey download job, intended to run in an isolate
+Future<File> _downloadOrRetrieveMonkey(Map<String, String> params) async {
+  String fileName = params['fileName'];
+  Uri url = Uri.parse(params['url']);
+  if (await File(fileName).exists()) {
+    return File(fileName);
+  }
+  // Download monKey and return fildownloadOr
+  http.Client client = http.Client();
+  http.Response req;
+  req = await client.get(url);
+  var bytes = req.bodyBytes;
+  File file = File(fileName);
+  await file.writeAsBytes(bytes);
+  return file;
+}
 
+class UIUtil{
   Widget threeLineAddressText(BuildContext context, String address,
       {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY,
       String contactName}) {
@@ -426,23 +443,15 @@ class UIUtil{
         break;
     }
     String fileName = '$dir/$prefix$address.png';
-    if (await File(fileName).exists()) {
-      return File(fileName);
-    }
-    // Download monKey and return file
-    http.Client client = http.Client();
-    http.Response req;
+    String url;
     if (monkeySize ==MonkeySize.SVG) {
-      req = await client.get(Uri.parse(AppLocalization.of(context)
-          .getMonkeyDownloadUrl(address, svg: true)));
+      url = AppLocalization.of(context)
+          .getMonkeyDownloadUrl(address, svg: true);
     } else {
-      req = await client.get(Uri.parse(AppLocalization.of(context)
-          .getMonkeyDownloadUrl(address, size: size)));
+      url = AppLocalization.of(context)
+          .getMonkeyDownloadUrl(address, size: size); 
     }
-    var bytes = req.bodyBytes;
-    File file = File(fileName);
-    await file.writeAsBytes(bytes);
-    return file;
+    return await compute(_downloadOrRetrieveMonkey, {'fileName': fileName, 'url':url});
   }
 
   double drawerWidth(BuildContext context) {
