@@ -39,7 +39,11 @@ class AppTransferConfirmSheet {
 
   Function errorCallback;
 
-  AppTransferConfirmSheet(this.privKeyBalanceMap, this.errorCallback);
+  NanoUtil _nanoUtil;
+
+  AppTransferConfirmSheet(this.privKeyBalanceMap, this.errorCallback) {
+    _nanoUtil = NanoUtil();
+  }
 
   StreamSubscription<TransferAccountHistoryEvent> _historySub;
   StreamSubscription<TransferProcessEvent> _processSub;
@@ -308,8 +312,8 @@ class AppTransferConfirmSheet {
         });
   }
 
-  Future<String> _getPrivKey() async {
-    return NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(), 0);
+  Future<String> _getPrivKey(int index) async {
+    return await _nanoUtil.seedToPrivateInIsolate(await sl.get<Vault>().getSeed(), index);
   }
 
   ///
@@ -362,7 +366,7 @@ class AppTransferConfirmSheet {
       PendingResponseItem pendingItem = pendingBlocks.remove(hash);
       if (StateContainer.of(context).wallet.openBlock != null) {
         // Receive block
-        _getPrivKey().then((result) {
+        _getPrivKey(StateContainer.of(context).selectedAccount.index).then((result) {
           StateContainer.of(context).requestReceive(
               StateContainer.of(context).wallet.frontier,
               hash,
@@ -372,7 +376,7 @@ class AppTransferConfirmSheet {
         });
       } else {
         // Open account
-        _getPrivKey().then((result) {
+        _getPrivKey(StateContainer.of(context).selectedAccount.index).then((result) {
           StateContainer.of(context).requestOpen("0", hash, pendingItem.amount,
               privKey: result,
               account: StateContainer.of(context).wallet.address);

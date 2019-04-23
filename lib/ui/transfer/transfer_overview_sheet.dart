@@ -18,9 +18,12 @@ import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
+import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 
 class AppTransferOverviewSheet {
   static const int NUM_SWEEP = 15; // Number of accounts to sweep from a seed
+
+  NanoUtil _nanoUtil;
 
   // accounts to private keys/account balances
   Map<String, AccountBalanceItem> privKeyBalanceMap = Map();
@@ -34,6 +37,10 @@ class AppTransferOverviewSheet {
       _balancesSub.cancel();
     }
     return true;
+  }
+
+  AppTransferOverviewSheet() {
+    _nanoUtil = NanoUtil();
   }
 
   mainBottomSheet(BuildContext context) {
@@ -263,22 +270,22 @@ class AppTransferOverviewSheet {
       _animationOpen = false;
     }));
     // Get accounts from seed
-    List<String> accountsToRequest = getAccountsFromSeed(context, seed);
-    // Make balances request
-    StateContainer.of(context)
-        .requestAccountsBalances(accountsToRequest, fromTransfer: true);
+    getAccountsFromSeed(context, seed).then((accountsToRequest) {
+      // Make balances request
+      StateContainer.of(context)
+          .requestAccountsBalances(accountsToRequest, fromTransfer: true);
+    });
   }
 
   /// Get NUM_SWEEP accounts from seed to request balances for
-  List<String> getAccountsFromSeed(BuildContext context, String seed) {
+Future<List<String>> getAccountsFromSeed(BuildContext context, String seed) async {
     List<String> accountsToRequest = List();
     String privKey;
     String address;
     // Get NUM_SWEEP private keys + accounts from seed
     for (int i = 0; i < NUM_SWEEP; i++) {
-      privKey = NanoKeys.seedToPrivate(seed, i);
-      address = NanoAccounts.createAccount(
-          NanoAccountType.BANANO, NanoKeys.createPublicKey(privKey));
+      privKey = await _nanoUtil.seedToPrivateInIsolate(seed, i);
+      address = await _nanoUtil.seedToAddressInIsolate(seed, i);
       // Don't add this if it is the currently logged in account
       if (address != StateContainer.of(context).wallet.address) {
         privKeyBalanceMap.putIfAbsent(

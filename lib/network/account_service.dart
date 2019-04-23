@@ -70,6 +70,7 @@ class AccountService {
       return;
     }
 
+    _isConnecting = true;
     try {
       var packageInfo = await PackageInfo.fromPlatform();
 
