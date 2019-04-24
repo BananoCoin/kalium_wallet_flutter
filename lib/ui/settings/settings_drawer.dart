@@ -664,7 +664,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   height: smallScreen(context)?55:70,
                                   alignment: Alignment(0.5, 0.5),
                                   child: MonkeyWidget(
-                                    address: StateContainer.of(context).wallet.address
+                                    address: StateContainer.of(context).wallet.address,
+                                    size: MonkeySize.SMALL
                                   )
                                 ),
                               ),
@@ -713,7 +714,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           width: 48,
                                           height: 48,
                                             child: MonkeyWidget(
-                                              address: StateContainer.of(context).recentLast.address
+                                              address: StateContainer.of(context).recentLast.address,
+                                              size: MonkeySize.SMALLEST
                                             )
                                         ),
                                       ),
@@ -772,7 +774,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           width: 48,
                                           height: 48,
                                           child: MonkeyWidget(
-                                            address: StateContainer.of(context).recentSecondLast.address
+                                            address: StateContainer.of(context).recentSecondLast.address,
+                                            size: MonkeySize.SMALLEST
                                           )
                                         ),
                                       ),

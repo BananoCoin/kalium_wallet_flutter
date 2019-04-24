@@ -5,11 +5,9 @@ import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
 import 'package:logging/logging.dart';
 import 'package:share/share.dart';
-import 'package:flare_flutter/flare_actor.dart';
 
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -24,8 +22,8 @@ import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/ui/contacts/add_contact.dart';
 import 'package:kalium_wallet_flutter/ui/contacts/contact_details.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/monkey.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
-import 'package:kalium_wallet_flutter/util/fileutil.dart';
 
 class ContactsList extends StatefulWidget {
   final AnimationController contactsController;
@@ -79,7 +77,7 @@ class _ContactsListState extends State<ContactsList> {
         _contacts.sort(
             (a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
       });
-      // Full update which includes downloading new monKey
+      // Full update
       _updateContacts();
     });
     // Contact removed bus event
@@ -106,30 +104,6 @@ class _ContactsListState extends State<ContactsList> {
       _contacts
           .sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     });
-    // Get any monKeys that are missing
-    for (Contact c in _contacts) {
-      // Download monKeys if not existing
-      if (c.monkeyPath == null || c.monkeyPath.contains(".png")) {
-        File svgFile = await sl.get<UIUtil>().downloadOrRetrieveMonkey(
-            context, c.address, MonkeySize.SVG);
-        // TODO - Validate SVG
-        setState(() {
-          c.monkeyPath = path.basename(svgFile.path);
-        });
-        await sl.get<DBHelper>().setMonkeyForContact(c, c.monkeyPath);
-      }
-      if (c.monkeyImage == null) {
-        File pngFile = await sl.get<UIUtil>().downloadOrRetrieveMonkey(
-            context, c.address, MonkeySize.SMALL);
-        if (await sl.get<FileUtil>().pngHasValidSignature(pngFile)) {
-          setState(() {
-            c.monkeyImage = Image.file(pngFile,
-                width: smallScreen(context) ? 55 : 70,
-                height: smallScreen(context) ? 55 : 70);
-          });
-        }
-      }
-    }
   }
 
   Future<void> _exportContacts() async {
@@ -322,17 +296,6 @@ class _ContactsListState extends State<ContactsList> {
                     padding: EdgeInsets.only(top: 15.0),
                     itemCount: _contacts.length,
                     itemBuilder: (context, index) {
-                      // Some disaster recovery if monKey is in DB, but doesnt exist in filesystem
-                      if (_contacts[index].monkeyPath != null) {
-                        File("$documentsDirectory/${_contacts[index].monkeyPath}")
-                            .exists()
-                            .then((exists) {
-                          if (!exists) {
-                            sl.get<DBHelper>().setMonkeyForContact(
-                                _contacts[index], null);
-                          }
-                        });
-                      }
                       // Build contact
                       return _buildSingleContact(context, _contacts[index]);
                     },
@@ -419,18 +382,16 @@ class _ContactsListState extends State<ContactsList> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              //Container for monKey
-              contact.monkeyImage != null
-                  ? contact.monkeyImage
-                  : Container(
-                      width: smallScreen(context) ? 55 : 70,
-                      height: smallScreen(context) ? 55 : 70,
-                      child: FlareActor(
-                          "assets/monkey_placeholder_animation.flr",
-                          animation: "main",
-                          fit: BoxFit.contain,
-                          color: StateContainer.of(context).curTheme.primary),
-                    ),
+              // monKey
+              Container(
+                width: smallScreen(context) ? 55 : 70,
+                height: smallScreen(context) ? 55 : 70,
+                child: 
+                  MonkeyWidget(
+                    address: contact.address,
+                    size: MonkeySize.SMALL
+                  )
+              ),
               //Contact info
               Container(
                 margin: EdgeInsets.only(left: 5),

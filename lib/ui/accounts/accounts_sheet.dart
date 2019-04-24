@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:io';
-import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -17,11 +15,11 @@ import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/monkey.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
-import 'package:kalium_wallet_flutter/util/fileutil.dart';
 
 class AppAccountsSheet {
   List<Account> accounts;
@@ -67,20 +65,10 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     widget.accounts.where((a) => a.selected).forEach((acct) {
       acct.balance = widget.selectedBalance.toString();
     });
-    // Get monKeys
-    widget.accounts.forEach((account) async {
-      if (account.monKey == null) {
-        if (account.address == null && account.selected) {
-          account.address = StateContainer.of(context).wallet.address;
-        }
-        File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-        if (await sl.get<FileUtil>().pngHasValidSignature(monkeyF)) {
-          setState(() {
-            account.monKey = Image.file(monkeyF);
-          });
-        }
-      }
-    });    
+    // Ensure address is set
+    widget.accounts.where((b) => b.selected && b.address == null).forEach((acct) {
+      acct.address = StateContainer.of(context).wallet.address;
+    });  
   }
 
   @override void dispose() {
@@ -357,7 +345,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                   }
                                 }
                               });
-                              _getMonkey(context, newAccount, setState);
                             });
                           }
                         },
@@ -381,15 +368,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
           ],
         ),
       ));
-  }
-
-  Future<void> _getMonkey(BuildContext context, Account account, StateSetter setState) async {
-    File monkeyF = await sl.get<UIUtil>().downloadOrRetrieveMonkey(context, account.address, MonkeySize.SMALL);
-    if (await sl.get<FileUtil>().pngHasValidSignature(monkeyF)) {
-      setState(() {
-        account.monKey = Image.file(monkeyF);
-      });
-    }
   }
 
   Widget _buildAccountListItem(
@@ -435,13 +413,12 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                       children: <Widget>[
                         // Account Icon
                         Container(
-                            width: smallScreen(context) ? 55 : 70,
-                            child: account.monKey == null
-                            ? FlareActor("assets/monkey_placeholder_animation.flr",
-                                      animation: "main",
-                                      fit: BoxFit.contain,
-                                      color: StateContainer.of(context).curTheme.primary)
-                            : account.monKey
+                          width: smallScreen(context) ? 55 : 70,
+                          height: smallScreen(context) ? 55 : 70,
+                          child: MonkeyWidget(
+                            address: account.address,
+                            size: MonkeySize.SMALL
+                          )
                         ),
                         // Account name and address
                         Container(

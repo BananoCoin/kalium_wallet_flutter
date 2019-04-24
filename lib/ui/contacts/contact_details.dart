@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -20,6 +19,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/monkey.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 
 // Contact Details Sheet
@@ -163,7 +163,10 @@ class ContactDetailsSheet {
                         // monKey container
                         contact.monkeyPath != null
                             ? Expanded(
-                                child: SvgPicture.file(File("$documentsDirectory/${contact.monkeyPath}")),
+                                child: MonkeyWidget(
+                                  address: contact.address,
+                                  size: MonkeySize.SVG
+                                ),
                             )
                             : Expanded(
                               child: SizedBox(),
