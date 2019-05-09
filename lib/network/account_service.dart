@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
@@ -59,7 +60,31 @@ class AccountService {
     _isConnecting = false;
     suspended = false;
     _lock = Lock();
-    initCommunication();
+    initCommunication(unsuspend: true);
+  }
+
+  // Re-connect handling
+  bool _isInRetryState = false;
+  StreamSubscription<dynamic> reconnectStream;
+
+  /// Retry up to once per 3 seconds
+  Future<void> reconnectToService() async {
+    if (_isInRetryState) {
+      return;
+    } else if (reconnectStream != null) {
+      reconnectStream.cancel();
+    }
+    _isInRetryState = true;
+    log.fine("Retrying connection in 3 seconds...");
+    Future<dynamic> delayed = new Future.delayed(new Duration(seconds: 3));
+    delayed.then((_) {
+      return true;
+    });
+    reconnectStream = delayed.asStream().listen((_) {
+      log.fine("Attempting connection to service");
+      initCommunication(unsuspend: true);
+      _isInRetryState = false;
+    });
   }
 
   // Connect to server
@@ -67,6 +92,9 @@ class AccountService {
     if (_isConnected || _isConnecting) {
       return;
     } else if (suspended && !unsuspend) {
+      return;
+    } else if (!unsuspend) {
+      reconnectToService();
       return;
     }
 
@@ -98,6 +126,7 @@ class AccountService {
   void connectionClosed() {
     _isConnected = false;
     _isConnecting = false;
+    clearQueue();
     log.fine("disconnected from service");
     // Send disconnected message
     EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
@@ -107,6 +136,7 @@ class AccountService {
   void connectionClosedError(e) {
     _isConnected = false;
     _isConnecting = false;
+    clearQueue();
     log.fine("disconnected from service with error ${e.toString()}");
     // Send disconnected message
     EventTaxiImpl.singleton().fire(ConnStatusEvent(status: ConnectionStatus.DISCONNECTED));
