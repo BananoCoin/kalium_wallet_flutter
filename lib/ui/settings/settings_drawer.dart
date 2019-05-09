@@ -840,11 +840,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                     setState(() {
                                       _loadingAccounts = false;
                                     });
-                                    BigInt selectedBalance =
-                                        StateContainer.of(context)
-                                            .wallet
-                                            .accountBalance;
-                                    AppAccountsSheet(accounts, selectedBalance)
+                                    AppAccountsSheet(accounts)
                                         .mainBottomSheet(context);
                                   });
                                 }
