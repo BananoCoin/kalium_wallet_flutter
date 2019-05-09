@@ -40,9 +40,11 @@ class _MonkeyWidgetState extends State<MonkeyWidget> {
         }
       }
       if (isValid) {
-        setState(() {
-          monkeyFile = monkeyF;
-        });
+        if (mounted) {
+          setState(() {
+            monkeyFile = monkeyF;
+          });
+        }
       }
     }
   }
