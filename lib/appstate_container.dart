@@ -566,7 +566,7 @@ class StateContainerState extends State<StateContainer> {
             nextBlock.representative = frontier.representative;
             nextBlock.setBalance(frontier.balance);
             doUpdate = false;
-            nextBlock.sign(await _getPrivKey());
+            await nextBlock.sign(await _getPrivKey());
             pendingBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
             pendingResponseBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
             sl.get<AccountService>().queueRequest(ProcessRequest(block: json.encode(nextBlock.toJson()), subType: nextBlock.subType));
@@ -691,9 +691,9 @@ class StateContainerState extends State<StateContainer> {
       nextBlock.sendAmount = wallet.accountBalance.toString();
     }
     if (lastRequest.fromTransfer) {
-      nextBlock.sign(nextBlock.privKey);
+      await nextBlock.sign(nextBlock.privKey);
     } else {
-      nextBlock.sign(await _getPrivKey());
+      await nextBlock.sign(await _getPrivKey());
     }
     pendingResponseBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
     // If this is of type RECEIVE, update its data in our pending map
@@ -922,9 +922,9 @@ class StateContainerState extends State<StateContainer> {
         link: source,
         account: !fromTransfer ? wallet.address : account);
     if (!fromTransfer) {
-      openBlock.sign(await _getPrivKey());
+      await openBlock.sign(await _getPrivKey());
     } else {
-      openBlock.sign(privKey);
+      await openBlock.sign(privKey);
     }
     pendingResponseBlockMap.putIfAbsent(openBlock.hash, () => openBlock);
 
@@ -951,7 +951,7 @@ class StateContainerState extends State<StateContainer> {
         link:
             "0000000000000000000000000000000000000000000000000000000000000000",
         account: wallet.address);
-    changeBlock.sign(await _getPrivKey());
+    await changeBlock.sign(await _getPrivKey());
     pendingResponseBlockMap.putIfAbsent(changeBlock.hash, () => changeBlock);
 
     sl.get<AccountService>().queueRequest(ProcessRequest(
