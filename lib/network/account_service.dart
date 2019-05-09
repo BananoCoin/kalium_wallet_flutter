@@ -224,7 +224,7 @@ class AccountService {
   Future<void> sendRequest(BaseRequest request) async {
     // We don't care about order or server response in these requests
     log.fine("sending ${json.encode(request.toJson())}");
-    _send(json.encode(request.toJson()));
+    _send(await compute(encodeRequestItem, request));
   }
 
   /* Enqueue Request */
@@ -247,7 +247,7 @@ class AccountService {
             return;
           }
           requestItem.isProcessing = true;
-          String requestJson = json.encode(requestItem.request.toJson());
+          String requestJson = await compute(encodeRequestItem, requestItem.request);
           log.fine("Sending: $requestJson");
           await _send(requestJson);
         } else if (requestItem != null && (DateTime

@@ -483,7 +483,7 @@ class _AppHomePageState extends State<AppHomePage>
 
   // Return widget for list
   Widget _getListWidget(BuildContext context) {
-    if (StateContainer.of(context).wallet.historyLoading) {
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.historyLoading) {
       // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -653,12 +653,12 @@ class _AppHomePageState extends State<AppHomePage>
   @override
   Widget build(BuildContext context) {
     // Create QR ahead of time because it improves performance this way
-    if (receive == null) {
+    if (receive == null && StateContainer.of(context).wallet != null) {
       paintQrCode();
     }
 
     // Download/Retrieve smaller and large monKeys
-    if (!_monkeyDownloadTriggered) {
+    if (!_monkeyDownloadTriggered && StateContainer.of(context).wallet != null) {
       _monkeyDownloadTriggered = true;
       sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
               StateContainer.of(context).wallet.address, MonkeySize.HOME_SMALL)
@@ -830,7 +830,7 @@ class _AppHomePageState extends State<AppHomePage>
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(100.0)),
                         color:
-                            StateContainer.of(context).wallet.accountBalance >
+                            StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance >
                                     BigInt.zero
                                 ? StateContainer.of(context).curTheme.primary
                                 : StateContainer.of(context).curTheme.primary60,
@@ -842,18 +842,18 @@ class _AppHomePageState extends State<AppHomePage>
                           stepGranularity: 0.5,
                         ),
                         onPressed: () {
-                          if (StateContainer.of(context).wallet.accountBalance >
+                          if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance >
                               BigInt.zero) {
                             AppSendSheet().mainBottomSheet(context);
                           }
                         },
-                        highlightColor: StateContainer.of(context)
+                        highlightColor: StateContainer.of(context).wallet != null && StateContainer.of(context)
                                     .wallet
                                     .accountBalance >
                                 BigInt.zero
                             ? StateContainer.of(context).curTheme.background40
                             : Colors.transparent,
-                        splashColor: StateContainer.of(context)
+                        splashColor: StateContainer.of(context).wallet != null && StateContainer.of(context)
                                     .wallet
                                     .accountBalance >
                                 BigInt.zero
@@ -892,7 +892,7 @@ class _AppHomePageState extends State<AppHomePage>
       delegate: SlidableScrollDelegate(),
       actionExtentRatio: 0.35,
       movementDuration: Duration(milliseconds: 300),
-      enabled: StateContainer.of(context).wallet.accountBalance > BigInt.zero,
+      enabled: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero,
       onTriggered: (preempt) {
         if (preempt) {
           setState(() {
@@ -1480,7 +1480,7 @@ class _AppHomePageState extends State<AppHomePage>
 
   // Get balance display
   Widget _getBalanceWidget(BuildContext context) {
-    if (StateContainer.of(context).wallet.loading) {
+    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.loading) {
       // Placeholder for balance text
       return Container(
         padding: EdgeInsets.symmetric(vertical: 14),
