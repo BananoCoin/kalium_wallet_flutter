@@ -29,7 +29,7 @@ import 'package:kalium_wallet_flutter/network/model/response/process_response.da
 import 'package:kalium_wallet_flutter/bus/events.dart';
 
 // Server Connection String
-const String _SERVER_ADDRESS = "wss://kaliumapi.appditto.com";
+const String _SERVER_ADDRESS = "wss://kaba.banano.cc:443";
 
 Map decodeJson(dynamic src) {
   return json.decode(src);

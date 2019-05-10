@@ -161,7 +161,7 @@ class ContactDetailsSheet {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         // monKey container
-                        contact.monkeyPath != null
+                        contact.address != null
                             ? Expanded(
                                 child: MonkeyWidget(
                                   address: contact.address,
