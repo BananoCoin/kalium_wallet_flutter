@@ -81,6 +81,8 @@ class _AppState extends State<App> {
           const Locale('en', 'US'), // English
           const Locale('he', 'IL'), // Hebrew
           const Locale('de', 'DE'), // German
+          const Locale('ar'), // Arabic
+          const Locale('lv'), // Latvian
           const Locale('bg'), // Bulgarian
           const Locale('es'), // Spanish
           const Locale('hi'), // Hindi
