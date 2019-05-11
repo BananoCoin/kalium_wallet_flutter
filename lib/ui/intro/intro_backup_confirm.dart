@@ -41,7 +41,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                           children: <Widget>[
                             // Back Button
                             Container(
-                              margin: EdgeInsets.only(left: 20),
+                              margin: EdgeInsetsDirectional.only(start: 20),
                               height: 50,
                               width: 50,
                               child: FlatButton(
@@ -69,7 +69,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                         // The header
                         Container(
                           margin:
-                              EdgeInsets.only(top: 15.0, left: 50, right: 50),
+                              EdgeInsetsDirectional.only(top: 15.0, start: 50, end: 50),
                           alignment: Alignment(-1, 0),
                           child: Text(
                             AppLocalization.of(context).backupYourSeed,

@@ -119,7 +119,7 @@ class AppChangeRepresentativeSheet {
                             Container(
                               width: 50,
                               height: 50,
-                              margin: EdgeInsets.only(top: 10.0, left: 10.0),
+                              margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                               child: FlatButton(
                                 highlightColor:
                                     StateContainer.of(context).curTheme.text15,

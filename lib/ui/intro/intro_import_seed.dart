@@ -71,7 +71,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 Row(
                                   children: <Widget>[
                                     Container(
-                                      margin: EdgeInsets.only(left: 20),
+                                      margin: EdgeInsetsDirectional.only(start: 20),
                                       height: 50,
                                       width: 50,
                                       child: FlatButton(
@@ -118,7 +118,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                     AppLocalization.of(context).importSeedHint,
                                     style:
                                         AppStyles.textStyleParagraph(context),
-                                    textAlign: TextAlign.left,
+                                    textAlign: TextAlign.start,
                                   ),
                                 ),
                                 // The container for the seed
@@ -314,7 +314,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Container(
-                            margin: EdgeInsets.only(right: 30),
+                            margin: EdgeInsetsDirectional.only(end: 30),
                             height: 50,
                             width: 50,
                             child: FlatButton(

@@ -627,7 +627,7 @@ class _SettingsSheetState extends State<SettingsSheet>
           children: <Widget>[
             // A container for accounts area
             Container(
-              margin: EdgeInsets.only(left: 26.0, right: 20, bottom: 15),
+              margin: EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -638,7 +638,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                     children: <Widget>[
                       // Main Account
                       Container(
-                        margin: EdgeInsets.only(left: 4.0),
+                        margin: EdgeInsetsDirectional.only(start: 4.0),
                         child: Stack(
                           children: <Widget>[
                             Center(
@@ -706,7 +706,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                           // Second Account
                           StateContainer.of(context).recentLast != null
                               ? Container(
-                                  margin: EdgeInsets.only(right: 2),
+                                  margin: EdgeInsetsDirectional.only(end: 2),
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
@@ -766,7 +766,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                           // Third Account
                           StateContainer.of(context).recentSecondLast != null
                               ? Container(
-                                  margin: EdgeInsets.only(right: 8),
+                                  margin: EdgeInsetsDirectional.only(end: 8),
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
@@ -826,7 +826,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                           Container(
                             height: 36,
                             width: 36,
-                            margin: EdgeInsets.only(right: 6),
+                            margin: EdgeInsetsDirectional.only(end: 6),
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
                             ),
@@ -999,7 +999,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                     ),
                     Container(
                       margin:
-                          EdgeInsets.only(left: 30.0, top: 20.0, bottom: 10.0),
+                          EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
                       child: Text(AppLocalization.of(context).manage,
                           style: TextStyle(
                               fontSize: 16.0,
@@ -1276,7 +1276,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: EdgeInsets.only(top: 15.0),
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.only(left: 30.0, bottom: 10),
+                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
                           style: TextStyle(
                               fontSize: 16.0,

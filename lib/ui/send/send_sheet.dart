@@ -275,7 +275,7 @@ class AppSendSheet {
                                       // Balance Text
                                       Container(
                                         child: RichText(
-                                          textAlign: TextAlign.left,
+                                          textAlign: TextAlign.start,
                                           text: TextSpan(
                                             text: '',
                                             children: [
@@ -1011,7 +1011,7 @@ class AppSendSheet {
       child: !_addressValidAndUnfocused
           ? TextField(
               textAlign:
-                  _isContact && false ? TextAlign.left : TextAlign.center,
+                  _isContact && false ? TextAlign.start : TextAlign.center,
               focusNode: _sendAddressFocusNode,
               controller: _sendAddressController,
               cursorColor: StateContainer.of(context).curTheme.primary,

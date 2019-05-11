@@ -27,19 +27,19 @@ class AppSettings {
         padding: EdgeInsets.all(0.0),
         child: Container(
           height: 60.0,
-          margin: EdgeInsets.only(left: 30.0),
+          margin: EdgeInsetsDirectional.only(start: 30.0),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(right: 13.0),
+                margin: EdgeInsetsDirectional.only(end: 13.0),
                 child: Container(
                   child: Icon(icon,
                       color: disabled
                           ? StateContainer.of(context).curTheme.primary45
                           : StateContainer.of(context).curTheme.primary,
                       size: 24),
-                  margin: EdgeInsets.only(top: 3, left: 3, bottom: 3, right: 3),
+                  margin: EdgeInsets.all(3),
                 ),
               ),
               Column(
@@ -96,22 +96,22 @@ class AppSettings {
       padding: EdgeInsets.all(0.0),
       child: Container(
         height: 60.0,
-        margin: new EdgeInsets.only(left: 30.0),
+        margin: EdgeInsetsDirectional.only(start: 30.0),
         child: Row(
           children: <Widget>[
             Container(
-              margin: new EdgeInsets.only(right: 13.0),
+              margin: EdgeInsetsDirectional.only(end: 13.0),
               child: Container(
-                child: new Icon(
+                child: Icon(
                   settingIcon,
                   color: StateContainer.of(context).curTheme.primary,
                   size: 24,
                 ),
-                margin: EdgeInsets.only(
+                margin: EdgeInsetsDirectional.only(
                   top: 3,
-                  left: settingIcon == AppIcons.logout ? 6 : settingIcon == AppIcons.changerepresentative? 0: settingIcon == AppIcons.backupseed ? 1: settingIcon == AppIcons.transferfunds ? 2:3,
+                  start: settingIcon == AppIcons.logout ? 6 : settingIcon == AppIcons.changerepresentative? 0: settingIcon == AppIcons.backupseed ? 1: settingIcon == AppIcons.transferfunds ? 2:3,
                   bottom: 3,
-                  right: settingIcon == AppIcons.logout ? 0 : settingIcon == AppIcons.changerepresentative? 6: settingIcon == AppIcons.backupseed ? 5: settingIcon == AppIcons.transferfunds ? 4:3,
+                  end: settingIcon == AppIcons.logout ? 0 : settingIcon == AppIcons.changerepresentative? 6: settingIcon == AppIcons.backupseed ? 5: settingIcon == AppIcons.transferfunds ? 4:3,
                 ),
               ),
             ),

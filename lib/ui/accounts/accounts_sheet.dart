@@ -390,7 +390,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
               ),
               Container(
                 height: smallScreen(context) ? 70.0 : 85,
-                padding: EdgeInsets.only(right: 23, left: 10),
+                padding: EdgeInsetsDirectional.only(end: 23, start: 10),
                 decoration: BoxDecoration(
                   border: Border(left: BorderSide(width: 5, color: account.selected ? StateContainer.of(context).curTheme.primary:Colors.transparent), right: BorderSide(width: 5, color: account.selected?StateContainer.of(context).curTheme.primary:Colors.transparent))
                 ),
@@ -415,7 +415,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                         Container(
                           width:
                               (MediaQuery.of(context).size.width - (108)) * 0.5,
-                          margin: EdgeInsets.only(left: smallScreen(context) ? 10 : 8 ),
+                          margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 10 : 8 ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -433,7 +433,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 minFontSize: 8.0,
                                 stepGranularity: 0.1,
                                 maxLines: 1,
-                                textAlign: TextAlign.left,
+                                textAlign: TextAlign.start,
                               ),
                               // Account address
                               AutoSizeText(
@@ -489,7 +489,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                         style: TextStyle(fontSize: 16.0),
                         stepGranularity: 0.1,
                         minFontSize: 1,
-                        textAlign: TextAlign.right,
+                        textAlign: TextAlign.end,
                       ),
                     ),
                   ],
@@ -505,7 +505,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     List<Widget> _actions = List();
     _actions.add(SlideAction(
         child: Container(
-          margin: EdgeInsets.only(left: 2, top: 1, bottom: 1),
+          margin: EdgeInsetsDirectional.only(start: 2, top: 1, bottom: 1),
           constraints: BoxConstraints.expand(),
           decoration: BoxDecoration(
             color: StateContainer.of(context).curTheme.primary,
@@ -521,7 +521,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     if (account.index > 0) {
       _actions.add(SlideAction(
           child: Container(
-            margin: EdgeInsets.only(left: 2, top: 1, bottom: 1),
+            margin: EdgeInsetsDirectional.only(start: 2, top: 1, bottom: 1),
             constraints: BoxConstraints.expand(),
             decoration: BoxDecoration(
               color: StateContainer.of(context).curTheme.primary,

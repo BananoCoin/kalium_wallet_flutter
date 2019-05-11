@@ -182,7 +182,7 @@ class AppAlertDialog extends StatelessWidget {
     this.title,
     this.titlePadding,
     this.content,
-    this.contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
+    this.contentPadding = const EdgeInsetsDirectional.fromSTEB(24.0, 20.0, 24.0, 24.0),
     this.actions,
     this.semanticLabel,
     this.shape,

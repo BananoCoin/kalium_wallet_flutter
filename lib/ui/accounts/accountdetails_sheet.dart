@@ -74,7 +74,7 @@ class AccountDetailsSheet {
                             Container(
                                 width: 50,
                                 height: 50,
-                                margin: EdgeInsets.only(top: 10.0, left: 10.0),
+                                margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                                 child: account.index == 0
                                     ? SizedBox()
                                     : FlatButton(
@@ -169,7 +169,7 @@ class AccountDetailsSheet {
                         Container(
                           margin: EdgeInsets.only(top: 5.0),
                           child: RichText(
-                            textAlign: TextAlign.left,
+                            textAlign: TextAlign.start,
                             text: TextSpan(
                               text: '',
                               children: [
