@@ -198,13 +198,13 @@
     "type": "text",
     "placeholders": {}
   },
-  "contactsImportSuccess": "تم جلب جهات اتصال ٪1 بنجاح.",
+  "contactsImportSuccess": "تم جلب جهات اتصال %1 بنجاح.",
   "@contactsImportSuccess": {
     "description": "contact_import_success",
     "type": "text",
     "placeholders": {}
   },
-  "contactAdded": "تم إضافة ٪1 إلى جهات الاتصال.",
+  "contactAdded": "تم إضافة %1 إلى جهات الاتصال.",
   "@contactAdded": {
     "description": "contact_added",
     "type": "text",
