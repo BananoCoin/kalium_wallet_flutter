@@ -744,8 +744,8 @@ class _AppHomePageState extends State<AppHomePage>
                             StateContainer.of(context).curTheme.background00,
                             StateContainer.of(context).curTheme.background
                           ],
-                          begin: Alignment(0.5, 1.0),
-                          end: Alignment(0.5, -1.0),
+                          begin: AlignmentDirectional(0.5, 1.0),
+                          end: AlignmentDirectional(0.5, -1.0),
                         ),
                       ),
                     ),
@@ -763,8 +763,8 @@ class _AppHomePageState extends State<AppHomePage>
                             StateContainer.of(context).curTheme.background00,
                             StateContainer.of(context).curTheme.background
                           ],
-                          begin: Alignment(0.5, -1),
-                          end: Alignment(0.5, 0.5),
+                          begin: AlignmentDirectional(0.5, -1),
+                          end: AlignmentDirectional(0.5, 0.5),
                         ),
                       ),
                     ),
@@ -931,7 +931,7 @@ class _AppHomePageState extends State<AppHomePage>
                 top: 4,
                 bottom: 4),
             child: Container(
-              alignment: Alignment(-0.5, 0),
+              alignment: AlignmentDirectional(-0.5, 0),
               constraints: BoxConstraints.expand(),
               child: FlareActor("assets/pulltosend_animation.flr",
                   animation: "pull",
@@ -1413,7 +1413,7 @@ class _AppHomePageState extends State<AppHomePage>
           Container(
             width: 90.0,
             height: 120,
-            alignment: Alignment(-1, -1),
+            alignment: AlignmentDirectional(-1, -1),
             child: Container(
               margin: EdgeInsetsDirectional.only(top: 5, start: 5),
               height: 50,
@@ -1910,7 +1910,7 @@ class MonkeyOverlay extends ModalRoute<void> {
             ),
           ),
           Container(
-            alignment: Alignment(0, -0.3),
+            alignment: AlignmentDirectional(0, -0.3),
             child: ClipOval(
               child: Container(
                 width: MediaQuery.of(context).size.width,

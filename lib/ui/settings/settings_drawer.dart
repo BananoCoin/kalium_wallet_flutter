@@ -662,7 +662,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                 child: Container(
                                   width: smallScreen(context)?55:70,
                                   height: smallScreen(context)?55:70,
-                                  alignment: Alignment(0.5, 0.5),
+                                  alignment: AlignmentDirectional(0.5, 0.5),
                                   child: MonkeyWidget(
                                     address: StateContainer.of(context).wallet.address,
                                     size: MonkeySize.SMALL
@@ -932,7 +932,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: EdgeInsets.only(top: 15.0),
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.only(left: 30.0, bottom: 10),
+                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
                           style: TextStyle(
                               fontSize: 16.0,
@@ -1197,8 +1197,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                           StateContainer.of(context).curTheme.backgroundDark,
                           StateContainer.of(context).curTheme.backgroundDark00
                         ],
-                        begin: Alignment(0.5, -1.0),
-                        end: Alignment(0.5, 1.0),
+                        begin: AlignmentDirectional(0.5, -1.0),
+                        end: AlignmentDirectional(0.5, 1.0),
                       ),
                     ),
                   ),
@@ -1341,8 +1341,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                           StateContainer.of(context).curTheme.backgroundDark,
                           StateContainer.of(context).curTheme.backgroundDark00
                         ],
-                        begin: Alignment(0.5, -1.0),
-                        end: Alignment(0.5, 1.0),
+                        begin: AlignmentDirectional(0.5, -1.0),
+                        end: AlignmentDirectional(0.5, 1.0),
                       ),
                     ),
                   ),

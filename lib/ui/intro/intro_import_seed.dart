@@ -102,7 +102,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 Container(
                                   margin: EdgeInsets.only(
                                       top: 15.0, left: 50, right: 50),
-                                  alignment: Alignment(-1, 0),
+                                  alignment: AlignmentDirectional(-1, 0),
                                   child: Text(
                                     AppLocalization.of(context).importSeed,
                                     style: AppStyles.textStyleHeaderColored(

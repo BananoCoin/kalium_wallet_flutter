@@ -238,7 +238,7 @@ class _PinScreenState extends State<PinScreen>
           }
         },
         child: Container(
-          alignment: Alignment(0, 0),
+          alignment: AlignmentDirectional(0, 0),
           child: Text(
             buttonText,
             textAlign: TextAlign.center,
@@ -422,7 +422,7 @@ class _PinScreenState extends State<PinScreen>
                                   _backSpace();
                                 },
                                 child: Container(
-                                  alignment: Alignment(0, 0),
+                                  alignment: AlignmentDirectional(0, 0),
                                   child: Icon(Icons.backspace,
                                       color: StateContainer.of(context).curTheme.primary, size: 20.0),
                                 ),

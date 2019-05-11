@@ -337,7 +337,7 @@ class AppSendSheet {
 
                                       // ******* Enter Amount Error Container ******* //
                                       Container(
-                                        alignment: Alignment(0, 0),
+                                        alignment: AlignmentDirectional(0, 0),
                                         margin: EdgeInsets.only(top: 3),
                                         child: Text(_amountValidationText,
                                             style: TextStyle(
@@ -427,7 +427,7 @@ class AppSendSheet {
 
                                       // ******* Enter Address Error Container ******* //
                                       Container(
-                                        alignment: Alignment(0, 0),
+                                        alignment: AlignmentDirectional(0, 0),
                                         margin: EdgeInsets.only(top: 3),
                                         child: Text(_addressValidationText,
                                             style: TextStyle(

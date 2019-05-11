@@ -64,7 +64,7 @@ class AppReceiveSheet {
     shareCardKey = GlobalKey();
     appShareCard = Container(
       child: AppShareCard(shareCardKey, monkeySVGBorder),
-      alignment: Alignment(0.0, 0.0),
+      alignment: AlignmentDirectional(0.0, 0.0),
     );
     qrCode = qrWidget;
 

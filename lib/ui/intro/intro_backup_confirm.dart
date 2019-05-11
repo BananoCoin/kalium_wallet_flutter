@@ -70,7 +70,7 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
                         Container(
                           margin:
                               EdgeInsetsDirectional.only(top: 15.0, start: 50, end: 50),
-                          alignment: Alignment(-1, 0),
+                          alignment: AlignmentDirectional(-1, 0),
                           child: Text(
                             AppLocalization.of(context).backupYourSeed,
                             style: AppStyles.textStyleHeaderColored(context),

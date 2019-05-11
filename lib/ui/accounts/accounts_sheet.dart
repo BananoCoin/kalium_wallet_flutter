@@ -232,8 +232,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                   .curTheme
                                   .backgroundDark,
                             ],
-                            begin: Alignment(0.5, 1.0),
-                            end: Alignment(0.5, -1.0),
+                            begin: AlignmentDirectional(0.5, 1.0),
+                            end: AlignmentDirectional(0.5, -1.0),
                           ),
                         ),
                       ),
@@ -254,8 +254,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                   .curTheme
                                   .backgroundDark00
                             ],
-                            begin: Alignment(0.5, 1.0),
-                            end: Alignment(0.5, -1.0),
+                            begin: AlignmentDirectional(0.5, 1.0),
+                            end: AlignmentDirectional(0.5, -1.0),
                           ),
                         ),
                       ),
@@ -457,7 +457,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                     ),
                     Container(
                       width: (MediaQuery.of(context).size.width - 116) * 0.4,
-                      alignment: Alignment(1, 0),
+                      alignment: AlignmentDirectional(1, 0),
                       child: AutoSizeText.rich(
                         TextSpan(
                           children: [
