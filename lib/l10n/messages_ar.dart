@@ -149,7 +149,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferConfirmInfoThird" : MessageLookupByLibrary.simpleMessage("قد يستغرق النقل عدة ثوانيٍ."),
     "transferError" : MessageLookupByLibrary.simpleMessage("لقد حدث خطأ أثناء النقل. الرجاء إعادة المحاولة في وقت لاحق."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("تحويل الرصيد"),
-    "transferIntro" : MessageLookupByLibrary.simpleMessage("ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة كاليوم الخاصة بك. \n\n اضغط على الزر \"٪ 1\" للبدء."),
+    "transferIntro" : MessageLookupByLibrary.simpleMessage("ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة كاليوم الخاصة بك. \n\n اضغط على الزر \"%1\" للبدء."),
     "transferLoading" : MessageLookupByLibrary.simpleMessage("بصدد التحويل"),
     "transferManualHint" : MessageLookupByLibrary.simpleMessage("الرجاء إدخال المفتاح الخاص."),
     "transferNoFunds" : MessageLookupByLibrary.simpleMessage("هذا المفتاح الخاص لا يحتوي على BANANO"),
