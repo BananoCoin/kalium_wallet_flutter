@@ -77,7 +77,7 @@ class _AppState extends State<App> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        locale: Locale(StateContainer.of(context).curLanguage == null ? 'en' : StateContainer.of(context).curLanguage.getLocaleString()),
+        locale: StateContainer.of(context).curLanguage == null ? Locale('en') : StateContainer.of(context).curLanguage.getLocale(),
         supportedLocales: [
           const Locale('en', 'US'), // English
           const Locale('he', 'IL'), // Hebrew
@@ -103,8 +103,8 @@ class _AppState extends State<App> {
           const Locale('tl'), // Tagalog
           const Locale('tr'), // Turkish
           const Locale('vi'), // Vietnamese
-          const Locale('zh-Hans'), // Chinese Simplified
-          const Locale('zh-Hant'), // Chinese Traditional
+          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
+          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
           // Currency-default requires country included
           const Locale("es", "AR"),
           const Locale("en", "AU"),
