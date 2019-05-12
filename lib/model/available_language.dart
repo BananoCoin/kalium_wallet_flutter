@@ -73,7 +73,7 @@ class LanguageSetting extends SettingSelectionItem {
       case AvailableLanguage.PORTUGUESE:
         return "Português (pt)";
       case AvailableLanguage.ROMANIAN:
-        return "Romanian (ro)";
+        return "Română (ro)";
       case AvailableLanguage.RUSSIAN:
         return "Русский язык (ru)";
       case AvailableLanguage.SLOVENIAN:
