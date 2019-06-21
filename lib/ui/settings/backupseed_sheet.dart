@@ -1,13 +1,16 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_nano_core/flutter_nano_core.dart';
+import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
-import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/mnemonic_display.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/plainseed_display.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
@@ -15,191 +18,211 @@ import 'package:kalium_wallet_flutter/util/clipboardutil.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 
 class AppSeedBackupSheet {
-  // Seed copied state information
-  String _placeholderSeed = '●' * 64;
-  bool _seedCopied;
   String _seed;
+  List<String> _mnemonic;
+  List<String> mnemonic;
+  bool showMnemonic;
+  bool _seedCopied;
   Timer _seedCopiedTimer;
-  bool _seedHidden = true;
+  bool _mnemonicCopied;
+  Timer _mnemonicCopiedTimer;
 
   mainBottomSheet(BuildContext context) {
+    _seedCopied = false;
+    _mnemonicCopied = false;
     sl.get<Vault>().getSeed().then((result) {
       _seed = result;
-      // Set initial seed copy state
-      _seedCopied = false;
-      AppSheets.showAppHeightEightSheet(
+      _mnemonic = NanoMnemomics.seedToMnemonic(_seed);
+      bool showMnemonic = true;
+      AppSheets.showAppHeightNineSheet(
           context: context,
           builder: (BuildContext context) {
             return StatefulBuilder(
                 builder: (BuildContext context, StateSetter setState) {
               return SafeArea(
-                minimum: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.height * 0.035,
-                ),
-                child: Container(
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      // Sheet handle
-                      Container(
-                        margin: EdgeInsets.only(top: 10),
-                        height: 5,
-                        width: MediaQuery.of(context).size.width * 0.15,
-                        decoration: BoxDecoration(
-                          color: StateContainer.of(context).curTheme.text10,
-                          borderRadius: BorderRadius.circular(100.0),
-                        ),
-                      ),
-                      //A container for the header
-                      Container(
-                        margin: EdgeInsets.only(top: 15.0),
-                        constraints: BoxConstraints(
-                            maxWidth: MediaQuery.of(context).size.width - 140),
-                        child: Column(
+                  minimum: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).size.height * 0.035,
+                  ),
+                  child: Container(
+                    width: double.infinity,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Column(
                           children: <Widget>[
-                            AutoSizeText(
-                              CaseChange.toUpperCase(
-                                  AppLocalization.of(context).seed, context),
-                              style: AppStyles.textStyleHeader(context),
-                              maxLines: 1,
-                              stepGranularity: 0.1,
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      //A container for the paragraph and seed
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(
-                              top: smallScreen(context) ? 25 : 35),
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.only(
-                                    left: smallScreen(context) ? 35 : 50,
-                                    right: smallScreen(context) ? 35 : 50),
-                                child: AutoSizeText(
-                                  AppLocalization.of(context).seedBackupInfo,
-                                  style: AppStyles.textStyleParagraph(context),
-                                  maxLines: 4,
-                                  stepGranularity: 0.5,
-                                ),
-                              ),
-                              new GestureDetector(
-                                onTap: () {
-                                  if (_seedHidden) {
-                                    setState(() {
-                                      _seedHidden = false;
-                                    });
-                                  } else {
-                                    setState(() {
-                                      _seedHidden = true;
-                                    });
-                                  }
-                                },
-                                child: Column(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(width: 60, height: 60),
+                                // Sheet handle and Header
+                                Column(
                                   children: <Widget>[
+                                    // Header text
                                     Container(
-                                      margin: EdgeInsets.only(top: 25),
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 25.0, vertical: 15.0),
+                                      margin: EdgeInsets.only(top: 10),
+                                      height: 5,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.15,
                                       decoration: BoxDecoration(
                                         color: StateContainer.of(context)
                                             .curTheme
-                                            .backgroundDarkest,
-                                        borderRadius: BorderRadius.circular(25),
+                                            .text10,
+                                        borderRadius:
+                                            BorderRadius.circular(100.0),
                                       ),
-                                      child: sl.get<UIUtil>().threeLineSeedText(
-                                          context,
-                                          _seedHidden
-                                              ? _placeholderSeed
-                                              : _seed,
-                                          textStyle: _seedCopied
-                                              ? AppStyles.textStyleSeedGreen(
-                                                  context)
-                                              : AppStyles.textStyleSeed(
-                                                  context)),
                                     ),
+                                    //A container for the header
                                     Container(
-                                      margin: EdgeInsets.only(
-                                          top: 5,
-                                          left: smallScreen(context) ? 35 : 50,
-                                          right:
-                                              smallScreen(context) ? 35 : 50),
-                                      child: Text(
-                                          AppLocalization.of(context)
-                                              .seedCopied,
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                            fontSize: 14.0,
-                                            color: _seedCopied
-                                                ? StateContainer.of(context)
-                                                    .curTheme
-                                                    .success
-                                                : Colors.transparent,
-                                            fontFamily: 'NunitoSans',
-                                            fontWeight: FontWeight.w600,
-                                          )),
+                                      margin: EdgeInsets.only(top: 15.0),
+                                      constraints: BoxConstraints(
+                                          maxWidth: MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              140),
+                                      child: Column(
+                                        children: <Widget>[
+                                          AutoSizeText(
+                                            CaseChange.toUpperCase(
+                                                showMnemonic
+                                                    ? AppLocalization.of(context).secretPhrase
+                                                    : AppLocalization.of(context).seed,
+                                                context),
+                                            style: AppStyles.textStyleHeader(
+                                                context),
+                                            maxLines: 1,
+                                            stepGranularity: 0.1,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),
-                              ),
-                            ],
-                          ),
+                                // Switch button
+                                Container(
+                                  width: 50,
+                                  height: 50,
+                                  margin: EdgeInsetsDirectional.only(
+                                      top: 10.0, end: 10.0),
+                                  child: FlatButton(
+                                    highlightColor: StateContainer.of(context)
+                                        .curTheme
+                                        .text15,
+                                    splashColor: StateContainer.of(context)
+                                        .curTheme
+                                        .text15,
+                                    onPressed: () {
+                                      setState(() {
+                                        showMnemonic = !showMnemonic;
+                                      });
+                                    },
+                                    child: Icon(
+                                        showMnemonic
+                                            ? AppIcons.seed
+                                            : Icons.vpn_key,
+                                        size: 24,
+                                        color: StateContainer.of(context)
+                                            .curTheme
+                                            .text),
+                                    padding: EdgeInsets.all(13.0),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100.0)),
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.padded,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                      ),
 
-                      //A row with show/hide seed button
-                      Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                            context,
-                            _seedCopied
-                                ? AppButtonType.SUCCESS
-                                : AppButtonType.PRIMARY,
-                            _seedCopied
-                                ? AppLocalization.of(context).seedCopiedShort
-                                : AppLocalization.of(context).copySeed,
-                            Dimens.BUTTON_TOP_DIMENS,
-                            onPressed: () {
-                              Clipboard.setData(new ClipboardData(text: _seed));
-                              ClipboardUtil.setClipboardClearEvent();
-                              setState(() {
-                                _seedCopied = true;
-                              });
-                              if (_seedCopiedTimer != null) {
-                                _seedCopiedTimer.cancel();
-                              }
-                              _seedCopiedTimer = new Timer(
-                                  const Duration(milliseconds: 1200), () {
-                                setState(() {
-                                  _seedCopied = false;
-                                });
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      //A row with close button
-                      Row(
-                        children: <Widget>[
-                          AppButton.buildAppButton(
-                            context,
-                            AppButtonType.PRIMARY_OUTLINE,
-                            AppLocalization.of(context).close,
-                            Dimens.BUTTON_BOTTOM_DIMENS,
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              );
+                        //A container for the paragraph and seed
+                        Expanded(
+                          child: Container(
+                              child: Column(
+                            children: <Widget>[
+                              showMnemonic
+                                  ? MnemonicDisplay(
+                                      wordList: _mnemonic,
+                                      obscureSeed: true,
+                                      showButton: false,
+                                    )
+                                  : PlainSeedDisplay(
+                                      seed: _seed,
+                                      obscureSeed: true,
+                                      showButton: false,
+                                    ),
+                            ],
+                          )),
+                        ),
+                        //A row with copy button
+                        showMnemonic
+                            ? Row(
+                                children: <Widget>[
+                                  AppButton.buildAppButton(
+                                      context,
+                                      // Copy Mnemonic Button
+                                      _mnemonicCopied
+                                          ? AppButtonType.SUCCESS
+                                          : AppButtonType.PRIMARY,
+                                      _mnemonicCopied
+                                          ? AppLocalization.of(context).secretPhraseCopied
+                                          : AppLocalization.of(context).secretPhraseCopy,
+                                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                    Clipboard.setData(new ClipboardData(
+                                        text: _mnemonic.join(" ")));
+                                    ClipboardUtil.setClipboardClearEvent();
+                                    setState(() {
+                                      // Set copied style
+                                      _mnemonicCopied = true;
+                                    });
+                                    if (_mnemonicCopiedTimer != null) {
+                                      _mnemonicCopiedTimer.cancel();
+                                    }
+                                    _mnemonicCopiedTimer = new Timer(
+                                        const Duration(milliseconds: 1000), () {
+                                      try {
+                                        setState(() {
+                                          _mnemonicCopied = false;
+                                        });
+                                      } catch (e) {}
+                                    });
+                                  }),
+                                ],
+                              )
+                            : Row(
+                                children: <Widget>[
+                                  AppButton.buildAppButton(
+                                      context,
+                                      // Copy Seed Button
+                                      _seedCopied
+                                          ? AppButtonType.SUCCESS
+                                          : AppButtonType.PRIMARY,
+                                      _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
+                                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                    Clipboard.setData(
+                                        new ClipboardData(text: _seed));
+                                    ClipboardUtil.setClipboardClearEvent();
+                                    setState(() {
+                                      // Set copied style
+                                      _seedCopied = true;
+                                    });
+                                    if (_seedCopiedTimer != null) {
+                                      _seedCopiedTimer.cancel();
+                                    }
+                                    _seedCopiedTimer = new Timer(
+                                        const Duration(milliseconds: 1000), () {
+                                      setState(() {
+                                        _seedCopied = false;
+                                      });
+                                    });
+                                  }),
+                                ],
+                              ),
+                      ],
+                    ),
+                  ));
             });
           });
     });
