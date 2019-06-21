@@ -1,17 +1,17 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_nano_core/flutter_nano_core.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
+import 'package:kalium_wallet_flutter/app_icons.dart';
+import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
-import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
-import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/plainseed_display.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
-import 'package:kalium_wallet_flutter/util/clipboardutil.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/mnemonic_display.dart';
 
 class IntroBackupSeedPage extends StatefulWidget {
   @override
@@ -21,200 +21,176 @@ class IntroBackupSeedPage extends StatefulWidget {
 class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
   String _seed;
-  TextStyle _seedTapStyle;
-  var _seedCopiedColor = Colors.transparent;
-  Timer _seedCopiedTimer;
-
-  bool _seedCopied = false;
+  List<String> _mnemonic;
+  bool _showMnemonic;
 
   @override
   void initState() {
     super.initState();
-    _seed = NanoSeeds.generateSeed();
+    sl.get<Vault>().getSeed().then((seed) {
+      print(seed);
+      setState(() {
+        _seed = seed;
+        _mnemonic = NanoMnemomics.seedToMnemonic(seed);
+      });
+    });
+    _showMnemonic = true;
   }
 
   @override
   Widget build(BuildContext context) {
-    // Back button pressed
-    Future<bool> _onWillPop() async {
-      // Delete seed
-      await sl.get<Vault>().deleteAll();
-      // Delete any shared prefs
-      await sl.get<Vault>().deleteAll();
-      return true;
-    }
-
-    return new WillPopScope(
-        onWillPop: _onWillPop,
-        child: Scaffold(
-          resizeToAvoidBottomPadding: false,
-          key: _scaffoldKey,
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          body: LayoutBuilder(
-            builder: (context, constraints) => SafeArea(
-                  minimum: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.035,
-                      top: MediaQuery.of(context).size.height * 0.075),
-                  child: Column(
-                    children: <Widget>[
-                      //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
+    return Scaffold(
+      resizeToAvoidBottomPadding: false,
+      key: _scaffoldKey,
+      backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+      body: LayoutBuilder(
+        builder: (context, constraints) => SafeArea(
+              minimum: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.035,
+                  top: MediaQuery.of(context).size.height * 0.075),
+              child: Column(
+                children: <Widget>[
+                  //A widget that holds the header, the paragraph, the seed, "seed copied" text and the back button
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                // Back Button
-                                Container(
-                                  margin: EdgeInsetsDirectional.only(start: 20),
-                                  height: 50,
-                                  width: 50,
-                                  child: FlatButton(
-                                      highlightColor: StateContainer.of(context)
-                                          .curTheme
-                                          .text15,
-                                      splashColor: StateContainer.of(context)
-                                          .curTheme
-                                          .text15,
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(50.0)),
-                                      padding: EdgeInsets.all(0.0),
-                                      child: Icon(AppIcons.back,
-                                          color: StateContainer.of(context)
-                                              .curTheme
-                                              .text,
-                                          size: 24)),
-                                ),
-                              ],
-                            ),
-                            // The header
+                            // Back Button
                             Container(
-                              margin: EdgeInsets.only(
-                                  top: 15.0, left: 50, right: 50),
-                              alignment: AlignmentDirectional(-1, 0),
-                              child: Text(
-                                AppLocalization.of(context).seed,
-                                style:
-                                    AppStyles.textStyleHeaderColored(context),
-                              ),
-                            ),
-                            // The paragraph
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: 50, right: 50, top: 15.0),
-                              alignment: Alignment.centerLeft,
-                              child: AutoSizeText(
-                                AppLocalization.of(context).seedBackupInfo,
-                                style: AppStyles.textStyleParagraph(context),
-                                maxLines: 5,
-                                stepGranularity: 0.5,
-                              ),
-                            ),
-                            Container(
-                              // A gesture detector to decide if the is tapped or not
-                              child: new GestureDetector(
-                                  onTap: () {
-                                    Clipboard.setData(
-                                        new ClipboardData(text: _seed));
-                                    ClipboardUtil.setClipboardClearEvent();
-                                    setState(() {
-                                      _seedCopied = true;
-                                      _seedCopiedColor =
-                                          StateContainer.of(context)
-                                              .curTheme
-                                              .success;
-                                    });
-                                    if (_seedCopiedTimer != null) {
-                                      _seedCopiedTimer.cancel();
-                                    }
-                                    _seedCopiedTimer = new Timer(
-                                        const Duration(milliseconds: 1200), () {
-                                      setState(() {
-                                        _seedCopied = false;
-                                        _seedCopiedColor = Colors.transparent;
-                                      });
-                                    });
+                              margin: EdgeInsetsDirectional.only(
+                                  start: smallScreen(context) ? 15 : 20),
+                              height: 50,
+                              width: 50,
+                              child: FlatButton(
+                                  highlightColor: StateContainer.of(context)
+                                      .curTheme
+                                      .text15,
+                                  splashColor: StateContainer.of(context)
+                                      .curTheme
+                                      .text15,
+                                  onPressed: () {
+                                    Navigator.pop(context);
                                   },
-                                  // The seed
-                                  child: new Container(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: 25.0, vertical: 15),
-                                    margin: EdgeInsets.only(top: 25),
-                                    decoration: BoxDecoration(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(50.0)),
+                                  padding: EdgeInsets.all(0.0),
+                                  child: Icon(AppIcons.back,
                                       color: StateContainer.of(context)
                                           .curTheme
-                                          .backgroundDarkest,
-                                      borderRadius: BorderRadius.circular(25),
-                                    ),
-                                    child: sl.get<UIUtil>().threeLineSeedText(
-                                        context, _seed,
-                                        textStyle: _seedCopied
-                                            ? AppStyles.textStyleSeedGreen(
-                                                context)
-                                            : AppStyles.textStyleSeed(context)),
-                                  )),
+                                          .text,
+                                      size: 24)),
                             ),
-                            // "Seed copied to Clipboard" text that appaears when seed is tapped
+                            // Switch between Secret Phrase and Seed
                             Container(
-                              margin: EdgeInsets.only(top: 5),
-                              child:
-                                  Text(AppLocalization.of(context).seedCopied,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 14.0,
-                                        color: _seedCopiedColor,
-                                        fontFamily: 'NunitoSans',
-                                        fontWeight: FontWeight.w600,
-                                      )),
+                              margin: EdgeInsetsDirectional.only(
+                                  end: smallScreen(context) ? 15 : 20),
+                              height: 50,
+                              width: 50,
+                              child: FlatButton(
+                                  highlightColor: StateContainer.of(context)
+                                      .curTheme
+                                      .text15,
+                                  splashColor: StateContainer.of(context)
+                                      .curTheme
+                                      .text15,
+                                  onPressed: () {
+                                    setState(() {
+                                      _showMnemonic = !_showMnemonic;
+                                    });
+                                  },
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(50.0)),
+                                  padding: EdgeInsets.all(0.0),
+                                  child: Icon(
+                                      _showMnemonic
+                                          ? AppIcons.seed
+                                          : Icons.vpn_key,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .text,
+                                      size: 24)),
                             ),
                           ],
                         ),
-                      ),
-
-                      // Next Screen Button
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsetsDirectional.only(end: 30),
-                            height: 50,
-                            width: 50,
-                            child: FlatButton(
-                                splashColor: StateContainer.of(context)
-                                    .curTheme
-                                    .primary30,
-                                highlightColor: StateContainer.of(context)
-                                    .curTheme
-                                    .primary15,
-                                onPressed: () {
-                                  sl.get<Vault>().setSeed(_seed).then((result) {
-                                    // Update wallet
-                                    NanoUtil().loginAccount(context).then((_) {
-                                      StateContainer.of(context).requestUpdate();
-                                      Navigator.of(context)
-                                          .pushNamed('/intro_backup_confirm');
-                                    });
-                                  });
-                                },
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(50.0)),
-                                padding: EdgeInsets.all(0.0),
-                                child: Icon(AppIcons.forward,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
-                                    size: 50)),
+                        // The header
+                        Container(
+                          margin: EdgeInsetsDirectional.only(
+                            start: smallScreen(context) ? 30 : 40,
+                            end: smallScreen(context) ? 30 : 40,
+                            top: 10,
                           ),
-                        ],
+                          alignment: AlignmentDirectional(-1, 0),
+                          child: Row(
+                            children: <Widget>[
+                              Container(
+                                constraints: BoxConstraints(
+                                    maxWidth: MediaQuery.of(context)
+                                            .size
+                                            .width -
+                                        (smallScreen(context) ? 120 : 140)),
+                                child: AutoSizeText(
+                                  _showMnemonic ? AppLocalization.of(context).secretPhrase : AppLocalization.of(context).seed,
+                                  style: AppStyles.textStyleHeaderColored(
+                                      context),
+                                  stepGranularity: 0.1,
+                                  minFontSize: 12.0,
+                                  maxLines: 1,
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsetsDirectional.only(
+                                    start: 10, end: 10),
+                                child: Icon(
+                                  _showMnemonic
+                                      ? Icons.vpn_key
+                                      : AppIcons.seed,
+                                  size: _showMnemonic ? 36 : 24,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Mnemonic word list
+                         _seed != null && _mnemonic != null ?
+                          _showMnemonic
+                              ? MnemonicDisplay(wordList: _mnemonic)
+                              : PlainSeedDisplay(seed: _seed)
+                        : Text('')
+                      ],
+                    ),
+                  ),
+                  // Next Screen Button
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY,
+                        AppLocalization.of(context).backupConfirmButton,
+                        Dimens.BUTTON_BOTTOM_DIMENS,
+                        onPressed: () {
+                          // Update wallet
+                          NanoUtil().loginAccount(context).then((_) {
+                            StateContainer.of(context).requestUpdate();
+                            Navigator.of(context)
+                                .pushNamed('/intro_backup_confirm');
+                          });
+                        },
                       ),
                     ],
                   ),
-                ),
-          ),
-        ));
+                ],
+              ),
+            ),
+      ),
+    );
   }
 }

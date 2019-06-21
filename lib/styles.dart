@@ -18,6 +18,14 @@ class AppStyles {
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.primary);
   }
+  // Text style for thin paragraph text with primary color.
+  static TextStyle textStyleParagraphThinPrimary(BuildContext context) {
+    return TextStyle(
+      fontFamily: "NunitoSans",
+      fontSize: AppFontSizes.small,
+      fontWeight: FontWeight.w600,
+      color: StateContainer.of(context).curTheme.primary);
+  }
   // Text style for paragraph text with primary color.
   static TextStyle textStyleParagraphSuccess(BuildContext context) {
     return TextStyle(
@@ -80,6 +88,22 @@ class AppStyles {
       fontSize: AppFontSizes._large,
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.text);
+  }
+  // Text style for small outline button
+  static TextStyle textStyleButtonPrimarySmallOutline(BuildContext context) {
+    return TextStyle(
+      fontFamily: "NunitoSans",
+      fontSize: AppFontSizes.small,
+      fontWeight: FontWeight.w700,
+      color: StateContainer.of(context).curTheme.primary);
+  }
+  // Text style for small success outline button
+  static TextStyle textStyleButtonSuccessSmallOutline(BuildContext context) {
+    return TextStyle(
+      fontFamily: "NunitoSans",
+      fontSize: AppFontSizes.small,
+      fontWeight: FontWeight.w700,
+      color: StateContainer.of(context).curTheme.success);
   }
   // General address/seed styles
   static TextStyle textStyleAddressPrimary60(BuildContext context) {
@@ -268,6 +292,27 @@ class AppStyles {
       letterSpacing: 1,
     );
   }
+  // Text style for mnemonic text
+  static TextStyle textStyleMnemonicText(BuildContext context) {
+    return TextStyle(
+      fontSize: AppFontSizes.smallText(context),
+      fontWeight: FontWeight.w100,
+      fontFamily: 'OverpassMono',
+      color: StateContainer.of(context).curTheme.primary,
+      height: 1,
+      letterSpacing: 1,
+    );
+  }
+  static TextStyle textStyleMnemonicTextGray(BuildContext context) {
+    return TextStyle(
+      fontSize: AppFontSizes.smallText(context),
+      fontWeight: FontWeight.w100,
+      fontFamily: 'OverpassMono',
+      color: StateContainer.of(context).curTheme.text60,
+      height: 1,
+      letterSpacing: 1,
+    );
+  }
   static TextStyle textStyleSeedGreen(BuildContext context) {
     return TextStyle(
       fontSize: AppFontSizes.small,
@@ -375,6 +420,33 @@ class AppStyles {
       fontWeight: FontWeight.w600,
     );
   }
+  // Text style for mnemonic
+  static TextStyle textStyleMnemonic(BuildContext context) {
+    return TextStyle(
+      fontSize: AppFontSizes.smallText(context),
+      color: StateContainer.of(context).curTheme.primary,
+      fontFamily: 'OverpassMono',
+      fontWeight: FontWeight.w100,
+    );
+  }
+  // Text style for mnemonic success
+  static TextStyle textStyleMnemonicSuccess(BuildContext context) {
+    return TextStyle(
+      fontSize: AppFontSizes.smallText(context),
+      color: StateContainer.of(context).curTheme.success,
+      fontFamily: 'OverpassMono',
+      fontWeight: FontWeight.w100,
+    );
+  }
+  // Text style for numbers of mnemonic
+  static TextStyle textStyleNumbersOfMnemonic(BuildContext context) {
+    return TextStyle(
+      fontSize: AppFontSizes.smallText(context),
+      color: StateContainer.of(context).curTheme.text30,
+      fontFamily: 'OverpassMono',
+      fontWeight: FontWeight.w100,
+    );
+  }
 }
 
 class AppFontSizes {
@@ -393,12 +465,17 @@ class AppFontSizes {
     }
     return _largest;
   }
-
   static double large(context) {
     if (smallScreen(context)) {
       return _sslarge;
     }
     return _large;
+  }
+  static double smallText(context) {
+    if (smallScreen(context)) {
+      return smallest;
+    }
+    return small;
   }
 }
 

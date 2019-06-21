@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_nano_core/flutter_nano_core.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
+import 'package:kalium_wallet_flutter/model/vault.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:flare_flutter/flare_actor.dart';
+import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 
 class IntroWelcomePage extends StatefulWidget {
   @override
@@ -88,7 +92,14 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                               AppButtonType.PRIMARY,
                               AppLocalization.of(context).newWallet,
                               Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                            Navigator.of(context).pushNamed('/intro_backup');
+                            sl.get<Vault>().setSeed(NanoSeeds.generateSeed()).then((result) {
+                              // Update wallet
+                              NanoUtil().loginAccount(context).then((_) {
+                                StateContainer.of(context).requestUpdate();
+                                Navigator.of(context)
+                                    .pushNamed('/intro_backup_safety');
+                              });
+                            });
                           }),
                         ],
                       ),

@@ -4,7 +4,6 @@ import 'package:kalium_wallet_flutter/model/setting_item.dart';
 
 enum AvailableLanguage {
   DEFAULT,
-  ARABIC,
   ENGLISH,
   CHINESE_SIMPLIFIED,
   CHINESE_TRADITIONAL,
@@ -16,7 +15,6 @@ enum AvailableLanguage {
   HUNGARIAN,
   INDONESIAN,
   KOREAN,
-  LATVIAN,
   ITALIAN,
   MALAY,
   POLISH,
@@ -29,7 +27,9 @@ enum AvailableLanguage {
   SWEDISH,
   TAGALOG,
   TURKISH,
-  VIETNAMESE
+  VIETNAMESE,
+  ARABIC,
+  LATVIAN
 }
 
 /// Represent the available languages our app supports

@@ -16,6 +16,7 @@ import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/ui/home_page.dart';
 import 'package:kalium_wallet_flutter/ui/lock_screen.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_welcome.dart';
+import 'package:kalium_wallet_flutter/ui/intro/intro_backup_safety.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_backup_seed.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_import_seed.dart';
@@ -194,6 +195,11 @@ class _AppState extends State<App> {
                 builder: (_) => IntroBackupSeedPage(),
                 settings: settings,
               );
+            case '/intro_backup_safety':
+              return MaterialPageRoute(
+                builder: (_) => IntroBackupSafetyPage(),
+                settings: settings,
+              );
             case '/intro_backup_confirm':
               return MaterialPageRoute(
                 builder: (_) => IntroBackupConfirm(),
@@ -279,13 +285,16 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       if (firstLaunch) {
         bool migrated = false;
         if (Platform.isAndroid) {
-          migrated = await _doAndroidMigration();
+          try {
+            migrated = await _doAndroidMigration();
+          } catch (e) {
+            migrated = false;
+          }
         }
         if (!migrated) {
           await sl.get<Vault>().deleteAll();
         }
       }
-      await sl.get<SharedPrefsUtil>().setFirstLaunch();
       await sl.get<SharedPrefsUtil>().setFirstLaunch();
       // See if logged in already
       bool isLoggedIn = false;
@@ -325,6 +334,9 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
           await sl.get<SharedPrefsUtil>().setUseLegacyStorage();
           checkLoggedIn();
         }
+      } else {
+        await sl.get<Vault>().deleteAll();
+        await sl.get<SharedPrefsUtil>().deleteAll();
       }
     }
   }
