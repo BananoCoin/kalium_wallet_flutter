@@ -366,7 +366,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
       actionExtentRatio: 0.24,
-      delegate: SlidableStrechDelegate(),
+      actionPane: SlidableStrechActionPane(),
       child: FlatButton(
           highlightColor: StateContainer.of(context).curTheme.text15,
           splashColor: StateContainer.of(context).curTheme.text15,

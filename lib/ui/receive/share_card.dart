@@ -1,10 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
-import 'package:qr/qr.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class AppShareCard extends StatefulWidget {
@@ -67,6 +65,7 @@ class _AppShareCardState extends State<AppShareCard> {
                           data: StateContainer.of(context).wallet.address,
                           version: 6,
                           errorCorrectionLevel: QrErrorCorrectLevel.Q,
+                          gapless: false,
                         ),
                       ),
                     ),
