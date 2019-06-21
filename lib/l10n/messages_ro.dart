@@ -3,6 +3,8 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
@@ -109,7 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "qrInvalidSeed" : MessageLookupByLibrary.simpleMessage("Codul QR nu conține un seed sau private key valid"),
     "rawSeed" : MessageLookupByLibrary.simpleMessage("Seed simplu"),
     "receive" : MessageLookupByLibrary.simpleMessage("Primește"),
-    "received" : MessageLookupByLibrary.simpleMessage("S-a primit"),
+    "received" : MessageLookupByLibrary.simpleMessage("Ai primit"),
     "removeAccountText" : MessageLookupByLibrary.simpleMessage("Sigur doriți să ascundeți acest cont? Îl puteți reafișa mai târziu apăsând butonul \"%1\""),
     "removeContact" : MessageLookupByLibrary.simpleMessage("Șterge contactul"),
     "removeContactConfirmation" : MessageLookupByLibrary.simpleMessage("Dorești să elimini contactul %1?"),
@@ -128,7 +130,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendError" : MessageLookupByLibrary.simpleMessage("A apărut o eroare. Încercați din nou mai târziu."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Trimite de la"),
     "sending" : MessageLookupByLibrary.simpleMessage("Trimitere..."),
-    "sent" : MessageLookupByLibrary.simpleMessage("S-a trimis"),
+    "sent" : MessageLookupByLibrary.simpleMessage("Ai trimis"),
     "sentTo" : MessageLookupByLibrary.simpleMessage("Trmite către"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Setări"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Încarcă din Paper Wallet"),
