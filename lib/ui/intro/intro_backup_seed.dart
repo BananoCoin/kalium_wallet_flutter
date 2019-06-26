@@ -6,6 +6,7 @@ import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
+import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
@@ -28,7 +29,6 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
   void initState() {
     super.initState();
     sl.get<Vault>().getSeed().then((seed) {
-      print(seed);
       setState(() {
         _seed = seed;
         _mnemonic = NanoMnemomics.seedToMnemonic(seed);
@@ -178,10 +178,12 @@ class _IntroBackupSeedState extends State<IntroBackupSeedPage> {
                         Dimens.BUTTON_BOTTOM_DIMENS,
                         onPressed: () {
                           // Update wallet
-                          NanoUtil().loginAccount(context).then((_) {
-                            StateContainer.of(context).requestUpdate();
-                            Navigator.of(context)
-                                .pushNamed('/intro_backup_confirm');
+                          sl.get<DBHelper>().dropAccounts().then((_) {
+                            NanoUtil().loginAccount(context).then((_) {
+                              StateContainer.of(context).requestUpdate();
+                              Navigator.of(context)
+                                  .pushNamed('/intro_backup_confirm');
+                            });
                           });
                         },
                       ),
