@@ -839,5 +839,6 @@
     "secretPhraseCopied": "Hemlig fras kopierad",
     "import": "Importera",
     "importSeedInstead": "Importera seed istället",
-    "switchToSeed": "Byt till seed"
+    "switchToSeed": "Byt till seed",
+    "backupSecretPhrase": "Säkerhetskopiera hemlig fras"
 }

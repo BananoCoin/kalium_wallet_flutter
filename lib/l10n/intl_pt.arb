@@ -823,5 +823,6 @@
     "accounts": "Contas",
     "addAccount": "Adicionar Conta",
     "hideAccountHeader": "Ocultar Conta?",
-    "removeAccountText": "Tem certeza de que deseja ocultar esta conta? Você pode adicioná-la novamente tocando no botão \"%1\""
+    "removeAccountText": "Tem certeza de que deseja ocultar esta conta? Você pode adicioná-la novamente tocando no botão \"%1\"",
+    "backupSecretPhrase": "Backup da Frase Secreta"
 }

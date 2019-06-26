@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Wpisz ilość"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Metoda Uwierzytelniania"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Zapisałem frazę"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Zapisz Sekretną Frazę"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Zapisz Nasiono"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Czy jesteś pewny że zapisałeś nasiono portfela?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Zapisałeś swoje nasiono?"),

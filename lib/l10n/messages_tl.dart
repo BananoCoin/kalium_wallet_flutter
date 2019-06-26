@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage("Pamamaraan Authentication"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("I-lock ng automatic"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Na-back up ko na"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Backup Secret Phrase"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("I-back up ang Seed"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Sigurado ka ba na na-back up mo na ang iyong wallet seed?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("I-back up ang iyong seed"),

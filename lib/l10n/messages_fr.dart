@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage("Méthode d’authentification"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Verrouiller automatiquement"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("J\'ai bien sauvegardé"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Sauvegarder la phrase secrète"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Sauvegarder la clé privée"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Êtes vous sûr d’avoir sauvegardé votre clé privée?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Sauvegarder votre clé privée"),

@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage("Doğrulama Metodu"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Otomatik Kilitle"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Yedekledim"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Gizli Cümleyi Yedekle"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Seed\'i Yedekle"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Cüzdanınızın seed\'ini yedeklediğinizden emin misiniz?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Seed\'inizi yedekleyin"),

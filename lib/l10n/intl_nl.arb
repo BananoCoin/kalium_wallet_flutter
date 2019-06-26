@@ -845,5 +845,6 @@
     "secretPhraseCopied": "Geheime zin gekopieerd",
     "import": "Importeren",
     "importSeedInstead": "In plaats daarvan seed importeren",
-    "switchToSeed": "Schakel over naar seed"
+    "switchToSeed": "Schakel over naar seed",
+    "backupSecretPhrase": "Back-up geheime zin"
 }

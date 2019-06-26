@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage("Metodo di Autenticazione"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Blocco Automatico"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("L\'ho Conservata"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Conserva Frase Segreta"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Salva Seme"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Sei sicuro di aver fatto un backup del tuo seed?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Salva il seed"),

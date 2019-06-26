@@ -845,5 +845,6 @@
     "secretPhraseCopied": "Gizli Cümle Kopyalandı",
     "import": "İçe Aktar",
     "importSeedInstead": "Seedle İçe Aktar",
-    "switchToSeed": "Seede Geç"
+    "switchToSeed": "Seede Geç",
+    "backupSecretPhrase": "Gizli Cümleyi Yedekle"
 }

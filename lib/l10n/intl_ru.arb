@@ -861,5 +861,6 @@
     "secretPhraseCopied": "Секретная фраза скопирована",
     "import": "Импорт",
     "importSeedInstead": "Вместо этого Импортируйте Seed",
-    "switchToSeed": "Переключиться на Seed"
+    "switchToSeed": "Переключиться на Seed",
+    "backupSecretPhrase": "Копирование Секретной фразы"
 }

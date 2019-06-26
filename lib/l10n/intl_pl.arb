@@ -741,5 +741,6 @@
     "secretPhraseCopied": "Sekretna Fraza Skopiowania",
     "import": "Importuj",
     "importSeedInstead": "Importuj Nasiono Zamiast Sekretnej Frazy",
-    "switchToSeed": "Zamień na nasiono"
+    "switchToSeed": "Zamień na nasiono",
+    "backupSecretPhrase": "Zapisz Sekretną Frazę"
 }

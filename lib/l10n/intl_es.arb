@@ -845,5 +845,6 @@
     "secretPhraseCopied": "Frase secreta copiada",
     "importar": "importar",
     "importSeedInstead": "Importar semilla en su lugar",
-    "switchToSeed": "Cambiar a semilla"  
+    "switchToSeed": "Cambiar a semilla",
+    "backupSecretPhrase": "Frase secreta de respaldo"
 }

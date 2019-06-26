@@ -885,5 +885,6 @@
   "secretPhraseCopied": "Slepenā frāze nokopēta",
   "import": "Importēt",
   "importSeedInstead": "Importēt privāto atslēgu",
-  "switchToSeed": "Pārslēgties uz privāto atslēgu"
+  "switchToSeed": "Pārslēgties uz privāto atslēgu",
+  "backupSecretPhrase": "Kopēt slepeno frāzi"
 }

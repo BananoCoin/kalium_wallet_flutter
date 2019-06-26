@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage("Autentificēšanās metode"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Automātiski aizslēgt"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Esmu izveidojis rezerves kopiju"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Kopēt slepeno frāzi"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Kopēt sēklu"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Vai esat drošs, ka saglabājāt sēklas rezerves kopiju?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Izveidojiet sēklas rezerves kopiju"),

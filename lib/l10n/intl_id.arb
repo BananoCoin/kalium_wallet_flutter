@@ -845,5 +845,6 @@
     "secretPhraseCopied": "Kalimat Rahasia Disalin",
     "import": "Impor",
     "importSeedInstead": "Impor Benih Saja",
-    "switchToSeed": "Pindah Ke Benih Lain"
+    "switchToSeed": "Pindah Ke Benih Lain",
+    "backupSecretPhrase": "Simpan Kata Rahasia"
 }

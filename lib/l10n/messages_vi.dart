@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressShare" : MessageLookupByLibrary.simpleMessage("Share Address"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Hãy nhập một số lượng"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Phương thức đặt xác thực"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Sao chép lại cụm từ bí mật"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Sao lưu hạt giống(SEED)"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Bạn có chắc chắn rằng bạn đã sao lưu hạt giống của mình?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Sao lưu hạt giống của bạn"),

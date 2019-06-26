@@ -845,6 +845,7 @@
     "secretPhraseCopied": "Phrase secrète copiée",
     "import": "Importer",
     "importSeedInstead": "Importer une clé privée",
-    "switchToSeed": "Utiliser une clé privée"
+    "switchToSeed": "Utiliser une clé privée",
+    "backupSecretPhrase": "Sauvegarder la phrase secrète"
 }
 

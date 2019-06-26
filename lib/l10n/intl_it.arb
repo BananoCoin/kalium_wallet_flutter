@@ -845,5 +845,6 @@
     "secretPhraseCopied": "Frase Segreta Copiata",
     "import": "Importa",
     "importSeedInstead": "Oppure Importa Seed",
-    "switchToSeed": "Passa al Seed"
+    "switchToSeed": "Passa al Seed",
+    "backupSecretPhrase": "Conserva Frase Segreta"
 }

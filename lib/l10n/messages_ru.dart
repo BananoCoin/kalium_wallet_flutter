@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage(" Аутентификация"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Автоблокировка"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Я сделал резервную копию"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Копирование Секретной фразы"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Резервное копирование Seed"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Вы уверены,что сохранили Seed?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Резервное копирование Seed"),

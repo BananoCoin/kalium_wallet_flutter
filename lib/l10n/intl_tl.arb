@@ -845,5 +845,6 @@
   "secretPhraseCopied": "Secret Phrase ay nakopya",
   "import": "Angkatin",
   "importSeedInstead": "I-angkat ang Seed sa halip",
-  "switchToSeed": "Lumipat sa Seed"
+  "switchToSeed": "Lumipat sa Seed",
+  "backupSecretPhrase": "Backup Secret Phrase"
 }

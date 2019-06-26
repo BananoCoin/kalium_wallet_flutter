@@ -34,6 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Ange ett belopp"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Autentiseringsmetod"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Jag har sparat den"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Säkerhetskopiera hemlig fras"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Säkerhetskopiera seed"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Är du säker på att du har säkerhetskopierat din plånboks seed?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Säkerhetskopiera din seed"),

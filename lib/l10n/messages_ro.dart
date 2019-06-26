@@ -32,6 +32,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Introduceți o sumă"),
     "authMethod" : MessageLookupByLibrary.simpleMessage("Metoda de Autentificare"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Blocare automată"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Backup formulă secretă"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Copie de rezervă pentru seed"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Sunteți sigur/ă că ați salvat seed-ul portofelului?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Salvați-vă seed-ul (backup)"),

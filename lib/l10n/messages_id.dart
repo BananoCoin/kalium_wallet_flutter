@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage("Metode Otentikasi"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Kunci Otomatis"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Sudah Saya Simpan"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Simpan Kata Rahasia"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Simpan Benih"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Apakah anda yakin sudah menyimpan benih anda dengan aman?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Simpan benih anda"),

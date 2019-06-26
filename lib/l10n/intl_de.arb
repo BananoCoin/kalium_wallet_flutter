@@ -845,5 +845,6 @@
     "secretPhraseCopied": "Geheimsequenz kopiert",
     "import": "Importieren",
     "importSeedInstead": "Stattdessen Seed importieren",
-    "switchToSeed": "Zum Seed wechseln"
+    "switchToSeed": "Zum Seed wechseln",
+    "backupSecretPhrase": "Geheimsequenz sichern"
 }

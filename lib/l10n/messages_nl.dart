@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "authMethod" : MessageLookupByLibrary.simpleMessage("Verificatiemethode"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Automatisch vergrendelen"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Ik heb er een back-up van gemaakt"),
+    "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Back-up geheime zin"),
     "backupSeed" : MessageLookupByLibrary.simpleMessage("Maak seed back-up"),
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Weet je zeker dat jouw wallet seed is opgeslagen?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Maak een back-up van jouw seed"),
