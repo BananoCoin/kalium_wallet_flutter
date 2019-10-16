@@ -3,6 +3,7 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:logging/logging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:package_info/package_info.dart';
@@ -73,7 +74,9 @@ class _SettingsSheetState extends State<SettingsSheet>
   // Called if transfer fails
   void transferError() {
     Navigator.of(context).pop();
-    sl.get<UIUtil>().showSnackbar(AppLocalization.of(context).transferError, context);
+    sl
+        .get<UIUtil>()
+        .showSnackbar(AppLocalization.of(context).transferError, context);
   }
 
   @override
@@ -165,8 +168,9 @@ class _SettingsSheetState extends State<SettingsSheet>
         .registerTo<TransferCompleteEvent>()
         .listen((event) {
       StateContainer.of(context).requestUpdate();
-      AppTransferCompleteSheet(
-              sl.get<NumberUtil>().getRawAsUsableString(event.amount.toString()))
+      AppTransferCompleteSheet(sl
+              .get<NumberUtil>()
+              .getRawAsUsableString(event.amount.toString()))
           .mainBottomSheet(context);
     });
     // Unlock callback
@@ -212,7 +216,6 @@ class _SettingsSheetState extends State<SettingsSheet>
     }
   }
 
-
   Future<void> _authMethodDialog() async {
     switch (await showDialog<AuthMethod>(
         context: context,
@@ -251,7 +254,8 @@ class _SettingsSheetState extends State<SettingsSheet>
           );
         })) {
       case AuthMethod.PIN:
-        sl.get<SharedPrefsUtil>()
+        sl
+            .get<SharedPrefsUtil>()
             .setAuthMethod(AuthenticationMethod(AuthMethod.PIN))
             .then((result) {
           setState(() {
@@ -260,7 +264,8 @@ class _SettingsSheetState extends State<SettingsSheet>
         });
         break;
       case AuthMethod.BIOMETRICS:
-        sl.get<SharedPrefsUtil>()
+        sl
+            .get<SharedPrefsUtil>()
             .setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS))
             .then((result) {
           setState(() {
@@ -416,14 +421,15 @@ class _SettingsSheetState extends State<SettingsSheet>
                 title: Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: Text(
-                    AppLocalization.of(context).changeCurrency,
+                    AppLocalization.of(context).currency,
                     style: AppStyles.textStyleDialogHeader(context),
                   ),
                 ),
                 children: _buildCurrencyOptions(),
               );
             });
-    sl.get<SharedPrefsUtil>()
+    sl
+        .get<SharedPrefsUtil>()
         .setCurrency(AvailableCurrency(selection))
         .then((result) {
       if (StateContainer.of(context).curCurrency.currency != selection) {
@@ -469,7 +475,10 @@ class _SettingsSheetState extends State<SettingsSheet>
             children: _buildLanguageOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>().setLanguage(LanguageSetting(selection)).then((result) {
+    sl
+        .get<SharedPrefsUtil>()
+        .setLanguage(LanguageSetting(selection))
+        .then((result) {
       if (StateContainer.of(context).curLanguage.language != selection) {
         setState(() {
           StateContainer.of(context).updateLanguage(LanguageSetting(selection));
@@ -512,11 +521,13 @@ class _SettingsSheetState extends State<SettingsSheet>
             children: _buildLockTimeoutOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>()
+    sl
+        .get<SharedPrefsUtil>()
         .setLockTimeout(LockTimeoutSetting(selection))
         .then((result) {
       if (_curTimeoutSetting.setting != selection) {
-        sl.get<SharedPrefsUtil>()
+        sl
+            .get<SharedPrefsUtil>()
             .setLockTimeout(LockTimeoutSetting(selection))
             .then((_) {
           setState(() {
@@ -562,7 +573,10 @@ class _SettingsSheetState extends State<SettingsSheet>
           );
         });
     if (_curThemeSetting != ThemeSetting(selection)) {
-      sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((result) {
+      sl
+          .get<SharedPrefsUtil>()
+          .setTheme(ThemeSetting(selection))
+          .then((result) {
         setState(() {
           StateContainer.of(context).updateTheme(ThemeSetting(selection));
           _curThemeSetting = ThemeSetting(selection);
@@ -604,7 +618,8 @@ class _SettingsSheetState extends State<SettingsSheet>
             ),
             buildMainSettings(context),
             SlideTransition(
-                position: _offsetFloat, child: ContactsList(_controller, _contactsOpen)),
+                position: _offsetFloat,
+                child: ContactsList(_controller, _contactsOpen)),
             SlideTransition(
                 position: _securityOffsetFloat,
                 child: buildSecurityMenu(context)),
@@ -627,7 +642,8 @@ class _SettingsSheetState extends State<SettingsSheet>
           children: <Widget>[
             // A container for accounts area
             Container(
-              margin: EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
+              margin:
+                  EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -643,8 +659,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                           children: <Widget>[
                             Center(
                               child: Container(
-                                width: smallScreen(context)?63:78,
-                                height: smallScreen(context)?63:78,
+                                width: smallScreen(context) ? 63 : 78,
+                                height: smallScreen(context) ? 63 : 78,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
@@ -660,20 +676,20 @@ class _SettingsSheetState extends State<SettingsSheet>
                               child: Padding(
                                 padding: EdgeInsets.all(4.0),
                                 child: Container(
-                                  width: smallScreen(context)?55:70,
-                                  height: smallScreen(context)?55:70,
-                                  alignment: AlignmentDirectional(0.5, 0.5),
-                                  child: MonkeyWidget(
-                                    address: StateContainer.of(context).wallet.address,
-                                    size: MonkeySize.SMALL
-                                  )
-                                ),
+                                    width: smallScreen(context) ? 55 : 70,
+                                    height: smallScreen(context) ? 55 : 70,
+                                    alignment: AlignmentDirectional(0.5, 0.5),
+                                    child: MonkeyWidget(
+                                        address: StateContainer.of(context)
+                                            .wallet
+                                            .address,
+                                        size: MonkeySize.SMALL)),
                               ),
                             ),
                             Center(
                               child: Container(
-                                width: smallScreen(context)?63:78,
-                                height: smallScreen(context)?63:78,
+                                width: smallScreen(context) ? 63 : 78,
+                                height: smallScreen(context) ? 63 : 78,
                                 child: FlatButton(
                                   highlightColor: StateContainer.of(context)
                                       .curTheme
@@ -685,8 +701,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                       .withOpacity(0.75),
                                   padding: EdgeInsets.all(0.0),
                                   child: SizedBox(
-                                    width: smallScreen(context)?63:78,
-                                    height: smallScreen(context)?63:78,
+                                    width: smallScreen(context) ? 63 : 78,
+                                    height: smallScreen(context) ? 63 : 78,
                                   ),
                                   onPressed: () {
                                     AccountDetailsSheet(
@@ -711,13 +727,14 @@ class _SettingsSheetState extends State<SettingsSheet>
                                     children: <Widget>[
                                       Center(
                                         child: Container(
-                                          width: 48,
-                                          height: 48,
+                                            width: 48,
+                                            height: 48,
                                             child: MonkeyWidget(
-                                              address: StateContainer.of(context).recentLast.address,
-                                              size: MonkeySize.SMALLEST
-                                            )
-                                        ),
+                                                address:
+                                                    StateContainer.of(context)
+                                                        .recentLast
+                                                        .address,
+                                                size: MonkeySize.SMALLEST)),
                                       ),
                                       Center(
                                         child: Container(
@@ -726,7 +743,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
-                                              sl.get<DBHelper>()
+                                              sl
+                                                  .get<DBHelper>()
                                                   .changeAccount(
                                                       StateContainer.of(context)
                                                           .recentLast)
@@ -771,13 +789,14 @@ class _SettingsSheetState extends State<SettingsSheet>
                                     children: <Widget>[
                                       Center(
                                         child: Container(
-                                          width: 48,
-                                          height: 48,
-                                          child: MonkeyWidget(
-                                            address: StateContainer.of(context).recentSecondLast.address,
-                                            size: MonkeySize.SMALLEST
-                                          )
-                                        ),
+                                            width: 48,
+                                            height: 48,
+                                            child: MonkeyWidget(
+                                                address:
+                                                    StateContainer.of(context)
+                                                        .recentSecondLast
+                                                        .address,
+                                                size: MonkeySize.SMALLEST)),
                                       ),
                                       Center(
                                         child: Container(
@@ -786,7 +805,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
-                                              sl.get<DBHelper>()
+                                              sl
+                                                  .get<DBHelper>()
                                                   .changeAccount(
                                                       StateContainer.of(context)
                                                           .recentSecondLast)
@@ -836,7 +856,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   setState(() {
                                     _loadingAccounts = true;
                                   });
-                                  sl.get<DBHelper>().getAccounts().then((accounts) {
+                                  sl
+                                      .get<DBHelper>()
+                                      .getAccounts()
+                                      .then((accounts) {
                                     setState(() {
                                       _loadingAccounts = false;
                                     });
@@ -929,24 +952,39 @@ class _SettingsSheetState extends State<SettingsSheet>
                 child: Stack(
               children: <Widget>[
                 ListView(
-                  padding: EdgeInsets.only(top: 15.0),
+                  padding: EdgeInsets.only(top: 18.0),
                   children: <Widget>[
-                    Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
-                      child: Text(AppLocalization.of(context).preferences,
-                          style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w100,
-                              color:
-                                  StateContainer.of(context).curTheme.text60)),
-                    ),
-                    Divider(
-                      height: 2,
-                      color: StateContainer.of(context).curTheme.text15,
+                    Stack(
+                      alignment: Alignment.topRight,
+                      children: <Widget>[
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              margin: EdgeInsetsDirectional.only(
+                                  start: 30.0, bottom: 10, top: 6),
+                              child: Text(
+                                  AppLocalization.of(context).preferences,
+                                  style: TextStyle(
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w100,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .text60)),
+                            ),
+                            Divider(
+                              height: 2,
+                              color: StateContainer.of(context).curTheme.text15,
+                            ),
+                          ],
+                        ),
+                        // Live support button
+                        AppSupportButton(),
+                      ],
                     ),
                     AppSettings.buildSettingsListItemDoubleLine(
                         context,
-                        AppLocalization.of(context).changeCurrency,
+                        AppLocalization.of(context).currency,
                         StateContainer.of(context).curCurrency,
                         AppIcons.currency,
                         _currencyDialog),
@@ -998,8 +1036,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     Container(
-                      margin:
-                          EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
+                      margin: EdgeInsetsDirectional.only(
+                          start: 30.0, top: 20.0, bottom: 10.0),
                       child: Text(AppLocalization.of(context).manage,
                           style: TextStyle(
                               fontSize: 16.0,
@@ -1029,11 +1067,19 @@ class _SettingsSheetState extends State<SettingsSheet>
                         AppLocalization.of(context).backupSecretPhrase,
                         AppIcons.backupseed, onPressed: () {
                       // Authenticate
-                      sl.get<SharedPrefsUtil>().getAuthMethod().then((authMethod) {
-                        sl.get<BiometricUtil>().hasBiometrics().then((hasBiometrics) {
+                      sl
+                          .get<SharedPrefsUtil>()
+                          .getAuthMethod()
+                          .then((authMethod) {
+                        sl
+                            .get<BiometricUtil>()
+                            .hasBiometrics()
+                            .then((hasBiometrics) {
                           if (authMethod.method == AuthMethod.BIOMETRICS &&
                               hasBiometrics) {
-                            sl.get<BiometricUtil>().authenticateWithBiometrics(
+                            sl
+                                .get<BiometricUtil>()
+                                .authenticateWithBiometrics(
                                     context,
                                     AppLocalization.of(context)
                                         .fingerprintSeedBackup)
@@ -1122,7 +1168,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                             CaseChange.toUpperCase(
                                 AppLocalization.of(context).yes, context), () {
                           // Unsubscribe from notifications
-                          sl.get<SharedPrefsUtil>()
+                          sl
+                              .get<SharedPrefsUtil>()
                               .setNotificationsOn(false)
                               .then((_) {
                             FirebaseMessaging().getToken().then((fcmToken) {
@@ -1130,7 +1177,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   .fire(FcmUpdateEvent(token: fcmToken));
                               // Delete all data
                               sl.get<Vault>().deleteAll().then((_) {
-                                sl.get<SharedPrefsUtil>().deleteAll().then((result) {
+                                sl
+                                    .get<SharedPrefsUtil>()
+                                    .deleteAll()
+                                    .then((result) {
                                   StateContainer.of(context).logOut();
                                   Navigator.of(context).pushNamedAndRemoveUntil(
                                       '/', (Route<dynamic> route) => false);
@@ -1276,7 +1326,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: EdgeInsets.only(top: 15.0),
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      margin:
+                          EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
                           style: TextStyle(
                               fontSize: 16.0,
@@ -1349,6 +1400,85 @@ class _SettingsSheetState extends State<SettingsSheet>
                 ), //List Top Gradient End
               ],
             )),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class AppSupportButton extends StatelessWidget {
+  const AppSupportButton({
+    Key key,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100),
+        color: StateContainer.of(context).curTheme.primary,
+        boxShadow: [StateContainer.of(context).curTheme.boxShadowButton],
+      ),
+      height: 30,
+      padding: EdgeInsets.all(0),
+      margin: EdgeInsetsDirectional.only(end: 24),
+      // Support Button
+      child: FlatButton(
+        splashColor: StateContainer.of(context).curTheme.background40,
+        highlightColor: StateContainer.of(context).curTheme.background40,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return sl.get<UIUtil>().showWebview(
+                context,
+                'https://kalium.banano.cc/support/' +
+                    "?fcBackgroundColor=" +
+                    StateContainer.of(context)
+                        .curTheme
+                        .backgroundDark
+                        .toString()
+                        .substring(10, 16) +
+                    "&fcForegroundColor=" +
+                    StateContainer.of(context)
+                        .curTheme
+                        .text
+                        .toString()
+                        .substring(10, 16) +
+                    "&loadingText=" +
+                    AppLocalization.of(context).connectingHeader);
+          }));
+        },
+        padding: EdgeInsetsDirectional.fromSTEB(12, 4, 12, 4),
+        // A row for support icon and text
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // Support icon
+            Container(
+              margin: EdgeInsetsDirectional.only(end: 6),
+              child: Icon(AppIcons.support,
+                  size: 16,
+                  color: StateContainer.of(context).curTheme.backgroundDark),
+            ),
+            // Support text
+            Container(
+              constraints: BoxConstraints(
+                maxWidth: (MediaQuery.of(context).size.width * 0.225),
+              ),
+              child: AutoSizeText(
+                AppLocalization.of(context).supportButton,
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 14,
+                    fontFamily: "NunitoSans",
+                    color: StateContainer.of(context).curTheme.backgroundDark),
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                minFontSize: 6,
+                stepGranularity: 0.1,
+              ),
+            ),
           ],
         ),
       ),

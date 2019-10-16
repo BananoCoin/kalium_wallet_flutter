@@ -69,4 +69,8 @@ class AppIcons {
   static const IconData accountwallet = const IconData(0xe82e, fontFamily: _kFontFam);
   static const IconData score = const IconData(0xe82f, fontFamily: _kFontFam);
   static const IconData seed = const IconData(0xe830, fontFamily: _kFontFam);
+  static const IconData appia = const IconData(0xe831, fontFamily: _kFontFam);
+  static const IconData walletpassword = const IconData(0xe832, fontFamily: _kFontFam);
+  static const IconData walletpassworddisabled = const IconData(0xe833, fontFamily: _kFontFam);
+  static const IconData support = const IconData(0xe834, fontFamily: _kFontFam);
 }

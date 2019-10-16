@@ -441,6 +441,11 @@ class AppLocalization {
       desc: 'settings_local_currency', name: 'changeCurrency');
   }
 
+  String get currency {
+    return Intl.message("Currency",
+      desc: 'A settings menu item for changing currency', name: 'currency');
+  }
+
   String get language {
     return Intl.message("Language",
       desc: 'settings_change_language', name: 'language');
@@ -916,6 +921,27 @@ class AppLocalization {
   }
 
   /// -- END SEED PROCESS
+  
+
+  /// BUTTONS
+  
+  String get supportButton {
+    return Intl.message("Support",
+        desc: 'A button to open up the live support window', name: 'supportButton');
+  }
+  String get liveSupportButton {
+    return Intl.message("Support",
+        desc: 'A button to open up the live support window', name: 'liveSupportButton');
+  }
+
+  /// Live chat
+  String get connectingHeader {
+    return Intl.message(
+        "Connecting",
+        desc:
+            'A header to let the user now that Natrium is currently connecting to (or loading) live chat.',
+        name: 'connectingHeader');
+  }
 
   /// -- NON-TRANSLATABLE ITEMS
   String getBlockExplorerUrl(String hash) {
