@@ -35,7 +35,7 @@ If you need any help, please create an issue on GitHub or visit the [Banano disc
 
 ## License
 
-Kalium is released under the BSD-2 License
+Kalium is released under the MIT License
 
 ### Update translations:
 
