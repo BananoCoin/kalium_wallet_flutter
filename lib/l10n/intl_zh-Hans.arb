@@ -252,8 +252,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "欢迎来到Kalium。下一步，您可以创建新钱包或导入现有钱包",
-    "@welcomeText": {
+    "welcomeTextKal": "欢迎来到Kalium。下一步，您可以创建新钱包或导入现有钱包",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -288,8 +288,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "发送 %1 Banano?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "发送 %1 Banano?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -474,8 +474,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "注销将从此设备中删除您的种子代码和所有与Kalium相关的数据。如果您的种子代码没有备份，您将永远无法再次访问您的帐户",
-    "@logoutDetail": {
+    "logoutDetailKal": "注销将从此设备中删除您的种子代码和所有与Kalium相关的数据。如果您的种子代码没有备份，您将永远无法再次访问您的帐户",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -546,14 +546,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "收到 %1 BANANO",
-    "@notificationTitle": {
+    "notificationTitleKal": "收到 %1 BANANO",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "打开Kalium查看此交易.",
-    "@notificationBody": {
+    "notificationBodyKal": "打开Kalium查看此交易.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -624,14 +624,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "这个过程会将纸钱包的钱币转移到您的 Kalium 钱包。\n\n请按 \"%1\" 键开始。",
-    "@transferIntro": {
+    "transferIntroKal": "这个过程会将纸钱包的钱币转移到您的 Kalium 钱包。\n\n请按 \"%1\" 键开始。",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "请扫描 Banano \n种子代码",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "请扫描 Banano \n种子代码",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -642,14 +642,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "这个种子代码没有包含任何 BANANO",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "这个种子代码没有包含任何 BANANO",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "检测到一个包含 %1 BANANO 的钱包。\n",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "检测到一个包含 %1 BANANO 的钱包。\n",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -660,8 +660,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "传送需要几秒钟完成，请稍等一下。",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "传送需要几秒钟完成，请稍等一下。",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -672,8 +672,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO 成功传送到您的 Kalium 钱包。\n",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 BANANO 成功传送到您的 Kalium 钱包。\n",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -684,14 +684,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "请输入识别码码解锁 Kalium",
-    "@unlockPin": {
+    "unlockPinKal": "请输入识别码码解锁 Kalium",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "以生物特征解锁 Kalium",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "以生物特征解锁 Kalium",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -774,14 +774,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "扫描BANANO二维码地址",
-    "@scanInstructions": {
+    "scanInstructionsKal": "扫描BANANO二维码地址",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "欢迎来到Kalium。当您收到或发送BANANO时，它将显示在下面.",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "欢迎来到Kalium。当您收到或发送BANANO时，它将显示在下面.",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -798,21 +798,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "给一只未知的猴子",
-    "@exampleCardTo": {
+    "exampleCardToKal": "给一只未知的猴子",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "来自一只未知的猴子",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "来自一只未知的猴子",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
     },
     "defaultAccountName": "主要账户",
     "defaultNewAccountName": "账户 %1",
-    "newAccountIntro": "这是您的新账户。当您收到 BANANO 时, 交易会如下出现：",
+    "newAccountIntroKal": "这是您的新账户。当您收到 BANANO 时, 交易会如下出现：",
     "account": "账户",
     "accounts": "账户",
     "addAccount": "添加账户",

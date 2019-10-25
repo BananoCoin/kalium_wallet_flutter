@@ -276,8 +276,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "Bienvenido a Kalium. Para continuar, cree una billetera nueva o importe una ya existente.",
-    "@welcomeText": {
+    "welcomeTextKal": "Bienvenido a Kalium. Para continuar, cree una billetera nueva o importe una ya existente.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -312,8 +312,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "¿Enviar %1 Banano?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "¿Enviar %1 Banano?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -504,8 +504,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "Cerrar sesión eliminará su semilla, y todos los datos relativos a Kalium serán borrados de este dispositivo. Si no ha almacenado una copia de su semilla, nunca será capaz de volver a acceder a sus fondos.",
-    "@logoutDetail": {
+    "logoutDetailKal": "Cerrar sesión eliminará su semilla, y todos los datos relativos a Kalium serán borrados de este dispositivo. Si no ha almacenado una copia de su semilla, nunca será capaz de volver a acceder a sus fondos.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -576,14 +576,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "%1 BANANO recibidos",
-    "@notificationTitle": {
+    "notificationTitleKal": "%1 BANANO recibidos",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "Abra Kalium para ver esta transacción.",
-    "@notificationBody": {
+    "notificationBodyKal": "Abra Kalium para ver esta transacción.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -654,14 +654,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Kalium.\n\nPulse el \"%1\" botón para empezar.",
-    "@transferIntro": {
+    "transferIntroKal": "Este proceso transferirá los fondos de una billetera de papel a su billetera en Kalium.\n\nPulse el \"%1\" botón para empezar.",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Escanear una semilla \nde BANANO o clave privada",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "Escanear una semilla \nde BANANO o clave privada",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -672,14 +672,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "Esta semilla no contiene ningún BANANO.",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "Esta semilla no contiene ningún BANANO.",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Se ha detectado una billetera con un balance de %1 BANANO.\n",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "Se ha detectado una billetera con un balance de %1 BANANO.\n",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -690,8 +690,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "La transferencia puede tardar varios segundos en completarse.",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "La transferencia puede tardar varios segundos en completarse.",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -702,8 +702,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO se han transferido con éxito a su billetera en Kalium.",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 BANANO se han transferido con éxito a su billetera en Kalium.",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -714,20 +714,20 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Escanear un código QR\naddress de una billetera de Banano.",
-    "@scanInstructions": {
+    "scanInstructionsKal": "Escanear un código QR\naddress de una billetera de Banano.",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "Introduzca el código PIN para desbloquear Kalium",
-    "@unlockPin": {
+    "unlockPinKal": "Introduzca el código PIN para desbloquear Kalium",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "Autentíquese para desbloquear Kalium",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "Autentíquese para desbloquear Kalium",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -786,8 +786,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Bienvenido a Kalium. Una vez que envíe o reciba BANANO, las transacciones se verán así",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "Bienvenido a Kalium. Una vez que envíe o reciba BANANO, las transacciones se verán así",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -804,21 +804,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "a un mono",
-    "@exampleCardTo": {
+    "exampleCardToKal": "a un mono",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "de un mono",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "de un mono",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
     },
     "defaultAccountName": "Cuenta principal",
     "defaultNewAccountName": "Cuenta %1",
-    "newAccountIntro": "Esta es tu nueva cuenta. Una vez que reciba BANANO, las transacciones se mostrarán así.:",
+    "newAccountIntroKal": "Esta es tu nueva cuenta. Una vez que reciba BANANO, las transacciones se mostrarán así.:",
     "account": "Cuenta",
     "accounts": "Cuentas",
     "addAccount": "Añadir cuenta",

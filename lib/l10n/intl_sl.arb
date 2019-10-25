@@ -270,8 +270,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "welcomeText": "Dobrodošli v Kalium. Za začetek ustvarite novo denarnico ali uvozite že obstoječo.",
-  "@welcomeText": {
+  "welcomeTextKal": "Dobrodošli v Kalium. Za začetek ustvarite novo denarnico ali uvozite že obstoječo.",
+  "@welcomeTextKal": {
     "description": "intro_welcome_title",
     "type": "text",
     "placeholders": {}
@@ -306,8 +306,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "sendAmountConfirm": "Pošlji %1 BANANO",
-  "@sendAmountConfirm": {
+  "sendAmountConfirmKal": "Pošlji %1 BANANO",
+  "@sendAmountConfirmKal": {
     "description": "send_pin_description",
     "type": "text",
     "placeholders": {}
@@ -505,8 +505,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "logoutDetail": "Odjava bo izbrisala zasebni ključ in vse podatke v povezavi z aplikacijo Kalium. Če zasebnega ključa niste shranili, ne boste imeli več dostopa do vašega računa.",
-  "@logoutDetail": {
+  "logoutDetailKal": "Odjava bo izbrisala zasebni ključ in vse podatke v povezavi z aplikacijo Kalium. Če zasebnega ključa niste shranili, ne boste imeli več dostopa do vašega računa.",
+  "@logoutDetailKal": {
     "description": "settings_logout_alert_message",
     "type": "text",
     "placeholders": {}
@@ -577,14 +577,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "notificationTitle": "Prejeto %1 BANANO",
-  "@notificationTitle": {
+  "notificationTitleKal": "Prejeto %1 BANANO",
+  "@notificationTitleKal": {
     "description": "notification_title",
     "type": "text",
     "placeholders": {}
   },
-  "notificationBody": "Odpri Kalium za ogled transakcije",
-  "@notificationBody": {
+  "notificationBodyKal": "Odpri Kalium za ogled transakcije",
+  "@notificationBodyKal": {
     "description": "notification_body",
     "type": "text",
     "placeholders": {}
@@ -655,14 +655,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferIntro": "Postopek bo prenesel znesek iz papirnate denarnice v vašo Kalium denarnico.\n\nPritisnite \"%1\" gumb za začetek.",
-  "@transferIntro": {
+  "transferIntroKal": "Postopek bo prenesel znesek iz papirnate denarnice v vašo Kalium denarnico.\n\nPritisnite \"%1\" gumb za začetek.",
+  "@transferIntroKal": {
     "description": "transfer_intro",
     "type": "text",
     "placeholders": {}
   },
-  "transferQrScanHint": "Zajemi Banano \nključ",
-  "@transferQrScanHint": {
+  "transferQrScanHintKal": "Zajemi Banano \nključ",
+  "@transferQrScanHintKal": {
     "description": "transfer_qr_scan_hint",
     "type": "text",
     "placeholders": {}
@@ -673,14 +673,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferNoFunds": "Ključ ne vsebuje nobenega BANANO zneska.",
-  "@transferNoFunds": {
+  "transferNoFundsKal": "Ključ ne vsebuje nobenega BANANO zneska.",
+  "@transferNoFundsKal": {
     "description": "transfer_no_funds_toast",
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfo": "Denarnica z zneskom %1 BANANO je bila zaznana.\n",
-  "@transferConfirmInfo": {
+  "transferConfirmInfoKal": "Denarnica z zneskom %1 BANANO je bila zaznana.\n",
+  "@transferConfirmInfoKal": {
     "description": "transfer_confirm_info_first",
     "type": "text",
     "placeholders": {}
@@ -691,8 +691,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfoThird": "Prenos lahko traja nekaj sekund.",
-  "@transferConfirmInfoThird": {
+  "transferConfirmInfoKalThird": "Prenos lahko traja nekaj sekund.",
+  "@transferConfirmInfoKalThird": {
     "description": "transfer_confirm_info_third",
     "type": "text",
     "placeholders": {}
@@ -703,8 +703,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferComplete": "%1 BANANO uspešno prenešenih v vašo Kalium denarnico.\n",
-  "@transferComplete": {
+  "transferCompleteKal": "%1 BANANO uspešno prenešenih v vašo Kalium denarnico.\n",
+  "@transferCompleteKal": {
     "description": "transfer_complete_text",
     "type": "text",
     "placeholders": {}
@@ -715,20 +715,20 @@
     "type": "text",
     "placeholders": {}
   },
-  "scanInstructions": "Zajemi Banano \nnaslov QR kodo",
-  "@scanInstructions": {
+  "scanInstructionsKal": "Zajemi Banano \nnaslov QR kodo",
+  "@scanInstructionsKal": {
     "description": "scan_send_instruction_label",
     "type": "text",
     "placeholders": {}
   },
-  "unlockPin": "Vnesite PIN za odklep Kalium",
-  "@unlockPin": {
+  "unlockPinKal": "Vnesite PIN za odklep Kalium",
+  "@unlockPinKal": {
     "description": "unlock_kalium_pin",
     "type": "text",
     "placeholders": {}
   },
-  "unlockBiometrics": "Avtenticiraj za odklep Kalium",
-  "@unlockBiometrics": {
+  "unlockBiometricsKal": "Avtenticiraj za odklep Kalium",
+  "@unlockBiometricsKal": {
     "description": "unlock_kalium_bio",
     "type": "text",
     "placeholders": {}
@@ -787,8 +787,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardIntro": "Dobrodošli v Kalium. Ko boste prejeli BANANO, bodo transakcije prikazane takole:",
-  "@exampleCardIntro": {
+  "exampleCardIntroKal": "Dobrodošli v Kalium. Ko boste prejeli BANANO, bodo transakcije prikazane takole:",
+  "@exampleCardIntroKal": {
     "description": "example_card_intro",
     "type": "text",
     "placeholders": {}
@@ -805,21 +805,21 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardTo": "naključni opici",
-  "@exampleCardTo": {
+  "exampleCardToKal": "naključni opici",
+  "@exampleCardToKal": {
     "description": "example_card_to",
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardFrom": "od naključne opice",
-  "@exampleCardFrom": {
+  "exampleCardFromKal": "od naključne opice",
+  "@exampleCardFromKal": {
     "description": "example_card_from",
     "type": "text",
     "placeholders": {}
   },
   "defaultAccountName": "Glavni račun",
   "defaultNewAccountName": "Račun %1", 
-  "newAccountIntro": "To je vaš nov račun. Ko boste prejeli BANANO, bodo transakcije prikazane takole:",
+  "newAccountIntroKal": "To je vaš nov račun. Ko boste prejeli BANANO, bodo transakcije prikazane takole:",
   "account": "Račun",
   "accounts": "Računi",
   "addAccount": "Dodaj račun",

@@ -252,8 +252,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "Kalium에 오신 것을 환영합니다. 계속하려면, 새 지갑을 만들거나 기존 지갑을 불러오세요.",
-    "@welcomeText": {
+    "welcomeTextKal": "Kalium에 오신 것을 환영합니다. 계속하려면, 새 지갑을 만들거나 기존 지갑을 불러오세요.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -288,8 +288,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "%1 Banano를 발송하시겠습니까?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "%1 Banano를 발송하시겠습니까?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -474,8 +474,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "로그 아웃하면 시드와 모든 Kalium 관련 데이터가 삭제됩니다. 귀하의 시드가 백업되지 않은 경우 귀하의 자금을 다시  복구 할 수 없습니다.",
-    "@logoutDetail": {
+    "logoutDetailKal": "로그 아웃하면 시드와 모든 Kalium 관련 데이터가 삭제됩니다. 귀하의 시드가 백업되지 않은 경우 귀하의 자금을 다시  복구 할 수 없습니다.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -546,14 +546,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "% s개의 BANANO을 받았습니다",
-    "@notificationTitle": {
+    "notificationTitleKal": "% s개의 BANANO을 받았습니다",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "이 거래를 보려면 Kalium을 여십시오.",
-    "@notificationBody": {
+    "notificationBodyKal": "이 거래를 보려면 Kalium을 여십시오.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -564,14 +564,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Banano QR 코드 주소를 스캔하하세요",
-    "@scanInstructions": {
+    "scanInstructionsKal": "Banano QR 코드 주소를 스캔하하세요",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Kalium에 오신 것을 환영합니다. BANANO를 받으시면 거래가 다음과 같이 표시됩니다.",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "Kalium에 오신 것을 환영합니다. BANANO를 받으시면 거래가 다음과 같이 표시됩니다.",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -588,14 +588,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "임의의 수령인에게",
-    "@exampleCardTo": {
+    "exampleCardToKal": "임의의 수령인에게",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "임의의 발송자로부터",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "임의의 발송자로부터",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}

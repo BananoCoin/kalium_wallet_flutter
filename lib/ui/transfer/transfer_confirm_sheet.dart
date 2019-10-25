@@ -223,7 +223,7 @@ class AppTransferConfirmSheet {
                                           smallScreen(context) ? 35 : 60),
                                   child: Text(
                                     AppLocalization.of(context)
-                                        .transferConfirmInfo
+                                        .transferConfirmInfoKal
                                         .replaceAll(
                                             "%1", totalAsReadableAmount),
                                     style: AppStyles.textStyleParagraphPrimary(
@@ -247,7 +247,7 @@ class AppTransferConfirmSheet {
                                           smallScreen(context) ? 35 : 60),
                                   child: Text(
                                     AppLocalization.of(context)
-                                        .transferConfirmInfoThird,
+                                        .transferConfirmInfoKalThird,
                                     style:
                                         AppStyles.textStyleParagraph(context),
                                     textAlign: TextAlign.start,
@@ -408,7 +408,7 @@ class AppTransferConfirmSheet {
           .requestPending(account: StateContainer.of(context).wallet.address);
     } else {
       EventTaxiImpl.singleton()
-          .fire(TransferCompleteEvent(amount: totalToTransfer));
+          .fire(transferCompleteKalEvent(amount: totalToTransfer));
       if (animationOpen) {
         Navigator.of(context).pop();
       }

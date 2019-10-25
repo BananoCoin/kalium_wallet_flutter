@@ -519,12 +519,12 @@ class _AppHomePageState extends State<AppHomePage>
             _buildDummyTransactionCard(
                 AppLocalization.of(context).sent,
                 AppLocalization.of(context).exampleCardLittle,
-                AppLocalization.of(context).exampleCardTo,
+                AppLocalization.of(context).exampleCardToKal,
                 context),
             _buildDummyTransactionCard(
                 AppLocalization.of(context).received,
                 AppLocalization.of(context).exampleCardLot,
-                AppLocalization.of(context).exampleCardFrom,
+                AppLocalization.of(context).exampleCardFromKal,
                 context),
           ],
         ),
@@ -1119,9 +1119,9 @@ class _AppHomePageState extends State<AppHomePage>
   TextSpan _getExampleHeaderSpan(BuildContext context) {
     String workingStr;
     if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount.index == 0) {
-      workingStr = AppLocalization.of(context).exampleCardIntro;
+      workingStr = AppLocalization.of(context).exampleCardIntroKal;
     } else {
-      workingStr = AppLocalization.of(context).newAccountIntro;
+      workingStr = AppLocalization.of(context).newAccountIntroKal;
     }
     if (!workingStr.contains("BANANO")) {
       return TextSpan(

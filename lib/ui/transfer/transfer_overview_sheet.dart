@@ -69,7 +69,7 @@ class AppTransferOverviewSheet {
       });
       if (privKeyBalanceMap.length == 0) {
         sl.get<UIUtil>().showSnackbar(
-            AppLocalization.of(context).transferNoFunds, context);
+            AppLocalization.of(context).transferNoFundsKal, context);
         return;
       }
       // Go to confirmation screen
@@ -194,7 +194,7 @@ class AppTransferOverviewSheet {
                                   vertical: 20),
                               child: AutoSizeText(
                                 AppLocalization.of(context)
-                                    .transferIntro
+                                    .transferIntroKal
                                     .replaceAll("%1",
                                         AppLocalization.of(context).scanQrCode),
                                 style: AppStyles.textStyleParagraph(context),

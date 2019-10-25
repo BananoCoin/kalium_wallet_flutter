@@ -44,7 +44,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
         _goHome();
       },
       expectedPin: expectedPin,
-      description: AppLocalization.of(context).unlockPin,
+      description: AppLocalization.of(context).unlockPinKal,
     );
   }
 
@@ -148,7 +148,7 @@ class _AppLockScreenState extends State<AppLockScreen> {
             _showUnlockButton = true;
           });
           sl.get<BiometricUtil>().authenticateWithBiometrics(context, 
-                  AppLocalization.of(context).unlockBiometrics)
+                  AppLocalization.of(context).unlockBiometricsKal)
               .then((authenticated) {
             if (authenticated) {
               _goHome();

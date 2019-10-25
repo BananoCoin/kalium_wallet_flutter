@@ -276,8 +276,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "Välkommen till Kalium. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig.",
-    "@welcomeText": {
+    "welcomeTextKal": "Välkommen till Kalium. För att fortsätta, behöver du skapa en ny plånbok eller importera en befintlig.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -312,8 +312,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "Skicka %1 Banano?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "Skicka %1 Banano?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -504,8 +504,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "Vid utloggning raderas din seed och all kaliumrelaterad data från denna enhet. Om du inte har säkerhetskopierat din seed, kommer du aldrig att kunna komma åt dina resurser igen.",
-    "@logoutDetail": {
+    "logoutDetailKal": "Vid utloggning raderas din seed och all kaliumrelaterad data från denna enhet. Om du inte har säkerhetskopierat din seed, kommer du aldrig att kunna komma åt dina resurser igen.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -576,14 +576,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "Mottog %1 BANANO",
-    "@notificationTitle": {
+    "notificationTitleKal": "Mottog %1 BANANO",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "Öppna Kalium för att visa transaktion.",
-    "@notificationBody": {
+    "notificationBodyKal": "Öppna Kalium för att visa transaktion.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -654,14 +654,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Den här processen kommer att överföra medel från en pappersplånbok till din Kalium-plånbok.\n\nTryck på \"%1\" knappen för att starta.",
-    "@transferIntro": {
+    "transferIntroKal": "Den här processen kommer att överföra medel från en pappersplånbok till din Kalium-plånbok.\n\nTryck på \"%1\" knappen för att starta.",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Skanna en Banano \nseed eller en privat nyckel",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "Skanna en Banano \nseed eller en privat nyckel",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -672,14 +672,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "Denna seed innehåller inga BANANO.",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "Denna seed innehåller inga BANANO.",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "En plånbok med ett saldo om %1 BANANO har upptäckts.\n",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "En plånbok med ett saldo om %1 BANANO har upptäckts.\n",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -690,8 +690,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "Överföringen kan ta upp till flera sekunder att genomföras.",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "Överföringen kan ta upp till flera sekunder att genomföras.",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -702,8 +702,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO har överförts till din Kalium-plånbok.",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 BANANO har överförts till din Kalium-plånbok.",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -714,20 +714,20 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Skanna en Banano\nadress QR-kod",
-    "@scanInstructions": {
+    "scanInstructionsKal": "Skanna en Banano\nadress QR-kod",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "Ange PIN för att låsa upp Kalium",
-    "@unlockPin": {
+    "unlockPinKal": "Ange PIN för att låsa upp Kalium",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "Verifiera för att låsa upp Kalium",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "Verifiera för att låsa upp Kalium",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -780,8 +780,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Välkommen till Kalium. Så snart du tar emot BANANO, visas transaktionerna på detta vis",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "Välkommen till Kalium. Så snart du tar emot BANANO, visas transaktionerna på detta vis",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -798,21 +798,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "Till någon apa",
-    "@exampleCardTo": {
+    "exampleCardToKal": "Till någon apa",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "Från någon apa",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "Från någon apa",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
     },
     "defaultAccountName": "Huvudkonto",
     "defaultNewAccountName": "Konto %1",
-    "newAccountIntro": "Det här är ditt nya konto. Så snart du tar emot BANANO, kommer transaktioner att se ut så här:",
+    "newAccountIntroKal": "Det här är ditt nya konto. Så snart du tar emot BANANO, kommer transaktioner att se ut så här:",
     "account": "Konto",
     "accounts": "Konton",
     "addAccount": "Lägg till konto",

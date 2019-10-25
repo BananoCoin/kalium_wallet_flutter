@@ -276,8 +276,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "Maligayang pagdating sa Kalium. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
-    "@welcomeText": {
+    "welcomeTextKal": "Maligayang pagdating sa Kalium. Para magpatuloy, gumawa ng bagong wallet o gamitin ang dating wallet.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -312,8 +312,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "Magpadala ng %1 Banano?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "Magpadala ng %1 Banano?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -504,8 +504,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "Mabubura ang iyong seed at lahat ng Kalium-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
-    "@logoutDetail": {
+    "logoutDetailKal": "Mabubura ang iyong seed at lahat ng Kalium-related na data sa aparato na ito kapag ikaw ay nag-logout. Kapag wala kang back up ng iyong seed, hindi mo na ulit ma-aaccess ang iyong pondo.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -576,14 +576,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "Nakatanggap ng %1 BANANO",
-    "@notificationTitle": {
+    "notificationTitleKal": "Nakatanggap ng %1 BANANO",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "Buksan ang Kalium para tingnan ito.",
-    "@notificationBody": {
+    "notificationBodyKal": "Buksan ang Kalium para tingnan ito.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -654,14 +654,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
-    "@transferIntro": {
+    "transferIntroKal": "Ang prosesong ito ay ang paglipat ng pondo galing sa paper wallet.\n\nI-tap ang \"%1\" button para umpisahan.",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Mag-scan ng Banano \nseed o private key",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "Mag-scan ng Banano \nseed o private key",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -672,14 +672,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "Ang seed na ito ay walang BANANO.",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "Ang seed na ito ay walang BANANO.",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Ang wallet na may balanse na %1 BANANO ay na-detect.\n",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "Ang wallet na may balanse na %1 BANANO ay na-detect.\n",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -690,8 +690,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "Ang paglipat ay maaring tumagal ng ilang segundo.",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "Ang paglipat ay maaring tumagal ng ilang segundo.",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -702,8 +702,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO ay nalipat na sa iyong Kalium Wallet.",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 BANANO ay nalipat na sa iyong Kalium Wallet.",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -714,20 +714,20 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "I-scan ang Banano \naddress QR code",
-    "@scanInstructions": {
+    "scanInstructionsKal": "I-scan ang Banano \naddress QR code",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "Ilagay ang PIN mabuksan",
-    "@unlockPin": {
+    "unlockPinKal": "Ilagay ang PIN mabuksan",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "I-Authenticate para ma-unlock",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "I-Authenticate para ma-unlock",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -786,8 +786,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "Maligayang pagdating sa Kalium. Ganito ang makikita mong transaksyon pag nakatanggap ka ng BANANO",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -804,21 +804,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "para sa iba",
-    "@exampleCardTo": {
+    "exampleCardToKal": "para sa iba",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "galing sa iba",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "galing sa iba",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
     },
     "defaultAccountName": "Pangunahing Account",
     "defaultNewAccountName": "Account %1",
-    "newAccountIntro": "Ito ang iyong bagong account. Pag nakareceive ka ng BANANO, ganito ang makikita mo:",
+    "newAccountIntroKal": "Ito ang iyong bagong account. Pag nakareceive ka ng BANANO, ganito ang makikita mo:",
     "account": "Account",
     "accounts": "Mga Account",
     "addAccount": "Magdagdag ng Account",

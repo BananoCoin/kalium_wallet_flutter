@@ -270,8 +270,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "welcomeText": "أهلا بك في كاليوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة.",
-  "@welcomeText": {
+  "welcomeTextKal": "أهلا بك في كاليوم. لتبدأ، إحدث محفظة أو إجلب محفظة موجودة.",
+  "@welcomeTextKal": {
     "description": "intro_welcome_title",
     "type": "text",
     "placeholders": {}
@@ -306,8 +306,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "sendAmountConfirm": "أرسل %1 BANANO",
-  "@sendAmountConfirm": {
+  "sendAmountConfirmKal": "أرسل %1 BANANO",
+  "@sendAmountConfirmKal": {
     "description": "send_pin_description",
     "type": "text",
     "placeholders": {}
@@ -504,8 +504,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "logoutDetail": "خروجك من حساب كاليوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا.",
-  "@logoutDetail": {
+  "logoutDetailKal": "خروجك من حساب كاليوم سوف يحذف البيانات من الجهاز. إذا مفتاحك الخاص غير محفوظ في مكان أمن، سوف تفقد رصيدك نهائيا.",
+  "@logoutDetailKal": {
     "description": "settings_logout_alert_message",
     "type": "text",
     "placeholders": {}
@@ -576,14 +576,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "notificationTitle": "تم استلام %1 BANANO",
-  "@notificationTitle": {
+  "notificationTitleKal": "تم استلام %1 BANANO",
+  "@notificationTitleKal": {
     "description": "notification_title",
     "type": "text",
     "placeholders": {}
   },
-  "notificationBody": "أفتح كاليوم للكشف عن هذا التعامل",
-  "@notificationBody": {
+  "notificationBodyKal": "أفتح كاليوم للكشف عن هذا التعامل",
+  "@notificationBodyKal": {
     "description": "notification_body",
     "type": "text",
     "placeholders": {}
@@ -654,14 +654,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferIntro": "ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة كاليوم الخاصة بك. \n\n اضغط على الزر \"%1\" للبدء.",
-  "@transferIntro": {
+  "transferIntroKal": "ستقوم هذه العملية بتحويل الرصيد من المحفظة الورقية إلى محفظة كاليوم الخاصة بك. \n\n اضغط على الزر \"%1\" للبدء.",
+  "@transferIntroKal": {
     "description": "transfer_intro",
     "type": "text",
     "placeholders": {}
   },
-  "transferQrScanHint": "مسح\n المفتاح الخاص",
-  "@transferQrScanHint": {
+  "transferQrScanHintKal": "مسح\n المفتاح الخاص",
+  "@transferQrScanHintKal": {
     "description": "transfer_qr_scan_hint",
     "type": "text",
     "placeholders": {}
@@ -672,14 +672,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferNoFunds": "هذا المفتاح الخاص لا يحتوي على BANANO",
-  "@transferNoFunds": {
+  "transferNoFundsKal": "هذا المفتاح الخاص لا يحتوي على BANANO",
+  "@transferNoFundsKal": {
     "description": "transfer_no_funds_toast",
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfo": "تم كشف محفظة برصيد %1 BANANO.\n",
-  "@transferConfirmInfo": {
+  "transferConfirmInfoKal": "تم كشف محفظة برصيد %1 BANANO.\n",
+  "@transferConfirmInfoKal": {
     "description": "transfer_confirm_info_first",
     "type": "text",
     "placeholders": {}
@@ -690,8 +690,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfoThird": "قد يستغرق النقل عدة ثوانيٍ.",
-  "@transferConfirmInfoThird": {
+  "transferConfirmInfoKalThird": "قد يستغرق النقل عدة ثوانيٍ.",
+  "@transferConfirmInfoKalThird": {
     "description": "transfer_confirm_info_third",
     "type": "text",
     "placeholders": {}
@@ -702,8 +702,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferComplete": "تم تحويل %1 BANANO إلى محفظة كاليوم.\n",
-  "@transferComplete": {
+  "transferCompleteKal": "تم تحويل %1 BANANO إلى محفظة كاليوم.\n",
+  "@transferCompleteKal": {
     "description": "transfer_complete_text",
     "type": "text",
     "placeholders": {}
@@ -714,20 +714,20 @@
     "type": "text",
     "placeholders": {}
   },
-  "scanInstructions": "مسح \nعنوان رمز الاستجابة السريعة",
-  "@scanInstructions": {
+  "scanInstructionsKal": "مسح \nعنوان رمز الاستجابة السريعة",
+  "@scanInstructionsKal": {
     "description": "scan_send_instruction_label",
     "type": "text",
     "placeholders": {}
   },
-  "unlockPin": "أدخل الPIN لفتح كاليوم",
-  "@unlockPin": {
+  "unlockPinKal": "أدخل الPIN لفتح كاليوم",
+  "@unlockPinKal": {
     "description": "unlock_kalium_pin",
     "type": "text",
     "placeholders": {}
   },
-  "unlockBiometrics": "مصادقة لفتح كاليوم",
-  "@unlockBiometrics": {
+  "unlockBiometricsKal": "مصادقة لفتح كاليوم",
+  "@unlockBiometricsKal": {
     "description": "unlock_kalium_bio",
     "type": "text",
     "placeholders": {}
@@ -786,8 +786,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardIntro": "مرحبا بكم في كاليوم. بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
-  "@exampleCardIntro": {
+  "exampleCardIntroKal": "مرحبا بكم في كاليوم. بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
+  "@exampleCardIntroKal": {
     "description": "example_card_intro",
     "type": "text",
     "placeholders": {}
@@ -804,14 +804,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardTo": "لقرد عشوائي",
-  "@exampleCardTo": {
+  "exampleCardToKal": "لقرد عشوائي",
+  "@exampleCardToKal": {
     "description": "example_card_to",
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardFrom": "من قرد عشوائي",
-  "@exampleCardFrom": {
+  "exampleCardFromKal": "من قرد عشوائي",
+  "@exampleCardFromKal": {
     "description": "example_card_from",
     "type": "text",
     "placeholders": {}
@@ -828,8 +828,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "newAccountIntro": "هذا هو حسابك الجديد بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
-  "@newAccountIntro": {
+  "newAccountIntroKal": "هذا هو حسابك الجديد بمجرد تلقي BANANO ، ستظهر المعاملات كما يلي:",
+  "@newAccountIntroKal": {
     "description": "Alternate account intro card",
     "type": "text",
     "placeholders": {}

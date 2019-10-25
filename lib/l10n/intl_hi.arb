@@ -252,8 +252,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "केलियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट खोल सकते हैं। ",
-    "@welcomeText": {
+    "welcomeTextKal": "केलियम में आपका स्वागत है। आगे बढ़ने के लिए, आप एक नया वॉलेट बना सकते हैं या एक मौजूदा वॉलेट खोल सकते हैं। ",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -288,8 +288,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "%1 बनानो भेजें ? ",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "%1 बनानो भेजें ? ",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -474,8 +474,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "लॉगआउट करने पर आपके  बीज (सीड) और केलियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने बीज को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।",
-    "@logoutDetail": {
+    "logoutDetailKal": "लॉगआउट करने पर आपके  बीज (सीड) और केलियम से संबंधित सभी डेटा हट जाएंगे। यदि आपने अपने बीज को बैकअप नहीं किया, तो आप कभी भी अपने धन का उपयोग नहीं कर पाएंगे।",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -546,14 +546,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": " %1 बनानो प्राप्त हुए",
-    "@notificationTitle": {
+    "notificationTitleKal": " %1 बनानो प्राप्त हुए",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "इस लेनदेन को देखने के लिए केलियम खोलें ",
-    "@notificationBody": {
+    "notificationBodyKal": "इस लेनदेन को देखने के लिए केलियम खोलें ",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -564,14 +564,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "बनानो के पते का \nक्यू आर कोड स्कैन करें ",
-    "@scanInstructions": {
+    "scanInstructionsKal": "बनानो के पते का \nक्यू आर कोड स्कैन करें ",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "केलियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "केलियम में आपका स्वागत है। बनानो प्राप्त करने पर सभी लेनदेन इस तरह नीचे दिखाई देंगे -",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -588,14 +588,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "अजनबी बंदर को",
-    "@exampleCardTo": {
+    "exampleCardToKal": "अजनबी बंदर को",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "अजनबी बंदर से",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "अजनबी बंदर से",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}

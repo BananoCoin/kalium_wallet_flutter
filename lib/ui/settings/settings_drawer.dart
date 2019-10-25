@@ -152,7 +152,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   StreamSubscription<TransferConfirmEvent> _transferConfirmSub;
-  StreamSubscription<TransferCompleteEvent> _transferCompleteSub;
+  StreamSubscription<transferCompleteKalEvent> _transferCompleteKalSub;
   StreamSubscription<UnlockCallbackEvent> _callbackUnlockSub;
 
   void _registerBus() {
@@ -164,11 +164,11 @@ class _SettingsSheetState extends State<SettingsSheet>
           .mainBottomSheet(context);
     });
     // Ready to go to transfer complete
-    _transferCompleteSub = EventTaxiImpl.singleton()
-        .registerTo<TransferCompleteEvent>()
+    _transferCompleteKalSub = EventTaxiImpl.singleton()
+        .registerTo<transferCompleteKalEvent>()
         .listen((event) {
       StateContainer.of(context).requestUpdate();
-      AppTransferCompleteSheet(sl
+      ApptransferCompleteKalSheet(sl
               .get<NumberUtil>()
               .getRawAsUsableString(event.amount.toString()))
           .mainBottomSheet(context);
@@ -185,8 +185,8 @@ class _SettingsSheetState extends State<SettingsSheet>
     if (_transferConfirmSub != null) {
       _transferConfirmSub.cancel();
     }
-    if (_transferCompleteSub != null) {
-      _transferCompleteSub.cancel();
+    if (_transferCompleteKalSub != null) {
+      _transferCompleteKalSub.cancel();
     }
     if (_callbackUnlockSub != null) {
       _callbackUnlockSub.cancel();
@@ -1156,7 +1156,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                           context,
                           CaseChange.toUpperCase(
                               AppLocalization.of(context).warning, context),
-                          AppLocalization.of(context).logoutDetail,
+                          AppLocalization.of(context).logoutDetailKal,
                           AppLocalization.of(context)
                               .logoutAction
                               .toUpperCase(), () {

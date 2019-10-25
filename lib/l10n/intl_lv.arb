@@ -270,8 +270,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "welcomeText": "Sveicināti Kalium. Izveidojiet jaunu maku vai importējiet eksistējošu",
-  "@welcomeText": {
+  "welcomeTextKal": "Sveicināti Kalium. Izveidojiet jaunu maku vai importējiet eksistējošu",
+  "@welcomeTextKal": {
     "description": "intro_welcome_title",
     "type": "text",
     "placeholders": {}
@@ -306,8 +306,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "sendAmountConfirm": "Sūtīt %1 BANANO",
-  "@sendAmountConfirm": {
+  "sendAmountConfirmKal": "Sūtīt %1 BANANO",
+  "@sendAmountConfirmKal": {
     "description": "send_pin_description",
     "type": "text",
     "placeholders": {}
@@ -504,8 +504,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "logoutDetail": "Izejot tiks aizmirsta jūsu sēkla un visi Kalium saistītie dati šajā ierīcē. Ja neesat izveidojis maka sēklas rezerves kopiju, maks un tā līdzekļi tiks neatgriezeniski zaudēti",
-  "@logoutDetail": {
+  "logoutDetailKal": "Izejot tiks aizmirsta jūsu sēkla un visi Kalium saistītie dati šajā ierīcē. Ja neesat izveidojis maka sēklas rezerves kopiju, maks un tā līdzekļi tiks neatgriezeniski zaudēti",
+  "@logoutDetailKal": {
     "description": "settings_logout_alert_message",
     "type": "text",
     "placeholders": {}
@@ -576,14 +576,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "notificationTitle": "Saņemts %1 BANANO",
-  "@notificationTitle": {
+  "notificationTitleKal": "Saņemts %1 BANANO",
+  "@notificationTitleKal": {
     "description": "notification_title",
     "type": "text",
     "placeholders": {}
   },
-  "notificationBody": "Atveriet Kalium, lai apskatītu šo transakciju",
-  "@notificationBody": {
+  "notificationBodyKal": "Atveriet Kalium, lai apskatītu šo transakciju",
+  "@notificationBodyKal": {
     "description": "notification_body",
     "type": "text",
     "placeholders": {}
@@ -654,14 +654,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferIntro": "Šis process pārskaitīs jūsu papīra maka līdzekļus uz jūsu Kalium maku.\n\nPieskaries \"%1\" pogai, lai sāktu.",
-  "@transferIntro": {
+  "transferIntroKal": "Šis process pārskaitīs jūsu papīra maka līdzekļus uz jūsu Kalium maku.\n\nPieskaries \"%1\" pogai, lai sāktu.",
+  "@transferIntroKal": {
     "description": "transfer_intro",
     "type": "text",
     "placeholders": {}
   },
-  "transferQrScanHint": "Skenē Banano \nsēklu vai privāto atslēgu",
-  "@transferQrScanHint": {
+  "transferQrScanHintKal": "Skenē Banano \nsēklu vai privāto atslēgu",
+  "@transferQrScanHintKal": {
     "description": "transfer_qr_scan_hint",
     "type": "text",
     "placeholders": {}
@@ -672,14 +672,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferNoFunds": "Šai sēklai nav piesaistīti līdzekļi",
-  "@transferNoFunds": {
+  "transferNoFundsKal": "Šai sēklai nav piesaistīti līdzekļi",
+  "@transferNoFundsKal": {
     "description": "transfer_no_funds_toast",
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfo": "Maks ar %1 BANANO bilanci ir atrasts.\n",
-  "@transferConfirmInfo": {
+  "transferConfirmInfoKal": "Maks ar %1 BANANO bilanci ir atrasts.\n",
+  "@transferConfirmInfoKal": {
     "description": "transfer_confirm_info_first",
     "type": "text",
     "placeholders": {}
@@ -690,8 +690,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfoThird": "Pārskaitīšana var prasīt vairākas sekundes.",
-  "@transferConfirmInfoThird": {
+  "transferConfirmInfoKalThird": "Pārskaitīšana var prasīt vairākas sekundes.",
+  "@transferConfirmInfoKalThird": {
     "description": "transfer_confirm_info_third",
     "type": "text",
     "placeholders": {}
@@ -702,8 +702,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferComplete": "%1 BANANO sekmīgi pārskaitīti uz jūsu Kalium maku.\n",
-  "@transferComplete": {
+  "transferCompleteKal": "%1 BANANO sekmīgi pārskaitīti uz jūsu Kalium maku.\n",
+  "@transferCompleteKal": {
     "description": "transfer_complete_text",
     "type": "text",
     "placeholders": {}
@@ -714,20 +714,20 @@
     "type": "text",
     "placeholders": {}
   },
-  "scanInstructions": "Noskenējiet Banano \nadreses QR kodu",
-  "@scanInstructions": {
+  "scanInstructionsKal": "Noskenējiet Banano \nadreses QR kodu",
+  "@scanInstructionsKal": {
     "description": "scan_send_instruction_label",
     "type": "text",
     "placeholders": {}
   },
-  "unlockPin": "Ievadiet PIN, lai piekļūtu Kalium",
-  "@unlockPin": {
+  "unlockPinKal": "Ievadiet PIN, lai piekļūtu Kalium",
+  "@unlockPinKal": {
     "description": "unlock_kalium_pin",
     "type": "text",
     "placeholders": {}
   },
-  "unlockBiometrics": "Autorizējieties, lai piekļūtu Kalium",
-  "@unlockBiometrics": {
+  "unlockBiometricsKal": "Autorizējieties, lai piekļūtu Kalium",
+  "@unlockBiometricsKal": {
     "description": "unlock_kalium_bio",
     "type": "text",
     "placeholders": {}
@@ -786,8 +786,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardIntro": "Sveicināti Kalium. Tiklīdz saņemsiet BANANO, transakcijas būs redzamas šādi:",
-  "@exampleCardIntro": {
+  "exampleCardIntroKal": "Sveicināti Kalium. Tiklīdz saņemsiet BANANO, transakcijas būs redzamas šādi:",
+  "@exampleCardIntroKal": {
     "description": "example_card_intro",
     "type": "text",
     "placeholders": {}
@@ -804,14 +804,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardTo": "kādam pērtiķim",
-  "@exampleCardTo": {
+  "exampleCardToKal": "kādam pērtiķim",
+  "@exampleCardToKal": {
     "description": "example_card_to",
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardFrom": "no kāda pērtiķa",
-  "@exampleCardFrom": {
+  "exampleCardFromKal": "no kāda pērtiķa",
+  "@exampleCardFromKal": {
     "description": "example_card_from",
     "type": "text",
     "placeholders": {}
@@ -828,8 +828,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "newAccountIntro": "Šis ir jūsu jaunais konts. Tiklīdz saņemsiet BANANO, transakcijas būs redzamas šādi:",
-  "@newAccountIntro": {
+  "newAccountIntroKal": "Šis ir jūsu jaunais konts. Tiklīdz saņemsiet BANANO, transakcijas būs redzamas šādi:",
+  "@newAccountIntroKal": {
     "description": "Alternate account intro card",
     "type": "text",
     "placeholders": {}

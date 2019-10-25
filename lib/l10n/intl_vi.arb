@@ -264,8 +264,8 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"welcomeText": "Chào mừng đến với Kalium. Để tiếp tục, bạn có thể tạo một ví mới hoặc nhập một ví hiện có.",
-	"@welcomeText": {
+	"welcomeTextKal": "Chào mừng đến với Kalium. Để tiếp tục, bạn có thể tạo một ví mới hoặc nhập một ví hiện có.",
+	"@welcomeTextKal": {
 		"description": "intro_welcome_title",
 		"type": "text",
 		"placeholders": {}
@@ -300,8 +300,8 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"sendAmountConfirm": "Gửi %1 Banano?",
-	"@sendAmountConfirm": {
+	"sendAmountConfirmKal": "Gửi %1 Banano?",
+	"@sendAmountConfirmKal": {
 		"description": "send_pin_description",
 		"type": "text",
 		"placeholders": {}
@@ -492,8 +492,8 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"logoutDetail": "Đăng xuất sẽ xóa hạt giống(seed) của bạn và tất cả dữ liệu liên quan đến Kalium khỏi thiết bị này. Nếu hạt giống của bạn không được sao lưu, bạn sẽ không bao giờ có thể truy cập lại vào tiền của mình.",
-	"@logoutDetail": {
+	"logoutDetailKal": "Đăng xuất sẽ xóa hạt giống(seed) của bạn và tất cả dữ liệu liên quan đến Kalium khỏi thiết bị này. Nếu hạt giống của bạn không được sao lưu, bạn sẽ không bao giờ có thể truy cập lại vào tiền của mình.",
+	"@logoutDetailKal": {
 		"description": "settings_logout_alert_message",
 		"type": "text",
 		"placeholders": {}
@@ -564,14 +564,14 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"notificationTitle": "Đã nhận được %1 BANANO",
-	"@notificationTitle": {
+	"notificationTitleKal": "Đã nhận được %1 BANANO",
+	"@notificationTitleKal": {
 		"description": "notification_title",
 		"type": "text",
 		"placeholders": {}
 	},
-	"notificationBody": "Mở Kalium để xem giao dịch này.",
-	"@notificationBody": {
+	"notificationBodyKal": "Mở Kalium để xem giao dịch này.",
+	"@notificationBodyKal": {
 		"description": "notification_body",
 		"type": "text",
 		"placeholders": {}
@@ -630,14 +630,14 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferIntro": "Quá trình này sẽ chuyển từ quỹ ví giấy sang ví Kalium của bạn.nnNhấn vào \"%1\" Nút để bắt đầu.",
-	"@transferIntro": {
+	"transferIntroKal": "Quá trình này sẽ chuyển từ quỹ ví giấy sang ví Kalium của bạn.nnNhấn vào \"%1\" Nút để bắt đầu.",
+	"@transferIntroKal": {
 		"description": "transfer_intro",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferQrScanHint": "Quét một Banano nseed hoặc private key",
-	"@transferQrScanHint": {
+	"transferQrScanHintKal": "Quét một Banano nseed hoặc private key",
+	"@transferQrScanHintKal": {
 		"description": "transfer_qr_scan_hint",
 		"type": "text",
 		"placeholders": {}
@@ -648,14 +648,14 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferNoFunds": "Hạt giống này không chứa bất kỳ BANANO bên trong.",
-	"@transferNoFunds": {
+	"transferNoFundsKal": "Hạt giống này không chứa bất kỳ BANANO bên trong.",
+	"@transferNoFundsKal": {
 		"description": "transfer_no_funds_toast",
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferConfirmInfo": "Một ví có số dư là %1 BANANO đã được tìm thấy.\n",
-	"@transferConfirmInfo": {
+	"transferConfirmInfoKal": "Một ví có số dư là %1 BANANO đã được tìm thấy.\n",
+	"@transferConfirmInfoKal": {
 		"description": "transfer_confirm_info_first",
 		"type": "text",
 		"placeholders": {}
@@ -666,8 +666,8 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferConfirmInfoThird": "Chuyển có thể mất vài giây để hoàn thành.",
-	"@transferConfirmInfoThird": {
+	"transferConfirmInfoKalThird": "Chuyển có thể mất vài giây để hoàn thành.",
+	"@transferConfirmInfoKalThird": {
 		"description": "transfer_confirm_info_third",
 		"type": "text",
 		"placeholders": {}
@@ -678,8 +678,8 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"transferComplete": "%1 BANANO đã được chuyển thành công vào ví Kalium của bạn.",
-	"@transferComplete": {
+	"transferCompleteKal": "%1 BANANO đã được chuyển thành công vào ví Kalium của bạn.",
+	"@transferCompleteKal": {
 		"description": "transfer_complete_text",
 		"type": "text",
 		"placeholders": {}
@@ -690,8 +690,8 @@
 		"type": "text",
 		"placeholders": {}
 	},
-	"scanInstructions": "Quét 1 Banano nđịa chỉ mã QR",
-	"@scanInstructions": {
+	"scanInstructionsKal": "Quét 1 Banano nđịa chỉ mã QR",
+	"@scanInstructionsKal": {
 		"description": "scan_send_instruction_label",
 		"type": "text",
 		"placeholders": {}
@@ -704,7 +704,7 @@
     },
 	"defaultAccountName": "Tài khoản chính",
 	"defaultNewAccountName": "Account %1",
-	"newAccountIntro": "Đây là tài khoản mới của bạn. khi bạn nhận được Banano, giao dịch sẽ hiển thị như sau:",
+	"newAccountIntroKal": "Đây là tài khoản mới của bạn. khi bạn nhận được Banano, giao dịch sẽ hiển thị như sau:",
 	"account": "Tài khoản",
 	"accounts": "Các tài khoản",
 	"addAccount": "Thêm tài khoản",

@@ -259,9 +259,9 @@ class AppLocalization {
         desc: 'intro_seed_info', name: 'importSeedHint');
   }
 
-  String get welcomeText {
+  String get welcomeTextKal {
     return Intl.message("Welcome to Kalium. To begin you may create a new wallet or import an existing one.",
-        desc: 'intro_welcome_title', name: 'welcomeText');
+        desc: 'intro_welcome_title', name: 'welcomeTextKal');
   }
 
   String get newWallet {
@@ -291,13 +291,13 @@ class AppLocalization {
         desc: 'send_to', name: 'to');
   }
 
-  String get sendAmountConfirm {
+  String get sendAmountConfirmKal {
     return Intl.message("Send %1 BANANO",
-        desc: 'send_pin_description', name: 'sendAmountConfirm');
+        desc: 'send_pin_description', name: 'sendAmountConfirmKal');
   }
 
-  String get sendAmountConfirmPin {
-    return sendAmountConfirm;
+  String get sendAmountConfirmKalPin {
+    return sendAmountConfirmKal;
   }
 
   String get sendError {
@@ -471,9 +471,9 @@ class AppLocalization {
       desc: 'settings_logout_alert_title', name: 'warning');
   }
 
-  String get logoutDetail {
+  String get logoutDetailKal {
     return Intl.message("Logging out will remove your seed and all Kalium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
-      desc: 'settings_logout_alert_message', name: 'logoutDetail');
+      desc: 'settings_logout_alert_message', name: 'logoutDetailKal');
   }
 
   String get logoutAction {
@@ -531,14 +531,14 @@ class AppLocalization {
       desc: 'notifications_settings', name: 'notifications');
   }
 
-  String get notificationTitle {
+  String get notificationTitleKal {
     return Intl.message("Received %1 BANANO",
-      desc: 'notification_title', name: 'notificationTitle');
+      desc: 'notification_title', name: 'notificationTitleKal');
   }
 
-  String get notificationBody {
+  String get notificationBodyKal {
     return Intl.message("Open Kalium to view this transaction",
-      desc: 'notification_body', name: 'notificationBody');
+      desc: 'notification_body', name: 'notificationBodyKal');
   }
 
   String get notificationHeaderSupplement {
@@ -603,14 +603,14 @@ class AppLocalization {
       desc: 'transfer_hint', name: 'transferManualHint');
   }
 
-  String get transferIntro {
+  String get transferIntroKal {
     return Intl.message("This process will transfer the funds from a paper wallet to your Kalium wallet.\n\nTap the \"%1\" button to start.",
-      desc: 'transfer_intro', name: 'transferIntro');
+      desc: 'transfer_intro', name: 'transferIntroKal');
   }
 
-  String get transferQrScanHint {
+  String get transferQrScanHintKal {
     return Intl.message("Scan a Banano \nseed or private key",
-      desc: 'transfer_qr_scan_hint', name: 'transferQrScanHint');
+      desc: 'transfer_qr_scan_hint', name: 'transferQrScanHintKal');
   }
 
   String get transferQrScanError {
@@ -618,16 +618,16 @@ class AppLocalization {
       desc: 'transfer_qr_scan_error', name: 'transferQrScanError');
   }
 
-  String get transferNoFunds {
+  String get transferNoFundsKal {
     return Intl.message("This seed does not have any BANANO on it",
-      desc: 'transfer_no_funds_toast', name: 'transferNoFunds');
+      desc: 'transfer_no_funds_toast', name: 'transferNoFundsKal');
   }
 
   // Confirm screen
 
-  String get transferConfirmInfo {
+  String get transferConfirmInfoKal {
     return Intl.message("A wallet with a balance of %1 BANANO has been detected.\n",
-      desc: 'transfer_confirm_info_first', name: 'transferConfirmInfo');
+      desc: 'transfer_confirm_info_first', name: 'transferConfirmInfoKal');
   }
 
   String get transferConfirmInfoSecond {
@@ -635,9 +635,9 @@ class AppLocalization {
       desc: 'transfer_confirm_info_second', name: 'transferConfirmInfoSecond');
   }
 
-  String get transferConfirmInfoThird {
+  String get transferConfirmInfoKalThird {
     return Intl.message("Transfer may take several seconds to complete.",
-      desc: 'transfer_confirm_info_third', name: 'transferConfirmInfoThird');
+      desc: 'transfer_confirm_info_third', name: 'transferConfirmInfoKalThird');
   }
 
   String get transferLoading {
@@ -647,9 +647,9 @@ class AppLocalization {
 
   // Compelte screen
 
-  String get transferComplete {
+  String get transferCompleteKal {
     return Intl.message("%1 BANANO successfully transferred to your Kalium Wallet.\n",
-      desc: 'transfer_complete_text', name: 'transferComplete');
+      desc: 'transfer_complete_text', name: 'transferCompleteKal');
   }
 
   String get transferClose {
@@ -661,21 +661,21 @@ class AppLocalization {
 
   // Scan
 
-  String get scanInstructions {
+  String get scanInstructionsKal {
     return Intl.message("Scan a Banano \naddress QR code",
-      desc: 'scan_send_instruction_label', name: 'scanInstructions');
+      desc: 'scan_send_instruction_label', name: 'scanInstructionsKal');
   }
 
   /// -- LOCK SCREEN 
 
-  String get unlockPin {
+  String get unlockPinKal {
     return Intl.message("Enter PIN to Unlock Kalium",
-      desc: 'unlock_kalium_pin', name: 'unlockPin');
+      desc: 'unlock_kalium_pin', name: 'unlockPinKal');
   }
 
-  String get unlockBiometrics {
+  String get unlockBiometricsKal {
     return Intl.message("Authenticate to Unlock Kalium",
-      desc: 'unlock_kalium_bio', name: 'unlockBiometrics');
+      desc: 'unlock_kalium_bio', name: 'unlockBiometricsKal');
   }
 
   String get lockAppSetting {
@@ -728,13 +728,44 @@ class AppLocalization {
       desc: 'insantly', name: 'instantly');
   }
 
+  String get setWalletPassword {
+    return Intl.message("Set Wallet Password",
+      desc: 'Allows user to encrypt wallet with a password', name: 'setWalletPassword');
+  }
+
+  String get setPassword {
+    return Intl.message("Set Password",
+      desc: 'A button that sets the wallet password', name: 'setPassword');
+  }
+
+  String get disableWalletPassword {
+    return Intl.message("Disable Wallet Password",
+      desc: 'Allows user to deencrypt wallet with a password', name: 'disableWalletPassword');
+  }
+
+  String get encryptionFailedError {
+    return Intl.message("Failed to set a wallet password",
+      desc: 'If encrypting a wallet raised an error', name: 'encryptionFailedError');
+  }
+
+  String get setPasswordSuccess {
+    return Intl.message("Password has been set successfully",
+      desc: 'Setting a Wallet Password was successful', name: 'setPasswordSuccess');
+  }
+
+  String get disablePasswordSuccess {
+    return Intl.message("Password has been disabled",
+      desc: 'Disabling a Wallet Password was successful', name: 'disablePasswordSuccess');
+  }
+
+
   /// -- END SECURITY SETTINGS SUBMENU
 
   /// -- EXAMPLE HOME SCREEN CARDS
 
-  String get exampleCardIntro {
+  String get exampleCardIntroKal {
     return Intl.message("Welcome to Kalium. Once you receive BANANO, transactions will show up like this:",
-      desc: 'example_card_intro', name: 'exampleCardIntro');
+      desc: 'example_card_intro', name: 'exampleCardIntroKal');
   }
 
   String get exampleCardLittle {
@@ -747,14 +778,14 @@ class AppLocalization {
       desc: 'example_card_lot', name: 'exampleCardLot');
   }
 
-  String get exampleCardTo {
+  String get exampleCardToKal {
     return Intl.message("to a random monkey",
-      desc: 'example_card_to', name: 'exampleCardTo');
+      desc: 'example_card_to', name: 'exampleCardToKal');
   }
 
-  String get exampleCardFrom {
+  String get exampleCardFromKal {
     return Intl.message("from a random monkey",
-      desc: 'example_card_from', name: 'exampleCardFrom');
+      desc: 'example_card_from', name: 'exampleCardFromKal');
   }
 
   /// -- END EXAMPLE HOME SCREEN CARDS
@@ -771,9 +802,9 @@ class AppLocalization {
       desc: "Default new account name - e.g. Account 1", name: 'defaultNewAccountName');
   }
 
-  String get newAccountIntro {
+  String get newAccountIntroKal {
     return Intl.message("This is your new account. Once you receive BANANO, transactions will show up like this:",
-      desc: 'Alternate account intro card', name: 'newAccountIntro');
+      desc: 'Alternate account intro card', name: 'newAccountIntroKal');
   }
 
   String get account {
@@ -922,9 +953,101 @@ class AppLocalization {
 
   /// -- END SEED PROCESS
   
+  /// HINTS
+  String get createPasswordHint {
+    return Intl.message("Create a password",
+      desc: 'A text field hint that tells the user to create a password', name: 'createPasswordHint');
+  }
+
+  String get confirmPasswordHint {
+    return Intl.message("Confirm the password",
+      desc: 'A text field hint that tells the user to confirm the password', name: 'confirmPasswordHint');
+  }
+
+  String get enterPasswordHint {
+    return Intl.message("Enter your password",
+      desc: 'A text field hint that tells the users to enter their password', name: 'enterPasswordHint');
+  }
+
+  String get passwordsDontMatch {
+    return Intl.message("Passwords do not match", desc: 'An error indicating a password has been confirmed incorrectly', name: 'passwordsDontMatch');
+  }
+
+  String get passwordBlank {
+    return Intl.message("Password cannot be empty", desc: 'An error indicating a password has been entered incorrectly', name: 'passwordBlank');
+  }
+
+  String get invalidPassword {
+    return Intl.message("Invalid Password", desc: 'An error indicating a password has been entered incorrectly', name: 'invalidPassword');
+  }
+  /// HINTS END
+
+ /// PARAGRAPS
+  String get passwordWillBeRequiredToOpenParagraph {
+    return Intl.message("This password will be required to open Natrium.",
+      desc: 'A paragraph that tells the users that the created password will be required to open Natrium.', name: 'passwordWillBeRequiredToOpenParagraph');
+  }
+
+  String get passwordNoLongerRequiredToOpenParagraph {
+    return Intl.message("You will not need a password to open Natrium anymore.",
+      desc: 'An info paragraph that tells the user a password will no longer be needed to open Natrium', name: 'passwordNoLongerRequiredToOpenParagraph');
+  }
+
+  String get createPasswordFirstParagraph {
+    return Intl.message("You can create a password to add additional security to your wallet.",
+      desc: 'A paragraph that tells the users that they can create a password for additional security.', name: 'createPasswordFirstParagraph');
+  }
+
+  String get createPasswordSecondParagraph {
+    return Intl.message("Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
+      desc: 'A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless.', name: 'createPasswordSecondParagraph');
+  }
+  /// PARAGRAPS END
+  
+  /// HEADERS
+  String get createAPasswordHeader {
+    return Intl.message("Create a password.",
+      desc: 'A paragraph that tells the users to create a password.', name: 'createAPasswordHeader');
+  }
+
+  String get createPasswordSheetHeader {
+    return Intl.message("Create",
+      desc: 'Prompt user to create a new password', name: 'createPasswordSheetHeader');
+  }
+
+  String get disablePasswordSheetHeader {
+    return Intl.message("Disable",
+      desc: 'Prompt user to disable their password', name: 'disablePasswordSheetHeader');
+  }
+
+  String get requireAPasswordToOpenHeader {
+    return Intl.message("Require a password to open Natrium?",
+      desc: 'A paragraph that asks the users if they would like a password to be required to open Natrium.', name: 'requireAPasswordToOpenHeader');
+  }
+  /// HEADERS END
 
   /// BUTTONS
   
+  String get noSkipButton {
+    return Intl.message("No, Skip",
+      desc: 'A button that declines and skips the mentioned process.', name: 'noSkipButton');
+  }
+
+  String get yesButton {
+    return Intl.message("Yes",
+      desc: 'A button that accepts the mentioned process.', name: 'yesButton');
+  }
+
+  String get nextButton {
+    return Intl.message("Next",
+      desc: 'A button that goes to the next screen.', name: 'nextButton');
+  }
+
+  String get goBackButton {
+    return Intl.message("Go Back",
+      desc: 'A button that goes to the previous screen.', name: 'goBackButton');
+  }
+
   String get supportButton {
     return Intl.message("Support",
         desc: 'A button to open up the live support window', name: 'supportButton');

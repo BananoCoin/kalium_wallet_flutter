@@ -276,8 +276,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "Benvenuto in Kalium. Per continuare, puoi creare un nuovo portafoglio o importarne uno esistente.",
-    "@welcomeText": {
+    "welcomeTextKal": "Benvenuto in Kalium. Per continuare, puoi creare un nuovo portafoglio o importarne uno esistente.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -312,8 +312,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "Inviare %1 Banano?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "Inviare %1 Banano?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -504,8 +504,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "Facendo il logout il tuo seed e tutti i dati relativi a Kalium verranno rimossi dal dispositivo. Se non hai salvato il tuo seed, non sarai più in grado di accedere ai tuoi fondi.",
-    "@logoutDetail": {
+    "logoutDetailKal": "Facendo il logout il tuo seed e tutti i dati relativi a Kalium verranno rimossi dal dispositivo. Se non hai salvato il tuo seed, non sarai più in grado di accedere ai tuoi fondi.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -576,14 +576,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "Ricevuti %1 BANANO",
-    "@notificationTitle": {
+    "notificationTitleKal": "Ricevuti %1 BANANO",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "Apri Kalium per vedere la transazione.",
-    "@notificationBody": {
+    "notificationBodyKal": "Apri Kalium per vedere la transazione.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -654,14 +654,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Questo processo trasferirà i fondi da un portafoglio cartaceo al tuo portafoglio Kalium.\n\nPremi il pulsante \"%1\" per iniziare.",
-    "@transferIntro": {
+    "transferIntroKal": "Questo processo trasferirà i fondi da un portafoglio cartaceo al tuo portafoglio Kalium.\n\nPremi il pulsante \"%1\" per iniziare.",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Scansiona un seed \no una chiave privata",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "Scansiona un seed \no una chiave privata",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -672,14 +672,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "Questo seed non contiene alcun BANANO al suo interno.",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "Questo seed non contiene alcun BANANO al suo interno.",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Rilevato un portafoglio con un saldo di %1 BANANO.\n",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "Rilevato un portafoglio con un saldo di %1 BANANO.\n",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -690,8 +690,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "Il trasferimento potrebbe richiedere parecchi secondi.",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "Il trasferimento potrebbe richiedere parecchi secondi.",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -702,8 +702,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO trasferiti con successo sul tuo portafoglio Kalium.",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 BANANO trasferiti con successo sul tuo portafoglio Kalium.",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -714,20 +714,20 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Scansiona un \ncodice QR Banano",
-    "@scanInstructions": {
+    "scanInstructionsKal": "Scansiona un \ncodice QR Banano",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "Inserisci il PIN per Sbloccare Kalium",
-    "@unlockPin": {
+    "unlockPinKal": "Inserisci il PIN per Sbloccare Kalium",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "Autenticati per Sbloccare Kalium",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "Autenticati per Sbloccare Kalium",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -786,8 +786,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Benvenuto in Kalium. Una volta ricevuti dei BANANO, le transazioni compariranno in questo modo",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "Benvenuto in Kalium. Una volta ricevuti dei BANANO, le transazioni compariranno in questo modo",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -804,21 +804,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "ad una scimmietta",
-    "@exampleCardTo": {
+    "exampleCardToKal": "ad una scimmietta",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "da una scimmietta",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "da una scimmietta",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
     },
     "defaultAccountName": "Principale",
     "defaultNewAccountName": "Account %1",
-    "newAccountIntro": "Questo è il tuo nuovo account. Una volta ricevuti BANANO, le transazioni appariranno così:",
+    "newAccountIntroKal": "Questo è il tuo nuovo account. Una volta ricevuti BANANO, le transazioni appariranno così:",
     "account": "Account",
     "accounts": "Accounts",
     "addAccount": "Aggiungi",

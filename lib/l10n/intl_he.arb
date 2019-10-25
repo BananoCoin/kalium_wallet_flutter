@@ -276,8 +276,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "\tברוך הבא לקאליום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים.",
-    "@welcomeText": {
+    "welcomeTextKal": "\tברוך הבא לקאליום. בכדי להמשיך, אתה רשאי לייצר ארנק חדש או לייבא אחד קיים.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -312,8 +312,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "שלח %1 באנאנו?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "שלח %1 באנאנו?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -504,8 +504,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": ".התנתקות תוביל להסרת הסיד וכל המידע הקשור לקאליום מהמכשיר. אם הסיד שלך אינו מגובה, אתה לעולם לא תוכל לקבל גישה לכספים שלך יותר.",
-    "@logoutDetail": {
+    "logoutDetailKal": ".התנתקות תוביל להסרת הסיד וכל המידע הקשור לקאליום מהמכשיר. אם הסיד שלך אינו מגובה, אתה לעולם לא תוכל לקבל גישה לכספים שלך יותר.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -576,14 +576,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "%1 באנאנו התקבלו",
-    "@notificationTitle": {
+    "notificationTitleKal": "%1 באנאנו התקבלו",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "פתח את קאליום בשביל לצפות בטרנסקציה.",
-    "@notificationBody": {
+    "notificationBodyKal": "פתח את קאליום בשביל לצפות בטרנסקציה.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -654,14 +654,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "התהליך יעביר את הסכום שברשותך מארנק הנייר לארנק קאליום\n\nלחץ על כפתור ה \"%1\" בכדי להתחיל.",
-    "@transferIntro": {
+    "transferIntroKal": "התהליך יעביר את הסכום שברשותך מארנק הנייר לארנק קאליום\n\nלחץ על כפתור ה \"%1\" בכדי להתחיל.",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "סרוק סיד של \nבאנאנו או ארנק נייר",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "סרוק סיד של \nבאנאנו או ארנק נייר",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -672,14 +672,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "אין שום באנאנו בסיד המצורף.",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "אין שום באנאנו בסיד המצורף.",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "\nארנק עם מאזן של %1 באנאנו אותר.",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "\nארנק עם מאזן של %1 באנאנו אותר.",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -690,8 +690,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "יתכן שיקחו כמה שניות עד תחילת ההעברה.",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "יתכן שיקחו כמה שניות עד תחילת ההעברה.",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -702,8 +702,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 באנאנו הועברו לארנק קאליום.",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 באנאנו הועברו לארנק קאליום.",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -714,20 +714,20 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "סרוק כתובת ברקוד \n של באנאנו",
-    "@scanInstructions": {
+    "scanInstructionsKal": "סרוק כתובת ברקוד \n של באנאנו",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "הכנס קוד בשביל לשחרר את קאליום מנעילה",
-    "@unlockPin": {
+    "unlockPinKal": "הכנס קוד בשביל לשחרר את קאליום מנעילה",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "בצע אימות בכדי לשחרר את קאליום מנעילה",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "בצע אימות בכדי לשחרר את קאליום מנעילה",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -786,8 +786,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -804,21 +804,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "לקוף רנדומלי",
-    "@exampleCardTo": {
+    "exampleCardToKal": "לקוף רנדומלי",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "מקוף רנדומלי",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "מקוף רנדומלי",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
     },
     "defaultAccountName": "חשבון ראשי",
     "defaultNewAccountName": "חשבון %1",
-    "newAccountIntro": "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך",
+    "newAccountIntroKal": "ברוך הבא לקאליום. ברגע שתקבל באנאנו, הטרנסקציות יופיעו כך",
     "account": "חשבון",
     "accounts": "חשבונות",
     "addAccount": "הוסף חשבון",

@@ -223,7 +223,7 @@ class AppSendConfirmSheet {
                                       sl.get<BiometricUtil>().authenticateWithBiometrics(
                                               context,
                                               AppLocalization.of(context)
-                                                  .sendAmountConfirm
+                                                  .sendAmountConfirmKal
                                                   .replaceAll("%1", _amount))
                                           .then((authenticated) {
                                         if (authenticated) {
@@ -287,7 +287,7 @@ class AppSendConfirmSheet {
                                             expectedPin: expectedPin,
                                             description:
                                                 AppLocalization.of(context)
-                                                    .sendAmountConfirmPin
+                                                    .sendAmountConfirmKalPin
                                                     .replaceAll("%1", _amount),
                                           );
                                         }));

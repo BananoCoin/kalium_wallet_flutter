@@ -252,8 +252,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "Kalium'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
-    "@welcomeText": {
+    "welcomeTextKal": "Kalium'a hoşgeldiniz. Devam etmek için yeni bir cüzdan oluşturabilir veya var olanı içe aktarabilirsiniz.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -288,8 +288,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "%1 Banano gönder?",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "%1 Banano gönder?",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -474,8 +474,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "Çıkış yaptığınızda seed'iniz ve Kalium'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
-    "@logoutDetail": {
+    "logoutDetailKal": "Çıkış yaptığınızda seed'iniz ve Kalium'la ilgili bütün verileriniz bu cihazdan silinecektir. Seed'inizi yedeklemediyseniz paranıza bir daha asla ulaşamazsınız.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -546,14 +546,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "%1 BANANO Alındı",
-    "@notificationTitle": {
+    "notificationTitleKal": "%1 BANANO Alındı",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "Bu transferi görmek için Kalium’u aç.",
-    "@notificationBody": {
+    "notificationBodyKal": "Bu transferi görmek için Kalium’u aç.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -612,14 +612,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
-    "@transferIntro": {
+    "transferIntroKal": "Bu işlem bir kağıt cüzdanda bulunan bakiyeyi senin Kalium cüzdanına aktaracak.\n\nBaşlamak için \"%1\" butonuna bas.",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Bir Banano seedi \nveya private key'i tara",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "Bir Banano seedi \nveya private key'i tara",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -630,14 +630,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "Bu seedin içinde hiç BANANO yok.",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "Bu seedin içinde hiç BANANO yok.",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "%1 BANANO bakiyeye sahip bir cüzdan tespit edildi.\n",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "%1 BANANO bakiyeye sahip bir cüzdan tespit edildi.\n",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -648,8 +648,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "Bu işlem birkaç saniye sürebilir.",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "Bu işlem birkaç saniye sürebilir.",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -660,8 +660,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO başarıyla Kalium cüzdanına aktarıldı.",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 BANANO başarıyla Kalium cüzdanına aktarıldı.",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -672,8 +672,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Banano Adresi'nin \n QR Kodu'nu tarayın",
-    "@scanInstructions": {
+    "scanInstructionsKal": "Banano Adresi'nin \n QR Kodu'nu tarayın",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
@@ -684,8 +684,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Kalium’a hoşgeldin. Hesabına BANANO geldiğinde işlemlerin şu şekilde görünecek",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "Kalium’a hoşgeldin. Hesabına BANANO geldiğinde işlemlerin şu şekilde görünecek",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -702,14 +702,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "rastgele bir maymuna",
-    "@exampleCardTo": {
+    "exampleCardToKal": "rastgele bir maymuna",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "rastgele bir maymundan",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "rastgele bir maymundan",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
@@ -756,14 +756,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "Kalium’u Açmak için Pin Kodunu Gir",
-    "@unlockPin": {
+    "unlockPinKal": "Kalium’u Açmak için Pin Kodunu Gir",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "Kalium’u Açmak için Kimliğini Doğrula",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "Kalium’u Açmak için Kimliğini Doğrula",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -818,7 +818,7 @@
     },
     "defaultAccountName": "Ana Hesap",
     "defaultNewAccountName": "Hesap %1",
-    "newAccountIntro": "Bu senin yeni hesabın. Hesabına BANANO geldiğinde işlemlerin aşağıdaki gibi görünecek.",
+    "newAccountIntroKal": "Bu senin yeni hesabın. Hesabına BANANO geldiğinde işlemlerin aşağıdaki gibi görünecek.",
     "account": "Hesap",
     "accounts": "Hesaplar",
     "addAccount": "Hesap Ekle",

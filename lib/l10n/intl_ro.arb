@@ -276,8 +276,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "welcomeText": "Bun venit la Kalium. Pentru a continua, puteți crea un nou portofel sau puteți importa unul existent.",
-    "@welcomeText": {
+    "welcomeTextKal": "Bun venit la Kalium. Pentru a continua, puteți crea un nou portofel sau puteți importa unul existent.",
+    "@welcomeTextKal": {
         "description": "intro_welcome_title",
         "type": "text",
         "placeholders": {}
@@ -312,8 +312,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "sendAmountConfirm": "Trimite %1 BANANO",
-    "@sendAmountConfirm": {
+    "sendAmountConfirmKal": "Trimite %1 BANANO",
+    "@sendAmountConfirmKal": {
         "description": "send_pin_description",
         "type": "text",
         "placeholders": {}
@@ -504,8 +504,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "logoutDetail": "Prin deconectare vom elimina seed-ul și toate datele legate de Kalium de pe acest dispozitiv. Dacă seed-ul nu are o copie de rezervă/backup, fondurile for fi pierdute permanent.",
-    "@logoutDetail": {
+    "logoutDetailKal": "Prin deconectare vom elimina seed-ul și toate datele legate de Kalium de pe acest dispozitiv. Dacă seed-ul nu are o copie de rezervă/backup, fondurile for fi pierdute permanent.",
+    "@logoutDetailKal": {
         "description": "settings_logout_alert_message",
         "type": "text",
         "placeholders": {}
@@ -576,14 +576,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "notificationTitle": "Ai primit %1 BANANO",
-    "@notificationTitle": {
+    "notificationTitleKal": "Ai primit %1 BANANO",
+    "@notificationTitleKal": {
         "description": "notification_title",
         "type": "text",
         "placeholders": {}
     },
-    "notificationBody": "Deschide Kalium pentru a vizualiza tranzacția.",
-    "@notificationBody": {
+    "notificationBodyKal": "Deschide Kalium pentru a vizualiza tranzacția.",
+    "@notificationBodyKal": {
         "description": "notification_body",
         "type": "text",
         "placeholders": {}
@@ -654,14 +654,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferIntro": "Acest proces va transfera fondurile dintr-un Paper Wallet către contul dvs. Kalium.\n\nAtingeți butonul \"%1\" pentru a începe.",
-    "@transferIntro": {
+    "transferIntroKal": "Acest proces va transfera fondurile dintr-un Paper Wallet către contul dvs. Kalium.\n\nAtingeți butonul \"%1\" pentru a începe.",
+    "@transferIntroKal": {
         "description": "transfer_intro",
         "type": "text",
         "placeholders": {}
     },
-    "transferQrScanHint": "Scanați un seed pentru BANANO\n sau un private key",
-    "@transferQrScanHint": {
+    "transferQrScanHintKal": "Scanați un seed pentru BANANO\n sau un private key",
+    "@transferQrScanHintKal": {
         "description": "transfer_qr_scan_hint",
         "type": "text",
         "placeholders": {}
@@ -672,14 +672,14 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferNoFunds": "Acest seed nu conține BANANO.",
-    "@transferNoFunds": {
+    "transferNoFundsKal": "Acest seed nu conține BANANO.",
+    "@transferNoFundsKal": {
         "description": "transfer_no_funds_toast",
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfo": "Un portofel cu un sold de %1 BANANO a fost detectat.\n",
-    "@transferConfirmInfo": {
+    "transferConfirmInfoKal": "Un portofel cu un sold de %1 BANANO a fost detectat.\n",
+    "@transferConfirmInfoKal": {
         "description": "transfer_confirm_info_first",
         "type": "text",
         "placeholders": {}
@@ -690,8 +690,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferConfirmInfoThird": "Transferul poate dura câteva secunde.",
-    "@transferConfirmInfoThird": {
+    "transferConfirmInfoKalThird": "Transferul poate dura câteva secunde.",
+    "@transferConfirmInfoKalThird": {
         "description": "transfer_confirm_info_third",
         "type": "text",
         "placeholders": {}
@@ -702,8 +702,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "transferComplete": "%1 BANANO au fost transferate cu succes în portofelul dvs. Kalium.",
-    "@transferComplete": {
+    "transferCompleteKal": "%1 BANANO au fost transferate cu succes în portofelul dvs. Kalium.",
+    "@transferCompleteKal": {
         "description": "transfer_complete_text",
         "type": "text",
         "placeholders": {}
@@ -714,20 +714,20 @@
         "type": "text",
         "placeholders": {}
     },
-    "scanInstructions": "Scanează o adresă BANANO de tip cod QR",
-    "@scanInstructions": {
+    "scanInstructionsKal": "Scanează o adresă BANANO de tip cod QR",
+    "@scanInstructionsKal": {
         "description": "scan_send_instruction_label",
         "type": "text",
         "placeholders": {}
     },
-    "unlockPin": "Introduceți codul PIN pentru a debloca Kalium",
-    "@unlockPin": {
+    "unlockPinKal": "Introduceți codul PIN pentru a debloca Kalium",
+    "@unlockPinKal": {
         "description": "unlock_kalium_pin",
         "type": "text",
         "placeholders": {}
     },
-    "unlockBiometrics": "Autentificaţi-vă pentru a debloca Kalium",
-    "@unlockBiometrics": {
+    "unlockBiometricsKal": "Autentificaţi-vă pentru a debloca Kalium",
+    "@unlockBiometricsKal": {
         "description": "unlock_kalium_bio",
         "type": "text",
         "placeholders": {}
@@ -786,8 +786,8 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardIntro": "Bun venit la Kalium. Odată ce primiți sau trimiteți BANANO, tranzacțiile vor arăta astfel",
-    "@exampleCardIntro": {
+    "exampleCardIntroKal": "Bun venit la Kalium. Odată ce primiți sau trimiteți BANANO, tranzacțiile vor arăta astfel",
+    "@exampleCardIntroKal": {
         "description": "example_card_intro",
         "type": "text",
         "placeholders": {}
@@ -804,21 +804,21 @@
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardTo": "unui om oarecare",
-    "@exampleCardTo": {
+    "exampleCardToKal": "unui om oarecare",
+    "@exampleCardToKal": {
         "description": "example_card_to",
         "type": "text",
         "placeholders": {}
     },
-    "exampleCardFrom": "de la oricine",
-    "@exampleCardFrom": {
+    "exampleCardFromKal": "de la oricine",
+    "@exampleCardFromKal": {
         "description": "example_card_from",
         "type": "text",
         "placeholders": {}
     },
     "defaultAccountName": "Cont principal", 
     "defaultNewAccountName": "Contul nr. %1", 
-    "newAccountIntro": "Acesta este noul tău cont! Odată ce primești BANANO, tranzacțiile vor arată astfel:", 
+    "newAccountIntroKal": "Acesta este noul tău cont! Odată ce primești BANANO, tranzacțiile vor arată astfel:", 
     "accounts": "Conturi", 
     "addAccount": "Adăugare cont", 
     "hideAccountHeader": "Ascundere cont?", 

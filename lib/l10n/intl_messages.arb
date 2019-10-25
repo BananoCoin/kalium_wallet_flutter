@@ -1,5 +1,5 @@
 {
-  "@@last_modified": "2019-06-21T10:18:48.847217",
+  "@@last_modified": "2019-10-25T09:25:07.872122",
   "cancel": "Cancel",
   "@cancel": {
     "description": "dialog_cancel",
@@ -270,8 +270,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "welcomeText": "Welcome to Kalium. To begin you may create a new wallet or import an existing one.",
-  "@welcomeText": {
+  "welcomeTextKal": "Welcome to Kalium. To begin you may create a new wallet or import an existing one.",
+  "@welcomeTextKal": {
     "description": "intro_welcome_title",
     "type": "text",
     "placeholders": {}
@@ -306,8 +306,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "sendAmountConfirm": "Send %1 BANANO",
-  "@sendAmountConfirm": {
+  "sendAmountConfirmKal": "Send %1 BANANO",
+  "@sendAmountConfirmKal": {
     "description": "send_pin_description",
     "type": "text",
     "placeholders": {}
@@ -474,6 +474,12 @@
     "type": "text",
     "placeholders": {}
   },
+  "currency": "Currency",
+  "@currency": {
+    "description": "A settings menu item for changing currency",
+    "type": "text",
+    "placeholders": {}
+  },
   "language": "Language",
   "@language": {
     "description": "settings_change_language",
@@ -504,8 +510,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "logoutDetail": "Logging out will remove your seed and all Kalium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
-  "@logoutDetail": {
+  "logoutDetailKal": "Logging out will remove your seed and all Kalium-related data from this device. If your seed is not backed up, you will never be able to access your funds again",
+  "@logoutDetailKal": {
     "description": "settings_logout_alert_message",
     "type": "text",
     "placeholders": {}
@@ -576,14 +582,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "notificationTitle": "Received %1 BANANO",
-  "@notificationTitle": {
+  "notificationTitleKal": "Received %1 BANANO",
+  "@notificationTitleKal": {
     "description": "notification_title",
     "type": "text",
     "placeholders": {}
   },
-  "notificationBody": "Open Kalium to view this transaction",
-  "@notificationBody": {
+  "notificationBodyKal": "Open Kalium to view this transaction",
+  "@notificationBodyKal": {
     "description": "notification_body",
     "type": "text",
     "placeholders": {}
@@ -654,14 +660,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferIntro": "This process will transfer the funds from a paper wallet to your Kalium wallet.\n\nTap the \"%1\" button to start.",
-  "@transferIntro": {
+  "transferIntroKal": "This process will transfer the funds from a paper wallet to your Kalium wallet.\n\nTap the \"%1\" button to start.",
+  "@transferIntroKal": {
     "description": "transfer_intro",
     "type": "text",
     "placeholders": {}
   },
-  "transferQrScanHint": "Scan a Banano \nseed or private key",
-  "@transferQrScanHint": {
+  "transferQrScanHintKal": "Scan a Banano \nseed or private key",
+  "@transferQrScanHintKal": {
     "description": "transfer_qr_scan_hint",
     "type": "text",
     "placeholders": {}
@@ -672,14 +678,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferNoFunds": "This seed does not have any BANANO on it",
-  "@transferNoFunds": {
+  "transferNoFundsKal": "This seed does not have any BANANO on it",
+  "@transferNoFundsKal": {
     "description": "transfer_no_funds_toast",
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfo": "A wallet with a balance of %1 BANANO has been detected.\n",
-  "@transferConfirmInfo": {
+  "transferConfirmInfoKal": "A wallet with a balance of %1 BANANO has been detected.\n",
+  "@transferConfirmInfoKal": {
     "description": "transfer_confirm_info_first",
     "type": "text",
     "placeholders": {}
@@ -690,8 +696,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfoThird": "Transfer may take several seconds to complete.",
-  "@transferConfirmInfoThird": {
+  "transferConfirmInfoKalThird": "Transfer may take several seconds to complete.",
+  "@transferConfirmInfoKalThird": {
     "description": "transfer_confirm_info_third",
     "type": "text",
     "placeholders": {}
@@ -702,8 +708,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferComplete": "%1 BANANO successfully transferred to your Kalium Wallet.\n",
-  "@transferComplete": {
+  "transferCompleteKal": "%1 BANANO successfully transferred to your Kalium Wallet.\n",
+  "@transferCompleteKal": {
     "description": "transfer_complete_text",
     "type": "text",
     "placeholders": {}
@@ -714,20 +720,20 @@
     "type": "text",
     "placeholders": {}
   },
-  "scanInstructions": "Scan a Banano \naddress QR code",
-  "@scanInstructions": {
+  "scanInstructionsKal": "Scan a Banano \naddress QR code",
+  "@scanInstructionsKal": {
     "description": "scan_send_instruction_label",
     "type": "text",
     "placeholders": {}
   },
-  "unlockPin": "Enter PIN to Unlock Kalium",
-  "@unlockPin": {
+  "unlockPinKal": "Enter PIN to Unlock Kalium",
+  "@unlockPinKal": {
     "description": "unlock_kalium_pin",
     "type": "text",
     "placeholders": {}
   },
-  "unlockBiometrics": "Authenticate to Unlock Kalium",
-  "@unlockBiometrics": {
+  "unlockBiometricsKal": "Authenticate to Unlock Kalium",
+  "@unlockBiometricsKal": {
     "description": "unlock_kalium_bio",
     "type": "text",
     "placeholders": {}
@@ -786,8 +792,44 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardIntro": "Welcome to Kalium. Once you receive BANANO, transactions will show up like this:",
-  "@exampleCardIntro": {
+  "setWalletPassword": "Set Wallet Password",
+  "@setWalletPassword": {
+    "description": "Allows user to encrypt wallet with a password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setPassword": "Set Password",
+  "@setPassword": {
+    "description": "A button that sets the wallet password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "disableWalletPassword": "Disable Wallet Password",
+  "@disableWalletPassword": {
+    "description": "Allows user to deencrypt wallet with a password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "encryptionFailedError": "Failed to set a wallet password",
+  "@encryptionFailedError": {
+    "description": "If encrypting a wallet raised an error",
+    "type": "text",
+    "placeholders": {}
+  },
+  "setPasswordSuccess": "Password has been set successfully",
+  "@setPasswordSuccess": {
+    "description": "Setting a Wallet Password was successful",
+    "type": "text",
+    "placeholders": {}
+  },
+  "disablePasswordSuccess": "Password has been disabled",
+  "@disablePasswordSuccess": {
+    "description": "Disabling a Wallet Password was successful",
+    "type": "text",
+    "placeholders": {}
+  },
+  "exampleCardIntroKal": "Welcome to Kalium. Once you receive BANANO, transactions will show up like this:",
+  "@exampleCardIntroKal": {
     "description": "example_card_intro",
     "type": "text",
     "placeholders": {}
@@ -804,14 +846,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardTo": "to a random monkey",
-  "@exampleCardTo": {
+  "exampleCardToKal": "to a random monkey",
+  "@exampleCardToKal": {
     "description": "example_card_to",
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardFrom": "from a random monkey",
-  "@exampleCardFrom": {
+  "exampleCardFromKal": "from a random monkey",
+  "@exampleCardFromKal": {
     "description": "example_card_from",
     "type": "text",
     "placeholders": {}
@@ -828,8 +870,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "newAccountIntro": "This is your new account. Once you receive BANANO, transactions will show up like this:",
-  "@newAccountIntro": {
+  "newAccountIntroKal": "This is your new account. Once you receive BANANO, transactions will show up like this:",
+  "@newAccountIntroKal": {
     "description": "Alternate account intro card",
     "type": "text",
     "placeholders": {}
@@ -999,6 +1041,132 @@
   "backupSecretPhrase": "Backup Secret Phrase",
   "@backupSecretPhrase": {
     "description": "backup seed",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createPasswordHint": "Create a password",
+  "@createPasswordHint": {
+    "description": "A text field hint that tells the user to create a password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "confirmPasswordHint": "Confirm the password",
+  "@confirmPasswordHint": {
+    "description": "A text field hint that tells the user to confirm the password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "enterPasswordHint": "Enter your password",
+  "@enterPasswordHint": {
+    "description": "A text field hint that tells the users to enter their password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordsDontMatch": "Passwords do not match",
+  "@passwordsDontMatch": {
+    "description": "An error indicating a password has been confirmed incorrectly",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordBlank": "Password cannot be empty",
+  "@passwordBlank": {
+    "description": "An error indicating a password has been entered incorrectly",
+    "type": "text",
+    "placeholders": {}
+  },
+  "invalidPassword": "Invalid Password",
+  "@invalidPassword": {
+    "description": "An error indicating a password has been entered incorrectly",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordWillBeRequiredToOpenParagraph": "This password will be required to open Natrium.",
+  "@passwordWillBeRequiredToOpenParagraph": {
+    "description": "A paragraph that tells the users that the created password will be required to open Natrium.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "passwordNoLongerRequiredToOpenParagraph": "You will not need a password to open Natrium anymore.",
+  "@passwordNoLongerRequiredToOpenParagraph": {
+    "description": "An info paragraph that tells the user a password will no longer be needed to open Natrium",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createPasswordFirstParagraph": "You can create a password to add additional security to your wallet.",
+  "@createPasswordFirstParagraph": {
+    "description": "A paragraph that tells the users that they can create a password for additional security.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createPasswordSecondParagraph": "Password is optional, and your wallet will be protected with your PIN or biometrics regardless.",
+  "@createPasswordSecondParagraph": {
+    "description": "A paragraph that tells the users that the password creation is optional and the wallet will be still protected with biometrics or PIN regardless.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createAPasswordHeader": "Create a password.",
+  "@createAPasswordHeader": {
+    "description": "A paragraph that tells the users to create a password.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "createPasswordSheetHeader": "Create",
+  "@createPasswordSheetHeader": {
+    "description": "Prompt user to create a new password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "disablePasswordSheetHeader": "Disable",
+  "@disablePasswordSheetHeader": {
+    "description": "Prompt user to disable their password",
+    "type": "text",
+    "placeholders": {}
+  },
+  "requireAPasswordToOpenHeader": "Require a password to open Natrium?",
+  "@requireAPasswordToOpenHeader": {
+    "description": "A paragraph that asks the users if they would like a password to be required to open Natrium.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "noSkipButton": "No, Skip",
+  "@noSkipButton": {
+    "description": "A button that declines and skips the mentioned process.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "yesButton": "Yes",
+  "@yesButton": {
+    "description": "A button that accepts the mentioned process.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "nextButton": "Next",
+  "@nextButton": {
+    "description": "A button that goes to the next screen.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "goBackButton": "Go Back",
+  "@goBackButton": {
+    "description": "A button that goes to the previous screen.",
+    "type": "text",
+    "placeholders": {}
+  },
+  "supportButton": "Support",
+  "@supportButton": {
+    "description": "A button to open up the live support window",
+    "type": "text",
+    "placeholders": {}
+  },
+  "liveSupportButton": "Support",
+  "@liveSupportButton": {
+    "description": "A button to open up the live support window",
+    "type": "text",
+    "placeholders": {}
+  },
+  "connectingHeader": "Connecting",
+  "@connectingHeader": {
+    "description": "A header to let the user now that Natrium is currently connecting to (or loading) live chat.",
     "type": "text",
     "placeholders": {}
   }

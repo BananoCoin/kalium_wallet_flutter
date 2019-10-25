@@ -71,7 +71,7 @@ class _IntroWelcomePageState extends State<IntroWelcomePage> {
                           margin: EdgeInsets.symmetric(
                               horizontal: 50, vertical: 20),
                           child: AutoSizeText(
-                            AppLocalization.of(context).welcomeText,
+                            AppLocalization.of(context).welcomeTextKal,
                             style: AppStyles.textStyleParagraph(context),
                             maxLines: 4,
                             stepGranularity: 0.5,

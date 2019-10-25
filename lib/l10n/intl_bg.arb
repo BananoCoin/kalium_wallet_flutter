@@ -270,8 +270,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "welcomeText": "Добре дошли в Kalium. За да започнете, можете да създадете нов портфейл или да импортирате вече съществуващ.",
-  "@welcomeText": {
+  "welcomeTextKal": "Добре дошли в Kalium. За да започнете, можете да създадете нов портфейл или да импортирате вече съществуващ.",
+  "@welcomeTextKal": {
     "description": "intro_welcome_title",
     "type": "text",
     "placeholders": {}
@@ -306,8 +306,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "sendAmountConfirm": "Изпрати %1 BANANO",
-  "@sendAmountConfirm": {
+  "sendAmountConfirmKal": "Изпрати %1 BANANO",
+  "@sendAmountConfirmKal": {
     "description": "send_pin_description",
     "type": "text",
     "placeholders": {}
@@ -504,8 +504,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "logoutDetail": "Отписването ще премахне вашият Seed и всички свързани с Kalium данни от това устройство. Ако вашият Seed няма резервно копие, вие никога повече няма да имате достъп до вашите средства.",
-  "@logoutDetail": {
+  "logoutDetailKal": "Отписването ще премахне вашият Seed и всички свързани с Kalium данни от това устройство. Ако вашият Seed няма резервно копие, вие никога повече няма да имате достъп до вашите средства.",
+  "@logoutDetailKal": {
     "description": "settings_logout_alert_message",
     "type": "text",
     "placeholders": {}
@@ -576,14 +576,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "notificationTitle": "Получени %1 BANANO",
-  "@notificationTitle": {
+  "notificationTitleKal": "Получени %1 BANANO",
+  "@notificationTitleKal": {
     "description": "notification_title",
     "type": "text",
     "placeholders": {}
   },
-  "notificationBody": "Отвори Kalium за да видиш тази транзакция",
-  "@notificationBody": {
+  "notificationBodyKal": "Отвори Kalium за да видиш тази транзакция",
+  "@notificationBodyKal": {
     "description": "notification_body",
     "type": "text",
     "placeholders": {}
@@ -654,14 +654,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferIntro": "Този процес ще прехвърли вашите средства от Хартиен Портфейл към Kalium Портфейл.\n\nНатиснете \"%1\" бутона за Старт.",
-  "@transferIntro": {
+  "transferIntroKal": "Този процес ще прехвърли вашите средства от Хартиен Портфейл към Kalium Портфейл.\n\nНатиснете \"%1\" бутона за Старт.",
+  "@transferIntroKal": {
     "description": "transfer_intro",
     "type": "text",
     "placeholders": {}
   },
-  "transferQrScanHint": "Сканирайте BANANO \nSeed или Личен Ключ.",
-  "@transferQrScanHint": {
+  "transferQrScanHintKal": "Сканирайте BANANO \nSeed или Личен Ключ.",
+  "@transferQrScanHintKal": {
     "description": "transfer_qr_scan_hint",
     "type": "text",
     "placeholders": {}
@@ -672,14 +672,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferNoFunds": "Този Seed не съдържа BANANO на него.",
-  "@transferNoFunds": {
+  "transferNoFundsKal": "Този Seed не съдържа BANANO на него.",
+  "@transferNoFundsKal": {
     "description": "transfer_no_funds_toast",
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfo": "Портфейл с баланс от %1 BANANO е открит.\n",
-  "@transferConfirmInfo": {
+  "transferConfirmInfoKal": "Портфейл с баланс от %1 BANANO е открит.\n",
+  "@transferConfirmInfoKal": {
     "description": "transfer_confirm_info_first",
     "type": "text",
     "placeholders": {}
@@ -690,8 +690,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferConfirmInfoThird": "Прехвърлянето може да отнеме няколко секунди.",
-  "@transferConfirmInfoThird": {
+  "transferConfirmInfoKalThird": "Прехвърлянето може да отнеме няколко секунди.",
+  "@transferConfirmInfoKalThird": {
     "description": "transfer_confirm_info_third",
     "type": "text",
     "placeholders": {}
@@ -702,8 +702,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "transferComplete": "%1 BANANO успешно прехвърлени към вашият Kalium Портфейл.\n",
-  "@transferComplete": {
+  "transferCompleteKal": "%1 BANANO успешно прехвърлени към вашият Kalium Портфейл.\n",
+  "@transferCompleteKal": {
     "description": "transfer_complete_text",
     "type": "text",
     "placeholders": {}
@@ -714,20 +714,20 @@
     "type": "text",
     "placeholders": {}
   },
-  "scanInstructions": "Сканирай BANANO \nАдрес или QR-код",
-  "@scanInstructions": {
+  "scanInstructionsKal": "Сканирай BANANO \nАдрес или QR-код",
+  "@scanInstructionsKal": {
     "description": "scan_send_instruction_label",
     "type": "text",
     "placeholders": {}
   },
-  "unlockPin": "Въведи ПИН за да отключиш Kalium",
-  "@unlockPin": {
+  "unlockPinKal": "Въведи ПИН за да отключиш Kalium",
+  "@unlockPinKal": {
     "description": "unlock_kalium_pin",
     "type": "text",
     "placeholders": {}
   },
-  "unlockBiometrics": "Удостовери за Отключване на Kalium",
-  "@unlockBiometrics": {
+  "unlockBiometricsKal": "Удостовери за Отключване на Kalium",
+  "@unlockBiometricsKal": {
     "description": "unlock_kalium_bio",
     "type": "text",
     "placeholders": {}
@@ -786,8 +786,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardIntro": "Добре Дошли в Kalium. След като получите BANANO, транзакциите ще се покажат по следния начин:",
-  "@exampleCardIntro": {
+  "exampleCardIntroKal": "Добре Дошли в Kalium. След като получите BANANO, транзакциите ще се покажат по следния начин:",
+  "@exampleCardIntroKal": {
     "description": "example_card_intro",
     "type": "text",
     "placeholders": {}
@@ -804,14 +804,14 @@
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardTo": "на случайна маймунка",
-  "@exampleCardTo": {
+  "exampleCardToKal": "на случайна маймунка",
+  "@exampleCardToKal": {
     "description": "example_card_to",
     "type": "text",
     "placeholders": {}
   },
-  "exampleCardFrom": "от случайна маймунка",
-  "@exampleCardFrom": {
+  "exampleCardFromKal": "от случайна маймунка",
+  "@exampleCardFromKal": {
     "description": "example_card_from",
     "type": "text",
     "placeholders": {}
@@ -828,8 +828,8 @@
     "type": "text",
     "placeholders": {}
   },
-  "newAccountIntro": "Това е вашият нов акаунт. След като получите BANANO, транзакциите ще се покажат по следният начин:",
-  "@newAccountIntro": {
+  "newAccountIntroKal": "Това е вашият нов акаунт. След като получите BANANO, транзакциите ще се покажат по следният начин:",
+  "@newAccountIntroKal": {
     "description": "Alternate account intro card",
     "type": "text",
     "placeholders": {}
