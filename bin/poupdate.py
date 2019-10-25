@@ -28,6 +28,8 @@ for fname in os.listdir('lib/l10n'):
                     data = json.load(json_file)
                     for obj in data:
                         if 'reference' in obj and 'definition' in obj and obj['definition'] is not None:
+                                if obj['reference'] in ret:
+                                    print(f"WARN: {obj['reference']} is duplicated in {fname}")
                                 ret[obj['reference']] = obj['definition'].replace("<newline>", "\n")
                 with open(out_file, 'w') as outf:
                     json.dump(ret, outf, indent=2, ensure_ascii=False)

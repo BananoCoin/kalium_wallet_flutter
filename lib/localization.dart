@@ -143,8 +143,18 @@ class AppLocalization {
   }
 
   String get qrInvalidAddress {
-    return Intl.message("QR code does not contain a valid address",
+    return Intl.message("QR code does not contain a valid destination",
       desc: "qr_invalid_address", name: 'qrInvalidAddress');
+  }
+
+  String get qrInvalidPermissions {
+    return Intl.message("Please Grant Camera Permissions to scan QR Codes",
+      desc: "User did not grant camera permissions to the app", name: "qrInvalidPermissions");
+  }
+
+  String get qrUnknownError {
+    return Intl.message("Could not Read QR Code",
+      desc: "An unknown error occurred with the QR scanner", name: "qrUnknownError");
   }
 
   /// -- END GENERIC ITEMS
@@ -250,7 +260,7 @@ class AppLocalization {
   }
 
   String get importSeed {
-    return Intl.message("Import seed",
+    return Intl.message("Import Seed",
         desc: 'intro_seed_header', name: 'importSeed');
   }
 
@@ -464,6 +474,21 @@ class AppLocalization {
   String get logout {
     return Intl.message("Logout",
       desc: 'settings_logout', name: 'logout');
+  }
+
+  String get rootWarning {
+    return Intl.message('It appears your device is "rooted", "jailbroken", or modified in a way that compromises security. It is recommended that you reset your device to its original state before proceeding.',
+    desc: "Shown to users if they have a rooted Android device or jailbroken iOS device", name: 'rootWarning');
+  }
+
+  String get iUnderstandTheRisks {
+    return Intl.message("I Understand the Risks",
+    desc: "Shown to users if they have a rooted Android device or jailbroken iOS device", name: 'iUnderstandTheRisks');
+  }
+
+  String get exit {
+    return Intl.message("Exit",
+    desc: "Exit action, like a button", name: 'exit');
   }
 
   String get warning {
