@@ -2,6 +2,10 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:barcode_scan/barcode_scan.dart';
+import 'package:kalium_wallet_flutter/model/db/appdb.dart';
+import 'package:kalium_wallet_flutter/model/vault.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
+import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
@@ -417,17 +421,25 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                           splashColor: StateContainer.of(context)
                               .curTheme
                               .primary30,
-                          onPressed: () {
+                          onPressed: () async {
                             if (_seedMode) {
                               _seedInputFocusNode.unfocus();
                               // If seed valid, log them in
                               if (NanoSeeds.isValidSeed(
                                   _seedInputController.text)) {
-                                sl.get<SharedPrefsUtil>()
-                                    .setSeedBackedUp(true)
-                                    .then((result) {
-                                  Navigator.pushNamed(context, '/intro_password_on_launch', arguments: _seedInputController.text);
-                                });
+                                await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                                await sl.get<Vault>().setSeed(_seedInputController.text);
+                                await sl.get<DBHelper>().dropAccounts();
+                                await NanoUtil().loginAccount(context);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return PinScreen(
+                                          PinOverlayType.NEW_PIN,
+                                          (_pinEnteredCallback));
+                                    }
+                                  )
+                                );
                               } else {
                                 // Display error
                                 setState(() {
@@ -438,11 +450,19 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                               // mnemonic mode
                               _mnemonicFocusNode.unfocus();
                               if (NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
-                                sl.get<SharedPrefsUtil>()
-                                    .setSeedBackedUp(true)
-                                    .then((result) {
-                                  Navigator.pushNamed(context, '/intro_password_on_launch', arguments: NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
-                                });                                  
+                                await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+                                await sl.get<Vault>().setSeed(NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
+                                await sl.get<DBHelper>().dropAccounts();
+                                await NanoUtil().loginAccount(context);
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return PinScreen(
+                                          PinOverlayType.NEW_PIN,
+                                          (_pinEnteredCallback));
+                                    }
+                                  )
+                                );                      
                               } else {
                                 // Show mnemonic error
                                 if (_mnemonicController.text.split(' ').length != 24) {
@@ -480,5 +500,14 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
         )
       )
     );
+  }
+
+  void _pinEnteredCallback(String pin) {
+    Navigator.of(context).pop();
+    sl.get<Vault>().writePin(pin).then((result) {
+      // Update wallet
+      Navigator.of(context)
+          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
+    });
   }
 }
