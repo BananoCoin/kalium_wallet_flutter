@@ -1,7 +1,7 @@
 import 'package:event_taxi/event_taxi.dart';
 
-class transferCompleteKalEvent implements Event {
+class TransferCompleteEvent implements Event {
   final BigInt amount;
 
-  transferCompleteKalEvent({this.amount});
+  TransferCompleteEvent({this.amount});
 }

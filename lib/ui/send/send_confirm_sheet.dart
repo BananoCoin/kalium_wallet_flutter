@@ -42,7 +42,6 @@ class SendConfirmSheet extends StatefulWidget {
 
 class _SendConfirmSheetState extends State<SendConfirmSheet> {
   String amount;
-  String destinationAltered;
   bool animationOpen;
   bool sent;
   bool isMantaTransaction;
@@ -227,7 +226,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child: sl.get<UIUtil>().threeLineAddressText(
-                              context, destinationAltered,
+                              context, widget.destination,
                               contactName: widget.contactName)),
                 ],
               ),
@@ -267,7 +266,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                                       StateContainer.of(context)
                                           .wallet
                                           .frontier,
-                                      destinationAltered,
+                                      widget.destination,
                                       widget.maxSend ? "0" : widget.amountRaw,
                                       localCurrencyAmount:
                                           widget.localCurrency);
@@ -317,7 +316,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                 StateContainer.of(context)
                     .wallet
                     .frontier,
-                destinationAltered,
+                widget.destination,
                 widget.maxSend ? "0" : widget.amountRaw,
                 localCurrencyAmount:
                     widget.localCurrency);

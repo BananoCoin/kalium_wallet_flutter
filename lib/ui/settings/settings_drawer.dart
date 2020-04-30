@@ -4,6 +4,7 @@ import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +150,7 @@ class _SettingsSheetState extends State<SettingsSheet>
   }
 
   StreamSubscription<TransferConfirmEvent> _transferConfirmSub;
-  StreamSubscription<transferCompleteKalEvent> _transferCompleteKalSub;
+  StreamSubscription<TransferCompleteEvent> _transferCompleteKalSub;
   StreamSubscription<UnlockCallbackEvent> _callbackUnlockSub;
 
   void _registerBus() {
@@ -157,12 +158,17 @@ class _SettingsSheetState extends State<SettingsSheet>
     _transferConfirmSub = EventTaxiImpl.singleton()
         .registerTo<TransferConfirmEvent>()
         .listen((event) {
-      AppTransferConfirmSheet(event.balMap, transferError)
-          .mainBottomSheet(context);
+      Sheets.showAppHeightNineSheet(
+        context: context,
+        widget: AppTransferConfirmSheet(
+          privKeyBalanceMap: event.balMap,
+          errorCallback: transferError,
+        )
+      );  
     });
     // Ready to go to transfer complete
     _transferCompleteKalSub = EventTaxiImpl.singleton()
-        .registerTo<transferCompleteKalEvent>()
+        .registerTo<TransferCompleteEvent>()
         .listen((event) {
       StateContainer.of(context).requestUpdate();
       ApptransferCompleteKalSheet(NumberUtil.getRawAsUsableString(event.amount.toString()))

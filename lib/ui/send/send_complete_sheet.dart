@@ -25,7 +25,6 @@ class SendCompleteSheet extends StatefulWidget {
 
 class _SendCompleteSheetState extends State<SendCompleteSheet> {
   String amount;
-  String destinationAltered;
 
   @override
   void initState() {
@@ -174,7 +173,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                         borderRadius: BorderRadius.circular(25),
                       ),
                       child:  sl.get<UIUtil>().threeLineAddressText(
-                              context, destinationAltered,
+                              context, widget.destination,
                               type: ThreeLineAddressTextType.SUCCESS,
                               contactName: widget.contactName)),
                 ],

@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
+import 'package:logger/logger.dart';
 
 class BiometricUtil {
   ///
@@ -13,7 +15,11 @@ class BiometricUtil {
     bool canCheck = await localAuth.canCheckBiometrics;
     if (canCheck) {
       List<BiometricType> availableBiometrics = await localAuth.getAvailableBiometrics();
-      if (Platform.isIOS && availableBiometrics.contains(BiometricType.face)) {
+      availableBiometrics.forEach((type) {
+        sl.get<Logger>().d(type.toString());
+        sl.get<Logger>().d("${type == BiometricType.face ? 'face' : type == BiometricType.iris ? 'iris' : type == BiometricType.fingerprint ? 'fingerprint' : 'unknown'}");
+      });
+      if (availableBiometrics.contains(BiometricType.face)) {
         return true;
       } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
         return true;
