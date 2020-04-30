@@ -12,6 +12,7 @@ import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
@@ -20,6 +21,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/util/biometrics.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
@@ -28,6 +30,7 @@ import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/authentication_method.dart';
 import 'package:kalium_wallet_flutter/model/state_block.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
+import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 // TODO - add validations
 
@@ -101,93 +104,82 @@ class AppChangeRepresentativeSheet {
             });
             return WillPopScope(
                 onWillPop: _onWillPop,
-                child: SafeArea(
-                  minimum: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.height * 0.035,
-                  ),
-                  child: Container(
-                    width: double.infinity,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: <Widget>[
-                        //A container for the header
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            //A container for the info button
-                            Container(
-                              width: 50,
-                              height: 50,
-                              margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
-                              child: FlatButton(
-                                highlightColor:
-                                    StateContainer.of(context).curTheme.text15,
-                                splashColor:
-                                    StateContainer.of(context).curTheme.text15,
-                                onPressed: () {
-                                  AppDialogs.showInfoDialog(
-                                      context,
-                                      AppLocalization.of(context).repInfoHeader,
-                                      AppLocalization.of(context).repInfo);
-                                },
-                                child: Icon(AppIcons.info,
-                                    size: 24,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .text),
-                                padding: EdgeInsets.all(13.0),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100.0)),
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.padded,
-                              ),
-                            ),
-
-                            //Container for the header
-                            Expanded(
-                              child: Container(
-                                margin: EdgeInsets.only(top: 30),
-                                constraints: BoxConstraints(
-                                    maxWidth:
-                                        MediaQuery.of(context).size.width -
-                                            140),
-                                child: AutoSizeText(
-                                  CaseChange.toUpperCase(
-                                      AppLocalization.of(context)
-                                          .changeRepAuthenticate,
-                                      context),
-                                  style: AppStyles.textStyleHeader(context),
-                                  textAlign: TextAlign.center,
-                                  maxLines: 2,
-                                  stepGranularity: 0.1,
+                child: TapOutsideUnfocus(
+                  child: SafeArea(
+                    minimum: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.035,
+                    ),
+                    child: Container(
+                      width: double.infinity,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: <Widget>[
+                          //A container for the header
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              //A container for the info button
+                              Container(
+                                width: 50,
+                                height: 50,
+                                margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
+                                child: FlatButton(
+                                  highlightColor:
+                                      StateContainer.of(context).curTheme.text15,
+                                  splashColor:
+                                      StateContainer.of(context).curTheme.text15,
+                                  onPressed: () {
+                                    AppDialogs.showInfoDialog(
+                                        context,
+                                        AppLocalization.of(context).repInfoHeader,
+                                        AppLocalization.of(context).repInfo);
+                                  },
+                                  child: Icon(AppIcons.info,
+                                      size: 24,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .text),
+                                  padding: EdgeInsets.all(13.0),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(100.0)),
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.padded,
                                 ),
                               ),
-                            ),
-                            // Empty sized box
-                            SizedBox(width: 60,height: 60)
-                          ],
-                        ),
 
-                        //A expanded section for current representative and new representative fields
-                        Expanded(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                                top: smallScreen(context) ? 20 : 35,
-                                bottom: smallScreen(context) ? 20 : 35),
-                            child: Stack(children: <Widget>[
-                              GestureDetector(
-                                onTap: () {
-                                  // Clear focus of our fields when tapped in this empty space
-                                  _repFocusNode.unfocus();
-                                },
+                              //Container for the header
+                              Expanded(
                                 child: Container(
-                                  color: Colors.transparent,
-                                  child: SizedBox.expand(),
-                                  constraints: BoxConstraints.expand(),
+                                  margin: EdgeInsets.only(top: 30),
+                                  constraints: BoxConstraints(
+                                      maxWidth:
+                                          MediaQuery.of(context).size.width -
+                                              140),
+                                  child: AutoSizeText(
+                                    CaseChange.toUpperCase(
+                                        AppLocalization.of(context)
+                                            .changeRepAuthenticate,
+                                        context),
+                                    style: AppStyles.textStyleHeader(context),
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    stepGranularity: 0.1,
+                                  ),
                                 ),
                               ),
-                              Column(
+                              // Empty sized box
+                              SizedBox(width: 60,height: 60)
+                            ],
+                          ),
+
+                          //A expanded section for current representative and new representative fields
+                          Expanded(
+                            child: KeyboardAvoider(
+                              duration: Duration(milliseconds: 0),
+                              autoScroll: true,
+                              focusPadding: 40,
+                              child: Column(
                                 children: <Widget>[
                                   // Currently represented by text
                                   Container(
@@ -245,7 +237,8 @@ class AppChangeRepresentativeSheet {
                                         color: StateContainer.of(context)
                                             .curTheme
                                             .backgroundDarkest,
-                                        borderRadius: BorderRadius.circular(25),
+                                        borderRadius:
+                                            BorderRadius.circular(25),
                                       ),
                                       child: sl.get<UIUtil>().threeLineAddressText(
                                           context,
@@ -261,7 +254,8 @@ class AppChangeRepresentativeSheet {
                                   ),
                                   // Address Copied text container
                                   Container(
-                                    margin: EdgeInsets.only(top: 5, bottom: 5),
+                                    margin:
+                                        EdgeInsets.only(top: 5, bottom: 5),
                                     child: Text(
                                         _addressCopied
                                             ? AppLocalization.of(context)
@@ -275,292 +269,244 @@ class AppChangeRepresentativeSheet {
                                           fontFamily: 'NunitoSans',
                                           fontWeight: FontWeight.w600,
                                         )),
-                                  ),
+                                  ),                                  
                                   // New representative
-                                  Container(
-                                    margin: EdgeInsets.only(
-                                      left: MediaQuery.of(context).size.width *
-                                          0.105,
-                                      right: MediaQuery.of(context).size.width *
-                                          0.105,
-                                    ),
-                                    width: double.infinity,
+                                  AppTextField(
                                     padding: _addressValidAndUnfocused
                                         ? EdgeInsets.symmetric(
                                             horizontal: 25.0, vertical: 15.0)
                                         : EdgeInsets.zero,
-                                    decoration: BoxDecoration(
-                                      color: StateContainer.of(context)
-                                          .curTheme
-                                          .backgroundDarkest,
-                                      borderRadius: BorderRadius.circular(25),
+                                    focusNode: _repFocusNode,
+                                    controller: _repController,
+                                    textAlign: TextAlign.center,
+                                    inputFormatters: [
+                                      LengthLimitingTextInputFormatter(
+                                          65),
+                                    ],
+                                    textInputAction: TextInputAction.done,
+                                    maxLines: null,
+                                    autocorrect: false,
+                                    hintText: _changeRepHint,
+                                    prefixButton: TextFieldButton(
+                                      icon: AppIcons.scan,
+                                      onPressed: () {
+                                        sl.get<UIUtil>().cancelLockEvent();
+                                          BarcodeScanner.scan(
+                                                  StateContainer.of(context)
+                                                      .curTheme
+                                                      .qrScanTheme)
+                                              .then((result) {
+                                            if (result == null) {
+                                              return;
+                                            }
+                                            Address address = new Address(result);
+                                            if (address.isValid()) {
+                                              setState(() {
+                                                _addressValidAndUnfocused = true;
+                                                _showPasteButton = false;
+                                                _repAddressStyle =
+                                                    AppStyles.textStyleAddressText60(
+                                                        context);
+                                              });
+                                              _repController.text = address.address;
+                                              _repFocusNode.unfocus();
+                                            } else {
+                                              sl.get<UIUtil>().showSnackbar(
+                                                  AppLocalization.of(context)
+                                                      .qrInvalidAddress,
+                                                  context);
+                                            }
+                                          });                                         
+                                      },
                                     ),
-                                    child: !_addressValidAndUnfocused
-                                        ? TextField(
-                                            focusNode: _repFocusNode,
-                                            controller: _repController,
-                                            textAlign: TextAlign.center,
-                                            cursorColor:
-                                                StateContainer.of(context)
-                                                    .curTheme
-                                                    .primary,
-                                            inputFormatters: [
-                                              LengthLimitingTextInputFormatter(
-                                                  64),
-                                            ],
-                                            textInputAction:
-                                                TextInputAction.done,
-                                            maxLines: null,
-                                            autocorrect: false,
-                                            decoration: InputDecoration(
-                                              hintText: _changeRepHint,
-                                                // QR Code Scan Button
-                                                prefixIcon: AnimatedCrossFade(
-                                                  duration: Duration(
-                                                      milliseconds: 100),
-                                                  firstChild: Container(
-                                                    width: 48.0,
-                                                    height: 48.0,
-                                                    child: FlatButton(
-                                                      highlightColor:
-                                                          StateContainer.of(
-                                                                  context)
-                                                              .curTheme
-                                                              .primary15,
-                                                      splashColor:
-                                                          StateContainer.of(
-                                                                  context)
-                                                              .curTheme
-                                                              .primary30,
-                                                      padding:
-                                                          EdgeInsets.all(15.0),
-                                                      onPressed: () {
-                                                        sl.get<UIUtil>().cancelLockEvent();
-                                                        BarcodeScanner.scan(
-                                                                StateContainer.of(context)
-                                                                    .curTheme
-                                                                    .qrScanTheme)
-                                                            .then((result) {
-                                                          if (result == null) {
-                                                            return;
-                                                          }
-                                                          Address address = new Address(result);
-                                                          if (address.isValid()) {
-                                                            setState(() {
-                                                              _addressValidAndUnfocused = true;
-                                                              _showPasteButton = false;
-                                                              _repAddressStyle =
-                                                                  AppStyles.textStyleAddressText60(
-                                                                      context);
-                                                            });
-                                                            _repController.text = address.address;
-                                                            _repFocusNode.unfocus();
-                                                          } else {
-                                                            sl.get<UIUtil>().showSnackbar(
-                                                                AppLocalization.of(context)
-                                                                    .qrInvalidAddress,
-                                                                context);
-                                                          }
-                                                        });  
-                                                    },
-                                                    child: Icon(
-                                                        AppIcons.scan,
-                                                        size: 20.0,
-                                                        color:
-                                                            StateContainer.of(
-                                                                    context)
-                                                                .curTheme
-                                                                .primary),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        200.0)),
-                                                    materialTapTargetSize:
-                                                        MaterialTapTargetSize
-                                                            .padded,
-                                                  ),
-                                                ),
-                                                secondChild: SizedBox(),
-                                                crossFadeState:
-                                                    _showPasteButton
-                                                        ? CrossFadeState
-                                                            .showFirst
-                                                        : CrossFadeState
-                                                            .showSecond,
-                                              ),
-                                              // Paste Button
-                                              suffixIcon: AnimatedCrossFade(
-                                                duration:
-                                                    Duration(milliseconds: 100),
-                                                firstChild: Container(
-                                                  width: 48.0,
-                                                  height: 48.0,
-                                                  child: FlatButton(
-                                                    highlightColor:
-                                                        StateContainer.of(
-                                                                context)
-                                                            .curTheme
-                                                            .primary15,
-                                                    splashColor:
-                                                        StateContainer.of(
-                                                                context)
-                                                            .curTheme
-                                                            .primary30,
-                                                    padding:
-                                                        EdgeInsets.all(15.0),
-                                                    onPressed: () {
-                                                      if (!_showPasteButton) {
-                                                        return;
-                                                      }
-                                                      Clipboard.getData(
-                                                              "text/plain")
-                                                          .then((ClipboardData
-                                                              data) {
-                                                        if (data == null ||
-                                                            data.text == null) {
-                                                          return;
-                                                        }
-                                                        Address address =
-                                                            new Address(
-                                                                data.text);
-                                                        if (address.isValid()) {
-                                                          setState(() {
-                                                            _addressValidAndUnfocused =
-                                                                true;
-                                                            _showPasteButton =
-                                                                false;
-                                                            _repAddressStyle =
-                                                                AppStyles
-                                                                    .textStyleAddressText90(
-                                                                        context);
-                                                          });
-                                                          _repController.text =
-                                                              address.address;
-                                                          _repFocusNode
-                                                              .unfocus();
-                                                        }
-                                                      });
-                                                    },
-                                                    child: Icon(AppIcons.paste,
-                                                        size: 20.0,
-                                                        color:
-                                                            StateContainer.of(
-                                                                    context)
-                                                                .curTheme
-                                                                .primary),
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        200.0)),
-                                                    materialTapTargetSize:
-                                                        MaterialTapTargetSize
-                                                            .padded,
-                                                  ),
-                                                ),
-                                                secondChild: SizedBox(),
-                                                crossFadeState: _showPasteButton
-                                                    ? CrossFadeState.showFirst
-                                                    : CrossFadeState.showSecond,
-                                              ),
-                                              border: InputBorder.none,
-                                              hintStyle: TextStyle(
-                                                fontFamily: 'NunitoSans',
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w100,
-                                                color:
-                                                    StateContainer.of(context)
-                                                        .curTheme
-                                                        .text60,
-                                              ),
-                                            ),
-                                            keyboardType: TextInputType.text,
-                                            style: _repAddressStyle,
-                                            onChanged: (text) {
-                                              if (Address(text).isValid()) {
-                                                _repFocusNode.unfocus();
-                                                setState(() {
-                                                  _showPasteButton = false;
-                                                  _repAddressStyle = AppStyles
+                                    fadePrefixOnCondition: true,
+                                    prefixShowFirstCondition: _showPasteButton,
+                                    suffixButton: TextFieldButton(
+                                      icon: AppIcons.paste,
+                                      onPressed: () {
+                                        if (!_showPasteButton) {
+                                          return;
+                                        }
+                                        Clipboard.getData("text/plain")
+                                            .then((ClipboardData
+                                                data) {
+                                          if (data == null ||
+                                              data.text ==
+                                                  null) {
+                                            return;
+                                          }
+                                          Address address =
+                                              new Address(
+                                                  data.text);
+                                          if (address
+                                              .isValid()) {
+                                            setState(() {
+                                              _addressValidAndUnfocused =
+                                                  true;
+                                              _showPasteButton =
+                                                  false;
+                                              _repAddressStyle =
+                                                  AppStyles
                                                       .textStyleAddressText90(
                                                           context);
-                                                });
-                                              } else {
-                                                setState(() {
-                                                  _showPasteButton = true;
-                                                  _repAddressStyle = AppStyles
-                                                      .textStyleAddressText60(
-                                                          context);
-                                                });
-                                              }
-                                            },
-                                          )
-                                        : GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                _addressValidAndUnfocused =
-                                                    false;
-                                              });
-                                              Future.delayed(
-                                                  Duration(milliseconds: 50),
-                                                  () {
-                                                FocusScope.of(context)
-                                                    .requestFocus(
-                                                        _repFocusNode);
-                                              });
-                                            },
-                                            child: sl.get<UIUtil>().threeLineAddressText(
-                                                context, _repController.text),
-                                          ),
+                                            });
+                                            _repController
+                                                    .text =
+                                                address.address;
+                                            _repFocusNode
+                                                .unfocus();
+                                          }
+                                        });
+                                      },
+                                    ),
+                                    fadeSuffixOnCondition: true,
+                                    suffixShowFirstCondition: _showPasteButton,
+                                    keyboardType: TextInputType.text,
+                                    style: _repAddressStyle,
+                                    onChanged: (text) {
+                                      if (Address(text).isValid()) {
+                                        _repFocusNode.unfocus();
+                                        setState(() {
+                                          _showPasteButton = false;
+                                          _repAddressStyle = AppStyles
+                                              .textStyleAddressText90(
+                                                  context);
+                                        });
+                                      } else {
+                                        setState(() {
+                                          _showPasteButton = true;
+                                          _repAddressStyle = AppStyles
+                                              .textStyleAddressText60(
+                                                  context);
+                                        });
+                                      }
+                                    },
+                                    overrideTextFieldWidget: _addressValidAndUnfocused ?
+                                      GestureDetector(
+                                        onTap: () {
+                                          setState(() {
+                                            _addressValidAndUnfocused =
+                                                false;
+                                          });
+                                          Future.delayed(
+                                              Duration(milliseconds: 50),
+                                              () {
+                                            FocusScope.of(context)
+                                                .requestFocus(
+                                                    _repFocusNode);
+                                          });
+                                        },
+                                        child:
+                                            sl.get<UIUtil>().threeLineAddressText(
+                                                context,
+                                                _repController.text),
+                                      )
+                                    : null,
                                   ),
                                 ],
                               ),
-                            ]),
-                          ),
-                        ),
+                            ),
+                          ),                       
 
-                        //A row with change and close button
-                        Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                AppButton.buildAppButton(
-                                  context,
-                                  AppButtonType.PRIMARY,
-                                  AppLocalization.of(context)
-                                      .changeRepButton
-                                      .toUpperCase(),
-                                  Dimens.BUTTON_TOP_DIMENS,
-                                  onPressed: () {
-                                    if (!NanoAccounts.isValid(
-                                        NanoAccountType.BANANO,
-                                        _repController.text)) {
-                                      return;
-                                    }
-                                    // Authenticate
-                                    sl.get<SharedPrefsUtil>()
-                                        .getAuthMethod()
-                                        .then((authMethod) {
-                                      sl.get<BiometricUtil>().hasBiometrics()
-                                          .then((hasBiometrics) {
-                                        if (authMethod.method ==
-                                                AuthMethod.BIOMETRICS &&
-                                            hasBiometrics) {
-                                          sl.get<BiometricUtil>()
-                                                  .authenticateWithBiometrics(
-                                                      context,
-                                                      AppLocalization.of(
-                                                              context)
-                                                          .changeRepAuthenticate)
-                                              .then((authenticated) {
-                                            if (authenticated) {
-                                              sl.get<HapticUtil>().fingerprintSucess();
-                                              _animationOpen = true;
+                          //A row with change and close button
+                          Column(
+                            children: <Widget>[
+                              Row(
+                                children: <Widget>[
+                                  AppButton.buildAppButton(
+                                    context,
+                                    AppButtonType.PRIMARY,
+                                    AppLocalization.of(context)
+                                        .changeRepButton
+                                        .toUpperCase(),
+                                    Dimens.BUTTON_TOP_DIMENS,
+                                    onPressed: () {
+                                      if (!NanoAccounts.isValid(
+                                          NanoAccountType.BANANO,
+                                          _repController.text)) {
+                                        return;
+                                      }
+                                      // Authenticate
+                                      sl.get<SharedPrefsUtil>()
+                                          .getAuthMethod()
+                                          .then((authMethod) {
+                                        sl.get<BiometricUtil>().hasBiometrics()
+                                            .then((hasBiometrics) {
+                                          if (authMethod.method ==
+                                                  AuthMethod.BIOMETRICS &&
+                                              hasBiometrics) {
+                                            sl.get<BiometricUtil>()
+                                                    .authenticateWithBiometrics(
+                                                        context,
+                                                        AppLocalization.of(
+                                                                context)
+                                                            .changeRepAuthenticate)
+                                                .then((authenticated) {
+                                              if (authenticated) {
+                                                sl.get<HapticUtil>().fingerprintSucess();
+                                                _animationOpen = true;
+                                                Navigator.of(context).push(
+                                                    AnimationLoadingOverlay(
+                                                        AnimationType.GENERIC,
+                                                        StateContainer.of(context)
+                                                            .curTheme
+                                                            .animationOverlayStrong,
+                                                        StateContainer.of(context)
+                                                            .curTheme
+                                                            .animationOverlayMedium,
+                                                        onPoppedCallback: () =>
+                                                            _animationOpen =
+                                                                false));
+                                                // If account isnt open, just store the account in sharedprefs
+                                                if (StateContainer.of(context)
+                                                        .wallet
+                                                        .openBlock ==
+                                                    null) {
+                                                  sl.get<SharedPrefsUtil>()
+                                                      .setRepresentative(
+                                                          _repController.text)
+                                                      .then((result) {
+                                                    EventTaxiImpl.singleton()
+                                                        .fire(RepChangedEvent(
+                                                            previous: StateBlock(
+                                                                representative:
+                                                                    _repController
+                                                                        .text,
+                                                                previous: "",
+                                                                link: "",
+                                                                balance: "",
+                                                                account: "")));
+                                                  });
+                                                } else {
+                                                  StateContainer.of(context)
+                                                      .requestChange(
+                                                          StateContainer.of(
+                                                                  context)
+                                                              .wallet
+                                                              .frontier,
+                                                          StateContainer.of(
+                                                                  context)
+                                                              .wallet
+                                                              .accountBalance
+                                                              .toString(),
+                                                          _repController.text);
+                                                }
+                                              }
+                                            });
+                                          } else {
+                                            // PIN Authentication
+                                            sl.get<Vault>()
+                                                .getPin()
+                                                .then((expectedPin) {
                                               Navigator.of(context).push(
-                                                  AnimationLoadingOverlay(
+                                                  MaterialPageRoute(builder:
+                                                      (BuildContext context) {
+                                                return new PinScreen(
+                                                  PinOverlayType.ENTER_PIN,
+                                                  (pin) {
+                                                    Navigator.of(context).pop();
+                                                    Navigator.of(context).push(
+                                                        AnimationLoadingOverlay(
                                                       AnimationType.GENERIC,
                                                       StateContainer.of(context)
                                                           .curTheme
@@ -568,139 +514,81 @@ class AppChangeRepresentativeSheet {
                                                       StateContainer.of(context)
                                                           .curTheme
                                                           .animationOverlayMedium,
-                                                      onPoppedCallback: () =>
-                                                          _animationOpen =
-                                                              false));
-                                              // If account isnt open, just store the account in sharedprefs
-                                              if (StateContainer.of(context)
-                                                      .wallet
-                                                      .openBlock ==
-                                                  null) {
-                                                sl.get<SharedPrefsUtil>()
-                                                    .setRepresentative(
-                                                        _repController.text)
-                                                    .then((result) {
-                                                  EventTaxiImpl.singleton()
-                                                      .fire(RepChangedEvent(
-                                                          previous: StateBlock(
-                                                              representative:
-                                                                  _repController
-                                                                      .text,
-                                                              previous: "",
-                                                              link: "",
-                                                              balance: "",
-                                                              account: "")));
-                                                });
-                                              } else {
-                                                StateContainer.of(context)
-                                                    .requestChange(
-                                                        StateContainer.of(
-                                                                context)
+                                                    ));
+                                                    // If account isnt open, just store the account in sharedprefs
+                                                    if (StateContainer.of(context)
                                                             .wallet
-                                                            .frontier,
-                                                        StateContainer.of(
-                                                                context)
-                                                            .wallet
-                                                            .accountBalance
-                                                            .toString(),
-                                                        _repController.text);
-                                              }
-                                            }
-                                          });
-                                        } else {
-                                          // PIN Authentication
-                                          sl.get<Vault>()
-                                              .getPin()
-                                              .then((expectedPin) {
-                                            Navigator.of(context).push(
-                                                MaterialPageRoute(builder:
-                                                    (BuildContext context) {
-                                              return new PinScreen(
-                                                PinOverlayType.ENTER_PIN,
-                                                (pin) {
-                                                  Navigator.of(context).pop();
-                                                  Navigator.of(context).push(
-                                                      AnimationLoadingOverlay(
-                                                    AnimationType.GENERIC,
-                                                    StateContainer.of(context)
-                                                        .curTheme
-                                                        .animationOverlayStrong,
-                                                    StateContainer.of(context)
-                                                        .curTheme
-                                                        .animationOverlayMedium,
-                                                  ));
-                                                  // If account isnt open, just store the account in sharedprefs
-                                                  if (StateContainer.of(context)
-                                                          .wallet
-                                                          .openBlock ==
-                                                      null) {
-                                                    sl.get<SharedPrefsUtil>()
-                                                        .setRepresentative(
-                                                            _repController.text)
-                                                        .then((result) {
-                                                      EventTaxiImpl.singleton()
-                                                          .fire(RepChangedEvent(
-                                                              previous: StateBlock(
-                                                                  representative:
-                                                                      _repController
-                                                                          .text,
-                                                                  previous: "",
-                                                                  link: "",
-                                                                  balance: "",
-                                                                  account:
-                                                                      "")));
-                                                    });
-                                                  } else {
-                                                    StateContainer.of(context)
-                                                        .requestChange(
-                                                            StateContainer.of(
-                                                                    context)
-                                                                .wallet
-                                                                .frontier,
-                                                            StateContainer.of(
-                                                                    context)
-                                                                .wallet
-                                                                .accountBalance
-                                                                .toString(),
-                                                            _repController
-                                                                .text);
-                                                  }
-                                                },
-                                                expectedPin: expectedPin,
-                                                description:
-                                                    AppLocalization.of(context)
-                                                        .pinRepChange,
-                                              );
-                                            }));
-                                          });
-                                        }
+                                                            .openBlock ==
+                                                        null) {
+                                                      sl.get<SharedPrefsUtil>()
+                                                          .setRepresentative(
+                                                              _repController.text)
+                                                          .then((result) {
+                                                        EventTaxiImpl.singleton()
+                                                            .fire(RepChangedEvent(
+                                                                previous: StateBlock(
+                                                                    representative:
+                                                                        _repController
+                                                                            .text,
+                                                                    previous: "",
+                                                                    link: "",
+                                                                    balance: "",
+                                                                    account:
+                                                                        "")));
+                                                      });
+                                                    } else {
+                                                      StateContainer.of(context)
+                                                          .requestChange(
+                                                              StateContainer.of(
+                                                                      context)
+                                                                  .wallet
+                                                                  .frontier,
+                                                              StateContainer.of(
+                                                                      context)
+                                                                  .wallet
+                                                                  .accountBalance
+                                                                  .toString(),
+                                                              _repController
+                                                                  .text);
+                                                    }
+                                                  },
+                                                  expectedPin: expectedPin,
+                                                  description:
+                                                      AppLocalization.of(context)
+                                                          .pinRepChange,
+                                                );
+                                              }));
+                                            });
+                                          }
+                                        });
                                       });
-                                    });
-                                  },
-                                ),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                AppButton.buildAppButton(
-                                  context,
-                                  AppButtonType.PRIMARY_OUTLINE,
-                                  CaseChange.toUpperCase(
-                                      AppLocalization.of(context).close,
-                                      context),
-                                  Dimens.BUTTON_BOTTOM_DIMENS,
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: <Widget>[
+                                  AppButton.buildAppButton(
+                                    context,
+                                    AppButtonType.PRIMARY_OUTLINE,
+                                    CaseChange.toUpperCase(
+                                        AppLocalization.of(context).close,
+                                        context),
+                                    Dimens.BUTTON_BOTTOM_DIMENS,
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                ));
+                  )
+                )
+            );
           });
         });
   }

@@ -674,11 +674,13 @@ class StateContainerState extends State<StateContainer> {
 
     // Update data on our next pending request
     nextBlock.previous = hash;
-    nextBlock.representative = previousBlock.representative;
+    if (nextBlock.subType != BlockTypes.CHANGE) {
+      nextBlock.representative = previousBlock.representative;
+    }
     nextBlock.setBalance(previousBlock.balance);
     if (nextBlock.subType == BlockTypes.SEND && nextBlock.balance == "0") {
       // In case of a max send, go back and update sendAmount with the balance
-      nextBlock.sendAmount = wallet.accountBalance.toString();
+      nextBlock.sendAmount = wallet.accountBalance.toString();      
     }
     if (lastRequest.fromTransfer) {
       await nextBlock.sign(nextBlock.privKey);
@@ -696,7 +698,6 @@ class StateContainerState extends State<StateContainer> {
     sl.get<AccountService>().queueRequest(ProcessRequest(block: json.encode(nextBlock.toJson()), subType: nextBlock.subType), fromTransfer: lastRequest.fromTransfer);
     sl.get<AccountService>().processQueue();
   }
-
   /// Handle callback response
   /// Typically this means we need to pocket transactions
   Future<void> handleCallbackResponse(CallbackResponse resp) async {
@@ -923,24 +924,24 @@ class StateContainerState extends State<StateContainer> {
     sl.get<AccountService>().processQueue();
   }
 
+
   ///
   /// Create a state block change request
-  ///
+  /// 
   /// @param previous - Previous Hash
   /// @param balance - Current balance
   /// @param representative - representative
-  ///
+  /// 
   Future<void> requestChange(String previous, String balance, String representative) async {
     StateBlock changeBlock = StateBlock(
-        subtype: BlockTypes.CHANGE,
-        previous: previous,
-        representative: representative,
-        balance: balance,
-        link:
-            "0000000000000000000000000000000000000000000000000000000000000000",
-        account: wallet.address);
-    await changeBlock.sign(await _getPrivKey());
-    pendingResponseBlockMap.putIfAbsent(changeBlock.hash, () => changeBlock);
+      subtype:BlockTypes.CHANGE,
+      previous: previous,
+      representative: representative,
+      balance:balance,
+      link:"0000000000000000000000000000000000000000000000000000000000000000",
+      account:wallet.address
+    );
+    previousPendingMap.putIfAbsent(previous, () => changeBlock);
 
     sl.get<AccountService>().queueRequest(BlockInfoRequest(hash: previous), fromTransfer: false);
     sl.get<AccountService>().processQueue();
