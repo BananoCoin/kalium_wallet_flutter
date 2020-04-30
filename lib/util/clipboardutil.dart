@@ -1,5 +1,5 @@
 import 'package:flutter/services.dart';
-import 'package:flutter_nano_core/flutter_nano_core.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 
 class ClipboardUtil {
   static var setStream;

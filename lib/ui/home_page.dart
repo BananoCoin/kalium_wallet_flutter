@@ -41,8 +41,8 @@ import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/util/fileutil.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class AppHomePage extends StatefulWidget {
   @override

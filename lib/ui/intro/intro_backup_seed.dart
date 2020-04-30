@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nano_core/flutter_nano_core.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';

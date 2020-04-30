@@ -146,18 +146,6 @@ class DBHelper{
     return await dbClient.rawUpdate("UPDATE contacts SET monkey_path = ? WHERE address = ?", [monkeyPath, contact.address]) > 0;
   }
 
-  static Future<List<Account>> setAddressForAccounts(Map<String,dynamic> params) async {
-    List<Account> accounts = params['accounts'];
-    String seed = params['seed'];
-    accounts.forEach((a) {
-      a.address = NanoUtil.seedToAddress({
-        'seed':seed,
-        'index':a.index
-      });
-    });
-    return accounts;
-  }
-
   // Accounts
   Future<List<Account>> getAccounts() async {
     var dbClient = await db;
@@ -166,7 +154,12 @@ class DBHelper{
     for (int i = 0; i < list.length; i++) {
       accounts.add(Account(id: list[i]["id"], name: list[i]["name"], index: list[i]["acct_index"], lastAccess: list[i]["last_accessed"], selected: list[i]["selected"] == 1 ? true : false, balance: list[i]["balance"]));
     }
-    accounts = await compute(setAddressForAccounts, {'seed': await sl.get<Vault>().getSeed(), 'accounts':accounts});
+    for (Account a in accounts) {
+      a.address = NanoUtil.seedToAddress(
+        await sl.get<Vault>().getSeed(),
+        a.index
+      );
+    }
     return accounts;
   }
 
@@ -177,7 +170,12 @@ class DBHelper{
     for (int i = 0; i < list.length; i++) {
       accounts.add(Account(id: list[i]["id"], name: list[i]["name"], index: list[i]["acct_index"], lastAccess: list[i]["last_accessed"], selected: list[i]["selected"] == 1 ? true : false, balance: list[i]["balance"]));
     }
-    accounts = await compute(setAddressForAccounts, {'seed': await sl.get<Vault>().getSeed(), 'accounts':accounts});
+    for (Account a in accounts) {
+      a.address = NanoUtil.seedToAddress(
+        await sl.get<Vault>().getSeed(),
+        a.index
+      );
+    }    
     return accounts;
   }
 
@@ -197,7 +195,7 @@ class DBHelper{
       }
       int nextID = nextIndex + 1;
       String nextName = nameBuilder.replaceAll("%1", nextID.toString());
-      account = Account(index: nextIndex, name:nextName, lastAccess: 0, selected: false, address: await _nanoUtil.seedToAddressInIsolate(await sl.get<Vault>().getSeed(), nextIndex));
+      account = Account(index: nextIndex, name:nextName, lastAccess: 0, selected: false, address: NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), nextIndex));
       await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)', [account.name, account.index, account.lastAccess, account.selected ? 1 : 0, account.address]);
     });
     return account;
@@ -239,7 +237,7 @@ class DBHelper{
     if (list.length == 0) {
       return null;
     }
-    String address = await _nanoUtil.seedToAddressInIsolate(await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
+    String address = NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
     Account account = Account(id: list[0]["id"], name: list[0]["name"], index: list[0]["acct_index"], selected: true, lastAccess: list[0]["last_accessed"], balance: list[0]["balance"],  address: address);
     return account;
   }
@@ -250,7 +248,7 @@ class DBHelper{
     if (list.length == 0) {
       return null;
     }
-    String address = await _nanoUtil.seedToAddressInIsolate(await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
+    String address = NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
     Account account = Account(id: list[0]["id"], name: list[0]["name"], index: list[0]["acct_index"], selected: true, lastAccess: list[0]["last_accessed"], balance: list[0]["balance"],  address: address);
     return account;
   }

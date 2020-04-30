@@ -64,8 +64,6 @@ abstract class BaseTheme {
 
   // QR scanner theme
   OverlayTheme qrScanTheme;
-  // FP Dialog theme (android-only)
-  FPDialogTheme fpTheme;
   // App icon (iOS only)
   AppIconEnum appIcon;
 }
@@ -142,7 +140,6 @@ class KaliumTheme extends BaseTheme {
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.KALIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.KALIUM;
   AppIconEnum appIcon = AppIconEnum.KALIUM;
 }
 
@@ -217,7 +214,6 @@ class TitaniumTheme extends BaseTheme {
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.TITANIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.TITANIUM;
   AppIconEnum appIcon = AppIconEnum.TITANIUM;
 }
 
@@ -298,7 +294,6 @@ class IridiumTheme extends BaseTheme {
       blurRadius: 15);
 
   OverlayTheme qrScanTheme = OverlayTheme.IRIDIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.IRIDIUM;
   AppIconEnum appIcon = AppIconEnum.IRIDIUM;
 }
 
@@ -373,7 +368,6 @@ class BerylliumTheme extends BaseTheme {
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.BERYLLIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.BERYLLIUM;
   AppIconEnum appIcon = AppIconEnum.BERYLLIUM;
 }
 
@@ -448,7 +442,6 @@ class RadiumTheme extends BaseTheme {
   BoxShadow boxShadowButton = BoxShadow(color: Colors.transparent);
 
   OverlayTheme qrScanTheme = OverlayTheme.RADIUM;
-  FPDialogTheme fpTheme = FPDialogTheme.RADIUM;
   AppIconEnum appIcon = AppIconEnum.RADIUM;
 }
 

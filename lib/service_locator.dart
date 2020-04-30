@@ -11,7 +11,7 @@ import 'package:kalium_wallet_flutter/util/fileutil.dart';
 import 'package:kalium_wallet_flutter/util/biometrics.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 
-GetIt sl = new GetIt();
+GetIt sl = GetIt.instance;
 
 void setupServiceLocator() {
   sl.registerLazySingleton<AccountService>(() => AccountService());

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:flutter_nano_core/flutter_nano_core.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -284,8 +284,8 @@ Future<List<String>> getAccountsFromSeed(BuildContext context, String seed) asyn
     String address;
     // Get NUM_SWEEP private keys + accounts from seed
     for (int i = 0; i < NUM_SWEEP; i++) {
-      privKey = await _nanoUtil.seedToPrivateInIsolate(seed, i);
-      address = await _nanoUtil.seedToAddressInIsolate(seed, i);
+      privKey = NanoUtil.seedToPrivate(seed, i);
+      address = NanoUtil.seedToAddress(seed, i);
       // Don't add this if it is the currently logged in account
       if (address != StateContainer.of(context).wallet.address) {
         privKeyBalanceMap.putIfAbsent(

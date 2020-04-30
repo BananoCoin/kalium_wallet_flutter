@@ -33,8 +33,7 @@ class BiometricUtil {
       LocalAuthentication localAuth = new LocalAuthentication();
       return await localAuth.authenticateWithBiometrics(
         localizedReason: message,
-        useErrorDialogs: false,
-        dialogTheme: StateContainer.of(context).curTheme.fpTheme
+        useErrorDialogs: false
       );
     }
     return false;

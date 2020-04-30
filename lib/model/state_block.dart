@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:meta/meta.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:flutter_nano_core/flutter_nano_core.dart';
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 
 import 'package:kalium_wallet_flutter/network/model/block_types.dart';
 
@@ -96,11 +96,6 @@ class StateBlock {
     }
   }
 
-  /// Helper function that can be used with flutter's compute function
-  static String signBlock(Map<String, String> params) {
-    return NanoSignatures.signBlock(params['hash'], params['privKey']);
-  }
-
   /// Sign block with private key
   /// Returns signature if signed, null if this block is invalid and can't be signed
   Future<String> sign(String privateKey) async {
@@ -113,7 +108,7 @@ class StateBlock {
                       BigInt.parse(this.balance),
                       this.link
                   );
-    this.signature = await compute(signBlock, {'hash':this.hash, 'privKey':privateKey});
+    this.signature = NanoSignatures.signBlock(this.hash, privateKey);
     return this.signature;
   }
 
