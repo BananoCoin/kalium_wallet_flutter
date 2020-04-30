@@ -185,7 +185,7 @@ class AccountDetailsSheet {
                                   ),
                                 ),
                                 TextSpan(
-                                  text: sl.get<NumberUtil>().getRawAsUsableString(account.balance == null ? StateContainer.of(context).wallet.accountBalance.toString() : account.balance),
+                                  text: NumberUtil.getRawAsUsableString(account.balance == null ? StateContainer.of(context).wallet.accountBalance.toString() : account.balance),
                                   style: TextStyle(
                                     color: StateContainer.of(context)
                                         .curTheme

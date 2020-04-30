@@ -58,12 +58,12 @@ class AppWallet {
     if (accountBalance == null) {
       return "0";
     }
-    return sl.get<NumberUtil>().getRawAsUsableString(_accountBalance.toString());
+    return NumberUtil.getRawAsUsableString(_accountBalance.toString());
   }
 
 
   String getLocalCurrencyPrice({String locale = "en_US"}) {
-    Decimal converted = Decimal.parse(_localCurrencyPrice) * sl.get<NumberUtil>().getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_localCurrencyPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     switch (locale) {
       case "es_VE":
         return NumberFormat.currency(locale:locale, symbol: "Bs.S").format(converted.toDouble());
@@ -83,7 +83,7 @@ class AppWallet {
   }
 
   String get btcPrice {
-    Decimal converted = Decimal.parse(_btcPrice) * sl.get<NumberUtil>().getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_btcPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     // Show 4 decimal places for BTC price if its >= 0.0001 BTC, otherwise 6 decimals
     if (converted >= Decimal.parse("0.0001")) {
       return new NumberFormat("#,##0.0000", "en_US").format(converted.toDouble());
@@ -97,7 +97,7 @@ class AppWallet {
   }
 
   String get nanoPrice {
-    Decimal converted = Decimal.parse(_nanoPrice) * sl.get<NumberUtil>().getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_nanoPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     // Show 2 decimal places for nano price if its >= 1 NANO, otherwise 4 decimals
     if (converted >= Decimal.parse("1")) {
       return new NumberFormat("#,##0.00", "en_US").format(converted.toDouble());

@@ -4,9 +4,10 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:logging/logging.dart';
 import 'package:share/share.dart';
 
 import 'package:kalium_wallet_flutter/service_locator.dart';
@@ -35,7 +36,7 @@ class ContactsList extends StatefulWidget {
 }
 
 class _ContactsListState extends State<ContactsList> {
-  final log = Logger("ContactsList");
+  final log = sl.get<Logger>();
 
   List<Contact> _contacts;
   String documentsDirectory;
@@ -173,7 +174,7 @@ class _ContactsListState extends State<ContactsList> {
             AppLocalization.of(context).noContactsImport, context);
       }
     } catch (e) {
-      log.severe(e.toString());
+      log.e(e.toString(), e);
       sl.get<UIUtil>().showSnackbar(
           AppLocalization.of(context).contactsImportErr, context);
       return;
@@ -351,7 +352,10 @@ class _ContactsListState extends State<ContactsList> {
                       AppButtonType.TEXT_OUTLINE,
                       AppLocalization.of(context).addContact,
                       Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                    AddContactSheet().mainBottomSheet(context);
+                    Sheets.showAppHeightNineSheet(
+                        context: context,
+                        widget: AddContactSheet()
+                    );
                   }),
                 ],
               ),

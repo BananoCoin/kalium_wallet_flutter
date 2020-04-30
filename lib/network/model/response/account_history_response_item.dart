@@ -39,7 +39,7 @@ class AccountHistoryResponseItem {
    * Return amount formatted for use in the UI
    */
   String getFormattedAmount() {
-    return sl.get<NumberUtil>().getRawAsUsableString(amount);
+    return NumberUtil.getRawAsUsableString(amount);
   }
 
   factory AccountHistoryResponseItem.fromJson(Map<String, dynamic> json) => _$AccountHistoryResponseItemFromJson(json);

@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:logging/logging.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
@@ -32,6 +31,7 @@ import 'package:kalium_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_drawer.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_scaffold.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/list_slidable.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
@@ -42,6 +42,7 @@ import 'package:kalium_wallet_flutter/util/fileutil.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
+import 'package:logger/logger.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class AppHomePage extends StatefulWidget {
@@ -56,7 +57,7 @@ class _AppHomePageState extends State<AppHomePage>
         FlareController {
   final GlobalKey<AppScaffoldState> _scaffoldKey =
       new GlobalKey<AppScaffoldState>();
-  final Logger log = Logger("HomePage");
+  final Logger log = sl.get<Logger>();
 
   // Controller for placeholder card animations
   AnimationController _placeholderCardAnimationController;
@@ -136,7 +137,7 @@ class _AppHomePageState extends State<AppHomePage>
         }
       }
     } catch (e) {
-      log.severe(e.toString());
+      log.e(e.toString(), e);
     }
   }
 
@@ -171,7 +172,6 @@ class _AppHomePageState extends State<AppHomePage>
     // Register push notifications
     _firebaseMessaging.configure(
       onMessage: (Map<String, dynamic> message) async {
-        print("onMessage: $message");
       },
       onLaunch: (Map<String, dynamic> message) async {
         _chooseCorrectAccountFromNotification(message);
@@ -307,9 +307,15 @@ class _AppHomePageState extends State<AppHomePage>
         sl.get<DBHelper>().getContactWithAddress(event.previous.link).then((contact) {
           String contactName = contact == null ? null : contact.name;
           Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-          AppSendCompleteSheet(event.previous.sendAmount, event.previous.link, contactName,
-                  localAmount: event.previous.localCurrencyValue)
-              .mainBottomSheet(context);
+          Sheets.showAppHeightNineSheet(
+              context: context,
+              closeOnTap: true,
+              removeUntilHome: true,
+              widget: SendCompleteSheet(
+                  amountRaw: event.previous.sendAmount,
+                  destination: event.previous.link,
+                  contactName: contactName,
+                  localAmount: event.previous.localCurrencyValue));
         });
       }
     });
@@ -621,12 +627,20 @@ class _AppHomePageState extends State<AppHomePage>
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       if (amount != null) {
         // Go to send confirm with amount
-        AppSendConfirmSheet(amount, address.address, contactName: contactName)
-            .mainBottomSheet(context);
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: SendConfirmSheet(
+                amountRaw: amount,
+                destination: address.address,
+                contactName: contactName));
       } else {
         // Go to send with address
-        AppSendSheet(contact: contact, address: address.address)
-            .mainBottomSheet(context);
+        Sheets.showAppHeightNineSheet(
+            context: context,
+            widget: SendSheet(
+                localCurrency: StateContainer.of(context).curCurrency,
+                contact: contact,
+                address: address.address));
       }
     });
   }
@@ -842,7 +856,13 @@ class _AppHomePageState extends State<AppHomePage>
                         onPressed: () {
                           if (StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance >
                               BigInt.zero) {
-                            AppSendSheet().mainBottomSheet(context);
+                            // Go to send sheet
+                            Sheets.showAppHeightNineSheet(
+                              context: context,
+                              widget: SendSheet(
+                                localCurrency: StateContainer.of(context).curCurrency
+                              )
+                            );    
                           }
                         },
                         highlightColor: StateContainer.of(context).wallet != null && StateContainer.of(context)
@@ -869,11 +889,9 @@ class _AppHomePageState extends State<AppHomePage>
     );
   }
 
-  // Transaction Card/List Item
+   // Transaction Card/List Item
   Widget _buildTransactionCard(AccountHistoryResponseItem item,
       Animation<double> animation, String displayName, BuildContext context) {
-    TransactionDetailsSheet transactionDetails =
-        TransactionDetailsSheet(item.hash, item.account, displayName);
     String text;
     IconData icon;
     Color iconColor;
@@ -890,7 +908,8 @@ class _AppHomePageState extends State<AppHomePage>
       delegate: SlidableScrollDelegate(),
       actionExtentRatio: 0.35,
       movementDuration: Duration(milliseconds: 300),
-      enabled: StateContainer.of(context).wallet != null && StateContainer.of(context).wallet.accountBalance > BigInt.zero,
+      enabled: StateContainer.of(context).wallet != null &&
+          StateContainer.of(context).wallet.accountBalance > BigInt.zero,
       onTriggered: (preempt) {
         if (preempt) {
           setState(() {
@@ -898,13 +917,19 @@ class _AppHomePageState extends State<AppHomePage>
           });
         } else {
           // See if a contact
-          sl.get<DBHelper>().getContactWithAddress(item.account).then((contact) {
+          sl
+              .get<DBHelper>()
+              .getContactWithAddress(item.account)
+              .then((contact) {
             // Go to send with address
-            AppSendSheet(
-                    contact: contact,
-                    address: item.account,
-                    quickSendAmount: item.amount)
-                .mainBottomSheet(context);
+            Sheets.showAppHeightNineSheet(
+                context: context,
+                widget: SendSheet(
+                  localCurrency: StateContainer.of(context).curCurrency,
+                  contact: contact,
+                  address: item.account,
+                  quickSendAmount: item.amount,
+                ));
           });
         }
       },
@@ -956,7 +981,15 @@ class _AppHomePageState extends State<AppHomePage>
             padding: EdgeInsets.all(0.0),
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0)),
-            onPressed: () => transactionDetails.mainBottomSheet(context),
+            onPressed: () {
+              Sheets.showAppHeightEightSheet(
+                  context: context,
+                  widget: TransactionDetailsSheet(
+                      hash: item.hash,
+                      address: item.account,
+                      displayName: displayName),
+                  animationDurationMs: 175);
+            },
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -1705,145 +1738,143 @@ class _AppHomePageState extends State<AppHomePage>
   }
 }
 
-class TransactionDetailsSheet {
-  String _hash;
-  String _address;
-  String _displayName;
-  TransactionDetailsSheet(String hash, String address, String displayName)
-      : _hash = hash,
-        _address = address,
-        _displayName = displayName;
+class TransactionDetailsSheet extends StatefulWidget {
+  final String hash;
+  final String address;
+  final String displayName;
+
+  TransactionDetailsSheet({this.hash, this.address, this.displayName})
+      : super();
+
+  _TransactionDetailsSheetState createState() =>
+      _TransactionDetailsSheetState();
+}
+
+class _TransactionDetailsSheetState extends State<TransactionDetailsSheet> {
   // Current state references
   bool _addressCopied = false;
   // Timer reference so we can cancel repeated events
   Timer _addressCopiedTimer;
 
-  mainBottomSheet(BuildContext context) {
-    AppSheets.showAppHeightEightSheet(
-        animationDurationMs: 175,
-        context: context,
-        builder: (BuildContext context) {
-          return StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-            return SafeArea(
-              minimum: EdgeInsets.only(
-                bottom: MediaQuery.of(context).size.height * 0.035,
-              ),
-              child: Container(
-                width: double.infinity,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      minimum: EdgeInsets.only(
+        bottom: MediaQuery.of(context).size.height * 0.035,
+      ),
+      child: Container(
+        width: double.infinity,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Column(
+              children: <Widget>[
+                // A stack for Copy Address and Add Contact buttons
+                Stack(
                   children: <Widget>[
-                    Column(
+                    // A row for Copy Address Button
+                    Row(
                       children: <Widget>[
-                        // A stack for Copy Address and Add Contact buttons
-                        Stack(
-                          children: <Widget>[
-                            // A row for Copy Address Button
-                            Row(
-                              children: <Widget>[
-                                AppButton.buildAppButton(
-                                    context,
-                                    // Share Address Button
-                                    _addressCopied
-                                        ? AppButtonType.SUCCESS
-                                        : AppButtonType.PRIMARY,
-                                    _addressCopied
-                                        ? AppLocalization.of(context)
-                                            .addressCopied
-                                        : AppLocalization.of(context)
-                                            .copyAddress,
-                                    Dimens.BUTTON_TOP_EXCEPTION_DIMENS,
+                        AppButton.buildAppButton(
+                            context,
+                            // Share Address Button
+                            _addressCopied
+                                ? AppButtonType.SUCCESS
+                                : AppButtonType.PRIMARY,
+                            _addressCopied
+                                ? AppLocalization.of(context).addressCopied
+                                : AppLocalization.of(context).copyAddress,
+                            Dimens.BUTTON_TOP_EXCEPTION_DIMENS, onPressed: () {
+                          Clipboard.setData(
+                              new ClipboardData(text: widget.address));
+                          if (mounted) {
+                            setState(() {
+                              // Set copied style
+                              _addressCopied = true;
+                            });
+                          }
+                          if (_addressCopiedTimer != null) {
+                            _addressCopiedTimer.cancel();
+                          }
+                          _addressCopiedTimer =
+                              new Timer(const Duration(milliseconds: 800), () {
+                            if (mounted) {
+                              setState(() {
+                                _addressCopied = false;
+                              });
+                            }
+                          });
+                        }),
+                      ],
+                    ),
+                    // A row for Add Contact Button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsetsDirectional.only(
+                              top: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1],
+                              end: Dimens.BUTTON_TOP_EXCEPTION_DIMENS[2]),
+                          child: Container(
+                            height: 55,
+                            width: 55,
+                            // Add Contact Button
+                            child: !widget.displayName.startsWith("@")
+                                ? FlatButton(
                                     onPressed: () {
-                                  Clipboard.setData(
-                                      new ClipboardData(text: _address));
-                                  setState(() {
-                                    // Set copied style
-                                    _addressCopied = true;
-                                  });
-                                  if (_addressCopiedTimer != null) {
-                                    _addressCopiedTimer.cancel();
-                                  }
-                                  _addressCopiedTimer = new Timer(
-                                      const Duration(milliseconds: 800), () {
-                                    setState(() {
-                                      _addressCopied = false;
-                                    });
-                                  });
-                                }),
-                              ],
-                            ),
-                            // A row for Add Contact Button
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsetsDirectional.only(
-                                      top:
-                                          Dimens.BUTTON_TOP_EXCEPTION_DIMENS[1],
-                                      end: Dimens
-                                          .BUTTON_TOP_EXCEPTION_DIMENS[2]),
-                                  child: Container(
-                                    height: 55,
-                                    width: 55,
-                                    // Add Contact Button
-                                    child: !_displayName.startsWith("@")
-                                        ? FlatButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                              AddContactSheet(address: _address)
-                                                  .mainBottomSheet(context);
-                                            },
-                                            splashColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        100.0)),
-                                            padding: EdgeInsets.symmetric(
-                                                vertical: 10.0, horizontal: 10),
-                                            child: Icon(AppIcons.addcontact,
-                                                size: 35,
-                                                color: _addressCopied
-                                                    ? StateContainer.of(context)
-                                                        .curTheme
-                                                        .successDark
-                                                    : StateContainer.of(context)
-                                                        .curTheme
-                                                        .backgroundDark),
-                                          )
-                                        : SizedBox(),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        // A row for View Details button
-                        Row(
-                          children: <Widget>[
-                            AppButton.buildAppButton(
-                                context,
-                                AppButtonType.PRIMARY_OUTLINE,
-                                AppLocalization.of(context).viewDetails,
-                                Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return sl.get<UIUtil>().showBlockExplorerWebview(
-                                    context, _hash);
-                              }));
-                            }),
-                          ],
+                                      Navigator.of(context).pop();
+                                      Sheets.showAppHeightNineSheet(
+                                          context: context,
+                                          widget: AddContactSheet(
+                                              address: widget.address));
+                                    },
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(100.0)),
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10.0, horizontal: 10),
+                                    child: Icon(AppIcons.addcontact,
+                                        size: 35,
+                                        color: _addressCopied
+                                            ? StateContainer.of(context)
+                                                .curTheme
+                                                .successDark
+                                            : StateContainer.of(context)
+                                                .curTheme
+                                                .backgroundDark),
+                                  )
+                                : SizedBox(),
+                          ),
                         ),
                       ],
                     ),
                   ],
                 ),
-              ),
-            );
-          });
-        });
+                // A row for View Details button
+                Row(
+                  children: <Widget>[
+                    AppButton.buildAppButton(
+                        context,
+                        AppButtonType.PRIMARY_OUTLINE,
+                        AppLocalization.of(context).viewDetails,
+                        Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return sl.get<UIUtil>().showBlockExplorerWebview(
+                            context, widget.hash);
+                      }));
+                    }),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 

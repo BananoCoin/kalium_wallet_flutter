@@ -8,8 +8,8 @@ import 'package:kalium_wallet_flutter/model/wallet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:logging/logging.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:logger/logger.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path_provider/path_provider.dart';
@@ -75,9 +75,7 @@ class StateContainer extends StatefulWidget {
   // Exactly like MediaQuery.of and Theme.of
   // It basically says 'get the data from the widget of this type.
   static StateContainerState of(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(_InheritedStateContainer)
-            as _InheritedStateContainer)
-        .data;
+    return context.dependOnInheritedWidgetOfExactType<_InheritedStateContainer>().data;
   }
 
   @override
@@ -90,7 +88,7 @@ class StateContainer extends StatefulWidget {
 ///
 /// Basically the central hub behind the entire app
 class StateContainerState extends State<StateContainer> {
-  final Logger log = Logger("StateContainerState");
+  final Logger log = sl.get<Logger>();
   // Minimum receive = 0.01 BANANO
   String receiveMinimum = BigInt.from(10).pow(27).toString();
 
@@ -705,7 +703,7 @@ class StateContainerState extends State<StateContainer> {
     if (_locked) {
       return;
     }
-    log.fine("Received callback ${json.encode(resp.toJson())}");
+    log.d("Received callback ${json.encode(resp.toJson())}");
     if (resp.isSend != "true") {
       sl.get<AccountService>().processQueue();
       return;
@@ -813,7 +811,7 @@ class StateContainerState extends State<StateContainer> {
   ///
   void requestAccountHistory(String account) {
     sl.get<AccountService>().queueRequest(
-        AccountHistoryRequest(account: account, count: 1),
+        AccountHistoryRequest(account: account, count: 100),
         fromTransfer: true);
     sl.get<AccountService>().processQueue();
   }
@@ -887,8 +885,7 @@ class StateContainerState extends State<StateContainer> {
       pendingBlockMap.putIfAbsent(source, () => receiveBlock);
     }
 
-    sl.get<AccountService>().queueRequest(BlockInfoRequest(hash: previous),
-        fromTransfer: fromTransfer);
+    sl.get<AccountService>().queueRequest(BlockInfoRequest(hash: previous), fromTransfer: false);
     sl.get<AccountService>().processQueue();
   }
 
@@ -945,9 +942,7 @@ class StateContainerState extends State<StateContainer> {
     await changeBlock.sign(await _getPrivKey());
     pendingResponseBlockMap.putIfAbsent(changeBlock.hash, () => changeBlock);
 
-    sl.get<AccountService>().queueRequest(ProcessRequest(
-        block: json.encode(changeBlock.toJson()),
-        subType: BlockTypes.CHANGE));
+    sl.get<AccountService>().queueRequest(BlockInfoRequest(hash: previous), fromTransfer: false);
     sl.get<AccountService>().processQueue();
   }
 

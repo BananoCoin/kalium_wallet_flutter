@@ -3,8 +3,8 @@ import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
-import 'package:logging/logging.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:logger/logger.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:share/share.dart';
@@ -53,7 +53,7 @@ class _SettingsSheetState extends State<SettingsSheet>
 
   String versionString = "";
 
-  final log = Logger("SettingsSheet");
+  final log = sl.get<Logger>();
   bool _hasBiometrics = false;
   AuthenticationMethod _curAuthMethod =
       AuthenticationMethod(AuthMethod.BIOMETRICS);
@@ -165,9 +165,7 @@ class _SettingsSheetState extends State<SettingsSheet>
         .registerTo<transferCompleteKalEvent>()
         .listen((event) {
       StateContainer.of(context).requestUpdate();
-      ApptransferCompleteKalSheet(sl
-              .get<NumberUtil>()
-              .getRawAsUsableString(event.amount.toString()))
+      ApptransferCompleteKalSheet(NumberUtil.getRawAsUsableString(event.amount.toString()))
           .mainBottomSheet(context);
     });
     // Unlock callback

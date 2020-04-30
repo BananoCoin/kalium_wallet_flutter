@@ -1,7 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
 
 /// Input formatter for Crpto/Fiat amounts
@@ -9,8 +8,9 @@ class CurrencyFormatter extends TextInputFormatter {
 
   String commaSeparator;
   String decimalSeparator;
+  int maxDecimalDigits;
 
-  CurrencyFormatter({this.commaSeparator = ",", this.decimalSeparator = "."});
+  CurrencyFormatter({this.commaSeparator = ",", this.decimalSeparator = ".", this.maxDecimalDigits = NumberUtil.maxDecimalDigits});
 
   TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
     bool returnOriginal = true;
@@ -43,7 +43,7 @@ class CurrencyFormatter extends TextInputFormatter {
         }
       });
     }
-    if (splitStr[1].length <= sl.get<NumberUtil>().maxDecimalDigits) {
+    if (splitStr[1].length <= maxDecimalDigits) {
       if (workingText == newValue.text) {
         return newValue;
       } else {
@@ -52,7 +52,7 @@ class CurrencyFormatter extends TextInputFormatter {
           selection: new TextSelection.collapsed(offset: workingText.length));
        }
     }
-    String newText = splitStr[0] + decimalSeparator + splitStr[1].substring(0, sl.get<NumberUtil>().maxDecimalDigits);
+    String newText = splitStr[0] + decimalSeparator + splitStr[1].substring(0, maxDecimalDigits);
     return newValue.copyWith(
       text: newText,
       selection: new TextSelection.collapsed(offset: newText.length));
@@ -76,7 +76,7 @@ class LocalCurrencyFormatter extends TextInputFormatter {
     if (active) {
       // Make local currency = symbol + amount with correct decimal separator
       String curText = newValue.text;
-      String shouldBeText = sl.get<NumberUtil>().sanitizeNumber(curText.replaceAll(",", "."));
+      String shouldBeText = NumberUtil.sanitizeNumber(curText.replaceAll(",", "."));
       shouldBeText = currencyFormat.currencySymbol + shouldBeText.replaceAll(".", currencyFormat.symbols.DECIMAL_SEP);
       if (shouldBeText != curText) {
         return newValue.copyWith(
@@ -86,7 +86,7 @@ class LocalCurrencyFormatter extends TextInputFormatter {
     } else {
       // Make crypto amount have no symbol and formatted as US locale
       String curText = newValue.text;
-      String shouldBeText = sl.get<NumberUtil>().sanitizeNumber(curText.replaceAll(",", "."));
+      String shouldBeText = NumberUtil.sanitizeNumber(curText.replaceAll(",", "."));
       if (shouldBeText != curText) {
         return newValue.copyWith(
           text: shouldBeText,

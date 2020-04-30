@@ -12,6 +12,7 @@ import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/network/model/response/account_balance_item.dart';
 import 'package:kalium_wallet_flutter/ui/transfer/transfer_manual_entry_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
@@ -22,8 +23,6 @@ import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 
 class AppTransferOverviewSheet {
   static const int NUM_SWEEP = 15; // Number of accounts to sweep from a seed
-
-  NanoUtil _nanoUtil;
 
   // accounts to private keys/account balances
   Map<String, AccountBalanceItem> privKeyBalanceMap = Map();
@@ -37,10 +36,6 @@ class AppTransferOverviewSheet {
       _balancesSub.cancel();
     }
     return true;
-  }
-
-  AppTransferOverviewSheet() {
-    _nanoUtil = NanoUtil();
   }
 
   mainBottomSheet(BuildContext context) {
@@ -240,8 +235,12 @@ class AppTransferOverviewSheet {
                             AppLocalization.of(context).manualEntry,
                             Dimens.BUTTON_BOTTOM_DIMENS,
                             onPressed: () {
-                              AppTransferManualEntrySheet(manualEntryCallback)
-                                  .mainBottomSheet(context);
+                              Sheets.showAppHeightNineSheet(
+                                context: context,
+                                widget: TransferManualEntrySheet(
+                                  validSeedCallback: manualEntryCallback,
+                                )
+                              );
                             },
                           ),
                         ],

@@ -3,21 +3,17 @@ import 'package:intl/intl.dart';
 import 'package:decimal/decimal.dart';
 
 class NumberUtil {
-  final BigInt rawPerBan = BigInt.from(10).pow(29);
-  static const int DEFAULT_DECIMAL_DIGITS = 2;
-
-  int maxDecimalDigits; // Max digits after decimal
-
-  NumberUtil({this.maxDecimalDigits = DEFAULT_DECIMAL_DIGITS});
+  static final BigInt rawPerNano = BigInt.from(10).pow(29);
+  static const int maxDecimalDigits = 2; // Max digits after decimal
 
   /// Convert raw to ban and return as BigDecimal
   ///
   /// @param raw 100000000000000000000000000000
   /// @return Decimal value 1.000000000000000000000000000000
   ///
-  Decimal getRawAsUsableDecimal(String raw) {
+  static Decimal getRawAsUsableDecimal(String raw) {
     Decimal amount = Decimal.parse(raw.toString());
-    Decimal result = amount / Decimal.parse(rawPerBan.toString());
+    Decimal result = amount / Decimal.parse(rawPerNano.toString());
     return result;
   }
 
@@ -26,7 +22,7 @@ class NumberUtil {
   /// @param input 1.059
   /// @return double value 1.05
   ///
-  double truncateDecimal(Decimal input, {int digits = DEFAULT_DECIMAL_DIGITS}) {
+  static double truncateDecimal(Decimal input, {int digits = maxDecimalDigits}) {
     return (input * Decimal.fromInt(pow(10, digits))).truncateToDouble() / pow(10, digits);
   }
 
@@ -35,7 +31,7 @@ class NumberUtil {
   /// @param raw 100000000000000000000000000000
   /// @returns 1
   ///
-  String getRawAsUsableString(String raw) {
+  static String getRawAsUsableString(String raw) {
     NumberFormat nf = new NumberFormat.currency(locale:'en_US', decimalDigits: maxDecimalDigits, symbol:'');
     String asString = nf.format(truncateDecimal(getRawAsUsableDecimal(raw)));
     var split = asString.split(".");
@@ -66,18 +62,34 @@ class NumberUtil {
   /// @param amount 1.01
   /// @returns  101000000000000000000000000000
   ///
-  String getAmountAsRaw(String amount) {
+  static String getAmountAsRaw(String amount) {
     Decimal asDecimal = Decimal.parse(amount);
-    Decimal rawDecimal = Decimal.parse(rawPerBan.toString());
+    Decimal rawDecimal = Decimal.parse(rawPerNano.toString());
     return (asDecimal * rawDecimal).toString();
+  }
+
+  /// Return percentage of total supploy
+  /// @param amount 10020243004141
+  /// @return 0.0000001%
+  static String getPercentOfTotalSupply(BigInt amount) {
+    Decimal totalSupply = Decimal.parse('133248290000000000000000000000000000000');
+    Decimal amountRaw = Decimal.parse(amount.toString());
+    return ((amountRaw / totalSupply) * Decimal.fromInt(100)).toStringAsFixed(4);
   }
 
   /// Sanitize a number as something that can actually
   /// be parsed. Expects "." to be decimal separator
   /// @param amount $1,512
   /// @returns 1.512
-  String sanitizeNumber(String input) {
+  static String sanitizeNumber(String input, {int maxDecimalDigits = maxDecimalDigits}) {
     String sanitized = "";
+    List<String> splitStr = input.split(".");
+    if (splitStr.length > 1) {
+      if (splitStr[1].length > maxDecimalDigits) {
+        splitStr[1] = splitStr[1].substring(0, maxDecimalDigits);
+        input = splitStr[0] + "." + splitStr[1];
+      }
+    }
     for (int i=0; i< input.length; i++) {
       try {
         if (input[i] == ".") {

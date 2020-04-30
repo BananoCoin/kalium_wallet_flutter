@@ -473,7 +473,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                             // Main balance text
                             TextSpan(
                               text: account.balance != null && !account.selected
-                                  ? sl.get<NumberUtil>().getRawAsUsableString(account.balance)
+                                  ? NumberUtil.getRawAsUsableString(account.balance)
                                   : account.selected ? StateContainer.of(context).wallet.getAccountBalanceDisplay()
                                   : "",
                               style: TextStyle(

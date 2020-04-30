@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "GeneratedPluginRegistrant.h"
-#import <uni_links/UniLinksPlugin.h>
+#import "Runner-Swift.h"
 
 @implementation AppDelegate
 
@@ -53,6 +53,10 @@
             } else if ([@"radium" isEqualToString:icon]) {
                 [self lc_setAlternateIconName:@"radium"];
             }
+        } else if ([@"setSecureClipboardItem" isEqualToString:call.method]) {
+            NSDictionary *arguments = [call arguments];
+            NSString *value = arguments[@"value"];
+            [SecureClipboard setClipboardItem:value];
         } else {
             result(FlutterMethodNotImplemented);
         }
@@ -60,13 +64,6 @@
     
     [GeneratedPluginRegistrant registerWithRegistry:self];
     return [super application:application didFinishLaunchingWithOptions:launchOptions];
-}
-
-// NOTE: Necessary, until Flutter supports
-//       `application:continueUserActivity:restorationHandler` within the
-//       `FlutterPlugin` protocol.
-- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray * _Nullable))restorationHandler {
-    return [[UniLinksPlugin sharedInstance] application:application continueUserActivity:userActivity restorationHandler:restorationHandler];
 }
 
 @end

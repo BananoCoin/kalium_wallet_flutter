@@ -11,7 +11,6 @@ import android.app.Application;
 import androidx.annotation.CallSuper;
 import android.content.Context;
 import androidx.multidex.MultiDex;
-import io.realm.Realm;
 
 import io.flutter.view.FlutterMain;
 
@@ -30,7 +29,6 @@ public class MultidexApplication extends Application {
     @CallSuper
     public void onCreate() {
         super.onCreate();
-        Realm.init(this);
 
         try {
             Vault.initializeVault(this);

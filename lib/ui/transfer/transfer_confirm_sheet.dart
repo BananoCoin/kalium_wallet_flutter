@@ -89,7 +89,7 @@ class AppTransferConfirmSheet {
       privKeyBalanceMap.remove(account);
     });
     totalAsReadableAmount =
-        sl.get<NumberUtil>().getRawAsUsableString(totalToTransfer.toString());
+        NumberUtil.getRawAsUsableString(totalToTransfer.toString());
 
     // Register event buses (this will probably get a little messy)
     // Receiving account history

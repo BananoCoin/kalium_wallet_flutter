@@ -1,14 +1,13 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:logging/logging.dart';
+import 'package:logger/logger.dart';
 import 'package:oktoast/oktoast.dart';
-import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
@@ -22,22 +21,20 @@ import 'package:kalium_wallet_flutter/ui/intro/intro_backup_seed.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_backup_confirm.dart';
 import 'package:kalium_wallet_flutter/ui/intro/intro_import_seed.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
-import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
-import 'package:kalium_wallet_flutter/model/db/appdb.dart';
-import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:kalium_wallet_flutter/util/legacyutil.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   // Setup Service Provide
   setupServiceLocator();
-  // Setup logger
-  Logger.root.level = Level.ALL;
-  Logger.root.onRecord.listen((LogRecord rec) {
-    print('${rec.level.name}: ${rec.time}: ${rec.message}');
-  });
+  // Setup logger, only show warning and higher in release mode.
+  if (kReleaseMode) {
+    Logger.level = Level.warning;
+  } else {
+    Logger.level = Level.debug;
+  }
   // Run app
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
     runApp(new StateContainer(child: new App()));
@@ -240,48 +237,6 @@ class Splash extends StatefulWidget {
 class SplashState extends State<Splash> with WidgetsBindingObserver {
   bool _hasCheckedLoggedIn;
   bool _retried;
-
-  Future<bool> _doAndroidMigration() async {
-    bool migrated = false;
-    // Migrate seed
-    String legacySeed = await sl.get<LegacyMigration>().getLegacySeed();
-    if (legacySeed != null && NanoSeeds.isValidSeed(legacySeed)) {
-      migrated = true;
-      await sl.get<Vault>().setSeed(legacySeed);
-      await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
-    }
-    if (migrated) {
-      // Migrate PIN
-      String legacyPin = await sl.get<LegacyMigration>().getLegacyPin();
-      if (legacyPin != null && legacyPin.length == 4) {
-        await sl.get<Vault>().writePin(legacyPin);
-      }
-      // Migrate Contacts
-      String legacyContacts = await sl.get<LegacyMigration>().getLegacyContacts();
-      if (legacyContacts != null) {
-        Iterable contactsJson = json.decode(legacyContacts);
-        List<Contact> contacts = List();
-        List<Contact> contactsToAdd = List();
-        contactsJson.forEach((contact) {
-          contacts.add(Contact.fromJson(contact));
-        });
-        for (Contact contact in contacts) {
-          if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) &&
-              !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
-            // Contact doesnt exist, make sure name and address are valid
-            if (Address(contact.address).isValid()) {
-              if (contact.name.startsWith("@") && contact.name.length <= 20) {
-                contactsToAdd.add(contact);
-              }
-            }
-          }
-        }
-        await sl.get<DBHelper>().saveContacts(contactsToAdd);
-      }
-    }
-    return migrated;
-  }
-
   Future checkLoggedIn() async {
     if (!_hasCheckedLoggedIn) {
       _hasCheckedLoggedIn = true;
@@ -292,17 +247,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       // iOS key store is persistent, so if this is first launch then we will clear the keystore
       bool firstLaunch = await sl.get<SharedPrefsUtil>().getFirstLaunch();
       if (firstLaunch) {
-        bool migrated = false;
-        if (Platform.isAndroid) {
-          try {
-            migrated = await _doAndroidMigration();
-          } catch (e) {
-            migrated = false;
-          }
-        }
-        if (!migrated) {
-          await sl.get<Vault>().deleteAll();
-        }
+        await sl.get<Vault>().deleteAll();
       }
       await sl.get<SharedPrefsUtil>().setFirstLaunch();
       // See if logged in already

@@ -9,9 +9,9 @@ part of 'price_response.dart';
 PriceResponse _$PriceResponseFromJson(Map<String, dynamic> json) {
   return PriceResponse()
     ..currency = json['currency'] as String
-    ..price = json['price'] == null ? null : _toDouble(json['price'])
-    ..btcPrice = json['btc'] == null ? null : _toDouble(json['btc'])
-    ..nanoPrice = json['nano'] == null ? null : _toDouble(json['nano']);
+    ..price = _toDouble(json['price'])
+    ..btcPrice = _toDouble(json['btc'])
+    ..nanoPrice = _toDouble(json['nano']);
 }
 
 Map<String, dynamic> _$PriceResponseToJson(PriceResponse instance) =>
@@ -19,5 +19,5 @@ Map<String, dynamic> _$PriceResponseToJson(PriceResponse instance) =>
       'currency': instance.currency,
       'price': instance.price,
       'btc': instance.btcPrice,
-      'nano': instance.nanoPrice
+      'nano': instance.nanoPrice,
     };
