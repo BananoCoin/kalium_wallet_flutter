@@ -1,9 +1,9 @@
-name: DEPLOY_RELEASE
+name: DEPLOY_BETA
 
 on:
   push:
     tags:
-    - 'v*-release'
+    - 'v*-beta'
 
 jobs:
   build_ed25519:
@@ -58,6 +58,8 @@ jobs:
           ED215519_SO_FILE: /Users/adapps/flutter_nano_ffi/android/libed25519_blake2b.dylib
           FLUTTER_PATH: /Users/adapps/flutter
           ANDROID_SDK_PATH: /Users/adapps/Library/Android/Sdk
+          GEM_HOME: ~/.gems
+          PATH: ${{ env.PATH }}:~/.gems/bin
         run: |
           echo flutter.sdk=${{ env.FLUTTER_PATH }} > local.properties
           echo sdk.dir=${{ env.ANDROID_SDK_PATH }} >> local.properties
@@ -98,6 +100,8 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
           TEMP_KEYCHAIN_NAME: ${{ secrets.TEMP_KEYCHAIN_NAME }}
           TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
+          GEM_HOME: ~/.gems
+          PATH: ${{ env.PATH }}:~/.gems/bin
         run: |
           fastlane build_ios
 
@@ -126,7 +130,9 @@ jobs:
         if: success()
         working-directory: android
         env:
-          AAB_PATH: ${{ env.workspace }}/app.aab     
+          AAB_PATH: ${{ env.workspace }}/app.aab
+          GEM_HOME: ~/.gems
+          PATH: ${{ env.PATH }}:~/.gems/bin
         run: |
           fastlane deploy_android production:true
 
@@ -144,12 +150,14 @@ jobs:
       - name: Set workspace in env
         run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
 
-      - name: Deploy iOS
+      - name: Deploy iOS 
         if: success()
         working-directory: ios
         env:
-          IPA_PATH: ${{ env.workspace }}/Runner.ipa
+          IPA_PATH: ${{ env.workspace }}/Runner.ipa   
           FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
-          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}   
+          GEM_HOME: ~/.gems
+          PATH: ${{ env.PATH }}:~/.gems/bin
         run: |
           fastlane deploy_ios
