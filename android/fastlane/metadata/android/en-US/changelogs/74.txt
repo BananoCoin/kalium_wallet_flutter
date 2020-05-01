@@ -1,0 +1,5 @@
+- Quick QR scan shortcut by swiping up send button
+- Fixed paper wallet loading bugs
+- Support face authentication on Pixel 4
+- Security improvements
+- Numerous performance improvements, especially on lower end devices
