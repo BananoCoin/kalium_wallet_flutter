@@ -78,7 +78,7 @@ platform :ios do
         export_options: {
             method: "app-store",
             provisioningProfiles: { 
-              "com.avengemedia.natrium" => ENV['SIGH_PROVISIONING_PROFILE_NAME'],
+              "com.banano.kaliumwallet" => ENV['SIGH_PROVISIONING_PROFILE_NAME'],
             }
         }
       )
