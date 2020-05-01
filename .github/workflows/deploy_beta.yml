@@ -66,7 +66,7 @@ jobs:
           echo keyAlias=${{ secrets.ANDROID_KEY_ALIAS }} >> key.properties
           echo keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }} >> key.properties
           echo storePassword=${{ secrets.ANDROID_KEY_STORE_PASSWORD }} >> key.properties
-          bundle exec fastlane build_android production:true
+          fastlane build_android production:true
           rm -f key.properties
 
       - name: Upload APK
@@ -99,7 +99,7 @@ jobs:
           TEMP_KEYCHAIN_NAME: ${{ secrets.TEMP_KEYCHAIN_NAME }}
           TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
         run: |
-          bundle exec fastlane build_ios
+          fastlane build_ios
 
       - name: Upload IPA
         if: success()
@@ -128,7 +128,7 @@ jobs:
         env:
           AAB_PATH: ${{ env.workspace }}/app.aab     
         run: |
-          bundle exec fastlane deploy_android internal:true
+          fastlane deploy_android internal:true
 
   deploy_ios:
     name: Deploy iOS testflight
@@ -144,10 +144,12 @@ jobs:
       - name: Set workspace in env
         run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
 
-      - name: Deploy iOS
+      - name: Deploy iOS 
         if: success()
         working-directory: ios
         env:
           IPA_PATH: ${{ env.workspace }}/Runner.ipa   
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}   
         run: |
-          bundle exec fastlane deploy_ios testflight:true
+          fastlane deploy_ios testflight:true

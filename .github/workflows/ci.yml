@@ -68,7 +68,7 @@ jobs:
           echo keyAlias=${{ secrets.ANDROID_KEY_ALIAS }} >> key.properties
           echo keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }} >> key.properties
           echo storePassword=${{ secrets.ANDROID_KEY_STORE_PASSWORD }} >> key.properties
-          bundle exec fastlane build_android production:true
+          fastlane build_android production:true
           rm -f key.properties
 
       - name: Upload APK
@@ -101,7 +101,7 @@ jobs:
           TEMP_KEYCHAIN_NAME: ${{ secrets.TEMP_KEYCHAIN_NAME }}
           TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
         run: |
-          bundle exec fastlane build_ios
+          fastlane build_ios
 
       - name: Upload IPA
         if: success()
