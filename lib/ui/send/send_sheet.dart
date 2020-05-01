@@ -558,7 +558,7 @@ class _SendSheetState extends State<SendSheet> {
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                         sl.get<UIUtil>().cancelLockEvent();
                         String scanResult = await UserDataUtil.getQRData(
-                            DataType.ADDRESS, context);
+                            DataType.RAW, context);
                         if (scanResult == null) {
                           sl.get<UIUtil>().showSnackbar(
                               AppLocalization.of(context).qrInvalidAddress,

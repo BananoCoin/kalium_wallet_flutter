@@ -6,6 +6,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kalium_wallet_flutter/ui/before_scan_screen.dart';
 import 'package:logger/logger.dart';
 import 'package:oktoast/oktoast.dart';
 
@@ -218,6 +219,11 @@ class _AppState extends State<App> {
                 builder: (_) => AppLockScreen(),
                 settings: settings,
               );          
+            case '/before_scan_screen':
+              return NoTransitionRoute(
+                builder: (_) => BeforeScanScreen(),
+                settings: settings,
+              );
             default:
               return null;
           }

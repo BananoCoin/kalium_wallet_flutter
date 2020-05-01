@@ -650,6 +650,11 @@ class AppLocalization {
       desc: 'transfer_confirm_info_first', name: 'transferConfirmInfoKal');
   }
 
+  String get minimumSendKal {
+    return Intl.message("Minimum send amount is %1 BANANO",
+      desc: 'send_minimum_error', name: 'amountMinimumError');
+  }
+
   String get transferConfirmInfoSecond {
     return Intl.message("Tap confirm to transfer the funds.\n",
       desc: 'transfer_confirm_info_second', name: 'transferConfirmInfoSecond');
