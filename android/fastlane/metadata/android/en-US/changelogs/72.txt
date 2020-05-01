@@ -1,0 +1,4 @@
+- Add Mnemonic Phrase Support for backing up or restoring your seed
+- Add Arabic & Latvian Translations
+- Support RTL Layouts
+- Various bug fixes

@@ -1,0 +1,25 @@
+BANANO is a fee-less, instant cryptocurrency. It is the first-ever fork of the Nano cryptocurrency. And Kalium is the official mobile wallet of BANANO.
+
+Features:
+- Create a new BANANO wallet or import an existing one.
+- Secure pin and biometric authentication
+- Send BANANO instantly to anyone, anywhere in the world.
+- Manage contacts in an intuitive easy-to-use address book
+- Receive real-time notifications when you receive BANANO
+- Load BANANO from a paper wallet or a seed.
+- Share your personal account address with a unique MonkeyQR card.
+- Get a unique monKey that represents your account.
+- Personalize your experience with numerous themes.
+- Change your wallet representative.
+- View your account's entire transaction history.
+- Support for over 20 different languages
+- Support for over 30 different currency conversions.
+
+IMPORTANT:
+
+Remember to backup your wallet seed and store it in a safe place. It is the only way to recover your funds if you sign out of the wallet or lose your device! If someone else gets your seed, they will be able to control your funds!
+
+Kalium is open source and available on GitHub.
+
+For support:
+https://chat.banano.cc

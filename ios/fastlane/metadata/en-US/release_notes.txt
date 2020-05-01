@@ -1,0 +1,4 @@
+- Mnemonic phrase support
+- Arabic and Latvian added
+- RTL layout support
+- Miscellaneous bug fixes
