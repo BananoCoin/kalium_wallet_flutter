@@ -151,7 +151,6 @@ class _SettingsSheetState extends State<SettingsSheet>
 
   StreamSubscription<TransferConfirmEvent> _transferConfirmSub;
   StreamSubscription<TransferCompleteEvent> _transferCompleteKalSub;
-  StreamSubscription<UnlockCallbackEvent> _callbackUnlockSub;
 
   void _registerBus() {
     // Ready to go to transfer confirm
@@ -174,12 +173,6 @@ class _SettingsSheetState extends State<SettingsSheet>
       ApptransferCompleteKalSheet(NumberUtil.getRawAsUsableString(event.amount.toString()))
           .mainBottomSheet(context);
     });
-    // Unlock callback
-    _callbackUnlockSub = EventTaxiImpl.singleton()
-        .registerTo<UnlockCallbackEvent>()
-        .listen((event) {
-      StateContainer.of(context).unlockCallback();
-    });
   }
 
   void _destroyBus() {
@@ -188,9 +181,6 @@ class _SettingsSheetState extends State<SettingsSheet>
     }
     if (_transferCompleteKalSub != null) {
       _transferCompleteKalSub.cancel();
-    }
-    if (_callbackUnlockSub != null) {
-      _callbackUnlockSub.cancel();
     }
   }
 

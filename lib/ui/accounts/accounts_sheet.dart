@@ -7,6 +7,8 @@ import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
+import 'package:kalium_wallet_flutter/network/account_service.dart';
+import 'package:kalium_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/model/db/account.dart';
@@ -20,6 +22,7 @@ import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
+import 'package:logger/logger.dart';
 
 class AppAccountsSheet {
   List<Account> accounts;
@@ -51,7 +54,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   bool _addingAccount;
   ScrollController _scrollController = new ScrollController();
 
-  StreamSubscription<AccountsBalancesEvent> _balancesSub;
   StreamSubscription<AccountModifiedEvent> _accountModifiedSub;
   bool _accountIsChanging;
 
@@ -68,11 +70,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   }
 
   void _registerBus() {
-    _balancesSub = EventTaxiImpl.singleton()
-        .registerTo<AccountsBalancesEvent>()
-        .listen((event) {
-      _handleAccountsBalancesResponse(event, setState);
-    });
     _accountModifiedSub = EventTaxiImpl.singleton()
         .registerTo<AccountModifiedEvent>()
         .listen((event) {
@@ -109,9 +106,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   }
 
   void _destroyBus() {
-    if (_balancesSub != null) {
-      _balancesSub.cancel();
-    }
     if (_accountModifiedSub != null) {
       _accountModifiedSub.cancel();
     }
@@ -125,17 +119,19 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
         addresses.add(account.address);
       }
     });
-    StateContainer.of(context).requestAccountsBalances(addresses);
+    try {
+      AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(addresses);
+      await _handleAccountsBalancesResponse(resp);
+    } catch (e) {
+      sl.get<Logger>().e("Error", e);
+    }
   }
 
   Future<void> _handleAccountsBalancesResponse(
-      AccountsBalancesEvent event, StateSetter setState) async {
-    if (event.transfer) {
-      return;
-    }
+      AccountsBalancesResponse resp) async {
     // Handle balances event
     widget.accounts.forEach((account) {
-      event.response.balances.forEach((address, balance) {
+      resp.balances.forEach((address, balance) {
         String combinedBalance = (BigInt.tryParse(balance.balance) +
                 BigInt.tryParse(balance.pending))
             .toString();

@@ -4,6 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
+import 'package:kalium_wallet_flutter/network/account_service.dart';
+import 'package:kalium_wallet_flutter/network/model/response/accounts_balances_response.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -20,6 +22,7 @@ import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
+import 'package:logger/logger.dart';
 
 class AppTransferOverviewSheet {
   static const int NUM_SWEEP = 15; // Number of accounts to sweep from a seed
@@ -29,50 +32,11 @@ class AppTransferOverviewSheet {
 
   bool _animationOpen = false;
 
-  StreamSubscription<AccountsBalancesEvent> _balancesSub;
-
   Future<bool> _onWillPop() async {
-    if (_balancesSub != null) {
-      _balancesSub.cancel();
-    }
     return true;
   }
 
   mainBottomSheet(BuildContext context) {
-    // Handle accounts balances response
-    _balancesSub = EventTaxiImpl.singleton()
-        .registerTo<AccountsBalancesEvent>()
-        .listen((event) {
-      if (_animationOpen) {
-        Navigator.of(context).pop();
-      }
-      List<String> accountsToRemove = List();
-      event.response.balances
-          .forEach((String account, AccountBalanceItem balItem) {
-        BigInt balance = BigInt.parse(balItem.balance);
-        BigInt pending = BigInt.parse(balItem.pending);
-        if (balance + pending == BigInt.zero) {
-          accountsToRemove.add(account);
-        } else {
-          // Update balance of this item
-          privKeyBalanceMap[account].balance = balItem.balance;
-          privKeyBalanceMap[account].pending = balItem.pending;
-        }
-      });
-      accountsToRemove.forEach((String account) {
-        privKeyBalanceMap.remove(account);
-      });
-      if (privKeyBalanceMap.length == 0) {
-        sl.get<UIUtil>().showSnackbar(
-            AppLocalization.of(context).transferNoFundsKal, context);
-        return;
-      }
-      // Go to confirmation screen
-      EventTaxiImpl.singleton()
-          .fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
-      Navigator.of(context).pop();
-    });
-
     void manualEntryCallback(String seed) {
       Navigator.of(context).pop();
       startTransfer(context, seed, manualEntry: true);
@@ -254,8 +218,8 @@ class AppTransferOverviewSheet {
         });
   }
 
-  void startTransfer(BuildContext context, String seed,
-      {bool manualEntry = false}) {
+  Future<void> startTransfer(BuildContext context, String seed,
+      {bool manualEntry = false}) async {
     // Show loading overlay
     _animationOpen = true;
     AnimationType animation = manualEntry
@@ -269,11 +233,46 @@ class AppTransferOverviewSheet {
       _animationOpen = false;
     }));
     // Get accounts from seed
-    getAccountsFromSeed(context, seed).then((accountsToRequest) {
-      // Make balances request
-      StateContainer.of(context)
-          .requestAccountsBalances(accountsToRequest, fromTransfer: true);
-    });
+    List<String> accounts = await getAccountsFromSeed(context, seed);
+    try {
+      AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(accounts);
+      if (_animationOpen) {
+        Navigator.of(context).pop();
+      }
+      List<String> accountsToRemove = List();
+      resp.balances
+          .forEach((String account, AccountBalanceItem balItem) {
+        BigInt balance = BigInt.parse(balItem.balance);
+        BigInt pending = BigInt.parse(balItem.pending);
+        if (balance + pending == BigInt.zero) {
+          accountsToRemove.add(account);
+        } else {
+          // Update balance of this item
+          privKeyBalanceMap[account].balance = balItem.balance;
+          privKeyBalanceMap[account].pending = balItem.pending;
+        }
+      });
+      accountsToRemove.forEach((String account) {
+        privKeyBalanceMap.remove(account);
+      });
+      if (privKeyBalanceMap.length == 0) {
+        sl.get<UIUtil>().showSnackbar(
+            AppLocalization.of(context).transferNoFundsKal, context);
+        return;
+      }
+      // Go to confirmation screen
+      EventTaxiImpl.singleton()
+          .fire(TransferConfirmEvent(balMap: privKeyBalanceMap));
+      Navigator.of(context).pop();
+    } catch (e) {
+      sl.get<Logger>().e("error", e);
+      if (_animationOpen) {
+        Navigator.of(context).pop();
+      }
+      sl.get<UIUtil>().showSnackbar(
+        AppLocalization.of(context).sendError,
+        context);
+    }
   }
 
   /// Get NUM_SWEEP accounts from seed to request balances for
