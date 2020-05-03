@@ -111,15 +111,9 @@ class StateContainerState extends State<StateContainer> {
   // Deep link changes
   StreamSubscription _deepLinkSub;
 
-  // This map stashes pending process requests, this is because we need to update these requests
-  // after a blocks_info with the balance after send, and sign the block
-  Map<String, StateBlock> previousPendingMap = Map();
-
-  // Maps previous block requested to next block
-  Map<String, StateBlock> pendingResponseBlockMap = Map();
-
-  // Maps all pending receives to previous blocks
-  Map<String, StateBlock> pendingBlockMap = Map();
+  // Keep lists of pending blocks to avoid multiple receive attempts
+  List<String> pendingRequests = [];
+  List<String> alreadyReceived = [];
 
   /// A [PictureInfoDecoder] for [Uint8List]s that will clip to the viewBox.
   static final PictureInfoDecoder<Uint8List> svgByteDecoder =
@@ -429,48 +423,6 @@ class StateContainerState extends State<StateContainer> {
     });
   }
 
-  /// Handle blocks_info response
-  /// Typically, this preceeds a process request. And we want to update
-  /// that request with data from the previous block (which is what we got from this request)
-  Future<void> handleBlockInfoResponse(BlockInfoItem resp) async {
-    RequestItem lastRequest = sl.get<AccountService>().pop();
-    if (lastRequest == null || !(lastRequest.request is BlockInfoRequest)) {
-      sl.get<AccountService>().processQueue();
-      return;
-    }
-    String hash = lastRequest.request.hash;
-    StateBlock previousBlock =  await compute(stateBlockFromJson, resp.contents);
-    StateBlock nextBlock = previousPendingMap.remove(hash);
-    if (nextBlock == null) {
-      return;
-    }
-
-    // Update data on our next pending request
-    nextBlock.previous = hash;
-    if (nextBlock.subType != BlockTypes.CHANGE) {
-      nextBlock.representative = previousBlock.representative;
-    }
-    nextBlock.setBalance(previousBlock.balance);
-    if (nextBlock.subType == BlockTypes.SEND && nextBlock.balance == "0") {
-      // In case of a max send, go back and update sendAmount with the balance
-      nextBlock.sendAmount = wallet.accountBalance.toString();      
-    }
-    if (lastRequest.fromTransfer) {
-      await nextBlock.sign(nextBlock.privKey);
-    } else {
-      await nextBlock.sign(await _getPrivKey());
-    }
-    pendingResponseBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
-    // If this is of type RECEIVE, update its data in our pending map
-    if (nextBlock.subType == BlockTypes.RECEIVE && !lastRequest.fromTransfer) {
-      StateBlock prevReceive = pendingBlockMap.remove(nextBlock.link);
-      if (prevReceive != null) {
-        pendingBlockMap.putIfAbsent(nextBlock.hash, () => nextBlock);
-      }
-    }
-    sl.get<AccountService>().queueRequest(ProcessRequest(block: json.encode(nextBlock.toJson()), subType: nextBlock.subType), fromTransfer: lastRequest.fromTransfer);
-    sl.get<AccountService>().processQueue();
-  }
   /// Handle callback response
   /// Typically this means we need to pocket transactions
   Future<void> handleCallbackResponse(CallbackResponse resp) async {
@@ -484,25 +436,36 @@ class StateContainerState extends State<StateContainer> {
     }
     PendingResponseItem pendingItem = PendingResponseItem(
         hash: resp.hash, source: resp.account, amount: resp.amount);
-    if (await handlePendingItem(pendingItem)) {
+    String receivedHash = await handlePendingItem(pendingItem);
+    if (receivedHash != null) {
       AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
         type: BlockTypes.RECEIVE,
-        account: wallet.address,
+        account: resp.account,
         amount: resp.amount,
-        hash: resp.hash
+        hash: receivedHash
       );
       if (!wallet.history.contains(histItem)) {
-        wallet.history.insert(0, histItem);
+        setState(() {
+          wallet.history.insert(0, histItem);
+          // Send list to home screen
+          EventTaxiImpl.singleton()
+              .fire(HistoryHomeEvent(items: wallet.history));
+        });
       }
     }
   }
 
-  Future<bool> handlePendingItem(PendingResponseItem item) async {
+  Future<String> handlePendingItem(PendingResponseItem item) async {
+    if (pendingRequests.contains(item.hash)) {
+      return null;
+    }
+    pendingRequests.add(item.hash);
     BigInt amountBigInt = BigInt.tryParse(item.amount);
     sl.get<Logger>().d("Handling ${item.hash} pending");
     if (amountBigInt != null) {
       if (amountBigInt < BigInt.parse(receiveMinimum)) {
-        return false;
+        pendingRequests.remove(item.hash);
+        return null;
       }
     }
     if (wallet.openBlock == null) {
@@ -512,8 +475,11 @@ class StateContainerState extends State<StateContainer> {
         ProcessResponse resp = await sl.get<AccountService>().requestOpen(item.amount, item.hash, wallet.address, await _getPrivKey());
         wallet.openBlock = resp.hash;
         wallet.frontier = resp.hash;
-        return true;
+        pendingRequests.remove(item.hash);
+        alreadyReceived.add(item.hash);
+        return resp.hash;
       } catch (e) {
+        pendingRequests.remove(item.hash);
         sl.get<Logger>().e("Error creating open", e);
       }
     } else {
@@ -522,12 +488,15 @@ class StateContainerState extends State<StateContainer> {
       try {
         ProcessResponse resp = await sl.get<AccountService>().requestReceive(wallet.representative, wallet.frontier, item.amount, item.hash, wallet.address, await _getPrivKey());
         wallet.frontier = resp.hash;
-        return true;
+        pendingRequests.remove(item.hash);
+        alreadyReceived.add(item.hash);        
+        return resp.hash;
       } catch (e) {
+        pendingRequests.remove(item.hash);
         sl.get<Logger>().e("Error creating receive", e);
       }     
     }
-    return false;
+    return null;
   }
 
   /// Request balances for accounts in our database
@@ -561,9 +530,6 @@ class StateContainerState extends State<StateContainer> {
       bool notificationsEnabled =
           await sl.get<SharedPrefsUtil>().getNotificationsOn();
       sl.get<AccountService>().clearQueue();
-      pendingBlockMap.clear();
-      pendingResponseBlockMap.clear();
-      previousPendingMap.clear();
       sl.get<AccountService>().queueRequest(SubscribeRequest(
           account: wallet.address,
           currency: curCurrency.getIso4217Code(),
@@ -622,15 +588,21 @@ class StateContainerState extends State<StateContainer> {
           for (String hash in pendingResp.blocks.keys) {
             PendingResponseItem pendingResponseItem = pendingResp.blocks[hash];
             pendingResponseItem.hash = hash;
-            if (await handlePendingItem(pendingResponseItem)) {
+            String receivedHash = await handlePendingItem(pendingResponseItem);
+            if (receivedHash != null) {
               AccountHistoryResponseItem histItem = AccountHistoryResponseItem(
                 type: BlockTypes.RECEIVE,
-                account: wallet.address,
+                account: pendingResponseItem.source,
                 amount: pendingResponseItem.amount,
-                hash: hash
+                hash: receivedHash
               );
               if (!wallet.history.contains(histItem)) {
-                wallet.history.insert(0, histItem);
+                setState(() {
+                  wallet.history.insert(0, histItem);
+                  // Send list to home screen
+                  EventTaxiImpl.singleton()
+                      .fire(HistoryHomeEvent(items: wallet.history));
+                });
               }
             }
           }

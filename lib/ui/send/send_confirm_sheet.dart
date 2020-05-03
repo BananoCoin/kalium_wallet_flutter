@@ -49,6 +49,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   bool animationOpen;
   bool sent;
   bool isMantaTransaction;
+  StateContainerState state;
 
   @override
   void initState() {
@@ -69,16 +70,17 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   }
 
   @override
-  void dispose() {
-    super.dispose();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    this.state = StateContainer.of(context);
   }
 
   void _showSendingAnimation(BuildContext context) {
     animationOpen = true;
     Navigator.of(context).push(AnimationLoadingOverlay(
         AnimationType.SEND,
-        StateContainer.of(context).curTheme.animationOverlayStrong,
-        StateContainer.of(context).curTheme.animationOverlayMedium,
+        state.curTheme.animationOverlayStrong,
+        state.curTheme.animationOverlayMedium,
         onPoppedCallback: () => animationOpen = false));
   }
 
@@ -95,7 +97,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
               height: 5,
               width: MediaQuery.of(context).size.width * 0.15,
               decoration: BoxDecoration(
-                color: StateContainer.of(context).curTheme.text10,
+                color: state.curTheme.text10,
                 borderRadius: BorderRadius.circular(100.0),
               ),
             ),
@@ -126,7 +128,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       color:
-                          StateContainer.of(context).curTheme.backgroundDarkest,
+                          state.curTheme.backgroundDarkest,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     // Amount text
@@ -139,7 +141,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                             text: "$amount",
                             style: TextStyle(
                               color:
-                                  StateContainer.of(context).curTheme.primary,
+                                  state.curTheme.primary,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
@@ -149,7 +151,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                             text: " BAN",
                             style: TextStyle(
                               color:
-                                  StateContainer.of(context).curTheme.primary,
+                                  state.curTheme.primary,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
                               fontFamily: 'NunitoSans',
@@ -161,7 +163,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                                 : "",
                             style: TextStyle(
                               color:
-                                  StateContainer.of(context).curTheme.primary,
+                                  state.curTheme.primary,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
@@ -193,7 +195,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                           right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: StateContainer.of(context)
+                        color: state
                             .curTheme
                             .backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
@@ -271,21 +273,21 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   Future<void> _doSend() async {
     try {
       ProcessResponse resp = await sl.get<AccountService>().requestSend(
-        StateContainer.of(context).wallet.representative,
-        StateContainer.of(context).wallet.frontier,
+        state.wallet.representative,
+        state.wallet.frontier,
         widget.amountRaw,
         widget.destination,
-        StateContainer.of(context).wallet.address,
-        NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(), StateContainer.of(context).selectedAccount.index),
+        state.wallet.address,
+        NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(), state.selectedAccount.index),
         max: widget.maxSend
       );
-      StateContainer.of(context).wallet.frontier = resp.hash;
-      StateContainer.of(context).wallet.accountBalance += BigInt.parse(widget.amountRaw);
+      state.wallet.frontier = resp.hash;
+      state.wallet.accountBalance += BigInt.parse(widget.amountRaw);
       // Show complete
       Contact contact = await sl.get<DBHelper>().getContactWithAddress(widget.destination);
       String contactName = contact == null ? null : contact.name;
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      StateContainer.of(context).requestUpdate();
+      state.requestUpdate();
       Sheets.showAppHeightNineSheet(
           context: context,
           closeOnTap: true,
