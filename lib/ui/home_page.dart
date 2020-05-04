@@ -117,26 +117,24 @@ class _AppHomePageState extends State<AppHomePage>
     return true;
   }
 
-  /// Notification includes which account its for, automatically switch to it if they're entering app from notification
-  Future<void> _chooseCorrectAccountFromNotification(
-      Map<String, dynamic> message) async {
-    try {
-      if (message.containsKey("account")) {
-        Account selectedAccount = await sl.get<DBHelper>().getSelectedAccount();
-        if (message['account'] != selectedAccount.address) {
-          List<Account> accounts = await sl.get<DBHelper>().getAccounts();
-          for (int i = 0; i < accounts.length; i++) {
-            if (accounts[i].address == message['account']) {
-              await sl.get<DBHelper>().changeAccount(accounts[i]);
-              EventTaxiImpl.singleton()
-                  .fire(AccountChangedEvent(account: accounts[i]));
-              break;
-            }
-          }
-        }
+  Future<void> _switchToAccount(String account) async {
+    List<Account> accounts = await sl.get<DBHelper>().getAccounts();
+    for (Account a in accounts) {
+      if (a.address == account && a.address != StateContainer.of(context).wallet.address) {
+        await sl.get<DBHelper>().changeAccount(a);
+        EventTaxiImpl.singleton()
+                .fire(AccountChangedEvent(account: a, delayPop: true));        
       }
-    } catch (e) {
-      log.e(e.toString(), e);
+    }
+  }
+
+  /// Notification includes which account its for, automatically switch to it if they're entering app from notification
+  Future<void> _chooseCorrectAccountFromNotification(dynamic message) async {
+    if (message.containsKey("account")) {
+      String account = message['account'];
+      if (account != null) {
+        await _switchToAccount(account);
+      }
     }
   }
 
@@ -173,10 +171,14 @@ class _AppHomePageState extends State<AppHomePage>
       onMessage: (Map<String, dynamic> message) async {
       },
       onLaunch: (Map<String, dynamic> message) async {
-        _chooseCorrectAccountFromNotification(message);
+        if (message.containsKey('data')) {
+          await _chooseCorrectAccountFromNotification(message['data']);
+        }
       },
       onResume: (Map<String, dynamic> message) async {
-        _chooseCorrectAccountFromNotification(message);
+        if (message.containsKey('data')) {
+          await _chooseCorrectAccountFromNotification(message['data']);
+        }
       },
     );
     _firebaseMessaging.requestNotificationPermissions(
