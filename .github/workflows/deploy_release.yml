@@ -1,9 +1,9 @@
-name: DEPLOY_BETA
+name: DEPLOY_RELEASE
 
 on:
   push:
     tags:
-    - 'v*-beta'
+    - 'v*-release'
 
 jobs:
   build_ed25519:
