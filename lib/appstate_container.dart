@@ -447,6 +447,7 @@ class StateContainerState extends State<StateContainer> {
       if (!wallet.history.contains(histItem)) {
         setState(() {
           wallet.history.insert(0, histItem);
+          wallet.accountBalance += BigInt.parse(resp.amount);
           // Send list to home screen
           EventTaxiImpl.singleton()
               .fire(HistoryHomeEvent(items: wallet.history));
@@ -599,6 +600,7 @@ class StateContainerState extends State<StateContainer> {
               if (!wallet.history.contains(histItem)) {
                 setState(() {
                   wallet.history.insert(0, histItem);
+                  wallet.accountBalance += BigInt.parse(pendingResponseItem.amount);
                   // Send list to home screen
                   EventTaxiImpl.singleton()
                       .fire(HistoryHomeEvent(items: wallet.history));
