@@ -104,7 +104,7 @@
   "settingsTransfer": "Transfert de fond",
   "transferError": "Une erreur s’est produite durant le transfert. Veuillez réessayer plus tard.",
   "paperWallet": "Portefeuille Papier",
-  "kaliumWallet": "Portefeuille Natrium",
+  "kaliumWallet": "Portefeuille Kalium",
   "manualEntry": "Saisie manuelle",
   "mnemonicPhrase": "Phrase mnemonique",
   "rawSeed": "Seed",
@@ -202,6 +202,9 @@
   "goBackButton": "Retour",
   "welcomeTextKal": "Bienvenue dans Kalium. Avant de continuer, veuillez créer un nouveau portefeuille ou en importer un déjà établi.",
   "sendAmountConfirmKal": "Envoyer les Bananos?",
+  "currency": "Devise",
+  "shareKalium": "Partager Kalium",
+  "shareKaliumText": "Testez Kalium ! Le portefeuille mobile officiel de Banano !",
   "logoutDetailKal": "Le processus de déconnexion effacera votre clé privée ainsi que toutes autres données liées à Kalium de votre appareil. Si vous n’avez pas sauvegardé votre clé privée, vous perdrez l’accès à vos fonds de façon permanente.",
   "notificationTitleKal": "%1 BANANO reçus",
   "notificationBodyKal": "Ouvrir Kalium pour voir cette transaction.",
@@ -216,5 +219,7 @@
   "exampleCardIntroKal": "Bienvenue sur Kalium. Lorsque vous recevrez des BANANO, les transactions apparaîtront içi.",
   "exampleCardToKal": "à un monKey aléatoire",
   "exampleCardFromKal": "d'un monKey aléatoire",
-  "newAccountIntroKal": "Ceci est votre nouveau compte. Lorsque vous recevrez des BANANO, les transactions apparaîtront comme ci-dessous.:"
+  "newAccountIntroKal": "Ceci est votre nouveau compte. Lorsque vous recevrez des BANANO, les transactions apparaîtront comme ci-dessous.:",
+  "liveSupportButton": "Support",
+  "connectingHeader": "Connexion"
 }

@@ -64,7 +64,7 @@ class _AppHomePageState extends State<AppHomePage>
   bool _animationDisposed;
 
   // Receive card instance
-  AppReceiveSheet receive;
+  ReceiveSheet receive;
 
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
@@ -629,8 +629,8 @@ class _AppHomePageState extends State<AppHomePage>
     );
     painter.toImageData(MediaQuery.of(context).size.width).then((byteData) {
       setState(() {
-        receive = AppReceiveSheet(
-          Container(
+        receive = ReceiveSheet(
+          qrWidget: Container(
               width: MediaQuery.of(context).size.width / 2.675,
               child: Image.memory(byteData.buffer.asUint8List())),
         );
@@ -816,7 +816,7 @@ class _AppHomePageState extends State<AppHomePage>
                             if (receive == null) {
                               return;
                             }
-                            receive.mainBottomSheet(context);
+                            Sheets.showAppHeightEightSheet(context: context, widget: receive);
                           },
                           highlightColor: receive != null
                               ? StateContainer.of(context).curTheme.background40

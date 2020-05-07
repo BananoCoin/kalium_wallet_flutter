@@ -104,7 +104,7 @@
   "settingsTransfer": "Carica Portafoglio Cartaceo",
   "transferError": "Si è verificato un errore durante il trasferimento. Riprova più tardi.",
   "paperWallet": "Portafoglio Cartaceo",
-  "kaliumWallet": "Portafoglio Natrium",
+  "kaliumWallet": "Kalium Wallet",
   "manualEntry": "Inserisci Manualmente",
   "mnemonicPhrase": "Frase Mnemonica",
   "rawSeed": "Seed",
@@ -202,6 +202,9 @@
   "goBackButton": "Indietro",
   "welcomeTextKal": "Benvenuto in Kalium. Per continuare, puoi creare un nuovo portafoglio o importarne uno esistente.",
   "sendAmountConfirmKal": "Inviare %1 Banano?",
+  "currency": "Valuta",
+  "shareKalium": "Condividi Kalium",
+  "shareKaliumText": "Dai un'occhiata a Kalium! Il mobile wallet ufficiale di Banano!",
   "logoutDetailKal": "Facendo il logout il tuo seed e tutti i dati relativi a Kalium verranno rimossi dal dispositivo. Se non hai salvato il tuo seed, non sarai più in grado di accedere ai tuoi fondi.",
   "notificationTitleKal": "Ricevuti %1 BANANO",
   "notificationBodyKal": "Apri Kalium per vedere la transazione.",
@@ -216,5 +219,7 @@
   "exampleCardIntroKal": "Benvenuto in Kalium. Una volta ricevuti dei BANANO, le transazioni compariranno in questo modo",
   "exampleCardToKal": "ad una scimmietta",
   "exampleCardFromKal": "da una scimmietta",
-  "newAccountIntroKal": "Questo è il tuo nuovo account. Una volta ricevuti BANANO, le transazioni appariranno così:"
+  "newAccountIntroKal": "Questo è il tuo nuovo account. Una volta ricevuti BANANO, le transazioni appariranno così:",
+  "liveSupportButton": "Supporto",
+  "connectingHeader": "In connessione"
 }
