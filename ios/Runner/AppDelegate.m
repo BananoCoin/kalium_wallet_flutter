@@ -9,18 +9,9 @@
     if ([[UIApplication sharedApplication] respondsToSelector:@selector(supportsAlternateIcons)] &&
         [[UIApplication sharedApplication] supportsAlternateIcons])
     {
-        NSMutableString *selectorString = [[NSMutableString alloc] initWithCapacity:40];
-        [selectorString appendString:@"_setAlternate"];
-        [selectorString appendString:@"IconName:"];
-        [selectorString appendString:@"completionHandler:"];
-        
-        SEL selector = NSSelectorFromString(selectorString);
-        IMP imp = [[UIApplication sharedApplication] methodForSelector:selector];
-        void (*func)(id, SEL, id, id) = (void *)imp;
-        if (func)
-        {
-            func([UIApplication sharedApplication], selector, iconName, ^(NSError * _Nullable error) {});
-        }
+        [[UIApplication sharedApplication] setAlternateIconName:iconName completionHandler:^(NSError * _Nullable error) {
+                NSLog(@"Error...");
+        }];
     }
 }
 

@@ -1,0 +1,99 @@
+name: DEPLOY_RELEASE_IOS
+
+on:
+  push:
+    tags:
+    - 'v*-release-ios'
+
+jobs:
+  build_ed25519:
+    name: Build dependent library
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master
+        with:
+          repository: appditto/flutter_nano_ffi
+          ref: refs/heads/master
+      - name: Run cmake
+        working-directory: android
+        run: |
+          cmake .
+          make
+      - name: Upload artifact
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: libraries
+          path: android/libed25519_blake2b.dylib
+
+  run_tests:
+    name: Run tests
+    needs: build_ed25519
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master   
+      - name: Download library
+        uses: actions/download-artifact@v2
+
+      - name: Set workspace in env
+        run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
+
+      - name: Run tests
+        env:
+          ED215519_SO_FILE: ${{ env.workspace }}/libraries/libed25519_blake2b.dylib
+        run: |
+          flutter pub get
+          flutter test
+
+  build_ios:
+    name: Build iOS app
+    needs: run_tests
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Build artifacts
+        working-directory: ios
+        env:
+          ED215519_SO_FILE: /Users/adapps/flutter_nano_ffi/android/libed25519_blake2b.dylib
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}
+          TEMP_KEYCHAIN_NAME: ${{ secrets.TEMP_KEYCHAIN_NAME }}
+          TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
+          GEM_HOME: ~/.gems
+        run: |
+          echo "::add-path::~/.gems/bin"
+          fastlane build_ios
+
+      - name: Upload IPA
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: ios-ipa
+          path: ios/Runner.ipa
+
+  deploy_ios:
+    name: Deploy iOS AppStore
+    needs: build_ios
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@master   
+      - name: Download IPA
+        uses: actions/download-artifact@v2
+        with:
+          name: ios-ipa
+
+      - name: Set workspace in env
+        run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
+
+      - name: Deploy iOS 
+        if: success()
+        working-directory: ios
+        env:
+          IPA_PATH: ${{ env.workspace }}/Runner.ipa   
+          FASTLANE_PASSWORD: ${{ secrets.FASTLANE_PASSWORD }}
+          MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}   
+          GEM_HOME: ~/.gems
+        run: |
+          echo "::add-path::~/.gems/bin"
+          fastlane deploy_ios
