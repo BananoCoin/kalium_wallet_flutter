@@ -60,16 +60,6 @@ class AppChangeRepresentativeSheet {
 
   StreamSubscription<AuthenticatedEvent> _authSub;
 
-  void _registerBus(BuildContext context) {
-    _authSub = EventTaxiImpl.singleton()
-        .registerTo<AuthenticatedEvent>()
-        .listen((event) {
-      if (event.authType == AUTH_EVENT_TYPE.CHANGE) {
-        doChange(context);
-      }
-    });
-  }
-
   void _destroyBus() {
     if (_authSub != null) {
       _authSub.cancel();
@@ -84,12 +74,17 @@ class AppChangeRepresentativeSheet {
   mainBottomSheet(BuildContext context) {
     _changeRepHint = AppLocalization.of(context).changeRepHint;
     _repAddressStyle = AppStyles.textStyleAddressText60(context);
-
+    _authSub = EventTaxiImpl.singleton()
+        .registerTo<AuthenticatedEvent>()
+        .listen((event) {
+      if (event.authType == AUTH_EVENT_TYPE.CHANGE) {
+        doChange(context);
+      }
+    });    
     AppSheets.showAppHeightNineSheet(
         context: context,
         onDisposed: _onWillPop,
         builder: (BuildContext context) {
-          _registerBus(context);
           return StatefulBuilder(
               builder: (BuildContext context, StateSetter setState) {
             // On address focus change

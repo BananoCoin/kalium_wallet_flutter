@@ -298,6 +298,7 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
   Future<void> _doSend() async {
     try {
+      _showSendingAnimation(context);
       ProcessResponse resp = await sl.get<AccountService>().requestSend(
         state.wallet.representative,
         state.wallet.frontier,
