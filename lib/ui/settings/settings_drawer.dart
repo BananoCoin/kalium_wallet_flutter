@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter/services.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
@@ -1022,44 +1023,30 @@ class _SettingsSheetState extends State<SettingsSheet>
                     AppSettings.buildSettingsListItemSingleLine(
                         context,
                         AppLocalization.of(context).backupSecretPhrase,
-                        AppIcons.backupseed, onPressed: () {
+                        AppIcons.backupseed, onPressed: () async {
                       // Authenticate
-                      sl.get<SharedPrefsUtil>().getAuthMethod().then((authMethod) {
-                        sl.get<BiometricUtil>().hasBiometrics().then((hasBiometrics) {
-                          if (authMethod.method == AuthMethod.BIOMETRICS &&
-                              hasBiometrics) {
-                            sl.get<BiometricUtil>().authenticateWithBiometrics(
+                      AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();                          
+                      if (authMethod.method == AuthMethod.BIOMETRICS &&
+                          hasBiometrics) {
+                        try {
+                          bool authenticated = await sl
+                                .get<BiometricUtil>()
+                                .authenticateWithBiometrics(
                                     context,
                                     AppLocalization.of(context)
-                                        .fingerprintSeedBackup)
-                                .then((authenticated) {
-                              if (authenticated) {
-                                sl.get<HapticUtil>().fingerprintSucess();
-                                new AppSeedBackupSheet()
-                                    .mainBottomSheet(context);
-                              }
-                            });
-                          } else {
-                            // PIN Authentication
-                            sl.get<Vault>().getPin().then((expectedPin) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (BuildContext context) {
-                                return new PinScreen(
-                                  PinOverlayType.ENTER_PIN,
-                                  (pin) {
-                                    Navigator.of(context).pop();
-                                    new AppSeedBackupSheet()
-                                        .mainBottomSheet(context);
-                                  },
-                                  expectedPin: expectedPin,
-                                  description:
-                                      AppLocalization.of(context).pinSeedBackup,
-                                );
-                              }));
-                            });
+                                        .fingerprintSeedBackup);
+                          if (authenticated) {
+                            sl.get<HapticUtil>().fingerprintSucess();
+                            AppSeedBackupSheet()
+                                .mainBottomSheet(context);
                           }
-                        });
-                      });
+                        } catch (e) {
+                          await authenticateWithPin();
+                        }
+                      } else {
+                        await authenticateWithPin();
+                      }
                     }),
                     Divider(
                       height: 2,
@@ -1348,5 +1335,25 @@ class _SettingsSheetState extends State<SettingsSheet>
         ),
       ),
     );
+  }
+
+  Future<void> authenticateWithPin() async {
+    // PIN Authentication
+    String expectedPin = await sl.get<Vault>().getPin();
+    bool auth = await Navigator.of(context).push(MaterialPageRoute(
+          builder: (BuildContext context) {
+        return new PinScreen(
+          PinOverlayType.ENTER_PIN,
+          expectedPin: expectedPin,
+          description:
+              AppLocalization.of(context).pinSeedBackup,
+        );
+      }));
+    if (auth != null && auth) {
+      await Future.delayed(Duration(milliseconds: 200));
+            Navigator.of(context).pop();
+      AppSeedBackupSheet()
+          .mainBottomSheet(context);
+    }   
   }
 }

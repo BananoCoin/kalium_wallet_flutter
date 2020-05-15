@@ -15,3 +15,4 @@ export 'transfer_confirm_event.dart';
 export 'account_changed_event.dart';
 export 'account_modified_event.dart';
 export 'account_recents_updated_event.dart';
+export 'authenticated_event.dart';

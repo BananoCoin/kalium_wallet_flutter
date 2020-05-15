@@ -431,15 +431,16 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 await sl.get<Vault>().setSeed(_seedInputController.text);
                                 await sl.get<DBHelper>().dropAccounts();
                                 await NanoUtil().loginAccount(context);
-                                Navigator.of(context).push(
+                                String pin = await Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (BuildContext context) {
                                       return PinScreen(
                                           PinOverlayType.NEW_PIN,
-                                          (_pinEnteredCallback));
+                                          );
                                     }
                                   )
                                 );
+                                _pinEnteredCallback(pin);
                               } else {
                                 // Display error
                                 setState(() {
@@ -454,15 +455,16 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                 await sl.get<Vault>().setSeed(NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' ')));
                                 await sl.get<DBHelper>().dropAccounts();
                                 await NanoUtil().loginAccount(context);
-                                Navigator.of(context).push(
+                                String pin = await Navigator.of(context).push(
                                   MaterialPageRoute(
                                     builder: (BuildContext context) {
                                       return PinScreen(
                                           PinOverlayType.NEW_PIN,
-                                          (_pinEnteredCallback));
+                                          );
                                     }
                                   )
-                                );                      
+                                ); 
+                                _pinEnteredCallback(pin);                     
                               } else {
                                 // Show mnemonic error
                                 if (_mnemonicController.text.split(' ').length != 24) {
@@ -503,7 +505,6 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
   }
 
   void _pinEnteredCallback(String pin) {
-    Navigator.of(context).pop();
     sl.get<Vault>().writePin(pin).then((result) {
       // Update wallet
       Navigator.of(context)

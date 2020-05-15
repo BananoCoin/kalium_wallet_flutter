@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
+import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
@@ -48,12 +50,30 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
   String amount;
   bool animationOpen;
   bool sent;
-  bool isMantaTransaction;
   StateContainerState state;
+
+  StreamSubscription<AuthenticatedEvent> _authSub;
+
+  void _registerBus() {
+    _authSub = EventTaxiImpl.singleton()
+        .registerTo<AuthenticatedEvent>()
+        .listen((event) {
+      if (event.authType == AUTH_EVENT_TYPE.SEND) {
+        _doSend();
+      }
+    });
+  }
+
+  void _destroyBus() {
+    if (_authSub != null) {
+      _authSub.cancel();
+    }
+  }
 
   @override
   void initState() {
     super.initState();
+    _registerBus();
     this.animationOpen = false;
     this.sent = false;
     // Derive amount from raw amount
@@ -67,6 +87,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
               .toStringAsFixed(6) +
           "~";
     }
+  }
+
+  @override
+  void dispose() {
+    _destroyBus();
+    super.dispose();
   }
 
   @override
@@ -236,8 +262,8 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
                                                           .replaceAll("%1", amount));
                                 if (authenticated) {
                                   sl.get<HapticUtil>().fingerprintSucess();
-                                  _showSendingAnimation(context);
-                                  await _doSend();
+                                  EventTaxiImpl.singleton()
+                                            .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));   
                                 }
                               } catch (e) {
                                 await authenticateWithPin();
@@ -309,22 +335,21 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
 
   Future<void> authenticateWithPin() async {
     // PIN Authentication
-    sl.get<Vault>().getPin().then((expectedPin) {
-      Navigator.of(context).push(MaterialPageRoute(
+    String expectedPin = await sl.get<Vault>().getPin();
+    bool auth = await Navigator.of(context).push(MaterialPageRoute(
           builder: (BuildContext context) {
         return new PinScreen(
           PinOverlayType.ENTER_PIN,
-          (pin) async {
-            Navigator.of(context).pop();
-            _showSendingAnimation(context);
-            await _doSend();
-          },
           expectedPin: expectedPin,
           description: AppLocalization.of(context)
               .sendAmountConfirmKalPin
               .replaceAll("%1", amount),
         );
       }));
-    });
+    if (auth != null && auth) {
+      await Future.delayed(Duration(milliseconds: 200));
+       EventTaxiImpl.singleton()
+          .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.SEND));    
+    }
   }
 }
