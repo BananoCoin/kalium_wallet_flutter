@@ -399,13 +399,9 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         // Account Icon
-                        Container(
-                          width: smallScreen(context) ? 55 : 70,
-                          height: smallScreen(context) ? 55 : 70,
-                          child: MonkeyWidget(
-                            address: account.address,
-                            size: MonkeySize.SMALL
-                          )
+                        MonkeyWidget(
+                          size: smallScreen(context) ? 55 : 70,
+                          address: account.address
                         ),
                         // Account name and address
                         Container(

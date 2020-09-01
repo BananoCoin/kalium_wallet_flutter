@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kalium_wallet_flutter/ui/popup_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
@@ -29,15 +30,12 @@ import 'package:kalium_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
-import 'package:kalium_wallet_flutter/ui/widgets/app_drawer.dart';
-import 'package:kalium_wallet_flutter/ui/widgets/app_scaffold.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/list_slidable.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
-import 'package:kalium_wallet_flutter/util/fileutil.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
@@ -54,8 +52,8 @@ class _AppHomePageState extends State<AppHomePage>
         WidgetsBindingObserver,
         SingleTickerProviderStateMixin,
         FlareController {
-  final GlobalKey<AppScaffoldState> _scaffoldKey =
-      new GlobalKey<AppScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey =
+      new GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
   // Controller for placeholder card animations
@@ -71,11 +69,6 @@ class _AppHomePageState extends State<AppHomePage>
   final Map<String, GlobalKey<AnimatedListState>> _listKeyMap = Map();
   final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
 
-  // monKey widget
-  Widget _monKey;
-  Widget _largeMonkey;
-  bool _monkeyOverlayOpen = false;
-  bool _monkeyDownloadTriggered = false;
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
 
@@ -148,7 +141,6 @@ class _AppHomePageState extends State<AppHomePage>
     });
     _addSampleContact();
     _updateContacts();
-    _monkeyDownloadTriggered = false;
     // Setup placeholder animation and start
     _animationDisposed = false;
     _placeholderCardAnimationController = new AnimationController(
@@ -282,7 +274,6 @@ class _AppHomePageState extends State<AppHomePage>
   StreamSubscription<HistoryHomeEvent> _historySub;
   StreamSubscription<ContactModifiedEvent> _contactModifiedSub;
   StreamSubscription<DisableLockTimeoutEvent> _disableLockSub;
-  StreamSubscription<MonkeyOverlayClosedEvent> _monkeyOverlaySub;
   StreamSubscription<AccountChangedEvent> _switchAccountSub;
 
   void _registerBus() {
@@ -303,15 +294,6 @@ class _AppHomePageState extends State<AppHomePage>
         .listen((event) {
       _updateContacts();
     });
-    _monkeyOverlaySub = EventTaxiImpl.singleton()
-        .registerTo<MonkeyOverlayClosedEvent>()
-        .listen((event) {
-      Future.delayed(Duration(milliseconds: 150), () {
-        setState(() {
-          _monkeyOverlayOpen = false;
-        });
-      });
-    });
     // Hackish event to block auto-lock functionality
     _disableLockSub = EventTaxiImpl.singleton()
         .registerTo<DisableLockTimeoutEvent>()
@@ -326,38 +308,10 @@ class _AppHomePageState extends State<AppHomePage>
         .registerTo<AccountChangedEvent>()
         .listen((event) {
       setState(() {
-        _monKey = null;
-        _largeMonkey = null;
         StateContainer.of(context).wallet.loading = true;
         StateContainer.of(context).wallet.historyLoading = true;
         _startAnimation();
         StateContainer.of(context).updateWallet(account: event.account);
-      });
-      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
-              event.account.address, MonkeySize.HOME_SMALL)
-          .then((result) {
-        if (result != null) {
-          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
-            if (valid) {
-              setState(() {
-                _monKey = Image.file(result);
-              });
-            }
-          });
-        }
-      });
-      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
-              event.account.address, MonkeySize.LARGE)
-          .then((result) {
-        if (result != null) {
-          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
-            if (valid) {
-              setState(() {
-                _largeMonkey = Image.file(result);
-              });
-            }
-          });
-        }
       });
       paintQrCode(address: event.account.address);
       if (event.delayPop) {
@@ -387,9 +341,6 @@ class _AppHomePageState extends State<AppHomePage>
     }
     if (_disableLockSub != null) {
       _disableLockSub.cancel();
-    }
-    if (_monkeyOverlaySub != null) {
-      _monkeyOverlaySub.cancel();
     }
     if (_switchAccountSub != null) {
       _switchAccountSub.cancel();
@@ -644,44 +595,15 @@ class _AppHomePageState extends State<AppHomePage>
     if (receive == null && StateContainer.of(context).wallet != null) {
       paintQrCode();
     }
-
-    // Download/Retrieve smaller and large monKeys
-    if (!_monkeyDownloadTriggered && StateContainer.of(context).wallet != null) {
-      _monkeyDownloadTriggered = true;
-      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
-              StateContainer.of(context).wallet.address, MonkeySize.HOME_SMALL)
-          .then((result) {
-        if (result != null) {
-          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
-            if (valid) {
-              setState(() {
-                _monKey = Image.file(result);
-              });
-            }
-          });
-        }
-      });
-      sl.get<UIUtil>().downloadOrRetrieveMonkey(context,
-              StateContainer.of(context).wallet.address, MonkeySize.LARGE)
-          .then((result) {
-        if (result != null) {
-          sl.get<FileUtil>().pngHasValidSignature(result).then((valid) {
-            if (valid) {
-              setState(() {
-                _largeMonkey = Image.file(result);
-              });
-            }
-          });
-        }
-      });
-    }
-      return AppScaffold(
+    return Scaffold(
+      drawerEdgeDragWidth: 200,
+      
       resizeToAvoidBottomPadding: false,
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.background,
       drawer: SizedBox(
         width: sl.get<UIUtil>().drawerWidth(context),
-        child: AppDrawer(
+        child: Drawer(
           child: SettingsSheet(),
         ),
       ),
@@ -1413,46 +1335,61 @@ class _AppHomePageState extends State<AppHomePage>
             ),
           ),
           _getBalanceWidget(context),
-          Container(
-            width: 90.0,
-            height: 90.0,
-            child: _monKey == null
-                ? _monKey = FlareActor(
-                    "assets/monkey_placeholder_animation.flr",
-                    animation: "main",
-                    fit: BoxFit.contain,
-                    color: StateContainer.of(context).curTheme.primary)
-                : FlatButton(
-                    highlightColor: StateContainer.of(context).curTheme.text15,
-                    splashColor: StateContainer.of(context).curTheme.text15,
-                    child: _monkeyOverlayOpen
-                        ? SizedBox()
-                        : Stack(children: <Widget>[
-                            Container(width: 80, height: 80, child: _largeMonkey),
-                            Center(
-                              child: Container(
-                                width: 90,
-                                height: 90,
-                                color: StateContainer.of(context)
-                                    .curTheme
-                                    .backgroundDark,
-                              ),
-                            ),
-                            _monKey
-                          ]),
-                    padding: EdgeInsets.all(0.0),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(100.0)),
-                    onPressed: () {
-                      if (_monkeyOverlayOpen || _largeMonkey == null) {
-                        return;
-                      }
-                      setState(() {
-                        _monkeyOverlayOpen = true;
-                      });
-                      Navigator.of(context).push(MonkeyOverlay(_largeMonkey));
-                    }),
-          ),
+          AnimatedContainer(
+            duration: Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            width: 74,
+            height: 74,
+            margin: EdgeInsets.only(right: 2),
+            alignment: Alignment(0, 0),
+            child: Stack(
+              children: <Widget>[
+                Center(
+                  child: Container(
+                    // natricon
+                    child: Hero(
+                      tag: "avatar",
+                      child: SvgPicture.network(
+                        UIUtil.getMonkeyURL(StateContainer.of(context).selectedAccount.address),    
+                        key: Key(UIUtil.getMonkeyURL(StateContainer.of(context).selectedAccount.address)),
+                        placeholderBuilder: (BuildContext context) =>
+                            Container(
+                          child: FlareActor(
+                            "assets/monkey_placeholder_animation.flr",
+                            animation: "main",
+                            fit: BoxFit.contain,
+                            color: StateContainer.of(context)
+                                .curTheme
+                                .primary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Container(
+                    color: Colors.transparent,
+                    child: FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/avatar_page');
+                      },
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0)),
+                      highlightColor:
+                          StateContainer.of(context).curTheme.text15,
+                      splashColor:
+                          StateContainer.of(context).curTheme.text15,
+                      padding: EdgeInsets.all(0.0),
+                      child: Container(
+                        color: Colors.transparent,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -1822,97 +1759,6 @@ class _TransactionDetailsSheetState extends State<TransactionDetailsSheet> {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-// monKey Overlay
-class MonkeyOverlay extends ModalRoute<void> {
-  var monKey;
-  MonkeyOverlay(this.monKey);
-
-  @override
-  Duration get transitionDuration => Duration(milliseconds: 200);
-
-  @override
-  bool get opaque => false;
-
-  @override
-  bool get barrierDismissible => false;
-
-  @override
-  Color get barrierColor => AppColors.overlay70;
-
-  @override
-  String get barrierLabel => null;
-
-  @override
-  bool get maintainState => false;
-
-  Future<bool> _onClosed() async {
-    EventTaxiImpl.singleton().fire(MonkeyOverlayClosedEvent());
-    return true;
-  }
-
-  @override
-  Widget buildPage(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-  ) {
-    // Setup position transition
-    return WillPopScope(
-      onWillPop: _onClosed,
-      child: Material(
-        type: MaterialType.transparency,
-        child: SafeArea(child: _buildOverlayContent(context)),
-      ),
-    );
-  }
-
-  Widget _buildOverlayContent(BuildContext context) {
-    return Container(
-      constraints: BoxConstraints.expand(),
-      child: Stack(
-        children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              _onClosed();
-              Navigator.pop(context);
-            },
-            child: Container(
-              color: Colors.transparent,
-              child: SizedBox.expand(),
-              constraints: BoxConstraints.expand(),
-            ),
-          ),
-          Container(
-            alignment: AlignmentDirectional(0, -0.3),
-            child: ClipOval(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width,
-                child: monKey,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  @override
-  Widget buildTransitions(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation, Widget child) {
-    return SlideTransition(
-      position: Tween<Offset>(
-        begin: const Offset(0.42, -0.42),
-        end: Offset.zero,
-      ).animate(animation),
-      child: ScaleTransition(
-        scale: animation,
-        child: FadeTransition(opacity: animation, child: child),
       ),
     );
   }

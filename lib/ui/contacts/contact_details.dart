@@ -1,8 +1,10 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -164,11 +166,22 @@ class ContactDetailsSheet {
                         // monKey container
                         contact.address != null
                             ? Expanded(
-                                child: MonkeyWidget(
-                                  address: contact.address,
-                                  size: MonkeySize.SVG
+                                child: SvgPicture.network(
+                                  UIUtil.getMonkeyURL(contact.address),
+                                  key: Key(UIUtil.getMonkeyURL(contact.address)),
+                                  placeholderBuilder:
+                                      (BuildContext context) => Container(
+                                    child: FlareActor(
+                                      "assets/monkey_placeholder_animation.flr",
+                                      animation: "main",
+                                      fit: BoxFit.contain,
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .primary,
+                                    ),
+                                  ),
                                 ),
-                            )
+                              )
                             : Expanded(
                               child: SizedBox(),
                             ),

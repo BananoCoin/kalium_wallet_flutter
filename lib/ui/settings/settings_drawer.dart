@@ -655,15 +655,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                             Center(
                               child: Padding(
                                 padding: EdgeInsets.all(4.0),
-                                child: Container(
-                                  width: smallScreen(context)?55:70,
-                                  height: smallScreen(context)?55:70,
-                                  alignment: AlignmentDirectional(0.5, 0.5),
-                                  child: MonkeyWidget(
-                                    address: StateContainer.of(context).wallet.address,
-                                    size: MonkeySize.SMALL
-                                  )
-                                ),
+                                child: MonkeyWidget(
+                                  size: smallScreen(context)?55:70,
+                                  address: StateContainer.of(context).wallet.address,
+                                )
                               ),
                             ),
                             Center(
@@ -706,14 +701,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
-                                        child: Container(
-                                          width: 48,
-                                          height: 48,
-                                            child: MonkeyWidget(
-                                              address: StateContainer.of(context).recentLast.address,
-                                              size: MonkeySize.SMALLEST
-                                            )
-                                        ),
+                                        child: MonkeyWidget(
+                                          address: StateContainer.of(context).recentLast.address,
+                                          size: 48
+                                        )
                                       ),
                                       Center(
                                         child: Container(
@@ -766,14 +757,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
-                                        child: Container(
-                                          width: 48,
-                                          height: 48,
-                                          child: MonkeyWidget(
-                                            address: StateContainer.of(context).recentSecondLast.address,
-                                            size: MonkeySize.SMALLEST
-                                          )
-                                        ),
+                                        child: MonkeyWidget(
+                                          address: StateContainer.of(context).recentSecondLast.address,
+                                          size: 48
+                                        )
                                       ),
                                       Center(
                                         child: Container(

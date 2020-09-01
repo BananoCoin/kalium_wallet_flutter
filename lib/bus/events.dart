@@ -9,7 +9,6 @@ export 'fcm_update_event.dart';
 export 'contact_added_event.dart';
 export 'contact_modified_event.dart';
 export 'contact_removed_event.dart';
-export 'monkey_overlay_closed_event.dart';
 export 'transfer_complete_event.dart';
 export 'transfer_confirm_event.dart';
 export 'account_changed_event.dart';

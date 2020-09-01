@@ -1,12 +1,8 @@
-import 'dart:io';
 import 'dart:async';
-import 'package:flutter/foundation.dart';
 import 'package:event_taxi/event_taxi.dart';
-import 'package:http/http.dart' as http;
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
@@ -15,24 +11,6 @@ import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
-enum MonkeySize { SMALLEST, SMALL, HOME_SMALL, NORMAL, LARGE, SVG }
-
-/// monKey download job, intended to run in an isolate
-Future<File> _downloadOrRetrieveMonkey(Map<String, String> params) async {
-  String fileName = params['fileName'];
-  Uri url = Uri.parse(params['url']);
-  if (await File(fileName).exists()) {
-    return File(fileName);
-  }
-  // Download monKey and return fildownloadOr
-  http.Client client = http.Client();
-  http.Response req;
-  req = await client.get(url);
-  var bytes = req.bodyBytes;
-  File file = File(fileName);
-  await file.writeAsBytes(bytes);
-  return file;
-}
 
 class UIUtil{
   Widget threeLineAddressText(BuildContext context, String address,
@@ -405,55 +383,6 @@ class UIUtil{
     );
   }
 
-  Future<File> downloadOrRetrieveMonkey(
-      BuildContext context, String address, MonkeySize monkeySize) async {
-    // Get expected path
-    String dir = (await getApplicationDocumentsDirectory()).path;
-    String prefix;
-    // Compute size required in pixels
-    int size = 1000;
-    switch (monkeySize) {
-      case MonkeySize.LARGE:
-        prefix = "large_";
-        size = (MediaQuery.of(context).size.width *
-                MediaQuery.of(context).devicePixelRatio)
-            .toInt();
-        break;
-      case MonkeySize.NORMAL:
-        prefix = "normal_";
-        int multiplier = smallScreen(context) ? 130 : 200;
-        size = (multiplier * MediaQuery.of(context).devicePixelRatio).toInt();
-        break;
-      case MonkeySize.SMALL:
-        prefix = "small_";
-        int multiplier = smallScreen(context) ? 55 : 70;
-        size = (multiplier * MediaQuery.of(context).devicePixelRatio).toInt();
-        break;
-      case MonkeySize.SMALLEST:
-        prefix = "smallest_";
-        int multiplier = 48;
-        size = (multiplier * MediaQuery.of(context).devicePixelRatio).toInt();
-        break;
-      case MonkeySize.HOME_SMALL:
-        prefix = "home_";
-        size = (90 * MediaQuery.of(context).devicePixelRatio).toInt();
-        break;
-      case MonkeySize.SVG:
-        prefix = "svg_";
-        break;
-    }
-    String fileName = '$dir/$prefix$address.png';
-    String url;
-    if (monkeySize ==MonkeySize.SVG) {
-      url = AppLocalization.of(context)
-          .getMonkeyDownloadUrl(address, svg: true);
-    } else {
-      url = AppLocalization.of(context)
-          .getMonkeyDownloadUrl(address, size: size); 
-    }
-    return await compute(_downloadOrRetrieveMonkey, {'fileName': fileName, 'url':url});
-  }
-
   double drawerWidth(BuildContext context) {
     if (MediaQuery.of(context).size.width < 375)
       return MediaQuery.of(context).size.width * 0.94;
@@ -503,5 +432,9 @@ class UIUtil{
     _lockDisableSub = delayed.asStream().listen((_) {
       EventTaxiImpl.singleton().fire(DisableLockTimeoutEvent(disable: false));
     });
+  }
+
+  static String getMonkeyURL(String address) {
+    return "https://monkey.banano.cc/api/v1/monkey/$address?svc=kalium";
   }
 }

@@ -388,14 +388,9 @@ class _ContactsListState extends State<ContactsList> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               // monKey
-              Container(
-                width: smallScreen(context) ? 55 : 70,
-                height: smallScreen(context) ? 55 : 70,
-                child: 
-                  MonkeyWidget(
-                    address: contact.address,
-                    size: MonkeySize.SMALL
-                  )
+              MonkeyWidget(
+                size: smallScreen(context) ? 55 : 70,
+                address: contact.address,
               ),
               //Contact info
               Container(
