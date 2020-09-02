@@ -7,6 +7,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kalium_wallet_flutter/model/available_language.dart';
+import 'package:kalium_wallet_flutter/ui/avatar/avatar.dart';
 import 'package:kalium_wallet_flutter/ui/before_scan_screen.dart';
 import 'package:logger/logger.dart';
 import 'package:oktoast/oktoast.dart';
@@ -38,7 +39,8 @@ void main() async {
     Logger.level = Level.debug;
   }
   // Run app
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
     runApp(new StateContainer(child: new App()));
   });
 }
@@ -47,7 +49,6 @@ class App extends StatefulWidget {
   @override
   _AppState createState() => new _AppState();
 }
-
 
 class _AppState extends State<App> {
   @override
@@ -58,7 +59,8 @@ class _AppState extends State<App> {
   // This widget is the root of the application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(StateContainer.of(context).curTheme.statusBar);
+    SystemChrome.setSystemUIOverlayStyle(
+        StateContainer.of(context).curTheme.statusBar);
     return OKToast(
       textStyle: AppStyles.textStyleSnackbar(context),
       backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -66,7 +68,8 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: 'Kalium',
         theme: ThemeData(
-          dialogBackgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+          dialogBackgroundColor:
+              StateContainer.of(context).curTheme.backgroundDark,
           primaryColor: StateContainer.of(context).curTheme.primary,
           accentColor: StateContainer.of(context).curTheme.primary10,
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -78,7 +81,9 @@ class _AppState extends State<App> {
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate
         ],
-        locale: StateContainer.of(context).curLanguage == null || StateContainer.of(context).curLanguage.language == AvailableLanguage.DEFAULT
+        locale: StateContainer.of(context).curLanguage == null ||
+                StateContainer.of(context).curLanguage.language ==
+                    AvailableLanguage.DEFAULT
             ? null
             : StateContainer.of(context).curLanguage.getLocale(),
         supportedLocales: [
@@ -106,8 +111,10 @@ class _AppState extends State<App> {
           const Locale('tl'), // Tagalog
           const Locale('tr'), // Turkish
           const Locale('vi'), // Vietnamese
-          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
-          const Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
+          const Locale.fromSubtags(
+              languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
+          const Locale.fromSubtags(
+              languageCode: 'zh', scriptCode: 'Hant'), // Chinese Traditional
           // Currency-default requires country included
           const Locale("es", "AR"),
           const Locale("en", "AU"),
@@ -176,7 +183,7 @@ class _AppState extends State<App> {
               return NoTransitionRoute(
                 builder: (_) => Splash(),
                 settings: settings,
-              ); 
+              );
             case '/home':
               return NoTransitionRoute(
                 builder: (_) => AppHomePage(),
@@ -216,17 +223,23 @@ class _AppState extends State<App> {
               return NoTransitionRoute(
                 builder: (_) => AppLockScreen(),
                 settings: settings,
-              );            
+              );
             case '/lock_screen_transition':
               return MaterialPageRoute(
                 builder: (_) => AppLockScreen(),
                 settings: settings,
-              );          
+              );
             case '/before_scan_screen':
               return NoTransitionRoute(
                 builder: (_) => BeforeScanScreen(),
                 settings: settings,
               );
+            case '/avatar_page':
+              return PageRouteBuilder(
+                  pageBuilder: (context, animationIn, animationOut) =>
+                      AvatarPage(),
+                  settings: settings,
+                  opaque: false);
             default:
               return null;
           }
@@ -275,7 +288,8 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       }
 
       if (isLoggedIn) {
-        if (await sl.get<SharedPrefsUtil>().getLock() || await sl.get<SharedPrefsUtil>().shouldLock()) {
+        if (await sl.get<SharedPrefsUtil>().getLock() ||
+            await sl.get<SharedPrefsUtil>().shouldLock()) {
           Navigator.of(context).pushReplacementNamed('/lock_screen');
         } else {
           await NanoUtil().loginAccount(context);
@@ -288,7 +302,7 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       /// Fallback secure storage
       /// A very small percentage of users are encountering issues writing to the
       /// Android keyStore using the flutter_secure_storage plugin.
-      /// 
+      ///
       /// Instead of telling them they are out of luck, this is an automatic "fallback"
       /// It will generate a 64-byte secret using the native android "bottlerocketstudios" Vault
       /// This secret is used to encrypt sensitive data and save it in SharedPreferences
@@ -352,14 +366,17 @@ class SplashState extends State<Splash> with WidgetsBindingObserver {
       setState(() {
         StateContainer.of(context).updateLanguage(setting);
       });
-    });    
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     // This seems to be the earliest place we can retrieve the device Locale
     setLanguage();
-    sl.get<SharedPrefsUtil>().getCurrency(StateContainer.of(context).deviceLocale).then((currency) {
+    sl
+        .get<SharedPrefsUtil>()
+        .getCurrency(StateContainer.of(context).deviceLocale)
+        .then((currency) {
       StateContainer.of(context).curCurrency = currency;
     });
     return new Scaffold(
