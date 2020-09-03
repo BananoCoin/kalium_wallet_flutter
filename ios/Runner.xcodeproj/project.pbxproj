@@ -12,7 +12,6 @@
 		39167EDB22219F00008D1855 /* Ra-Icon-App@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED822219F00008D1855 /* Ra-Icon-App@3x.png */; };
 		39167EDC22219F00008D1855 /* Ra-Icon-App@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 39167ED922219F00008D1855 /* Ra-Icon-App@1x.png */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
-		763C2BCC250139BE00166D9C /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 763C2BCB250139BE00166D9C /* Pods_Runner.framework */; };
 		766B5805221081E2009C8264 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 766B5804221081E2009C8264 /* Assets.xcassets */; };
 		766B58782210874F009C8264 /* Ir-Icon-App@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 766B586B2210874F009C8264 /* Ir-Icon-App@3x.png */; };
 		766B58792210874F009C8264 /* Be-Icon-App@1x.png in Resources */ = {isa = PBXBuildFile; fileRef = 766B586C2210874F009C8264 /* Be-Icon-App@1x.png */; };
@@ -81,7 +80,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				763C2BCC250139BE00166D9C /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
