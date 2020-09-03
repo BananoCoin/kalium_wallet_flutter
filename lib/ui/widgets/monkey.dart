@@ -1,14 +1,9 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';
-
-import '../../service_locator.dart';
-import '../util/ui_util.dart';
-import '../util/ui_util.dart';
+import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 
 class MonkeyWidget extends StatefulWidget {
   final String address;
