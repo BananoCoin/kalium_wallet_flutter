@@ -26,7 +26,7 @@ def create_temp_keychain(name, password)
   create_keychain(
     name: name,
     password: password,
-    unlock: false,
+    unlock: true,
     timeout: false
   )
 end
@@ -75,6 +75,8 @@ platform :ios do
         code_sign_identity: "iPhone Distribution"
       )
       sh "./flutter_build.sh --clean"
+      sh "security unlock-keychain -p \"#{keychain_password}\" #{keychain_name}"
+      sh "security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k \"#{keychain_password}\" \"#{keychain_name}\""
       build_ios_app(
         export_options: {
             method: "app-store",
