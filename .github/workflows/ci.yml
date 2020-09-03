@@ -105,7 +105,7 @@ jobs:
           GEM_HOME: ~/.gems
         run: |
           echo "::add-path::~/.gems/bin"
-          fastlane build_ios
+          fastlane build_ios --verbose
 
       - name: Upload IPA
         if: success()
