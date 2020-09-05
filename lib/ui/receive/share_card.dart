@@ -85,7 +85,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         children: [
                           // Currency Icon
                           TextSpan(
-                            text: " ",
+                            text: "\u{e807} ",
                             style: TextStyle(
                               color:
                                   StateContainer.of(context).curTheme.primary,
@@ -168,7 +168,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               fontSize: 50.0,
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
-                              height: 0.9,
+                              height: 1.2,
                             ),
                           ),
                         ),
@@ -189,7 +189,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
                               fontSize: 50,
-                              height: 0.9,
+                              height: 1.2,
                             ),
                           ),
                         ),
@@ -210,7 +210,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
                               fontSize: 50,
-                              height: 0.9,
+                              height: 1.2,
                             ),
                           ),
                         ),
@@ -233,7 +233,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
-                                    height: 0.9,
+                                    height: 1.2,
                                   ),
                                 ),
                                 // Primary colored part of the last row
@@ -249,7 +249,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
-                                    height: 0.9,
+                                    height: 1.2,
                                   ),
                                 ),
                               ],
@@ -261,7 +261,7 @@ class _AppShareCardState extends State<AppShareCard> {
                               fontSize: 50,
                               fontFamily: "OverpassMono",
                               fontWeight: FontWeight.w100,
-                              height: 0.9,
+                              height: 1.2,
                             ),
                           ),
                         ),

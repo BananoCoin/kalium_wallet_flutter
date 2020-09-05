@@ -52,8 +52,7 @@ class _AppHomePageState extends State<AppHomePage>
         WidgetsBindingObserver,
         SingleTickerProviderStateMixin,
         FlareController {
-  final GlobalKey<ScaffoldState> _scaffoldKey =
-      new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   final Logger log = sl.get<Logger>();
 
   // Controller for placeholder card animations
@@ -67,7 +66,8 @@ class _AppHomePageState extends State<AppHomePage>
   // A separate unfortunate instance of this list, is a little unfortunate
   // but seems the only way to handle the animations
   final Map<String, GlobalKey<AnimatedListState>> _listKeyMap = Map();
-  final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap = Map();
+  final Map<String, ListModel<AccountHistoryResponseItem>> _historyListMap =
+      Map();
 
   // List of contacts (Store it so we only have to query the DB once for transaction cards)
   List<Contact> _contacts = List();
@@ -113,10 +113,11 @@ class _AppHomePageState extends State<AppHomePage>
   Future<void> _switchToAccount(String account) async {
     List<Account> accounts = await sl.get<DBHelper>().getAccounts();
     for (Account a in accounts) {
-      if (a.address == account && a.address != StateContainer.of(context).wallet.address) {
+      if (a.address == account &&
+          a.address != StateContainer.of(context).wallet.address) {
         await sl.get<DBHelper>().changeAccount(a);
         EventTaxiImpl.singleton()
-                .fire(AccountChangedEvent(account: a, delayPop: true));        
+            .fire(AccountChangedEvent(account: a, delayPop: true));
       }
     }
   }
@@ -160,8 +161,7 @@ class _AppHomePageState extends State<AppHomePage>
     _placeholderCardAnimationController.forward();
     // Register push notifications
     _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-      },
+      onMessage: (Map<String, dynamic> message) async {},
       onLaunch: (Map<String, dynamic> message) async {
         if (message.containsKey('data')) {
           await _chooseCorrectAccountFromNotification(message['data']);
@@ -360,7 +360,8 @@ class _AppHomePageState extends State<AppHomePage>
       case AppLifecycleState.resumed:
         cancelLockEvent();
         StateContainer.of(context).reconnect();
-        if (!StateContainer.of(context).wallet.loading && StateContainer.of(context).initialDeepLink != null) {
+        if (!StateContainer.of(context).wallet.loading &&
+            StateContainer.of(context).initialDeepLink != null) {
           handleDeepLink(StateContainer.of(context).initialDeepLink);
           StateContainer.of(context).initialDeepLink = null;
         }
@@ -401,20 +402,28 @@ class _AppHomePageState extends State<AppHomePage>
   Widget _buildItem(
       BuildContext context, int index, Animation<double> animation) {
     String displayName = smallScreen(context)
-        ? _historyListMap[StateContainer.of(context).wallet.address][index].getShorterString()
-        : _historyListMap[StateContainer.of(context).wallet.address][index].getShortString();
+        ? _historyListMap[StateContainer.of(context).wallet.address][index]
+            .getShorterString()
+        : _historyListMap[StateContainer.of(context).wallet.address][index]
+            .getShortString();
     _contacts.forEach((contact) {
-      if (contact.address == _historyListMap[StateContainer.of(context).wallet.address][index].account) {
+      if (contact.address ==
+          _historyListMap[StateContainer.of(context).wallet.address][index]
+              .account) {
         displayName = contact.name;
       }
     });
     return _buildTransactionCard(
-        _historyListMap[StateContainer.of(context).wallet.address][index], animation, displayName, context);
+        _historyListMap[StateContainer.of(context).wallet.address][index],
+        animation,
+        displayName,
+        context);
   }
 
   // Return widget for list
   Widget _getListWidget(BuildContext context) {
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.historyLoading) {
+    if (StateContainer.of(context).wallet == null ||
+        StateContainer.of(context).wallet.historyLoading) {
       // Loading Animation
       return ReactiveRefreshIndicator(
           backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
@@ -469,15 +478,16 @@ class _AppHomePageState extends State<AppHomePage>
     }
     // Setup history list
     if (!_listKeyMap.containsKey(StateContainer.of(context).wallet.address)) {
-      _listKeyMap.putIfAbsent(StateContainer.of(context).wallet.address, () => GlobalKey<AnimatedListState>());
+      _listKeyMap.putIfAbsent(StateContainer.of(context).wallet.address,
+          () => GlobalKey<AnimatedListState>());
       setState(() {
         _historyListMap.putIfAbsent(
-          StateContainer.of(context).wallet.address,
-          () => ListModel<AccountHistoryResponseItem>(
-                listKey: _listKeyMap[StateContainer.of(context).wallet.address],
-                initialItems: StateContainer.of(context).wallet.history,
-                )
-        );
+            StateContainer.of(context).wallet.address,
+            () => ListModel<AccountHistoryResponseItem>(
+                  listKey:
+                      _listKeyMap[StateContainer.of(context).wallet.address],
+                  initialItems: StateContainer.of(context).wallet.history,
+                ));
       });
     }
     return ReactiveRefreshIndicator(
@@ -485,7 +495,8 @@ class _AppHomePageState extends State<AppHomePage>
       child: AnimatedList(
         key: _listKeyMap[StateContainer.of(context).wallet.address],
         padding: EdgeInsetsDirectional.fromSTEB(0, 5.0, 0, 15.0),
-        initialItemCount: _historyListMap[StateContainer.of(context).wallet.address].length,
+        initialItemCount:
+            _historyListMap[StateContainer.of(context).wallet.address].length,
         itemBuilder: _buildItem,
       ),
       onRefresh: _refresh,
@@ -517,13 +528,20 @@ class _AppHomePageState extends State<AppHomePage>
   /// Required to do it this way for the animation
   ///
   void diffAndUpdateHistoryList(List<AccountHistoryResponseItem> newList) {
-    if (newList == null || newList.length == 0 || _historyListMap[StateContainer.of(context).wallet.address] == null) return;
+    if (newList == null ||
+        newList.length == 0 ||
+        _historyListMap[StateContainer.of(context).wallet.address] == null)
+      return;
     // Get items not in current list, and add them from top-down
     newList.reversed
-        .where((item) => !_historyListMap[StateContainer.of(context).wallet.address].items.contains(item))
+        .where((item) =>
+            !_historyListMap[StateContainer.of(context).wallet.address]
+                .items
+                .contains(item))
         .forEach((historyItem) {
       setState(() {
-        _historyListMap[StateContainer.of(context).wallet.address].insertAtTop(historyItem);
+        _historyListMap[StateContainer.of(context).wallet.address]
+            .insertAtTop(historyItem);
       });
     });
     // Re-subscribe if missing data
@@ -574,7 +592,8 @@ class _AppHomePageState extends State<AppHomePage>
 
   void paintQrCode({String address}) {
     QrPainter painter = QrPainter(
-      data: address == null ? StateContainer.of(context).wallet.address : address,
+      data:
+          address == null ? StateContainer.of(context).wallet.address : address,
       version: 6,
       errorCorrectionLevel: QrErrorCorrectLevel.Q,
     );
@@ -586,7 +605,7 @@ class _AppHomePageState extends State<AppHomePage>
               child: Image.memory(byteData.buffer.asUint8List())),
         );
       });
-    });    
+    });
   }
 
   @override
@@ -597,7 +616,6 @@ class _AppHomePageState extends State<AppHomePage>
     }
     return Scaffold(
       drawerEdgeDragWidth: 200,
-      
       resizeToAvoidBottomPadding: false,
       key: _scaffoldKey,
       backgroundColor: StateContainer.of(context).curTheme.background,
@@ -738,7 +756,8 @@ class _AppHomePageState extends State<AppHomePage>
                             if (receive == null) {
                               return;
                             }
-                            Sheets.showAppHeightEightSheet(context: context, widget: receive);
+                            Sheets.showAppHeightEightSheet(
+                                context: context, widget: receive);
                           },
                           highlightColor: receive != null
                               ? StateContainer.of(context).curTheme.background40
@@ -760,7 +779,7 @@ class _AppHomePageState extends State<AppHomePage>
     );
   }
 
-   // Transaction Card/List Item
+  // Transaction Card/List Item
   Widget _buildTransactionCard(AccountHistoryResponseItem item,
       Animation<double> animation, String displayName, BuildContext context) {
     String text;
@@ -1022,7 +1041,8 @@ class _AppHomePageState extends State<AppHomePage>
   // Welcome Card
   TextSpan _getExampleHeaderSpan(BuildContext context) {
     String workingStr;
-    if (StateContainer.of(context).selectedAccount == null || StateContainer.of(context).selectedAccount.index == 0) {
+    if (StateContainer.of(context).selectedAccount == null ||
+        StateContainer.of(context).selectedAccount.index == 0) {
       workingStr = AppLocalization.of(context).exampleCardIntroKal;
     } else {
       workingStr = AppLocalization.of(context).newAccountIntroKal;
@@ -1350,17 +1370,17 @@ class _AppHomePageState extends State<AppHomePage>
                     child: Hero(
                       tag: "avatar",
                       child: SvgPicture.network(
-                        UIUtil.getMonkeyURL(StateContainer.of(context).selectedAccount.address),    
-                        key: Key(UIUtil.getMonkeyURL(StateContainer.of(context).selectedAccount.address)),
-                        placeholderBuilder: (BuildContext context) =>
-                            Container(
+                        UIUtil.getMonkeyURL(
+                            StateContainer.of(context).selectedAccount.address),
+                        key: Key(UIUtil.getMonkeyURL(StateContainer.of(context)
+                            .selectedAccount
+                            .address)),
+                        placeholderBuilder: (BuildContext context) => Container(
                           child: FlareActor(
                             "assets/monkey_placeholder_animation.flr",
                             animation: "main",
                             fit: BoxFit.contain,
-                            color: StateContainer.of(context)
-                                .curTheme
-                                .primary,
+                            color: StateContainer.of(context).curTheme.primary,
                           ),
                         ),
                       ),
@@ -1378,8 +1398,7 @@ class _AppHomePageState extends State<AppHomePage>
                           borderRadius: BorderRadius.circular(100.0)),
                       highlightColor:
                           StateContainer.of(context).curTheme.text15,
-                      splashColor:
-                          StateContainer.of(context).curTheme.text15,
+                      splashColor: StateContainer.of(context).curTheme.text15,
                       padding: EdgeInsets.all(0.0),
                       child: Container(
                         color: Colors.transparent,
@@ -1397,7 +1416,8 @@ class _AppHomePageState extends State<AppHomePage>
 
   // Get balance display
   Widget _getBalanceWidget(BuildContext context) {
-    if (StateContainer.of(context).wallet == null || StateContainer.of(context).wallet.loading) {
+    if (StateContainer.of(context).wallet == null ||
+        StateContainer.of(context).wallet.loading) {
       // Placeholder for balance text
       return Container(
         padding: EdgeInsets.symmetric(vertical: 14),
@@ -1571,7 +1591,7 @@ class _AppHomePageState extends State<AppHomePage>
                         children: [
                           // Currency Icon
                           TextSpan(
-                            text: "",
+                            text: "\u{e80a}",
                             style: TextStyle(
                               fontFamily: 'AppIcons',
                               color:
@@ -1749,8 +1769,9 @@ class _TransactionDetailsSheetState extends State<TransactionDetailsSheet> {
                         Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                       Navigator.of(context).push(
                           MaterialPageRoute(builder: (BuildContext context) {
-                        return sl.get<UIUtil>().showBlockExplorerWebview(
-                            context, widget.hash);
+                        return sl
+                            .get<UIUtil>()
+                            .showBlockExplorerWebview(context, widget.hash);
                       }));
                     }),
                   ],
