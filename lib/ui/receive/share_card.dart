@@ -85,7 +85,7 @@ class _AppShareCardState extends State<AppShareCard> {
                         children: [
                           // Currency Icon
                           TextSpan(
-                            text: "\u{e807} ",
+                            text: "\u{e801} ",
                             style: TextStyle(
                               color:
                                   StateContainer.of(context).curTheme.primary,
@@ -117,9 +117,7 @@ class _AppShareCardState extends State<AppShareCard> {
                   ),
                   // Address
                   Container(
-                    padding: Platform.isIOS
-                        ? EdgeInsets.only(bottom: 6)
-                        : EdgeInsets.zero,
+                    padding: EdgeInsets.only(bottom: 6),
                     child: Column(
                       children: <Widget>[
                         // First row of the address
