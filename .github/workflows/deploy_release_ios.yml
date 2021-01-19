@@ -36,7 +36,7 @@ jobs:
         uses: actions/download-artifact@v2
 
       - name: Set workspace in env
-        run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
+        run: echo "workspace=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
       - name: Run tests
         env:
@@ -62,8 +62,7 @@ jobs:
           TEMP_KEYCHAIN_PASSWORD: ${{ secrets.TEMP_KEYCHAIN_PASSWORD }}
           GEM_HOME: ~/.gems
         run: |
-          echo "::add-path::~/.gems/bin"
-          fastlane build_ios
+          /usr/local/bin/fastlane build_ios
 
       - name: Upload IPA
         if: success()
@@ -84,7 +83,7 @@ jobs:
           name: ios-ipa
 
       - name: Set workspace in env
-        run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
+        run: echo "workspace=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
       - name: Deploy iOS 
         if: success()
@@ -95,5 +94,4 @@ jobs:
           MATCH_PASSWORD: ${{ secrets.MATCH_PASSWORD }}   
           GEM_HOME: ~/.gems
         run: |
-          echo "::add-path::~/.gems/bin"
-          fastlane deploy_ios
+          /usr/local/bin/fastlane deploy_ios

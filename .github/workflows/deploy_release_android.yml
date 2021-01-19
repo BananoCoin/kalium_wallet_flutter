@@ -36,7 +36,7 @@ jobs:
         uses: actions/download-artifact@v2
 
       - name: Set workspace in env
-        run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
+        run: echo "workspace=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
       - name: Run tests
         env:
@@ -60,7 +60,6 @@ jobs:
           ANDROID_SDK_PATH: /Users/adapps/Library/Android/Sdk
           GEM_HOME: ~/.gems
         run: |
-          echo "::add-path::~/.gems/bin"
           echo flutter.sdk=${{ env.FLUTTER_PATH }} > local.properties
           echo sdk.dir=${{ env.ANDROID_SDK_PATH }} >> local.properties
           echo flutter.buildMode=release >> local.properties
@@ -68,7 +67,7 @@ jobs:
           echo keyAlias=${{ secrets.ANDROID_KEY_ALIAS }} >> key.properties
           echo keyPassword=${{ secrets.ANDROID_KEY_PASSWORD }} >> key.properties
           echo storePassword=${{ secrets.ANDROID_KEY_STORE_PASSWORD }} >> key.properties
-          fastlane build_android production:true
+          /usr/local/bin/fastlane build_android production:true
           rm -f key.properties
 
       - name: Upload APK
@@ -97,7 +96,7 @@ jobs:
           name: android-aab
 
       - name: Set workspace in env
-        run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
+        run: echo "workspace=$GITHUB_WORKSPACE" >> $GITHUB_ENV
 
       - name: Deploy android
         if: success()
@@ -106,5 +105,4 @@ jobs:
           AAB_PATH: ${{ env.workspace }}/app-release.aab
           GEM_HOME: ~/.gems
         run: |
-          echo "::add-path::~/.gems/bin"
-          fastlane deploy_android production:true
+          /usr/local/bin/fastlane deploy_android production:true
