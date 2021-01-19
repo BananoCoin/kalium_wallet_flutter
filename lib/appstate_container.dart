@@ -584,6 +584,7 @@ class StateContainerState extends State<StateContainer> {
         sl.get<AccountService>().processQueue();
         // Receive pendings
         if (pending) {
+          pendingRequests.clear();
           PendingResponse pendingResp = await sl.get<AccountService>().getPending(wallet.address, max(wallet.blockCount ?? 0, 10), threshold: receiveMinimum);
           // Initiate receive/open request for each pending
           for (String hash in pendingResp.blocks.keys) {
