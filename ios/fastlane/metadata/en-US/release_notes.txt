@@ -1,3 +1,1 @@
-- Introduce the new monKey, more information at https://monkey.banano.cc
-- Allow up to 50 accounts
-- General bug fixes and improvements
+- General bug fixes & improvements
