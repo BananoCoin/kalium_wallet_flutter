@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'ja';
+  String get localeName => 'ja';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -74,7 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "disablePasswordSheetHeader" : MessageLookupByLibrary.simpleMessage("無効にする"),
     "disablePasswordSuccess" : MessageLookupByLibrary.simpleMessage("パスワードの無効化に成功しました。"),
     "disableWalletPassword" : MessageLookupByLibrary.simpleMessage("ウォレットのパスワードを無効にする"),
-    "encryptionFailedError" : MessageLookupByLibrary.simpleMessage("ウォレットのパスワードの設定に失敗しました。"),
+    "encryptionFailedError" : MessageLookupByLibrary.simpleMessage("ウォレットパスワードの作成に失敗しました。"),
     "enterAddress" : MessageLookupByLibrary.simpleMessage("アドレスを入力する"),
     "enterAmount" : MessageLookupByLibrary.simpleMessage("金額を入力する"),
     "enterPasswordHint" : MessageLookupByLibrary.simpleMessage("パスワードを入力する"),
@@ -85,7 +84,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "goBackButton" : MessageLookupByLibrary.simpleMessage("戻る"),
     "gotItButton" : MessageLookupByLibrary.simpleMessage("了解しました"),
     "hideAccountHeader" : MessageLookupByLibrary.simpleMessage("アカウントを非表示にしますか？"),
-    "iUnderstandTheRisks" : MessageLookupByLibrary.simpleMessage("リスクがあることを理解しました。"),
+    "iUnderstandTheRisks" : MessageLookupByLibrary.simpleMessage("リスクを理解しました。"),
     "import" : MessageLookupByLibrary.simpleMessage("インポート"),
     "importSecretPhrase" : MessageLookupByLibrary.simpleMessage("シークレットフレーズをインポートする"),
     "importSecretPhraseHint" : MessageLookupByLibrary.simpleMessage("以下に24語のシークレットフレーズを入力してください。各単語はスペースで区切ります。"),
@@ -97,7 +96,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("残高不足です"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("入力したアドレスが無効です"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("パスワードが無効です"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natriumウォレット"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("ナトリアムウォレット"),
     "language" : MessageLookupByLibrary.simpleMessage("言語"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("起動時に認証する"),
     "locked" : MessageLookupByLibrary.simpleMessage("ロック済み"),
@@ -125,21 +124,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Natriumを開く際にパスワードを必要としなくなります。"),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("このパスワードはNatriumを開く際に必要となります。"),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("パスワードが一致しません"),
-    "pinConfirmError" : MessageLookupByLibrary.simpleMessage("ピンが一致しません"),
-    "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("ピンが正しいことを確認しました"),
-    "pinCreateTitle" : MessageLookupByLibrary.simpleMessage("6桁のピンを作成する"),
-    "pinEnterTitle" : MessageLookupByLibrary.simpleMessage("ピンを入力してください"),
-    "pinInvalid" : MessageLookupByLibrary.simpleMessage("入力したピンが無効です"),
+    "pinConfirmError" : MessageLookupByLibrary.simpleMessage("暗証番号が一致しません"),
+    "pinConfirmTitle" : MessageLookupByLibrary.simpleMessage("暗証番号が正しいことを確認しました"),
+    "pinCreateTitle" : MessageLookupByLibrary.simpleMessage("6桁の暗証番号を作成する"),
+    "pinEnterTitle" : MessageLookupByLibrary.simpleMessage("暗証番号を入力してください"),
+    "pinInvalid" : MessageLookupByLibrary.simpleMessage("入力した暗証番号が無効です"),
     "pinMethod" : MessageLookupByLibrary.simpleMessage("ピン"),
-    "pinRepChange" : MessageLookupByLibrary.simpleMessage("ピンを入力して代理人を変更します。"),
-    "pinSeedBackup" : MessageLookupByLibrary.simpleMessage("シードをバックアップするピンを入力します"),
-    "preferences" : MessageLookupByLibrary.simpleMessage("プリファレンス"),
+    "pinRepChange" : MessageLookupByLibrary.simpleMessage("暗証番号を入力して代理人を変更します。"),
+    "pinSeedBackup" : MessageLookupByLibrary.simpleMessage("シードをバックアップするため暗証番号を入力して下さい"),
+    "preferences" : MessageLookupByLibrary.simpleMessage("設定"),
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("個人情報保護方針"),
-    "qrInvalidAddress" : MessageLookupByLibrary.simpleMessage("QRコードには有効な送金先が含まれていません。"),
-    "qrInvalidPermissions" : MessageLookupByLibrary.simpleMessage("カメラがQRコードをスキャンすることを許可してください"),
+    "qrInvalidAddress" : MessageLookupByLibrary.simpleMessage("QRコードに正しい送金先が含まれていません。"),
+    "qrInvalidPermissions" : MessageLookupByLibrary.simpleMessage("カメラがQRコードをスキャンするためを許可してください。"),
     "qrInvalidSeed" : MessageLookupByLibrary.simpleMessage("QRコードに有効なシードまたは秘密キーが含まれていません"),
     "qrMnemonicError" : MessageLookupByLibrary.simpleMessage("QRに有効なシークレットフレーズが含まれていません"),
-    "qrUnknownError" : MessageLookupByLibrary.simpleMessage("QRコードを読み取れません。"),
+    "qrUnknownError" : MessageLookupByLibrary.simpleMessage("QRコードを読み取れ出来ません"),
     "rawSeed" : MessageLookupByLibrary.simpleMessage("[Obsolete] 元のシード"),
     "receive" : MessageLookupByLibrary.simpleMessage("着金"),
     "received" : MessageLookupByLibrary.simpleMessage("着金済み"),
@@ -168,11 +167,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendError" : MessageLookupByLibrary.simpleMessage("エラーが発生しました。後で再び実行してください。"),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("送金元"),
     "sending" : MessageLookupByLibrary.simpleMessage("送金金額"),
-    "sent" : MessageLookupByLibrary.simpleMessage("送金済み"),
+    "sent" : MessageLookupByLibrary.simpleMessage("送金した"),
     "sentTo" : MessageLookupByLibrary.simpleMessage("送金先"),
-    "setPassword" : MessageLookupByLibrary.simpleMessage("パスワードを設定する"),
+    "setPassword" : MessageLookupByLibrary.simpleMessage("ウォレットのパスワードを作成する"),
     "setPasswordSuccess" : MessageLookupByLibrary.simpleMessage("パスワードの設定に成功しました。"),
-    "setWalletPassword" : MessageLookupByLibrary.simpleMessage("ウォレットのパスワードを設定する"),
+    "setWalletPassword" : MessageLookupByLibrary.simpleMessage("ウォレットのパスワードを作成する"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("設定"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("ペーパーウォレットから読み込む"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("シードに切り替える"),
@@ -185,7 +184,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactions" : MessageLookupByLibrary.simpleMessage("トランザクション履歴"),
     "transfer" : MessageLookupByLibrary.simpleMessage("転送"),
     "transferClose" : MessageLookupByLibrary.simpleMessage("任意の場所をタップしてウィンドウを閉じます。"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("転送が完了するまでに数秒かかる場合があります。"),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("確認をタップして資金を転送します。\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("転送中にエラーが発生しました。後で再び実行してください。"),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("資金を転送する"),

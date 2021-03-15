@@ -7,6 +7,7 @@ enum AvailableLanguage {
   ENGLISH,
   CHINESE_SIMPLIFIED,
   CHINESE_TRADITIONAL,
+  DANISH,
   DUTCH,
   FRENCH,
   GERMAN,
@@ -48,6 +49,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "Български език (bg)";
       case AvailableLanguage.FRENCH:
         return "Français (fr)";
+      case AvailableLanguage.DANISH:
+        return "Dansk (dk)";
       case AvailableLanguage.GERMAN:
         return "Deutsch (de)";
       case AvailableLanguage.SPANISH:
@@ -151,6 +154,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "zh-Hant";
       case AvailableLanguage.MALAY:
         return "ms";
+      case AvailableLanguage.DANISH:
+        return "da";
       default:
         return "DEFAULT";
     }

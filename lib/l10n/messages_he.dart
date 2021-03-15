@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'he';
+  String get localeName => 'he';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -142,7 +141,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("לחץ בכל מקום בכדי לסגור את החלון."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 באנאנו הועברו לארנק קאליום."),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("\nארנק עם מאזן של %1 באנאנו אותר."),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("יתכן שיקחו כמה שניות עד תחילת ההעברה."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("\nלחץ על אשר בכדי להעביר את הסכום."),
     "transferError" : MessageLookupByLibrary.simpleMessage("חלה תקלה במהלך ההעברה. בבקשה נסה מאוחר יותר."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("העברת\nסכום"),

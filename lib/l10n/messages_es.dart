@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'es';
+  String get localeName => 'es';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Cerrar"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Confirmar"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Confirme su contraseña"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Conectando"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 ha sido añadido"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("El contacto ya existe"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Contacto"),
@@ -78,8 +78,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAddress" : MessageLookupByLibrary.simpleMessage("Introducir billetera"),
     "enterAmount" : MessageLookupByLibrary.simpleMessage("Introducir cantidad"),
     "enterPasswordHint" : MessageLookupByLibrary.simpleMessage("Ingrese su contraseña"),
+    "exampleCardFromKal" : MessageLookupByLibrary.simpleMessage("de un mono aleatorio"),
+    "exampleCardIntroKal" : MessageLookupByLibrary.simpleMessage("Bienvenido a Kalium. Una vez que reciba BANANO, las transacciones se mostrarán así:"),
     "exampleCardLittle" : MessageLookupByLibrary.simpleMessage("Algunos"),
     "exampleCardLot" : MessageLookupByLibrary.simpleMessage("Muchos"),
+    "exampleCardToKal" : MessageLookupByLibrary.simpleMessage("a un mono aleatorio"),
     "exit" : MessageLookupByLibrary.simpleMessage("Salir"),
     "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Confirme con huella dactilar para hacer una copia de seguridad de su semilla."),
     "goBackButton" : MessageLookupByLibrary.simpleMessage("Regresar\n"),
@@ -97,26 +100,31 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Fondos insuficientes"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Billetera de destino incorrecta"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Contraseña no válida"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natrium"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Billetera Kalium"),
     "language" : MessageLookupByLibrary.simpleMessage("Idioma"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Soporte"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Autenticarse al iniciar"),
     "locked" : MessageLookupByLibrary.simpleMessage("Bloqueado"),
     "logout" : MessageLookupByLibrary.simpleMessage("Cerrar sesión"),
     "logoutAction" : MessageLookupByLibrary.simpleMessage("Eliminar semilla y cerrar sesión"),
     "logoutAreYouSure" : MessageLookupByLibrary.simpleMessage("¿Está seguro?"),
+    "logoutDetailKal" : MessageLookupByLibrary.simpleMessage("Cerrar la sesión eliminará su semilla, y todos los datos relacionados a Kalium serán borrados de este dispositivo. Si no ha almacenado una copia de su semilla, nunca será capaz de volver a acceder a sus fondos."),
     "logoutReassurance" : MessageLookupByLibrary.simpleMessage("Si tiene una copia de seguridad de su semilla, no tiene nada de qué preocuparse."),
     "manage" : MessageLookupByLibrary.simpleMessage("Administrar"),
     "manualEntry" : MessageLookupByLibrary.simpleMessage("Introducir datos"),
     "mnemonicInvalidWord" : MessageLookupByLibrary.simpleMessage("% 1 no es una palabra válida"),
     "mnemonicPhrase" : MessageLookupByLibrary.simpleMessage("Frase mnemónica"),
     "mnemonicSizeError" : MessageLookupByLibrary.simpleMessage("La frase secreta solo puede contener 24 palabras"),
+    "newAccountIntroKal" : MessageLookupByLibrary.simpleMessage("Esta es su nueva cuenta. Una vez que reciba BANANO, las transacciones se mostrarán así:"),
     "newWallet" : MessageLookupByLibrary.simpleMessage("Nueva billetera"),
     "nextButton" : MessageLookupByLibrary.simpleMessage("Siguiente"),
     "no" : MessageLookupByLibrary.simpleMessage("No"),
     "noContactsExport" : MessageLookupByLibrary.simpleMessage("No hay contactos para exportar."),
     "noContactsImport" : MessageLookupByLibrary.simpleMessage("No hay contactos para importar"),
     "noSkipButton" : MessageLookupByLibrary.simpleMessage("No, omitir"),
+    "notificationBodyKal" : MessageLookupByLibrary.simpleMessage("Abra Kalium para ver esta transacción"),
     "notificationHeaderSupplement" : MessageLookupByLibrary.simpleMessage("Pulse para abrir"),
+    "notificationTitleKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO Recibido \n%1 BANANO Recibidos"),
     "notifications" : MessageLookupByLibrary.simpleMessage("Notificaciones"),
     "off" : MessageLookupByLibrary.simpleMessage("Desactivadas"),
     "onStr" : MessageLookupByLibrary.simpleMessage("Activadas"),
@@ -150,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "repInfoHeader" : MessageLookupByLibrary.simpleMessage("¿Qué es un representante?"),
     "requireAPasswordToOpenHeader" : MessageLookupByLibrary.simpleMessage("¿Requerir de una contraseña para abrir Natrium?"),
     "rootWarning" : MessageLookupByLibrary.simpleMessage("Parece que su dispositivo está \"rooteado\", \"liberado\" o modificado de una manera que compromete su seguridad. Se recomienda que restablezca su dispositivo a su estado original antes de continuar."),
+    "scanInstructionsKal" : MessageLookupByLibrary.simpleMessage("Escanear el código QR de una billetera\n de Banano"),
     "scanQrCode" : MessageLookupByLibrary.simpleMessage("Escanear código QR"),
     "secretInfo" : MessageLookupByLibrary.simpleMessage("En la siguiente pantalla, verá su frase secreta. Es una contraseña para acceder a sus fondos. Es crucial que la respalde y nunca la comparta con nadie"),
     "secretInfoHeader" : MessageLookupByLibrary.simpleMessage("¡La seguridad es lo primero!"),
@@ -165,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedDescription" : MessageLookupByLibrary.simpleMessage("Una semilla contiene la misma información que una frase secreta, pero de forma legible por una máquina. Mientras tenga la copia de seguridad de alguna de ellas, tendrá acceso a sus fondos"),
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("La semilla no es correcta"),
     "send" : MessageLookupByLibrary.simpleMessage("Enviar"),
+    "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("Enviar %1 BANANO"),
     "sendError" : MessageLookupByLibrary.simpleMessage("Ha ocurrido un error. Por favor, inténtelo de nuevo."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Enviar desde"),
     "sending" : MessageLookupByLibrary.simpleMessage("Enviando"),
@@ -175,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Configurar contraseña de la billetera"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Configuración"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Cargar desde billetera de papel"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Compartir Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("¡Échale un vistazo a Kalium! ¡La billetera móvil oficial de Banano!"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Cambiar a semilla"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Sistema por defecto"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Pulse para ocultar"),
@@ -185,16 +197,23 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactions" : MessageLookupByLibrary.simpleMessage("Transacciones"),
     "transfer" : MessageLookupByLibrary.simpleMessage("Transferir"),
     "transferClose" : MessageLookupByLibrary.simpleMessage("Pulse en cualquier lugar para cerrar esta ventana."),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("La transferencia puede tardar varios segundos en completarse."),
+    "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO se ha transferido exitosamente a su billetera Kalium.\n \n%1 BANANO se han transferido exitosamente a su billetera Kalium.\n"),
+    "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("Una billetera con un balance de %1 BANANO ha sido detectada. \n"),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Pulse confirmar para transferir los fondos.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Ha ocurrido un error durante la transferencia. Por favor, inténtelo de nuevo más tarde."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Transferir fondos"),
+    "transferIntroKal" : MessageLookupByLibrary.simpleMessage("Este proceso transferirá los fondos de una billetera de papel a su billetera en Kalium.\n\nPulse el botón \"%1\"  para empezar."),
     "transferLoading" : MessageLookupByLibrary.simpleMessage("Transfiriendo"),
     "transferManualHint" : MessageLookupByLibrary.simpleMessage("Por favor, introduzca la semilla a continuación."),
+    "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("Esta semilla no contiene ningún BANANO"),
     "transferQrScanError" : MessageLookupByLibrary.simpleMessage("Este código QR no contiene una semilla válida."),
+    "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("Escanear una semilla\n de Banano o clave privada"),
     "unlock" : MessageLookupByLibrary.simpleMessage("Desbloquear"),
+    "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("Autentíquese para desbloquear Kalium"),
+    "unlockPinKal" : MessageLookupByLibrary.simpleMessage("Ingrese su PIN para desbloquear Kalium"),
     "viewDetails" : MessageLookupByLibrary.simpleMessage("Ver detalles"),
     "warning" : MessageLookupByLibrary.simpleMessage("Advertencia"),
+    "welcomeTextKal" : MessageLookupByLibrary.simpleMessage("Bienvenido a Kalium. Para comenzar, usted debe crear una nueva billetera o importar una existente."),
     "xMinute" : MessageLookupByLibrary.simpleMessage("Tras %1 minuto"),
     "xMinutes" : MessageLookupByLibrary.simpleMessage("Tras %1 minutos"),
     "yes" : MessageLookupByLibrary.simpleMessage("Sí"),

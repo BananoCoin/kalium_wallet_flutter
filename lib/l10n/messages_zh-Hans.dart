@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'zh_Hans';
+  String get localeName => 'zh_Hans';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("关闭"),
     "confirm" : MessageLookupByLibrary.simpleMessage("确认"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("确认密码"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("连接中"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1已被添加到联系人！"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("联系人已存在"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("联系人"),
@@ -100,14 +100,15 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("余额不足"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("无效的目标地址"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("无效密码"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natrium 钱包"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium钱包"),
     "language" : MessageLookupByLibrary.simpleMessage("语言"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("技术支持"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("启动时要求验证"),
     "locked" : MessageLookupByLibrary.simpleMessage("已锁定"),
     "logout" : MessageLookupByLibrary.simpleMessage("登出"),
     "logoutAction" : MessageLookupByLibrary.simpleMessage("删除种子并登出"),
     "logoutAreYouSure" : MessageLookupByLibrary.simpleMessage("您确定？"),
-    "logoutDetailKal" : MessageLookupByLibrary.simpleMessage("注销将从此设备中删除您的种子代码和所有与Kalium相关的数据。如果您的种子代码没有备份，您将永远无法再次访问您的帐户"),
+    "logoutDetailKal" : MessageLookupByLibrary.simpleMessage("注销将从此设备中删除您的种子和所有与Kalium相关的数据。如果您的种子没有备份，您将永远无法再次访问您的帐户"),
     "logoutReassurance" : MessageLookupByLibrary.simpleMessage("只要您有备份您的种子，就没有什么可担心的。"),
     "manage" : MessageLookupByLibrary.simpleMessage("管理"),
     "manualEntry" : MessageLookupByLibrary.simpleMessage("手动输入"),
@@ -121,7 +122,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "noContactsExport" : MessageLookupByLibrary.simpleMessage("没有要导出的联系人"),
     "noContactsImport" : MessageLookupByLibrary.simpleMessage("找不到要导入的联系人"),
     "noSkipButton" : MessageLookupByLibrary.simpleMessage("不，跳过"),
-    "notificationBodyKal" : MessageLookupByLibrary.simpleMessage("打开Kalium查看此交易."),
+    "notificationBodyKal" : MessageLookupByLibrary.simpleMessage("打开Kalium查看此交易"),
     "notificationHeaderSupplement" : MessageLookupByLibrary.simpleMessage("点击打开"),
     "notificationTitleKal" : MessageLookupByLibrary.simpleMessage("收到 %1 BANANO"),
     "notifications" : MessageLookupByLibrary.simpleMessage("通知"),
@@ -173,7 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedDescription" : MessageLookupByLibrary.simpleMessage("种子和秘密词语对机器来说是同一个东西，只要有种子或秘密词语的备份，就可以存取您的币。"),
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("无效的种子"),
     "send" : MessageLookupByLibrary.simpleMessage("发送"),
-    "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("发送 %1 Banano?"),
+    "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("发送 %1 Banano"),
     "sendError" : MessageLookupByLibrary.simpleMessage("发生错误。请稍后再试。"),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("发送自"),
     "sending" : MessageLookupByLibrary.simpleMessage("发出"),
@@ -184,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("设置钱包密码"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("设置"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("用纸钱包充值"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("分享Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("来看看Kalium！Banano的官方钱包！"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("转换成种子"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("系统默认"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("点击隐藏"),
@@ -196,22 +199,21 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("点击任意位置关闭窗口。"),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO 成功传送到您的 Kalium 钱包。\n"),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("检测到一个包含 %1 BANANO 的钱包。\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("传送需要几秒钟完成，请稍等一下。"),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("按键确定传送钱币。\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("传送出现了问题，请稍后再尝试。"),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("传送钱币"),
     "transferIntroKal" : MessageLookupByLibrary.simpleMessage("这个过程会将纸钱包的钱币转移到您的 Kalium 钱包。\n\n请按 \"%1\" 键开始。"),
     "transferLoading" : MessageLookupByLibrary.simpleMessage("传送中"),
     "transferManualHint" : MessageLookupByLibrary.simpleMessage("请输入种子。"),
-    "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("这个种子代码没有包含任何 BANANO"),
+    "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("这个种子没有包含任何 BANANO"),
     "transferQrScanError" : MessageLookupByLibrary.simpleMessage("这个二维码没有包含任何有效的种子。"),
-    "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("请扫描 Banano \n种子代码"),
+    "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("请扫描 Banano \n种子或私匙"),
     "unlock" : MessageLookupByLibrary.simpleMessage("解锁"),
     "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("以生物特征解锁 Kalium"),
     "unlockPinKal" : MessageLookupByLibrary.simpleMessage("请输入识别码码解锁 Kalium"),
     "viewDetails" : MessageLookupByLibrary.simpleMessage("查看详情"),
     "warning" : MessageLookupByLibrary.simpleMessage("警告"),
-    "welcomeTextKal" : MessageLookupByLibrary.simpleMessage("欢迎来到Kalium。下一步，您可以创建新钱包或导入现有钱包"),
+    "welcomeTextKal" : MessageLookupByLibrary.simpleMessage("欢迎来到Kalium。下一步，您可以创建新钱包或导入现有钱包。"),
     "xMinute" : MessageLookupByLibrary.simpleMessage("%1 分钟后"),
     "xMinutes" : MessageLookupByLibrary.simpleMessage("%1 分钟后"),
     "yes" : MessageLookupByLibrary.simpleMessage("确认"),

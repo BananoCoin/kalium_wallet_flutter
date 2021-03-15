@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'ms';
+  String get localeName => 'ms';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Tutup"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Konfirm"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Sahkan kata laluan"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Menyambung"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 telah ditambah sebagai kenalan!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Kenalan telah wujud"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Kenalan"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Baki tak mencukupi"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Alamat destinasi tidak sah"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("kata laluan tidak sah"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Dompet Natrium"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Dompet Kalium"),
     "language" : MessageLookupByLibrary.simpleMessage("Bahasa"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Sokongan"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Mengesahkan saat Pelancaran"),
     "locked" : MessageLookupByLibrary.simpleMessage("Terkunci"),
     "logout" : MessageLookupByLibrary.simpleMessage("Log Keluar"),
@@ -114,6 +115,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "mnemonicInvalidWord" : MessageLookupByLibrary.simpleMessage("%1 bukan perkataan yang sah"),
     "mnemonicPhrase" : MessageLookupByLibrary.simpleMessage("Frasa Mnemonik"),
     "mnemonicSizeError" : MessageLookupByLibrary.simpleMessage("Frasa rahsia hanya boleh mengandungi 24 perkataan"),
+    "newAccountIntroKal" : MessageLookupByLibrary.simpleMessage("Ini adalah akaun baru anda. Setelah anda menerima BANANO, transaksi akan muncul seperti ini:"),
     "newWallet" : MessageLookupByLibrary.simpleMessage("Dompet Baru"),
     "nextButton" : MessageLookupByLibrary.simpleMessage("Seterusnya"),
     "no" : MessageLookupByLibrary.simpleMessage("Tidak"),
@@ -183,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Tetapkan Kata Laluan Wallet"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Tetapan"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Muatkan dari Dompet Kertas"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Bahagian Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Semak Kalium! Dompet mobile Banano!"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Beralih kepada Benih"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Default Sistem"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Ketuk untuk menyembunyikan"),
@@ -193,14 +197,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactions" : MessageLookupByLibrary.simpleMessage("Transaksi"),
     "transfer" : MessageLookupByLibrary.simpleMessage("Pemindahan"),
     "transferClose" : MessageLookupByLibrary.simpleMessage("Ketuk mana-mana sahaja untuk menutup tetingkap."),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("Pemindahan mungkin mengambil masa beberapa saat untuk disiapkan."),
+    "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO berjaya dipindahkan ke Dompet Kalium anda. \n"),
+    "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("Satu dompet dengan baki %1 BANANO telah dikesan. \n"),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Ketik Sahkan untuk memindahkan dana. \n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Ralat berlaku semasa pemindahan. Sila cuba sebentar lagi."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Pemindahan Dana"),
+    "transferIntroKal" : MessageLookupByLibrary.simpleMessage("Proses ini akan memindahkan dana dari dompet kertas ke dompet Kalium anda. \n\n Ketik butang \"%1\" untuk bermula."),
     "transferLoading" : MessageLookupByLibrary.simpleMessage("Memindahkan"),
     "transferManualHint" : MessageLookupByLibrary.simpleMessage("Sila masukkan benih di bawah."),
+    "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("Benih ini tidak mempunyai sebarang BANANO di atasnya"),
     "transferQrScanError" : MessageLookupByLibrary.simpleMessage("Kod QR ini tidak mengandungi benih yang sah."),
+    "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("Imbas banano \n benih atau kunci peribadi"),
     "unlock" : MessageLookupByLibrary.simpleMessage("Buka kunci"),
+    "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("Mengesahkan untuk Membuka Kalium"),
+    "unlockPinKal" : MessageLookupByLibrary.simpleMessage("Masukkan PIN untuk Membuka Kalium"),
     "viewDetails" : MessageLookupByLibrary.simpleMessage("Lihat Butiran"),
     "warning" : MessageLookupByLibrary.simpleMessage("AMARAN"),
     "welcomeTextKal" : MessageLookupByLibrary.simpleMessage("Selamat datang ke Kalium. Untuk bersambung, anda boleh membuat dompet yang baru atau import dompet yang sedia ada."),

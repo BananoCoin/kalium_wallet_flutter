@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'ar';
+  String get localeName => 'ar';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("إغلاق"),
     "confirm" : MessageLookupByLibrary.simpleMessage("تأكيد"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("تأكيد كلمة المرور\n"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("الاتصال"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("تم إضافة %1 إلى جهات الاتصال."),
     "contactExists" : MessageLookupByLibrary.simpleMessage("جهة الاتصال موجودة مسبقا"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("جهة الاتصال"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("لرصيد غير كافي"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("العنوان المدخل غير صحيح"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("كلمة المرور خاطئ\n"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("المحفظة نتريوم"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("محفظة  كاليوم"),
     "language" : MessageLookupByLibrary.simpleMessage("اللغة"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("مساعدة"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("المصادقة في الاطلاق"),
     "locked" : MessageLookupByLibrary.simpleMessage("مقفل"),
     "logout" : MessageLookupByLibrary.simpleMessage("خروج"),
@@ -184,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("إنشاء كلمة مرور المحفظة\n"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("الإعدادات"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("تحميل من المحفظة الورقية"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("نشر كاليوم"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("ألق نظرة على كاليوم !محفظة بننو !"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("التبديل إلى المفتاح الخاص"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("النظام الافتراضي"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("إضغط للاخفاء"),
@@ -196,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("اضغط في أي مكان لغلق النافذة."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("تم تحويل %1 BANANO إلى محفظة كاليوم.\n"),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("تم كشف محفظة برصيد %1 BANANO.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("قد يستغرق النقل عدة ثوانيٍ."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("إضغط لتأكيد تحويل الرصيد.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("لقد حدث خطأ أثناء النقل. الرجاء إعادة المحاولة في وقت لاحق."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("تحويل الرصيد"),

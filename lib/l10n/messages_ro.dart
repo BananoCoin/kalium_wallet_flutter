@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'ro';
+  String get localeName => 'ro';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -41,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Salvați-vă seed-ul (backup)"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Biometria"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Renunţare"),
-    "changeCurrency" : MessageLookupByLibrary.simpleMessage("Schimbă moneda"),
+    "changeCurrency" : MessageLookupByLibrary.simpleMessage("Schimbă valuta"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Schimbă reprezentantul"),
     "changeRepButton" : MessageLookupByLibrary.simpleMessage("Schimbă"),
     "changeRepHint" : MessageLookupByLibrary.simpleMessage("Introdu noul reprezentant"),
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Închide"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Confirmare"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Confirmă parola"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Se încarcă"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 a fost adăugat la contacte!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Contact deja existent"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Contact"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Fonduri insuficiente"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Adresa introdusă este invalidă"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Parolă incorectă"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Portofel Natrium"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Portofelul Kalium"),
     "language" : MessageLookupByLibrary.simpleMessage("Limba"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Asistență"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Autentificare la deschidere"),
     "locked" : MessageLookupByLibrary.simpleMessage("Închis"),
     "logout" : MessageLookupByLibrary.simpleMessage("Deconectare"),
@@ -178,12 +179,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Trimite de la"),
     "sending" : MessageLookupByLibrary.simpleMessage("Trimitere..."),
     "sent" : MessageLookupByLibrary.simpleMessage("Ai trimis"),
-    "sentTo" : MessageLookupByLibrary.simpleMessage("Trmite către"),
+    "sentTo" : MessageLookupByLibrary.simpleMessage("Trimis către"),
     "setPassword" : MessageLookupByLibrary.simpleMessage("Setează parola"),
     "setPasswordSuccess" : MessageLookupByLibrary.simpleMessage("Parola a fost setată cu succes"),
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Setați o parolă portofelului"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Setări"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Încarcă din Paper Wallet"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Share Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Încearcă Kalium! Portofelul Banano oficial pentru mobil!"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Folosește seed-ul"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Limba implicită"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Apăsați pentru a ascunde"),
@@ -196,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("Apăsați oriunde pentru a închide această fereastră."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO au fost transferate cu succes în portofelul dvs. Kalium."),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("Un portofel cu un sold de %1 BANANO a fost detectat.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("Transferul poate dura câteva secunde."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Apăsați pentru a confirma transferul.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("A avut loc o eroare în timpul transferului. Vă rugăm să încercați din nou mai târziu."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Transferă\nFonduri"),

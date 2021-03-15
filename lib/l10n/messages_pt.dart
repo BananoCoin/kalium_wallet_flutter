@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'pt';
+  String get localeName => 'pt';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Fechar"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Confirmar"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Confirme a senha"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Conectando"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 foi adicionado aos contatos!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Contato já Existe"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Contato"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Saldo Insuficiente"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Endereço de Destino Inválido"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Senha Inválida"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Carteira Natrium"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Carteira Kalium"),
     "language" : MessageLookupByLibrary.simpleMessage("Língua"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Suporte"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Autenticar ao iniciar"),
     "locked" : MessageLookupByLibrary.simpleMessage("Bloqueado"),
     "logout" : MessageLookupByLibrary.simpleMessage("Sair"),
@@ -184,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Definir senha da carteira"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Configurações"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Carteira de Papel"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Compartilhe a Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Confira Kalium! Carteira mobile oficial da Banano!"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Mudar Para Seed"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Sistema padrão"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Toque para esconder"),
@@ -196,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("Toque em qualquer lugar para fechar a janela."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO transferido com sucesso para sua carteira Kalium."),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("Uma carteira com saldo de %1 BANANO foi detectada.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("A transferência pode levar vários segundos para concluir."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Toque em confirmar para transferir os fundos.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Ocorreu um erro durante a transferência. Por favor, tente novamente mais tarde."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Transferir\nFundos"),

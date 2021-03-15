@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'ru';
+  String get localeName => 'ru';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Закрыть"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Подтвердить"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Подтвердите пароль"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Подключение"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 добавлен в контакты!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Контакт уже существует"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Контакт"),
@@ -78,11 +78,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAddress" : MessageLookupByLibrary.simpleMessage("Введите Адрес"),
     "enterAmount" : MessageLookupByLibrary.simpleMessage("Введите Сумму"),
     "enterPasswordHint" : MessageLookupByLibrary.simpleMessage("Введите свой пароль"),
-    "exampleCardFromKal" : MessageLookupByLibrary.simpleMessage("От случайной обезьяны"),
+    "exampleCardFromKal" : MessageLookupByLibrary.simpleMessage("От случайного человека"),
     "exampleCardIntroKal" : MessageLookupByLibrary.simpleMessage("Добро пожаловать в Kalium.Когда вы получите или отправите BANANO,это будет отображено ниже."),
     "exampleCardLittle" : MessageLookupByLibrary.simpleMessage("Немного"),
     "exampleCardLot" : MessageLookupByLibrary.simpleMessage("Много"),
-    "exampleCardToKal" : MessageLookupByLibrary.simpleMessage("К случайной обезьяне"),
+    "exampleCardToKal" : MessageLookupByLibrary.simpleMessage("Случайному человеку"),
     "exit" : MessageLookupByLibrary.simpleMessage("Выход"),
     "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Аутентификация для резервного копирования Seed."),
     "goBackButton" : MessageLookupByLibrary.simpleMessage("Назад"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Недостаточный баланс"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Введен неверный адрес"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Неправильный пароль"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natrium кошелёк"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium кошелёк"),
     "language" : MessageLookupByLibrary.simpleMessage("Язык"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Служба поддержки"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Аутентификация при запуске"),
     "locked" : MessageLookupByLibrary.simpleMessage("Закрыт"),
     "logout" : MessageLookupByLibrary.simpleMessage("Выход"),
@@ -184,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Установить пароль"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Настройки"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Загрузить с Paper кошелька"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Поделиться Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Проверьте Kalium! Официальный мобильный кошелек Banano!"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Переключиться на Seed"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("По умолчанию"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Нажмите, чтобы скрыть"),
@@ -196,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("Нажмите в любом месте, чтобы закрыть окно."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO успешно переведены в Kalium кошелёк."),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("Обнаружен кошелёк с балансом %1 BANANO.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("Перевод может занять несколько секунд."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Нажмите Подтвердить, чтобы перевести средства.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Во время передачи произошла ошибка.Пожалуйста, попробуйте позже."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Перевод Средств"),
@@ -210,7 +212,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("Аутентификация для разблокировки Kalium"),
     "unlockPinKal" : MessageLookupByLibrary.simpleMessage("Введите PIN-код, чтобы разблокировать Kalium"),
     "viewDetails" : MessageLookupByLibrary.simpleMessage("Посмотреть Детали"),
-    "warning" : MessageLookupByLibrary.simpleMessage("ПРЕДУПРЕЖДЕНИЕ"),
+    "warning" : MessageLookupByLibrary.simpleMessage("Предупреждение"),
     "welcomeTextKal" : MessageLookupByLibrary.simpleMessage("Добро пожаловать в Kalium. Чтобы продолжить, можно создать новый кошелек или импортировать уже существующий."),
     "xMinute" : MessageLookupByLibrary.simpleMessage("Через %1 мин."),
     "xMinutes" : MessageLookupByLibrary.simpleMessage("Через %1 мин."),

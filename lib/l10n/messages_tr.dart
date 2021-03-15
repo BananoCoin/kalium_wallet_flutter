@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'tr';
+  String get localeName => 'tr';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Kapat"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Onayla"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Şifreni onayla"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Bağlanıyor"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 rehbere eklendi!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Bu kişi zaten mevcut"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Kişi"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Yetersiz Bakiye"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Geçersiz bir adres girdiniz"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Geçersiz Şifre"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natrium Cüzdanı"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium"),
     "language" : MessageLookupByLibrary.simpleMessage("Dil"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Destek"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Başlangıçta Kimlik Doğrula"),
     "locked" : MessageLookupByLibrary.simpleMessage("Kilitli"),
     "logout" : MessageLookupByLibrary.simpleMessage("Çıkış"),
@@ -184,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Cüzdan Şifresi Oluştur"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Ayarlar"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Bakiye Transferi"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Kalium\'u Paylaş"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Banano\'nun resmi cüzdanı Kalium\'u dene!"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Seede Geç"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Sistem Dili"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Gizlemek için dokun"),
@@ -196,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("Pencereyi kapatmak için herhangi bir yere dokun."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO başarıyla Kalium cüzdanına aktarıldı."),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO bakiyeye sahip bir cüzdan tespit edildi.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("Bu işlem birkaç saniye sürebilir."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Transfer işlemini başlatmak için onayla butonuna bas.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Aktarma esnasında bir problem oluştu. Lütfen daha sonra tekrar dene."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Bakiye\nTransferi"),

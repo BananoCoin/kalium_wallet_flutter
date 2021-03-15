@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'de';
+  String get localeName => 'de';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -32,7 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "addressMising" : MessageLookupByLibrary.simpleMessage("Bitte Adresse eingeben"),
     "addressShare" : MessageLookupByLibrary.simpleMessage("Teilen"),
     "amountMissing" : MessageLookupByLibrary.simpleMessage("Bitte Betrag eingeben"),
-    "authMethod" : MessageLookupByLibrary.simpleMessage("Authentisierung"),
+    "authMethod" : MessageLookupByLibrary.simpleMessage("Authentifizierungs-Verfahren"),
     "autoLockHeader" : MessageLookupByLibrary.simpleMessage("Automatisch sperren"),
     "backupConfirmButton" : MessageLookupByLibrary.simpleMessage("Ich habe den Seed gesichert"),
     "backupSecretPhrase" : MessageLookupByLibrary.simpleMessage("Geheimsequenz sichern"),
@@ -49,12 +48,13 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Schließen"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Bestätigen"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Passwort bestätigen"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Verbindet"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 zu Kontakten hinzugefügt!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Kontakt bereits vorhanden"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Kontakt"),
     "contactInvalid" : MessageLookupByLibrary.simpleMessage("Ungültiger Kontaktname"),
     "contactNameHint" : MessageLookupByLibrary.simpleMessage("Namen eingeben @"),
-    "contactNameMissing" : MessageLookupByLibrary.simpleMessage("Keine Kontakte zum Exportieren gefunden"),
+    "contactNameMissing" : MessageLookupByLibrary.simpleMessage("Gib diesem Kontakt einen Namen"),
     "contactRemoved" : MessageLookupByLibrary.simpleMessage("%1 wurde aus den Kontakten gelöscht!"),
     "contactsHeader" : MessageLookupByLibrary.simpleMessage("Kontakte"),
     "contactsImportErr" : MessageLookupByLibrary.simpleMessage("Import fehlgeschlagen"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Nicht genügend Guthaben"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Ungültige Empfänger-Adresse"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Ungültiges Passwort"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natrium Wallet"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kalium Wallet"),
     "language" : MessageLookupByLibrary.simpleMessage("Sprache"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Support"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Authentifizierung beim Öffnen"),
     "locked" : MessageLookupByLibrary.simpleMessage("Gesperrt"),
     "logout" : MessageLookupByLibrary.simpleMessage("Ausloggen"),
@@ -128,8 +129,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "off" : MessageLookupByLibrary.simpleMessage("Aus"),
     "onStr" : MessageLookupByLibrary.simpleMessage("An"),
     "paperWallet" : MessageLookupByLibrary.simpleMessage("Paper Wallet"),
-    "passwordBlank" : MessageLookupByLibrary.simpleMessage("Passwort kann nicht leer sein"),
-    "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Zum Öffnen der App wird kein Passwort mehr benötigt."),
+    "passwordBlank" : MessageLookupByLibrary.simpleMessage("Passwort darf nicht leer sein"),
+    "passwordNoLongerRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Zum Öffnen der App wird jetzt kein Passwort mehr benötigt."),
     "passwordWillBeRequiredToOpenParagraph" : MessageLookupByLibrary.simpleMessage("Dieses Passwort wird benötigt, um Natrium zu öffnen."),
     "passwordsDontMatch" : MessageLookupByLibrary.simpleMessage("Passwörter stimmen nicht überein"),
     "pinConfirmError" : MessageLookupByLibrary.simpleMessage("PINs stimmen nicht überein"),
@@ -138,9 +139,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "pinEnterTitle" : MessageLookupByLibrary.simpleMessage("PIN eingeben"),
     "pinInvalid" : MessageLookupByLibrary.simpleMessage("Falsche PIN eingegeben"),
     "pinMethod" : MessageLookupByLibrary.simpleMessage("PIN"),
-    "pinRepChange" : MessageLookupByLibrary.simpleMessage("PIN eingeben, um Repesentative zu wechseln"),
+    "pinRepChange" : MessageLookupByLibrary.simpleMessage("PIN eingeben, um Repräsentant zu wechseln"),
     "pinSeedBackup" : MessageLookupByLibrary.simpleMessage("PIN eingeben, um Seed zu sehen."),
-    "preferences" : MessageLookupByLibrary.simpleMessage("Darstellung"),
+    "preferences" : MessageLookupByLibrary.simpleMessage("Einstellungen"),
     "privacyPolicy" : MessageLookupByLibrary.simpleMessage("Datenschutz"),
     "qrInvalidAddress" : MessageLookupByLibrary.simpleMessage("QR-Code enthält kein gültiges Ziel"),
     "qrInvalidPermissions" : MessageLookupByLibrary.simpleMessage("Bitte Kamerazugriff erlauben, um QR-Codes zu scannen"),
@@ -173,7 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedDescription" : MessageLookupByLibrary.simpleMessage("Ein Seed enthält dieselben Informationen wie eine Geheimsequenz, ist jedoch maschinell lesbar. Solange du eines der beiden gesichert hast, hast du Zugriff auf dein Guthaben."),
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("Seed ist ungültig."),
     "send" : MessageLookupByLibrary.simpleMessage("Senden"),
-    "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("%1 Bananos senden?"),
+    "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO senden?"),
     "sendError" : MessageLookupByLibrary.simpleMessage("Ein Fehler ist aufgetreten. Bitte versuche es später erneut."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Senden von"),
     "sending" : MessageLookupByLibrary.simpleMessage("Sende"),
@@ -184,9 +185,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Wallet-Passwort festlegen"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Einstellungen"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Von Paper Wallet importieren"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Teile Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Probier Kalium, Bananos offizielles mobiles Wallet!"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Zum Seed wechseln"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Systemsprache"),
-    "tapToHide" : MessageLookupByLibrary.simpleMessage("Zum Verstecken tippen"),
+    "tapToHide" : MessageLookupByLibrary.simpleMessage("Zum Verbergen tippen"),
     "tapToReveal" : MessageLookupByLibrary.simpleMessage("Zum Anzeigen tippen"),
     "themeHeader" : MessageLookupByLibrary.simpleMessage("Thema"),
     "to" : MessageLookupByLibrary.simpleMessage("An"),
@@ -196,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("Tippe, um das Fenster zu schließen."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO wurden erfolgreich an dein Kalium Wallet gesendet."),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("Ein Wallet mit einem Guthaben von %1 BANANO wurde gefunden.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("Der Vorgang kann einige Sekunden dauern."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Tippe, um den Transfer zu bestätigen.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Während des Transfers ist ein Fehler aufgetreten. Bitte versuche es später erneut."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Guthaben\ntransferieren"),

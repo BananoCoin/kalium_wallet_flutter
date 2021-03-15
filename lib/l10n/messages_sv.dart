@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'sv';
+  String get localeName => 'sv';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Stäng"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Bekräfta"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Bekräfta lösenordet"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Ansluter"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 har lagts till under kontakter!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Kontakten existerar redan"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Kontakter"),
@@ -100,8 +100,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "insufficientBalance" : MessageLookupByLibrary.simpleMessage("Saknas täckning"),
     "invalidAddress" : MessageLookupByLibrary.simpleMessage("Ogiltig mottagaradress"),
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Ogiltigt lösenord"),
-    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Natrium-plånbok"),
+    "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Kaliumplånbok"),
     "language" : MessageLookupByLibrary.simpleMessage("Språk"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Support"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Verifiera vid uppstart"),
     "locked" : MessageLookupByLibrary.simpleMessage("Låst"),
     "logout" : MessageLookupByLibrary.simpleMessage("Logga ut"),
@@ -184,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Ställ in plånbokslösenord"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Inställningar"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Ladda från pappersplånbok"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Dela Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Prova Kalium! Bananos officiella mobilplånbok"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Byt till seed"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Systemfel"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Tryck för att dölja"),
@@ -196,7 +199,6 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferClose" : MessageLookupByLibrary.simpleMessage("Tryck någonstans för att stänga fönstret."),
     "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO har överförts till din Kalium-plånbok."),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("En plånbok med ett saldo om %1 BANANO har upptäckts.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("Överföringen kan ta upp till flera sekunder att genomföras."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Tryck på bekräfta för att överföra medel.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Ett fel uppstod vid överföringen. Försök igen senare."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Överför\nmedel"),

@@ -3,22 +3,21 @@
 // messages from the main program should be duplicated here with the same
 // function name.
 
-// ignore_for_file: unnecessary_brace_in_string_interps
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
 
-// ignore: unnecessary_new
 final messages = new MessageLookup();
 
-// ignore: unused_element
-final _keepAnalysisHappy = Intl.defaultLocale;
-
-// ignore: non_constant_identifier_names
-typedef MessageIfAbsent(String message_str, List args);
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 
 class MessageLookup extends MessageLookupByLibrary {
-  get localeName => 'vi';
+  String get localeName => 'vi';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
@@ -49,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "close" : MessageLookupByLibrary.simpleMessage("Đóng"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Xác nhận"),
     "confirmPasswordHint" : MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+    "connectingHeader" : MessageLookupByLibrary.simpleMessage("Đang kết nối"),
     "contactAdded" : MessageLookupByLibrary.simpleMessage("%1 Đã thêm vào liên hệ!"),
     "contactExists" : MessageLookupByLibrary.simpleMessage("Liên hệ đã tồn tại"),
     "contactHeader" : MessageLookupByLibrary.simpleMessage("Liên hệ"),
@@ -78,8 +78,11 @@ class MessageLookup extends MessageLookupByLibrary {
     "enterAddress" : MessageLookupByLibrary.simpleMessage("Nhập địa chỉ"),
     "enterAmount" : MessageLookupByLibrary.simpleMessage("Nhập số lượng"),
     "enterPasswordHint" : MessageLookupByLibrary.simpleMessage("Nhập mật khẩu"),
-    "exampleCardLittle" : MessageLookupByLibrary.simpleMessage("Một ít"),
-    "exampleCardLot" : MessageLookupByLibrary.simpleMessage("Nhiều"),
+    "exampleCardFromKal" : MessageLookupByLibrary.simpleMessage("từ một người nào đó"),
+    "exampleCardIntroKal" : MessageLookupByLibrary.simpleMessage("Chào mừng đến với Kalium. Khi bạn nhận được BANANO, các giao dịch sẽ hiển thị như sau:"),
+    "exampleCardLittle" : MessageLookupByLibrary.simpleMessage("BANANO"),
+    "exampleCardLot" : MessageLookupByLibrary.simpleMessage("BANANO"),
+    "exampleCardToKal" : MessageLookupByLibrary.simpleMessage("đến một người nào đó"),
     "exit" : MessageLookupByLibrary.simpleMessage("Thoát"),
     "fingerprintSeedBackup" : MessageLookupByLibrary.simpleMessage("Xác nhận để sao lưu hạt giống"),
     "goBackButton" : MessageLookupByLibrary.simpleMessage("Quay lại"),
@@ -99,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "invalidPassword" : MessageLookupByLibrary.simpleMessage("Mật khẩu không hợp lệ"),
     "kaliumWallet" : MessageLookupByLibrary.simpleMessage("Ví Kalium"),
     "language" : MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+    "liveSupportButton" : MessageLookupByLibrary.simpleMessage("Hỗ trợ"),
     "lockAppSetting" : MessageLookupByLibrary.simpleMessage("Xác thực khi khởi chạy"),
     "locked" : MessageLookupByLibrary.simpleMessage("Đã khoá"),
     "logout" : MessageLookupByLibrary.simpleMessage("Đăng xuất"),
@@ -154,7 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "repInfoHeader" : MessageLookupByLibrary.simpleMessage("Đại diện là gì?"),
     "requireAPasswordToOpenHeader" : MessageLookupByLibrary.simpleMessage("Yêu cầu mật khẩu để mở Kalium? "),
     "rootWarning" : MessageLookupByLibrary.simpleMessage("Có vẻ như thiết bị của bạn đã được \"root\", \"jailbreak\" hoặc được sửa đổi theo cách làm tổn hại đến bảo mật. Bạn nên đặt lại thiết bị của bạn về trạng thái ban đầu trước khi tiếp tục."),
-    "scanInstructionsKal" : MessageLookupByLibrary.simpleMessage("Quét 1 Banano nđịa chỉ mã QR"),
+    "scanInstructionsKal" : MessageLookupByLibrary.simpleMessage("Quét địa chỉ Banano \nmã QR"),
     "scanQrCode" : MessageLookupByLibrary.simpleMessage("Quét mã QR"),
     "secretInfo" : MessageLookupByLibrary.simpleMessage("Hiển thị tiếp theo bạn sẽ nhìn thấy cụm từ bí mật của bạn. Nó là mật khẩu để truy cập vào quỹ của bạn. Đừng quên sao lưu nó lại và không chia sẻ cho bất kỳ ai."),
     "secretInfoHeader" : MessageLookupByLibrary.simpleMessage("An toàn là trên hết! "),
@@ -181,6 +185,8 @@ class MessageLookup extends MessageLookupByLibrary {
     "setWalletPassword" : MessageLookupByLibrary.simpleMessage("Đặt mật khẩu ví"),
     "settingsHeader" : MessageLookupByLibrary.simpleMessage("Cài đặt"),
     "settingsTransfer" : MessageLookupByLibrary.simpleMessage("Tải lên từ ví giấy"),
+    "shareKalium" : MessageLookupByLibrary.simpleMessage("Chia sẻ Kalium"),
+    "shareKaliumText" : MessageLookupByLibrary.simpleMessage("Kiểm tra Kalium!  Ví di động chính thức của Banano"),
     "switchToSeed" : MessageLookupByLibrary.simpleMessage("Chuyển sang hạt giống"),
     "systemDefault" : MessageLookupByLibrary.simpleMessage("Mặc định hệ thống"),
     "tapToHide" : MessageLookupByLibrary.simpleMessage("Nhấn để ẩn"),
@@ -191,19 +197,20 @@ class MessageLookup extends MessageLookupByLibrary {
     "transactions" : MessageLookupByLibrary.simpleMessage("Các giao dịch"),
     "transfer" : MessageLookupByLibrary.simpleMessage("Chuyển giao"),
     "transferClose" : MessageLookupByLibrary.simpleMessage("Nhấn vào bất kỳ đâu để đóng cửa sổ."),
-    "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO đã được chuyển thành công vào ví Kalium của bạn."),
+    "transferCompleteKal" : MessageLookupByLibrary.simpleMessage("%1 BANANO đã được chuyển thành công vào ví Kalium của bạn. \n"),
     "transferConfirmInfoKal" : MessageLookupByLibrary.simpleMessage("Một ví có số dư là %1 BANANO đã được tìm thấy.\n"),
-    "transferConfirmInfoKalThird" : MessageLookupByLibrary.simpleMessage("Chuyển giao có thể mất vài giây để hoàn thành."),
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Nhấn xác nhận để chuyển quỹ.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Một lỗi đã xảy ra trong quá trình chuyển giao. Hãy thử lại sau."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Chuyển tiền"),
-    "transferIntroKal" : MessageLookupByLibrary.simpleMessage("Quá trình này sẽ chuyển từ quỹ ví giấy sang ví Kalium của bạn.nnNhấn vào \"%1\" Nút để bắt đầu."),
+    "transferIntroKal" : MessageLookupByLibrary.simpleMessage("Quá trình này sẽ chuyển quỹ từ ví giấy sang ví Kalium của bạn.\n\nNhấn nút \"%1\" để bắt đầu."),
     "transferLoading" : MessageLookupByLibrary.simpleMessage("Đang chuyển"),
     "transferManualHint" : MessageLookupByLibrary.simpleMessage("Hãy nhập hạt giống dưới đây"),
     "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("Hạt giống này không chứa bất kỳ BANANO bên trong."),
     "transferQrScanError" : MessageLookupByLibrary.simpleMessage("Mã QR này không chứa hạt giống hợp lệ."),
-    "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("Quét một Banano nseed hoặc private key"),
+    "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("Quét \nhạt giống Banano hoặc khoá chính"),
     "unlock" : MessageLookupByLibrary.simpleMessage("Mở khoá"),
+    "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("Xác thực để mở khoá Kalium"),
+    "unlockPinKal" : MessageLookupByLibrary.simpleMessage("Nhập mã PIN để mở khoá Kalium"),
     "viewDetails" : MessageLookupByLibrary.simpleMessage("Xem chi tiết"),
     "warning" : MessageLookupByLibrary.simpleMessage("CẢNH BÁO!"),
     "welcomeTextKal" : MessageLookupByLibrary.simpleMessage("Chào mừng đến với Kalium. Để tiếp tục, bạn có thể tạo một ví mới hoặc nhập một ví hiện có."),
