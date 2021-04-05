@@ -41,7 +41,8 @@ class _ContactsListState extends State<ContactsList> {
   List<Contact> _contacts;
   String documentsDirectory;
 
-  @override void initState() {
+  @override
+  void initState() {
     super.initState();
     _registerBus();
     // Initial contacts list
@@ -55,7 +56,8 @@ class _ContactsListState extends State<ContactsList> {
     });
   }
 
-  @override void dispose() {
+  @override
+  void dispose() {
     if (_contactAddedSub != null) {
       _contactAddedSub.cancel();
     }
@@ -89,7 +91,7 @@ class _ContactsListState extends State<ContactsList> {
       setState(() {
         _contacts.remove(event.contact);
       });
-    });    
+    });
   }
 
   Future<void> _updateContacts() async {
@@ -111,8 +113,9 @@ class _ContactsListState extends State<ContactsList> {
   Future<void> _exportContacts() async {
     List<Contact> contacts = await sl.get<DBHelper>().getContacts();
     if (contacts.length == 0) {
-      sl.get<UIUtil>().showSnackbar(
-          AppLocalization.of(context).noContactsExport, context);
+      sl
+          .get<UIUtil>()
+          .showSnackbar(AppLocalization.of(context).noContactsExport, context);
       return;
     }
     List<Map<String, dynamic>> jsonList = List();
@@ -131,57 +134,71 @@ class _ContactsListState extends State<ContactsList> {
 
   Future<void> _importContacts() async {
     sl.get<UIUtil>().cancelLockEvent();
-    String filePath = await FilePicker.getFilePath(
-        type: FileType.custom, allowedExtensions: ["txt"]);
-    File f = File(filePath);
-    if (!await f.exists()) {
-      sl.get<UIUtil>().showSnackbar(
-          AppLocalization.of(context).contactsImportErr, context);
-      return;
-    }
-    try {
-      String contents = await f.readAsString();
-      Iterable contactsJson = json.decode(contents);
-      List<Contact> contacts = List();
-      List<Contact> contactsToAdd = List();
-      contactsJson.forEach((contact) {
-        contacts.add(Contact.fromJson(contact));
-      });
-      for (Contact contact in contacts) {
-        if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) &&
-            !await sl.get<DBHelper>().contactExistsWithAddress(contact.address)) {
-          // Contact doesnt exist, make sure name and address are valid
-          if (Address(contact.address).isValid()) {
-            if (contact.name.startsWith("@") && contact.name.length <= 20) {
-              contactsToAdd.add(contact);
+    FilePickerResult result = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
+        type: FileType.custom,
+        allowedExtensions: ["txt"]);
+    if (result != null) {
+      File f = File(result.files.single.path);
+      if (!await f.exists()) {
+        sl.get<UIUtil>().showSnackbar(
+            AppLocalization.of(context).contactsImportErr, context);
+        return;
+      }
+      try {
+        String contents = await f.readAsString();
+        Iterable contactsJson = json.decode(contents);
+        List<Contact> contacts = List();
+        List<Contact> contactsToAdd = List();
+        contactsJson.forEach((contact) {
+          contacts.add(Contact.fromJson(contact));
+        });
+        for (Contact contact in contacts) {
+          if (!await sl.get<DBHelper>().contactExistsWithName(contact.name) &&
+              !await sl
+                  .get<DBHelper>()
+                  .contactExistsWithAddress(contact.address)) {
+            // Contact doesnt exist, make sure name and address are valid
+            if (Address(contact.address).isValid()) {
+              if (contact.name.startsWith("@") && contact.name.length <= 20) {
+                contactsToAdd.add(contact);
+              }
             }
           }
         }
-      }
-      // Save all the new contacts and update states
-      int numSaved = await sl.get<DBHelper>().saveContacts(contactsToAdd);
-      if (numSaved > 0) {
-        _updateContacts();
-        EventTaxiImpl.singleton().fire(
-            ContactModifiedEvent(contact: Contact(name: "", address: "")));
-        sl.get<UIUtil>().showSnackbar(
-            AppLocalization.of(context)
-                .contactsImportSuccess
-                .replaceAll("%1", numSaved.toString()),
-            context);
-      } else {
+        // Save all the new contacts and update states
+        int numSaved = await sl.get<DBHelper>().saveContacts(contactsToAdd);
+        if (numSaved > 0) {
+          _updateContacts();
+          EventTaxiImpl.singleton().fire(
+              ContactModifiedEvent(contact: Contact(name: "", address: "")));
+          sl.get<UIUtil>().showSnackbar(
+              AppLocalization.of(context)
+                  .contactsImportSuccess
+                  .replaceAll("%1", numSaved.toString()),
+              context);
+        } else {
+          sl.get<UIUtil>().showSnackbar(
+              AppLocalization.of(context).noContactsImport, context);
+        }
+      } catch (e) {
+        log.e(e.toString(), e);
         sl.get<UIUtil>().showSnackbar(
             AppLocalization.of(context).noContactsImport, context);
+        return;
       }
-    } catch (e) {
-      log.e(e.toString(), e);
-      sl.get<UIUtil>().showSnackbar(
-          AppLocalization.of(context).contactsImportErr, context);
+    } else {
+      // Cancelled by user
+      log.e("FilePicker cancelled by user");
+      sl
+          .get<UIUtil>()
+          .showSnackbar(AppLocalization.of(context).contactsImportErr, context);
       return;
     }
   }
 
-  @override Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
     return _buildContacts(context);
   }
 
@@ -353,9 +370,7 @@ class _ContactsListState extends State<ContactsList> {
                       AppLocalization.of(context).addContact,
                       Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                     Sheets.showAppHeightNineSheet(
-                        context: context,
-                        widget: AddContactSheet()
-                    );
+                        context: context, widget: AddContactSheet());
                   }),
                 ],
               ),
