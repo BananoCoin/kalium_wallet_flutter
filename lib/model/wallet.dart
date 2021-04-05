@@ -6,10 +6,12 @@ import 'package:kalium_wallet_flutter/util/numberutil.dart';
 
 /// Main wallet object that's passed around the app via state
 class AppWallet {
-  static const String defaultRepresentative = 'ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo';
+  static const String defaultRepresentative =
+      'ban_1ka1ium4pfue3uxtntqsrib8mumxgazsjf58gidh1xeo5te3whsq8z476goo';
 
   bool _loading; // Whether or not app is initially loading
-  bool _historyLoading; // Whether or not we have received initial account history response
+  bool
+      _historyLoading; // Whether or not we have received initial account history response
   String _address;
   BigInt _accountBalance;
   String _frontier;
@@ -20,12 +22,25 @@ class AppWallet {
   String _nanoPrice;
   String _btcPrice;
   int _blockCount;
+  int confirmationHeight;
   List<AccountHistoryResponseItem> _history;
 
-
-  AppWallet({String address, BigInt accountBalance, String frontier, String openBlock, String representativeBlock,
-                String representative, String localCurrencyPrice, String nanoPrice, String btcPrice, int blockCount,
-                List<AccountHistoryResponseItem> history, bool loading, bool historyLoading}) {
+  AppWallet({
+    String address,
+    BigInt accountBalance,
+    String frontier,
+    String openBlock,
+    String representativeBlock,
+    String representative,
+    String localCurrencyPrice,
+    String nanoPrice,
+    String btcPrice,
+    int blockCount,
+    List<AccountHistoryResponseItem> history,
+    bool loading,
+    bool historyLoading,
+    this.confirmationHeight = -1,
+  }) {
     this._address = address;
     this._accountBalance = accountBalance ?? BigInt.zero;
     this._frontier = frontier;
@@ -38,7 +53,7 @@ class AppWallet {
     this._blockCount = blockCount ?? 0;
     this._history = history ?? new List<AccountHistoryResponseItem>();
     this._loading = loading ?? true;
-    this._historyLoading = historyLoading  ?? true;
+    this._historyLoading = historyLoading ?? true;
   }
 
   String get address => _address;
@@ -61,16 +76,19 @@ class AppWallet {
     return NumberUtil.getRawAsUsableString(_accountBalance.toString());
   }
 
-
   String getLocalCurrencyPrice({String locale = "en_US"}) {
-    Decimal converted = Decimal.parse(_localCurrencyPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_localCurrencyPrice) *
+        NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     switch (locale) {
       case "es_VE":
-        return NumberFormat.currency(locale:locale, symbol: "Bs.S").format(converted.toDouble());
+        return NumberFormat.currency(locale: locale, symbol: "Bs.S")
+            .format(converted.toDouble());
       case "tr_TR":
-        return NumberFormat.currency(locale:locale, symbol: "₺").format(converted.toDouble());
+        return NumberFormat.currency(locale: locale, symbol: "₺")
+            .format(converted.toDouble());
       default:
-        return NumberFormat.simpleCurrency(locale:locale).format(converted.toDouble());
+        return NumberFormat.simpleCurrency(locale: locale)
+            .format(converted.toDouble());
     }
   }
 
@@ -83,12 +101,15 @@ class AppWallet {
   }
 
   String get btcPrice {
-    Decimal converted = Decimal.parse(_btcPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_btcPrice) *
+        NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     // Show 4 decimal places for BTC price if its >= 0.0001 BTC, otherwise 6 decimals
     if (converted >= Decimal.parse("0.0001")) {
-      return new NumberFormat("#,##0.0000", "en_US").format(converted.toDouble());
+      return new NumberFormat("#,##0.0000", "en_US")
+          .format(converted.toDouble());
     } else {
-      return new NumberFormat("#,##0.000000", "en_US").format(converted.toDouble());
+      return new NumberFormat("#,##0.000000", "en_US")
+          .format(converted.toDouble());
     }
   }
 
@@ -97,12 +118,14 @@ class AppWallet {
   }
 
   String get nanoPrice {
-    Decimal converted = Decimal.parse(_nanoPrice) * NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+    Decimal converted = Decimal.parse(_nanoPrice) *
+        NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
     // Show 2 decimal places for nano price if its >= 1 NANO, otherwise 4 decimals
     if (converted >= Decimal.parse("1")) {
       return new NumberFormat("#,##0.00", "en_US").format(converted.toDouble());
     } else {
-      return new NumberFormat("#,##0.0000", "en_US").format(converted.toDouble());
+      return new NumberFormat("#,##0.0000", "en_US")
+          .format(converted.toDouble());
     }
   }
 
@@ -111,7 +134,7 @@ class AppWallet {
   }
 
   String get representative {
-   return _representative ?? defaultRepresentative;
+    return _representative ?? defaultRepresentative;
   }
 
   set representative(String value) {

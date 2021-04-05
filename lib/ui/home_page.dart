@@ -35,6 +35,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/list_slidable.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/reactive_refresh.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/transaction_state_tag.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
@@ -271,6 +272,7 @@ class _AppHomePageState extends State<AppHomePage>
     });
   }
 
+  StreamSubscription<ConfirmationHeightChangedEvent> _confirmEventSub;
   StreamSubscription<HistoryHomeEvent> _historySub;
   StreamSubscription<ContactModifiedEvent> _contactModifiedSub;
   StreamSubscription<DisableLockTimeoutEvent> _disableLockSub;
@@ -312,6 +314,7 @@ class _AppHomePageState extends State<AppHomePage>
         StateContainer.of(context).wallet.historyLoading = true;
         _startAnimation();
         StateContainer.of(context).updateWallet(account: event.account);
+        currentConfHeight = -1;
       });
       paintQrCode(address: event.account.address);
       if (event.delayPop) {
@@ -321,6 +324,12 @@ class _AppHomePageState extends State<AppHomePage>
       } else if (!event.noPop) {
         Navigator.of(context).popUntil(RouteUtils.withNameLike("/home"));
       }
+    });
+    // Handle subscribe
+    _confirmEventSub = EventTaxiImpl.singleton()
+        .registerTo<ConfirmationHeightChangedEvent>()
+        .listen((event) {
+      updateConfirmationHeights(event.confirmationHeight);
     });
   }
 
@@ -345,6 +354,67 @@ class _AppHomePageState extends State<AppHomePage>
     if (_switchAccountSub != null) {
       _switchAccountSub.cancel();
     }
+    if (_confirmEventSub != null) {
+      _confirmEventSub.cancel();
+    }
+  }
+
+  int currentConfHeight = -1;
+
+  void updateConfirmationHeights(int confirmationHeight) {
+    setState(() {
+      currentConfHeight = confirmationHeight;
+    });
+    if (!_historyListMap
+        .containsKey(StateContainer.of(context).wallet.address)) {
+      return;
+    }
+    List<int> unconfirmedUpdate = List();
+    List<int> confirmedUpdate = List();
+    for (int i = 0;
+        i <
+            _historyListMap[StateContainer.of(context).wallet.address]
+                .items
+                .length;
+        i++) {
+      if ((_historyListMap[StateContainer.of(context).wallet.address][i]
+                      .confirmed ==
+                  null ||
+              _historyListMap[StateContainer.of(context).wallet.address][i]
+                  .confirmed) &&
+          _historyListMap[StateContainer.of(context).wallet.address][i]
+                  .height !=
+              null &&
+          confirmationHeight <
+              _historyListMap[StateContainer.of(context).wallet.address][i]
+                  .height) {
+        unconfirmedUpdate.add(i);
+      } else if ((_historyListMap[StateContainer.of(context).wallet.address][i]
+                      .confirmed ==
+                  null ||
+              !_historyListMap[StateContainer.of(context).wallet.address][i]
+                  .confirmed) &&
+          _historyListMap[StateContainer.of(context).wallet.address][i]
+                  .height !=
+              null &&
+          confirmationHeight >=
+              _historyListMap[StateContainer.of(context).wallet.address][i]
+                  .height) {
+        confirmedUpdate.add(i);
+      }
+    }
+    unconfirmedUpdate.forEach((element) {
+      setState(() {
+        _historyListMap[StateContainer.of(context).wallet.address][element]
+            .confirmed = false;
+      });
+    });
+    confirmedUpdate.forEach((element) {
+      setState(() {
+        _historyListMap[StateContainer.of(context).wallet.address][element]
+            .confirmed = true;
+      });
+    });
   }
 
   @override
@@ -547,6 +617,9 @@ class _AppHomePageState extends State<AppHomePage>
     // Re-subscribe if missing data
     if (StateContainer.of(context).wallet.loading) {
       StateContainer.of(context).requestSubscribe();
+    } else {
+      updateConfirmationHeights(
+          StateContainer.of(context).wallet.confirmationHeight);
     }
   }
 
@@ -929,10 +1002,31 @@ class _AppHomePageState extends State<AppHomePage>
                     ),
                     Container(
                       width: MediaQuery.of(context).size.width / 2.4,
-                      child: Text(
-                        displayName,
-                        textAlign: TextAlign.end,
-                        style: AppStyles.textStyleTransactionAddress(context),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            displayName,
+                            textAlign: TextAlign.end,
+                            style:
+                                AppStyles.textStyleTransactionAddress(context),
+                          ),
+
+                          // TRANSACTION STATE TAG
+                          (item.confirmed != null && !item.confirmed) ||
+                                  (currentConfHeight > -1 &&
+                                      item.height != null &&
+                                      item.height > currentConfHeight)
+                              ? Container(
+                                  margin: EdgeInsetsDirectional.only(
+                                    top: 4,
+                                  ),
+                                  child: TransactionStateTag(
+                                      transactionState:
+                                          TransactionStateOptions.UNCONFIRMED),
+                                )
+                              : SizedBox()
+                        ],
                       ),
                     ),
                   ],

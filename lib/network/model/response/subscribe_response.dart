@@ -11,50 +11,54 @@ double _toDouble(v) {
 /// For running in an isolate, needs to be top-level function
 SubscribeResponse subscribeResponseFromJson(Map<dynamic, dynamic> json) {
   return SubscribeResponse.fromJson(json);
-} 
+}
 
 @JsonSerializable()
 class SubscribeResponse {
-  @JsonKey(name:'frontier')
+  @JsonKey(name: 'frontier')
   String frontier;
 
-  @JsonKey(name:'open_block')
+  @JsonKey(name: 'open_block')
   String openBlock;
 
-  @JsonKey(name:'representative_block')
+  @JsonKey(name: 'representative_block')
   String representativeBlock;
 
-  @JsonKey(name:'representative')
+  @JsonKey(name: 'representative')
   String representative;
 
   // Balance in RAW
-  @JsonKey(name:'balance')
+  @JsonKey(name: 'balance')
   String balance;
 
-  @JsonKey(name:'block_count', fromJson: _toInt)
+  @JsonKey(name: 'block_count', fromJson: _toInt)
   int blockCount;
 
-  @JsonKey(name:'pending')
+  @JsonKey(name: 'pending')
   String pending;
 
   // Server provides a uuid for each connection
-  @JsonKey(name:'uuid')
+  @JsonKey(name: 'uuid')
   String uuid;
 
-  @JsonKey(name:'price', fromJson:_toDouble)
+  @JsonKey(name: 'price', fromJson: _toDouble)
   double price;
 
-  @JsonKey(name:'btc', fromJson:_toDouble)
+  @JsonKey(name: 'btc', fromJson: _toDouble)
   double btcPrice;
 
-  @JsonKey(name:'nano', fromJson:_toDouble)
+  @JsonKey(name: 'nano', fromJson: _toDouble)
   double nanoPrice;
 
-  @JsonKey(name:'pending_count')
+  @JsonKey(name: 'pending_count')
   int pendingCount;
+
+  @JsonKey(name: 'confirmation_height', nullable: false, fromJson: _toInt)
+  int confirmationHeight;
 
   SubscribeResponse();
 
-  factory SubscribeResponse.fromJson(Map<String, dynamic> json) => _$SubscribeResponseFromJson(json);
+  factory SubscribeResponse.fromJson(Map<String, dynamic> json) =>
+      _$SubscribeResponseFromJson(json);
   Map<String, dynamic> toJson() => _$SubscribeResponseToJson(this);
 }

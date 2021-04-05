@@ -632,11 +632,11 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
         )));
   }
 
-  void _pinEnteredCallback(String pin) {
-    sl.get<Vault>().writePin(pin).then((result) {
-      // Update wallet
-      Navigator.of(context)
-          .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-    });
+  Future _pinEnteredCallback(String pin) async {
+    await sl.get<Vault>().writePin(pin);
+    StateContainer.of(context).requestSubscribe();
+    // Update wallet
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }
 }

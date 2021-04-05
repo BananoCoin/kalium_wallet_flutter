@@ -139,12 +139,11 @@ class _IntroBackupConfirmState extends State<IntroBackupConfirm> {
     );
   }
 
-  void _pinEnteredCallback(String pin) {
-    sl.get<SharedPrefsUtil>().setSeedBackedUp(true).then((result) {
-      sl.get<Vault>().writePin(pin).then((result) {
-        Navigator.of(context)
-            .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
-      });
-    });
+  Future _pinEnteredCallback(String pin) async {
+    await sl.get<SharedPrefsUtil>().setSeedBackedUp(true);
+    await sl.get<Vault>().writePin(pin);
+    StateContainer.of(context).requestSubscribe();
+    Navigator.of(context)
+        .pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
   }
 }

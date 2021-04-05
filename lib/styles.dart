@@ -494,6 +494,15 @@ class AppStyles {
       fontWeight: FontWeight.w100,
     );
   }
+
+  static TextStyle tagText(BuildContext context) {
+    return TextStyle(
+      fontSize: 12,
+      color: StateContainer.of(context).curTheme.text60,
+      fontFamily: 'NunitoSans',
+      fontWeight: FontWeight.w400,
+    );
+  }
 }
 
 class AppFontSizes {
