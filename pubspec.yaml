@@ -40,7 +40,7 @@ dependencies:
   device_info: ^2.0.0
 
   # JSON Serialization
-  json_annotation: ^3.1.1
+  json_annotation: ^4.0.1
 
   # Localization
   intl: ^0.17.0
@@ -66,7 +66,7 @@ dependencies:
   event_taxi: ^1.0.0
 
   # SVG
-  flutter_svg: ^0.19.3
+  flutter_svg: ^0.21.0-nullsafety.0
     
   # QR Codes
   qr_flutter: ^2.0.1 # Generator
@@ -134,8 +134,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: 1.11.1
-  json_serializable: ^3.5.1
+  build_runner: 1.12.2
+  json_serializable: ^4.1.0
   intl_translation:
     git:
       url: https://github.com/bbedward/intl_translation.git
