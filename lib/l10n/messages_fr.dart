@@ -175,7 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("La clé privée est invalide"),
     "send" : MessageLookupByLibrary.simpleMessage("Envoyer"),
     "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("Envoyer les Bananos?"),
-    "sendError" : MessageLookupByLibrary.simpleMessage("Une erreur est survenue. Veuillez réessayer plus tard."),
+    "sendError" : MessageLookupByLibrary.simpleMessage("Une erreur s\'est produite. Veuillez réessayer plus tard."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Envoyer depuis"),
     "sending" : MessageLookupByLibrary.simpleMessage("Envoi en cours"),
     "sent" : MessageLookupByLibrary.simpleMessage("Envoyé"),

@@ -175,7 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("Seed is ongeldig"),
     "send" : MessageLookupByLibrary.simpleMessage("Verstuur"),
     "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("Verstuur %1 Banano"),
-    "sendError" : MessageLookupByLibrary.simpleMessage("Er ging iets fout. Probeer het a.u.b. nog een keer."),
+    "sendError" : MessageLookupByLibrary.simpleMessage("Er is een fout opgetreden. Probeer het later nog eens."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Verstuur vanaf"),
     "sending" : MessageLookupByLibrary.simpleMessage("Versturen"),
     "sent" : MessageLookupByLibrary.simpleMessage("Verstuurd"),

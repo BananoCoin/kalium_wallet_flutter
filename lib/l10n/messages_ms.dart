@@ -175,7 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("Benih tidak sah"),
     "send" : MessageLookupByLibrary.simpleMessage("Hantar"),
     "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("Hantar %1 Banano?"),
-    "sendError" : MessageLookupByLibrary.simpleMessage("Sesuatu kesilapan telah berlaku. Sila cuba lagi."),
+    "sendError" : MessageLookupByLibrary.simpleMessage("Berlaku ralat. Cuba lagi nanti."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Dihantar dari"),
     "sending" : MessageLookupByLibrary.simpleMessage("Sedang dihantarkan"),
     "sent" : MessageLookupByLibrary.simpleMessage("Dihantar"),

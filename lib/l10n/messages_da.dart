@@ -175,7 +175,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "seedInvalid" : MessageLookupByLibrary.simpleMessage("Seed er ugyldigt"),
     "send" : MessageLookupByLibrary.simpleMessage("Send"),
     "sendAmountConfirmKal" : MessageLookupByLibrary.simpleMessage("Insend %1 BANANO"),
-    "sendError" : MessageLookupByLibrary.simpleMessage("Der opstod en fejl. Prøv igen senere."),
+    "sendError" : MessageLookupByLibrary.simpleMessage("En fejl opstod. Prøv igen senere."),
     "sendFrom" : MessageLookupByLibrary.simpleMessage("Send fra"),
     "sending" : MessageLookupByLibrary.simpleMessage("Sender"),
     "sent" : MessageLookupByLibrary.simpleMessage("Sendt"),
