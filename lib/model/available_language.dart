@@ -50,7 +50,7 @@ class LanguageSetting extends SettingSelectionItem {
       case AvailableLanguage.FRENCH:
         return "Français (fr)";
       case AvailableLanguage.DANISH:
-        return "Dansk (dk)";
+        return "Dansk (da)";
       case AvailableLanguage.GERMAN:
         return "Deutsch (de)";
       case AvailableLanguage.SPANISH:
@@ -166,7 +166,8 @@ class LanguageSetting extends SettingSelectionItem {
     if (localeStr == 'DEFAULT') {
       return Locale('en');
     } else if (localeStr == 'zh-Hans' || localeStr == 'zh-Hant') {
-      return Locale.fromSubtags(languageCode: 'zh', scriptCode: localeStr.split('-')[1]);
+      return Locale.fromSubtags(
+          languageCode: 'zh', scriptCode: localeStr.split('-')[1]);
     }
     return Locale(localeStr);
   }
