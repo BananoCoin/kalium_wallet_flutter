@@ -1014,7 +1014,8 @@ class _AppHomePageState extends State<AppHomePage>
 
                           // TRANSACTION STATE TAG
                           (item.confirmed != null && !item.confirmed) ||
-                                  (currentConfHeight > -1 &&
+                                  (currentConfHeight != null &&
+                                      currentConfHeight > -1 &&
                                       item.height != null &&
                                       item.height > currentConfHeight)
                               ? Container(

@@ -19,7 +19,8 @@ SubscribeResponse _$SubscribeResponseFromJson(Map<String, dynamic> json) {
     ..price = _toDouble(json['price'])
     ..btcPrice = _toDouble(json['btc'])
     ..nanoPrice = _toDouble(json['nano'])
-    ..pendingCount = json['pending_count'] as int;
+    ..pendingCount = json['pending_count'] as int
+    ..confirmationHeight = _toInt(json['confirmation_height'] as String);
 }
 
 Map<String, dynamic> _$SubscribeResponseToJson(SubscribeResponse instance) =>
@@ -36,4 +37,5 @@ Map<String, dynamic> _$SubscribeResponseToJson(SubscribeResponse instance) =>
       'btc': instance.btcPrice,
       'nano': instance.nanoPrice,
       'pending_count': instance.pendingCount,
+      'confirmation_height': instance.confirmationHeight,
     };

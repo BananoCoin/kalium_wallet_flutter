@@ -53,7 +53,7 @@ class SubscribeResponse {
   @JsonKey(name: 'pending_count')
   int pendingCount;
 
-  @JsonKey(name: 'confirmation_height', nullable: false, fromJson: _toInt)
+  @JsonKey(name: 'confirmation_height', fromJson: _toInt)
   int confirmationHeight;
 
   SubscribeResponse();
