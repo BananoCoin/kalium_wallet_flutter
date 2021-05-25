@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("Bu seedin içinde hiç BANANO yok."),
     "transferQrScanError" : MessageLookupByLibrary.simpleMessage("Bu QR kodu geçerli bir seed içermiyor."),
     "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("Bir Banano seedi \nveya private key\'i tara"),
+    "unconfirmed" : MessageLookupByLibrary.simpleMessage("onaylanmamış"),
     "unlock" : MessageLookupByLibrary.simpleMessage("Kilidi Aç"),
     "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("Kalium’u Açmak için Kimliğini Doğrula"),
     "unlockPinKal" : MessageLookupByLibrary.simpleMessage("Kalium’u Açmak için Pin Kodunu Gir"),

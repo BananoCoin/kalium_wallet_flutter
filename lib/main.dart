@@ -112,6 +112,8 @@ class _AppState extends State<App> {
           const Locale('tl'), // Tagalog
           const Locale('tr'), // Turkish
           const Locale('vi'), // Vietnamese
+          const Locale('ca'), // Catalan
+          const Locale('uk'), // Ukrainian
           const Locale.fromSubtags(
               languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
           const Locale.fromSubtags(

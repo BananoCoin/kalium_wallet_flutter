@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("Deze seed bevat geen Banano."),
     "transferQrScanError" : MessageLookupByLibrary.simpleMessage("Deze QR-code bevat geen geldige seed."),
     "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("Scan een Banano \nseed of private key"),
+    "unconfirmed" : MessageLookupByLibrary.simpleMessage("onbevestigd"),
     "unlock" : MessageLookupByLibrary.simpleMessage("Ontgrendelen"),
     "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("Verifiëren om Kalium te ontgrendelen"),
     "unlockPinKal" : MessageLookupByLibrary.simpleMessage("PIN invoeren om Kalium te ontgrendelen"),

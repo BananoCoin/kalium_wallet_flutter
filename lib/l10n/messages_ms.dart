@@ -208,6 +208,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("Benih ini tidak mempunyai sebarang BANANO di atasnya"),
     "transferQrScanError" : MessageLookupByLibrary.simpleMessage("Kod QR ini tidak mengandungi benih yang sah."),
     "transferQrScanHintKal" : MessageLookupByLibrary.simpleMessage("Imbas banano \n benih atau kunci peribadi"),
+    "unconfirmed" : MessageLookupByLibrary.simpleMessage("tidak disahkan"),
     "unlock" : MessageLookupByLibrary.simpleMessage("Buka kunci"),
     "unlockBiometricsKal" : MessageLookupByLibrary.simpleMessage("Mengesahkan untuk Membuka Kalium"),
     "unlockPinKal" : MessageLookupByLibrary.simpleMessage("Masukkan PIN untuk Membuka Kalium"),

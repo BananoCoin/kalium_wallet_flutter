@@ -5,6 +5,7 @@ import 'package:kalium_wallet_flutter/model/setting_item.dart';
 enum AvailableLanguage {
   DEFAULT,
   ENGLISH,
+  CATALAN,
   CHINESE_SIMPLIFIED,
   CHINESE_TRADITIONAL,
   DANISH,
@@ -30,7 +31,8 @@ enum AvailableLanguage {
   TURKISH,
   VIETNAMESE,
   ARABIC,
-  LATVIAN
+  LATVIAN,
+  UKRAINIAN,
 }
 
 /// Represent the available languages our app supports
@@ -95,6 +97,10 @@ class LanguageSetting extends SettingSelectionItem {
         return "繁體中文 (zh-Hant)";
       case AvailableLanguage.MALAY:
         return "Bahasa Melayu (ms)";
+      case AvailableLanguage.CATALAN:
+        return "Català (ca)";
+      case AvailableLanguage.UKRAINIAN:
+        return "Ukrainian (uk)";
       default:
         return AppLocalization.of(context).systemDefault;
     }
@@ -156,6 +162,10 @@ class LanguageSetting extends SettingSelectionItem {
         return "ms";
       case AvailableLanguage.DANISH:
         return "da";
+      case AvailableLanguage.CATALAN:
+        return "ca";
+      case AvailableLanguage.UKRAINIAN:
+        return "uk";
       default:
         return "DEFAULT";
     }
