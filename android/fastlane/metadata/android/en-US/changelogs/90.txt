@@ -1,5 +1,4 @@
 - Misc. fixes and improvements
-- Add Catalan translation
-- Add Ukrainian translation
+- Add support for Catalan, Norwegian, and Ukrainian languages
 - Add Ukrainian hryvnia currency
 - Update other translations

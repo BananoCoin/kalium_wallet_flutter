@@ -202,7 +202,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "transferConfirmInfoSecond" : MessageLookupByLibrary.simpleMessage("Tryk på Bekræft for at overføre midlerne.\n"),
     "transferError" : MessageLookupByLibrary.simpleMessage("Der opstod en fejl under overførslen. Prøv igen senere."),
     "transferHeader" : MessageLookupByLibrary.simpleMessage("Overfør midler"),
-    "transferIntroKal" : MessageLookupByLibrary.simpleMessage("Denne proces overfører penge fra en Papir tegnebog til din Kalium tegnebog.\n\nTryk på \"%1\" knappen for at begynde."),
+    "transferIntroKal" : MessageLookupByLibrary.simpleMessage("Denne proces overfører midler fra en Papir tegnebog til din Kalium tegnebog.\n\nTryk på \"%1\" knappen for at begynde."),
     "transferLoading" : MessageLookupByLibrary.simpleMessage("Overfører"),
     "transferManualHint" : MessageLookupByLibrary.simpleMessage("Indtast Seed nedenfor."),
     "transferNoFundsKal" : MessageLookupByLibrary.simpleMessage("Dette Seed indeholder ingen BANANO"),

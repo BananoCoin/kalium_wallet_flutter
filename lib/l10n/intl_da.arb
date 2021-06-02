@@ -208,7 +208,7 @@
   "logoutDetailKal": "Når du logger ud, fjernes dit Seed og alle data relateret til Kalium fra denne enhed. Hvis dit Seed ikke er sikkerhedskopieret, vil du aldrig kunne få adgang til dine midler igen.",
   "notificationTitleKal": "Modtaget %1 BANANO",
   "notificationBodyKal": "Åbn Kalium for at se denne transaktion",
-  "transferIntroKal": "Denne proces overfører penge fra en Papir tegnebog til din Kalium tegnebog.\n\nTryk på \"%1\" knappen for at begynde.",
+  "transferIntroKal": "Denne proces overfører midler fra en Papir tegnebog til din Kalium tegnebog.\n\nTryk på \"%1\" knappen for at begynde.",
   "transferQrScanHintKal": "Scan en Banano \nSeed eller privat nøgle",
   "transferNoFundsKal": "Dette Seed indeholder ingen BANANO",
   "transferConfirmInfoKal": "En tegnebog med en saldo på %1 BANANO blev fundet.\n",

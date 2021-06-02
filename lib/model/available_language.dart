@@ -33,6 +33,7 @@ enum AvailableLanguage {
   ARABIC,
   LATVIAN,
   UKRAINIAN,
+  NORWEGIAN,
 }
 
 /// Represent the available languages our app supports
@@ -101,6 +102,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "Català (ca)";
       case AvailableLanguage.UKRAINIAN:
         return "Ukrainian (uk)";
+      case AvailableLanguage.NORWEGIAN:
+        return "Norsk (no)";
       default:
         return AppLocalization.of(context).systemDefault;
     }
@@ -166,6 +169,8 @@ class LanguageSetting extends SettingSelectionItem {
         return "ca";
       case AvailableLanguage.UKRAINIAN:
         return "uk";
+      case AvailableLanguage.NORWEGIAN:
+        return "no";
       default:
         return "DEFAULT";
     }
