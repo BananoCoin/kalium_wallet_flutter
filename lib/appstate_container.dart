@@ -415,6 +415,7 @@ class StateContainerState extends State<StateContainer> {
     }
     EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(
         confirmationHeight: response.confirmationHeight));
+    print(response.price.toString());
     setState(() {
       wallet.loading = false;
       wallet.frontier = response.frontier;

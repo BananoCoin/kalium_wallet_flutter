@@ -18,7 +18,9 @@ class SendCompleteSheet extends StatefulWidget {
   final String contactName;
   final String localAmount;
 
-  SendCompleteSheet({this.amountRaw, this.destination, this.contactName, this.localAmount}) : super();  
+  SendCompleteSheet(
+      {this.amountRaw, this.destination, this.contactName, this.localAmount})
+      : super();
 
   _SendCompleteSheetState createState() => _SendCompleteSheetState();
 }
@@ -45,8 +47,8 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        minimum: EdgeInsets.only(
-            bottom: MediaQuery.of(context).size.height * 0.035),
+        minimum:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
         child: Column(
           children: <Widget>[
             // Sheet handle
@@ -70,23 +72,18 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                     margin: EdgeInsets.only(bottom: 25),
                     child: Icon(AppIcons.success,
                         size: 100,
-                        color: StateContainer.of(context)
-                            .curTheme
-                            .success),
+                        color: StateContainer.of(context).curTheme.success),
                   ),
                   // Container for the Amount Text
                   Container(
                     margin: EdgeInsets.only(
                         left: MediaQuery.of(context).size.width * 0.105,
-                        right:
-                            MediaQuery.of(context).size.width * 0.105),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 25, vertical: 15),
+                        right: MediaQuery.of(context).size.width * 0.105),
+                    padding: EdgeInsets.symmetric(horizontal: 25, vertical: 15),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      color: StateContainer.of(context)
-                          .curTheme
-                          .backgroundDarkest,
+                      color:
+                          StateContainer.of(context).curTheme.backgroundDarkest,
                       borderRadius: BorderRadius.circular(50),
                     ),
                     // Amount text
@@ -98,23 +95,23 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                           TextSpan(
                             text: "$amount",
                             style: TextStyle(
-                              color: StateContainer.of(context)
-                                  .curTheme
-                                  .success,
+                              color:
+                                  StateContainer.of(context).curTheme.success,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
+                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                           TextSpan(
                             text: " BAN",
                             style: TextStyle(
-                              color: StateContainer.of(context)
-                                  .curTheme
-                                  .success,
+                              color:
+                                  StateContainer.of(context).curTheme.success,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
                               fontFamily: 'NunitoSans',
+                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                           TextSpan(
@@ -122,12 +119,12 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                                 ? " (${widget.localAmount})"
                                 : "",
                             style: TextStyle(
-                              color: StateContainer.of(context)
-                                  .curTheme
-                                  .success,
+                              color:
+                                  StateContainer.of(context).curTheme.success,
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
+                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                         ],
@@ -142,15 +139,13 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                         // "SENT TO" text
                         Text(
                           CaseChange.toUpperCase(
-                              AppLocalization.of(context).sentTo,
-                              context),
+                              AppLocalization.of(context).sentTo, context),
                           style: TextStyle(
                             fontSize: 28.0,
                             fontWeight: FontWeight.w700,
-                            color: StateContainer.of(context)
-                                .curTheme
-                                .success,
+                            color: StateContainer.of(context).curTheme.success,
                             fontFamily: 'NunitoSans',
+                            fontFamilyFallback: ["Roboto"],
                           ),
                         ),
                       ],
@@ -161,10 +156,8 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                       padding: EdgeInsets.symmetric(
                           horizontal: 25.0, vertical: 15.0),
                       margin: EdgeInsets.only(
-                          left:
-                              MediaQuery.of(context).size.width * 0.105,
-                          right: MediaQuery.of(context).size.width *
-                              0.105),
+                          left: MediaQuery.of(context).size.width * 0.105,
+                          right: MediaQuery.of(context).size.width * 0.105),
                       width: double.infinity,
                       decoration: BoxDecoration(
                         color: StateContainer.of(context)
@@ -172,10 +165,10 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                             .backgroundDarkest,
                         borderRadius: BorderRadius.circular(25),
                       ),
-                      child:  sl.get<UIUtil>().threeLineAddressText(
-                              context, widget.destination,
-                              type: ThreeLineAddressTextType.SUCCESS,
-                              contactName: widget.contactName)),
+                      child: sl.get<UIUtil>().threeLineAddressText(
+                          context, widget.destination,
+                          type: ThreeLineAddressTextType.SUCCESS,
+                          contactName: widget.contactName)),
                 ],
               ),
             ),
@@ -190,8 +183,7 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                           context,
                           AppButtonType.SUCCESS_OUTLINE,
                           CaseChange.toUpperCase(
-                              AppLocalization.of(context).close,
-                              context),
+                              AppLocalization.of(context).close, context),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
@@ -201,8 +193,6 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
               ),
             ),
           ],
-        )
-      );    
+        ));
   }
 }
-

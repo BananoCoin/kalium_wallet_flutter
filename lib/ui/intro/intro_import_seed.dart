@@ -518,6 +518,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                                         .primary
                                                     : Colors.transparent,
                                             fontFamily: 'NunitoSans',
+                                            fontFamilyFallback: ["Roboto"],
                                             fontWeight: FontWeight.w600,
                                           )),
                                     ),

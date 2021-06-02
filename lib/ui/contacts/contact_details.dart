@@ -56,7 +56,8 @@ class ContactDetailsSheet {
                       Container(
                         width: 50,
                         height: 50,
-                        margin: EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
+                        margin:
+                            EdgeInsetsDirectional.only(top: 10.0, start: 10.0),
                         child: FlatButton(
                           highlightColor:
                               StateContainer.of(context).curTheme.text15,
@@ -72,7 +73,10 @@ class ContactDetailsSheet {
                                 CaseChange.toUpperCase(
                                     AppLocalization.of(context).yes, context),
                                 () {
-                              sl.get<DBHelper>().deleteContact(contact).then((deleted) {
+                              sl
+                                  .get<DBHelper>()
+                                  .deleteContact(contact)
+                                  .then((deleted) {
                                 if (deleted) {
                                   // Delete image if exists
                                   if (contact.monkeyPath != null) {
@@ -112,7 +116,9 @@ class ContactDetailsSheet {
                       ),
                       // The header of the sheet
                       Container(
-                        margin: EdgeInsets.only(top: 25.0, bottom: MediaQuery.of(context).size.height*0.01),
+                        margin: EdgeInsets.only(
+                            top: 25.0,
+                            bottom: MediaQuery.of(context).size.height * 0.01),
                         constraints: BoxConstraints(
                             maxWidth: MediaQuery.of(context).size.width - 140),
                         child: Column(
@@ -133,7 +139,8 @@ class ContactDetailsSheet {
                       Container(
                         width: 50,
                         height: 50,
-                        margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                        margin:
+                            EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
                         child: FlatButton(
                           highlightColor:
                               StateContainer.of(context).curTheme.text15,
@@ -142,8 +149,9 @@ class ContactDetailsSheet {
                           onPressed: () {
                             Navigator.of(context).push(MaterialPageRoute(
                                 builder: (BuildContext context) {
-                              return sl.get<UIUtil>().showAccountWebview(
-                                  context, contact.address);
+                              return sl
+                                  .get<UIUtil>()
+                                  .showAccountWebview(context, contact.address);
                             }));
                           },
                           child: Icon(AppIcons.search,
@@ -168,9 +176,10 @@ class ContactDetailsSheet {
                             ? Expanded(
                                 child: SvgPicture.network(
                                   UIUtil.getMonkeyURL(contact.address),
-                                  key: Key(UIUtil.getMonkeyURL(contact.address)),
-                                  placeholderBuilder:
-                                      (BuildContext context) => Container(
+                                  key:
+                                      Key(UIUtil.getMonkeyURL(contact.address)),
+                                  placeholderBuilder: (BuildContext context) =>
+                                      Container(
                                     child: FlareActor(
                                       "assets/monkey_placeholder_animation.flr",
                                       animation: "main",
@@ -183,8 +192,8 @@ class ContactDetailsSheet {
                                 ),
                               )
                             : Expanded(
-                              child: SizedBox(),
-                            ),
+                                child: SizedBox(),
+                              ),
                         // Contact Name container
                         Container(
                           width: double.infinity,
@@ -209,6 +218,7 @@ class ContactDetailsSheet {
                               color:
                                   StateContainer.of(context).curTheme.primary,
                               fontFamily: 'NunitoSans',
+                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                         ),
@@ -264,6 +274,7 @@ class ContactDetailsSheet {
                                 color:
                                     StateContainer.of(context).curTheme.success,
                                 fontFamily: 'NunitoSans',
+                                fontFamilyFallback: ["Roboto"],
                                 fontWeight: FontWeight.w600,
                               )),
                         ),
@@ -273,7 +284,8 @@ class ContactDetailsSheet {
 
                   // A column with "Send" and "Close" buttons
                   Container(
-                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.025),
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.025),
                     child: Column(
                       children: <Widget>[
                         Row(
@@ -284,12 +296,17 @@ class ContactDetailsSheet {
                                 AppButtonType.PRIMARY,
                                 AppLocalization.of(context).send,
                                 Dimens.BUTTON_TOP_DIMENS,
-                                disabled: StateContainer.of(context).wallet.accountBalance == BigInt.zero,
-                                onPressed: () {
+                                disabled: StateContainer.of(context)
+                                        .wallet
+                                        .accountBalance ==
+                                    BigInt.zero, onPressed: () {
                               Navigator.of(context).pop();
                               Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: SendSheet(localCurrency: StateContainer.of(context).curCurrency, contact: contact));
+                                  context: context,
+                                  widget: SendSheet(
+                                      localCurrency: StateContainer.of(context)
+                                          .curCurrency,
+                                      contact: contact));
                             }),
                           ],
                         ),

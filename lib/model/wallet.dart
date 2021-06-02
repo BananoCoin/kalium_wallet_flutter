@@ -89,6 +89,9 @@ class AppWallet {
       case "es_AR":
         return NumberFormat.currency(locale: locale, symbol: "\$")
             .format(converted.toDouble());
+      case "uk_UA":
+        return NumberFormat.currency(locale: locale, symbol: "\₴")
+            .format(converted.toDouble());
       default:
         return NumberFormat.simpleCurrency(locale: locale)
             .format(converted.toDouble());

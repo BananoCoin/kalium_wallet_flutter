@@ -57,14 +57,16 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   StreamSubscription<AccountModifiedEvent> _accountModifiedSub;
   bool _accountIsChanging;
 
-  @override void initState() {
+  @override
+  void initState() {
     super.initState();
     _registerBus();
     this._addingAccount = false;
     this._accountIsChanging = false;
   }
 
-  @override void dispose() {
+  @override
+  void dispose() {
     _destroyBus();
     super.dispose();
   }
@@ -80,9 +82,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
               widget.accounts
                   .where((a) =>
                       a.index ==
-                      StateContainer.of(context)
-                          .selectedAccount
-                          .index)
+                      StateContainer.of(context).selectedAccount.index)
                   .forEach((account) {
                 account.selected = true;
               });
@@ -90,14 +90,12 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
           });
         }
         setState(() {
-          widget.accounts
-              .removeWhere((a) => a.index == event.account.index);
+          widget.accounts.removeWhere((a) => a.index == event.account.index);
         });
       } else {
         // Name change
         setState(() {
-          widget.accounts
-              .removeWhere((a) => a.index == event.account.index);
+          widget.accounts.removeWhere((a) => a.index == event.account.index);
           widget.accounts.add(event.account);
           widget.accounts.sort((a, b) => a.index.compareTo(b.index));
         });
@@ -120,7 +118,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
       }
     });
     try {
-      AccountsBalancesResponse resp = await sl.get<AccountService>().requestAccountsBalances(addresses);
+      AccountsBalancesResponse resp =
+          await sl.get<AccountService>().requestAccountsBalances(addresses);
       await _handleAccountsBalancesResponse(resp);
     } catch (e) {
       sl.get<Logger>().e("Error", e);
@@ -166,195 +165,181 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.only(
-        bottom: MediaQuery.of(context).size.height * 0.035,
-      ),
-      child: Container(
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            //A container for the header
-            Container(
-              margin: EdgeInsets.only(top: 30.0, bottom: 15),
-              constraints: BoxConstraints(
-                  maxWidth:
-                      MediaQuery.of(context).size.width - 140),
-              child: AutoSizeText(
-                CaseChange.toUpperCase(
-                    AppLocalization.of(context).accounts,
-                    context),
-                style: AppStyles.textStyleHeader(context),
-                maxLines: 1,
-                stepGranularity: 0.1,
-              ),
-            ),
-
-            //A list containing accounts
-            Expanded(
-                key: expandedKey,
-                child: Stack(
-                  children: <Widget>[
-                    widget.accounts == null
-                        ? Center(
-                            child: Text("Loading"),
-                          )
-                        : ListView.builder(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 20),
-                            itemCount: widget.accounts.length,
-                            controller: _scrollController,
-                            itemBuilder: (BuildContext context,
-                                int index) {
-                              return _buildAccountListItem(
-                                  context,
-                                  widget.accounts[index],
-                                  setState);
-                            },
-                          ),
-                    //List Top Gradient
-                    Align(
-                      alignment: Alignment.topCenter,
-                      child: Container(
-                        height: 20.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark00,
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
-                            ],
-                            begin: AlignmentDirectional(0.5, 1.0),
-                            end: AlignmentDirectional(0.5, -1.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                    // List Bottom Gradient
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 20.0,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                            colors: [
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark,
-                              StateContainer.of(context)
-                                  .curTheme
-                                  .backgroundDark00
-                            ],
-                            begin: AlignmentDirectional(0.5, 1.0),
-                            end: AlignmentDirectional(0.5, -1.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                )),
-            SizedBox(
-              height: 15,
-            ),
-            //A row with Add Account button
-            Row(
-              children: <Widget>[
-                widget.accounts == null ||
-                        widget.accounts.length >= MAX_ACCOUNTS
-                    ? SizedBox()
-                    : AppButton.buildAppButton(
-                        context,
-                        AppButtonType.PRIMARY,
-                        AppLocalization.of(context).addAccount,
-                        Dimens.BUTTON_TOP_DIMENS,
-                        disabled: _addingAccount,
-                        onPressed: () {
-                          if (!_addingAccount) {
-                            setState(() {
-                              _addingAccount = true;
-                            });
-                            sl.get<DBHelper>()
-                                .addAccount(
-                                    nameBuilder: AppLocalization
-                                            .of(context)
-                                        .defaultNewAccountName)
-                                .then((newAccount) {
-                              _requestBalances(
-                                  context, [newAccount]);
-                              StateContainer.of(context)
-                                  .updateRecentlyUsedAccounts();
-                              widget.accounts.add(newAccount);
-                              setState(() {
-                                _addingAccount = false;
-                                widget.accounts.sort((a, b) =>
-                                    a.index.compareTo(b.index));
-                                // Scroll if list is full
-                                if (expandedKey.currentContext !=
-                                    null) {
-                                  RenderBox box = expandedKey
-                                      .currentContext
-                                      .findRenderObject();
-                                  if (widget.accounts.length *
-                                          (smallScreen(context)
-                                              ? 72.0
-                                              : 87.0) >=
-                                      box.size.height) {
-                                    _scrollController.animateTo(
-                                      newAccount.index *
-                                                  (smallScreen(
-                                                          context)
-                                                      ? 72.0
-                                                      : 87.0) >
-                                              _scrollController
-                                                  .position
-                                                  .maxScrollExtent
-                                          ? _scrollController
-                                                  .position
-                                                  .maxScrollExtent +
-                                              (smallScreen(
-                                                      context)
-                                                  ? 72.0
-                                                  : 87.0)
-                                          : newAccount.index *
-                                              (smallScreen(
-                                                      context)
-                                                  ? 72.0
-                                                  : 87.0),
-                                      curve: Curves.easeOut,
-                                      duration: const Duration(
-                                          milliseconds: 200),
-                                    );
-                                  }
-                                }
-                              });
-                            });
-                          }
-                        },
-                      ),
-              ],
-            ),
-            //A row with Close button
-            Row(
-              children: <Widget>[
-                AppButton.buildAppButton(
-                  context,
-                  AppButtonType.PRIMARY_OUTLINE,
-                  AppLocalization.of(context).close,
-                  Dimens.BUTTON_BOTTOM_DIMENS,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ],
-            ),
-          ],
+        minimum: EdgeInsets.only(
+          bottom: MediaQuery.of(context).size.height * 0.035,
         ),
-      ));
+        child: Container(
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              //A container for the header
+              Container(
+                margin: EdgeInsets.only(top: 30.0, bottom: 15),
+                constraints: BoxConstraints(
+                    maxWidth: MediaQuery.of(context).size.width - 140),
+                child: AutoSizeText(
+                  CaseChange.toUpperCase(
+                      AppLocalization.of(context).accounts, context),
+                  style: AppStyles.textStyleHeader(context),
+                  maxLines: 1,
+                  stepGranularity: 0.1,
+                ),
+              ),
+
+              //A list containing accounts
+              Expanded(
+                  key: expandedKey,
+                  child: Stack(
+                    children: <Widget>[
+                      widget.accounts == null
+                          ? Center(
+                              child: Text("Loading"),
+                            )
+                          : ListView.builder(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              itemCount: widget.accounts.length,
+                              controller: _scrollController,
+                              itemBuilder: (BuildContext context, int index) {
+                                return _buildAccountListItem(
+                                    context, widget.accounts[index], setState);
+                              },
+                            ),
+                      //List Top Gradient
+                      Align(
+                        alignment: Alignment.topCenter,
+                        child: Container(
+                          height: 20.0,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                StateContainer.of(context)
+                                    .curTheme
+                                    .backgroundDark00,
+                                StateContainer.of(context)
+                                    .curTheme
+                                    .backgroundDark,
+                              ],
+                              begin: AlignmentDirectional(0.5, 1.0),
+                              end: AlignmentDirectional(0.5, -1.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                      // List Bottom Gradient
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                          height: 20.0,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                              colors: [
+                                StateContainer.of(context)
+                                    .curTheme
+                                    .backgroundDark,
+                                StateContainer.of(context)
+                                    .curTheme
+                                    .backgroundDark00
+                              ],
+                              begin: AlignmentDirectional(0.5, 1.0),
+                              end: AlignmentDirectional(0.5, -1.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+              SizedBox(
+                height: 15,
+              ),
+              //A row with Add Account button
+              Row(
+                children: <Widget>[
+                  widget.accounts == null ||
+                          widget.accounts.length >= MAX_ACCOUNTS
+                      ? SizedBox()
+                      : AppButton.buildAppButton(
+                          context,
+                          AppButtonType.PRIMARY,
+                          AppLocalization.of(context).addAccount,
+                          Dimens.BUTTON_TOP_DIMENS,
+                          disabled: _addingAccount,
+                          onPressed: () {
+                            if (!_addingAccount) {
+                              setState(() {
+                                _addingAccount = true;
+                              });
+                              sl
+                                  .get<DBHelper>()
+                                  .addAccount(
+                                      nameBuilder: AppLocalization.of(context)
+                                          .defaultNewAccountName)
+                                  .then((newAccount) {
+                                _requestBalances(context, [newAccount]);
+                                StateContainer.of(context)
+                                    .updateRecentlyUsedAccounts();
+                                widget.accounts.add(newAccount);
+                                setState(() {
+                                  _addingAccount = false;
+                                  widget.accounts.sort(
+                                      (a, b) => a.index.compareTo(b.index));
+                                  // Scroll if list is full
+                                  if (expandedKey.currentContext != null) {
+                                    RenderBox box = expandedKey.currentContext
+                                        .findRenderObject();
+                                    if (widget.accounts.length *
+                                            (smallScreen(context)
+                                                ? 72.0
+                                                : 87.0) >=
+                                        box.size.height) {
+                                      _scrollController.animateTo(
+                                        newAccount.index *
+                                                    (smallScreen(context)
+                                                        ? 72.0
+                                                        : 87.0) >
+                                                _scrollController
+                                                    .position.maxScrollExtent
+                                            ? _scrollController
+                                                    .position.maxScrollExtent +
+                                                (smallScreen(context)
+                                                    ? 72.0
+                                                    : 87.0)
+                                            : newAccount.index *
+                                                (smallScreen(context)
+                                                    ? 72.0
+                                                    : 87.0),
+                                        curve: Curves.easeOut,
+                                        duration:
+                                            const Duration(milliseconds: 200),
+                                      );
+                                    }
+                                  }
+                                });
+                              });
+                            }
+                          },
+                        ),
+                ],
+              ),
+              //A row with Close button
+              Row(
+                children: <Widget>[
+                  AppButton.buildAppButton(
+                    context,
+                    AppButtonType.PRIMARY_OUTLINE,
+                    AppLocalization.of(context).close,
+                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ));
   }
 
   Widget _buildAccountListItem(
@@ -388,8 +373,17 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                 height: smallScreen(context) ? 70.0 : 85,
                 padding: EdgeInsetsDirectional.only(end: 23, start: 10),
                 decoration: BoxDecoration(
-                  border: Border(left: BorderSide(width: 5, color: account.selected ? StateContainer.of(context).curTheme.primary:Colors.transparent), right: BorderSide(width: 5, color: account.selected?StateContainer.of(context).curTheme.primary:Colors.transparent))
-                ),
+                    border: Border(
+                        left: BorderSide(
+                            width: 5,
+                            color: account.selected
+                                ? StateContainer.of(context).curTheme.primary
+                                : Colors.transparent),
+                        right: BorderSide(
+                            width: 5,
+                            color: account.selected
+                                ? StateContainer.of(context).curTheme.primary
+                                : Colors.transparent))),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -400,14 +394,14 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                       children: <Widget>[
                         // Account Icon
                         MonkeyWidget(
-                          size: smallScreen(context) ? 55 : 70,
-                          address: account.address
-                        ),
+                            size: smallScreen(context) ? 55 : 70,
+                            address: account.address),
                         // Account name and address
                         Container(
                           width:
                               (MediaQuery.of(context).size.width - (108)) * 0.5,
-                          margin: EdgeInsetsDirectional.only(start: smallScreen(context) ? 10 : 8 ),
+                          margin: EdgeInsetsDirectional.only(
+                              start: smallScreen(context) ? 10 : 8),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -417,6 +411,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 account.name,
                                 style: TextStyle(
                                   fontFamily: "NunitoSans",
+                                  fontFamilyFallback: ["Roboto"],
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.0,
                                   color:
@@ -432,6 +427,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 account.address.substring(0, 11) + "...",
                                 style: TextStyle(
                                   fontFamily: "OverpassMono",
+                                  fontFamilyFallback: ["RobotoMono"],
                                   fontWeight: FontWeight.w100,
                                   fontSize: 14.0,
                                   color: StateContainer.of(context)
@@ -465,12 +461,17 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                             // Main balance text
                             TextSpan(
                               text: account.balance != null && !account.selected
-                                  ? NumberUtil.getRawAsUsableString(account.balance)
-                                  : account.selected ? StateContainer.of(context).wallet.getAccountBalanceDisplay()
-                                  : "",
+                                  ? NumberUtil.getRawAsUsableString(
+                                      account.balance)
+                                  : account.selected
+                                      ? StateContainer.of(context)
+                                          .wallet
+                                          .getAccountBalanceDisplay()
+                                      : "",
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: "NunitoSans",
+                                  fontFamilyFallback: ["Roboto"],
                                   fontWeight: FontWeight.w900,
                                   color:
                                       StateContainer.of(context).curTheme.text),

@@ -19,7 +19,8 @@ class TransferManualEntrySheet extends StatefulWidget {
 
   TransferManualEntrySheet({this.validSeedCallback}) : super();
 
-  _TransferManualEntrySheetState createState() => _TransferManualEntrySheetState();
+  _TransferManualEntrySheetState createState() =>
+      _TransferManualEntrySheetState();
 }
 
 class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
@@ -42,7 +43,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
   @override
   Widget build(BuildContext context) {
     return TapOutsideUnfocus(
-      child: SafeArea(
+        child: SafeArea(
       minimum: EdgeInsets.only(
         bottom: MediaQuery.of(context).size.height * 0.035,
       ),
@@ -56,8 +57,7 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
               margin: EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
                 CaseChange.toUpperCase(
-                    AppLocalization.of(context).transferHeader,
-                    context),
+                    AppLocalization.of(context).transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -68,32 +68,28 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
               child: Container(
                 margin: EdgeInsets.only(
                     top: MediaQuery.of(context).size.height * 0.05),
-                child:Column(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     // The paragraph
                     Container(
                       margin: EdgeInsets.symmetric(
-                          horizontal:
-                              smallScreen(context) ? 50 : 60,
+                          horizontal: smallScreen(context) ? 50 : 60,
                           vertical: 10),
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        AppLocalization.of(context)
-                            .transferManualHint,
-                        style:
-                            AppStyles.textStyleParagraph(context),
+                        AppLocalization.of(context).transferManualHint,
+                        style: AppStyles.textStyleParagraph(context),
                         textAlign: TextAlign.start,
                       ),
                     ),
                     // The container for the seed
                     Expanded(
                       child: KeyboardAvoider(
-                        duration: Duration(milliseconds: 0),
-                        autoScroll: true,
-                        focusPadding: 40,
-                        child: Column(
-                          children: <Widget>[
+                          duration: Duration(milliseconds: 0),
+                          autoScroll: true,
+                          focusPadding: 40,
+                          child: Column(children: <Widget>[
                             AppTextField(
                               focusNode: _seedInputFocusNode,
                               controller: _seedInputController,
@@ -106,27 +102,32 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                               suffixButton: TextFieldButton(
                                 icon: AppIcons.paste,
                                 onPressed: () async {
-                                  String data = await UserDataUtil.getClipboardText(DataType.SEED);
+                                  String data =
+                                      await UserDataUtil.getClipboardText(
+                                          DataType.SEED);
                                   if (data != null) {
                                     if (mounted) {
                                       _seedInputController.text = data;
                                       setState(() {
                                         seedIsValid = true;
-                                      });                                            
+                                      });
                                     }
                                   } else {
                                     if (mounted) {
                                       setState(() {
                                         seedIsValid = false;
                                       });
-                                    }                               
+                                    }
                                   }
                                 },
                               ),
                               fadeSuffixOnCondition: true,
-                              suffixShowFirstCondition: !NanoSeeds.isValidSeed(_seedInputController.text),
+                              suffixShowFirstCondition: !NanoSeeds.isValidSeed(
+                                  _seedInputController.text),
                               keyboardType: TextInputType.text,
-                              style: seedIsValid ? AppStyles.textStyleSeed(context) : AppStyles.textStyleSeedGray(context),
+                              style: seedIsValid
+                                  ? AppStyles.textStyleSeed(context)
+                                  : AppStyles.textStyleSeedGray(context),
                               onChanged: (text) {
                                 // Always reset the error message to be less annoying
                                 setState(() {
@@ -148,18 +149,21 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                             // "Invalid Seed" text that appears if the input is invalid
                             Container(
                               margin: EdgeInsets.only(top: 5),
-                              child: Text(
-                                  AppLocalization.of(context).seedInvalid,
-                                  style: TextStyle(
-                                    fontSize: 14.0,
-                                    color: hasError ? StateContainer.of(context).curTheme.primary : Colors.transparent,
-                                    fontFamily: 'NunitoSans',
-                                    fontWeight: FontWeight.w600,
-                                  )),
+                              child:
+                                  Text(AppLocalization.of(context).seedInvalid,
+                                      style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: hasError
+                                            ? StateContainer.of(context)
+                                                .curTheme
+                                                .primary
+                                            : Colors.transparent,
+                                        fontFamily: 'NunitoSans',
+                                        fontFamilyFallback: ["Roboto"],
+                                        fontWeight: FontWeight.w600,
+                                      )),
                             ),
-                          ]
-                        )
-                      ),
+                          ])),
                     ),
                   ],
                 ),
@@ -174,7 +178,8 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                   AppLocalization.of(context).transfer,
                   Dimens.BUTTON_TOP_DIMENS,
                   onPressed: () {
-                    if (NanoSeeds.isValidSeed(_seedInputController.text) && widget.validSeedCallback != null) {
+                    if (NanoSeeds.isValidSeed(_seedInputController.text) &&
+                        widget.validSeedCallback != null) {
                       widget.validSeedCallback(_seedInputController.text);
                     } else if (mounted) {
                       setState(() {

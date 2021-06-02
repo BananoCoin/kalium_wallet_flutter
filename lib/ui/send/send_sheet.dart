@@ -252,6 +252,7 @@ class _SendSheetState extends State<SendSheet> {
                           fontSize: 16.0,
                           fontWeight: FontWeight.w700,
                           fontFamily: 'NunitoSans',
+                          fontFamilyFallback: ["Roboto"],
                         ),
                       ),
                     ],
@@ -317,6 +318,9 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.w100,
                                                   fontFamily: 'NunitoSans',
+                                                  fontFamilyFallback: [
+                                                    "Roboto"
+                                                  ],
                                                 ),
                                               ),
                                               TextSpan(
@@ -338,6 +342,9 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.w700,
                                                   fontFamily: 'NunitoSans',
+                                                  fontFamilyFallback: [
+                                                    "Roboto"
+                                                  ],
                                                 ),
                                               ),
                                               TextSpan(
@@ -352,6 +359,9 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.w100,
                                                   fontFamily: 'NunitoSans',
+                                                  fontFamilyFallback: [
+                                                    "Roboto"
+                                                  ],
                                                 ),
                                               ),
                                             ],
@@ -367,6 +377,7 @@ class _SendSheetState extends State<SendSheet> {
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.w100,
                                           fontFamily: 'NunitoSans',
+                                          fontFamilyFallback: ["Roboto"],
                                         ),
                                       ),
                                     );
@@ -387,6 +398,7 @@ class _SendSheetState extends State<SendSheet> {
                                             .curTheme
                                             .primary,
                                         fontFamily: 'NunitoSans',
+                                        fontFamilyFallback: ["Roboto"],
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
@@ -469,6 +481,7 @@ class _SendSheetState extends State<SendSheet> {
                                             .curTheme
                                             .primary,
                                         fontFamily: 'NunitoSans',
+                                        fontFamilyFallback: ["Roboto"],
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
@@ -557,8 +570,8 @@ class _SendSheetState extends State<SendSheet> {
                           AppLocalization.of(context).scanQrCode,
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () async {
                         sl.get<UIUtil>().cancelLockEvent();
-                        String scanResult = await UserDataUtil.getQRData(
-                            DataType.RAW, context);
+                        String scanResult =
+                            await UserDataUtil.getQRData(DataType.RAW, context);
                         if (scanResult == null) {
                           sl.get<UIUtil>().showSnackbar(
                               AppLocalization.of(context).qrInvalidAddress,
@@ -612,15 +625,22 @@ class _SendSheetState extends State<SendSheet> {
                               setState(() {
                                 _rawAmount = address.amount;
                                 // If raw amount has more precision than we support show a special indicator
-                                if (NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "") ==
-                                    NumberUtil.getRawAsUsableDecimal(_rawAmount).toString()) {
-                                  _sendAmountController.text = NumberUtil.getRawAsUsableString(_rawAmount).replaceAll(",", "");
+                                if (NumberUtil.getRawAsUsableString(_rawAmount)
+                                        .replaceAll(",", "") ==
+                                    NumberUtil.getRawAsUsableDecimal(_rawAmount)
+                                        .toString()) {
+                                  _sendAmountController.text =
+                                      NumberUtil.getRawAsUsableString(
+                                              _rawAmount)
+                                          .replaceAll(",", "");
                                 } else {
-                                  _sendAmountController.text = 
-                                    NumberUtil.truncateDecimal(
-                                      NumberUtil.getRawAsUsableDecimal(address.amount),
-                                      digits: 6
-                                    ).toStringAsFixed(6) + "~";
+                                  _sendAmountController
+                                      .text = NumberUtil.truncateDecimal(
+                                              NumberUtil.getRawAsUsableDecimal(
+                                                  address.amount),
+                                              digits: 6)
+                                          .toStringAsFixed(6) +
+                                      "~";
                                 }
                               });
                               _sendAddressFocusNode.unfocus();
@@ -885,6 +905,7 @@ class _SendSheetState extends State<SendSheet> {
         fontSize: 16.0,
         color: StateContainer.of(context).curTheme.primary,
         fontFamily: 'NunitoSans',
+        fontFamilyFallback: ["Roboto"],
       ),
       inputFormatters: _rawAmount == null
           ? [
@@ -1135,8 +1156,9 @@ class _SendSheetState extends State<SendSheet> {
                     FocusScope.of(context).requestFocus(_sendAddressFocusNode);
                   });
                 },
-                child: sl.get<UIUtil>().threeLineAddressText(
-                    context, _sendAddressController.text))
+                child: sl
+                    .get<UIUtil>()
+                    .threeLineAddressText(context, _sendAddressController.text))
             : null);
   } //************ Enter Address Container Method End ************//
   //*************************************************************//

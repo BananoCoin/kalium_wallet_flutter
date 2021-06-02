@@ -239,6 +239,7 @@ class _PinScreenState extends State<PinScreen>
               fontSize: 20.0,
               color: StateContainer.of(context).curTheme.primary,
               fontFamily: 'NunitoSans',
+              fontFamilyFallback: ["Roboto"],
               fontWeight: FontWeight.w700,
             ),
           ),

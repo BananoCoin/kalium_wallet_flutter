@@ -75,7 +75,9 @@ class _SettingsSheetState extends State<SettingsSheet>
   // Called if transfer fails
   void transferError() {
     Navigator.of(context).pop();
-    sl.get<UIUtil>().showSnackbar(AppLocalization.of(context).transferError, context);
+    sl
+        .get<UIUtil>()
+        .showSnackbar(AppLocalization.of(context).transferError, context);
   }
 
   @override
@@ -159,19 +161,19 @@ class _SettingsSheetState extends State<SettingsSheet>
         .registerTo<TransferConfirmEvent>()
         .listen((event) {
       Sheets.showAppHeightNineSheet(
-        context: context,
-        widget: AppTransferConfirmSheet(
-          privKeyBalanceMap: event.balMap,
-          errorCallback: transferError,
-        )
-      );  
+          context: context,
+          widget: AppTransferConfirmSheet(
+            privKeyBalanceMap: event.balMap,
+            errorCallback: transferError,
+          ));
     });
     // Ready to go to transfer complete
     _transferCompleteKalSub = EventTaxiImpl.singleton()
         .registerTo<TransferCompleteEvent>()
         .listen((event) {
       StateContainer.of(context).requestUpdate();
-      ApptransferCompleteKalSheet(NumberUtil.getRawAsUsableString(event.amount.toString()))
+      ApptransferCompleteKalSheet(
+              NumberUtil.getRawAsUsableString(event.amount.toString()))
           .mainBottomSheet(context);
     });
   }
@@ -207,7 +209,6 @@ class _SettingsSheetState extends State<SettingsSheet>
         break;
     }
   }
-
 
   Future<void> _authMethodDialog() async {
     switch (await showDialog<AuthMethod>(
@@ -247,7 +248,8 @@ class _SettingsSheetState extends State<SettingsSheet>
           );
         })) {
       case AuthMethod.PIN:
-        sl.get<SharedPrefsUtil>()
+        sl
+            .get<SharedPrefsUtil>()
             .setAuthMethod(AuthenticationMethod(AuthMethod.PIN))
             .then((result) {
           setState(() {
@@ -256,7 +258,8 @@ class _SettingsSheetState extends State<SettingsSheet>
         });
         break;
       case AuthMethod.BIOMETRICS:
-        sl.get<SharedPrefsUtil>()
+        sl
+            .get<SharedPrefsUtil>()
             .setAuthMethod(AuthenticationMethod(AuthMethod.BIOMETRICS))
             .then((result) {
           setState(() {
@@ -419,7 +422,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                 children: _buildCurrencyOptions(),
               );
             });
-    sl.get<SharedPrefsUtil>()
+    sl
+        .get<SharedPrefsUtil>()
         .setCurrency(AvailableCurrency(selection))
         .then((result) {
       if (StateContainer.of(context).curCurrency.currency != selection) {
@@ -465,7 +469,10 @@ class _SettingsSheetState extends State<SettingsSheet>
             children: _buildLanguageOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>().setLanguage(LanguageSetting(selection)).then((result) {
+    sl
+        .get<SharedPrefsUtil>()
+        .setLanguage(LanguageSetting(selection))
+        .then((result) {
       if (StateContainer.of(context).curLanguage.language != selection) {
         setState(() {
           StateContainer.of(context).updateLanguage(LanguageSetting(selection));
@@ -508,11 +515,13 @@ class _SettingsSheetState extends State<SettingsSheet>
             children: _buildLockTimeoutOptions(),
           );
         });
-    sl.get<SharedPrefsUtil>()
+    sl
+        .get<SharedPrefsUtil>()
         .setLockTimeout(LockTimeoutSetting(selection))
         .then((result) {
       if (_curTimeoutSetting.setting != selection) {
-        sl.get<SharedPrefsUtil>()
+        sl
+            .get<SharedPrefsUtil>()
             .setLockTimeout(LockTimeoutSetting(selection))
             .then((_) {
           setState(() {
@@ -558,7 +567,10 @@ class _SettingsSheetState extends State<SettingsSheet>
           );
         });
     if (_curThemeSetting != ThemeSetting(selection)) {
-      sl.get<SharedPrefsUtil>().setTheme(ThemeSetting(selection)).then((result) {
+      sl
+          .get<SharedPrefsUtil>()
+          .setTheme(ThemeSetting(selection))
+          .then((result) {
         setState(() {
           StateContainer.of(context).updateTheme(ThemeSetting(selection));
           _curThemeSetting = ThemeSetting(selection);
@@ -600,7 +612,8 @@ class _SettingsSheetState extends State<SettingsSheet>
             ),
             buildMainSettings(context),
             SlideTransition(
-                position: _offsetFloat, child: ContactsList(_controller, _contactsOpen)),
+                position: _offsetFloat,
+                child: ContactsList(_controller, _contactsOpen)),
             SlideTransition(
                 position: _securityOffsetFloat,
                 child: buildSecurityMenu(context)),
@@ -623,7 +636,8 @@ class _SettingsSheetState extends State<SettingsSheet>
           children: <Widget>[
             // A container for accounts area
             Container(
-              margin: EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
+              margin:
+                  EdgeInsetsDirectional.only(start: 26.0, end: 20, bottom: 15),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -639,8 +653,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                           children: <Widget>[
                             Center(
                               child: Container(
-                                width: smallScreen(context)?63:78,
-                                height: smallScreen(context)?63:78,
+                                width: smallScreen(context) ? 63 : 78,
+                                height: smallScreen(context) ? 63 : 78,
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
                                   border: Border.all(
@@ -654,17 +668,18 @@ class _SettingsSheetState extends State<SettingsSheet>
                             ),
                             Center(
                               child: Padding(
-                                padding: EdgeInsets.all(4.0),
-                                child: MonkeyWidget(
-                                  size: smallScreen(context)?55:70,
-                                  address: StateContainer.of(context).wallet.address,
-                                )
-                              ),
+                                  padding: EdgeInsets.all(4.0),
+                                  child: MonkeyWidget(
+                                    size: smallScreen(context) ? 55 : 70,
+                                    address: StateContainer.of(context)
+                                        .wallet
+                                        .address,
+                                  )),
                             ),
                             Center(
                               child: Container(
-                                width: smallScreen(context)?63:78,
-                                height: smallScreen(context)?63:78,
+                                width: smallScreen(context) ? 63 : 78,
+                                height: smallScreen(context) ? 63 : 78,
                                 child: FlatButton(
                                   highlightColor: StateContainer.of(context)
                                       .curTheme
@@ -676,8 +691,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                       .withOpacity(0.75),
                                   padding: EdgeInsets.all(0.0),
                                   child: SizedBox(
-                                    width: smallScreen(context)?63:78,
-                                    height: smallScreen(context)?63:78,
+                                    width: smallScreen(context) ? 63 : 78,
+                                    height: smallScreen(context) ? 63 : 78,
                                   ),
                                   onPressed: () {
                                     AccountDetailsSheet(
@@ -701,11 +716,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
-                                        child: MonkeyWidget(
-                                          address: StateContainer.of(context).recentLast.address,
-                                          size: 48
-                                        )
-                                      ),
+                                          child: MonkeyWidget(
+                                              address:
+                                                  StateContainer.of(context)
+                                                      .recentLast
+                                                      .address,
+                                              size: 48)),
                                       Center(
                                         child: Container(
                                           width: 48,
@@ -713,7 +729,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
-                                              sl.get<DBHelper>()
+                                              sl
+                                                  .get<DBHelper>()
                                                   .changeAccount(
                                                       StateContainer.of(context)
                                                           .recentLast)
@@ -757,11 +774,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   child: Stack(
                                     children: <Widget>[
                                       Center(
-                                        child: MonkeyWidget(
-                                          address: StateContainer.of(context).recentSecondLast.address,
-                                          size: 48
-                                        )
-                                      ),
+                                          child: MonkeyWidget(
+                                              address:
+                                                  StateContainer.of(context)
+                                                      .recentSecondLast
+                                                      .address,
+                                              size: 48)),
                                       Center(
                                         child: Container(
                                           width: 48,
@@ -769,7 +787,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                                           color: Colors.transparent,
                                           child: FlatButton(
                                             onPressed: () {
-                                              sl.get<DBHelper>()
+                                              sl
+                                                  .get<DBHelper>()
                                                   .changeAccount(
                                                       StateContainer.of(context)
                                                           .recentSecondLast)
@@ -819,7 +838,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   setState(() {
                                     _loadingAccounts = true;
                                   });
-                                  sl.get<DBHelper>().getAccounts().then((accounts) {
+                                  sl
+                                      .get<DBHelper>()
+                                      .getAccounts()
+                                      .then((accounts) {
                                     setState(() {
                                       _loadingAccounts = false;
                                     });
@@ -879,6 +901,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               StateContainer.of(context).selectedAccount.name,
                               style: TextStyle(
                                 fontFamily: "NunitoSans",
+                                fontFamilyFallback: ["Roboto"],
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16.0,
                                 color: StateContainer.of(context).curTheme.text,
@@ -894,6 +917,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   .substring(0, 11),
                               style: TextStyle(
                                 fontFamily: "OverpassMono",
+                                fontFamilyFallback: ["RobotoMono"],
                                 fontWeight: FontWeight.w100,
                                 fontSize: 14.0,
                                 color:
@@ -915,11 +939,13 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: EdgeInsets.only(top: 15.0),
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      margin:
+                          EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
+                              fontFamilyFallback: ["Roboto"],
                               color:
                                   StateContainer.of(context).curTheme.text60)),
                     ),
@@ -981,8 +1007,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                       color: StateContainer.of(context).curTheme.text15,
                     ),
                     Container(
-                      margin:
-                          EdgeInsetsDirectional.only(start: 30.0, top: 20.0, bottom: 10.0),
+                      margin: EdgeInsetsDirectional.only(
+                          start: 30.0, top: 20.0, bottom: 10.0),
                       child: Text(AppLocalization.of(context).manage,
                           style: TextStyle(
                               fontSize: 16.0,
@@ -1012,21 +1038,22 @@ class _SettingsSheetState extends State<SettingsSheet>
                         AppLocalization.of(context).backupSecretPhrase,
                         AppIcons.backupseed, onPressed: () async {
                       // Authenticate
-                      AuthenticationMethod authMethod = await sl.get<SharedPrefsUtil>().getAuthMethod();
-                      bool hasBiometrics = await sl.get<BiometricUtil>().hasBiometrics();                          
+                      AuthenticationMethod authMethod =
+                          await sl.get<SharedPrefsUtil>().getAuthMethod();
+                      bool hasBiometrics =
+                          await sl.get<BiometricUtil>().hasBiometrics();
                       if (authMethod.method == AuthMethod.BIOMETRICS &&
                           hasBiometrics) {
                         try {
                           bool authenticated = await sl
-                                .get<BiometricUtil>()
-                                .authenticateWithBiometrics(
-                                    context,
-                                    AppLocalization.of(context)
-                                        .fingerprintSeedBackup);
+                              .get<BiometricUtil>()
+                              .authenticateWithBiometrics(
+                                  context,
+                                  AppLocalization.of(context)
+                                      .fingerprintSeedBackup);
                           if (authenticated) {
                             sl.get<HapticUtil>().fingerprintSucess();
-                            AppSeedBackupSheet()
-                                .mainBottomSheet(context);
+                            AppSeedBackupSheet().mainBottomSheet(context);
                           }
                         } catch (e) {
                           await authenticateWithPin();
@@ -1091,7 +1118,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                             CaseChange.toUpperCase(
                                 AppLocalization.of(context).yes, context), () {
                           // Unsubscribe from notifications
-                          sl.get<SharedPrefsUtil>()
+                          sl
+                              .get<SharedPrefsUtil>()
                               .setNotificationsOn(false)
                               .then((_) {
                             FirebaseMessaging().getToken().then((fcmToken) {
@@ -1099,7 +1127,10 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   .fire(FcmUpdateEvent(token: fcmToken));
                               // Delete all data
                               sl.get<Vault>().deleteAll().then((_) {
-                                sl.get<SharedPrefsUtil>().deleteAll().then((result) {
+                                sl
+                                    .get<SharedPrefsUtil>()
+                                    .deleteAll()
+                                    .then((result) {
                                   StateContainer.of(context).logOut();
                                   Navigator.of(context).pushNamedAndRemoveUntil(
                                       '/', (Route<dynamic> route) => false);
@@ -1245,11 +1276,13 @@ class _SettingsSheetState extends State<SettingsSheet>
                   padding: EdgeInsets.only(top: 15.0),
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
+                      margin:
+                          EdgeInsetsDirectional.only(start: 30.0, bottom: 10),
                       child: Text(AppLocalization.of(context).preferences,
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
+                              fontFamilyFallback: ["Roboto"],
                               color:
                                   StateContainer.of(context).curTheme.text60)),
                     ),
@@ -1327,20 +1360,18 @@ class _SettingsSheetState extends State<SettingsSheet>
   Future<void> authenticateWithPin() async {
     // PIN Authentication
     String expectedPin = await sl.get<Vault>().getPin();
-    bool auth = await Navigator.of(context).push(MaterialPageRoute(
-          builder: (BuildContext context) {
-        return new PinScreen(
-          PinOverlayType.ENTER_PIN,
-          expectedPin: expectedPin,
-          description:
-              AppLocalization.of(context).pinSeedBackup,
-        );
-      }));
+    bool auth = await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return new PinScreen(
+        PinOverlayType.ENTER_PIN,
+        expectedPin: expectedPin,
+        description: AppLocalization.of(context).pinSeedBackup,
+      );
+    }));
     if (auth != null && auth) {
       await Future.delayed(Duration(milliseconds: 200));
-            Navigator.of(context).pop();
-      AppSeedBackupSheet()
-          .mainBottomSheet(context);
-    }   
+      Navigator.of(context).pop();
+      AppSeedBackupSheet().mainBottomSheet(context);
+    }
   }
 }
