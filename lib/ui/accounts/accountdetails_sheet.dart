@@ -204,7 +204,6 @@ class AccountDetailsSheet {
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w100,
                                               fontFamily: 'NunitoSans',
-                                              fontFamilyFallback: ["Roboto"],
                                             ),
                                           ),
                                           TextSpan(
@@ -224,7 +223,6 @@ class AccountDetailsSheet {
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w700,
                                               fontFamily: 'NunitoSans',
-                                              fontFamilyFallback: ["Roboto"],
                                             ),
                                           ),
                                           TextSpan(
@@ -236,7 +234,6 @@ class AccountDetailsSheet {
                                               fontSize: 14.0,
                                               fontWeight: FontWeight.w100,
                                               fontFamily: 'NunitoSans',
-                                              fontFamilyFallback: ["Roboto"],
                                             ),
                                           ),
                                         ],
@@ -280,7 +277,6 @@ class AccountDetailsSheet {
                                                 .curTheme
                                                 .primary,
                                             fontFamily: 'NunitoSans',
-                                            fontFamilyFallback: ["Roboto"],
                                           ),
                                         ),
                                       ])),

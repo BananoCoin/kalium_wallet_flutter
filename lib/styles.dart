@@ -6,7 +6,6 @@ class AppStyles {
   static TextStyle textStyleParagraph(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.medium,
         fontWeight: FontWeight.w200,
         color: StateContainer.of(context).curTheme.text);
@@ -16,7 +15,6 @@ class AppStyles {
   static TextStyle textStyleParagraphPrimary(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.medium,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.primary);
@@ -26,7 +24,6 @@ class AppStyles {
   static TextStyle textStyleParagraphThinPrimary(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.small,
         fontWeight: FontWeight.w600,
         color: StateContainer.of(context).curTheme.primary);
@@ -36,7 +33,6 @@ class AppStyles {
   static TextStyle textStyleParagraphSuccess(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.medium,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.success);
@@ -46,7 +42,6 @@ class AppStyles {
   static TextStyle textStyleSnackbar(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.small,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.background);
@@ -56,7 +51,6 @@ class AppStyles {
   static TextStyle textStyleButtonPrimary(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes._large,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.background);
@@ -66,7 +60,6 @@ class AppStyles {
   static TextStyle textStyleButtonPrimaryGreen(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes._large,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.successDark);
@@ -76,7 +69,6 @@ class AppStyles {
   static TextStyle textStyleButtonPrimaryOutline(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes._large,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.primary);
@@ -85,7 +77,6 @@ class AppStyles {
   static TextStyle textStyleButtonPrimaryOutlineDisabled(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes._large,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.primary60);
@@ -95,7 +86,6 @@ class AppStyles {
   static TextStyle textStyleButtonSuccessOutline(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes._large,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.success);
@@ -105,7 +95,6 @@ class AppStyles {
   static TextStyle textStyleButtonTextOutline(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes._large,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.text);
@@ -115,7 +104,6 @@ class AppStyles {
   static TextStyle textStyleButtonPrimarySmallOutline(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.small,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.primary);
@@ -125,7 +113,6 @@ class AppStyles {
   static TextStyle textStyleButtonSuccessSmallOutline(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.small,
         fontWeight: FontWeight.w700,
         color: StateContainer.of(context).curTheme.success);
@@ -139,7 +126,6 @@ class AppStyles {
       height: 1.4,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
     );
   }
 
@@ -150,7 +136,6 @@ class AppStyles {
       height: 1.4,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
     );
   }
 
@@ -161,7 +146,6 @@ class AppStyles {
       height: 1.4,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
     );
   }
 
@@ -172,7 +156,6 @@ class AppStyles {
       height: 1.4,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
     );
   }
 
@@ -183,7 +166,6 @@ class AppStyles {
       height: 1.4,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
     );
   }
 
@@ -218,7 +200,6 @@ class AppStyles {
   static TextStyle textStyleTransactionType(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.small,
         fontWeight: FontWeight.w600,
         color: StateContainer.of(context).curTheme.text);
@@ -228,7 +209,6 @@ class AppStyles {
   static TextStyle textStyleTransactionAmount(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         color: StateContainer.of(context).curTheme.primary60,
         fontSize: AppFontSizes.smallest,
         fontWeight: FontWeight.w600);
@@ -238,7 +218,6 @@ class AppStyles {
   static TextStyle textStyleTransactionUnit(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       color: StateContainer.of(context).curTheme.primary60,
       fontSize: AppFontSizes.smallest,
       fontWeight: FontWeight.w100,
@@ -250,7 +229,6 @@ class AppStyles {
     return TextStyle(
       fontSize: AppFontSizes.smallest,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       fontWeight: FontWeight.w100,
       color: StateContainer.of(context).curTheme.text60,
     );
@@ -263,7 +241,6 @@ class AppStyles {
       fontWeight: FontWeight.w200,
       color: StateContainer.of(context).curTheme.text,
       fontFamily: 'NunitoSans',
-      fontFamilyFallback: ["Roboto"],
     );
   }
 
@@ -274,7 +251,6 @@ class AppStyles {
       fontWeight: FontWeight.w200,
       color: StateContainer.of(context).curTheme.primary,
       fontFamily: 'NunitoSans',
-      fontFamilyFallback: ["Roboto"],
     );
   }
 
@@ -282,7 +258,6 @@ class AppStyles {
   static TextStyle textStyleVersion(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.small,
         fontWeight: FontWeight.w100,
         color: StateContainer.of(context).curTheme.text60);
@@ -291,7 +266,6 @@ class AppStyles {
   static TextStyle textStyleVersionUnderline(BuildContext context) {
     return TextStyle(
         fontFamily: "NunitoSans",
-        fontFamilyFallback: ["Roboto"],
         fontSize: AppFontSizes.small,
         fontWeight: FontWeight.w100,
         color: StateContainer.of(context).curTheme.text60,
@@ -302,7 +276,6 @@ class AppStyles {
   static TextStyle textStyleDialogHeader(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes._large,
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.primary,
@@ -313,7 +286,6 @@ class AppStyles {
   static TextStyle textStyleDialogOptions(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.medium,
       fontWeight: FontWeight.w600,
       color: StateContainer.of(context).curTheme.text,
@@ -324,7 +296,6 @@ class AppStyles {
   static TextStyle textStyleDialogButtonText(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.smallest,
       fontWeight: FontWeight.w600,
       color: StateContainer.of(context).curTheme.primary,
@@ -337,7 +308,6 @@ class AppStyles {
       fontSize: AppFontSizes.small,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       color: StateContainer.of(context).curTheme.primary,
       height: 1.3,
       letterSpacing: 1,
@@ -349,7 +319,6 @@ class AppStyles {
       fontSize: AppFontSizes.small,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       color: StateContainer.of(context).curTheme.text60,
       height: 1.3,
       letterSpacing: 1,
@@ -362,7 +331,6 @@ class AppStyles {
       fontSize: AppFontSizes.smallText(context),
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       color: StateContainer.of(context).curTheme.primary,
       height: 1,
       letterSpacing: 1,
@@ -374,7 +342,6 @@ class AppStyles {
       fontSize: AppFontSizes.smallText(context),
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       color: StateContainer.of(context).curTheme.text60,
       height: 1,
       letterSpacing: 1,
@@ -386,7 +353,6 @@ class AppStyles {
       fontSize: AppFontSizes.small,
       fontWeight: FontWeight.w100,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       color: StateContainer.of(context).curTheme.success,
       height: 1.3,
       letterSpacing: 1,
@@ -397,7 +363,6 @@ class AppStyles {
   static TextStyle textStyleHeader(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.largest(context),
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.text,
@@ -408,7 +373,6 @@ class AppStyles {
   static TextStyle textStyleSettingsHeader(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes._largest,
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.text,
@@ -419,7 +383,6 @@ class AppStyles {
   static TextStyle textStyleHeaderColored(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes._largest,
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.primary,
@@ -430,7 +393,6 @@ class AppStyles {
   static TextStyle textStyleHeader2Colored(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.larger,
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.primary,
@@ -440,7 +402,6 @@ class AppStyles {
   static TextStyle textStylePinScreenHeaderColored(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes._large,
       fontWeight: FontWeight.w700,
       color: StateContainer.of(context).curTheme.primary,
@@ -451,7 +412,6 @@ class AppStyles {
   static TextStyle textStyleSettingItemHeader(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.medium,
       fontWeight: FontWeight.w600,
       color: StateContainer.of(context).curTheme.text,
@@ -461,7 +421,6 @@ class AppStyles {
   static TextStyle textStyleSettingItemHeader60(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.medium,
       fontWeight: FontWeight.w600,
       color: StateContainer.of(context).curTheme.text60,
@@ -471,7 +430,6 @@ class AppStyles {
   static TextStyle textStyleSettingItemHeader45(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.medium,
       fontWeight: FontWeight.w600,
       color: StateContainer.of(context).curTheme.text45,
@@ -482,7 +440,6 @@ class AppStyles {
   static TextStyle textStyleSettingItemSubheader(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.smallest,
       fontWeight: FontWeight.w100,
       color: StateContainer.of(context).curTheme.text60,
@@ -492,7 +449,6 @@ class AppStyles {
   static TextStyle textStyleSettingItemSubheader30(BuildContext context) {
     return TextStyle(
       fontFamily: "NunitoSans",
-      fontFamilyFallback: ["Roboto"],
       fontSize: AppFontSizes.smallest,
       fontWeight: FontWeight.w100,
       color: StateContainer.of(context).curTheme.text30,
@@ -505,7 +461,6 @@ class AppStyles {
       fontSize: AppFontSizes.small,
       color: StateContainer.of(context).curTheme.primary,
       fontFamily: 'NunitoSans',
-      fontFamilyFallback: ["Roboto"],
       fontWeight: FontWeight.w600,
     );
   }
@@ -516,7 +471,6 @@ class AppStyles {
       fontSize: AppFontSizes.smallText(context),
       color: StateContainer.of(context).curTheme.primary,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       fontWeight: FontWeight.w100,
     );
   }
@@ -527,7 +481,6 @@ class AppStyles {
       fontSize: AppFontSizes.smallText(context),
       color: StateContainer.of(context).curTheme.success,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       fontWeight: FontWeight.w100,
     );
   }
@@ -538,7 +491,6 @@ class AppStyles {
       fontSize: AppFontSizes.smallText(context),
       color: StateContainer.of(context).curTheme.text30,
       fontFamily: 'OverpassMono',
-      fontFamilyFallback: ["RobotoMono"],
       fontWeight: FontWeight.w100,
     );
   }
@@ -548,7 +500,6 @@ class AppStyles {
       fontSize: 12,
       color: StateContainer.of(context).curTheme.text60,
       fontFamily: 'NunitoSans',
-      fontFamilyFallback: ["Roboto"],
       fontWeight: FontWeight.w400,
     );
   }

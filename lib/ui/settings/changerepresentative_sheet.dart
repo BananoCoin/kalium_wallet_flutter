@@ -266,7 +266,6 @@ class AppChangeRepresentativeSheet {
                                             .curTheme
                                             .success,
                                         fontFamily: 'NunitoSans',
-                                        fontFamilyFallback: ["Roboto"],
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),

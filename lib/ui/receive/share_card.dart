@@ -100,7 +100,6 @@ class _AppShareCardState extends State<AppShareCard> {
                               color:
                                   StateContainer.of(context).curTheme.primary,
                               fontFamily: "NeueHansKendrick",
-                              fontFamilyFallback: ["Roboto"],
                               fontWeight: FontWeight.w500,
                               fontSize: 49,
                             ),
@@ -112,7 +111,6 @@ class _AppShareCardState extends State<AppShareCard> {
                       minFontSize: 1,
                       style: TextStyle(
                         fontFamily: "NeueHansKendrick",
-                        fontFamilyFallback: ["Roboto"],
                         fontSize: 50,
                       ),
                     ),
@@ -139,7 +137,6 @@ class _AppShareCardState extends State<AppShareCard> {
                                         .curTheme
                                         .primary,
                                     fontFamily: "OverpassMono",
-                                    fontFamilyFallback: ["RobotoMono"],
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
                                     height: 0.9,
@@ -155,7 +152,6 @@ class _AppShareCardState extends State<AppShareCard> {
                                         .curTheme
                                         .text,
                                     fontFamily: "OverpassMono",
-                                    fontFamilyFallback: ["RobotoMono"],
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
                                     height: 0.9,
@@ -169,7 +165,6 @@ class _AppShareCardState extends State<AppShareCard> {
                             style: TextStyle(
                               fontSize: 50.0,
                               fontFamily: "OverpassMono",
-                              fontFamilyFallback: ["RobotoMono"],
                               fontWeight: FontWeight.w100,
                               height: 1.2,
                             ),
@@ -190,7 +185,6 @@ class _AppShareCardState extends State<AppShareCard> {
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.text,
                               fontFamily: "OverpassMono",
-                              fontFamilyFallback: ["RobotoMono"],
                               fontWeight: FontWeight.w100,
                               fontSize: 50,
                               height: 1.2,
@@ -212,7 +206,6 @@ class _AppShareCardState extends State<AppShareCard> {
                             style: TextStyle(
                               color: StateContainer.of(context).curTheme.text,
                               fontFamily: "OverpassMono",
-                              fontFamilyFallback: ["RobotoMono"],
                               fontWeight: FontWeight.w100,
                               fontSize: 50,
                               height: 1.2,
@@ -236,7 +229,6 @@ class _AppShareCardState extends State<AppShareCard> {
                                         .curTheme
                                         .text,
                                     fontFamily: "OverpassMono",
-                                    fontFamilyFallback: ["RobotoMono"],
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
                                     height: 1.2,
@@ -253,7 +245,6 @@ class _AppShareCardState extends State<AppShareCard> {
                                         .curTheme
                                         .primary,
                                     fontFamily: "OverpassMono",
-                                    fontFamilyFallback: ["RobotoMono"],
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
                                     height: 1.2,
@@ -267,7 +258,6 @@ class _AppShareCardState extends State<AppShareCard> {
                             style: TextStyle(
                               fontSize: 50,
                               fontFamily: "OverpassMono",
-                              fontFamilyFallback: ["RobotoMono"],
                               fontWeight: FontWeight.w100,
                               height: 1.2,
                             ),
@@ -288,7 +278,6 @@ class _AppShareCardState extends State<AppShareCard> {
                       style: TextStyle(
                         color: StateContainer.of(context).curTheme.primary,
                         fontFamily: "NeueHansKendrick",
-                        fontFamilyFallback: ["Roboto"],
                         fontWeight: FontWeight.w500,
                       ),
                     ),

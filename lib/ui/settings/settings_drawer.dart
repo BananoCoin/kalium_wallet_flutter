@@ -901,7 +901,6 @@ class _SettingsSheetState extends State<SettingsSheet>
                               StateContainer.of(context).selectedAccount.name,
                               style: TextStyle(
                                 fontFamily: "NunitoSans",
-                                fontFamilyFallback: ["Roboto"],
                                 fontWeight: FontWeight.w600,
                                 fontSize: 16.0,
                                 color: StateContainer.of(context).curTheme.text,
@@ -917,7 +916,6 @@ class _SettingsSheetState extends State<SettingsSheet>
                                   .substring(0, 11),
                               style: TextStyle(
                                 fontFamily: "OverpassMono",
-                                fontFamilyFallback: ["RobotoMono"],
                                 fontWeight: FontWeight.w100,
                                 fontSize: 14.0,
                                 color:
@@ -945,7 +943,6 @@ class _SettingsSheetState extends State<SettingsSheet>
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
-                              fontFamilyFallback: ["Roboto"],
                               color:
                                   StateContainer.of(context).curTheme.text60)),
                     ),
@@ -1282,7 +1279,6 @@ class _SettingsSheetState extends State<SettingsSheet>
                           style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
-                              fontFamilyFallback: ["Roboto"],
                               color:
                                   StateContainer.of(context).curTheme.text60)),
                     ),

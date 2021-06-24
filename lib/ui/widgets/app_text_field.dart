@@ -147,7 +147,6 @@ class _AppTextFieldState extends State<AppTextField> {
                           fontSize: 16.0,
                           fontWeight: FontWeight.w100,
                           fontFamily: 'NunitoSans',
-                          fontFamilyFallback: ["Roboto"],
                           color: StateContainer.of(context).curTheme.text60,
                         ),
                         // First button

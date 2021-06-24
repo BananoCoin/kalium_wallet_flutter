@@ -176,39 +176,6 @@ flutter:
           weight: 500
         - asset: fonts/NeueHansKendrick-Light.ttf
           weight: 300
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Light.ttf
-          weight: 200
-        - asset:  fonts/Roboto-Regular.ttf
-          weight: 600
-        - asset: fonts/Roboto-Thin.ttf
-          weight: 100
-        - asset: fonts/Roboto-Light.ttf
-          weight: 200
-        - asset: fonts/Roboto-Medium.ttf
-          weight: 700
-        - asset: fonts/Roboto-Bold.ttf
-          weight: 800
-        - asset: fonts/Roboto-Black.ttf
-          weight: 900
-    - family: RobotoMono
-      fonts:
-        - asset: fonts/RobotoMono-Light.ttf
-          weight: 200
-        - asset:  fonts/RobotoMono-Regular.ttf
-          weight: 600
-        - asset: fonts/RobotoMono-Thin.ttf
-          weight: 100
-        - asset: fonts/RobotoMono-Light.ttf
-          weight: 200
-        - asset: fonts/RobotoMono-Medium.ttf
-          weight: 700
-        - asset: fonts/RobotoMono-Bold.ttf
-          weight: 800
-        - asset: fonts/RobotoMono-Bold.ttf
-          weight: 900
-
 
   assets:
     - assets/monkeyQR.svg

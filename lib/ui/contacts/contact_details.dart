@@ -218,7 +218,6 @@ class ContactDetailsSheet {
                               color:
                                   StateContainer.of(context).curTheme.primary,
                               fontFamily: 'NunitoSans',
-                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                         ),
@@ -274,7 +273,6 @@ class ContactDetailsSheet {
                                 color:
                                     StateContainer.of(context).curTheme.success,
                                 fontFamily: 'NunitoSans',
-                                fontFamilyFallback: ["Roboto"],
                                 fontWeight: FontWeight.w600,
                               )),
                         ),

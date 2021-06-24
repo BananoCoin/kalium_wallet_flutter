@@ -411,7 +411,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 account.name,
                                 style: TextStyle(
                                   fontFamily: "NunitoSans",
-                                  fontFamilyFallback: ["Roboto"],
                                   fontWeight: FontWeight.w600,
                                   fontSize: 16.0,
                                   color:
@@ -427,7 +426,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 account.address.substring(0, 11) + "...",
                                 style: TextStyle(
                                   fontFamily: "OverpassMono",
-                                  fontFamilyFallback: ["RobotoMono"],
                                   fontWeight: FontWeight.w100,
                                   fontSize: 14.0,
                                   color: StateContainer.of(context)
@@ -471,7 +469,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                               style: TextStyle(
                                   fontSize: 16.0,
                                   fontFamily: "NunitoSans",
-                                  fontFamilyFallback: ["Roboto"],
                                   fontWeight: FontWeight.w900,
                                   color:
                                       StateContainer.of(context).curTheme.text),

@@ -728,11 +728,10 @@ class _AppHomePageState extends State<AppHomePage>
                                   context),
                               textAlign: TextAlign.start,
                               style: TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w100,
-                                  color:
-                                      StateContainer.of(context).curTheme.text,
-                                  fontFamilyFallback: ["Roboto"]),
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w100,
+                                color: StateContainer.of(context).curTheme.text,
+                              ),
                             ),
                           ],
                         ),
@@ -1286,7 +1285,6 @@ class _AppHomePageState extends State<AppHomePage>
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     fontFamily: "NunitoSans",
-                                    fontFamilyFallback: ["Roboto"],
                                     fontSize: AppFontSizes.small,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.transparent,
@@ -1306,7 +1304,6 @@ class _AppHomePageState extends State<AppHomePage>
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                         fontFamily: "NunitoSans",
-                                        fontFamilyFallback: ["Roboto"],
                                         fontSize: AppFontSizes.small - 4,
                                         fontWeight: FontWeight.w600,
                                         color: Colors.transparent,
@@ -1327,7 +1324,6 @@ class _AppHomePageState extends State<AppHomePage>
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                       fontFamily: "NunitoSans",
-                                      fontFamilyFallback: ["Roboto"],
                                       color: Colors.transparent,
                                       fontSize: AppFontSizes.smallest,
                                       fontWeight: FontWeight.w600),
@@ -1346,7 +1342,6 @@ class _AppHomePageState extends State<AppHomePage>
                                       textAlign: TextAlign.start,
                                       style: TextStyle(
                                           fontFamily: "NunitoSans",
-                                          fontFamilyFallback: ["Roboto"],
                                           color: Colors.transparent,
                                           fontSize: AppFontSizes.smallest - 3,
                                           fontWeight: FontWeight.w600),
@@ -1377,7 +1372,6 @@ class _AppHomePageState extends State<AppHomePage>
                               style: TextStyle(
                                 fontSize: AppFontSizes.smallest,
                                 fontFamily: 'OverpassMono',
-                                fontFamilyFallback: ["RobotoMono"],
                                 fontWeight: FontWeight.w100,
                                 color: Colors.transparent,
                               ),
@@ -1397,7 +1391,6 @@ class _AppHomePageState extends State<AppHomePage>
                                   style: TextStyle(
                                     fontSize: AppFontSizes.smallest - 3,
                                     fontFamily: 'OverpassMono',
-                                    fontFamilyFallback: ["RobotoMono"],
                                     fontWeight: FontWeight.w100,
                                     color: Colors.transparent,
                                   ),
@@ -1537,7 +1530,6 @@ class _AppHomePageState extends State<AppHomePage>
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontFamily: "NunitoSans",
-                        fontFamilyFallback: ["Roboto"],
                         fontSize: AppFontSizes.small,
                         fontWeight: FontWeight.w600,
                         color: Colors.transparent),
@@ -1554,7 +1546,6 @@ class _AppHomePageState extends State<AppHomePage>
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: "NunitoSans",
-                            fontFamilyFallback: ["Roboto"],
                             fontSize: AppFontSizes.small - 3,
                             fontWeight: FontWeight.w600,
                             color: Colors.transparent),
@@ -1574,7 +1565,6 @@ class _AppHomePageState extends State<AppHomePage>
                     "1234567",
                     style: TextStyle(
                         fontFamily: "NunitoSans",
-                        fontFamilyFallback: ["Roboto"],
                         fontSize: AppFontSizes.largestc,
                         fontWeight: FontWeight.w900,
                         color: Colors.transparent),
@@ -1593,7 +1583,6 @@ class _AppHomePageState extends State<AppHomePage>
                         "1234567",
                         style: TextStyle(
                             fontFamily: "NunitoSans",
-                            fontFamilyFallback: ["Roboto"],
                             fontSize: AppFontSizes.largestc - 8,
                             fontWeight: FontWeight.w900,
                             color: Colors.transparent),
@@ -1615,7 +1604,6 @@ class _AppHomePageState extends State<AppHomePage>
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontFamily: "NunitoSans",
-                        fontFamilyFallback: ["Roboto"],
                         fontSize: AppFontSizes.small,
                         fontWeight: FontWeight.w600,
                         color: Colors.transparent),
@@ -1632,7 +1620,6 @@ class _AppHomePageState extends State<AppHomePage>
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: "NunitoSans",
-                            fontFamilyFallback: ["Roboto"],
                             fontSize: AppFontSizes.small - 3,
                             fontWeight: FontWeight.w600,
                             color: Colors.transparent),

@@ -100,7 +100,6 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
-                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                           TextSpan(
@@ -111,7 +110,6 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                               fontSize: 16.0,
                               fontWeight: FontWeight.w100,
                               fontFamily: 'NunitoSans',
-                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                           TextSpan(
@@ -124,7 +122,6 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                               fontSize: 16.0,
                               fontWeight: FontWeight.w700,
                               fontFamily: 'NunitoSans',
-                              fontFamilyFallback: ["Roboto"],
                             ),
                           ),
                         ],
@@ -145,7 +142,6 @@ class _SendCompleteSheetState extends State<SendCompleteSheet> {
                             fontWeight: FontWeight.w700,
                             color: StateContainer.of(context).curTheme.success,
                             fontFamily: 'NunitoSans',
-                            fontFamilyFallback: ["Roboto"],
                           ),
                         ),
                       ],

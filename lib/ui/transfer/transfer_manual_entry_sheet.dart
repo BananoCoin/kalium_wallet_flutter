@@ -159,7 +159,6 @@ class _TransferManualEntrySheetState extends State<TransferManualEntrySheet> {
                                                 .primary
                                             : Colors.transparent,
                                         fontFamily: 'NunitoSans',
-                                        fontFamilyFallback: ["Roboto"],
                                         fontWeight: FontWeight.w600,
                                       )),
                             ),

@@ -252,7 +252,6 @@ class _SendSheetState extends State<SendSheet> {
                           fontSize: 16.0,
                           fontWeight: FontWeight.w700,
                           fontFamily: 'NunitoSans',
-                          fontFamilyFallback: ["Roboto"],
                         ),
                       ),
                     ],
@@ -318,9 +317,6 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.w100,
                                                   fontFamily: 'NunitoSans',
-                                                  fontFamilyFallback: [
-                                                    "Roboto"
-                                                  ],
                                                 ),
                                               ),
                                               TextSpan(
@@ -342,9 +338,6 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.w700,
                                                   fontFamily: 'NunitoSans',
-                                                  fontFamilyFallback: [
-                                                    "Roboto"
-                                                  ],
                                                 ),
                                               ),
                                               TextSpan(
@@ -359,9 +352,6 @@ class _SendSheetState extends State<SendSheet> {
                                                   fontSize: 14.0,
                                                   fontWeight: FontWeight.w100,
                                                   fontFamily: 'NunitoSans',
-                                                  fontFamilyFallback: [
-                                                    "Roboto"
-                                                  ],
                                                 ),
                                               ),
                                             ],
@@ -377,7 +367,6 @@ class _SendSheetState extends State<SendSheet> {
                                           fontSize: 14.0,
                                           fontWeight: FontWeight.w100,
                                           fontFamily: 'NunitoSans',
-                                          fontFamilyFallback: ["Roboto"],
                                         ),
                                       ),
                                     );
@@ -398,7 +387,6 @@ class _SendSheetState extends State<SendSheet> {
                                             .curTheme
                                             .primary,
                                         fontFamily: 'NunitoSans',
-                                        fontFamilyFallback: ["Roboto"],
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
@@ -481,7 +469,6 @@ class _SendSheetState extends State<SendSheet> {
                                             .curTheme
                                             .primary,
                                         fontFamily: 'NunitoSans',
-                                        fontFamilyFallback: ["Roboto"],
                                         fontWeight: FontWeight.w600,
                                       )),
                                 ),
@@ -905,7 +892,6 @@ class _SendSheetState extends State<SendSheet> {
         fontSize: 16.0,
         color: StateContainer.of(context).curTheme.primary,
         fontFamily: 'NunitoSans',
-        fontFamilyFallback: ["Roboto"],
       ),
       inputFormatters: _rawAmount == null
           ? [
