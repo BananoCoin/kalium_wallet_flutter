@@ -27,7 +27,7 @@ def create_temp_keychain(name, password)
     name: name,
     password: password,
     unlock: true,
-    timeout: false
+    timeout: 0
   )
 end
 
