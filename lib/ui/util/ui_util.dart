@@ -12,7 +12,7 @@ import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
-class UIUtil{
+class UIUtil {
   Widget threeLineAddressText(BuildContext context, String address,
       {ThreeLineAddressTextType type = ThreeLineAddressTextType.PRIMARY,
       String contactName}) {
@@ -63,9 +63,8 @@ class UIUtil{
                     style: AppStyles.textStyleAddressText60(context),
                   ),
                   TextSpan(
-                    text: stringPartFive,
-                    style: AppStyles.textStyleAddressPrimary60(context)
-                  ),
+                      text: stringPartFive,
+                      style: AppStyles.textStyleAddressPrimary60(context)),
                 ],
               ),
             )
@@ -324,7 +323,8 @@ class UIUtil{
     }
   }
 
-  Widget threeLineSeedText(BuildContext context, String address, {TextStyle textStyle}) {
+  Widget threeLineSeedText(BuildContext context, String address,
+      {TextStyle textStyle}) {
     textStyle = textStyle ?? AppStyles.textStyleSeed(context);
     String stringPartOne = address.substring(0, 22);
     String stringPartTwo = address.substring(22, 44);
@@ -350,11 +350,13 @@ class UIUtil{
   Widget showBlockExplorerWebview(BuildContext context, String hash) {
     cancelLockEvent();
     return WebviewScaffold(
-      url: AppLocalization.of(context).getBlockExplorerUrl(hash),
+      url: AppLocalization.of(context).getBlockExplorerUrl(
+          hash, StateContainer.of(context).curBlockExplorer),
       appBar: new AppBar(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
+        iconTheme:
+            IconThemeData(color: StateContainer.of(context).curTheme.text),
       ),
     );
   }
@@ -362,11 +364,13 @@ class UIUtil{
   Widget showAccountWebview(BuildContext context, String account) {
     cancelLockEvent();
     return WebviewScaffold(
-      url: AppLocalization.of(context).getAccountExplorerUrl(account),
+      url: AppLocalization.of(context).getAccountExplorerUrl(
+          account, StateContainer.of(context).curBlockExplorer),
       appBar: new AppBar(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
+        iconTheme:
+            IconThemeData(color: StateContainer.of(context).curTheme.text),
       ),
     );
   }
@@ -378,7 +382,8 @@ class UIUtil{
       appBar: new AppBar(
         backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
         brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme: IconThemeData(color: StateContainer.of(context).curTheme.text),
+        iconTheme:
+            IconThemeData(color: StateContainer.of(context).curTheme.text),
       ),
     );
   }
@@ -395,14 +400,20 @@ class UIUtil{
       Align(
         alignment: Alignment.topCenter,
         child: Container(
-          margin: EdgeInsets.symmetric(vertical: MediaQuery.of(context).size.height * 0.05, horizontal: 14),
+          margin: EdgeInsets.symmetric(
+              vertical: MediaQuery.of(context).size.height * 0.05,
+              horizontal: 14),
           padding: EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           width: MediaQuery.of(context).size.width - 30,
           decoration: BoxDecoration(
             color: StateContainer.of(context).curTheme.primary,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(color:StateContainer.of(context).curTheme.barrier, offset: Offset(0, 15), blurRadius: 30, spreadRadius: -5),
+              BoxShadow(
+                  color: StateContainer.of(context).curTheme.barrier,
+                  offset: Offset(0, 15),
+                  blurRadius: 30,
+                  spreadRadius: -5),
             ],
           ),
           child: Text(

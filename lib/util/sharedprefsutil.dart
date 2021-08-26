@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'dart:io';
 import 'package:intl/intl.dart';
+import 'package:kalium_wallet_flutter/model/available_block_explorer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/util/encrypt.dart';
@@ -26,7 +27,9 @@ class SharedPrefsUtil {
   static const String cur_currency = 'fkalium_currency_pref';
   static const String cur_language = 'fkalium_language_pref';
   static const String cur_theme = 'fkalium_theme_pref';
-  static const String user_representative = 'fkalium_user_rep'; // For when non-opened accounts have set a representative
+  static const String cur_explorer = 'fkalium_cur_explorer_pref';
+  static const String user_representative =
+      'fkalium_user_rep'; // For when non-opened accounts have set a representative
   static const String firstcontact_added = 'fkalium_first_c_added';
   static const String notification_enabled = 'fkalium_notification_on';
   static const String lock_kalium = 'fkalium_lock_dev';
@@ -61,11 +64,14 @@ class SharedPrefsUtil {
     // Retrieve/Generate encryption password
     String secret = await sl.get<Vault>().getEncryptionPhrase();
     if (secret == null) {
-      secret = Salsa20Encryptor.generateEncryptionSecret(16) + ":" + Salsa20Encryptor.generateEncryptionSecret(8);
+      secret = Salsa20Encryptor.generateEncryptionSecret(16) +
+          ":" +
+          Salsa20Encryptor.generateEncryptionSecret(8);
       await sl.get<Vault>().writeEncryptionPhrase(secret);
     }
     // Encrypt and save
-    Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
+    Salsa20Encryptor encrypter =
+        new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, encrypter.encrypt(value));
   }
@@ -74,7 +80,8 @@ class SharedPrefsUtil {
     String secret = await sl.get<Vault>().getEncryptionPhrase();
     if (secret == null) return null;
     // Decrypt and return
-    Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
+    Salsa20Encryptor encrypter =
+        new Salsa20Encryptor(secret.split(":")[0], secret.split(":")[1]);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String encrypted = prefs.get(key);
     if (encrypted == null) return null;
@@ -98,7 +105,6 @@ class SharedPrefsUtil {
     return await get(first_launch_key, defaultValue: true);
   }
 
-
   Future<void> setFirstContactAdded(bool value) async {
     return await set(firstcontact_added, value);
   }
@@ -115,45 +121,61 @@ class SharedPrefsUtil {
     return await getEncrypted(app_uuid_key);
   }
 
-
   Future<void> setPriceConversion(PriceConversion conversion) async {
-   return await set(price_conversion, conversion.index);
+    return await set(price_conversion, conversion.index);
   }
 
   Future<PriceConversion> getPriceConversion() async {
-    return PriceConversion.values[await get(price_conversion, defaultValue: PriceConversion.BTC.index)];
+    return PriceConversion.values[
+        await get(price_conversion, defaultValue: PriceConversion.BTC.index)];
   }
 
   Future<void> setAuthMethod(AuthenticationMethod method) async {
-   return await set(auth_method, method.getIndex());
+    return await set(auth_method, method.getIndex());
   }
 
   Future<AuthenticationMethod> getAuthMethod() async {
-    return AuthenticationMethod(AuthMethod.values[await get(auth_method, defaultValue: AuthMethod.BIOMETRICS.index)]);
+    return AuthenticationMethod(AuthMethod.values[
+        await get(auth_method, defaultValue: AuthMethod.BIOMETRICS.index)]);
   }
 
   Future<void> setCurrency(AvailableCurrency currency) async {
-   return await set(cur_currency, currency.getIndex());
+    return await set(cur_currency, currency.getIndex());
   }
 
   Future<AvailableCurrency> getCurrency(Locale deviceLocale) async {
-    return AvailableCurrency(AvailableCurrencyEnum.values[await get(cur_currency, defaultValue: AvailableCurrency.getBestForLocale(deviceLocale).currency.index)]);
+    return AvailableCurrency(AvailableCurrencyEnum.values[await get(
+        cur_currency,
+        defaultValue:
+            AvailableCurrency.getBestForLocale(deviceLocale).currency.index)]);
   }
 
   Future<void> setLanguage(LanguageSetting language) async {
-   return await set(cur_language, language.getIndex());
+    return await set(cur_language, language.getIndex());
   }
 
   Future<LanguageSetting> getLanguage() async {
-    return LanguageSetting(AvailableLanguage.values[await get(cur_language, defaultValue: AvailableLanguage.DEFAULT.index)]);
+    return LanguageSetting(AvailableLanguage.values[await get(cur_language,
+        defaultValue: AvailableLanguage.DEFAULT.index)]);
+  }
+
+  Future<void> setBlockExplorer(AvailableBlockExplorer explorer) async {
+    return await set(cur_explorer, explorer.getIndex());
+  }
+
+  Future<AvailableBlockExplorer> getBlockExplorer() async {
+    return AvailableBlockExplorer(AvailableBlockExplorerEnum.values[await get(
+        cur_explorer,
+        defaultValue: AvailableBlockExplorerEnum.CREEPER.index)]);
   }
 
   Future<void> setTheme(ThemeSetting theme) async {
-   return await set(cur_theme, theme.getIndex());
+    return await set(cur_theme, theme.getIndex());
   }
 
   Future<ThemeSetting> getTheme() async {
-    return ThemeSetting(ThemeOptions.values[await get(cur_theme, defaultValue: ThemeOptions.KALIUM.index)]);
+    return ThemeSetting(ThemeOptions
+        .values[await get(cur_theme, defaultValue: ThemeOptions.KALIUM.index)]);
   }
 
   Future<void> setRepresentative(String rep) async {
@@ -161,7 +183,8 @@ class SharedPrefsUtil {
   }
 
   Future<String> getRepresentative() async {
-    return await get(user_representative, defaultValue: AppWallet.defaultRepresentative);
+    return await get(user_representative,
+        defaultValue: AppWallet.defaultRepresentative);
   }
 
   Future<void> setNotificationsOn(bool value) async {
@@ -169,14 +192,16 @@ class SharedPrefsUtil {
   }
 
   Future<bool> getNotificationsOn() async {
-    // Notifications off by default on iOS, 
+    // Notifications off by default on iOS,
     bool defaultValue = Platform.isIOS ? false : true;
     return await get(notification_enabled, defaultValue: defaultValue);
   }
 
   /// If notifications have been set by user/app
   Future<bool> getNotificationsSet() async {
-    return await get(notification_enabled, defaultValue: null) == null ? false : true;
+    return await get(notification_enabled, defaultValue: null) == null
+        ? false
+        : true;
   }
 
   Future<void> setLock(bool value) async {
@@ -188,11 +213,13 @@ class SharedPrefsUtil {
   }
 
   Future<void> setLockTimeout(LockTimeoutSetting setting) async {
-   return await set(kalium_lock_timeout, setting.getIndex());
+    return await set(kalium_lock_timeout, setting.getIndex());
   }
 
   Future<LockTimeoutSetting> getLockTimeout() async {
-    return LockTimeoutSetting(LockTimeoutOption.values[await get(kalium_lock_timeout, defaultValue: LockTimeoutOption.ONE.index)]);
+    return LockTimeoutSetting(LockTimeoutOption.values[await get(
+        kalium_lock_timeout,
+        defaultValue: LockTimeoutOption.ONE.index)]);
   }
 
   // Locking out when max pin attempts exceeded
@@ -229,15 +256,31 @@ class SharedPrefsUtil {
     int attempts = await getLockAttempts();
     if (attempts >= 20) {
       // 4+ failed attempts
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(hours: 24))));
+      await set(
+          pin_lock_until,
+          DateFormat.yMd()
+              .add_jms()
+              .format(DateTime.now().toUtc().add(Duration(hours: 24))));
     } else if (attempts >= 15) {
       // 3 failed attempts
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(minutes: 15))));
+      await set(
+          pin_lock_until,
+          DateFormat.yMd()
+              .add_jms()
+              .format(DateTime.now().toUtc().add(Duration(minutes: 15))));
     } else if (attempts >= 10) {
       // 2 failed attempts
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(minutes: 5))));
+      await set(
+          pin_lock_until,
+          DateFormat.yMd()
+              .add_jms()
+              .format(DateTime.now().toUtc().add(Duration(minutes: 5))));
     } else if (attempts >= 5) {
-      await set(pin_lock_until, DateFormat.yMd().add_jms().format(DateTime.now().toUtc().add(Duration(minutes: 1))));
+      await set(
+          pin_lock_until,
+          DateFormat.yMd()
+              .add_jms()
+              .format(DateTime.now().toUtc().add(Duration(minutes: 1))));
     }
   }
 

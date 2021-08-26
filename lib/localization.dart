@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:kalium_wallet_flutter/model/available_block_explorer.dart';
 import 'package:kalium_wallet_flutter/model/available_language.dart';
 
 import 'l10n/messages_all.dart';
@@ -455,6 +456,11 @@ class AppLocalization {
   String get language {
     return Intl.message("Language",
         desc: 'settings_change_language', name: 'language');
+  }
+
+  String get blockExplorer {
+    return Intl.message("Block Explorer",
+        desc: 'settings_change_block_explorer', name: 'blockExplorer');
   }
 
   String get shareKalium {
@@ -1157,11 +1163,18 @@ class AppLocalization {
   }
 
   /// -- NON-TRANSLATABLE ITEMS
-  String getBlockExplorerUrl(String hash) {
+  String getBlockExplorerUrl(String hash, AvailableBlockExplorer explorer) {
+    if (explorer.explorer == AvailableBlockExplorerEnum.BANANOLOOKER) {
+      return 'https://bananolooker.com/block/$hash';
+    }
     return 'https://creeper.banano.cc/explorer/block/$hash';
   }
 
-  String getAccountExplorerUrl(String account) {
+  String getAccountExplorerUrl(
+      String account, AvailableBlockExplorer explorer) {
+    if (explorer.explorer == AvailableBlockExplorerEnum.BANANOLOOKER) {
+      return 'https://bananolooker.com/account/$account';
+    }
     return 'https://creeper.banano.cc/explorer/account/$account';
   }
 

@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:kalium_wallet_flutter/model/available_block_explorer.dart';
 import 'package:kalium_wallet_flutter/model/wallet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -98,6 +99,8 @@ class StateContainerState extends State<StateContainer> {
   Locale deviceLocale = Locale('en', 'US');
   AvailableCurrency curCurrency = AvailableCurrency(AvailableCurrencyEnum.USD);
   LanguageSetting curLanguage = LanguageSetting(AvailableLanguage.DEFAULT);
+  AvailableBlockExplorer curBlockExplorer =
+      AvailableBlockExplorer(AvailableBlockExplorerEnum.CREEPER);
   BaseTheme curTheme = KaliumTheme();
   // Currently selected account
   Account selectedAccount =
@@ -158,6 +161,12 @@ class StateContainerState extends State<StateContainer> {
     // Get theme default
     sl.get<SharedPrefsUtil>().getTheme().then((theme) {
       updateTheme(theme, setIcon: false);
+    });
+    // Get default block explorer
+    sl.get<SharedPrefsUtil>().getBlockExplorer().then((explorer) {
+      setState(() {
+        curBlockExplorer = explorer;
+      });
     });
     // Get initial deep link
     getInitialLink().then((initialLink) {
@@ -366,6 +375,13 @@ class StateContainerState extends State<StateContainer> {
   void updateDeviceLocale(Locale locale) {
     setState(() {
       deviceLocale = locale;
+    });
+  }
+
+  // Change block explorer
+  void updateBlockExplorer(AvailableBlockExplorer explorer) {
+    setState(() {
+      curBlockExplorer = explorer;
     });
   }
 
