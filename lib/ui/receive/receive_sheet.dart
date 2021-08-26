@@ -17,11 +17,12 @@ import 'package:kalium_wallet_flutter/ui/receive/share_card.dart';
 import 'package:kalium_wallet_flutter/model/wallet.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:math' as Math;
 
 class ReceiveSheet extends StatefulWidget {
   final Widget qrWidget;
 
-  ReceiveSheet({this.qrWidget}) : super();  
+  ReceiveSheet({this.qrWidget}) : super();
 
   _ReceiveSheetStateState createState() => _ReceiveSheetStateState();
 }
@@ -58,14 +59,14 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
     // Create our SVG-heavy things in the constructor because they are slower operations
     // Share card initialization
     shareCardKey = GlobalKey();
-    _showShareCard = false;    
+    _showShareCard = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.only(
-          bottom: MediaQuery.of(context).size.height * 0.035),
+      minimum:
+          EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.035),
       child: Column(
         children: <Widget>[
           // A row for the address text and close button
@@ -109,39 +110,57 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
 
           //MonkeyQR which takes all the available space left from the buttons & address text
           Expanded(
-            child: Center(
-              child: Stack(
-                children: <Widget>[
-                  _showShareCard ? Container(
-                    child: AppShareCard(shareCardKey, SvgPicture.asset('assets/monkeyQR.svg')),
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                  ) : SizedBox(),
-                  // This is for hiding the share card
-                  Center(
-                    child: Container(
-                      width: 260,
-                      height: 150,
-                      color: StateContainer.of(context)
-                          .curTheme
-                          .backgroundDark,
+            child: Padding(
+              padding: EdgeInsetsDirectional.only(
+                  top: 20, bottom: 28, start: 20, end: 20),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  double availableWidth = constraints.maxWidth;
+                  double availableHeight = constraints.maxHeight;
+                  double widthDivideFactor = 1.3;
+                  double computedMaxSize = Math.min(
+                      availableWidth / widthDivideFactor, availableHeight);
+                  return Center(
+                    child: Stack(
+                      children: <Widget>[
+                        _showShareCard
+                            ? Container(
+                                child: AppShareCard(shareCardKey,
+                                    SvgPicture.asset('assets/monkeyQR.svg')),
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                              )
+                            : SizedBox(),
+                        // This is for hiding the share card
+                        Center(
+                          child: Container(
+                            width: 260,
+                            height: 150,
+                            color: StateContainer.of(context)
+                                .curTheme
+                                .backgroundDark,
+                          ),
+                        ),
+                        // Background/border part the monkeyQR
+                        Center(
+                          child: Container(
+                            width: computedMaxSize,
+                            child: SvgPicture.asset('assets/monkeyQR.svg'),
+                          ),
+                        ),
+                        // Actual QR part of the monkeyQR
+                        Center(
+                          child: Container(
+                            margin: EdgeInsets.only(
+                              top: computedMaxSize / 4.05,
+                            ),
+                            width: computedMaxSize / 2.15,
+                            child: widget.qrWidget,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  // Background/border part the monkeyQR
-                  Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width / 1.5,
-                      child: SvgPicture.asset('assets/monkeyQR.svg'),
-                    ),
-                  ),
-                  // Actual QR part of the monkeyQR
-                  Center(
-                    child: Container(
-                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.width / 6),
-                      width: MediaQuery.of(context).size.width / 3.12,
-                      child: widget.qrWidget,
-                    ),
-                  ),
-                ],
+                  );
+                },
               ),
             ),
           ),
@@ -161,8 +180,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                           ? AppLocalization.of(context).addressCopied
                           : AppLocalization.of(context).copyAddress,
                       Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                    Clipboard.setData(
-                        new ClipboardData(text: StateContainer.of(context).wallet.address));
+                    Clipboard.setData(new ClipboardData(
+                        text: StateContainer.of(context).wallet.address));
                     setState(() {
                       // Set copied style
                       _addressCopied = true;
@@ -170,8 +189,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                     if (_addressCopiedTimer != null) {
                       _addressCopiedTimer.cancel();
                     }
-                    _addressCopiedTimer = new Timer(
-                        const Duration(milliseconds: 800), () {
+                    _addressCopiedTimer =
+                        new Timer(const Duration(milliseconds: 800), () {
                       if (mounted) {
                         setState(() {
                           _addressCopied = false;
@@ -192,16 +211,14 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                       disabled: _showShareCard, onPressed: () {
                     String receiveCardFileName =
                         "share_${StateContainer.of(context).wallet.address}.png";
-                    getApplicationDocumentsDirectory()
-                        .then((directory) {
+                    getApplicationDocumentsDirectory().then((directory) {
                       String filePath =
                           "${directory.path}/$receiveCardFileName";
                       File f = File(filePath);
                       setState(() {
                         _showShareCard = true;
                       });
-                      Future.delayed(new Duration(milliseconds: 50),
-                          () {
+                      Future.delayed(new Duration(milliseconds: 50), () {
                         if (_showShareCard) {
                           _capturePng().then((byteData) {
                             if (byteData != null) {
