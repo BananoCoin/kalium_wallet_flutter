@@ -475,16 +475,16 @@ class RadiumTheme extends BaseTheme {
 }
 
 class UraniumTheme extends BaseTheme {
-  static const brightYellow = Color(0xFFEEF088);
+  static const brightYellow = Color(0xFFE4E582);
 
-  static const green = Color(0xFFA3F088);
-  static const greenDark = Color(0xFF528242);
+  static const green = Color(0xFF82E582);
+  static const greenDark = Color(0xFF428242);
 
   static const white = Color(0xFFFFFFFF);
-  static const whiteish = Color(0xFFE9E9F2);
+  static const whiteish = Color(0xFFE9E9F0);
 
   static const black = Color(0xFF000000);
-  static const blackYellowish = Color(0xFF14140D);
+  static const blackYellowish = Color(0xFF14140F);
   static const blackLighter = Color(0xFF0E0F0F);
 
   Color primary = brightYellow;

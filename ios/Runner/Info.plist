@@ -125,6 +125,15 @@
 				<key>UIPrerenderedIcon</key>
 				<false/>
 			</dict>
+			<key>uranium</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>U-Icon-App</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
 		</dict>
 	</dict>
 </dict>

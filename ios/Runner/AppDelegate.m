@@ -43,6 +43,8 @@
                 [self lc_setAlternateIconName:@"beryllium"];
             } else if ([@"radium" isEqualToString:icon]) {
                 [self lc_setAlternateIconName:@"radium"];
+            } else if ([@"uranium" isEqualToString:icon]) {
+                [self lc_setAlternateIconName:@"uranium"];
             }
         } else if ([@"setSecureClipboardItem" isEqualToString:call.method]) {
             NSDictionary *arguments = [call arguments];
