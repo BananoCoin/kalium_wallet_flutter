@@ -46,7 +46,7 @@ class _AvatarPageState extends State<AvatarPage>
   Widget build(BuildContext context) {
     bgColorAnimation = ColorTween(
       begin: Colors.transparent,
-      end: StateContainer.of(context).curTheme.overlay70,
+      end: StateContainer.of(context).curTheme.barrier,
     ).animate(CurvedAnimation(
         parent: _controller,
         curve: Curves.easeOut,

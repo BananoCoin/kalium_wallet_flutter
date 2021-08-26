@@ -402,7 +402,7 @@ class UIUtil{
             color: StateContainer.of(context).curTheme.primary,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
-              BoxShadow(color:StateContainer.of(context).curTheme.overlay80, offset: Offset(0, 15), blurRadius: 30, spreadRadius: -5),
+              BoxShadow(color:StateContainer.of(context).curTheme.barrier, offset: Offset(0, 15), blurRadius: 30, spreadRadius: -5),
             ],
           ),
           child: Text(

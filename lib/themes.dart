@@ -53,6 +53,11 @@ abstract class BaseTheme {
   Color overlay30;
   Color overlay20;
 
+  Color barrier;
+  Color barrierWeaker;
+  Color barrierWeakest;
+  Color barrierStronger;
+
   Color animationOverlayMedium;
   Color animationOverlayStrong;
 
@@ -128,9 +133,13 @@ class KaliumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Color barrier = black.withOpacity(0.7);
+  Color barrierWeaker = black.withOpacity(0.4);
+  Color barrierWeakest = black.withOpacity(0.3);
+  Color barrierStronger = black.withOpacity(0.85);
+
   Color animationOverlayMedium = black.withOpacity(0.7);
   Color animationOverlayStrong = black.withOpacity(0.85);
-
 
   Brightness brightness = Brightness.dark;
   SystemUiOverlayStyle statusBar =
@@ -202,6 +211,11 @@ class TitaniumTheme extends BaseTheme {
   Color overlay50 = black.withOpacity(0.5);
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
+
+  Color barrier = black.withOpacity(0.7);
+  Color barrierWeaker = black.withOpacity(0.4);
+  Color barrierWeakest = black.withOpacity(0.3);
+  Color barrierStronger = black.withOpacity(0.85);
 
   Color animationOverlayMedium = black.withOpacity(0.7);
   Color animationOverlayStrong = black.withOpacity(0.85);
@@ -276,6 +290,11 @@ class IridiumTheme extends BaseTheme {
   Color overlay50 = black.withOpacity(0.5);
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
+
+  Color barrier = black.withOpacity(0.7);
+  Color barrierWeaker = black.withOpacity(0.4);
+  Color barrierWeakest = black.withOpacity(0.3);
+  Color barrierStronger = black.withOpacity(0.85);
 
   Color animationOverlayMedium = white.withOpacity(0.7);
   Color animationOverlayStrong = white.withOpacity(0.85);
@@ -357,6 +376,11 @@ class BerylliumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Color barrier = black.withOpacity(0.7);
+  Color barrierWeaker = black.withOpacity(0.4);
+  Color barrierWeakest = black.withOpacity(0.3);
+  Color barrierStronger = black.withOpacity(0.85);
+
   Color animationOverlayMedium = black.withOpacity(0.7);
   Color animationOverlayStrong = black.withOpacity(0.85);
 
@@ -431,6 +455,11 @@ class RadiumTheme extends BaseTheme {
   Color overlay30 = black.withOpacity(0.3);
   Color overlay20 = black.withOpacity(0.2);
 
+  Color barrier = black.withOpacity(0.7);
+  Color barrierWeaker = black.withOpacity(0.4);
+  Color barrierWeakest = black.withOpacity(0.3);
+  Color barrierStronger = black.withOpacity(0.85);
+
   Color animationOverlayMedium = black.withOpacity(0.7);
   Color animationOverlayStrong = black.withOpacity(0.85);
 
@@ -446,6 +475,7 @@ class RadiumTheme extends BaseTheme {
 }
 
 enum AppIconEnum { KALIUM, TITANIUM, IRIDIUM, BERYLLIUM, RADIUM }
+
 class AppIcon {
   static const _channel = const MethodChannel('fappchannel');
 
@@ -473,7 +503,7 @@ class AppIcon {
         break;
     }
     final Map<String, dynamic> params = <String, dynamic>{
-     'icon': iconStr,
+      'icon': iconStr,
     };
     return await _channel.invokeMethod('changeIcon', params);
   }
