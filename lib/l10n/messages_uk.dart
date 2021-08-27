@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("ви впевнені що ви зробили резервну копію seed?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("зробити резервну копію seed"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Біометрика"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Explorer блокчейну"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Відмовитися"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Змінити валюту"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Зміна представника"),

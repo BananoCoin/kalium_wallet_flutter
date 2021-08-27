@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Bạn có chắc rằng bạn đã sao lưu hạt giống của mình?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Sao lưu hạt giống của bạn"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Sinh trắc học"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Trình khám phá khối"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Hủy"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Đổi loại tiền pháp định"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Thay đổi đại diện"),

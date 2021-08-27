@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Cüzdanınızın seed\'ini yedeklediğinizden emin misiniz?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Seed\'inizi yedekleyin"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Biyometrik"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Blok Tarayacı"),
     "cancel" : MessageLookupByLibrary.simpleMessage("İptal"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Para Birimi"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Temsilci Değiştir"),

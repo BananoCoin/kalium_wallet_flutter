@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("N\'estàs segur que has fet una còpia de seguretat de la llavor?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Copia la teva llavor"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Biometria"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Explorador de blocs"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel·lar"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Canviar moneda"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Canviar representant"),

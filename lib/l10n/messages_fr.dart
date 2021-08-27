@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Êtes vous sûr d’avoir sauvegardé votre clé privée?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Sauvegarder votre clé privée"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Biométrie"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Explorateur de blocs"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Annuler"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Changer de devise"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Changer le représentant"),

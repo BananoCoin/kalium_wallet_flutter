@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("क्या आप निश्चित है की आपने अपने वॉलेट का सीड बैकअप कर लिया है?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("सीड बैकअप करें"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("बॉयोमेट्रिक्स"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("ब्लॉक एक्सप्लोरर"),
     "cancel" : MessageLookupByLibrary.simpleMessage("रद्द करें"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("मुद्रा बदलें"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("प्रतिनिधि बदलें"),

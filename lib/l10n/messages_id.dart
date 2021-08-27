@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Apakah anda yakin sudah menyimpan benih anda dengan aman?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Simpan benih anda"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Biometrik"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Penjelajah Blok"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Batal"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Ubah Mata Uang"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Ubah Perwakilan"),

@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Weet je zeker dat jouw wallet seed is opgeslagen?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Maak een back-up van jouw seed"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Biometrie"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Blok verkenner"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Annuleer"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Verander valuta"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Verander van vertegenwoordiger"),

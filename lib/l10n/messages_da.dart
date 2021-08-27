@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "backupSeedConfirm" : MessageLookupByLibrary.simpleMessage("Er du sikker på, at du har sikkerhedskopieret tegnebogens Seed?"),
     "backupYourSeed" : MessageLookupByLibrary.simpleMessage("Lav sikkerhedskopi af Seed"),
     "biometricsMethod" : MessageLookupByLibrary.simpleMessage("Biometri"),
+    "blockExplorer" : MessageLookupByLibrary.simpleMessage("Bloker Explorer"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Annuler"),
     "changeCurrency" : MessageLookupByLibrary.simpleMessage("Skift valuta"),
     "changeRepAuthenticate" : MessageLookupByLibrary.simpleMessage("Skift repræsentant"),
