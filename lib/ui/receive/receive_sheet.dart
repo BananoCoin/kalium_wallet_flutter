@@ -144,6 +144,7 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         Center(
                           child: Container(
                             width: computedMaxSize,
+                            height: computedMaxSize,
                             child: SvgPicture.asset('assets/monkeyQR.svg'),
                           ),
                         ),
@@ -151,9 +152,9 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                         Center(
                           child: Container(
                             margin: EdgeInsets.only(
-                              top: computedMaxSize / 4.05,
+                              top: computedMaxSize / 4.27,
                             ),
-                            width: computedMaxSize / 2.15,
+                            width: computedMaxSize / 2.2,
                             child: widget.qrWidget,
                           ),
                         ),

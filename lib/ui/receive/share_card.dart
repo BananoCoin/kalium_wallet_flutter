@@ -44,24 +44,24 @@ class _AppShareCardState extends State<AppShareCard> {
               Container(
                 margin: EdgeInsets.only(bottom: 12.5),
                 width: 105,
-                height: 100.0,
+                height: 105,
                 child: Stack(
                   children: <Widget>[
                     // Background/border part of monkeyQR
                     Center(
                       child: Container(
                         width: 105,
-                        height: 100.0,
+                        height: 105,
                         child: monkeySvg,
                       ),
                     ),
                     // Actual QR part of the monkeyQR
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(top: 26.3),
+                        margin: EdgeInsets.only(top: 23.5),
                         child: QrImage(
                           padding: EdgeInsets.all(0.0),
-                          size: 49,
+                          size: 45.5,
                           data: StateContainer.of(context).wallet.address,
                           version: 6,
                           errorCorrectionLevel: QrErrorCorrectLevel.Q,
