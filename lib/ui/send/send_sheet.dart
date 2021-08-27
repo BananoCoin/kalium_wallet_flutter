@@ -603,7 +603,18 @@ class _SendSheetState extends State<SendSheet> {
                           }
                           // If amount is present, fill it and go to SendConfirm
                           if (address.amount != null) {
-                            if (_localCurrencyMode && mounted) {
+                            bool hasError = false;
+                            BigInt amountBigInt =
+                                BigInt.tryParse(address.amount);
+                            if (amountBigInt != null &&
+                                amountBigInt >= BigInt.from(10).pow(27)) {
+                              hasError = true;
+                              sl.get<UIUtil>().showSnackbar(
+                                  AppLocalization.of(context)
+                                      .minimumSendKal
+                                      .replaceAll("%1", "0.000001"),
+                                  context);
+                            } else if (_localCurrencyMode && mounted) {
                               toggleLocalCurrency();
                               _sendAmountController.text =
                                   NumberUtil.getRawAsUsableString(

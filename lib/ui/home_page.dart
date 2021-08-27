@@ -363,7 +363,7 @@ class _AppHomePageState extends State<AppHomePage>
 
   void updateConfirmationHeights(int confirmationHeight) {
     setState(() {
-      currentConfHeight = confirmationHeight;
+      currentConfHeight = confirmationHeight + 1;
     });
     if (!_historyListMap
         .containsKey(StateContainer.of(context).wallet.address)) {
@@ -630,9 +630,14 @@ class _AppHomePageState extends State<AppHomePage>
     }
     String amount;
     String contactName;
+    bool sufficientBalance = false;
     if (address.amount != null) {
+      BigInt amountBigInt = BigInt.tryParse(address.amount);
       // Require minimum 1 BANOSHI to send
-      if (BigInt.parse(address.amount) >= BigInt.from(10).pow(27)) {
+      if (amountBigInt != null && amountBigInt >= BigInt.from(10).pow(27)) {
+        if (StateContainer.of(context).wallet.accountBalance > amountBigInt) {
+          sufficientBalance = true;
+        }
         amount = address.amount;
       }
     }
@@ -643,7 +648,7 @@ class _AppHomePageState extends State<AppHomePage>
       }
       // Remove any other screens from stack
       Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
-      if (amount != null) {
+      if (amount != null && sufficientBalance) {
         // Go to send confirm with amount
         Sheets.showAppHeightNineSheet(
             context: context,
@@ -656,9 +661,11 @@ class _AppHomePageState extends State<AppHomePage>
         Sheets.showAppHeightNineSheet(
             context: context,
             widget: SendSheet(
-                localCurrency: StateContainer.of(context).curCurrency,
-                contact: contact,
-                address: address.address));
+              localCurrency: StateContainer.of(context).curCurrency,
+              contact: contact,
+              address: address.address,
+              quickSendAmount: amount != null ? amount : null,
+            ));
       }
     });
   }

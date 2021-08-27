@@ -29,41 +29,56 @@ class _AppPopupButtonState extends State<AppPopupButton> {
   Color popupColor = Colors.transparent;
 
   Future<void> scanAndHandlResult() async {
-    dynamic scanResult = await Navigator.pushNamed(context, '/before_scan_screen');
+    dynamic scanResult =
+        await Navigator.pushNamed(context, '/before_scan_screen');
     // Parse scan data and route appropriately
     if (scanResult == null) {
-      sl.get<UIUtil>().showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+      sl
+          .get<UIUtil>()
+          .showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
     } else if (!QRScanErrs.ERROR_LIST.contains(scanResult)) {
       // Is a URI
       Address address = Address(scanResult);
       if (address.address == null) {
-        sl.get<UIUtil>().showSnackbar(AppLocalization.of(context).qrInvalidAddress, context);
+        sl.get<UIUtil>().showSnackbar(
+            AppLocalization.of(context).qrInvalidAddress, context);
       } else {
         // See if this address belongs to a contact
-        Contact contact = await sl.get<DBHelper>().getContactWithAddress(address.address);
+        Contact contact =
+            await sl.get<DBHelper>().getContactWithAddress(address.address);
         // If amount is present, fill it and go to SendConfirm
-        BigInt amountBigInt = address.amount != null ? BigInt.tryParse(address.amount) : null;
+        BigInt amountBigInt =
+            address.amount != null ? BigInt.tryParse(address.amount) : null;
+        bool sufficientBalance = false;
         if (amountBigInt != null && amountBigInt < BigInt.from(10).pow(27)) {
-          sl.get<UIUtil>().showSnackbar(AppLocalization.of(context).minimumSendKal.replaceAll("%1", "0.01"), context);
-        } else if (amountBigInt != null && StateContainer.of(context).wallet.accountBalance > amountBigInt) {
+          sl.get<UIUtil>().showSnackbar(
+              AppLocalization.of(context)
+                  .minimumSendKal
+                  .replaceAll("%1", "0.000001"),
+              context);
+        } else if (amountBigInt != null &&
+            StateContainer.of(context).wallet.accountBalance > amountBigInt) {
+          sufficientBalance = true;
+        }
+        if (amountBigInt != null && sufficientBalance) {
           // Go to confirm sheet
           Sheets.showAppHeightNineSheet(
-            context: context,
-            widget: SendConfirmSheet(
-                      amountRaw: address.amount,
-                      destination: contact != null ? contact.address : address.address,
-                      contactName: contact != null ? contact.name : null)
-          );
+              context: context,
+              widget: SendConfirmSheet(
+                  amountRaw: address.amount,
+                  destination:
+                      contact != null ? contact.address : address.address,
+                  contactName: contact != null ? contact.name : null));
         } else {
           // Go to send sheet
           Sheets.showAppHeightNineSheet(
-            context: context,
-            widget: SendSheet(
-              localCurrency: StateContainer.of(context).curCurrency,
-              contact: contact,
-              address: contact != null ? contact.address : address.address
-            )
-          );            
+              context: context,
+              widget: SendSheet(
+                localCurrency: StateContainer.of(context).curCurrency,
+                contact: contact,
+                address: contact != null ? contact.address : address.address,
+                quickSendAmount: amountBigInt != null ? address.amount : null,
+              ));
         }
       }
     }
