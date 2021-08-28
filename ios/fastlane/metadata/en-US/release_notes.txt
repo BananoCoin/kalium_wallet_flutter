@@ -1,4 +1,5 @@
 - Add Uranium theme
 - Add option to change block explorer to bananolooker
+- Improve translations
 - Improve QR Scannability
 - General bug fixes & improvements
