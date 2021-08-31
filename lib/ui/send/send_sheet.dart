@@ -607,7 +607,7 @@ class _SendSheetState extends State<SendSheet> {
                             BigInt amountBigInt =
                                 BigInt.tryParse(address.amount);
                             if (amountBigInt != null &&
-                                amountBigInt >= BigInt.from(10).pow(27)) {
+                                amountBigInt < BigInt.from(10).pow(27)) {
                               hasError = true;
                               sl.get<UIUtil>().showSnackbar(
                                   AppLocalization.of(context)
@@ -643,26 +643,32 @@ class _SendSheetState extends State<SendSheet> {
                               });
                               _sendAddressFocusNode.unfocus();
                             }
-                            // Go to confirm sheet
-                            Sheets.showAppHeightNineSheet(
-                                context: context,
-                                widget: SendConfirmSheet(
-                                    amountRaw: _localCurrencyMode
-                                        ? NumberUtil.getAmountAsRaw(
-                                            _convertLocalCurrencyToCrypto())
-                                        : _rawAmount == null
-                                            ? NumberUtil.getAmountAsRaw(
-                                                _sendAmountController.text)
-                                            : _rawAmount,
-                                    destination: contact != null
-                                        ? contact.address
-                                        : address.address,
-                                    contactName:
-                                        contact != null ? contact.name : null,
-                                    maxSend: _isMaxSend(),
-                                    localCurrency: _localCurrencyMode
-                                        ? _sendAmountController.text
-                                        : null));
+                            if (!hasError &&
+                                StateContainer.of(context)
+                                        .wallet
+                                        .accountBalance >
+                                    amountBigInt) {
+                              // Go to confirm sheet
+                              Sheets.showAppHeightNineSheet(
+                                  context: context,
+                                  widget: SendConfirmSheet(
+                                      amountRaw: _localCurrencyMode
+                                          ? NumberUtil.getAmountAsRaw(
+                                              _convertLocalCurrencyToCrypto())
+                                          : _rawAmount == null
+                                              ? NumberUtil.getAmountAsRaw(
+                                                  _sendAmountController.text)
+                                              : _rawAmount,
+                                      destination: contact != null
+                                          ? contact.address
+                                          : address.address,
+                                      contactName:
+                                          contact != null ? contact.name : null,
+                                      maxSend: _isMaxSend(),
+                                      localCurrency: _localCurrencyMode
+                                          ? _sendAmountController.text
+                                          : null));
+                            }
                           }
                         }
                       })
