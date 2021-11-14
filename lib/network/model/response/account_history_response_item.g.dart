@@ -14,6 +14,7 @@ AccountHistoryResponseItem _$AccountHistoryResponseItemFromJson(
     amount: json['amount'] as String,
     hash: json['hash'] as String,
     height: _toInt(json['height'] as String),
+    localTimestamp: _toInt(json['local_timestamp'] as String),
   );
 }
 
@@ -25,4 +26,5 @@ Map<String, dynamic> _$AccountHistoryResponseItemToJson(
       'amount': instance.amount,
       'hash': instance.hash,
       'height': instance.height,
+      'local_timestamp': instance.localTimestamp,
     };
