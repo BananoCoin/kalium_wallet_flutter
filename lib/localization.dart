@@ -608,6 +608,25 @@ class AppLocalization {
         desc: 'kalium_wallet', name: 'kaliumWallet');
   }
 
+  String get pickFromList {
+    return Intl.message("Pick From a List",
+        desc: 'pick rep from list', name: 'pickFromList');
+  }
+
+  String get representatives {
+    return Intl.message("Representatives",
+        desc: 'representatives', name: 'representatives');
+  }
+
+  String get uptime {
+    return Intl.message("Uptime", desc: 'Rep uptime', name: 'uptime');
+  }
+
+  String get votingWeight {
+    return Intl.message("Voting Weight",
+        desc: 'Representative Voting Weight', name: 'votingWeight');
+  }
+
   String get manualEntry {
     return Intl.message("Manual Entry",
         desc: 'transfer_manual_entry', name: 'manualEntry');

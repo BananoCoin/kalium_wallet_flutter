@@ -14,8 +14,10 @@ import 'package:kalium_wallet_flutter/network/account_service.dart';
 import 'package:kalium_wallet_flutter/network/model/response/process_response.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
@@ -25,6 +27,7 @@ import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
+import 'package:kalium_wallet_flutter/util/numberutil.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/util/biometrics.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
@@ -32,8 +35,11 @@ import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/model/address.dart';
 import 'package:kalium_wallet_flutter/model/authentication_method.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
+import 'package:kalium_wallet_flutter/util/yellowspyglass/representative_node.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 import 'package:logger/logger.dart';
+
+import 'changerepresentativemanualentry_sheet.dart';
 
 // TODO - add validations
 
@@ -42,6 +48,7 @@ class AppChangeRepresentativeSheet {
   TextEditingController _repController;
 
   String _changeRepHint = "";
+  String _currentRep = "";
   TextStyle _repAddressStyle;
   bool _showPasteButton = true;
   bool _addressValidAndUnfocused = false;
@@ -53,9 +60,10 @@ class AppChangeRepresentativeSheet {
   // Timer reference so we can cancel repeated events
   Timer _addressCopiedTimer;
 
-  AppChangeRepresentativeSheet() {
+  AppChangeRepresentativeSheet(BuildContext context) {
     _repFocusNode = new FocusNode();
     _repController = new TextEditingController();
+    _currentRep = StateContainer.of(context).wallet.representative;
   }
 
   StreamSubscription<AuthenticatedEvent> _authSub;
@@ -404,47 +412,21 @@ class AppChangeRepresentativeSheet {
                                 AppButton.buildAppButton(
                                   context,
                                   AppButtonType.PRIMARY,
-                                  AppLocalization.of(context)
-                                      .changeRepButton
-                                      .toUpperCase(),
+                                  AppLocalization.of(context).pickFromList,
                                   Dimens.BUTTON_TOP_DIMENS,
-                                  onPressed: () async {
-                                    if (!NanoAccounts.isValid(
-                                        NanoAccountType.BANANO,
-                                        _repController.text)) {
-                                      return;
-                                    }
-                                    // Authenticate
-                                    AuthenticationMethod authMethod = await sl
-                                        .get<SharedPrefsUtil>()
-                                        .getAuthMethod();
-                                    bool hasBiometrics = await sl
-                                        .get<BiometricUtil>()
-                                        .hasBiometrics();
-                                    if (authMethod.method ==
-                                            AuthMethod.BIOMETRICS &&
-                                        hasBiometrics) {
-                                      try {
-                                        bool authenticated = await sl
-                                            .get<BiometricUtil>()
-                                            .authenticateWithBiometrics(
-                                                context,
-                                                AppLocalization.of(context)
-                                                    .changeRepAuthenticate);
-                                        if (authenticated) {
-                                          sl
-                                              .get<HapticUtil>()
-                                              .fingerprintSucess();
-                                          EventTaxiImpl.singleton().fire(
-                                              AuthenticatedEvent(
-                                                  AUTH_EVENT_TYPE.CHANGE));
-                                        }
-                                      } catch (e) {
-                                        await authenticateWithPin(context);
-                                      }
-                                    } else {
-                                      await authenticateWithPin(context);
-                                    }
+                                  disabled: StateContainer.of(context)
+                                          .representativeNodes ==
+                                      null,
+                                  onPressed: () {
+                                    showDialog(
+                                        barrierColor: StateContainer.of(context)
+                                            .curTheme
+                                            .barrier,
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return _buildRepresenativeDialog(
+                                              context);
+                                        });
                                   },
                                 ),
                               ],
@@ -454,12 +436,13 @@ class AppChangeRepresentativeSheet {
                                 AppButton.buildAppButton(
                                   context,
                                   AppButtonType.PRIMARY_OUTLINE,
-                                  CaseChange.toUpperCase(
-                                      AppLocalization.of(context).close,
-                                      context),
+                                  AppLocalization.of(context).manualEntry,
                                   Dimens.BUTTON_BOTTOM_DIMENS,
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    Sheets.showAppHeightEightSheet(
+                                        context: context,
+                                        widget: ChangeRepManualSheet(
+                                            TextEditingController()));
                                   },
                                 ),
                               ],
@@ -532,5 +515,216 @@ class AppChangeRepresentativeSheet {
       EventTaxiImpl.singleton()
           .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
     }
+  }
+
+  _buildRepresenativeDialog(BuildContext context) {
+    return AppSimpleDialog(
+        title: Container(
+          margin: EdgeInsets.only(bottom: 10),
+          child: Text(
+            AppLocalization.of(context).representatives,
+            style: AppStyles.textStyleDialogHeader(context),
+          ),
+        ),
+        children: _getRepresentativeWidgets(
+            context, StateContainer.of(context).representativeNodes));
+  }
+
+  _getRepresentativeWidgets(
+      BuildContext context, List<RepresentativeNode> list) {
+    if (list == null) return [];
+    List<Widget> ret = [];
+    list.sort((a, b) {
+      int cmp = b.uptimePercentSemiAnnual.compareTo(a.uptimePercentSemiAnnual);
+      if (cmp != 0) return cmp;
+      return a.weight.compareTo(b.weight);
+    });
+    list.forEach((node) {
+      if (node.alias != null && node.alias.trim().length > 0) {
+        ret.add(_buildSingleRepresentative(
+          node,
+          context,
+        ));
+      }
+    });
+    return ret;
+  }
+
+  _buildSingleRepresentative(RepresentativeNode rep, BuildContext context) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Divider(
+            height: 2,
+            color: StateContainer.of(context).curTheme.text15,
+          ),
+          FlatButton(
+            highlightColor: StateContainer.of(context).curTheme.text15,
+            splashColor: StateContainer.of(context).curTheme.text15,
+            onPressed: () async {
+              // Authenticate
+              AuthenticationMethod authMethod =
+                  await sl.get<SharedPrefsUtil>().getAuthMethod();
+              bool hasBiometrics =
+                  await sl.get<BiometricUtil>().hasBiometrics();
+              _repController.text = rep.address;
+              if (authMethod.method == AuthMethod.BIOMETRICS && hasBiometrics) {
+                try {
+                  bool authenticated = await sl
+                      .get<BiometricUtil>()
+                      .authenticateWithBiometrics(context,
+                          AppLocalization.of(context).changeRepAuthenticate);
+                  if (authenticated) {
+                    sl.get<HapticUtil>().fingerprintSucess();
+                    EventTaxiImpl.singleton()
+                        .fire(AuthenticatedEvent(AUTH_EVENT_TYPE.CHANGE));
+                  }
+                } catch (e) {
+                  await authenticateWithPin(context);
+                }
+              } else {
+                // PIN Authentication
+                await authenticateWithPin(context);
+              }
+            },
+            padding: EdgeInsets.all(0),
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsetsDirectional.only(start: 24),
+                    width: MediaQuery.of(context).size.width * 0.50,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        RichText(
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: _sanitizeAlias(rep.alias),
+                                style: TextStyle(
+                                    color: _currentRep == rep.address
+                                        ? StateContainer.of(context)
+                                            .curTheme
+                                            .primary
+                                        : StateContainer.of(context)
+                                            .curTheme
+                                            .text,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18.0,
+                                    fontFamily: 'Nunito Sans'),
+                              ),
+                              WidgetSpan(
+                                child: SizedBox(width: 10.0),
+                              ),
+                              WidgetSpan(
+                                child: Icon(
+                                  rep.online
+                                      ? AppIcons.success
+                                      : AppIcons.warning,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary,
+                                  size: 14.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.only(top: 7),
+                          child: RichText(
+                            text: TextSpan(
+                              text: '',
+                              children: [
+                                TextSpan(
+                                  text:
+                                      "${AppLocalization.of(context).votingWeight}: ",
+                                  style: TextStyle(
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .text,
+                                    fontWeight: FontWeight.w100,
+                                    fontSize: 14.0,
+                                    fontFamily: 'Nunito Sans',
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: NumberUtil.getPercentOfTotalSupply(
+                                      rep.weight),
+                                  style: TextStyle(
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .primary,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14.0,
+                                      fontFamily: 'Nunito Sans'),
+                                ),
+                                TextSpan(
+                                  text: "%",
+                                  style: TextStyle(
+                                      color: StateContainer.of(context)
+                                          .curTheme
+                                          .primary,
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 14.0,
+                                      fontFamily: 'Nunito Sans'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsetsDirectional.only(end: 24, start: 14),
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                            child: Icon(
+                          AppIcons.score,
+                          color: StateContainer.of(context).curTheme.primary,
+                          size: 50,
+                        )),
+                        Container(
+                          alignment: AlignmentDirectional(-0.03, 0.03),
+                          width: 50,
+                          height: 50,
+                          child: Text(
+                            (rep.uptimePercentSemiAnnual).toString(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: StateContainer.of(context)
+                                  .curTheme
+                                  .backgroundDark,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w800,
+                              fontFamily: 'Nunito Sans',
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _sanitizeAlias(String alias) {
+    if (alias != null) {
+      return alias.replaceAll(RegExp(r'[^a-zA-Z_.!?_;:-]'), '');
+    }
+    return '';
   }
 }

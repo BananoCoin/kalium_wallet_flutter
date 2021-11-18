@@ -39,6 +39,9 @@ class SharedPrefsUtil {
   static const String pin_lock_until = 'fkalium_lock_duraton';
   // For certain keystore incompatible androids
   static const String use_legacy_storage = 'fkalium_legacy_storage';
+  // Caching yellowspyglass API response
+  static const String yellowspyglass_api_cache =
+      'fkalium_yellowspyglass_api_cache';
 
   // For plain-text data
   Future<void> set(String key, value) async {
@@ -57,6 +60,14 @@ class SharedPrefsUtil {
   Future<dynamic> get(String key, {dynamic defaultValue}) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return await sharedPreferences.get(key) ?? defaultValue;
+  }
+
+  Future<String> getYellowSpyglassAPICache() async {
+    return await get(yellowspyglass_api_cache, defaultValue: null);
+  }
+
+  Future<void> setYellowSpyglassAPICache(String data) async {
+    await set(yellowspyglass_api_cache, data);
   }
 
   // For encrypted data
