@@ -965,79 +965,94 @@ class _AppHomePageState extends State<AppHomePage>
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: 14.0, horizontal: 20.0),
-                child: Row(
+                child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
+                  children: [
+                    Padding(
+                      padding: EdgeInsetsDirectional.only(bottom: 8.0),
+                      child: Text(
+                        item.date,
+                        textAlign: TextAlign.end,
+                        style: AppStyles.textStyleTransactionAddress(context),
+                      ),
+                    ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            Container(
+                                margin: EdgeInsetsDirectional.only(end: 16.0),
+                                child: Icon(icon, color: iconColor, size: 20)),
+                            Container(
+                              width: MediaQuery.of(context).size.width / 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text(
+                                    text,
+                                    textAlign: TextAlign.start,
+                                    style: AppStyles.textStyleTransactionType(
+                                        context),
+                                  ),
+                                  RichText(
+                                    textAlign: TextAlign.start,
+                                    text: TextSpan(
+                                      text: '',
+                                      children: [
+                                        TextSpan(
+                                          text: item.getFormattedAmount(),
+                                          style: AppStyles
+                                              .textStyleTransactionAmount(
+                                                  context),
+                                        ),
+                                        TextSpan(
+                                          text: " BAN",
+                                          style: AppStyles
+                                              .textStyleTransactionUnit(
+                                                  context),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                         Container(
-                            margin: EdgeInsetsDirectional.only(end: 16.0),
-                            child: Icon(icon, color: iconColor, size: 20)),
-                        Container(
-                          width: MediaQuery.of(context).size.width / 4,
+                          width: MediaQuery.of(context).size.width / 2.4,
                           child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: [
                               Text(
-                                text,
-                                textAlign: TextAlign.start,
-                                style:
-                                    AppStyles.textStyleTransactionType(context),
+                                displayName,
+                                textAlign: TextAlign.end,
+                                style: AppStyles.textStyleTransactionAddress(
+                                    context),
                               ),
-                              RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(
-                                  text: '',
-                                  children: [
-                                    TextSpan(
-                                      text: item.getFormattedAmount(),
-                                      style:
-                                          AppStyles.textStyleTransactionAmount(
-                                              context),
-                                    ),
-                                    TextSpan(
-                                      text: " BAN",
-                                      style: AppStyles.textStyleTransactionUnit(
-                                          context),
-                                    ),
-                                  ],
-                                ),
-                              ),
+
+                              // TRANSACTION STATE TAG
+                              (item.confirmed != null && !item.confirmed) ||
+                                      (currentConfHeight != null &&
+                                          currentConfHeight > -1 &&
+                                          item.height != null &&
+                                          item.height > currentConfHeight)
+                                  ? Container(
+                                      margin: EdgeInsetsDirectional.only(
+                                        top: 4,
+                                      ),
+                                      child: TransactionStateTag(
+                                          transactionState:
+                                              TransactionStateOptions
+                                                  .UNCONFIRMED),
+                                    )
+                                  : SizedBox()
                             ],
                           ),
                         ),
                       ],
-                    ),
-                    Container(
-                      width: MediaQuery.of(context).size.width / 2.4,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            displayName,
-                            textAlign: TextAlign.end,
-                            style:
-                                AppStyles.textStyleTransactionAddress(context),
-                          ),
-
-                          // TRANSACTION STATE TAG
-                          (item.confirmed != null && !item.confirmed) ||
-                                  (currentConfHeight != null &&
-                                      currentConfHeight > -1 &&
-                                      item.height != null &&
-                                      item.height > currentConfHeight)
-                              ? Container(
-                                  margin: EdgeInsetsDirectional.only(
-                                    top: 4,
-                                  ),
-                                  child: TransactionStateTag(
-                                      transactionState:
-                                          TransactionStateOptions.UNCONFIRMED),
-                                )
-                              : SizedBox()
-                        ],
-                      ),
-                    ),
+                    )
                   ],
                 ),
               ),

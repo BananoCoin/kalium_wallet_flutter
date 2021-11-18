@@ -1,3 +1,4 @@
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:kalium_wallet_flutter/service_locator.dart';
@@ -25,6 +26,9 @@ class AccountHistoryResponseItem {
   @JsonKey(name: 'height', fromJson: _toInt)
   int height;
 
+  @JsonKey(name: 'local_timestamp', fromJson: _toInt)
+  int localTimestamp;
+
   @JsonKey(ignore: true)
   bool confirmed;
 
@@ -34,6 +38,7 @@ class AccountHistoryResponseItem {
     String amount,
     String hash,
     int height,
+    int localTimestamp,
     this.confirmed,
   }) {
     this.type = type;
@@ -41,6 +46,7 @@ class AccountHistoryResponseItem {
     this.amount = amount;
     this.hash = hash;
     this.height = height;
+    this.localTimestamp = localTimestamp;
   }
 
   String getShortString() {
@@ -57,6 +63,9 @@ class AccountHistoryResponseItem {
   String getFormattedAmount() {
     return NumberUtil.getRawAsUsableString(amount);
   }
+
+  String get date => DateFormat().format(DateTime.fromMillisecondsSinceEpoch(
+      int.parse(localTimestamp.toString().padRight(13, '0'))));
 
   factory AccountHistoryResponseItem.fromJson(Map<String, dynamic> json) =>
       _$AccountHistoryResponseItemFromJson(json);
