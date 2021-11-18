@@ -601,15 +601,40 @@ class AppChangeRepresentativeSheet {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Text(
-                          _sanitizeAlias(rep.alias),
-                          style: TextStyle(
-                              color: _currentRep == rep.address
-                                  ? StateContainer.of(context).curTheme.primary
-                                  : StateContainer.of(context).curTheme.text,
-                              fontWeight: FontWeight.w700,
-                              fontSize: 18.0,
-                              fontFamily: 'Nunito Sans'),
+                        RichText(
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: _sanitizeAlias(rep.alias),
+                                style: TextStyle(
+                                    color: _currentRep == rep.address
+                                        ? StateContainer.of(context)
+                                            .curTheme
+                                            .primary
+                                        : StateContainer.of(context)
+                                            .curTheme
+                                            .text,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 18.0,
+                                    fontFamily: 'Nunito Sans'),
+                              ),
+                              WidgetSpan(
+                                child: SizedBox(width: 10.0),
+                              ),
+                              WidgetSpan(
+                                child: Icon(
+                                  rep.online
+                                      ? AppIcons.success
+                                      : AppIcons.warning,
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary,
+                                  size: 14.0,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Container(
                           margin: EdgeInsets.only(top: 7),
