@@ -7,6 +7,7 @@ import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
+import 'package:kalium_wallet_flutter/util/yellowspyglass/api.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
@@ -1140,9 +1141,17 @@ class _SettingsSheetState extends State<SettingsSheet>
                     AppSettings.buildSettingsListItemSingleLine(
                         context,
                         AppLocalization.of(context).changeRepAuthenticate,
-                        AppIcons.changerepresentative, onPressed: () {
-                      new AppChangeRepresentativeSheet()
+                        AppIcons.changerepresentative, onPressed: () async {
+                      new AppChangeRepresentativeSheet(context)
                           .mainBottomSheet(context);
+                      if (!StateContainer.of(context).representativeUpdated) {
+                        YellowSpyglassAPI.getVerifiedNodes().then((result) {
+                          if (result != null) {
+                            StateContainer.of(context)
+                                .updateRepresentativeNodes(result);
+                          }
+                        });
+                      }
                     }),
                     Divider(
                       height: 2,

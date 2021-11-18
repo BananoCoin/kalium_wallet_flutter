@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:kalium_wallet_flutter/network/model/response/accounts_balances_response.dart';
+import 'package:kalium_wallet_flutter/util/yellowspyglass/api.dart';
+import 'package:kalium_wallet_flutter/util/yellowspyglass/representative_node.dart';
 import 'package:logger/logger.dart';
 import 'package:uni_links/uni_links.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -121,6 +123,33 @@ class StateContainerState extends State<StateContainer> {
   List<String> pendingRequests = [];
   List<String> alreadyReceived = [];
 
+  // List of Verified Representative Nodes
+  bool representativeUpdated = false;
+  List<RepresentativeNode> representativeNodes;
+
+  void updateRepresentativeNodes(List<RepresentativeNode> list) {
+    setState(() {
+      representativeNodes = list;
+    });
+  }
+
+  Future<void> checkAndCacheYellowSpyglassAPIResponse() async {
+    List<RepresentativeNode> nodes;
+    if ((await sl.get<SharedPrefsUtil>().getYellowSpyglassAPICache()) == null) {
+      nodes = await YellowSpyglassAPI.getVerifiedNodes();
+      setState(() {
+        representativeNodes = nodes;
+        representativeUpdated = true;
+      });
+    } else {
+      nodes = await YellowSpyglassAPI.getCachedVerifiedNodes();
+      setState(() {
+        representativeNodes = nodes;
+        representativeUpdated = false;
+      });
+    }
+  }
+
   /// A [PictureInfoDecoder] for [Uint8List]s that will clip to the viewBox.
   static final PictureInfoDecoder<Uint8List> svgByteDecoder =
       (Uint8List bytes, ColorFilter colorFilter, String key) =>
@@ -174,6 +203,9 @@ class StateContainerState extends State<StateContainer> {
         initialDeepLink = initialLink;
       });
     });
+
+    // Cache YellowSpyglass API if don't already have it
+    checkAndCacheYellowSpyglassAPIResponse();
     // Precache contact SVGs
     _precacheSvgs();
   }
@@ -431,7 +463,6 @@ class StateContainerState extends State<StateContainer> {
     }
     EventTaxiImpl.singleton().fire(ConfirmationHeightChangedEvent(
         confirmationHeight: response.confirmationHeight));
-    print(response.price.toString());
     setState(() {
       wallet.loading = false;
       wallet.frontier = response.frontier;
