@@ -11,12 +11,12 @@ class YellowSpyglassAPI {
 
   static Future<String> getAndCacheAPIResponse() async {
     http.Response responseRepresentatives =
-        await http.get(API_URL + '/representatives', headers: {});
+        await http.get(Uri.parse(API_URL + '/representatives'), headers: {});
     if (responseRepresentatives.statusCode != 200) {
       return null;
     }
     http.Response responseAliases =
-        await http.get(API_URL + '/aliases', headers: {});
+        await http.get(Uri.parse(API_URL + '/aliases'), headers: {});
     if (responseAliases.statusCode != 200) {
       return null;
     }

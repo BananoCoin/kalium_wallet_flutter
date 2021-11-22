@@ -118,6 +118,7 @@ class _AppState extends State<App> {
           const Locale('ca'), // Catalan
           const Locale('uk'), // Ukrainian
           const Locale('no'), // Norwegian
+          const Locale('bn'), // Bengali
           const Locale.fromSubtags(
               languageCode: 'zh', scriptCode: 'Hans'), // Chinese Simplified
           const Locale.fromSubtags(
@@ -184,6 +185,8 @@ class _AppState extends State<App> {
           const Locale("ar", "KW"), // Kuwait
           const Locale("uk", "UA"), // Ukraine
           const Locale("no", "NO"), // Norway
+          const Locale("bn", "BD"), // Bangladesh
+          const Locale("bn", "IN"), // India/Bengali
         ],
         initialRoute: '/',
         onGenerateRoute: (RouteSettings settings) {

@@ -1,8 +1,2 @@
-2.3.3:
-- Fix QR codes with amount from send sheet
-2.3.2:
-- Add Uranium theme
-- Add option to change block explorer to bananolooker
-- Improve translations
-- Improve QR Scannability
-- General bug fixes & improvements
+- Add representative option using yellow spy glass
+- Add Bengali language
