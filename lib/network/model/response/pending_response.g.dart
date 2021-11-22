@@ -6,17 +6,13 @@ part of 'pending_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-PendingResponse _$PendingResponseFromJson(Map<String, dynamic> json) {
-  return PendingResponse(
-    blocks: (json['blocks'] as Map<String, dynamic>)?.map(
-      (k, e) => MapEntry(
-          k,
-          e == null
-              ? null
-              : PendingResponseItem.fromJson(e as Map<String, dynamic>)),
-    ),
-  );
-}
+PendingResponse _$PendingResponseFromJson(Map<String, dynamic> json) =>
+    PendingResponse(
+      blocks: (json['blocks'] as Map<String, dynamic>).map(
+        (k, e) => MapEntry(
+            k, PendingResponseItem.fromJson(e as Map<String, dynamic>)),
+      ),
+    );
 
 Map<String, dynamic> _$PendingResponseToJson(PendingResponse instance) =>
     <String, dynamic>{

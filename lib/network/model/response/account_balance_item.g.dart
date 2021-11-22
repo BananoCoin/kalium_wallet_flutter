@@ -6,12 +6,11 @@ part of 'account_balance_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AccountBalanceItem _$AccountBalanceItemFromJson(Map<String, dynamic> json) {
-  return AccountBalanceItem(
-    balance: json['balance'] as String,
-    pending: json['pending'] as String,
-  );
-}
+AccountBalanceItem _$AccountBalanceItemFromJson(Map<String, dynamic> json) =>
+    AccountBalanceItem(
+      balance: json['balance'] as String,
+      pending: json['pending'] as String,
+    );
 
 Map<String, dynamic> _$AccountBalanceItemToJson(AccountBalanceItem instance) =>
     <String, dynamic>{

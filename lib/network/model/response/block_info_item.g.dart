@@ -6,16 +6,15 @@ part of 'block_info_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-BlockInfoItem _$BlockInfoItemFromJson(Map<String, dynamic> json) {
-  return BlockInfoItem(
-    blockAccount: json['block_account'] as String,
-    amount: json['amount'] as String,
-    balance: json['balance'] as String,
-    pending: json['pending'] as String,
-    sourceAccount: json['source_account'] as String,
-    contents: json['contents'] as String,
-  );
-}
+BlockInfoItem _$BlockInfoItemFromJson(Map<String, dynamic> json) =>
+    BlockInfoItem(
+      blockAccount: json['block_account'] as String,
+      amount: json['amount'] as String,
+      balance: json['balance'] as String,
+      pending: json['pending'] as String,
+      sourceAccount: json['source_account'] as String,
+      contents: json['contents'] as String,
+    );
 
 Map<String, dynamic> _$BlockInfoItemToJson(BlockInfoItem instance) =>
     <String, dynamic>{

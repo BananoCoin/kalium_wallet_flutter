@@ -7,15 +7,13 @@ part of 'account_history_response.dart';
 // **************************************************************************
 
 AccountHistoryResponse _$AccountHistoryResponseFromJson(
-    Map<String, dynamic> json) {
-  return AccountHistoryResponse(
-    history: (json['history'] as List)
-        ?.map((e) => e == null
-            ? null
-            : AccountHistoryResponseItem.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
+        Map<String, dynamic> json) =>
+    AccountHistoryResponse(
+      history: (json['history'] as List<dynamic>)
+          .map((e) =>
+              AccountHistoryResponseItem.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
 
 Map<String, dynamic> _$AccountHistoryResponseToJson(
         AccountHistoryResponse instance) =>

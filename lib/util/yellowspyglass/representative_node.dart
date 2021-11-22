@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:json_annotation/json_annotation.dart';
 
 part 'representative_node.g.dart';
@@ -46,12 +48,36 @@ class RepresentativeNode {
   @JsonKey(name: 'alias')
   String alias;
 
+  @JsonKey(name: 'creationUnixTimestamp')
+  int creationUnixTimestamp;
+
   RepresentativeNode({
     this.weight,
     this.uptimePercentYear,
     this.address,
     this.alias,
+    this.creationUnixTimestamp,
   });
+
+  int get daysSinceCreation {
+    DateTime date =
+        DateTime.fromMillisecondsSinceEpoch(this.creationUnixTimestamp).toUtc();
+    DateTime now = DateTime.now().toUtc();
+    return now.difference(date).inDays;
+  }
+
+  // Reverse engineer my nano ninja scores
+  int get score {
+    double scoreWeight = 100 / (1 + exp(8 * weight - 10));
+
+    double scoreUptime = pow(10, -6) * pow(uptimePercentSemiAnnual, 4);
+
+    double scoreAge = (100 + (-100 / (1 + pow(daysSinceCreation / 60, 4))));
+
+    int score =
+        ((scoreWeight * scoreUptime * scoreAge) ~/ (pow(100, 3) / 100)).toInt();
+    return score;
+  }
 
   factory RepresentativeNode.fromJson(Map<String, dynamic> json) =>
       _$RepresentativeNodeFromJson(json);

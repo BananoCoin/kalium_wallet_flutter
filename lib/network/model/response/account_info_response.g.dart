@@ -6,15 +6,14 @@ part of 'account_info_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AccountInfoResponse _$AccountInfoResponseFromJson(Map<String, dynamic> json) {
-  return AccountInfoResponse(
-    frontier: json['frontier'] as String,
-    openBlock: json['open_block'] as String,
-    representativeBlock: json['representative_block'] as String,
-    balance: json['balance'] as String,
-    blockCount: _toInt(json['block_count'] as String),
-  );
-}
+AccountInfoResponse _$AccountInfoResponseFromJson(Map<String, dynamic> json) =>
+    AccountInfoResponse(
+      frontier: json['frontier'] as String,
+      openBlock: json['open_block'] as String,
+      representativeBlock: json['representative_block'] as String,
+      balance: json['balance'] as String,
+      blockCount: _toInt(json['block_count'] as String),
+    );
 
 Map<String, dynamic> _$AccountInfoResponseToJson(
         AccountInfoResponse instance) =>

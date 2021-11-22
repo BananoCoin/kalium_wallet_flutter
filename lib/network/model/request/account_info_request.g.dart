@@ -6,12 +6,11 @@ part of 'account_info_request.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AccountInfoRequest _$AccountInfoRequestFromJson(Map<String, dynamic> json) {
-  return AccountInfoRequest(
-    action: json['action'] as String,
-    account: json['account'] as String,
-  );
-}
+AccountInfoRequest _$AccountInfoRequestFromJson(Map<String, dynamic> json) =>
+    AccountInfoRequest(
+      action: json['action'] as String,
+      account: json['account'] as String,
+    );
 
 Map<String, dynamic> _$AccountInfoRequestToJson(AccountInfoRequest instance) =>
     <String, dynamic>{

@@ -12,6 +12,7 @@ RepresentativeNode _$RepresentativeNodeFromJson(Map<String, dynamic> json) =>
       uptimePercentYear: _toDouble(json['uptimePercentYear']),
       address: json['address'] as String,
       alias: json['alias'] as String,
+      creationUnixTimestamp: json['creationUnixTimestamp'] as int,
     )
       ..online = json['online'] as bool
       ..delegatorsCount = _toBigInt(json['delegatorsCount'])
@@ -32,6 +33,7 @@ Map<String, dynamic> _$RepresentativeNodeToJson(RepresentativeNode instance) =>
       'uptimePercentSemiAnnual': instance.uptimePercentSemiAnnual,
       'uptimePercentWeek': instance.uptimePercentWeek,
       'uptimePercentYear': instance.uptimePercentYear,
-      'weight': instance.weight.toString(),
+      'weight': instance.weight,
       'alias': instance.alias,
+      'creationUnixTimestamp': instance.creationUnixTimestamp,
     };

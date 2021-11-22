@@ -7,11 +7,11 @@ part of 'accounts_balances_request.dart';
 // **************************************************************************
 
 AccountsBalancesRequest _$AccountsBalancesRequestFromJson(
-    Map<String, dynamic> json) {
-  return AccountsBalancesRequest(
-    accounts: (json['accounts'] as List)?.map((e) => e as String)?.toList(),
-  )..action = json['action'] as String;
-}
+        Map<String, dynamic> json) =>
+    AccountsBalancesRequest(
+      accounts:
+          (json['accounts'] as List<dynamic>).map((e) => e as String).toList(),
+    )..action = json['action'] as String;
 
 Map<String, dynamic> _$AccountsBalancesRequestToJson(
         AccountsBalancesRequest instance) =>

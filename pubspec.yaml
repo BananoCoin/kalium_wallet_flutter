@@ -136,7 +136,7 @@ dependencies:
   
 
 dependency_overrides:
-  analyzer: ^1.7.2
+  analyzer: ^2.7.0
   dart_style: ^2.0.0
 
 dev_dependencies:

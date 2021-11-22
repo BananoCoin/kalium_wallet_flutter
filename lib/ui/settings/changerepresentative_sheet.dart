@@ -69,7 +69,7 @@ class AppChangeRepresentativeSheet {
     if (list == null) return [];
     List<Widget> ret = [];
     list.sort((a, b) {
-      int cmp = b.uptimePercentSemiAnnual.compareTo(a.uptimePercentSemiAnnual);
+      int cmp = b.score.compareTo(a.score);
       if (cmp != 0) return cmp;
       return a.weight.compareTo(b.weight);
     });
@@ -257,7 +257,7 @@ class AppChangeRepresentativeSheet {
                           width: 50,
                           height: 50,
                           child: Text(
-                            (rep.uptimePercentSemiAnnual).toString(),
+                            (rep.score).toString(),
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: StateContainer.of(context)

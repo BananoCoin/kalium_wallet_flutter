@@ -58,7 +58,12 @@ class YellowSpyglassAPI {
         (decodedResponse[responseKey] as List)
             .map((e) => new RepresentativeNode.fromJson(e))
             .toList();
-    return representativeNodes;
+
+    return representativeNodes.where((node) {
+      return node.online &&
+          node.daysSinceCreation > 30 &&
+          node.uptimePercentSemiAnnual >= 90;
+    }).toList();
   }
 
   static Future<List<RepresentativeNode>> getCachedVerifiedNodes() async {
@@ -71,6 +76,10 @@ class YellowSpyglassAPI {
         (json.decode(rawJson) as List)
             .map((e) => new RepresentativeNode.fromJson(e))
             .toList();
-    return representativeNodes;
+    return representativeNodes.where((node) {
+      return node.online &&
+          node.daysSinceCreation > 30 &&
+          node.uptimePercentSemiAnnual >= 90;
+    }).toList();
   }
 }
