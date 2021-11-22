@@ -1143,7 +1143,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                         context,
                         AppLocalization.of(context).changeRepAuthenticate,
                         AppIcons.changerepresentative, onPressed: () async {
-                      new AppChangeRepresentativeSheet(context)
+                      new AppChangeRepresentativeSheet()
                           .mainBottomSheet(context);
                       if (!StateContainer.of(context).representativeUpdated) {
                         YellowSpyglassAPI.getVerifiedNodes().then((result) {
