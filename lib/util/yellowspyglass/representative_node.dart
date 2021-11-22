@@ -68,14 +68,16 @@ class RepresentativeNode {
 
   // Reverse engineer my nano ninja scores
   int get score {
-    double scoreWeight = 100 / (1 + exp(8 * weight - 10));
+    double weightCalculation = (weight * 0.005) * 100;
+//    double scoreWeight = 100 / (1 + exp(8 * weight - 10));
 
     double scoreUptime = pow(10, -6) * pow(uptimePercentSemiAnnual, 4);
 
-    double scoreAge = (100 + (-100 / (1 + pow(daysSinceCreation / 60, 4))));
+    double scoreAge = (100 + (-100 / (1 + pow(daysSinceCreation / 30, 4))));
 
     int score =
-        ((scoreWeight * scoreUptime * scoreAge) ~/ (pow(100, 3) / 100)).toInt();
+        (((scoreUptime * scoreAge) ~/ (pow(100, 2) / 100)) - weightCalculation)
+            .toInt();
     return score;
   }
 
