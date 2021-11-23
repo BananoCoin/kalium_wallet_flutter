@@ -182,17 +182,6 @@ class AppChangeRepresentativeSheet {
                               WidgetSpan(
                                 child: SizedBox(width: 10.0),
                               ),
-                              WidgetSpan(
-                                child: Icon(
-                                  rep.online
-                                      ? AppIcons.success
-                                      : AppIcons.warning,
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary,
-                                  size: 14.0,
-                                ),
-                              ),
                             ],
                           ),
                         ),
