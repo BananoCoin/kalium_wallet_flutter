@@ -48,25 +48,35 @@ platform :ios do
       keychain_name = ENV['TEMP_KEYCHAIN_NAME'] || TEMP_KEYCHAIN_NAME_DEFAULT
       keychain_password = ENV['TEMP_KEYCHAIN_PASSWORD'] || TEMP_KEYCHAN_PASSWORD_DEFAULT
       ensure_temp_keychain(keychain_name, keychain_password)
+      api_key = app_store_connect_api_key(
+        key_id: ENV['API_KEY_ID'],
+        issuer_id: ENV['API_KEY_ISSUER'],
+        key_filepath: ENV['API_KEY_FILEPATH'],
+        duration: 1200,
+        in_house: false
+      )        
       match(
         app_identifier: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
         type: "appstore",
         keychain_name: keychain_name,
         keychain_password: keychain_password,
         readonly: false,
-        skip_provisioning_profiles: true
+        skip_provisioning_profiles: true,
+        api_key: api_key
       )
       sh "security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k \"#{keychain_password}\" \"#{keychain_name}\""
       cert(
         keychain_path: "~/Library/Keychains/#{keychain_name}-db",
-        keychain_password: keychain_password        
+        keychain_password: keychain_password,
+        api_key: api_key       
       )
       sigh(
         app_identifier: CredentialsManager::AppfileConfig.try_fetch_value(:app_identifier),
         readonly: false,
         cert_id: lane_context[SharedValues::CERT_CERTIFICATE_ID],
         provisioning_name: ENV['SIGH_PROVISIONING_PROFILE_NAME'],
-        ignore_profiles_with_different_name: true
+        ignore_profiles_with_different_name: true,
+        api_key: api_key
       )
       update_code_signing_settings(
         use_automatic_signing: false,
@@ -84,7 +94,7 @@ platform :ios do
             provisioningProfiles: { 
               "com.banano.kaliumwallet" => ENV['SIGH_PROVISIONING_PROFILE_NAME'],
             }
-        }
+        },
       )
     rescue SystemExit, Interrupt
       raise
@@ -103,12 +113,15 @@ platform :ios do
   desc "Upload iOS app to app store"
   lane :deploy_ios do |options|
     api_key = app_store_connect_api_key(
-      key_id:  ENV['FASTLANE_API_KEY_ID'],
-      issuer_id: ENV['FASTLANE_API_KEY_ISSUER'],
-      key_content: ENV['FASTLANE_API_KEY']
-    )  
+      key_id: ENV['API_KEY_ID'],
+      issuer_id: ENV['API_KEY_ISSUER'],
+      key_filepath: ENV['API_KEY_FILEPATH'],
+      duration: 1200,
+      in_house: false
+    )
     if options[:testflight]
       upload_to_testflight(
+        api_key: api_key,
         skip_submission: true,
         ipa: ENV['IPA_PATH']
       )
@@ -119,7 +132,8 @@ platform :ios do
         submit_for_review: true,
         force: true,
         ipa: ENV['IPA_PATH'],
-        precheck_include_in_app_purchases: false
+        precheck_include_in_app_purchases: false,
+        api_key: api_key
       )
     end
   end
