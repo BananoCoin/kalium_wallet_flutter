@@ -66,9 +66,8 @@ class RepresentativeNode {
     return now.difference(date).inDays;
   }
 
-  // Reverse engineer my nano ninja scores
   int get score {
-    double weightCalculation = (weight * 0.005) * 100;
+    double weightCalculation = (weight * 0.0075) * 100;
 //    double scoreWeight = 100 / (1 + exp(8 * weight - 10));
 
     double scoreUptime = pow(10, -6) * pow(uptimePercentSemiAnnual, 4);
