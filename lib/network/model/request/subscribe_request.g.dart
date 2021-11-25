@@ -11,7 +11,7 @@ SubscribeRequest _$SubscribeRequestFromJson(Map<String, dynamic> json) =>
       action: json['action'] as String ?? Actions.SUBSCRIBE,
       account: json['account'] as String,
       currency: json['currency'] as String,
-      uuid: json['uuid'] as String,
+      uuid: json['uuid'] as String ?? '',
       fcmToken: json['fcm_token_v2'] as String,
       notificationEnabled: json['notification_enabled'] as bool,
     );
