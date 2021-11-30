@@ -1,0 +1,4 @@
+- Add representative chooser powered by yellow spy glass
+- Add Bengali translation
+- Android 12 support
+- Misc. fixes and improvements

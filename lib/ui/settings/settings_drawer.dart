@@ -312,27 +312,31 @@ class _SettingsSheetState extends State<SettingsSheet>
           );
         })) {
       case NotificationOptions.ON:
-        sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((result) {
+        sl.get<SharedPrefsUtil>().setNotificationsOn(true).then((result) async {
           setState(() {
             _curNotificiationSetting =
                 NotificationSetting(NotificationOptions.ON);
           });
           FirebaseMessaging.instance.requestPermission();
-          ;
-          FirebaseMessaging.instance.getToken().then((fcmToken) {
+          try {
+            String fcmToken = await FirebaseMessaging.instance.getToken();
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-          });
+          } catch (e) {}
         });
         break;
       case NotificationOptions.OFF:
-        sl.get<SharedPrefsUtil>().setNotificationsOn(false).then((result) {
+        sl
+            .get<SharedPrefsUtil>()
+            .setNotificationsOn(false)
+            .then((result) async {
           setState(() {
             _curNotificiationSetting =
                 NotificationSetting(NotificationOptions.OFF);
           });
-          FirebaseMessaging.instance.getToken().then((fcmToken) {
+          try {
+            String fcmToken = await FirebaseMessaging.instance.getToken();
             EventTaxiImpl.singleton().fire(FcmUpdateEvent(token: fcmToken));
-          });
+          } catch (e) {}
         });
         break;
     }
@@ -1192,10 +1196,12 @@ class _SettingsSheetState extends State<SettingsSheet>
                           sl
                               .get<SharedPrefsUtil>()
                               .setNotificationsOn(false)
-                              .then((_) {
-                            FirebaseMessaging.instance
-                                .getToken()
-                                .then((fcmToken) {
+                              .then((_) async {
+                            try {
+                              String fcmToken =
+                                  await FirebaseMessaging.instance.getToken();
+                              EventTaxiImpl.singleton()
+                                  .fire(FcmUpdateEvent(token: fcmToken));
                               EventTaxiImpl.singleton()
                                   .fire(FcmUpdateEvent(token: fcmToken));
                               // Delete all data
@@ -1209,7 +1215,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                                       '/', (Route<dynamic> route) => false);
                                 });
                               });
-                            });
+                            } catch (e) {}
                           });
                         });
                       });
