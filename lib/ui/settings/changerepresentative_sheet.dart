@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 
 import 'package:logger/logger.dart';
 import 'package:kalium_wallet_flutter/bus/events.dart';
@@ -301,7 +302,7 @@ class AppChangeRepresentativeSheet {
             .showSnackbar(AppLocalization.of(context).changeRepSucces, context);
         Navigator.of(context).popUntil(RouteUtils.withNameLike('/home'));
       } catch (e) {
-        sl.get<Logger>().e("Failed to change", e);
+        sl.get<Logger>().e("Failed to change", error: e);
         if (_animationOpen) {
           Navigator.of(context).pop();
         }

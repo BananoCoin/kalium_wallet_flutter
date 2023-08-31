@@ -11,6 +11,7 @@ import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/send/send_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/user_data_util.dart';

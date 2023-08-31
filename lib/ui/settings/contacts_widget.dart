@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
@@ -182,7 +183,7 @@ class _ContactsListState extends State<ContactsList> {
               AppLocalization.of(context).noContactsImport, context);
         }
       } catch (e) {
-        log.e(e.toString(), e);
+        log.e(e.toString(), error: e);
         sl.get<UIUtil>().showSnackbar(
             AppLocalization.of(context).noContactsImport, context);
         return;

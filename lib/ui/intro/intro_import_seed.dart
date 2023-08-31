@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
@@ -310,7 +311,7 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             inputFormatters: [
                                               SingleSpaceInputFormatter(),
                                               LowerCaseTextFormatter(),
-                                              WhitelistingTextInputFormatter(
+                                              FilteringTextInputFormatter(
                                                   RegExp("[a-zA-Z ]")),
                                             ],
                                             textInputAction:

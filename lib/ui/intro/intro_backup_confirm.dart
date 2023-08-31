@@ -7,6 +7,7 @@ import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/security.dart';
 import 'package:kalium_wallet_flutter/util/sharedprefsutil.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';

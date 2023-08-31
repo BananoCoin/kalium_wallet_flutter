@@ -59,7 +59,7 @@ class _AppShareCardState extends State<AppShareCard> {
                     Center(
                       child: Container(
                         margin: EdgeInsets.only(top: 23.5),
-                        child: QrImage(
+                        child: QrImageView(
                           padding: EdgeInsets.all(0.0),
                           size: 45.5,
                           data: StateContainer.of(context).wallet.address,

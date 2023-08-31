@@ -6,6 +6,7 @@ import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/setting_item.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 
 class AppSettings {
   //Settings item with a dropdown option
@@ -47,7 +48,7 @@ class AppSettings {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Container(
-                    width: sl.get<UIUtil>().drawerWidth(context)-100,
+                    width: sl.get<UIUtil>().drawerWidth(context) - 100,
                     child: AutoSizeText(
                       heading,
                       style: disabled
@@ -59,7 +60,7 @@ class AppSettings {
                     ),
                   ),
                   Container(
-                    width: sl.get<UIUtil>().drawerWidth(context)-100,
+                    width: sl.get<UIUtil>().drawerWidth(context) - 100,
                     child: AutoSizeText(
                       defaultMethod.getDisplayName(context),
                       style: disabled
@@ -109,14 +110,30 @@ class AppSettings {
                 ),
                 margin: EdgeInsetsDirectional.only(
                   top: 3,
-                  start: settingIcon == AppIcons.logout ? 6 : settingIcon == AppIcons.changerepresentative? 0: settingIcon == AppIcons.backupseed ? 1: settingIcon == AppIcons.transferfunds ? 2:3,
+                  start: settingIcon == AppIcons.logout
+                      ? 6
+                      : settingIcon == AppIcons.changerepresentative
+                          ? 0
+                          : settingIcon == AppIcons.backupseed
+                              ? 1
+                              : settingIcon == AppIcons.transferfunds
+                                  ? 2
+                                  : 3,
                   bottom: 3,
-                  end: settingIcon == AppIcons.logout ? 0 : settingIcon == AppIcons.changerepresentative? 6: settingIcon == AppIcons.backupseed ? 5: settingIcon == AppIcons.transferfunds ? 4:3,
+                  end: settingIcon == AppIcons.logout
+                      ? 0
+                      : settingIcon == AppIcons.changerepresentative
+                          ? 6
+                          : settingIcon == AppIcons.backupseed
+                              ? 5
+                              : settingIcon == AppIcons.transferfunds
+                                  ? 4
+                                  : 3,
                 ),
               ),
             ),
-            Container( 
-              width: sl.get<UIUtil>().drawerWidth(context)-100,
+            Container(
+              width: sl.get<UIUtil>().drawerWidth(context) - 100,
               child: Text(
                 heading,
                 style: AppStyles.textStyleSettingItemHeader(context),

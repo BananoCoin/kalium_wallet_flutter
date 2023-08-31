@@ -71,14 +71,14 @@ class _AppState extends State<App> {
         debugShowCheckedModeBanner: false,
         title: 'Kalium',
         theme: ThemeData(
-          dialogBackgroundColor:
-              StateContainer.of(context).curTheme.backgroundDark,
-          primaryColor: StateContainer.of(context).curTheme.primary,
-          accentColor: StateContainer.of(context).curTheme.primary10,
-          backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-          fontFamily: 'NunitoSans',
-          brightness: Brightness.dark,
-        ),
+            dialogBackgroundColor:
+                StateContainer.of(context).curTheme.backgroundDark,
+            primaryColor: StateContainer.of(context).curTheme.primary,
+            accentColor: StateContainer.of(context).curTheme.primary10,
+            backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
+            fontFamily: 'NunitoSans',
+            brightness: Brightness.dark,
+            useMaterial3: true),
         localizationsDelegates: [
           AppLocalizationsDelegate(StateContainer.of(context).curLanguage),
           GlobalMaterialLocalizations.delegate,

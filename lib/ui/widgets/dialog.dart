@@ -5,6 +5,7 @@ import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/themes.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 
 class AppDialogs {

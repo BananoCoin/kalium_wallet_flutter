@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 
 /// TextField button
 class TextFieldButton extends StatelessWidget {

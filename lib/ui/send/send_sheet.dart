@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 
 import 'package:decimal/decimal.dart';
 import 'package:intl/intl.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:logger/logger.dart';
 
 import 'package:kalium_wallet_flutter/appstate_container.dart';

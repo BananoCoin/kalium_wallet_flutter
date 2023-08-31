@@ -8,6 +8,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/outline_button.dart';
 import 'package:kalium_wallet_flutter/util/user_data_util.dart';
 
 /// A widget for displaying a mnemonic phrase
@@ -140,7 +141,9 @@ class _PlainSeedDisplayState extends State<PlainSeedDisplay> {
                           : StateContainer.of(context).curTheme.primary,
                       width: 1.0),
                   child: AutoSizeText(
-                    _seedCopied ? AppLocalization.of(context).copied : AppLocalization.of(context).copy,
+                    _seedCopied
+                        ? AppLocalization.of(context).copied
+                        : AppLocalization.of(context).copy,
                     textAlign: TextAlign.center,
                     style: _seedCopied
                         ? AppStyles.textStyleButtonSuccessSmallOutline(context)

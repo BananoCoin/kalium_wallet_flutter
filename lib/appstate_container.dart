@@ -542,7 +542,7 @@ class StateContainerState extends State<StateContainer> {
         return resp.hash;
       } catch (e) {
         pendingRequests.remove(item.hash);
-        sl.get<Logger>().e("Error creating open", e);
+        sl.get<Logger>().e("Error creating open", error: e);
       }
     } else {
       // Publish receive
@@ -561,7 +561,7 @@ class StateContainerState extends State<StateContainer> {
         return resp.hash;
       } catch (e) {
         pendingRequests.remove(item.hash);
-        sl.get<Logger>().e("Error creating receive", e);
+        sl.get<Logger>().e("Error creating receive", error: e);
       }
     }
     return null;
@@ -697,7 +697,7 @@ class StateContainerState extends State<StateContainer> {
         }
       } catch (e) {
         // TODO handle account history error
-        sl.get<Logger>().e("account_history e", e);
+        sl.get<Logger>().e("account_history e", error: e);
       }
     }
   }
@@ -726,16 +726,6 @@ class StateContainerState extends State<StateContainer> {
           notificationEnabled: notificationsEnabled));
       sl.get<AccountService>().processQueue();
     }
-  }
-
-  ///
-  /// Request account history
-  ///
-  void requestAccountHistory(String account) {
-    sl.get<AccountService>().queueRequest(
-        AccountHistoryRequest(account: account, count: 100),
-        fromTransfer: true);
-    sl.get<AccountService>().processQueue();
   }
 
   void logOut() {

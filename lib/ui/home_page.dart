@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flare_flutter/flare.dart';
-import 'package:flare_dart/math/mat2d.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flare_flutter/flare_controller.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +29,7 @@ import 'package:kalium_wallet_flutter/ui/send/send_confirm_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/receive/receive_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/settings/settings_drawer.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/list_slidable.dart';
 import 'package:kalium_wallet_flutter/ui/util/routes.dart';
@@ -1021,20 +1021,20 @@ class _AppHomePageState extends State<AppHomePage>
                           ),
 
                           // TRANSACTION STATE TAG
-                          (item.confirmed != null && !item.confirmed) ||
-                                  (currentConfHeight != null &&
-                                      currentConfHeight > -1 &&
-                                      item.height != null &&
-                                      item.height > currentConfHeight)
-                              ? Container(
-                                  margin: EdgeInsetsDirectional.only(
-                                    top: 4,
-                                  ),
-                                  child: TransactionStateTag(
-                                      transactionState:
-                                          TransactionStateOptions.UNCONFIRMED),
-                                )
-                              : SizedBox()
+                          // (item.confirmed != null && !item.confirmed) ||
+                          //         (currentConfHeight != null &&
+                          //             currentConfHeight > -1 &&
+                          //             item.height != null &&
+                          //             item.height > currentConfHeight)
+                          //     ? Container(
+                          //         margin: EdgeInsetsDirectional.only(
+                          //           top: 4,
+                          //         ),
+                          //         child: TransactionStateTag(
+                          //             transactionState:
+                          //                 TransactionStateOptions.UNCONFIRMED),
+                          //       )
+                          //     : SizedBox()
                         ],
                       ),
                     ),

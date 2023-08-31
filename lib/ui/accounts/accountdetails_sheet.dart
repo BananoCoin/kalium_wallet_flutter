@@ -17,6 +17,7 @@ import 'package:kalium_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/tap_outside_unfocus.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';

@@ -6,6 +6,7 @@ import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 
 class IntroBackupSafetyPage extends StatefulWidget {
   @override

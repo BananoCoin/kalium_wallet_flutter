@@ -70,31 +70,36 @@ class AppWallet {
 
   // Get pretty account balance version
   String getAccountBalanceDisplay() {
-    if (accountBalance == null) {
-      return "0";
+    try {
+      return NumberUtil.getRawAsUsableString(_accountBalance.toString());
+    } catch (e) {
+      return "N/A";
     }
-    return NumberUtil.getRawAsUsableString(_accountBalance.toString());
   }
 
   String getLocalCurrencyPrice({String locale = "en_US"}) {
-    Decimal converted = Decimal.parse(_localCurrencyPrice) *
-        NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
-    switch (locale) {
-      case "es_VE":
-        return NumberFormat.currency(locale: locale, symbol: "Bs.S")
-            .format(converted.toDouble());
-      case "tr_TR":
-        return NumberFormat.currency(locale: locale, symbol: "₺")
-            .format(converted.toDouble());
-      case "es_AR":
-        return NumberFormat.currency(locale: locale, symbol: "\$")
-            .format(converted.toDouble());
-      case "uk_UA":
-        return NumberFormat.currency(locale: locale, symbol: "\₴")
-            .format(converted.toDouble());
-      default:
-        return NumberFormat.simpleCurrency(locale: locale)
-            .format(converted.toDouble());
+    try {
+      Decimal converted = Decimal.parse(_localCurrencyPrice) *
+          NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+      switch (locale) {
+        case "es_VE":
+          return NumberFormat.currency(locale: locale, symbol: "Bs.S")
+              .format(converted.toDouble());
+        case "tr_TR":
+          return NumberFormat.currency(locale: locale, symbol: "₺")
+              .format(converted.toDouble());
+        case "es_AR":
+          return NumberFormat.currency(locale: locale, symbol: "\$")
+              .format(converted.toDouble());
+        case "uk_UA":
+          return NumberFormat.currency(locale: locale, symbol: "\₴")
+              .format(converted.toDouble());
+        default:
+          return NumberFormat.simpleCurrency(locale: locale)
+              .format(converted.toDouble());
+      }
+    } catch (e) {
+      return "N/A";
     }
   }
 
@@ -107,15 +112,19 @@ class AppWallet {
   }
 
   String get btcPrice {
-    Decimal converted = Decimal.parse(_btcPrice) *
-        NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
-    // Show 4 decimal places for BTC price if its >= 0.0001 BTC, otherwise 6 decimals
-    if (converted >= Decimal.parse("0.0001")) {
-      return new NumberFormat("#,##0.0000", "en_US")
-          .format(converted.toDouble());
-    } else {
-      return new NumberFormat("#,##0.000000", "en_US")
-          .format(converted.toDouble());
+    try {
+      Decimal converted = Decimal.parse(_btcPrice) *
+          NumberUtil.getRawAsUsableDecimal(_accountBalance.toString());
+      // Show 4 decimal places for BTC price if its >= 0.0001 BTC, otherwise 6 decimals
+      if (converted >= Decimal.parse("0.0001")) {
+        return new NumberFormat("#,##0.0000", "en_US")
+            .format(converted.toDouble());
+      } else {
+        return new NumberFormat("#,##0.000000", "en_US")
+            .format(converted.toDouble());
+      }
+    } catch (e) {
+      return "N/A";
     }
   }
 

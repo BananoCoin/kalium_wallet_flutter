@@ -6,6 +6,7 @@ import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accounts_sheet.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/util/yellowspyglass/api.dart';
 import 'package:logger/logger.dart';

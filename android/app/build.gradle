@@ -34,7 +34,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
 
     lintOptions {
         disable 'InvalidPackage'
@@ -43,7 +43,7 @@ android {
     defaultConfig {
         applicationId "com.banano.kaliumwallet"
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 34
         multiDexEnabled true
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
@@ -75,6 +75,12 @@ android {
                 abiFilters 'armeabi-v7a','arm64-v8a','x86_64'
             }                  
         }
+    }
+
+    ndkVersion "25.1.8937393"
+    namespace 'com.banano.kaliumwallet'
+    lint {
+        disable 'InvalidPackage'
     }
 }
 

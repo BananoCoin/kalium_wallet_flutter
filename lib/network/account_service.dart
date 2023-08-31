@@ -122,7 +122,7 @@ class AccountService {
       _channel.stream.listen(_onMessageReceived,
           onDone: connectionClosed, onError: connectionClosedError);
     } catch (e) {
-      log.e("Error from service ${e.toString()}", e);
+      log.e("Error from service ${e.toString()}", error: e);
       _isConnected = false;
       _isConnecting = false;
       EventTaxiImpl.singleton()
@@ -346,14 +346,15 @@ class AccountService {
     http.Response response = await http.post(Uri.parse(_SERVER_ADDRESS_HTTP),
         headers: {'Content-type': 'application/json'},
         body: json.encode(request.toJson()));
-    if (response.statusCode != 200) {
-      return null;
+    try {
+      Map decoded = json.decode(response.body);
+      if (decoded.containsKey("error")) {
+        return ErrorResponse.fromJson(decoded);
+      }
+      return decoded;
+    } catch (e) {
+      return ErrorResponse(error: "Invalid response from server");
     }
-    Map decoded = json.decode(response.body);
-    if (decoded.containsKey("error")) {
-      return ErrorResponse.fromJson(decoded);
-    }
-    return decoded;
   }
 
   Future<AccountInfoResponse> getAccountInfo(String account) async {

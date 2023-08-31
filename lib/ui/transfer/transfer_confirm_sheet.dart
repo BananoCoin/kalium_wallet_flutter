@@ -27,9 +27,11 @@ class AppTransferConfirmSheet extends StatefulWidget {
   final Map<String, AccountBalanceItem> privKeyBalanceMap;
   final Function errorCallback;
 
-  AppTransferConfirmSheet({this.privKeyBalanceMap, this.errorCallback}) : super();
+  AppTransferConfirmSheet({this.privKeyBalanceMap, this.errorCallback})
+      : super();
 
-  _AppTransferConfirmSheetState createState() => _AppTransferConfirmSheetState();
+  _AppTransferConfirmSheetState createState() =>
+      _AppTransferConfirmSheetState();
 }
 
 class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
@@ -55,7 +57,8 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
       totalToTransfer += BigInt.parse(accountBalanceItem.balance) +
           BigInt.parse(accountBalanceItem.pending);
     });
-    this.totalAsReadableAmount = NumberUtil.getRawAsUsableString(totalToTransfer.toString());
+    this.totalAsReadableAmount =
+        NumberUtil.getRawAsUsableString(totalToTransfer.toString());
   }
 
   @override
@@ -80,8 +83,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
               margin: EdgeInsets.only(top: 30.0, left: 70, right: 70),
               child: AutoSizeText(
                 CaseChange.toUpperCase(
-                    AppLocalization.of(context).transferHeader,
-                    context),
+                    AppLocalization.of(context).transferHeader, context),
                 style: AppStyles.textStyleHeader(context),
                 textAlign: TextAlign.center,
                 maxLines: 2,
@@ -100,37 +102,29 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                   children: <Widget>[
                     Container(
                         margin: EdgeInsets.symmetric(
-                            horizontal:
-                                smallScreen(context) ? 35 : 60),
+                            horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
                           AppLocalization.of(context)
                               .transferConfirmInfoKal
-                              .replaceAll(
-                                  "%1", totalAsReadableAmount),
-                          style: AppStyles.textStyleParagraphPrimary(
-                              context),
+                              .replaceAll("%1", totalAsReadableAmount),
+                          style: AppStyles.textStyleParagraphPrimary(context),
                           textAlign: TextAlign.start,
                         )),
                     Container(
                         margin: EdgeInsets.symmetric(
-                            horizontal:
-                                smallScreen(context) ? 35 : 60),
+                            horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
-                          AppLocalization.of(context)
-                              .transferConfirmInfoSecond,
-                          style:
-                              AppStyles.textStyleParagraph(context),
+                          AppLocalization.of(context).transferConfirmInfoSecond,
+                          style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         )),
                     Container(
                         margin: EdgeInsets.symmetric(
-                            horizontal:
-                                smallScreen(context) ? 35 : 60),
+                            horizontal: smallScreen(context) ? 35 : 60),
                         child: Text(
                           AppLocalization.of(context)
                               .transferConfirmInfoKalThird,
-                          style:
-                              AppStyles.textStyleParagraph(context),
+                          style: AppStyles.textStyleParagraph(context),
                           textAlign: TextAlign.start,
                         )),
                   ],
@@ -147,19 +141,17 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                           context,
                           AppButtonType.PRIMARY,
                           CaseChange.toUpperCase(
-                              AppLocalization.of(context).confirm,
-                              context),
+                              AppLocalization.of(context).confirm, context),
                           Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
                         animationOpen = true;
-                        Navigator.of(context).push(
-                            AnimationLoadingOverlay(
-                                AnimationType.TRANSFER_TRANSFERRING,
-                                StateContainer.of(context)
-                                    .curTheme
-                                    .animationOverlayStrong,
-                                StateContainer.of(context)
-                                    .curTheme
-                                    .animationOverlayMedium, onPoppedCallback: () {
+                        Navigator.of(context).push(AnimationLoadingOverlay(
+                            AnimationType.TRANSFER_TRANSFERRING,
+                            StateContainer.of(context)
+                                .curTheme
+                                .animationOverlayStrong,
+                            StateContainer.of(context)
+                                .curTheme
+                                .animationOverlayMedium, onPoppedCallback: () {
                           animationOpen = false;
                         }));
                         await processWallets();
@@ -172,9 +164,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
                       AppButton.buildAppButton(
                           context,
                           AppButtonType.PRIMARY_OUTLINE,
-                          AppLocalization.of(context)
-                              .cancel
-                              .toUpperCase(),
+                          AppLocalization.of(context).cancel.toUpperCase(),
                           Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
                         Navigator.of(context).pop();
                       }),
@@ -198,39 +188,39 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     try {
       state.lockCallback();
       for (String account in widget.privKeyBalanceMap.keys) {
-        AccountBalanceItem  balanceItem = widget.privKeyBalanceMap[account];
+        AccountBalanceItem balanceItem = widget.privKeyBalanceMap[account];
         // Get frontiers first
-        AccountInfoResponse resp = await sl.get<AccountService>().getAccountInfo(account);
+        AccountInfoResponse resp =
+            await sl.get<AccountService>().getAccountInfo(account);
         if (!resp.unopened) {
           balanceItem.frontier = resp.frontier;
         }
         // Receive pending blocks
-        PendingResponse pr = await sl.get<AccountService>().getPending(account, 20);
+        PendingResponse pr =
+            await sl.get<AccountService>().getPending(account, 20);
         Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
         for (String hash in pendingBlocks.keys) {
           PendingResponseItem item = pendingBlocks[hash];
           if (balanceItem.frontier != null) {
-            ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-              AppWallet.defaultRepresentative,
-              balanceItem.frontier,
-              item.amount,
-              hash,
-              account,
-              balanceItem.privKey
-            );
-            if (resp.hash != null)  {
+            ProcessResponse resp = await sl
+                .get<AccountService>()
+                .requestReceive(
+                    AppWallet.defaultRepresentative,
+                    balanceItem.frontier,
+                    item.amount,
+                    hash,
+                    account,
+                    balanceItem.privKey);
+            if (resp.hash != null) {
               balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount);
             }
           } else {
-            ProcessResponse resp = await sl.get<AccountService>().requestOpen(
-              item.amount,
-              hash,
-              account,
-              balanceItem.privKey
-            );
+            ProcessResponse resp = await sl
+                .get<AccountService>()
+                .requestOpen(item.amount, hash, account, balanceItem.privKey);
             if (resp.hash != null) {
-              balanceItem.frontier = resp.hash;            
+              balanceItem.frontier = resp.hash;
               totalTransferred += BigInt.parse(item.amount);
             }
           }
@@ -240,14 +230,13 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         // Process send from this account
         resp = await sl.get<AccountService>().getAccountInfo(account);
         ProcessResponse sendResp = await sl.get<AccountService>().requestSend(
-          AppWallet.defaultRepresentative,
-          resp.frontier,
-          resp.balance,
-          state.wallet.address,
-          account,
-          balanceItem.privKey,
-          max: true
-        );
+            AppWallet.defaultRepresentative,
+            resp.frontier,
+            resp.balance,
+            state.wallet.address,
+            account,
+            balanceItem.privKey,
+            max: true);
         if (sendResp.hash != null) {
           totalTransferred += BigInt.parse(balanceItem.balance);
         }
@@ -257,7 +246,7 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
         Navigator.of(context).pop();
       }
       widget.errorCallback();
-      sl.get<Logger>().e("Error processing wallet", e);
+      sl.get<Logger>().e("Error processing wallet", error: e);
       return;
     } finally {
       state.unlockCallback();
@@ -265,40 +254,40 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     try {
       state.lockCallback();
       // Receive all new blocks to our own account
-      PendingResponse pr = await sl.get<AccountService>().getPending(state.wallet.address, 20, includeActive: true);
+      PendingResponse pr = await sl
+          .get<AccountService>()
+          .getPending(state.wallet.address, 20, includeActive: true);
       Map<String, PendingResponseItem> pendingBlocks = pr.blocks;
       for (String hash in pendingBlocks.keys) {
         PendingResponseItem item = pendingBlocks[hash];
         if (state.wallet.openBlock != null) {
           ProcessResponse resp = await sl.get<AccountService>().requestReceive(
-            state.wallet.representative,
-            state.wallet.frontier,
-            item.amount,
-            hash,
-            state.wallet.address,
-            await _getPrivKey(state.selectedAccount.index)
-          );
+              state.wallet.representative,
+              state.wallet.frontier,
+              item.amount,
+              hash,
+              state.wallet.address,
+              await _getPrivKey(state.selectedAccount.index));
           if (resp.hash != null) {
             state.wallet.frontier = resp.hash;
           }
         } else {
           ProcessResponse resp = await sl.get<AccountService>().requestOpen(
-            item.amount,
-            hash,
-            state.wallet.address,
-            await _getPrivKey(state.selectedAccount.index),
-            representative: state.wallet.representative
-          );
+              item.amount,
+              hash,
+              state.wallet.address,
+              await _getPrivKey(state.selectedAccount.index),
+              representative: state.wallet.representative);
           if (resp.hash != null) {
             state.wallet.frontier = resp.hash;
-            state.wallet.openBlock = resp.hash;            
+            state.wallet.openBlock = resp.hash;
           }
         }
       }
       state.requestUpdate();
     } catch (e) {
       // Less-important error
-      sl.get<Logger>().e("Error processing wallet", e);
+      sl.get<Logger>().e("Error processing wallet", error: e);
     } finally {
       state.unlockCallback();
     }

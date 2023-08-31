@@ -8,6 +8,7 @@ import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/vault.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/mnemonic_display.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/plainseed_display.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
@@ -84,8 +85,12 @@ class AppSeedBackupSheet {
                                           AutoSizeText(
                                             CaseChange.toUpperCase(
                                                 showMnemonic
-                                                    ? AppLocalization.of(context).secretPhrase
-                                                    : AppLocalization.of(context).seed,
+                                                    ? AppLocalization.of(
+                                                            context)
+                                                        .secretPhrase
+                                                    : AppLocalization.of(
+                                                            context)
+                                                        .seed,
                                                 context),
                                             style: AppStyles.textStyleHeader(
                                                 context),
@@ -166,10 +171,14 @@ class AppSeedBackupSheet {
                                           ? AppButtonType.SUCCESS
                                           : AppButtonType.PRIMARY,
                                       _mnemonicCopied
-                                          ? AppLocalization.of(context).secretPhraseCopied
-                                          : AppLocalization.of(context).secretPhraseCopy,
-                                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
-                                    UserDataUtil.setSecureClipboardItem(_mnemonic.join(" "));
+                                          ? AppLocalization.of(context)
+                                              .secretPhraseCopied
+                                          : AppLocalization.of(context)
+                                              .secretPhraseCopy,
+                                      Dimens.BUTTON_BOTTOM_DIMENS,
+                                      onPressed: () {
+                                    UserDataUtil.setSecureClipboardItem(
+                                        _mnemonic.join(" "));
                                     setState(() {
                                       // Set copied style
                                       _mnemonicCopied = true;
@@ -196,8 +205,13 @@ class AppSeedBackupSheet {
                                       _seedCopied
                                           ? AppButtonType.SUCCESS
                                           : AppButtonType.PRIMARY,
-                                      _seedCopied ? AppLocalization.of(context).seedCopiedShort : AppLocalization.of(context).copySeed,
-                                      Dimens.BUTTON_BOTTOM_DIMENS, onPressed: () {
+                                      _seedCopied
+                                          ? AppLocalization.of(context)
+                                              .seedCopiedShort
+                                          : AppLocalization.of(context)
+                                              .copySeed,
+                                      Dimens.BUTTON_BOTTOM_DIMENS,
+                                      onPressed: () {
                                     UserDataUtil.setSecureClipboardItem(_seed);
                                     setState(() {
                                       // Set copied style
