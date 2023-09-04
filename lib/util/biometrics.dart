@@ -25,6 +25,8 @@ class BiometricUtil {
         return true;
       } else if (availableBiometrics.contains(BiometricType.fingerprint)) {
         return true;
+      } else if (availableBiometrics.contains(BiometricType.strong)) {
+        return true;
       }
     }
     return false;
