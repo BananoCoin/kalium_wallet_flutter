@@ -311,8 +311,9 @@ class _IntroImportSeedState extends State<IntroImportSeedPage> {
                                             inputFormatters: [
                                               SingleSpaceInputFormatter(),
                                               LowerCaseTextFormatter(),
-                                              FilteringTextInputFormatter(
-                                                  RegExp("[a-zA-Z ]")),
+                                              FilteringTextInputFormatter.allow(
+                                                RegExp("[a-zA-Z ]"),
+                                              ),
                                             ],
                                             textInputAction:
                                                 TextInputAction.done,

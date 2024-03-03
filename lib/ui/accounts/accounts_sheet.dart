@@ -13,8 +13,11 @@ import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/ui/accounts/accountdetails_sheet.dart';
+import 'package:kalium_wallet_flutter/ui/accounts/import_external_account_sheet.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/app_simpledialog.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/sheets.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/dialog.dart';
@@ -24,6 +27,7 @@ import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
 import 'package:logger/logger.dart';
+import 'package:kalium_wallet_flutter/app_icons.dart';
 
 class AppAccountsSheet {
   List<Account> accounts;
@@ -175,17 +179,51 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               //A container for the header
-              Container(
-                margin: EdgeInsets.only(top: 30.0, bottom: 15),
-                constraints: BoxConstraints(
-                    maxWidth: MediaQuery.of(context).size.width - 140),
-                child: AutoSizeText(
-                  CaseChange.toUpperCase(
-                      AppLocalization.of(context).accounts, context),
-                  style: AppStyles.textStyleHeader(context),
-                  maxLines: 1,
-                  stepGranularity: 0.1,
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 60, width: 60),
+                  //A column for the header
+                  Container(
+                    margin: EdgeInsets.only(top: 30.0, bottom: 15),
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width - 140),
+                    child: AutoSizeText(
+                      CaseChange.toUpperCase(
+                          AppLocalization.of(context).accounts, context),
+                      style: AppStyles.textStyleHeader(context),
+                      maxLines: 1,
+                      stepGranularity: 0.1,
+                    ),
+                  ),
+                  // Three dot button
+                  Container(
+                    width: 50,
+                    height: 50,
+                    margin: EdgeInsetsDirectional.only(top: 10.0, end: 10.0),
+                    child: FlatButton(
+                      highlightColor:
+                          StateContainer.of(context).curTheme.text15,
+                      splashColor: StateContainer.of(context).curTheme.text15,
+                      onPressed: () {
+                        showDialog(
+                          barrierColor:
+                              StateContainer.of(context).curTheme.barrier,
+                          context: context,
+                          builder: _buildMoreOptionsDialog,
+                        );
+                      },
+                      child: Icon(Icons.more_horiz_rounded,
+                          size: 28,
+                          color: StateContainer.of(context).curTheme.text),
+                      padding: EdgeInsets.all(11.0),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100.0)),
+                      materialTapTargetSize: MaterialTapTargetSize.padded,
+                    ),
+                  ),
+                ],
               ),
 
               //A list containing accounts
@@ -341,6 +379,38 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
             ],
           ),
         ));
+  }
+
+  Widget _buildMoreOptionsDialog(BuildContext context) {
+    var importExternalAccountSheet = new ImportExternalAccountSheet();
+    {
+      return AppSimpleDialog(
+          title: Container(
+            margin: EdgeInsets.only(bottom: 10),
+            child: Text(
+              "More Options",
+              style: AppStyles.textStyleDialogHeader(context),
+            ),
+          ),
+          children: [
+            SimpleDialogOption(
+              onPressed: () {
+                Navigator.pop(context);
+                Sheets.showAppHeightNineSheet(
+                  context: context,
+                  widget: importExternalAccountSheet,
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  "Import External Account",
+                  style: AppStyles.textStyleDialogOptions(context),
+                ),
+              ),
+            )
+          ]);
+    }
   }
 
   Widget _buildAccountListItem(
