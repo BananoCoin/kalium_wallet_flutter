@@ -507,6 +507,38 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 stepGranularity: 0.1,
                                 maxLines: 1,
                               ),
+                              // External Account Badge
+                              /* Container(
+                                padding: EdgeInsetsDirectional.only(
+                                  start: 5,
+                                  end: 5,
+                                  top: 0.5,
+                                  bottom: 1,
+                                ),
+                                margin: EdgeInsets.only(top: 4),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                    Radius.circular(4),
+                                  ),
+                                  color: StateContainer.of(context)
+                                      .curTheme
+                                      .primary10,
+                                ),
+                                child: AutoSizeText(
+                                  "External Account",
+                                  minFontSize: 8.0,
+                                  stepGranularity: 0.1,
+                                  maxLines: 1,
+                                  style: TextStyle(
+                                    fontFamily: "NunitoSans",
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12.0,
+                                    color: StateContainer.of(context)
+                                        .curTheme
+                                        .primary,
+                                  ),
+                                ),
+                              ) */
                             ],
                           ),
                         ),
@@ -563,6 +595,10 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
 
   List<Widget> _getSlideActionsForAccount(
       BuildContext context, Account account, StateSetter setState) {
+    var deleteExternalAccountHeader = "Delete External Account";
+    var deleteExternalAccountParagraph =
+        "Deleting an external account is irreversible. If you don't have its secret phrase backed up, you won't be able to recover it later. Are you sure you want to delete the account from this device?";
+    var isExternalAccount = false;
     List<Widget> _actions = List();
     _actions.add(SlideAction(
         child: Container(
@@ -595,10 +631,13 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
           onTap: () {
             AppDialogs.showConfirmDialog(
                 context,
-                AppLocalization.of(context).hideAccountHeader,
-                AppLocalization.of(context)
-                    .removeAccountText
-                    .replaceAll("%1", AppLocalization.of(context).addAccount),
+                isExternalAccount
+                    ? deleteExternalAccountHeader
+                    : AppLocalization.of(context).hideAccountHeader,
+                isExternalAccount
+                    ? deleteExternalAccountParagraph
+                    : AppLocalization.of(context).removeAccountText.replaceAll(
+                        "%1", AppLocalization.of(context).addAccount),
                 CaseChange.toUpperCase(
                     AppLocalization.of(context).yes, context), () {
               // Remove account
