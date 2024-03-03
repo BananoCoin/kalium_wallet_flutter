@@ -8,6 +8,7 @@ import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 
 import 'package:kalium_wallet_flutter/styles.dart';
@@ -16,11 +17,11 @@ import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/app_text_field.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
+import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
 
 class ImportExternalAccountSheet extends StatefulWidget {
   ImportExternalAccountSheet() : super();
-
   _ImportExternalAccountSheetState createState() =>
       _ImportExternalAccountSheetState();
 }
@@ -492,8 +493,21 @@ class _ImportExternalAccountSheetState
                         context,
                         AppButtonType.PRIMARY,
                         AppLocalization.of(context).import,
-                        Dimens.BUTTON_TOP_DIMENS, onPressed: () {
-                      // TO-DO: Import the phrase/seed
+                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                      // Derive private key
+                      String privateKey =
+                          NanoUtil.seedToPrivate(_seedInputController.text, 0);
+                      // Add account
+                      try {
+                        await sl.get<DBHelper>().addAccountWithPrivateKey(
+                            nameBuilder: AppLocalization.of(context)
+                                .defaultNewAccountName,
+                            privateKey: privateKey);
+                        StateContainer.of(context).updateRecentlyUsedAccounts();
+                      } catch (e) {
+                        // TODO handle error
+                        throw e;
+                      }
                     }),
                   ],
                 ),

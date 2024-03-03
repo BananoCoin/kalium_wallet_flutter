@@ -10,16 +10,14 @@ import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/model/db/contact.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 
-class DBHelper{
+class DBHelper {
   static const int DB_VERSION = 3;
-  static const String CONTACTS_SQL =
-    """CREATE TABLE Contacts( 
+  static const String CONTACTS_SQL = """CREATE TABLE Contacts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         address TEXT, 
         monkey_path TEXT)""";
-  static const String ACCOUNTS_SQL =
-    """CREATE TABLE Accounts( 
+  static const String ACCOUNTS_SQL = """CREATE TABLE Accounts( 
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         name TEXT, 
         acct_index INTEGER, 
@@ -27,8 +25,7 @@ class DBHelper{
         last_accessed INTEGER,
         private_key TEXT,
         balance TEXT)""";
-  static const String ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL =
-    """
+  static const String ACCOUNTS_ADD_ACCOUNT_COLUMN_SQL = """
     ALTER TABLE Accounts ADD address TEXT
     """;
   static Database _db;
@@ -40,8 +37,7 @@ class DBHelper{
   }
 
   Future<Database> get db async {
-    if(_db != null)
-      return _db;
+    if (_db != null) return _db;
     _db = await initDb();
     return _db;
   }
@@ -49,7 +45,8 @@ class DBHelper{
   initDb() async {
     io.Directory documentsDirectory = await getApplicationDocumentsDirectory();
     String path = join(documentsDirectory.path, "kalium.db");
-    var theDb = await openDatabase(path, version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
+    var theDb = await openDatabase(path,
+        version: DB_VERSION, onCreate: _onCreate, onUpgrade: _onUpgrade);
     return theDb;
   }
 
@@ -73,57 +70,83 @@ class DBHelper{
   // Contacts
   Future<List<Contact>> getContacts() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts ORDER BY name');
+    List<Map> list =
+        await dbClient.rawQuery('SELECT * FROM Contacts ORDER BY name');
     List<Contact> contacts = new List();
     for (int i = 0; i < list.length; i++) {
-      contacts.add(new Contact(id: list[i]["id"], name: list[i]["name"], address: list[i]["address"], monkeyPath: list[i]["monkey_path"]));
+      contacts.add(new Contact(
+          id: list[i]["id"],
+          name: list[i]["name"],
+          address: list[i]["address"],
+          monkeyPath: list[i]["monkey_path"]));
     }
     return contacts;
   }
 
   Future<List<Contact>> getContactsWithNameLike(String pattern) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name LIKE \'%$pattern%\' ORDER BY LOWER(name)');
+    List<Map> list = await dbClient.rawQuery(
+        'SELECT * FROM Contacts WHERE name LIKE \'%$pattern%\' ORDER BY LOWER(name)');
     List<Contact> contacts = new List();
     for (int i = 0; i < list.length; i++) {
-      contacts.add(new Contact(id: list[i]["id"], name: list[i]["name"], address: list[i]["address"], monkeyPath: list[i]["monkey_path"]));
+      contacts.add(new Contact(
+          id: list[i]["id"],
+          name: list[i]["name"],
+          address: list[i]["address"],
+          monkeyPath: list[i]["monkey_path"]));
     }
     return contacts;
   }
 
   Future<Contact> getContactWithAddress(String address) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE address = ?', [address]);
+    List<Map> list = await dbClient
+        .rawQuery('SELECT * FROM Contacts WHERE address = ?', [address]);
     if (list.length > 0) {
-      return Contact(id: list[0]["id"], name: list[0]["name"], address: list[0]["address"], monkeyPath: list[0]["monkey_path"]);
+      return Contact(
+          id: list[0]["id"],
+          name: list[0]["name"],
+          address: list[0]["address"],
+          monkeyPath: list[0]["monkey_path"]);
     }
     return null;
   }
 
   Future<Contact> getContactWithName(String name) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
+    List<Map> list = await dbClient
+        .rawQuery('SELECT * FROM Contacts WHERE name = ?', [name]);
     if (list.length > 0) {
-      return Contact(id: list[0]["id"], name: list[0]["name"], address: list[0]["address"], monkeyPath: list[0]["monkey_path"]);
+      return Contact(
+          id: list[0]["id"],
+          name: list[0]["name"],
+          address: list[0]["address"],
+          monkeyPath: list[0]["monkey_path"]);
     }
     return null;
   }
 
   Future<bool> contactExistsWithName(String name) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Contacts WHERE lower(name) = ?', [name.toLowerCase()]));
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery(
+        'SELECT count(*) FROM Contacts WHERE lower(name) = ?',
+        [name.toLowerCase()]));
     return count > 0;
   }
 
   Future<bool> contactExistsWithAddress(String address) async {
     var dbClient = await db;
-    int count = Sqflite.firstIntValue(await dbClient.rawQuery('SELECT count(*) FROM Contacts WHERE lower(address) = ?', [address.toLowerCase()]));
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery(
+        'SELECT count(*) FROM Contacts WHERE lower(address) = ?',
+        [address.toLowerCase()]));
     return count > 0;
   }
 
   Future<int> saveContact(Contact contact) async {
     var dbClient = await db;
-    return await dbClient.rawInsert('INSERT INTO Contacts (name, address) values(?, ?)', [contact.name, contact.address]);
+    return await dbClient.rawInsert(
+        'INSERT INTO Contacts (name, address) values(?, ?)',
+        [contact.name, contact.address]);
   }
 
   Future<int> saveContacts(List<Contact> contacts) async {
@@ -138,44 +161,61 @@ class DBHelper{
 
   Future<bool> deleteContact(Contact contact) async {
     var dbClient = await db;
-    return await dbClient.rawDelete("DELETE FROM Contacts WHERE name = ? AND address = ?", [contact.name, contact.address]) > 0;
+    return await dbClient.rawDelete(
+            "DELETE FROM Contacts WHERE name = ? AND address = ?",
+            [contact.name, contact.address]) >
+        0;
   }
 
   Future<bool> setMonkeyForContact(Contact contact, String monkeyPath) async {
     var dbClient = await db;
-    return await dbClient.rawUpdate("UPDATE contacts SET monkey_path = ? WHERE address = ?", [monkeyPath, contact.address]) > 0;
+    return await dbClient.rawUpdate(
+            "UPDATE contacts SET monkey_path = ? WHERE address = ?",
+            [monkeyPath, contact.address]) >
+        0;
   }
 
   // Accounts
   Future<List<Account>> getAccounts() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY acct_index');
+    List<Map> list =
+        await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY acct_index');
     List<Account> accounts = new List();
     for (int i = 0; i < list.length; i++) {
-      accounts.add(Account(id: list[i]["id"], name: list[i]["name"], index: list[i]["acct_index"], lastAccess: list[i]["last_accessed"], selected: list[i]["selected"] == 1 ? true : false, balance: list[i]["balance"]));
+      accounts.add(Account(
+          id: list[i]["id"],
+          name: list[i]["name"],
+          index: list[i]["acct_index"],
+          lastAccess: list[i]["last_accessed"],
+          selected: list[i]["selected"] == 1 ? true : false,
+          balance: list[i]["balance"]));
     }
     for (Account a in accounts) {
-      a.address = NanoUtil.seedToAddress(
-        await sl.get<Vault>().getSeed(),
-        a.index
-      );
+      a.address =
+          NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), a.index);
     }
     return accounts;
   }
 
   Future<List<Account>> getRecentlyUsedAccounts({int limit = 2}) async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts WHERE selected != 1 ORDER BY last_accessed DESC, acct_index ASC LIMIT ?', [limit]);
+    List<Map> list = await dbClient.rawQuery(
+        'SELECT * FROM Accounts WHERE selected != 1 ORDER BY last_accessed DESC, acct_index ASC LIMIT ?',
+        [limit]);
     List<Account> accounts = new List();
     for (int i = 0; i < list.length; i++) {
-      accounts.add(Account(id: list[i]["id"], name: list[i]["name"], index: list[i]["acct_index"], lastAccess: list[i]["last_accessed"], selected: list[i]["selected"] == 1 ? true : false, balance: list[i]["balance"]));
+      accounts.add(Account(
+          id: list[i]["id"],
+          name: list[i]["name"],
+          index: list[i]["acct_index"],
+          lastAccess: list[i]["last_accessed"],
+          selected: list[i]["selected"] == 1 ? true : false,
+          balance: list[i]["balance"]));
     }
     for (Account a in accounts) {
-      a.address = NanoUtil.seedToAddress(
-        await sl.get<Vault>().getSeed(),
-        a.index
-      );
-    }    
+      a.address =
+          NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), a.index);
+    }
     return accounts;
   }
 
@@ -185,7 +225,8 @@ class DBHelper{
     await dbClient.transaction((Transaction txn) async {
       int nextIndex = 1;
       int curIndex;
-      List<Map> accounts = await txn.rawQuery('SELECT * from Accounts WHERE acct_index > 0 ORDER BY acct_index ASC');
+      List<Map> accounts = await txn.rawQuery(
+          'SELECT * from Accounts WHERE acct_index > 0 ORDER BY acct_index ASC');
       for (int i = 0; i < accounts.length; i++) {
         curIndex = accounts[i]["acct_index"];
         if (curIndex != nextIndex) {
@@ -195,25 +236,82 @@ class DBHelper{
       }
       int nextID = nextIndex + 1;
       String nextName = nameBuilder.replaceAll("%1", nextID.toString());
-      account = Account(index: nextIndex, name:nextName, lastAccess: 0, selected: false, address: NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), nextIndex));
-      await txn.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)', [account.name, account.index, account.lastAccess, account.selected ? 1 : 0, account.address]);
+      account = Account(
+          index: nextIndex,
+          name: nextName,
+          lastAccess: 0,
+          selected: false,
+          address: NanoUtil.seedToAddress(
+              await sl.get<Vault>().getSeed(), nextIndex));
+      await txn.rawInsert(
+          'INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
+          [
+            account.name,
+            account.index,
+            account.lastAccess,
+            account.selected ? 1 : 0,
+            account.address
+          ]);
+    });
+    return account;
+  }
+
+  Future<Account> addAccountWithPrivateKey(
+      {String nameBuilder, String privateKey}) async {
+    var dbClient = await db;
+    Account account;
+    await dbClient.transaction((Transaction txn) async {
+      int nextID = 1;
+      List<Map> accounts =
+          await txn.rawQuery('SELECT * from Accounts WHERE acct_index == -1');
+      for (int i = 0; i < accounts.length; i++) {
+        nextID++;
+      }
+      String nextName = nameBuilder.replaceAll("AdHoc - %1", nextID.toString());
+      String address = NanoUtil.privateToAddress(privateKey);
+      account = Account(
+          index: -1,
+          name: nextName,
+          lastAccess: 0,
+          selected: false,
+          address: NanoUtil.privateToAddress(privateKey));
+      await sl.get<Vault>().setPrivateKey(address, privateKey);
+      await txn.rawInsert(
+          'INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
+          [
+            account.name,
+            -1,
+            account.lastAccess,
+            account.selected ? 1 : 0,
+            account.address
+          ]);
     });
     return account;
   }
 
   Future<int> deleteAccount(Account account) async {
     var dbClient = await db;
-    return await dbClient.rawDelete('DELETE FROM Accounts WHERE acct_index = ?', [account.index]);
+    return await dbClient.rawDelete(
+        'DELETE FROM Accounts WHERE acct_index = ?', [account.index]);
   }
 
   Future<int> saveAccount(Account account) async {
     var dbClient = await db;
-    return await dbClient.rawInsert('INSERT INTO Accounts (name, acct_index, last_accessed, selected) values(?, ?, ?, ?)', [account.name, account.index, account.lastAccess, account.selected ? 1 : 0]);
+    return await dbClient.rawInsert(
+        'INSERT INTO Accounts (name, acct_index, last_accessed, selected) values(?, ?, ?, ?)',
+        [
+          account.name,
+          account.index,
+          account.lastAccess,
+          account.selected ? 1 : 0
+        ]);
   }
 
   Future<int> changeAccountName(Account account, String name) async {
     var dbClient = await db;
-    return await dbClient.rawUpdate('UPDATE Accounts SET name = ? WHERE acct_index = ?', [name, account.index]);
+    return await dbClient.rawUpdate(
+        'UPDATE Accounts SET name = ? WHERE acct_index = ?',
+        [name, account.index]);
   }
 
   Future<void> changeAccount(Account account) async {
@@ -221,35 +319,58 @@ class DBHelper{
     return await dbClient.transaction((Transaction txn) async {
       await txn.rawUpdate('UPDATE Accounts set selected = 0');
       // Get access increment count
-      List<Map> list = await txn.rawQuery('SELECT max(last_accessed) as last_access FROM Accounts');
-      await txn.rawUpdate('UPDATE Accounts set selected = ?, last_accessed = ? where acct_index = ?', [1, list[0]["last_access"] + 1, account.index]);
+      List<Map> list = await txn
+          .rawQuery('SELECT max(last_accessed) as last_access FROM Accounts');
+      await txn.rawUpdate(
+          'UPDATE Accounts set selected = ?, last_accessed = ? where acct_index = ?',
+          [1, list[0]["last_access"] + 1, account.index]);
     });
   }
 
   Future<void> updateAccountBalance(Account account, String balance) async {
     var dbClient = await db;
-    return await dbClient.rawUpdate('UPDATE Accounts set balance = ? where acct_index = ?', [balance, account.index]);
+    return await dbClient.rawUpdate(
+        'UPDATE Accounts set balance = ? where acct_index = ?',
+        [balance, account.index]);
   }
 
   Future<Account> getSelectedAccount() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts where selected = 1');
+    List<Map> list =
+        await dbClient.rawQuery('SELECT * FROM Accounts where selected = 1');
     if (list.length == 0) {
       return null;
     }
-    String address = NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
-    Account account = Account(id: list[0]["id"], name: list[0]["name"], index: list[0]["acct_index"], selected: true, lastAccess: list[0]["last_accessed"], balance: list[0]["balance"],  address: address);
+    String address = NanoUtil.seedToAddress(
+        await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
+    Account account = Account(
+        id: list[0]["id"],
+        name: list[0]["name"],
+        index: list[0]["acct_index"],
+        selected: true,
+        lastAccess: list[0]["last_accessed"],
+        balance: list[0]["balance"],
+        address: address);
     return account;
   }
 
   Future<Account> getMainAccount() async {
     var dbClient = await db;
-    List<Map> list = await dbClient.rawQuery('SELECT * FROM Accounts where acct_index = 0');
+    List<Map> list =
+        await dbClient.rawQuery('SELECT * FROM Accounts where acct_index = 0');
     if (list.length == 0) {
       return null;
     }
-    String address = NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
-    Account account = Account(id: list[0]["id"], name: list[0]["name"], index: list[0]["acct_index"], selected: true, lastAccess: list[0]["last_accessed"], balance: list[0]["balance"],  address: address);
+    String address = NanoUtil.seedToAddress(
+        await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
+    Account account = Account(
+        id: list[0]["id"],
+        name: list[0]["name"],
+        index: list[0]["acct_index"],
+        selected: true,
+        lastAccess: list[0]["last_accessed"],
+        balance: list[0]["balance"],
+        address: address);
     return account;
   }
 

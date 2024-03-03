@@ -72,7 +72,7 @@ dependencies:
   flutter_svg: ^0.21.0+1
     
   # QR Codes
-  qr_flutter: ^4.0.0 # Generator
+  qr_flutter: ^2.0.1 # Generator
   barcode_scan:
     git:
       url: https://github.com/bbedward/flutter_barcode_reader.git

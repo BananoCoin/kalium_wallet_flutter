@@ -25,7 +25,7 @@ class Vault {
     if (await legacy()) {
       await setEncrypted(key, value);
     } else {
-      await secureStorage.write(key:key, value:value);
+      await secureStorage.write(key: key, value: value);
     }
     return value;
   }
@@ -34,7 +34,7 @@ class Vault {
     if (await legacy()) {
       return await getEncrypted(key);
     }
-    return await secureStorage.read(key:key) ?? defaultValue;
+    return await secureStorage.read(key: key) ?? defaultValue;
   }
 
   Future<void> deleteAll() async {
@@ -43,6 +43,12 @@ class Vault {
       await prefs.remove(encryptionKey);
       await prefs.remove(seedKey);
       await prefs.remove(pinKey);
+      var keys = prefs.getKeys();
+      for (var key in keys) {
+        if (key.startsWith("fklaium_p_")) {
+          await prefs.remove(key);
+        }
+      }
       return;
     }
     return await secureStorage.deleteAll();
@@ -63,6 +69,22 @@ class Vault {
       await prefs.remove(seedKey);
     }
     return await secureStorage.delete(key: seedKey);
+  }
+
+  Future<String> getPrivateKey(String address) async {
+    return await _read("fklaium_p_$address");
+  }
+
+  Future<String> setPrivateKey(String address, String privateKey) async {
+    return await _write("fklaium_p_$address", privateKey);
+  }
+
+  Future<void> deletePrivateKey(String address) async {
+    if (await legacy()) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove("fklaium_p_$address");
+    }
+    return await secureStorage.delete(key: "fklaium_p_$address");
   }
 
   Future<String> getEncryptionPhrase() async {
@@ -102,7 +124,9 @@ class Vault {
     String secret = await getSecret();
     if (secret == null) return null;
     // Decrypt and return
-    Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.substring(0, secret.length - 8), secret.substring(secret.length - 8));
+    Salsa20Encryptor encrypter = new Salsa20Encryptor(
+        secret.substring(0, secret.length - 8),
+        secret.substring(secret.length - 8));
     // Encrypt and save
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString(key, encrypter.encrypt(value));
@@ -112,7 +136,9 @@ class Vault {
     String secret = await getSecret();
     if (secret == null) return null;
     // Decrypt and return
-    Salsa20Encryptor encrypter = new Salsa20Encryptor(secret.substring(0, secret.length - 8), secret.substring(secret.length - 8));
+    Salsa20Encryptor encrypter = new Salsa20Encryptor(
+        secret.substring(0, secret.length - 8),
+        secret.substring(secret.length - 8));
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String encrypted = prefs.get(key);
     if (encrypted == null) return null;
@@ -124,5 +150,4 @@ class Vault {
   Future<String> getSecret() async {
     return await _channel.invokeMethod('getSecret');
   }
-
 }
