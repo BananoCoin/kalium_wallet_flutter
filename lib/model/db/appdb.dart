@@ -187,12 +187,15 @@ class DBHelper {
           name: list[i]["name"],
           index: list[i]["acct_index"],
           lastAccess: list[i]["last_accessed"],
+          address: list[i]["address"],
           selected: list[i]["selected"] == 1 ? true : false,
           balance: list[i]["balance"]));
     }
     for (Account a in accounts) {
-      a.address =
-          NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), a.index);
+      if (a.index > -1) {
+        a.address =
+            NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), a.index);
+      }
     }
     return accounts;
   }
@@ -210,11 +213,14 @@ class DBHelper {
           index: list[i]["acct_index"],
           lastAccess: list[i]["last_accessed"],
           selected: list[i]["selected"] == 1 ? true : false,
+          address: list[i]["address"],
           balance: list[i]["balance"]));
     }
     for (Account a in accounts) {
-      a.address =
-          NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), a.index);
+      if (a.index > -1) {
+        a.address =
+            NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), a.index);
+      }
     }
     return accounts;
   }
@@ -267,14 +273,15 @@ class DBHelper {
       for (int i = 0; i < accounts.length; i++) {
         nextID++;
       }
-      String nextName = nameBuilder.replaceAll("AdHoc - %1", nextID.toString());
+      String nextName =
+          nameBuilder.replaceAll("%1", "AdHoc #${nextID.toString()}");
       String address = NanoUtil.privateToAddress(privateKey);
       account = Account(
           index: -1,
           name: nextName,
           lastAccess: 0,
           selected: false,
-          address: NanoUtil.privateToAddress(privateKey));
+          address: address);
       await sl.get<Vault>().setPrivateKey(address, privateKey);
       await txn.rawInsert(
           'INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
