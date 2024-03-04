@@ -269,7 +269,7 @@ class AccountDetailsSheet {
                                           keyboardType: TextInputType.text,
                                           inputFormatters: [
                                             LengthLimitingTextInputFormatter(
-                                                15),
+                                                30),
                                           ],
                                           style: TextStyle(
                                             fontWeight: FontWeight.w600,

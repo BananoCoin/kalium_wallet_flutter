@@ -447,13 +447,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                 color: StateContainer.of(context).curTheme.text15,
               ),
               Container(
-                height: (smallScreen(context) ? 70.0 : 85) +
-                    (isExternalAccount
-                        ? smallScreen(context)
-                            ? 20
-                            : 10.0
-                        : 0.0),
-                padding: EdgeInsetsDirectional.only(end: 23, start: 10),
+                padding: EdgeInsetsDirectional.only(
+                    end: 23, start: 10, top: 4, bottom: 4),
                 decoration: BoxDecoration(
                   border: Border(
                     left: BorderSide(
@@ -481,6 +476,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                             address: account.address),
                         // Account name and address
                         Container(
+                          padding: EdgeInsets.only(top: 8, bottom: 8),
                           width:
                               (MediaQuery.of(context).size.width - (108)) * 0.5,
                           margin: EdgeInsetsDirectional.only(
@@ -501,7 +497,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 ),
                                 minFontSize: 8.0,
                                 stepGranularity: 0.1,
-                                maxLines: 1,
+                                maxLines: null,
                                 textAlign: TextAlign.start,
                               ),
                               // Account address
