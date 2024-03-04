@@ -455,17 +455,18 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                         : 0.0),
                 padding: EdgeInsetsDirectional.only(end: 23, start: 10),
                 decoration: BoxDecoration(
-                    border: Border(
-                        left: BorderSide(
-                            width: 5,
-                            color: account.selected
-                                ? StateContainer.of(context).curTheme.primary
-                                : Colors.transparent),
-                        right: BorderSide(
-                            width: 5,
-                            color: account.selected
-                                ? StateContainer.of(context).curTheme.primary
-                                : Colors.transparent))),
+                  border: Border(
+                    left: BorderSide(
+                        width: 5,
+                        color: account.selected
+                            ? StateContainer.of(context).curTheme.primary
+                            : Colors.transparent),
+                    right: BorderSide(
+                      width: 5,
+                      color: Colors.transparent,
+                    ),
+                  ),
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
