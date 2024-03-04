@@ -127,11 +127,13 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
         if (widget.accounts.length * (smallScreen(context) ? 72.0 : 87.0) >=
             box.size.height) {
           _scrollController.animateTo(
-            newAccount.index * (smallScreen(context) ? 72.0 : 87.0) >
+            widget.accounts.indexWhere((a) => a.id == newAccount.id) *
+                        (smallScreen(context) ? 72.0 : 87.0) >
                     _scrollController.position.maxScrollExtent
                 ? _scrollController.position.maxScrollExtent +
                     (smallScreen(context) ? 72.0 : 87.0)
-                : newAccount.index * (smallScreen(context) ? 72.0 : 87.0),
+                : widget.accounts.indexWhere((a) => a.id == newAccount.id) *
+                    (smallScreen(context) ? 72.0 : 87.0),
             curve: Curves.easeOut,
             duration: const Duration(milliseconds: 200),
           );
@@ -362,7 +364,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                                 : 87.0) >=
                                         box.size.height) {
                                       _scrollController.animateTo(
-                                        newAccount.id *
+                                        widget.accounts.indexWhere((a) =>
+                                                        a.id == newAccount.id) *
                                                     (smallScreen(context)
                                                         ? 72.0
                                                         : 87.0) >
@@ -373,7 +376,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                                 (smallScreen(context)
                                                     ? 72.0
                                                     : 87.0)
-                                            : newAccount.id *
+                                            : widget.accounts.indexWhere((a) =>
+                                                    a.id == newAccount.id) *
                                                 (smallScreen(context)
                                                     ? 72.0
                                                     : 87.0),

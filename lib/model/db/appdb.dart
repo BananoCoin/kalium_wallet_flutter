@@ -227,6 +227,7 @@ class DBHelper {
 
   Future<Account> addAccount({String nameBuilder}) async {
     var dbClient = await db;
+    int newAccountId;
     Account account;
     await dbClient.transaction((Transaction txn) async {
       int nextIndex = 1;
@@ -243,13 +244,14 @@ class DBHelper {
       int nextID = nextIndex + 1;
       String nextName = nameBuilder.replaceAll("%1", nextID.toString());
       account = Account(
+          id: 0,
           index: nextIndex,
           name: nextName,
           lastAccess: 0,
           selected: false,
           address: NanoUtil.seedToAddress(
               await sl.get<Vault>().getSeed(), nextIndex));
-      await txn.rawInsert(
+      newAccountId = await txn.rawInsert(
           'INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
           [
             account.name,
@@ -258,6 +260,7 @@ class DBHelper {
             account.selected ? 1 : 0,
             account.address
           ]);
+      account.id = newAccountId;
     });
     return account;
   }
@@ -276,6 +279,7 @@ class DBHelper {
       {String nameBuilder, String privateKey}) async {
     var dbClient = await db;
     Account account;
+    int newAccountId;
     await dbClient.transaction((Transaction txn) async {
       int nextID = 1;
       List<Map> accounts =
@@ -287,13 +291,14 @@ class DBHelper {
           nameBuilder.replaceAll("%1", "AdHoc #${nextID.toString()}");
       String address = NanoUtil.privateToAddress(privateKey);
       account = Account(
+          id: 0,
           index: -1,
           name: nextName,
           lastAccess: 0,
           selected: false,
           address: address);
       await sl.get<Vault>().setPrivateKey(address, privateKey);
-      await txn.rawInsert(
+      newAccountId = await txn.rawInsert(
           'INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
           [
             account.name,
@@ -302,6 +307,7 @@ class DBHelper {
             account.selected ? 1 : 0,
             account.address
           ]);
+      account.id = newAccountId;
     });
     return account;
   }
