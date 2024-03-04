@@ -608,7 +608,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
       BuildContext context, Account account, StateSetter setState) {
     var deleteExternalAccountHeader = "Delete External Account";
     var deleteExternalAccountParagraph =
-        "Deleting an external account is irreversible. If you don't have its secret phrase backed up, you won't be able to recover it later. Are you sure you want to delete the account from this device?";
+        "Deleting an external account from your device is irreversible. If you don't have its secret phrase backed up, you won't be able to recover it later. Are you sure you want to delete?";
     var isExternalAccount = account.index == -1;
     List<Widget> _actions = List();
     _actions.add(SlideAction(
