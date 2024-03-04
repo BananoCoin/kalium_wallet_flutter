@@ -87,8 +87,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
             setState(() {
               widget.accounts
                   .where((a) =>
-                      a.index ==
-                      StateContainer.of(context).selectedAccount.index)
+                      a.id == StateContainer.of(context).selectedAccount.id)
                   .forEach((account) {
                 account.selected = true;
               });
@@ -96,14 +95,14 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
           });
         }
         setState(() {
-          widget.accounts.removeWhere((a) => a.index == event.account.index);
+          widget.accounts.removeWhere((a) => a.id == event.account.id);
         });
       } else {
         // Name change
         setState(() {
-          widget.accounts.removeWhere((a) => a.index == event.account.index);
+          widget.accounts.removeWhere((a) => a.id == event.account.id);
           widget.accounts.add(event.account);
-          widget.accounts.sort((a, b) => a.index.compareTo(b.index));
+          widget.accounts.sort((a, b) => a.id.compareTo(b.id));
         });
       }
     });
@@ -113,6 +112,34 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     if (_accountModifiedSub != null) {
       _accountModifiedSub.cancel();
     }
+  }
+
+  void _externalAccountAdded(Account newAccount) {
+    _requestBalances(context, [newAccount]);
+    StateContainer.of(context).updateRecentlyUsedAccounts();
+    widget.accounts.add(newAccount);
+    setState(() {
+      _addingAccount = false;
+      widget.accounts.sort((a, b) => a.id.compareTo(b.id));
+      // Scroll if list is full
+      if (expandedKey.currentContext != null) {
+        RenderBox box = expandedKey.currentContext.findRenderObject();
+        if (widget.accounts.length * (smallScreen(context) ? 72.0 : 87.0) >=
+            box.size.height) {
+          _scrollController.animateTo(
+            newAccount.index * (smallScreen(context) ? 72.0 : 87.0) >
+                    _scrollController.position.maxScrollExtent
+                ? _scrollController.position.maxScrollExtent +
+                    (smallScreen(context) ? 72.0 : 87.0)
+                : newAccount.index * (smallScreen(context) ? 72.0 : 87.0),
+            curve: Curves.easeOut,
+            duration: const Duration(milliseconds: 200),
+          );
+        }
+      }
+    });
+    sl.get<UIUtil>().showSnackbar(
+        AppLocalization.of(context).externalAccountImportedSuccess, context);
   }
 
   Future<void> _requestBalances(
@@ -157,11 +184,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
         setState(() {
           a.selected = false;
         });
-      } else if (account.index == a.index) {
-        setState(() {
-          a.selected = true;
-        });
-      } else if (account.address == a.address) {
+      } else if (account.id == a.id) {
         setState(() {
           a.selected = true;
         });
@@ -327,8 +350,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 widget.accounts.add(newAccount);
                                 setState(() {
                                   _addingAccount = false;
-                                  widget.accounts.sort(
-                                      (a, b) => a.index.compareTo(b.index));
+                                  widget.accounts
+                                      .sort((a, b) => a.id.compareTo(b.id));
                                   // Scroll if list is full
                                   if (expandedKey.currentContext != null) {
                                     RenderBox box = expandedKey.currentContext
@@ -339,7 +362,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                                 : 87.0) >=
                                         box.size.height) {
                                       _scrollController.animateTo(
-                                        newAccount.index *
+                                        newAccount.id *
                                                     (smallScreen(context)
                                                         ? 72.0
                                                         : 87.0) >
@@ -350,7 +373,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                                 (smallScreen(context)
                                                     ? 72.0
                                                     : 87.0)
-                                            : newAccount.index *
+                                            : newAccount.id *
                                                 (smallScreen(context)
                                                     ? 72.0
                                                     : 87.0),
@@ -387,7 +410,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   }
 
   Widget _buildMoreOptionsDialog(BuildContext context) {
-    var importExternalAccountSheet = new ImportExternalAccountSheet();
+    var importExternalAccountSheet = new ImportExternalAccountSheet(
+        accountAddedCallback: _externalAccountAdded);
     {
       return AppSimpleDialog(
           title: Container(
@@ -656,7 +680,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                 EventTaxiImpl.singleton().fire(
                     AccountModifiedEvent(account: account, deleted: true));
                 setState(() {
-                  widget.accounts.removeWhere((a) => a.index == account.index);
+                  widget.accounts.removeWhere((a) => a.id == account.id);
                 });
               });
             },

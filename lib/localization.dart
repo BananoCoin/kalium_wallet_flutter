@@ -872,6 +872,37 @@ class AppLocalization {
         name: 'defaultNewAccountName');
   }
 
+  String get defaultNewAccountNameAdHoc {
+    return Intl.message("Imported %1",
+        desc:
+            "Default new account name for accounts imported with a different seed - e.g. Imported #1",
+        name: 'defaultNewAccountNameAdHoc');
+  }
+
+  String get externalAccountImportedSuccess {
+    return Intl.message("Account imported successfully",
+        desc: "External account imported success",
+        name: 'externalAccountImportedSuccess');
+  }
+
+  String get externalAccountImportedError {
+    return Intl.message("Failed to import account",
+        desc: "External account imported error",
+        name: 'externalAccountImportedError');
+  }
+
+  String get externalAccountInvalidIndex {
+    return Intl.message("Invalid index",
+        desc: "External account invalid index",
+        name: 'externalAccountInvalidIndex');
+  }
+
+  String get externalAccountAlreadyExists {
+    return Intl.message("Account already exists",
+        desc: "External account already exists",
+        name: 'externalAccountalreadyExists');
+  }
+
   String get newAccountIntroKal {
     return Intl.message(
         "This is your new account. Once you receive BANANO, transactions will show up like this:",

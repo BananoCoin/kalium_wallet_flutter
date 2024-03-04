@@ -293,8 +293,11 @@ class AppChangeRepresentativeSheet {
             _rep.address,
             StateContainer.of(context).wallet.frontier,
             StateContainer.of(context).wallet.accountBalance.toString(),
-            NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(),
-                StateContainer.of(context).selectedAccount.index));
+            StateContainer.of(context).selectedAccount.index < 0
+                ? await sl.get<Vault>().getPrivateKey(
+                    StateContainer.of(context).selectedAccount.address)
+                : NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(),
+                    StateContainer.of(context).selectedAccount.index));
         StateContainer.of(context).wallet.representative = _rep.address;
         StateContainer.of(context).wallet.frontier = resp.hash;
         sl

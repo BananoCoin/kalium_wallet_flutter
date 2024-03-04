@@ -10,6 +10,7 @@ import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
+import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/model/db/appdb.dart';
 import 'package:kalium_wallet_flutter/service_locator.dart';
 
@@ -21,9 +22,12 @@ import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
 import 'package:kalium_wallet_flutter/util/nanoutil.dart';
 import 'package:keyboard_avoider/keyboard_avoider.dart';
+import 'package:logger/logger.dart';
 
 class ImportExternalAccountSheet extends StatefulWidget {
-  ImportExternalAccountSheet() : super();
+  final Function accountAddedCallback;
+
+  ImportExternalAccountSheet({@required this.accountAddedCallback}) : super();
   _ImportExternalAccountSheetState createState() =>
       _ImportExternalAccountSheetState();
 }
@@ -532,19 +536,51 @@ class _ImportExternalAccountSheetState
                         AppButtonType.PRIMARY,
                         AppLocalization.of(context).import,
                         Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
+                      // Validations
+                      int selectedIndex = _indexInputController.text.isEmpty
+                          ? 0
+                          : int.tryParse(_indexInputController.text);
+                      if (selectedIndex == null || selectedIndex < 0) {
+                        sl.get<UIUtil>().showSnackbar(
+                            AppLocalization.of(context)
+                                .externalAccountInvalidIndex,
+                            context);
+                        return;
+                      }
+                      if (!NanoSeeds.isValidSeed(_seedInputController.text)) {
+                        sl.get<UIUtil>().showSnackbar(
+                            AppLocalization.of(context).seedInvalid, context);
+                        return;
+                      }
                       // Derive private key
-                      String privateKey =
-                          NanoUtil.seedToPrivate(_seedInputController.text, 0);
+                      String privateKey = NanoUtil.seedToPrivate(
+                          _seedInputController.text, selectedIndex);
+                      // See if account exists
+                      bool accountExists =
+                          await sl.get<DBHelper>().accountExists(privateKey);
+                      if (accountExists) {
+                        sl.get<UIUtil>().showSnackbar(
+                            AppLocalization.of(context)
+                                .externalAccountAlreadyExists,
+                            context);
+                        return;
+                      }
                       // Add account
                       try {
-                        await sl.get<DBHelper>().addAccountWithPrivateKey(
-                            nameBuilder: AppLocalization.of(context)
-                                .defaultNewAccountName,
-                            privateKey: privateKey);
-                        StateContainer.of(context).updateRecentlyUsedAccounts();
+                        Account acct = await sl
+                            .get<DBHelper>()
+                            .addAccountWithPrivateKey(
+                                nameBuilder: AppLocalization.of(context)
+                                    .defaultNewAccountNameAdHoc,
+                                privateKey: privateKey);
+                        widget.accountAddedCallback(acct);
+                        Navigator.of(context).pop();
                       } catch (e) {
-                        // TODO handle error
-                        throw e;
+                        sl.get<Logger>().e("Error importing account: $e");
+                        sl.get<UIUtil>().showSnackbar(
+                            AppLocalization.of(context)
+                                .externalAccountImportedError,
+                            context);
                       }
                     }),
                   ],

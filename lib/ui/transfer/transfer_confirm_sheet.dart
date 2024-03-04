@@ -179,10 +179,6 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
     );
   }
 
-  Future<String> _getPrivKey(int index) async {
-    return NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(), index);
-  }
-
   Future<void> processWallets() async {
     BigInt totalTransferred = BigInt.zero;
     try {
@@ -267,7 +263,11 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
               item.amount,
               hash,
               state.wallet.address,
-              await _getPrivKey(state.selectedAccount.index));
+              StateContainer.of(context).selectedAccount.index < 0
+                  ? await sl.get<Vault>().getPrivateKey(
+                      StateContainer.of(context).selectedAccount.address)
+                  : NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(),
+                      StateContainer.of(context).selectedAccount.index));
           if (resp.hash != null) {
             state.wallet.frontier = resp.hash;
           }
@@ -276,7 +276,11 @@ class _AppTransferConfirmSheetState extends State<AppTransferConfirmSheet> {
               item.amount,
               hash,
               state.wallet.address,
-              await _getPrivKey(state.selectedAccount.index),
+              StateContainer.of(context).selectedAccount.index < 0
+                  ? await sl.get<Vault>().getPrivateKey(
+                      StateContainer.of(context).selectedAccount.address)
+                  : NanoUtil.seedToPrivate(await sl.get<Vault>().getSeed(),
+                      StateContainer.of(context).selectedAccount.index),
               representative: state.wallet.representative);
           if (resp.hash != null) {
             state.wallet.frontier = resp.hash;

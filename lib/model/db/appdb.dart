@@ -179,7 +179,7 @@ class DBHelper {
   Future<List<Account>> getAccounts() async {
     var dbClient = await db;
     List<Map> list =
-        await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY acct_index');
+        await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY id');
     List<Account> accounts = new List();
     for (int i = 0; i < list.length; i++) {
       accounts.add(Account(
@@ -203,7 +203,7 @@ class DBHelper {
   Future<List<Account>> getRecentlyUsedAccounts({int limit = 2}) async {
     var dbClient = await db;
     List<Map> list = await dbClient.rawQuery(
-        'SELECT * FROM Accounts WHERE selected != 1 ORDER BY last_accessed DESC, acct_index ASC LIMIT ?',
+        'SELECT * FROM Accounts WHERE selected != 1 ORDER BY last_accessed DESC, id ASC LIMIT ?',
         [limit]);
     List<Account> accounts = new List();
     for (int i = 0; i < list.length; i++) {
@@ -262,6 +262,16 @@ class DBHelper {
     return account;
   }
 
+  // See if account exists with private key
+  Future<bool> accountExists(String privateKey) async {
+    var dbClient = await db;
+    String address = NanoUtil.privateToAddress(privateKey).toLowerCase();
+    int count = Sqflite.firstIntValue(await dbClient.rawQuery(
+        'SELECT count(*) FROM Accounts WHERE lower(address) = ?',
+        [address.toLowerCase()]));
+    return count > 0;
+  }
+
   Future<Account> addAccountWithPrivateKey(
       {String nameBuilder, String privateKey}) async {
     var dbClient = await db;
@@ -298,8 +308,8 @@ class DBHelper {
 
   Future<int> deleteAccount(Account account) async {
     var dbClient = await db;
-    return await dbClient.rawDelete(
-        'DELETE FROM Accounts WHERE acct_index = ?', [account.index]);
+    return await dbClient
+        .rawDelete('DELETE FROM Accounts WHERE id = ?', [account.id]);
   }
 
   Future<int> saveAccount(Account account) async {
@@ -317,8 +327,7 @@ class DBHelper {
   Future<int> changeAccountName(Account account, String name) async {
     var dbClient = await db;
     return await dbClient.rawUpdate(
-        'UPDATE Accounts SET name = ? WHERE acct_index = ?',
-        [name, account.index]);
+        'UPDATE Accounts SET name = ? WHERE id = ?', [name, account.id]);
   }
 
   Future<void> changeAccount(Account account) async {
@@ -329,16 +338,15 @@ class DBHelper {
       List<Map> list = await txn
           .rawQuery('SELECT max(last_accessed) as last_access FROM Accounts');
       await txn.rawUpdate(
-          'UPDATE Accounts set selected = ?, last_accessed = ? where acct_index = ?',
-          [1, list[0]["last_access"] + 1, account.index]);
+          'UPDATE Accounts set selected = ?, last_accessed = ? where id = ?',
+          [1, list[0]["last_access"] + 1, account.id]);
     });
   }
 
   Future<void> updateAccountBalance(Account account, String balance) async {
     var dbClient = await db;
     return await dbClient.rawUpdate(
-        'UPDATE Accounts set balance = ? where acct_index = ?',
-        [balance, account.index]);
+        'UPDATE Accounts set balance = ? where id = ?', [balance, account.id]);
   }
 
   Future<Account> getSelectedAccount() async {
@@ -348,8 +356,13 @@ class DBHelper {
     if (list.length == 0) {
       return null;
     }
-    String address = NanoUtil.seedToAddress(
-        await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
+    String address;
+    if (list[0]["acct_index"] > -1) {
+      address = NanoUtil.seedToAddress(
+          await sl.get<Vault>().getSeed(), list[0]["acct_index"]);
+    } else {
+      address = list[0]["address"];
+    }
     Account account = Account(
         id: list[0]["id"],
         name: list[0]["name"],

@@ -300,8 +300,12 @@ class _SendConfirmSheetState extends State<SendConfirmSheet> {
           widget.amountRaw,
           widget.destination,
           state.wallet.address,
-          NanoUtil.seedToPrivate(
-              await sl.get<Vault>().getSeed(), state.selectedAccount.index),
+          state.selectedAccount.index < 0
+              ? await sl
+                  .get<Vault>()
+                  .getPrivateKey(state.selectedAccount.address)
+              : NanoUtil.seedToPrivate(
+                  await sl.get<Vault>().getSeed(), state.selectedAccount.index),
           max: widget.maxSend);
       state.wallet.frontier = resp.hash;
       state.wallet.accountBalance += BigInt.parse(widget.amountRaw);
