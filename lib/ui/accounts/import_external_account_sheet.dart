@@ -119,13 +119,13 @@ class _ImportExternalAccountSheetState
               autoScroll: true,
               focusPadding: 40,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: 48),
+                padding: EdgeInsets.only(bottom: 64),
                 child: Column(
                   children: <Widget>[
                     Container(
                       margin: EdgeInsets.only(
-                          left: smallScreen(context) ? 30 : 40,
-                          right: smallScreen(context) ? 30 : 40),
+                          left: smallScreen(context) ? 24 : 32,
+                          right: smallScreen(context) ? 24 : 32),
                       alignment: Alignment.centerLeft,
                       child: AutoSizeText(
                         _seedMode
@@ -145,8 +145,8 @@ class _ImportExternalAccountSheetState
                     // Explanation text for secret phrase
                     Container(
                       margin: EdgeInsets.only(
-                          left: smallScreen(context) ? 30 : 40,
-                          right: smallScreen(context) ? 30 : 40,
+                          left: smallScreen(context) ? 24 : 32,
+                          right: smallScreen(context) ? 24 : 32,
                           top: 6.0),
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -166,8 +166,8 @@ class _ImportExternalAccountSheetState
                       },
                       child: _seedMode
                           ? AppTextField(
-                              leftMargin: smallScreen(context) ? 30 : 40,
-                              rightMargin: smallScreen(context) ? 30 : 40,
+                              leftMargin: smallScreen(context) ? 24 : 32,
+                              rightMargin: smallScreen(context) ? 24 : 32,
                               topMargin: 16,
                               focusNode: _seedInputFocusNode,
                               controller: _seedInputController,
@@ -277,8 +277,8 @@ class _ImportExternalAccountSheetState
                               })
                           : // Mnemonic mode
                           AppTextField(
-                              leftMargin: smallScreen(context) ? 30 : 40,
-                              rightMargin: smallScreen(context) ? 30 : 40,
+                              leftMargin: smallScreen(context) ? 24 : 32,
+                              rightMargin: smallScreen(context) ? 24 : 32,
                               topMargin: 16,
                               focusNode: _mnemonicFocusNode,
                               controller: _mnemonicController,
@@ -431,8 +431,8 @@ class _ImportExternalAccountSheetState
                     Container(
                       margin: EdgeInsets.only(
                         top: 5,
-                        left: smallScreen(context) ? 30 : 40,
-                        right: smallScreen(context) ? 30 : 40,
+                        left: smallScreen(context) ? 24 : 32,
+                        right: smallScreen(context) ? 24 : 32,
                       ),
                       child: Text(
                           !_seedMode
@@ -462,8 +462,8 @@ class _ImportExternalAccountSheetState
                     // Header for the "Account Index"
                     Container(
                       margin: EdgeInsets.only(
-                          left: smallScreen(context) ? 30 : 40,
-                          right: smallScreen(context) ? 30 : 40,
+                          left: smallScreen(context) ? 24 : 32,
+                          right: smallScreen(context) ? 24 : 32,
                           top: 12),
                       alignment: Alignment.centerLeft,
                       child: AutoSizeText(
@@ -482,8 +482,8 @@ class _ImportExternalAccountSheetState
                     // Explanation text for index
                     Container(
                       margin: EdgeInsets.only(
-                          left: smallScreen(context) ? 30 : 40,
-                          right: smallScreen(context) ? 30 : 40,
+                          left: smallScreen(context) ? 24 : 32,
+                          right: smallScreen(context) ? 24 : 32,
                           top: 6.0),
                       alignment: Alignment.centerLeft,
                       child: Text(
@@ -498,8 +498,8 @@ class _ImportExternalAccountSheetState
                         _indexInputFocusNode.unfocus();
                       },
                       child: AppTextField(
-                        leftMargin: smallScreen(context) ? 30 : 40,
-                        rightMargin: smallScreen(context) ? 30 : 40,
+                        leftMargin: smallScreen(context) ? 24 : 32,
+                        rightMargin: smallScreen(context) ? 24 : 32,
                         topMargin: 16,
                         hintText: defaultIndex.toString(),
                         keyboardType: TextInputType.numberWithOptions(

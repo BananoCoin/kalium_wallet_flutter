@@ -420,7 +420,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
 
   Widget _buildAccountListItem(
       BuildContext context, Account account, StateSetter setState) {
-    var isExternalAccount = false;
+    var isExternalAccount = account.index == -1;
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
       actionExtentRatio: 0.24,
@@ -612,7 +612,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     var deleteExternalAccountHeader = "Delete External Account";
     var deleteExternalAccountParagraph =
         "Deleting an external account is irreversible. If you don't have its secret phrase backed up, you won't be able to recover it later. Are you sure you want to delete the account from this device?";
-    var isExternalAccount = false;
+    var isExternalAccount = account.index == -1;
     List<Widget> _actions = List();
     _actions.add(SlideAction(
         child: Container(
@@ -629,7 +629,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
         onTap: () {
           AccountDetailsSheet(account).mainBottomSheet(context);
         }));
-    if (account.index > 0) {
+    if (account.index > 0 || isExternalAccount) {
       _actions.add(SlideAction(
           child: Container(
             margin: EdgeInsetsDirectional.only(start: 2, top: 1, bottom: 1),
