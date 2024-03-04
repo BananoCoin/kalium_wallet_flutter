@@ -160,6 +160,10 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
         setState(() {
           a.selected = true;
         });
+      } else if (account.address == a.address) {
+        setState(() {
+          a.selected = true;
+        });
       }
     });
     await sl.get<DBHelper>().changeAccount(account);

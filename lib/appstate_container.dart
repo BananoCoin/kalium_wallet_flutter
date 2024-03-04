@@ -737,6 +737,10 @@ class StateContainerState extends State<StateContainer> {
   }
 
   Future<String> _getPrivKey() async {
+    if (selectedAccount.index == -1) {
+      // TODO - handle priv key not found
+      return await sl.get<Vault>().getPrivateKey(selectedAccount.address);
+    }
     return NanoUtil.seedToPrivate(
         await sl.get<Vault>().getSeed(), selectedAccount.index);
   }
