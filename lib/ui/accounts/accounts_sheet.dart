@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -419,6 +420,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
 
   Widget _buildAccountListItem(
       BuildContext context, Account account, StateSetter setState) {
+    var isExternalAccount = false;
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
       actionExtentRatio: 0.24,
@@ -445,7 +447,12 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                 color: StateContainer.of(context).curTheme.text15,
               ),
               Container(
-                height: smallScreen(context) ? 70.0 : 85,
+                height: (smallScreen(context) ? 70.0 : 85) +
+                    (isExternalAccount
+                        ? smallScreen(context)
+                            ? 20
+                            : 10.0
+                        : 0.0),
                 padding: EdgeInsetsDirectional.only(end: 23, start: 10),
                 decoration: BoxDecoration(
                     border: Border(
@@ -512,37 +519,40 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 maxLines: 1,
                               ),
                               // External Account Badge
-                              /* Container(
-                                padding: EdgeInsetsDirectional.only(
-                                  start: 5,
-                                  end: 5,
-                                  top: 0.5,
-                                  bottom: 1,
-                                ),
-                                margin: EdgeInsets.only(top: 4),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(4),
-                                  ),
-                                  color: StateContainer.of(context)
-                                      .curTheme
-                                      .primary10,
-                                ),
-                                child: AutoSizeText(
-                                  "External Account",
-                                  minFontSize: 8.0,
-                                  stepGranularity: 0.1,
-                                  maxLines: 1,
-                                  style: TextStyle(
-                                    fontFamily: "NunitoSans",
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12.0,
-                                    color: StateContainer.of(context)
-                                        .curTheme
-                                        .primary,
-                                  ),
-                                ),
-                              ) */
+                              isExternalAccount
+                                  ? Container(
+                                      padding: EdgeInsetsDirectional.only(
+                                        start: 5,
+                                        end: 5,
+                                        top: 0.5,
+                                        bottom: 1,
+                                      ),
+                                      margin:
+                                          EdgeInsets.only(top: 6, bottom: 3),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(4),
+                                        ),
+                                        color: StateContainer.of(context)
+                                            .curTheme
+                                            .primary10,
+                                      ),
+                                      child: AutoSizeText(
+                                        "External Account",
+                                        minFontSize: 8.0,
+                                        stepGranularity: 0.1,
+                                        maxLines: 1,
+                                        style: TextStyle(
+                                          fontFamily: "NunitoSans",
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 12.0,
+                                          color: StateContainer.of(context)
+                                              .curTheme
+                                              .primary,
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox()
                             ],
                           ),
                         ),
