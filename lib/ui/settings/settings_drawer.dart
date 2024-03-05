@@ -12,7 +12,6 @@ import 'package:kalium_wallet_flutter/util/yellowspyglass/api.dart';
 import 'package:logger/logger.dart';
 import 'package:package_info/package_info.dart';
 import 'package:flutter/material.dart';
-import 'package:share/share.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
@@ -44,6 +43,7 @@ import 'package:kalium_wallet_flutter/util/biometrics.dart';
 import 'package:kalium_wallet_flutter/util/hapticutil.dart';
 import 'package:kalium_wallet_flutter/util/numberutil.dart';
 import 'package:kalium_wallet_flutter/util/caseconverter.dart';
+import 'package:share_plus/share_plus.dart';
 
 class SettingsSheet extends StatefulWidget {
   _SettingsSheetState createState() => _SettingsSheetState();

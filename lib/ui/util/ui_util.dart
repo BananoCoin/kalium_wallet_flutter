@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:event_taxi/event_taxi.dart';
+import 'package:kalium_wallet_flutter/ui/widgets/webview.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/styles.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
@@ -10,6 +10,7 @@ import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
+
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
 class UIUtil {
@@ -348,43 +349,24 @@ class UIUtil {
   }
 
   Widget showBlockExplorerWebview(BuildContext context, String hash) {
-    cancelLockEvent();
-    return WebviewScaffold(
-      url: AppLocalization.of(context).getBlockExplorerUrl(
-          hash, StateContainer.of(context).curBlockExplorer),
-      appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme:
-            IconThemeData(color: StateContainer.of(context).curTheme.text),
-      ),
+    final String url = AppLocalization.of(context)
+        .getBlockExplorerUrl(hash, StateContainer.of(context).curBlockExplorer);
+    return WebviewDisplayScreen(
+      url: url,
     );
   }
 
   Widget showAccountWebview(BuildContext context, String account) {
-    cancelLockEvent();
-    return WebviewScaffold(
-      url: AppLocalization.of(context).getAccountExplorerUrl(
-          account, StateContainer.of(context).curBlockExplorer),
-      appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme:
-            IconThemeData(color: StateContainer.of(context).curTheme.text),
-      ),
+    final String url = AppLocalization.of(context).getAccountExplorerUrl(
+        account, StateContainer.of(context).curBlockExplorer);
+    return WebviewDisplayScreen(
+      url: url,
     );
   }
 
   Widget showWebview(BuildContext context, String url) {
-    cancelLockEvent();
-    return WebviewScaffold(
+    return WebviewDisplayScreen(
       url: url,
-      appBar: new AppBar(
-        backgroundColor: StateContainer.of(context).curTheme.backgroundDark,
-        brightness: StateContainer.of(context).curTheme.brightness,
-        iconTheme:
-            IconThemeData(color: StateContainer.of(context).curTheme.text),
-      ),
     );
   }
 

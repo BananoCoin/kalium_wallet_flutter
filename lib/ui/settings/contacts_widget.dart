@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 
+import 'package:cross_file/cross_file.dart';
 import 'package:event_taxi/event_taxi.dart';
 import 'package:flutter/material.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/flat_button.dart';
@@ -9,7 +10,6 @@ import 'package:kalium_wallet_flutter/ui/widgets/sheet_util.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:share/share.dart';
 
 import 'package:kalium_wallet_flutter/service_locator.dart';
 import 'package:kalium_wallet_flutter/dimens.dart';
@@ -26,6 +26,7 @@ import 'package:kalium_wallet_flutter/ui/contacts/contact_details.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/buttons.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/monkey.dart';
 import 'package:kalium_wallet_flutter/ui/util/ui_util.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ContactsList extends StatefulWidget {
   final AnimationController contactsController;
@@ -130,7 +131,11 @@ class _ContactsListState extends State<ContactsList> {
     File contactsFile = File("${baseDirectory.path}/$filename");
     await contactsFile.writeAsString(json.encode(jsonList));
     sl.get<UIUtil>().cancelLockEvent();
-    Share.shareFile(contactsFile);
+
+    List<XFile> filesToShare = [XFile(contactsFile.path)];
+    Share.shareXFiles(
+      filesToShare,
+    );
   }
 
   Future<void> _importContacts() async {

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
+import 'package:cross_file/cross_file.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:share/share.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +18,8 @@ import 'package:kalium_wallet_flutter/model/wallet.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as Math;
+
+import 'package:share_plus/share_plus.dart';
 
 class ReceiveSheet extends StatefulWidget {
   final Widget qrWidget;
@@ -232,7 +234,8 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
                               if (byteData != null) {
                                 f.writeAsBytes(byteData).then((file) {
                                   sl.get<UIUtil>().cancelLockEvent();
-                                  Share.shareFile(file,
+                                  List<XFile> filesToShare = [XFile(file.path)];
+                                  Share.shareXFiles(filesToShare,
                                       text: StateContainer.of(context)
                                           .wallet
                                           .address);

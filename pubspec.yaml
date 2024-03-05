@@ -55,7 +55,7 @@ dependencies:
   logger: ^2.0.1
 
   # Native webview plugin
-  flutter_webview_plugin: ^0.4.0
+  webview_flutter: ^4.4.2
 
   # SQLite
   sqflite: ^2.0.0+4
@@ -79,11 +79,8 @@ dependencies:
       ref: master
 
   # Share files
-  share:
-    git:
-      url: https://github.com/bbedward/plugins.git
-      path: packages/share
-      ref: master
+  share_plus: '^4.5.3'
+  cross_file: '^0.3.3+6'
 
   # File picker
   file_picker: ^5.3.1
