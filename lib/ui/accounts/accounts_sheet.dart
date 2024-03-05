@@ -547,7 +547,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 stepGranularity: 0.1,
                                 maxLines: 1,
                               ),
-                              // External Account Badge
+                              // Imported Account Badge
                               isExternalAccount
                                   ? Container(
                                       padding: EdgeInsetsDirectional.only(
@@ -639,9 +639,6 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
 
   List<Widget> _getSlideActionsForAccount(
       BuildContext context, Account account, StateSetter setState) {
-    var deleteExternalAccountHeader = "Delete External Account";
-    var deleteExternalAccountParagraph =
-        "Deleting an external account from your device is irreversible. If you don't have its secret phrase backed up, you won't be able to recover it later. Are you sure you want to delete?";
     var isExternalAccount = account.index == -1;
     List<Widget> _actions = List();
     _actions.add(SlideAction(
@@ -676,10 +673,12 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
             AppDialogs.showConfirmDialog(
                 context,
                 isExternalAccount
-                    ? deleteExternalAccountHeader
+                    ? AppLocalization.of(context)
+                        .deleteImportedAdHocAccountDialogTitle
                     : AppLocalization.of(context).hideAccountHeader,
                 isExternalAccount
-                    ? deleteExternalAccountParagraph
+                    ? AppLocalization.of(context)
+                        .deleteImportedAdHocAccountDialogParagraph
                     : AppLocalization.of(context).removeAccountText.replaceAll(
                         "%1", AppLocalization.of(context).addAccount),
                 CaseChange.toUpperCase(
