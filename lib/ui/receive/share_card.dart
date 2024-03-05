@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:kalium_wallet_flutter/app_icons.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/ui/widgets/auto_resize_text.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -83,29 +82,33 @@ class _AppShareCardState extends State<AppShareCard> {
                   // Logo
                   Container(
                     width: 97,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        // Currency Icon
-                        Container(
-                          margin: EdgeInsets.only(right: 5.5, bottom: 1.5),
-                          child: Icon(
-                            AppIcons.bananologo,
-                            size: 24,
-                            color: StateContainer.of(context).curTheme.primary,
+                    child: RichText(
+                      maxLines: 1,
+                      text: TextSpan(
+                        children: [
+                          // Currency Icon
+                          TextSpan(
+                            text: "\u{e801} ",
+                            style: TextStyle(
+                              color:
+                                  StateContainer.of(context).curTheme.primary,
+                              fontFamily: "AppIcons",
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.8,
+                            ),
                           ),
-                        ),
-                        Text(
-                          "BANANO",
-                          style: TextStyle(
-                            fontFamily: 'NeueHansKendrick',
-                            color: StateContainer.of(context).curTheme.primary,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14.8,
+                          TextSpan(
+                            text: "BANANO",
+                            style: TextStyle(
+                              fontFamily: 'NeueHansKendrick',
+                              color:
+                                  StateContainer.of(context).curTheme.primary,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 14.8,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                   // Address

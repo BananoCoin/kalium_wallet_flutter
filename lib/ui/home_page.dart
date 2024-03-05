@@ -1697,6 +1697,7 @@ class _AppHomePageState extends State<AppHomePage>
                             text: "\u{e80a}",
                             style: TextStyle(
                               fontFamily: 'AppIcons',
+                              fontWeight: FontWeight.w400,
                               color:
                                   StateContainer.of(context).curTheme.primary,
                               fontSize: 23.0,

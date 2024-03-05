@@ -599,6 +599,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                               text: account.balance != null ? "" : "",
                               style: TextStyle(
                                 fontFamily: 'AppIcons',
+                                fontWeight: FontWeight.w400,
                                 color: StateContainer.of(context).curTheme.text,
                                 fontSize: 13.0,
                               ),
