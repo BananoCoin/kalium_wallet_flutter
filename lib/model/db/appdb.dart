@@ -230,19 +230,18 @@ class DBHelper {
     int newAccountId;
     Account account;
     await dbClient.transaction((Transaction txn) async {
-      int nextIndex = 1;
-      int curIndex;
+      int nextIndex;
       List<Map> accounts = await txn.rawQuery(
-          'SELECT * from Accounts WHERE acct_index > 0 ORDER BY acct_index ASC');
-      for (int i = 0; i < accounts.length; i++) {
-        curIndex = accounts[i]["acct_index"];
-        if (curIndex != nextIndex) {
-          break;
-        }
-        nextIndex++;
+          'SELECT * from Accounts WHERE acct_index >=0 ORDER BY acct_index ASC');
+      if (accounts.isEmpty ||
+          (accounts.length == 1 && accounts[0]["acct_index"] == 0)) {
+        nextIndex = 1;
+      } else {
+        int maxAcctIndex = accounts.last["acct_index"];
+        nextIndex = maxAcctIndex + 1;
       }
-      int nextID = nextIndex + 1;
-      String nextName = nameBuilder.replaceAll("%1", nextID.toString());
+
+      String nextName = nameBuilder.replaceAll("%1", nextIndex.toString());
       account = Account(
           id: 0,
           index: nextIndex,
