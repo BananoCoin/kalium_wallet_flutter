@@ -266,7 +266,7 @@ class StateContainerState extends State<StateContainer> {
         .registerTo<AccountModifiedEvent>()
         .listen((event) {
       if (!event.deleted) {
-        if (event.account.index == selectedAccount.index) {
+        if (event.account.id == selectedAccount.id) {
           setState(() {
             selectedAccount.name = event.account.name;
           });

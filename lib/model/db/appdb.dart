@@ -312,6 +312,9 @@ class DBHelper {
 
   Future<int> deleteAccount(Account account) async {
     var dbClient = await db;
+    if (account.index < 0) {
+      await sl.get<Vault>().deletePrivateKey(account.address);
+    }
     return await dbClient
         .rawDelete('DELETE FROM Accounts WHERE id = ?', [account.id]);
   }

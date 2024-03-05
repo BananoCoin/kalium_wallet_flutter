@@ -93,20 +93,27 @@ class AccountDetailsSheet {
                                                     .curTheme
                                                     .text15,
                                             onPressed: () {
+                                              bool isImportedAccount =
+                                                  account.index < 0;
                                               AppDialogs.showConfirmDialog(
                                                   context,
-                                                  AppLocalization.of(context)
-                                                      .hideAccountHeader,
-                                                  AppLocalization.of(context)
-                                                      .removeAccountText
-                                                      .replaceAll(
-                                                          "%1",
-                                                          AppLocalization.of(
-                                                                  context)
-                                                              .addAccount),
+                                                  isImportedAccount
+                                                      ? AppLocalization.of(context)
+                                                          .deleteImportedAdHocAccountDialogTitle
+                                                      : AppLocalization.of(context)
+                                                          .hideAccountHeader,
+                                                  isImportedAccount
+                                                      ? AppLocalization.of(context)
+                                                          .deleteImportedAdHocAccountDialogParagraph
+                                                      : AppLocalization.of(context)
+                                                          .removeAccountText
+                                                          .replaceAll(
+                                                              "%1",
+                                                              AppLocalization.of(
+                                                                      context)
+                                                                  .addAccount),
                                                   CaseChange.toUpperCase(
-                                                      AppLocalization.of(
-                                                              context)
+                                                      AppLocalization.of(context)
                                                           .yes,
                                                       context), () {
                                                 // Remove account
