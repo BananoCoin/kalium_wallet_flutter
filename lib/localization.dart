@@ -895,6 +895,19 @@ class AppLocalization {
         desc: "Account imported success", name: 'adHocAccountImportedSuccess');
   }
 
+  String get deleteImportedAdHocAccountDialogTitle {
+    return Intl.message("Delete Imported Account?",
+        desc: "The title of the dialog for deleting an imported account.",
+        name: 'deleteImportedAdHocAccountDialogTitle');
+  }
+
+  String get deleteImportedAdHocAccountDialogParagraph {
+    return Intl.message(
+        "Deleting an imported account from your device is irreversible. If you don't have its secret phrase backed up, you won't be able to recover it later. Are you sure you want to delete?",
+        desc: "The paragraph of the dialog for deleting an imported account.",
+        name: 'deleteImportedAdHocAccountDialogParagraph');
+  }
+
   String get adHocAccountImportedError {
     return Intl.message("Failed to import account",
         desc: "Account imported error", name: 'adHocAccountImportedError');

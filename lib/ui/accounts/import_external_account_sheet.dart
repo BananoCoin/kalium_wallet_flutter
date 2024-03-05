@@ -585,18 +585,21 @@ class _ImportExternalAccountSheetState
               children: <Widget>[
                 Row(
                   children: <Widget>[
-                    // Send Button
+                    // Import Button
                     AppButton.buildAppButton(
-                        context,
-                        AppButtonType.PRIMARY,
-                        AppLocalization.of(context).import,
-                        Dimens.BUTTON_TOP_DIMENS,
-                        onPressed: _importAdHocAccount),
+                      context,
+                      AppButtonType.PRIMARY,
+                      AppLocalization.of(context).import,
+                      Dimens.BUTTON_TOP_DIMENS,
+                      onPressed: _importAdHocAccount,
+                      disabled: _seedMode && !_seedIsValid ||
+                          !_seedMode && !_mnemonicIsValid,
+                    ),
                   ],
                 ),
                 Row(
                   children: <Widget>[
-                    // Scan QR Code Button
+                    // Cancel Button
                     AppButton.buildAppButton(
                         context,
                         AppButtonType.PRIMARY_OUTLINE,
