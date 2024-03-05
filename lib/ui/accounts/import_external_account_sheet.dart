@@ -192,7 +192,7 @@ class _ImportExternalAccountSheetState
                             : AppLocalization.of(context).secretPhrase,
                         style: TextStyle(
                           color: StateContainer.of(context).curTheme.text,
-                          fontSize: 24.0,
+                          fontSize: 22.0,
                           fontFamily: 'NunitoSans',
                           fontWeight: FontWeight.w700,
                         ),
@@ -534,7 +534,7 @@ class _ImportExternalAccountSheetState
                                   AppLocalization.of(context).accountIndexTitle,
                               style: TextStyle(
                                 color: StateContainer.of(context).curTheme.text,
-                                fontSize: 24.0,
+                                fontSize: 22.0,
                                 fontFamily: 'NunitoSans',
                                 fontWeight: FontWeight.w700,
                               ),
