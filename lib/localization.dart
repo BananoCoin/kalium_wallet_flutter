@@ -519,6 +519,10 @@ class AppLocalization {
         desc: 'settings_logout_alert_confirm_cta', name: 'logoutAction');
   }
 
+  String get delete {
+    return Intl.message('Delete', desc: 'Delete button', name: 'delete');
+  }
+
   String get logoutAreYouSure {
     return Intl.message("Are you sure?",
         desc: 'settings_logout_warning_title', name: 'logoutAreYouSure');

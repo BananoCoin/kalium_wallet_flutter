@@ -98,8 +98,10 @@ class AccountDetailsSheet {
                                               AppDialogs.showConfirmDialog(
                                                   context,
                                                   isImportedAccount
-                                                      ? AppLocalization.of(context)
-                                                          .deleteImportedAdHocAccountDialogTitle
+                                                      ? CaseChange.toUpperCase(
+                                                          AppLocalization.of(context)
+                                                              .warning,
+                                                          context)
                                                       : AppLocalization.of(context)
                                                           .hideAccountHeader,
                                                   isImportedAccount
@@ -109,13 +111,16 @@ class AccountDetailsSheet {
                                                           .removeAccountText
                                                           .replaceAll(
                                                               "%1",
-                                                              AppLocalization.of(
-                                                                      context)
+                                                              AppLocalization.of(context)
                                                                   .addAccount),
-                                                  CaseChange.toUpperCase(
-                                                      AppLocalization.of(context)
-                                                          .yes,
-                                                      context), () {
+                                                  isImportedAccount
+                                                      ? CaseChange.toUpperCase(
+                                                          AppLocalization.of(context)
+                                                              .delete,
+                                                          context)
+                                                      : CaseChange.toUpperCase(
+                                                          AppLocalization.of(context).yes, context),
+                                                  () {
                                                 // Remove account
                                                 deleted = true;
                                                 sl
@@ -130,12 +135,11 @@ class AccountDetailsSheet {
                                                   Navigator.of(context).pop();
                                                 });
                                               },
-                                                  cancelText:
-                                                      CaseChange.toUpperCase(
-                                                          AppLocalization.of(
-                                                                  context)
-                                                              .no,
-                                                          context));
+                                                  cancelText: isImportedAccount
+                                                      ? CaseChange.toUpperCase(
+                                                          AppLocalization.of(context).cancel,
+                                                          context)
+                                                      : CaseChange.toUpperCase(AppLocalization.of(context).no, context));
                                             },
                                             child: Icon(AppIcons.trashcan,
                                                 size: 24,

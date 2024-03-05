@@ -449,7 +449,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
 
   Widget _buildAccountListItem(
       BuildContext context, Account account, StateSetter setState) {
-    var isExternalAccount = account.index == -1;
+    var isImportedAccount = account.index == -1;
 
     var innerContainerWidth = MediaQuery.of(context).size.width - 112;
 
@@ -548,7 +548,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 maxLines: 1,
                               ),
                               // Imported Account Badge
-                              isExternalAccount
+                              isImportedAccount
                                   ? Container(
                                       padding: EdgeInsetsDirectional.only(
                                         start: 6,
@@ -639,7 +639,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
 
   List<Widget> _getSlideActionsForAccount(
       BuildContext context, Account account, StateSetter setState) {
-    var isExternalAccount = account.index == -1;
+    var isImportedAccount = account.index == -1;
     List<Widget> _actions = List();
     _actions.add(SlideAction(
         child: Container(
@@ -656,7 +656,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
         onTap: () {
           AccountDetailsSheet(account).mainBottomSheet(context);
         }));
-    if (account.index > 0 || isExternalAccount) {
+    if (account.index > 0 || isImportedAccount) {
       _actions.add(SlideAction(
           child: Container(
             margin: EdgeInsetsDirectional.only(start: 2, top: 1, bottom: 1),
@@ -672,17 +672,20 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
           onTap: () {
             AppDialogs.showConfirmDialog(
                 context,
-                isExternalAccount
-                    ? AppLocalization.of(context)
-                        .deleteImportedAdHocAccountDialogTitle
+                isImportedAccount
+                    ? CaseChange.toUpperCase(
+                        AppLocalization.of(context).warning, context)
                     : AppLocalization.of(context).hideAccountHeader,
-                isExternalAccount
+                isImportedAccount
                     ? AppLocalization.of(context)
                         .deleteImportedAdHocAccountDialogParagraph
                     : AppLocalization.of(context).removeAccountText.replaceAll(
                         "%1", AppLocalization.of(context).addAccount),
-                CaseChange.toUpperCase(
-                    AppLocalization.of(context).yes, context), () {
+                isImportedAccount
+                    ? CaseChange.toUpperCase(
+                        AppLocalization.of(context).delete, context)
+                    : CaseChange.toUpperCase(
+                        AppLocalization.of(context).yes, context), () {
               // Remove account
               sl.get<DBHelper>().deleteAccount(account).then((id) {
                 EventTaxiImpl.singleton().fire(
@@ -692,8 +695,11 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                 });
               });
             },
-                cancelText: CaseChange.toUpperCase(
-                    AppLocalization.of(context).no, context));
+                cancelText: isImportedAccount
+                    ? CaseChange.toUpperCase(
+                        AppLocalization.of(context).cancel, context)
+                    : CaseChange.toUpperCase(
+                        AppLocalization.of(context).no, context));
           }));
     }
     return _actions;
