@@ -54,7 +54,7 @@ class AppAccountsWidget extends StatefulWidget {
 }
 
 class _AppAccountsWidgetState extends State<AppAccountsWidget> {
-  static const int MAX_ACCOUNTS = 50;
+  static const int MAX_ACCOUNTS = 250;
   final GlobalKey expandedKey = GlobalKey();
 
   bool _addingAccount;
@@ -450,6 +450,9 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
   Widget _buildAccountListItem(
       BuildContext context, Account account, StateSetter setState) {
     var isExternalAccount = account.index == -1;
+
+    var innerContainerWidth = MediaQuery.of(context).size.width - 112;
+
     return Slidable(
       secondaryActions: _getSlideActionsForAccount(context, account, setState),
       actionExtentRatio: 0.24,
@@ -477,7 +480,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
               ),
               Container(
                 padding: EdgeInsetsDirectional.only(
-                    end: 23, start: 10, top: 4, bottom: 4),
+                    start: 4, end: 20, top: 4, bottom: 4),
                 decoration: BoxDecoration(
                   border: Border(
                     left: BorderSide(
@@ -505,9 +508,9 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                             address: account.address),
                         // Account name and address
                         Container(
-                          padding: EdgeInsets.only(top: 8, bottom: 8),
-                          width:
-                              (MediaQuery.of(context).size.width - (108)) * 0.5,
+                          padding: EdgeInsetsDirectional.only(
+                              top: 8, bottom: 8, end: 8),
+                          width: innerContainerWidth * 0.6,
                           margin: EdgeInsetsDirectional.only(
                               start: smallScreen(context) ? 10 : 8),
                           child: Column(
@@ -586,7 +589,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                       ],
                     ),
                     Container(
-                      width: (MediaQuery.of(context).size.width - 116) * 0.4,
+                      width: innerContainerWidth * 0.4,
                       alignment: AlignmentDirectional(1, 0),
                       child: AutoSizeText.rich(
                         TextSpan(
