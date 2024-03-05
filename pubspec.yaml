@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 2.4.1+97
+version: 2.4.2
 
 environment:
   sdk: ">=2.11.99 <3.0.0"
@@ -62,7 +62,7 @@ dependencies:
 
   # Android/iOS path provider
   path_provider: ^2.0.1
-  
+
   # TouchID/FaceID
   local_auth: ^2.1.6
   # Eventbus
@@ -70,7 +70,7 @@ dependencies:
 
   # SVG
   flutter_svg: ^0.21.0+1
-    
+
   # QR Codes
   qr_flutter: ^2.0.1 # Generator
   barcode_scan:
@@ -136,7 +136,6 @@ dependencies:
   keyboard_avoider: ^0.1.2
 
   quiver: ^3.0.1+1
-  
 
 dependency_overrides:
   analyzer: ^2.7.0
