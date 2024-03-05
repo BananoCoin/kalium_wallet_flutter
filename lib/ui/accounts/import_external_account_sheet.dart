@@ -525,17 +525,34 @@ class _ImportExternalAccountSheetState
                           right: smallScreen(context) ? 24 : 32,
                           top: 12),
                       alignment: Alignment.centerLeft,
-                      child: AutoSizeText(
-                        "Account Index",
-                        style: TextStyle(
-                          color: StateContainer.of(context).curTheme.text,
-                          fontSize: 24.0,
-                          fontFamily: 'NunitoSans',
-                          fontWeight: FontWeight.w700,
+                      child: RichText(
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text:
+                                  AppLocalization.of(context).accountIndexTitle,
+                              style: TextStyle(
+                                color: StateContainer.of(context).curTheme.text,
+                                fontSize: 24.0,
+                                fontFamily: 'NunitoSans',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            TextSpan(
+                              text: "  " +
+                                  AppLocalization.of(context)
+                                      .optionalFieldIndicator,
+                              style: TextStyle(
+                                color:
+                                    StateContainer.of(context).curTheme.text60,
+                                fontSize: 16.0,
+                                fontFamily: 'NunitoSans',
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )
+                          ],
                         ),
-                        textAlign: TextAlign.left,
-                        maxLines: null,
-                        stepGranularity: 0.1,
                       ),
                     ),
                     // Explanation text for index

@@ -908,6 +908,16 @@ class AppLocalization {
         name: 'deleteImportedAdHocAccountDialogParagraph');
   }
 
+  String get optionalFieldIndicator {
+    return Intl.message("(Optional)",
+        desc: "Optional field indicator", name: 'optionalFieldIndicator');
+  }
+
+  String get accountIndexTitle {
+    return Intl.message("Account Index",
+        desc: "Account index title", name: 'accountIndexTitle');
+  }
+
   String get adHocAccountImportedError {
     return Intl.message("Failed to import account",
         desc: "Account imported error", name: 'adHocAccountImportedError');
