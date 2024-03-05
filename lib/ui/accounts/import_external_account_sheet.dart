@@ -543,7 +543,7 @@ class _ImportExternalAccountSheetState
                       if (selectedIndex == null || selectedIndex < 0) {
                         sl.get<UIUtil>().showSnackbar(
                             AppLocalization.of(context)
-                                .externalAccountInvalidIndex,
+                                .adHocAccountInvalidIndex,
                             context);
                         return;
                       }
@@ -561,7 +561,7 @@ class _ImportExternalAccountSheetState
                       if (accountExists) {
                         sl.get<UIUtil>().showSnackbar(
                             AppLocalization.of(context)
-                                .externalAccountAlreadyExists,
+                                .importedAdHocAccountAlreadyExists,
                             context);
                         return;
                       }
@@ -579,7 +579,7 @@ class _ImportExternalAccountSheetState
                         sl.get<Logger>().e("Error importing account: $e");
                         sl.get<UIUtil>().showSnackbar(
                             AppLocalization.of(context)
-                                .externalAccountImportedError,
+                                .adHocAccountImportedError,
                             context);
                       }
                     }),

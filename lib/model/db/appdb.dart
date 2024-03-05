@@ -287,8 +287,7 @@ class DBHelper {
       for (int i = 0; i < accounts.length; i++) {
         nextID++;
       }
-      String nextName =
-          nameBuilder.replaceAll("%1", "AdHoc #${nextID.toString()}");
+      String nextName = nameBuilder.replaceAll("%1", "${nextID.toString()}");
       String address = NanoUtil.privateToAddress(privateKey);
       account = Account(
           id: 0,

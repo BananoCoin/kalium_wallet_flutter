@@ -873,34 +873,49 @@ class AppLocalization {
   }
 
   String get defaultNewAccountNameAdHoc {
-    return Intl.message("Imported %1",
+    return Intl.message("Imported Account %1",
         desc:
-            "Default new account name for accounts imported with a different seed - e.g. Imported #1",
+            "Default new account name for accounts imported with a different seed - e.g. Imported 1",
         name: 'defaultNewAccountNameAdHoc');
   }
 
-  String get externalAccountImportedSuccess {
+  String get importedAdHocAccountBadge {
+    return Intl.message("Imported Account",
+        desc: "The badge for imported accounts",
+        name: 'importedAdHocAccountBadge');
+  }
+
+  String get adHocAccountImportedSuccess {
     return Intl.message("Account imported successfully",
-        desc: "External account imported success",
-        name: 'externalAccountImportedSuccess');
+        desc: "Account imported success", name: 'adHocAccountImportedSuccess');
   }
 
-  String get externalAccountImportedError {
+  String get adHocAccountImportedError {
     return Intl.message("Failed to import account",
-        desc: "External account imported error",
-        name: 'externalAccountImportedError');
+        desc: "Account imported error", name: 'adHocAccountImportedError');
   }
 
-  String get externalAccountInvalidIndex {
+  String get adHocAccountInvalidIndex {
     return Intl.message("Invalid index",
-        desc: "External account invalid index",
-        name: 'externalAccountInvalidIndex');
+        desc: "Ad hoc account invalid index", name: 'adHocAccountInvalidIndex');
   }
 
-  String get externalAccountAlreadyExists {
+  String get importedAdHocAccountAlreadyExists {
     return Intl.message("Account already exists",
-        desc: "External account already exists",
-        name: 'externalAccountalreadyExists');
+        desc: "Imported account already exists",
+        name: 'importedAdHocAccountalreadyExists');
+  }
+
+  String get accountsMoreOptionsMenuTitle {
+    return Intl.message("More Options",
+        desc: "Title for the more options menu",
+        name: 'accountsMoreOptionsMenuTitle');
+  }
+
+  String get accountsMoreOptionsMenuImportAccountOption {
+    return Intl.message("Import Account",
+        desc: "Import account option in the more options menu",
+        name: 'accountsMoreOptionsMenuImportAccountOption');
   }
 
   String get newAccountIntroKal {

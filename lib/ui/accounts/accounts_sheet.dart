@@ -141,7 +141,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
       }
     });
     sl.get<UIUtil>().showSnackbar(
-        AppLocalization.of(context).externalAccountImportedSuccess, context);
+        AppLocalization.of(context).adHocAccountImportedSuccess, context);
   }
 
   Future<void> _requestBalances(
@@ -421,7 +421,7 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
           title: Container(
             margin: EdgeInsets.only(bottom: 10),
             child: Text(
-              "More Options",
+              AppLocalization.of(context).accountsMoreOptionsMenuTitle,
               style: AppStyles.textStyleDialogHeader(context),
             ),
           ),
@@ -437,7 +437,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
-                  "Import External Account",
+                  AppLocalization.of(context)
+                      .accountsMoreOptionsMenuImportAccountOption,
                   style: AppStyles.textStyleDialogOptions(context),
                 ),
               ),
@@ -563,7 +564,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                             .primary10,
                                       ),
                                       child: AutoSizeText(
-                                        "External Account",
+                                        AppLocalization.of(context)
+                                            .importedAdHocAccountBadge,
                                         minFontSize: 8.0,
                                         stepGranularity: 0.1,
                                         maxLines: 1,
