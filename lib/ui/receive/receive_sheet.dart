@@ -110,59 +110,65 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
 
           //MonkeyQR which takes all the available space left from the buttons & address text
           Expanded(
-            child: Padding(
-              padding: EdgeInsetsDirectional.only(
-                  top: 20, bottom: 28, start: 20, end: 20),
-              child: LayoutBuilder(
-                builder: (context, constraints) {
-                  double availableWidth = constraints.maxWidth;
-                  double availableHeight = constraints.maxHeight;
-                  double widthDivideFactor = 1.3;
-                  double computedMaxSize = Math.min(
-                      availableWidth / widthDivideFactor, availableHeight);
-                  return Center(
-                    child: Stack(
-                      children: <Widget>[
-                        _showShareCard
-                            ? Container(
-                                child: AppShareCard(shareCardKey,
-                                    SvgPicture.asset('assets/monkeyQR.svg')),
-                                alignment: AlignmentDirectional(0.0, 0.0),
-                              )
-                            : SizedBox(),
-                        // This is for hiding the share card
-                        Center(
-                          child: Container(
-                            width: 260,
-                            height: 150,
-                            color: StateContainer.of(context)
-                                .curTheme
-                                .backgroundDark,
-                          ),
-                        ),
-                        // Background/border part the monkeyQR
-                        Center(
-                          child: Container(
-                            width: computedMaxSize,
-                            height: computedMaxSize,
-                            child: SvgPicture.asset('assets/monkeyQR.svg'),
-                          ),
-                        ),
-                        // Actual QR part of the monkeyQR
-                        Center(
-                          child: Container(
-                            margin: EdgeInsets.only(
-                              top: computedMaxSize / 4.27,
+            child: Stack(
+              children: [
+                Padding(
+                  padding: EdgeInsetsDirectional.only(
+                      top: 20, bottom: 28, start: 20, end: 20),
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      double availableWidth = constraints.maxWidth;
+                      double availableHeight = constraints.maxHeight;
+                      double widthDivideFactor = 1.3;
+                      double computedMaxSize = Math.min(
+                          availableWidth / widthDivideFactor, availableHeight);
+                      return Center(
+                        child: Stack(
+                          children: <Widget>[
+                            _showShareCard
+                                ? Container(
+                                    child: AppShareCard(
+                                        shareCardKey,
+                                        SvgPicture.asset(
+                                            'assets/monkeyQR.svg')),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
+                                  )
+                                : SizedBox(),
+                            // This is for hiding the share card
+                            Center(
+                              child: Container(
+                                width: 260,
+                                height: 150,
+                                color: StateContainer.of(context)
+                                    .curTheme
+                                    .backgroundDark,
+                              ),
                             ),
-                            width: computedMaxSize / 2.2,
-                            child: widget.qrWidget,
-                          ),
+                            // Background/border part the monkeyQR
+                            Center(
+                              child: Container(
+                                width: computedMaxSize,
+                                height: computedMaxSize,
+                                child: SvgPicture.asset('assets/monkeyQR.svg'),
+                              ),
+                            ),
+                            // Actual QR part of the monkeyQR
+                            Center(
+                              child: Container(
+                                margin: EdgeInsets.only(
+                                  top: computedMaxSize / 4.27,
+                                ),
+                                width: computedMaxSize / 2.2,
+                                child: widget.qrWidget,
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  );
-                },
-              ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
 
@@ -204,43 +210,45 @@ class _ReceiveSheetStateState extends State<ReceiveSheet> {
               Row(
                 children: <Widget>[
                   AppButton.buildAppButton(
-                      context,
-                      // Share Address Button
-                      AppButtonType.PRIMARY_OUTLINE,
-                      AppLocalization.of(context).addressShare,
-                      Dimens.BUTTON_BOTTOM_DIMENS,
-                      disabled: _showShareCard, onPressed: () {
-                    String receiveCardFileName =
-                        "share_${StateContainer.of(context).wallet.address}.png";
-                    getApplicationDocumentsDirectory().then((directory) {
-                      String filePath =
-                          "${directory.path}/$receiveCardFileName";
-                      File f = File(filePath);
-                      setState(() {
-                        _showShareCard = true;
-                      });
-                      Future.delayed(new Duration(milliseconds: 50), () {
-                        if (_showShareCard) {
-                          _capturePng().then((byteData) {
-                            if (byteData != null) {
-                              f.writeAsBytes(byteData).then((file) {
-                                sl.get<UIUtil>().cancelLockEvent();
-                                Share.shareFile(file,
-                                    text: StateContainer.of(context)
-                                        .wallet
-                                        .address);
+                    context,
+                    // Share Address Button
+                    AppButtonType.PRIMARY_OUTLINE,
+                    AppLocalization.of(context).addressShare,
+                    Dimens.BUTTON_BOTTOM_DIMENS,
+                    disabled: _showShareCard,
+                    onPressed: () {
+                      String receiveCardFileName =
+                          "share_${StateContainer.of(context).wallet.address}.png";
+                      getApplicationDocumentsDirectory().then((directory) {
+                        String filePath =
+                            "${directory.path}/$receiveCardFileName";
+                        File f = File(filePath);
+                        setState(() {
+                          _showShareCard = true;
+                        });
+                        Future.delayed(new Duration(milliseconds: 50), () {
+                          if (_showShareCard) {
+                            _capturePng().then((byteData) {
+                              if (byteData != null) {
+                                f.writeAsBytes(byteData).then((file) {
+                                  sl.get<UIUtil>().cancelLockEvent();
+                                  Share.shareFile(file,
+                                      text: StateContainer.of(context)
+                                          .wallet
+                                          .address);
+                                });
+                              } else {
+                                // TODO - show a something went wrong message
+                              }
+                              setState(() {
+                                _showShareCard = false;
                               });
-                            } else {
-                              // TODO - show a something went wrong message
-                            }
-                            setState(() {
-                              _showShareCard = false;
                             });
-                          });
-                        }
+                          }
+                        });
                       });
-                    });
-                  }),
+                    },
+                  ),
                 ],
               ),
             ],

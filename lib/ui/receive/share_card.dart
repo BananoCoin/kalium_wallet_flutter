@@ -80,8 +80,9 @@ class _AppShareCardState extends State<AppShareCard> {
                   // Logo
                   Container(
                     width: 97,
-                    child: AutoSizeText.rich(
-                      TextSpan(
+                    child: RichText(
+                      maxLines: 1,
+                      text: TextSpan(
                         children: [
                           // Currency Icon
                           TextSpan(
@@ -91,27 +92,20 @@ class _AppShareCardState extends State<AppShareCard> {
                                   StateContainer.of(context).curTheme.primary,
                               fontFamily: "AppIcons",
                               fontWeight: FontWeight.w500,
-                              fontSize: 50,
+                              fontSize: 14.5,
                             ),
                           ),
                           TextSpan(
                             text: "BANANO",
                             style: TextStyle(
+                              fontFamily: 'NeueHansKendrick',
                               color:
                                   StateContainer.of(context).curTheme.primary,
-                              fontFamily: "NeueHansKendrick",
                               fontWeight: FontWeight.w500,
-                              fontSize: 49,
+                              fontSize: 14.5,
                             ),
                           ),
                         ],
-                      ),
-                      maxLines: 1,
-                      stepGranularity: 0.1,
-                      minFontSize: 1,
-                      style: TextStyle(
-                        fontFamily: "NeueHansKendrick",
-                        fontSize: 50,
                       ),
                     ),
                   ),
@@ -139,7 +133,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
-                                    height: 0.9,
+                                    height: 1.2,
                                   ),
                                 ),
                                 TextSpan(
@@ -154,7 +148,7 @@ class _AppShareCardState extends State<AppShareCard> {
                                     fontFamily: "OverpassMono",
                                     fontWeight: FontWeight.w100,
                                     fontSize: 50.0,
-                                    height: 0.9,
+                                    height: 1.2,
                                   ),
                                 ),
                               ],
