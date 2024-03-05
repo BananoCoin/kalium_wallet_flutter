@@ -551,16 +551,16 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                               isExternalAccount
                                   ? Container(
                                       padding: EdgeInsetsDirectional.only(
-                                        start: 5,
-                                        end: 5,
+                                        start: 6,
+                                        end: 6,
                                         top: 0.5,
-                                        bottom: 1,
+                                        bottom: 1.5,
                                       ),
                                       margin:
                                           EdgeInsets.only(top: 6, bottom: 3),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.all(
-                                          Radius.circular(4),
+                                          Radius.circular(5),
                                         ),
                                         color: StateContainer.of(context)
                                             .curTheme
@@ -574,8 +574,8 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                         maxLines: 1,
                                         style: TextStyle(
                                           fontFamily: "NunitoSans",
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 14.0,
                                           color: StateContainer.of(context)
                                               .curTheme
                                               .primary,
