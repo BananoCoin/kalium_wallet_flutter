@@ -24,7 +24,7 @@ class _AppShareCardState extends State<AppShareCard> {
   @override
   Widget build(BuildContext context) {
     double addressTextSize = 9.8;
-    double addressLineHeight = 1.3;
+    double addressLineHeight = 1.2;
     return RepaintBoundary(
       key: globalKey,
       child: Container(
