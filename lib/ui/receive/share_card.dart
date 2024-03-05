@@ -88,11 +88,11 @@ class _AppShareCardState extends State<AppShareCard> {
                         children: [
                           // Currency Icon
                           TextSpan(
-                            text: "\u{e801} ",
+                            text: "\u{e80d}",
                             style: TextStyle(
                               color:
                                   StateContainer.of(context).curTheme.primary,
-                              fontFamily: "AppIcons",
+                              fontFamily: "AppIcons2",
                               fontWeight: FontWeight.w400,
                               fontSize: 14.6,
                             ),

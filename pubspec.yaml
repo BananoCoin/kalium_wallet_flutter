@@ -179,6 +179,10 @@ flutter:
       fonts:
         - asset: fonts/AppIcons.ttf
           weight: 400
+    - family: AppIcons2
+      fonts:
+        - asset: fonts/AppIcons2.ttf
+          weight: 400
     - family: NeueHansKendrick
       fonts:
         - asset: fonts/NeueHansKendrick-Medium.ttf
