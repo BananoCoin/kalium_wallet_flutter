@@ -58,6 +58,61 @@ class _ImportExternalAccountSheetState
   bool _mnemonicIsValid = false;
   String _mnemonicError;
 
+  void _importAdHocAccount() async {
+    // Validations
+    int selectedIndex = _indexInputController.text.isEmpty
+        ? 0
+        : int.tryParse(_indexInputController.text);
+    if (selectedIndex == null || selectedIndex < 0) {
+      sl.get<UIUtil>().showSnackbar(
+          AppLocalization.of(context).adHocAccountInvalidIndex, context);
+      return;
+    }
+
+    if (_seedMode && !NanoSeeds.isValidSeed(_seedInputController.text)) {
+      sl
+          .get<UIUtil>()
+          .showSnackbar(AppLocalization.of(context).seedInvalid, context);
+      return;
+    }
+
+    if (!_seedMode &&
+        !NanoMnemomics.validateMnemonic(_mnemonicController.text.split(' '))) {
+      sl.get<UIUtil>().showSnackbar(
+          AppLocalization.of(context).secretPhraseInvalid, context);
+      return;
+    }
+
+    String seed = _seedMode
+        ? _seedInputController.text
+        : NanoMnemomics.mnemonicListToSeed(_mnemonicController.text.split(' '));
+
+    // Derive private key
+    String privateKey = NanoUtil.seedToPrivate(seed, selectedIndex);
+
+    // See if account exists
+    bool accountExists = await sl.get<DBHelper>().accountExists(privateKey);
+    if (accountExists) {
+      sl.get<UIUtil>().showSnackbar(
+          AppLocalization.of(context).importedAdHocAccountAlreadyExists,
+          context);
+      return;
+    }
+
+    // Add account
+    try {
+      Account acct = await sl.get<DBHelper>().addAccountWithPrivateKey(
+          nameBuilder: AppLocalization.of(context).defaultNewAccountNameAdHoc,
+          privateKey: privateKey);
+      widget.accountAddedCallback(acct);
+      Navigator.of(context).pop();
+    } catch (e) {
+      sl.get<Logger>().e("Error importing account: $e");
+      sl.get<UIUtil>().showSnackbar(
+          AppLocalization.of(context).adHocAccountImportedError, context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // The main column that holds everything
@@ -535,54 +590,8 @@ class _ImportExternalAccountSheetState
                         context,
                         AppButtonType.PRIMARY,
                         AppLocalization.of(context).import,
-                        Dimens.BUTTON_TOP_DIMENS, onPressed: () async {
-                      // Validations
-                      int selectedIndex = _indexInputController.text.isEmpty
-                          ? 0
-                          : int.tryParse(_indexInputController.text);
-                      if (selectedIndex == null || selectedIndex < 0) {
-                        sl.get<UIUtil>().showSnackbar(
-                            AppLocalization.of(context)
-                                .adHocAccountInvalidIndex,
-                            context);
-                        return;
-                      }
-                      if (!NanoSeeds.isValidSeed(_seedInputController.text)) {
-                        sl.get<UIUtil>().showSnackbar(
-                            AppLocalization.of(context).seedInvalid, context);
-                        return;
-                      }
-                      // Derive private key
-                      String privateKey = NanoUtil.seedToPrivate(
-                          _seedInputController.text, selectedIndex);
-                      // See if account exists
-                      bool accountExists =
-                          await sl.get<DBHelper>().accountExists(privateKey);
-                      if (accountExists) {
-                        sl.get<UIUtil>().showSnackbar(
-                            AppLocalization.of(context)
-                                .importedAdHocAccountAlreadyExists,
-                            context);
-                        return;
-                      }
-                      // Add account
-                      try {
-                        Account acct = await sl
-                            .get<DBHelper>()
-                            .addAccountWithPrivateKey(
-                                nameBuilder: AppLocalization.of(context)
-                                    .defaultNewAccountNameAdHoc,
-                                privateKey: privateKey);
-                        widget.accountAddedCallback(acct);
-                        Navigator.of(context).pop();
-                      } catch (e) {
-                        sl.get<Logger>().e("Error importing account: $e");
-                        sl.get<UIUtil>().showSnackbar(
-                            AppLocalization.of(context)
-                                .adHocAccountImportedError,
-                            context);
-                      }
-                    }),
+                        Dimens.BUTTON_TOP_DIMENS,
+                        onPressed: _importAdHocAccount),
                   ],
                 ),
                 Row(

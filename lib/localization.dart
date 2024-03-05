@@ -109,8 +109,13 @@ class AppLocalization {
   }
 
   String get seedInvalid {
-    return Intl.message('Seed is Invalid',
+    return Intl.message('Seed is invalid',
         desc: 'intro_seed_invalid', name: 'seedInvalid');
+  }
+
+  String get secretPhraseInvalid {
+    return Intl.message('Secret phrase is invalid',
+        desc: 'Secret phrase is invalid message.', name: 'secretPhraseInvalid');
   }
 
   String get seedCopied {
