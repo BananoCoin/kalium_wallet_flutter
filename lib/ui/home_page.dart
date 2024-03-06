@@ -1694,9 +1694,10 @@ class _AppHomePageState extends State<AppHomePage>
                         children: [
                           // Currency Icon
                           TextSpan(
-                            text: "\u{e80a}",
+                            text: "\u{e817}",
                             style: TextStyle(
-                              fontFamily: 'AppIcons',
+                              fontFamily: 'AppIcons2',
+                              fontWeight: FontWeight.w400,
                               color:
                                   StateContainer.of(context).curTheme.primary,
                               fontSize: 23.0,
@@ -1712,7 +1713,11 @@ class _AppHomePageState extends State<AppHomePage>
                         ],
                       ),
                       maxLines: 1,
-                      style: TextStyle(fontSize: 28.0),
+                      style: TextStyle(
+                        fontSize: 28.0,
+                        fontWeight: FontWeight.w600,
+                        fontFamily: "NunitoSans",
+                      ),
                       stepGranularity: 0.1,
                       minFontSize: 1,
                     ),

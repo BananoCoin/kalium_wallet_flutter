@@ -7,7 +7,7 @@ description: A new Flutter project.
 # Both the version and the builder number may be overridden in flutter
 # build by specifying --build-name and --build-number, respectively.
 # Read more about versioning at semver.org.
-version: 2.4.2+1
+version: 2.4.2+3
 
 environment:
   sdk: ">=2.11.99 <3.0.0"
@@ -175,6 +175,11 @@ flutter:
     - family: AppIcons
       fonts:
         - asset: fonts/AppIcons.ttf
+          weight: 400
+    - family: AppIcons2
+      fonts:
+        - asset: fonts/AppIcons2.ttf
+          weight: 400
     - family: NeueHansKendrick
       fonts:
         - asset: fonts/NeueHansKendrick-Medium.ttf

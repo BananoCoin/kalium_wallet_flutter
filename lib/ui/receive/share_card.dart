@@ -88,13 +88,23 @@ class _AppShareCardState extends State<AppShareCard> {
                         children: [
                           // Currency Icon
                           TextSpan(
-                            text: "\u{e801} ",
+                            text: "\u{e80d}",
                             style: TextStyle(
                               color:
                                   StateContainer.of(context).curTheme.primary,
-                              fontFamily: "AppIcons",
-                              fontWeight: FontWeight.w500,
-                              fontSize: 14.8,
+                              fontFamily: "AppIcons2",
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14.6,
+                            ),
+                          ),
+                          TextSpan(
+                            text: "  ",
+                            style: TextStyle(
+                              fontFamily: 'NunitoSans',
+                              color:
+                                  StateContainer.of(context).curTheme.primary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 8.5,
                             ),
                           ),
                           TextSpan(
@@ -108,6 +118,12 @@ class _AppShareCardState extends State<AppShareCard> {
                             ),
                           ),
                         ],
+                        style: TextStyle(
+                          fontFamily: 'NeueHansKendrick',
+                          color: StateContainer.of(context).curTheme.primary,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14.8,
+                        ),
                       ),
                     ),
                   ),

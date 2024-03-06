@@ -1108,7 +1108,7 @@ class AppLocalization {
   }
 
   String get backupSecretPhrase {
-    return Intl.message("Backup Secret Phrase",
+    return Intl.message("Back Up Secret Phrase",
         desc: 'backup seed', name: 'backupSecretPhrase');
   }
 
