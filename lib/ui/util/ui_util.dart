@@ -10,6 +10,7 @@ import 'package:kalium_wallet_flutter/bus/events.dart';
 import 'package:kalium_wallet_flutter/ui/util/exceptions.dart';
 
 enum ThreeLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS, SUCCESS_FULL }
+
 enum OneLineAddressTextType { PRIMARY60, PRIMARY, SUCCESS }
 
 class UIUtil {
@@ -424,7 +425,7 @@ class UIUtil {
         ),
       ),
       dismissOtherToast: true,
-      duration: Duration(milliseconds: 2500),
+      duration: Duration(milliseconds: 3000),
     );
   }
 
