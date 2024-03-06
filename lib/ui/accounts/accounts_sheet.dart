@@ -102,7 +102,22 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
         setState(() {
           widget.accounts.removeWhere((a) => a.id == event.account.id);
           widget.accounts.add(event.account);
-          widget.accounts.sort((a, b) => a.id.compareTo(b.id));
+          widget.accounts.sort((a, b) {
+            // Sort by acct_index first, then by id for adhoc accounts
+            if ((a.index >= 0 && b.index >= 0) ||
+                (a.index < 0 && b.index < 0)) {
+              int indexCompare = a.index.compareTo(b.index);
+              if (indexCompare != 0) return indexCompare;
+              // Sort by ID
+              return a.id.compareTo(b.id);
+            } else if (a.index < 0 && b.index >= 0) {
+              // a should come after b
+              return 1;
+            } else {
+              // a should come before b
+              return -1;
+            }
+          });
         });
       }
     });
@@ -120,7 +135,21 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
     widget.accounts.add(newAccount);
     setState(() {
       _addingAccount = false;
-      widget.accounts.sort((a, b) => a.id.compareTo(b.id));
+      widget.accounts.sort((a, b) {
+        // Sort by acct_index first, then by id for adhoc accounts
+        if ((a.index >= 0 && b.index >= 0) || (a.index < 0 && b.index < 0)) {
+          int indexCompare = a.index.compareTo(b.index);
+          if (indexCompare != 0) return indexCompare;
+          // Sort by ID
+          return a.id.compareTo(b.id);
+        } else if (a.index < 0 && b.index >= 0) {
+          // a should come after b
+          return 1;
+        } else {
+          // a should come before b
+          return -1;
+        }
+      });
       // Scroll if list is full
       if (expandedKey.currentContext != null) {
         RenderBox box = expandedKey.currentContext.findRenderObject();
@@ -352,8 +381,24 @@ class _AppAccountsWidgetState extends State<AppAccountsWidget> {
                                 widget.accounts.add(newAccount);
                                 setState(() {
                                   _addingAccount = false;
-                                  widget.accounts
-                                      .sort((a, b) => a.id.compareTo(b.id));
+                                  widget.accounts.sort((a, b) {
+                                    // Sort by acct_index first, then by id for adhoc accounts
+                                    if ((a.index >= 0 && b.index >= 0) ||
+                                        (a.index < 0 && b.index < 0)) {
+                                      int indexCompare =
+                                          a.index.compareTo(b.index);
+                                      if (indexCompare != 0)
+                                        return indexCompare;
+                                      // Sort by ID
+                                      return a.id.compareTo(b.id);
+                                    } else if (a.index < 0 && b.index >= 0) {
+                                      // a should come after b
+                                      return 1;
+                                    } else {
+                                      // a should come before b
+                                      return -1;
+                                    }
+                                  });
                                   // Scroll if list is full
                                   if (expandedKey.currentContext != null) {
                                     RenderBox box = expandedKey.currentContext

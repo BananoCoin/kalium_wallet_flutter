@@ -178,8 +178,17 @@ class DBHelper {
   // Accounts
   Future<List<Account>> getAccounts() async {
     var dbClient = await db;
-    List<Map> list =
-        await dbClient.rawQuery('SELECT * FROM Accounts ORDER BY id');
+    List<Map> list = await dbClient.rawQuery("""SELECT * FROM Accounts 
+ORDER BY 
+    CASE 
+        WHEN acct_index >= 0 THEN 0
+        ELSE 1 
+    END,
+    CASE 
+        WHEN acct_index >= 0 THEN acct_index 
+        ELSE id 
+    END;
+""");
     List<Account> accounts = new List();
     for (int i = 0; i < list.length; i++) {
       accounts.add(Account(
@@ -230,15 +239,16 @@ class DBHelper {
     int newAccountId;
     Account account;
     await dbClient.transaction((Transaction txn) async {
-      int nextIndex;
+      int nextIndex = 1; // Default starting index
       List<Map> accounts = await txn.rawQuery(
-          'SELECT * from Accounts WHERE acct_index >=0 ORDER BY acct_index ASC');
-      if (accounts.isEmpty ||
-          (accounts.length == 1 && accounts[0]["acct_index"] == 0)) {
-        nextIndex = 1;
-      } else {
-        int maxAcctIndex = accounts.last["acct_index"];
-        nextIndex = maxAcctIndex + 1;
+          'SELECT * FROM Accounts WHERE acct_index >= 0 ORDER BY acct_index ASC');
+
+      for (int i = 0; i < accounts.length; i++) {
+        if (accounts[i]["acct_index"] > nextIndex) {
+          break;
+        } else {
+          nextIndex = accounts[i]["acct_index"] + 1;
+        }
       }
 
       String nextName = nameBuilder.replaceAll("%1", nextIndex.toString());
@@ -281,11 +291,12 @@ class DBHelper {
     int newAccountId;
     await dbClient.transaction((Transaction txn) async {
       int nextID = 1;
-      List<Map> accounts =
-          await txn.rawQuery('SELECT * from Accounts WHERE acct_index == -1');
-      for (int i = 0; i < accounts.length; i++) {
-        nextID++;
+      var result = await txn.rawQuery('SELECT MAX(id) AS max_id FROM Accounts');
+      if (result[0]["max_id"] != null) {
+        int maxId = result[0]["max_id"];
+        nextID = maxId + 1;
       }
+
       String nextName = nameBuilder.replaceAll("%1", "${nextID.toString()}");
       String address = NanoUtil.privateToAddress(privateKey);
       account = Account(
