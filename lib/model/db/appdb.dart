@@ -325,12 +325,13 @@ ORDER BY
   Future<int> saveAccount(Account account) async {
     var dbClient = await db;
     return await dbClient.rawInsert(
-        'INSERT INTO Accounts (name, acct_index, last_accessed, selected) values(?, ?, ?, ?)',
+        'INSERT INTO Accounts (name, acct_index, last_accessed, selected, address) values(?, ?, ?, ?, ?)',
         [
           account.name,
           account.index,
           account.lastAccess,
-          account.selected ? 1 : 0
+          account.selected ? 1 : 0,
+          account.address
         ]);
   }
 

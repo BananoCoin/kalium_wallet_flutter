@@ -973,7 +973,7 @@ class _SettingsSheetState extends State<SettingsSheet>
                               StateContainer.of(context)
                                   .wallet
                                   .address
-                                  .substring(0, 11),
+                                  ?.substring(0, 11),
                               style: TextStyle(
                                 fontFamily: "OverpassMono",
                                 fontWeight: FontWeight.w100,
