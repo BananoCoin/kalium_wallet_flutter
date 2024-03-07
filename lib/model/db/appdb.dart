@@ -285,24 +285,16 @@ ORDER BY
   }
 
   Future<Account> addAccountWithPrivateKey(
-      {String nameBuilder, String privateKey}) async {
+      {String accountName, String privateKey}) async {
     var dbClient = await db;
     Account account;
     int newAccountId;
     await dbClient.transaction((Transaction txn) async {
-      int nextID = 1;
-      var result = await txn.rawQuery('SELECT MAX(id) AS max_id FROM Accounts');
-      if (result[0]["max_id"] != null) {
-        int maxId = result[0]["max_id"];
-        nextID = maxId + 1;
-      }
-
-      String nextName = nameBuilder.replaceAll("%1", "${nextID.toString()}");
       String address = NanoUtil.privateToAddress(privateKey);
       account = Account(
           id: 0,
           index: -1,
-          name: nextName,
+          name: accountName,
           lastAccess: 0,
           selected: false,
           address: address);

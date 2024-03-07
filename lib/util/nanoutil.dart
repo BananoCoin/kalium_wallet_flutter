@@ -8,6 +8,8 @@ import 'package:kalium_wallet_flutter/model/db/account.dart';
 import 'package:kalium_wallet_flutter/appstate_container.dart';
 import 'package:kalium_wallet_flutter/localization.dart';
 
+import '../model/vault.dart';
+
 class NanoUtil {
   static String seedToPrivate(String seed, int index) {
     return NanoKeys.seedToPrivate(seed, index);
@@ -30,6 +32,7 @@ class NanoUtil {
           index: 0,
           lastAccess: 0,
           name: AppLocalization.of(context).defaultAccountName,
+          address: NanoUtil.seedToAddress(await sl.get<Vault>().getSeed(), 0),
           selected: true);
       await sl.get<DBHelper>().saveAccount(selectedAcct);
     }

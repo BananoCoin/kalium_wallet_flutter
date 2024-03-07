@@ -102,7 +102,7 @@ class _ImportExternalAccountSheetState
     // Add account
     try {
       Account acct = await sl.get<DBHelper>().addAccountWithPrivateKey(
-          nameBuilder: AppLocalization.of(context).defaultNewAccountNameAdHoc,
+          accountName: AppLocalization.of(context).defaultNewAccountNameAdHoc,
           privateKey: privateKey);
       widget.accountAddedCallback(acct);
       Navigator.of(context).pop();

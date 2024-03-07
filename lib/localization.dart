@@ -882,7 +882,7 @@ class AppLocalization {
   }
 
   String get defaultNewAccountNameAdHoc {
-    return Intl.message("Imported Account %1",
+    return Intl.message("Imported Account",
         desc:
             "Default new account name for accounts imported with a different seed - e.g. Imported 1",
         name: 'defaultNewAccountNameAdHoc');
