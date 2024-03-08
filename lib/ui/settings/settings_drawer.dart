@@ -971,8 +971,8 @@ class _SettingsSheetState extends State<SettingsSheet>
                           Container(
                             child: Text(
                               StateContainer.of(context)
-                                  .wallet
-                                  .address
+                                  ?.wallet
+                                  ?.address
                                   ?.substring(0, 11),
                               style: TextStyle(
                                 fontFamily: "OverpassMono",
