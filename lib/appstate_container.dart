@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
 
+import 'package:flutter_nano_ffi/flutter_nano_ffi.dart';
 import 'package:kalium_wallet_flutter/model/available_block_explorer.dart';
 import 'package:kalium_wallet_flutter/model/wallet.dart';
 import 'package:flutter/foundation.dart';
@@ -352,6 +353,11 @@ class StateContainerState extends State<StateContainer> {
     String address;
     if (account.index == -1) {
       String privateKey = await sl.get<Vault>().getPrivateKey(account.address);
+      if (!NanoSeeds.isValidSeed(privateKey)) {
+        // Change account
+        await sl.get<DBHelper>().changeToDefaultAccount();
+        return;
+      }
       address = NanoUtil.privateToAddress(privateKey);
     } else {
       address = NanoUtil.seedToAddress(
@@ -745,7 +751,13 @@ class StateContainerState extends State<StateContainer> {
   Future<String> _getPrivKey() async {
     if (selectedAccount.index == -1) {
       // TODO - handle priv key not found
-      return await sl.get<Vault>().getPrivateKey(selectedAccount.address);
+      String privKey =
+          await sl.get<Vault>().getPrivateKey(selectedAccount.address);
+      if (!NanoSeeds.isValidSeed(privKey)) {
+        // Change account
+        await sl.get<DBHelper>().changeToDefaultAccount();
+        return null;
+      }
     }
     return NanoUtil.seedToPrivate(
         await sl.get<Vault>().getSeed(), selectedAccount.index);

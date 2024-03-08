@@ -341,6 +341,21 @@ ORDER BY
         'UPDATE Accounts SET name = ? WHERE id = ?', [name, account.id]);
   }
 
+  Future<void> changeToDefaultAccount() async {
+    var dbClient = await db;
+    return await dbClient.transaction((Transaction txn) async {
+      await txn.rawUpdate('UPDATE Accounts set selected = 0');
+      await txn
+          .rawUpdate('UPDATE Accounts set selected = 1 where acct_index = 0');
+      // Get access increment count
+      List<Map> list = await txn
+          .rawQuery('SELECT max(last_accessed) as last_access FROM Accounts');
+      await txn.rawUpdate(
+          'UPDATE Accounts set selected = ?, last_accessed = ? where acct_index = ?',
+          [1, list[0]["last_access"] + 1, 0]);
+    });
+  }
+
   Future<void> changeAccount(Account account) async {
     var dbClient = await db;
     return await dbClient.transaction((Transaction txn) async {
