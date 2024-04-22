@@ -277,15 +277,14 @@ class StateContainerState extends State<StateContainer> {
       } else {
         // Remove account
         updateRecentlyUsedAccounts().then((_) {
-          if (event.account.index == selectedAccount.index &&
-              recentLast != null) {
+          if (event.account.id == selectedAccount.id && recentLast != null) {
             sl.get<DBHelper>().changeAccount(recentLast);
             setState(() {
               selectedAccount = recentLast;
             });
             EventTaxiImpl.singleton()
                 .fire(AccountChangedEvent(account: recentLast, noPop: true));
-          } else if (event.account.index == selectedAccount.index &&
+          } else if (event.account.id == selectedAccount.id &&
               recentSecondLast != null) {
             sl.get<DBHelper>().changeAccount(recentSecondLast);
             setState(() {
@@ -293,7 +292,7 @@ class StateContainerState extends State<StateContainer> {
             });
             EventTaxiImpl.singleton().fire(
                 AccountChangedEvent(account: recentSecondLast, noPop: true));
-          } else if (event.account.index == selectedAccount.index) {
+          } else if (event.account.id == selectedAccount.id) {
             sl.get<DBHelper>().getMainAccount().then((mainAccount) {
               sl.get<DBHelper>().changeAccount(mainAccount);
               setState(() {
@@ -758,6 +757,7 @@ class StateContainerState extends State<StateContainer> {
         await sl.get<DBHelper>().changeToDefaultAccount();
         return null;
       }
+      return privKey;
     }
     return NanoUtil.seedToPrivate(
         await sl.get<Vault>().getSeed(), selectedAccount.index);
